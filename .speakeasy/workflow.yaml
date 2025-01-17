@@ -10,6 +10,9 @@ targets:
     novu:
         target: python
         source: novu-OAS
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/novu/novu/novu-oas-code-samples
