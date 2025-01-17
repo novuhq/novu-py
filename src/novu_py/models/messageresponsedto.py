@@ -11,14 +11,14 @@ from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SE
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-ContentTypedDict = Union[EmailBlockTypedDict, str]
+ContentTypedDict = TypeAliasType("ContentTypedDict", Union[EmailBlockTypedDict, str])
 r"""Content of the message, can be an email block or a string"""
 
 
-Content = Union[EmailBlock, str]
+Content = TypeAliasType("Content", Union[EmailBlock, str])
 r"""Content of the message, can be an email block or a string"""
 
 

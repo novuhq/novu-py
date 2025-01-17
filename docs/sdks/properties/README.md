@@ -17,17 +17,16 @@ Used to update the subscriber isOnline flag.
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.properties.update_online_flag(subscriber_id="<id>", update_subscriber_online_flag_request_dto={
-    "is_online": False,
-})
+    res = novu.subscribers.properties.update_online_flag(subscriber_id="<id>", update_subscriber_online_flag_request_dto={
+        "is_online": False,
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

@@ -5,13 +5,17 @@ from .subscriberchanneldto import SubscriberChannelDto, SubscriberChannelDtoType
 from novu_py.types import BaseModel
 import pydantic
 from typing import Dict, List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-CreateSubscriberRequestDtoDataTypedDict = Union[str, List[str], bool, float]
+CreateSubscriberRequestDtoDataTypedDict = TypeAliasType(
+    "CreateSubscriberRequestDtoDataTypedDict", Union[str, List[str], bool, float]
+)
 
 
-CreateSubscriberRequestDtoData = Union[str, List[str], bool, float]
+CreateSubscriberRequestDtoData = TypeAliasType(
+    "CreateSubscriberRequestDtoData", Union[str, List[str], bool, float]
+)
 
 
 class CreateSubscriberRequestDtoTypedDict(TypedDict):

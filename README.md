@@ -24,18 +24,23 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [novu-py](#novu-py)
+  * [SDK Installation](#sdk-installation)
+  * [IDE Support](#ide-support)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Pagination](#pagination)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+  * [Debugging](#debugging)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
 
-* [SDK Installation](#sdk-installation)
-* [IDE Support](#ide-support)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Pagination](#pagination)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Debugging](#debugging)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -48,7 +53,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install novu-py
 ```
 
 ### Poetry
@@ -56,7 +61,7 @@ pip install git+<UNSET>.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+<UNSET>.git
+poetry add novu-py
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -77,37 +82,37 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 ```python
 # Synchronous Example
+import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger(request={
-    "name": "workflow_identifier",
-    "to": {
-        "subscriber_id": "<id>",
-    },
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+        name="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
         },
-    },
-    "bridge_url": "https://example.com/bridge",
-    "overrides": {
-        "fcm": {
-            "data": {
-                "key": "value",
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
             },
         },
-    },
-})
+        bridge_url="https://example.com/bridge",
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -116,36 +121,38 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
+import novu_py
 from novu_py import Novu
 import os
 
 async def main():
-    s = Novu(
+    async with Novu(
         api_key=os.getenv("NOVU_API_KEY", ""),
-    )
-    res = await s.trigger_async(request={
-        "name": "workflow_identifier",
-        "to": {
-            "subscriber_id": "<id>",
-        },
-        "payload": {
-            "comment_id": "string",
-            "post": {
-                "text": "string",
+    ) as novu:
+
+        res = await novu.trigger_async(request=novu_py.TriggerEventRequestDto(
+            name="workflow_identifier",
+            to={
+                "subscriber_id": "<id>",
             },
-        },
-        "bridge_url": "https://example.com/bridge",
-        "overrides": {
-            "fcm": {
-                "data": {
-                    "key": "value",
+            payload={
+                "comment_id": "string",
+                "post": {
+                    "text": "string",
                 },
             },
-        },
-    })
-    if res is not None:
-        # handle response
-        pass
+            bridge_url="https://example.com/bridge",
+            overrides={
+                "fcm": {
+                    "data": {
+                        "key": "value",
+                    },
+                },
+            },
+        ))
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -158,80 +165,81 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger_bulk(request={
-    "events": [
-        {
-            "name": "workflow_identifier",
-            "to": {
-                "subscriber_id": "<id>",
-            },
-            "payload": {
-                "comment_id": "string",
-                "post": {
-                    "text": "string",
+    res = novu.trigger_bulk(request={
+        "events": [
+            novu_py.TriggerEventRequestDto(
+                name="workflow_identifier",
+                to={
+                    "subscriber_id": "<id>",
                 },
-            },
-            "bridge_url": "https://example.com/bridge",
-            "overrides": {
-                "fcm": {
-                    "data": {
-                        "key": "value",
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
                     },
                 },
-            },
-        },
-        {
-            "name": "workflow_identifier",
-            "to": {
-                "topic_key": "<value>",
-                "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-            },
-            "payload": {
-                "comment_id": "string",
-                "post": {
-                    "text": "string",
-                },
-            },
-            "bridge_url": "https://example.com/bridge",
-            "overrides": {
-                "fcm": {
-                    "data": {
-                        "key": "value",
+                bridge_url="https://example.com/bridge",
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
                     },
                 },
-            },
-        },
-        {
-            "name": "workflow_identifier",
-            "to": [
-                "SUBSCRIBER_ID",
-                "SUBSCRIBER_ID",
-            ],
-            "payload": {
-                "comment_id": "string",
-                "post": {
-                    "text": "string",
-                },
-            },
-            "bridge_url": "https://example.com/bridge",
-            "overrides": {
-                "fcm": {
-                    "data": {
-                        "key": "value",
+            ),
+            novu_py.TriggerEventRequestDto(
+                name="workflow_identifier",
+                to=[
+                    {
+                        "topic_key": "<value>",
+                        "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                    },
+                ],
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
                     },
                 },
-            },
-        },
-    ],
-})
+                bridge_url="https://example.com/bridge",
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+            novu_py.TriggerEventRequestDto(
+                name="workflow_identifier",
+                to=[
+                    "SUBSCRIBER_ID",
+                    "SUBSCRIBER_ID",
+                ],
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                bridge_url="https://example.com/bridge",
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+        ],
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -245,78 +253,81 @@ from novu_py import Novu
 import os
 
 async def main():
-    s = Novu(
+    async with Novu(
         api_key=os.getenv("NOVU_API_KEY", ""),
-    )
-    res = await s.trigger_bulk_async(request={
-        "events": [
-            {
-                "name": "workflow_identifier",
-                "to": {
-                    "subscriber_id": "<id>",
-                },
-                "payload": {
-                    "comment_id": "string",
-                    "post": {
-                        "text": "string",
+    ) as novu:
+
+        res = await novu.trigger_bulk_async(request={
+            "events": [
+                novu_py.TriggerEventRequestDto(
+                    name="workflow_identifier",
+                    to={
+                        "subscriber_id": "<id>",
                     },
-                },
-                "bridge_url": "https://example.com/bridge",
-                "overrides": {
-                    "fcm": {
-                        "data": {
-                            "key": "value",
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
                         },
                     },
-                },
-            },
-            {
-                "name": "workflow_identifier",
-                "to": {
-                    "topic_key": "<value>",
-                    "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-                },
-                "payload": {
-                    "comment_id": "string",
-                    "post": {
-                        "text": "string",
-                    },
-                },
-                "bridge_url": "https://example.com/bridge",
-                "overrides": {
-                    "fcm": {
-                        "data": {
-                            "key": "value",
+                    bridge_url="https://example.com/bridge",
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
                         },
                     },
-                },
-            },
-            {
-                "name": "workflow_identifier",
-                "to": [
-                    "SUBSCRIBER_ID",
-                    "SUBSCRIBER_ID",
-                ],
-                "payload": {
-                    "comment_id": "string",
-                    "post": {
-                        "text": "string",
-                    },
-                },
-                "bridge_url": "https://example.com/bridge",
-                "overrides": {
-                    "fcm": {
-                        "data": {
-                            "key": "value",
+                ),
+                novu_py.TriggerEventRequestDto(
+                    name="workflow_identifier",
+                    to=[
+                        {
+                            "topic_key": "<value>",
+                            "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                        },
+                    ],
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
                         },
                     },
-                },
-            },
-        ],
-    })
-    if res is not None:
-        # handle response
-        pass
+                    bridge_url="https://example.com/bridge",
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
+                        },
+                    },
+                ),
+                novu_py.TriggerEventRequestDto(
+                    name="workflow_identifier",
+                    to=[
+                        "SUBSCRIBER_ID",
+                        "SUBSCRIBER_ID",
+                    ],
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
+                        },
+                    },
+                    bridge_url="https://example.com/bridge",
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
+                        },
+                    },
+                ),
+            ],
+        })
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -328,24 +339,22 @@ asyncio.run(main())
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger_broadcast(request={
-    "name": "<value>",
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger_broadcast(request={
+        "name": "<value>",
+        "payload": {
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
         },
-    },
-    "overrides": {},
-})
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -358,22 +367,22 @@ from novu_py import Novu
 import os
 
 async def main():
-    s = Novu(
+    async with Novu(
         api_key=os.getenv("NOVU_API_KEY", ""),
-    )
-    res = await s.trigger_broadcast_async(request={
-        "name": "<value>",
-        "payload": {
-            "comment_id": "string",
-            "post": {
-                "text": "string",
+    ) as novu:
+
+        res = await novu.trigger_broadcast_async(request={
+            "name": "<value>",
+            "payload": {
+                "comment_id": "string",
+                "post": {
+                    "text": "string",
+                },
             },
-        },
-        "overrides": {},
-    })
-    if res is not None:
-        # handle response
-        pass
+        })
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -385,15 +394,14 @@ asyncio.run(main())
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.cancel(transaction_id="<id>")
+    res = novu.cancel(transaction_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -406,13 +414,14 @@ from novu_py import Novu
 import os
 
 async def main():
-    s = Novu(
+    async with Novu(
         api_key=os.getenv("NOVU_API_KEY", ""),
-    )
-    res = await s.cancel_async(transaction_id="<id>")
-    if res is not None:
-        # handle response
-        pass
+    ) as novu:
+
+        res = await novu.cancel_async(transaction_id="<id>")
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -533,19 +542,16 @@ Here's an example of one such pagination call:
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.list()
+    res = novu.subscribers.list()
 
-if res is not None:
-    while True:
-        # handle items
+    while res is not None:
+        # Handle items
 
         res = res.next()
-        if res is None:
-            break
 
 ```
 <!-- End Pagination [pagination] -->
@@ -557,77 +563,77 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-from novu.utils import BackoffStrategy, RetryConfig
+import novu_py
 from novu_py import Novu
+from novu_py.utils import BackoffStrategy, RetryConfig
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger(request={
-    "name": "workflow_identifier",
-    "to": {
-        "subscriber_id": "<id>",
-    },
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+        name="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
         },
-    },
-    "bridge_url": "https://example.com/bridge",
-    "overrides": {
-        "fcm": {
-            "data": {
-                "key": "value",
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
             },
         },
-    },
-},
-    RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
+        bridge_url="https://example.com/bridge",
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ),
+        RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-from novu.utils import BackoffStrategy, RetryConfig
+import novu_py
 from novu_py import Novu
+from novu_py.utils import BackoffStrategy, RetryConfig
 import os
 
-s = Novu(
+with Novu(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger(request={
-    "name": "workflow_identifier",
-    "to": {
-        "subscriber_id": "<id>",
-    },
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+        name="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
         },
-    },
-    "bridge_url": "https://example.com/bridge",
-    "overrides": {
-        "fcm": {
-            "data": {
-                "key": "value",
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
             },
         },
-    },
-})
+        bridge_url="https://example.com/bridge",
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 <!-- End Retries [retries] -->
@@ -657,49 +663,49 @@ When custom error responses are specified for an operation, the SDK may also rai
 ### Example
 
 ```python
+import novu_py
 from novu_py import Novu, models
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
+    res = None
+    try:
 
-res = None
-try:
-    res = s.trigger(request={
-        "name": "workflow_identifier",
-        "to": {
-            "subscriber_id": "<id>",
-        },
-        "payload": {
-            "comment_id": "string",
-            "post": {
-                "text": "string",
+        res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+            name="workflow_identifier",
+            to={
+                "subscriber_id": "<id>",
             },
-        },
-        "bridge_url": "https://example.com/bridge",
-        "overrides": {
-            "fcm": {
-                "data": {
-                    "key": "value",
+            payload={
+                "comment_id": "string",
+                "post": {
+                    "text": "string",
                 },
             },
-        },
-    })
+            bridge_url="https://example.com/bridge",
+            overrides={
+                "fcm": {
+                    "data": {
+                        "key": "value",
+                    },
+                },
+            },
+        ))
 
-    if res is not None:
-        # handle response
-        pass
+        # Handle response
+        print(res)
 
-except models.ErrorDto as e:
-    # handle e.data: models.ErrorDtoData
-    raise(e)
-except models.ValidationErrorDto as e:
-    # handle e.data: models.ValidationErrorDtoData
-    raise(e)
-except models.APIError as e:
-    # handle exception
-    raise(e)
+    except models.ErrorDto as e:
+        # handle e.data: models.ErrorDtoData
+        raise(e)
+    except models.ValidationErrorDto as e:
+        # handle e.data: models.ValidationErrorDtoData
+        raise(e)
+    except models.APIError as e:
+        # handle exception
+        raise(e)
 ```
 <!-- End Error Handling [errors] -->
 
@@ -718,38 +724,38 @@ You can override the default server globally by passing a server index to the `s
 #### Example
 
 ```python
+import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     server_idx=1,
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger(request={
-    "name": "workflow_identifier",
-    "to": {
-        "subscriber_id": "<id>",
-    },
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+        name="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
         },
-    },
-    "bridge_url": "https://example.com/bridge",
-    "overrides": {
-        "fcm": {
-            "data": {
-                "key": "value",
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
             },
         },
-    },
-})
+        bridge_url="https://example.com/bridge",
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -757,38 +763,38 @@ if res is not None:
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
+import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     server_url="https://api.novu.co",
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger(request={
-    "name": "workflow_identifier",
-    "to": {
-        "subscriber_id": "<id>",
-    },
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+        name="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
         },
-    },
-    "bridge_url": "https://example.com/bridge",
-    "overrides": {
-        "fcm": {
-            "data": {
-                "key": "value",
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
             },
         },
-    },
-})
+        bridge_url="https://example.com/bridge",
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 <!-- End Server Selection [server] -->
@@ -887,37 +893,37 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `api_key` parameter must be set when initializing the SDK client instance. For example:
 ```python
+import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger(request={
-    "name": "workflow_identifier",
-    "to": {
-        "subscriber_id": "<id>",
-    },
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+        name="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
         },
-    },
-    "bridge_url": "https://example.com/bridge",
-    "overrides": {
-        "fcm": {
-            "data": {
-                "key": "value",
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
             },
         },
-    },
-})
+        bridge_url="https://example.com/bridge",
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 <!-- End Authentication [security] -->

@@ -15,5 +15,5 @@ targets:
                 token: $pypi_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/novu/novu/novu-oas-code-samples
+                location: registry.speakeasyapi.dev/novu/novu/novu-oas-python-code-samples
             blocking: false

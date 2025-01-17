@@ -20,15 +20,14 @@ Get subscriber preferences
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.preferences.list(subscriber_id="<id>")
+    res = novu.subscribers.preferences.list(subscriber_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -62,15 +61,14 @@ Update subscriber global preferences
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.preferences.update_global(subscriber_id="<id>", update_subscriber_global_preferences_request_dto={})
+    res = novu.subscribers.preferences.update_global(subscriber_id="<id>", update_subscriber_global_preferences_request_dto={})
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -105,15 +103,14 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.preferences.retrieve_by_level(preference_level=novu_py.Parameter.TEMPLATE, subscriber_id="<id>")
+    res = novu.subscribers.preferences.retrieve_by_level(preference_level=novu_py.Parameter.TEMPLATE, subscriber_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -148,15 +145,14 @@ Update subscriber preference
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.preferences.update(subscriber_id="<id>", workflow_id="<id>", update_subscriber_preference_request_dto={})
+    res = novu.subscribers.preferences.update(subscriber_id="<id>", workflow_id="<id>", update_subscriber_preference_request_dto={})
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

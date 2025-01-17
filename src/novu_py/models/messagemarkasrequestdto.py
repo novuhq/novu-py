@@ -5,13 +5,13 @@ from enum import Enum
 from novu_py.types import BaseModel
 import pydantic
 from typing import List, Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
-MessageIDTypedDict = Union[str, List[str]]
+MessageIDTypedDict = TypeAliasType("MessageIDTypedDict", Union[str, List[str]])
 
 
-MessageID = Union[str, List[str]]
+MessageID = TypeAliasType("MessageID", Union[str, List[str]])
 
 
 class MarkAs(str, Enum):

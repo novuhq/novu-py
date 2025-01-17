@@ -6,7 +6,7 @@ from .tenantpayloaddto import TenantPayloadDto, TenantPayloadDtoTypedDict
 from novu_py.types import BaseModel
 import pydantic
 from typing import Any, Dict, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class OverridesTypedDict(TypedDict):
@@ -17,28 +17,37 @@ class Overrides(BaseModel):
     r"""This could be used to override provider specific configurations"""
 
 
-TriggerEventToAllRequestDtoActorTypedDict = Union[SubscriberPayloadDtoTypedDict, str]
+TriggerEventToAllRequestDtoActorTypedDict = TypeAliasType(
+    "TriggerEventToAllRequestDtoActorTypedDict",
+    Union[SubscriberPayloadDtoTypedDict, str],
+)
 r"""It is used to display the Avatar of the provided actor's subscriber id or actor object.
 If a new actor object is provided, we will create a new subscriber in our system
 
 """
 
 
-TriggerEventToAllRequestDtoActor = Union[SubscriberPayloadDto, str]
+TriggerEventToAllRequestDtoActor = TypeAliasType(
+    "TriggerEventToAllRequestDtoActor", Union[SubscriberPayloadDto, str]
+)
 r"""It is used to display the Avatar of the provided actor's subscriber id or actor object.
 If a new actor object is provided, we will create a new subscriber in our system
 
 """
 
 
-TriggerEventToAllRequestDtoTenantTypedDict = Union[TenantPayloadDtoTypedDict, str]
+TriggerEventToAllRequestDtoTenantTypedDict = TypeAliasType(
+    "TriggerEventToAllRequestDtoTenantTypedDict", Union[TenantPayloadDtoTypedDict, str]
+)
 r"""It is used to specify a tenant context during trigger event.
 If a new tenant object is provided, we will create a new tenant.
 
 """
 
 
-TriggerEventToAllRequestDtoTenant = Union[TenantPayloadDto, str]
+TriggerEventToAllRequestDtoTenant = TypeAliasType(
+    "TriggerEventToAllRequestDtoTenant", Union[TenantPayloadDto, str]
+)
 r"""It is used to specify a tenant context during trigger event.
 If a new tenant object is provided, we will create a new tenant.
 

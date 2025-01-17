@@ -19,21 +19,20 @@ Add subscribers to a topic by key
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.topics.subscribers.assign(topic_key="<value>", add_subscribers_request_dto={
-    "subscribers": [
-        "<value>",
-        "<value>",
-        "<value>",
-    ],
-})
+    res = novu.topics.subscribers.assign(topic_key="<value>", add_subscribers_request_dto={
+        "subscribers": [
+            "<value>",
+            "<value>",
+            "<value>",
+        ],
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -67,15 +66,14 @@ Check if a subscriber belongs to a certain topic
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.topics.subscribers.retrieve(external_subscriber_id="<id>", topic_key="<value>")
+    res = novu.topics.subscribers.retrieve(external_subscriber_id="<id>", topic_key="<value>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -109,20 +107,19 @@ Remove subscribers from a topic
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.topics.subscribers.remove(topic_key="<value>", remove_subscribers_request_dto={
-    "subscribers": [
-        "<value>",
-        "<value>",
-    ],
-})
+    res = novu.topics.subscribers.remove(topic_key="<value>", remove_subscribers_request_dto={
+        "subscribers": [
+            "<value>",
+            "<value>",
+        ],
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
