@@ -1,0 +1,10 @@
+# SubscribersControllerUpdateSubscriberPreferenceRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `subscriber_id`                                                                                  | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `workflow_id`                                                                                    | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `update_subscriber_preference_request_dto`                                                       | [models.UpdateSubscriberPreferenceRequestDto](../models/updatesubscriberpreferencerequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

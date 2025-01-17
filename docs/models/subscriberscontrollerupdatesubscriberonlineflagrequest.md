@@ -1,0 +1,9 @@
+# SubscribersControllerUpdateSubscriberOnlineFlagRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `subscriber_id`                                                                                  | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `update_subscriber_online_flag_request_dto`                                                      | [models.UpdateSubscriberOnlineFlagRequestDto](../models/updatesubscriberonlineflagrequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

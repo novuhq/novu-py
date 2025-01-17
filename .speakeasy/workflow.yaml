@@ -1,0 +1,16 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    novu-OAS:
+        inputs:
+            - location: https://api.novu.co/openapi.sdk.yaml
+        registry:
+            location: registry.speakeasyapi.dev/novu/novu/novu-oas
+targets:
+    novu:
+        target: python
+        source: novu-OAS
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/novu/novu/novu-oas-code-samples
+            blocking: false

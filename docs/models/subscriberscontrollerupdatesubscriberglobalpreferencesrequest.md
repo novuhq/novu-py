@@ -1,0 +1,9 @@
+# SubscribersControllerUpdateSubscriberGlobalPreferencesRequest
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `subscriber_id`                                                                                                | *str*                                                                                                          | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `update_subscriber_global_preferences_request_dto`                                                             | [models.UpdateSubscriberGlobalPreferencesRequestDto](../models/updatesubscriberglobalpreferencesrequestdto.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

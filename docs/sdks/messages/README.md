@@ -1,0 +1,137 @@
+# Messages
+(*messages*)
+
+## Overview
+
+A message in Novu represents a notification delivered to a recipient on a particular channel. Messages contain information about the request that triggered its delivery, a view of the data sent to the recipient, and a timeline of its lifecycle events. Learn more about messages.
+<https://docs.novu.co/workflows/messages>
+
+### Available Operations
+
+* [retrieve](#retrieve) - Get messages
+* [delete](#delete) - Delete message
+* [delete_by_transaction_id](#delete_by_transaction_id) - Delete messages by transactionId
+
+## retrieve
+
+Returns a list of messages, could paginate using the `page` query parameter
+
+### Example Usage
+
+```python
+from novu_py import Novu
+import os
+
+s = Novu(
+    api_key=os.getenv("NOVU_API_KEY", ""),
+)
+
+res = s.messages.retrieve()
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `request`                                                                                           | [models.MessagesControllerGetMessagesRequest](../../models/messagescontrollergetmessagesrequest.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
+| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
+
+### Response
+
+**[models.MessagesControllerGetMessagesResponse](../../models/messagescontrollergetmessagesresponse.md)**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| models.ErrorDto           | 400, 404, 409             | application/json          |
+| models.ValidationErrorDto | 422                       | application/json          |
+| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+
+## delete
+
+Deletes a message entity from the Novu platform
+
+### Example Usage
+
+```python
+from novu_py import Novu
+import os
+
+s = Novu(
+    api_key=os.getenv("NOVU_API_KEY", ""),
+)
+
+res = s.messages.delete(message_id="<id>")
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `message_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.MessagesControllerDeleteMessageResponse](../../models/messagescontrollerdeletemessageresponse.md)**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| models.ErrorDto           | 400, 404, 409             | application/json          |
+| models.ValidationErrorDto | 422                       | application/json          |
+| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+
+## delete_by_transaction_id
+
+Deletes messages entity from the Novu platform using TransactionId of message
+
+### Example Usage
+
+```python
+from novu_py import Novu
+import os
+
+s = Novu(
+    api_key=os.getenv("NOVU_API_KEY", ""),
+)
+
+res = s.messages.delete_by_transaction_id(transaction_id="<id>")
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `transaction_id`                                                        | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
+| `channel`                                                               | [Optional[models.QueryParamChannel]](../../models/queryparamchannel.md) | :heavy_minus_sign:                                                      | The channel of the message to be deleted                                |
+| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+
+### Response
+
+**[models.MessagesControllerDeleteMessagesByTransactionIDResponse](../../models/messagescontrollerdeletemessagesbytransactionidresponse.md)**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| models.ErrorDto           | 400, 404, 409             | application/json          |
+| models.ValidationErrorDto | 422                       | application/json          |
+| models.APIError           | 4XX, 5XX                  | \*/\*                     |

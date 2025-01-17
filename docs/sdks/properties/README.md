@@ -1,0 +1,52 @@
+# Properties
+(*subscribers.properties*)
+
+## Overview
+
+### Available Operations
+
+* [update_online_flag](#update_online_flag) - Update subscriber online status
+
+## update_online_flag
+
+Used to update the subscriber isOnline flag.
+
+### Example Usage
+
+```python
+from novu_py import Novu
+import os
+
+s = Novu(
+    api_key=os.getenv("NOVU_API_KEY", ""),
+)
+
+res = s.subscribers.properties.update_online_flag(subscriber_id="<id>", update_subscriber_online_flag_request_dto={
+    "is_online": False,
+})
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `subscriber_id`                                                                                     | *str*                                                                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `update_subscriber_online_flag_request_dto`                                                         | [models.UpdateSubscriberOnlineFlagRequestDto](../../models/updatesubscriberonlineflagrequestdto.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
+
+### Response
+
+**[models.SubscribersControllerUpdateSubscriberOnlineFlagResponse](../../models/subscriberscontrollerupdatesubscriberonlineflagresponse.md)**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| models.ErrorDto           | 400, 404, 409             | application/json          |
+| models.ValidationErrorDto | 422                       | application/json          |
+| models.APIError           | 4XX, 5XX                  | \*/\*                     |
