@@ -5,14 +5,16 @@ from enum import Enum
 from novu_py.types import BaseModel
 import pydantic
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-FeedIdentifierTypedDict = Union[str, List[str]]
+FeedIdentifierTypedDict = TypeAliasType(
+    "FeedIdentifierTypedDict", Union[str, List[str]]
+)
 r"""Optional feed identifier or array of feed identifiers"""
 
 
-FeedIdentifier = Union[str, List[str]]
+FeedIdentifier = TypeAliasType("FeedIdentifier", Union[str, List[str]])
 r"""Optional feed identifier or array of feed identifiers"""
 
 

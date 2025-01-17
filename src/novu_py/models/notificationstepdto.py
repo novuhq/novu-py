@@ -15,24 +15,30 @@ from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict
 from novu_py.types import BaseModel
 import pydantic
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-NotificationStepDtoMetadataTypedDict = Union[
-    DelayScheduledMetadataTypedDict,
-    DelayRegularMetadataTypedDict,
-    DigestTimedMetadataTypedDict,
-    DigestRegularMetadataTypedDict,
-]
+NotificationStepDtoMetadataTypedDict = TypeAliasType(
+    "NotificationStepDtoMetadataTypedDict",
+    Union[
+        DelayScheduledMetadataTypedDict,
+        DelayRegularMetadataTypedDict,
+        DigestTimedMetadataTypedDict,
+        DigestRegularMetadataTypedDict,
+    ],
+)
 r"""Metadata associated with the workflow step. Can vary based on the type of step."""
 
 
-NotificationStepDtoMetadata = Union[
-    DelayScheduledMetadata,
-    DelayRegularMetadata,
-    DigestTimedMetadata,
-    DigestRegularMetadata,
-]
+NotificationStepDtoMetadata = TypeAliasType(
+    "NotificationStepDtoMetadata",
+    Union[
+        DelayScheduledMetadata,
+        DelayRegularMetadata,
+        DigestTimedMetadata,
+        DigestRegularMetadata,
+    ],
+)
 r"""Metadata associated with the workflow step. Can vary based on the type of step."""
 
 

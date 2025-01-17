@@ -20,31 +20,30 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.credentials.update(subscriber_id="<id>", update_subscriber_channel_request_dto={
-    "provider_id": novu_py.UpdateSubscriberChannelRequestDtoProviderID.PUSHPAD,
-    "credentials": {
-        "webhook_url": "https://example.com/webhook",
-        "channel": "general",
-        "device_tokens": [
-            "token1",
-            "token2",
-            "token3",
-        ],
-        "alert_uid": "12345-abcde",
-        "title": "Critical Alert",
-        "image_url": "https://example.com/image.png",
-        "state": "resolved",
-        "external_url": "https://example.com/details",
-    },
-})
+    res = novu.subscribers.credentials.update(subscriber_id="<id>", update_subscriber_channel_request_dto={
+        "provider_id": novu_py.UpdateSubscriberChannelRequestDtoProviderID.PUSHPAD,
+        "credentials": {
+            "webhook_url": "https://example.com/webhook",
+            "channel": "general",
+            "device_tokens": [
+                "token1",
+                "token2",
+                "token3",
+            ],
+            "alert_uid": "12345-abcde",
+            "title": "Critical Alert",
+            "image_url": "https://example.com/image.png",
+            "state": "resolved",
+            "external_url": "https://example.com/details",
+        },
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -80,31 +79,30 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.credentials.append(subscriber_id="<id>", update_subscriber_channel_request_dto={
-    "provider_id": novu_py.UpdateSubscriberChannelRequestDtoProviderID.ZULIP,
-    "credentials": {
-        "webhook_url": "https://example.com/webhook",
-        "channel": "general",
-        "device_tokens": [
-            "token1",
-            "token2",
-            "token3",
-        ],
-        "alert_uid": "12345-abcde",
-        "title": "Critical Alert",
-        "image_url": "https://example.com/image.png",
-        "state": "resolved",
-        "external_url": "https://example.com/details",
-    },
-})
+    res = novu.subscribers.credentials.append(subscriber_id="<id>", update_subscriber_channel_request_dto={
+        "provider_id": novu_py.UpdateSubscriberChannelRequestDtoProviderID.ZULIP,
+        "credentials": {
+            "webhook_url": "https://example.com/webhook",
+            "channel": "general",
+            "device_tokens": [
+                "token1",
+                "token2",
+                "token3",
+            ],
+            "alert_uid": "12345-abcde",
+            "title": "Critical Alert",
+            "image_url": "https://example.com/image.png",
+            "state": "resolved",
+            "external_url": "https://example.com/details",
+        },
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -138,15 +136,14 @@ Delete subscriber credentials such as slack and expo tokens.
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.credentials.delete(subscriber_id="<id>", provider_id="<id>")
+    res = novu.subscribers.credentials.delete(subscriber_id="<id>", provider_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

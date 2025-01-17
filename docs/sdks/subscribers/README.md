@@ -25,19 +25,16 @@ Returns a list of subscribers, could paginated using the `page` and `limit` quer
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.list()
+    res = novu.subscribers.list()
 
-if res is not None:
-    while True:
-        # handle items
+    while res is not None:
+        # Handle items
 
         res = res.next()
-        if res is None:
-            break
 
 ```
 
@@ -71,17 +68,16 @@ Creates a subscriber entity, in the Novu platform. The subscriber will be later 
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.create(request={
-    "subscriber_id": "<id>",
-})
+    res = novu.subscribers.create(request={
+        "subscriber_id": "<id>",
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -114,15 +110,14 @@ Get subscriber by your internal id used to identify the subscriber
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.retrieve(subscriber_id="<id>")
+    res = novu.subscribers.retrieve(subscriber_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -156,32 +151,31 @@ Used to update the subscriber entity with new information
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.update(subscriber_id="<id>", update_subscriber_request_dto={
-    "email": "john.doe@example.com",
-    "first_name": "John",
-    "last_name": "Doe",
-    "phone": "+1234567890",
-    "avatar": "https://example.com/avatar.jpg",
-    "locale": "en-US",
-    "data": {
-        "preferences": {
-            "notifications": True,
-            "theme": "dark",
+    res = novu.subscribers.update(subscriber_id="<id>", update_subscriber_request_dto={
+        "email": "john.doe@example.com",
+        "first_name": "John",
+        "last_name": "Doe",
+        "phone": "+1234567890",
+        "avatar": "https://example.com/avatar.jpg",
+        "locale": "en-US",
+        "data": {
+            "preferences": {
+                "notifications": True,
+                "theme": "dark",
+            },
+            "tags": [
+                "premium",
+                "newsletter",
+            ],
         },
-        "tags": [
-            "premium",
-            "newsletter",
-        ],
-    },
-})
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -215,15 +209,14 @@ Deletes a subscriber entity from the Novu platform
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.delete(subscriber_id="<id>")
+    res = novu.subscribers.delete(subscriber_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -259,21 +252,20 @@ if res is not None:
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.create_bulk(request={
-    "subscribers": [
-        {
-            "subscriber_id": "<id>",
-        },
-    ],
-})
+    res = novu.subscribers.create_bulk(request={
+        "subscribers": [
+            {
+                "subscriber_id": "<id>",
+            },
+        ],
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

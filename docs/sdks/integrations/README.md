@@ -25,15 +25,14 @@ Return all the integrations the user has created for that organization. Review v
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.integrations.list()
+    res = novu.integrations.list()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -66,18 +65,17 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.integrations.create(request={
-    "provider_id": "<id>",
-    "channel": novu_py.CreateIntegrationRequestDtoChannel.SMS,
-})
+    res = novu.integrations.create(request={
+        "provider_id": "<id>",
+        "channel": novu_py.CreateIntegrationRequestDtoChannel.SMS,
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -110,15 +108,14 @@ Return all the active integrations the user has created for that organization. R
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.integrations.list_active()
+    res = novu.integrations.list_active()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -150,15 +147,14 @@ Update integration
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.integrations.update(integration_id="<id>", update_integration_request_dto={})
+    res = novu.integrations.update(integration_id="<id>", update_integration_request_dto={})
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -192,15 +188,14 @@ Delete integration
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.integrations.delete(integration_id="<id>")
+    res = novu.integrations.delete(integration_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -233,15 +228,14 @@ Set integration as primary
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.integrations.set_as_primary(integration_id="<id>")
+    res = novu.integrations.set_as_primary(integration_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

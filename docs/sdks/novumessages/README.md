@@ -20,18 +20,17 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.messages.mark_all_as(subscriber_id="<id>", message_mark_as_request_dto={
-    "message_id": "<value>",
-    "mark_as": novu_py.MarkAs.UNREAD,
-})
+    res = novu.subscribers.messages.mark_all_as(subscriber_id="<id>", message_mark_as_request_dto={
+        "message_id": "<value>",
+        "mark_as": novu_py.MarkAs.UNREAD,
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -66,17 +65,16 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.messages.mark_all(subscriber_id="<id>", mark_all_message_as_request_dto={
-    "mark_as": novu_py.MarkAllMessageAsRequestDtoMarkAs.SEEN,
-})
+    res = novu.subscribers.messages.mark_all(subscriber_id="<id>", mark_all_message_as_request_dto={
+        "mark_as": novu_py.MarkAllMessageAsRequestDtoMarkAs.SEEN,
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -111,17 +109,16 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.messages.update_as_seen(message_id="<id>", type_="<value>", subscriber_id="<id>", mark_message_action_as_seen_dto={
-    "status": novu_py.MarkMessageActionAsSeenDtoStatus.DONE,
-})
+    res = novu.subscribers.messages.update_as_seen(message_id="<id>", type_="<value>", subscriber_id="<id>", mark_message_action_as_seen_dto={
+        "status": novu_py.MarkMessageActionAsSeenDtoStatus.DONE,
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

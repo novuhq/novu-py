@@ -5,13 +5,13 @@ from .subscriberchanneldto import SubscriberChannelDto, SubscriberChannelDtoType
 from novu_py.types import BaseModel
 import pydantic
 from typing import Dict, List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-DataTypedDict = Union[str, List[str], bool, float]
+DataTypedDict = TypeAliasType("DataTypedDict", Union[str, List[str], bool, float])
 
 
-Data = Union[str, List[str], bool, float]
+Data = TypeAliasType("Data", Union[str, List[str], bool, float])
 
 
 class SubscriberPayloadDtoTypedDict(TypedDict):

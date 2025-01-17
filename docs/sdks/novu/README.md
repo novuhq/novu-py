@@ -27,37 +27,37 @@ Novu Documentation
 ### Example Usage
 
 ```python
+import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger(request={
-    "name": "workflow_identifier",
-    "to": {
-        "subscriber_id": "<id>",
-    },
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+        name="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
         },
-    },
-    "bridge_url": "https://example.com/bridge",
-    "overrides": {
-        "fcm": {
-            "data": {
-                "key": "value",
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
             },
         },
-    },
-})
+        bridge_url="https://example.com/bridge",
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -94,80 +94,81 @@ import novu_py
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger_bulk(request={
-    "events": [
-        {
-            "name": "workflow_identifier",
-            "to": {
-                "subscriber_id": "<id>",
-            },
-            "payload": {
-                "comment_id": "string",
-                "post": {
-                    "text": "string",
+    res = novu.trigger_bulk(request={
+        "events": [
+            novu_py.TriggerEventRequestDto(
+                name="workflow_identifier",
+                to={
+                    "subscriber_id": "<id>",
                 },
-            },
-            "bridge_url": "https://example.com/bridge",
-            "overrides": {
-                "fcm": {
-                    "data": {
-                        "key": "value",
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
                     },
                 },
-            },
-        },
-        {
-            "name": "workflow_identifier",
-            "to": {
-                "topic_key": "<value>",
-                "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-            },
-            "payload": {
-                "comment_id": "string",
-                "post": {
-                    "text": "string",
-                },
-            },
-            "bridge_url": "https://example.com/bridge",
-            "overrides": {
-                "fcm": {
-                    "data": {
-                        "key": "value",
+                bridge_url="https://example.com/bridge",
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
                     },
                 },
-            },
-        },
-        {
-            "name": "workflow_identifier",
-            "to": [
-                "SUBSCRIBER_ID",
-                "SUBSCRIBER_ID",
-            ],
-            "payload": {
-                "comment_id": "string",
-                "post": {
-                    "text": "string",
-                },
-            },
-            "bridge_url": "https://example.com/bridge",
-            "overrides": {
-                "fcm": {
-                    "data": {
-                        "key": "value",
+            ),
+            novu_py.TriggerEventRequestDto(
+                name="workflow_identifier",
+                to=[
+                    {
+                        "topic_key": "<value>",
+                        "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                    },
+                ],
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
                     },
                 },
-            },
-        },
-    ],
-})
+                bridge_url="https://example.com/bridge",
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+            novu_py.TriggerEventRequestDto(
+                name="workflow_identifier",
+                to=[
+                    "SUBSCRIBER_ID",
+                    "SUBSCRIBER_ID",
+                ],
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                bridge_url="https://example.com/bridge",
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+        ],
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -201,24 +202,22 @@ Trigger a broadcast event to all existing subscribers, could be used to send ann
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.trigger_broadcast(request={
-    "name": "<value>",
-    "payload": {
-        "comment_id": "string",
-        "post": {
-            "text": "string",
+    res = novu.trigger_broadcast(request={
+        "name": "<value>",
+        "payload": {
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
         },
-    },
-    "overrides": {},
-})
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -254,15 +253,14 @@ if res is not None:
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.cancel(transaction_id="<id>")
+    res = novu.cancel(transaction_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -293,17 +291,16 @@ if res is not None:
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.support_controller_fetch_user_organizations(request={
-    "timestamp": "<value>",
-})
+    res = novu.support_controller_fetch_user_organizations(request={
+        "timestamp": "<value>",
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -332,15 +329,15 @@ if res is not None:
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-s.create(request={
-    "text": "<value>",
-})
+    novu.create(request={
+        "text": "<value>",
+    })
 
-# Use the SDK ...
+    # Use the SDK ...
 
 ```
 

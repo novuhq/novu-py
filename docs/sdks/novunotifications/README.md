@@ -18,18 +18,17 @@ Get in-app notification feed for a particular subscriber
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.notifications.feed(request={
-    "subscriber_id": "<id>",
-    "payload": "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30=",
-})
+    res = novu.subscribers.notifications.feed(request={
+        "subscriber_id": "<id>",
+        "payload": "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30=",
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -62,15 +61,14 @@ Get the unseen in-app notifications count for subscribers feed
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.notifications.unseen_count(subscriber_id="<id>")
+    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

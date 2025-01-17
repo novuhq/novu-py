@@ -17,15 +17,14 @@ Return the status of the webhook for this provider, if it is supported or if it 
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.integrations.webhooks.retrieve(provider_or_integration_id="<id>")
+    res = novu.integrations.webhooks.retrieve(provider_or_integration_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

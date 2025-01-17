@@ -11,44 +11,53 @@ from .workflowtostepcontrolvaluesdto import (
 from novu_py.types import BaseModel
 import pydantic
 from typing import Any, Dict, List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-OneTypedDict = Union[TopicPayloadDtoTypedDict, SubscriberPayloadDtoTypedDict, str]
+OneTypedDict = TypeAliasType(
+    "OneTypedDict", Union[TopicPayloadDtoTypedDict, SubscriberPayloadDtoTypedDict, str]
+)
 
 
-One = Union[TopicPayloadDto, SubscriberPayloadDto, str]
+One = TypeAliasType("One", Union[TopicPayloadDto, SubscriberPayloadDto, str])
 
 
-ToTypedDict = Union[
-    TopicPayloadDtoTypedDict, SubscriberPayloadDtoTypedDict, List[OneTypedDict], str
-]
+ToTypedDict = TypeAliasType(
+    "ToTypedDict",
+    Union[
+        TopicPayloadDtoTypedDict, SubscriberPayloadDtoTypedDict, List[OneTypedDict], str
+    ],
+)
 r"""The recipients list of people who will receive the notification."""
 
 
-To = Union[TopicPayloadDto, SubscriberPayloadDto, List[One], str]
+To = TypeAliasType("To", Union[TopicPayloadDto, SubscriberPayloadDto, List[One], str])
 r"""The recipients list of people who will receive the notification."""
 
 
-ActorTypedDict = Union[SubscriberPayloadDtoTypedDict, str]
+ActorTypedDict = TypeAliasType(
+    "ActorTypedDict", Union[SubscriberPayloadDtoTypedDict, str]
+)
 r"""It is used to display the Avatar of the provided actor's subscriber id or actor object.
 If a new actor object is provided, we will create a new subscriber in our system
 """
 
 
-Actor = Union[SubscriberPayloadDto, str]
+Actor = TypeAliasType("Actor", Union[SubscriberPayloadDto, str])
 r"""It is used to display the Avatar of the provided actor's subscriber id or actor object.
 If a new actor object is provided, we will create a new subscriber in our system
 """
 
 
-TenantTypedDict = Union[TenantPayloadDtoTypedDict, str]
+TenantTypedDict = TypeAliasType(
+    "TenantTypedDict", Union[TenantPayloadDtoTypedDict, str]
+)
 r"""It is used to specify a tenant context during trigger event.
 Existing tenants will be updated with the provided details.
 """
 
 
-Tenant = Union[TenantPayloadDto, str]
+Tenant = TypeAliasType("Tenant", Union[TenantPayloadDto, str])
 r"""It is used to specify a tenant context during trigger event.
 Existing tenants will be updated with the provided details.
 """

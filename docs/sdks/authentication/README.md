@@ -18,21 +18,20 @@ Handle providers oauth redirect
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.authentication.chat_access_oauth_call_back(request={
-    "subscriber_id": "<id>",
-    "provider_id": "<id>",
-    "hmac_hash": "<value>",
-    "environment_id": "<id>",
-    "code": "<value>",
-})
+    res = novu.subscribers.authentication.chat_access_oauth_call_back(request={
+        "subscriber_id": "<id>",
+        "provider_id": "<id>",
+        "hmac_hash": "<value>",
+        "environment_id": "<id>",
+        "code": "<value>",
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -65,20 +64,19 @@ Handle chat oauth
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.subscribers.authentication.chat_access_oauth(request={
-    "subscriber_id": "<id>",
-    "provider_id": "<id>",
-    "hmac_hash": "<value>",
-    "environment_id": "<id>",
-})
+    res = novu.subscribers.authentication.chat_access_oauth(request={
+        "subscriber_id": "<id>",
+        "provider_id": "<id>",
+        "hmac_hash": "<value>",
+        "environment_id": "<id>",
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

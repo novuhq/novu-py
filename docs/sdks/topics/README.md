@@ -24,18 +24,17 @@ Create a topic
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.topics.create(request={
-    "key": "<key>",
-    "name": "<value>",
-})
+    res = novu.topics.create(request={
+        "key": "<key>",
+        "name": "<value>",
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -68,15 +67,14 @@ Returns a list of topics that can be paginated using the `page` query parameter 
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.topics.list(page=0, page_size=10, key="exampleKey")
+    res = novu.topics.list(page=0, page_size=10, key="exampleKey")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -111,15 +109,14 @@ Delete a topic by its topic key if it has no subscribers
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.topics.delete(topic_key="<value>")
+    res = novu.topics.delete(topic_key="<value>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -152,15 +149,14 @@ Get a topic by its topic key
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.topics.retrieve(topic_key="<value>")
+    res = novu.topics.retrieve(topic_key="<value>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -193,17 +189,16 @@ Rename a topic by providing a new name
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.topics.rename(topic_key="<value>", rename_topic_request_dto={
-    "name": "<value>",
-})
+    res = novu.topics.rename(topic_key="<value>", rename_topic_request_dto={
+        "name": "<value>",
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

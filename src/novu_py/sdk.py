@@ -15,7 +15,7 @@ from novu_py.subscribers import Subscribers
 from novu_py.topics import Topics
 from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
-from typing import Any, Callable, Dict, List, Optional, Union, cast
+from typing import Any, Callable, Dict, List, Mapping, Optional, Union, cast
 
 
 class Novu(BaseSDK):
@@ -83,7 +83,8 @@ class Novu(BaseSDK):
 
         security: Any = None
         if callable(api_key):
-            security = lambda: models.Security(api_key=api_key())  # pylint: disable=unnecessary-lambda-assignment
+            # pylint: disable=unnecessary-lambda-assignment
+            security = lambda: models.Security(api_key=api_key())
         else:
             security = models.Security(api_key=api_key)
 
@@ -126,6 +127,20 @@ class Novu(BaseSDK):
         self.messages = Messages(self.sdk_configuration)
         self.topics = Topics(self.sdk_configuration)
 
+    def __enter__(self):
+        return self
+
+    async def __aenter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.sdk_configuration.client is not None:
+            self.sdk_configuration.client.close()
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        if self.sdk_configuration.async_client is not None:
+            await self.sdk_configuration.async_client.aclose()
+
     def trigger(
         self,
         *,
@@ -135,6 +150,7 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EventsControllerTriggerResponse:
         r"""Trigger event
 
@@ -148,6 +164,7 @@ class Novu(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -161,7 +178,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.TriggerEventRequestDto)
         request = cast(models.TriggerEventRequestDto, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/v1/events/trigger",
             base_url=base_url,
@@ -172,6 +189,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TriggerEventRequestDto
@@ -218,12 +236,22 @@ class Novu(BaseSDK):
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
-        if utils.match_response(http_res, ["429", "503"], "*"):
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -247,6 +275,7 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EventsControllerTriggerResponse:
         r"""Trigger event
 
@@ -260,6 +289,7 @@ class Novu(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -273,7 +303,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.TriggerEventRequestDto)
         request = cast(models.TriggerEventRequestDto, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/v1/events/trigger",
             base_url=base_url,
@@ -284,6 +314,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TriggerEventRequestDto
@@ -330,12 +361,22 @@ class Novu(BaseSDK):
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
-        if utils.match_response(http_res, ["429", "503"], "*"):
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -357,6 +398,7 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EventsControllerTriggerBulkResponse:
         r"""Bulk trigger event
 
@@ -369,6 +411,7 @@ class Novu(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -382,7 +425,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.BulkTriggerEventDto)
         request = cast(models.BulkTriggerEventDto, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/v1/events/trigger/bulk",
             base_url=base_url,
@@ -393,6 +436,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.BulkTriggerEventDto
@@ -439,12 +483,22 @@ class Novu(BaseSDK):
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
-        if utils.match_response(http_res, ["429", "503"], "*"):
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -466,6 +520,7 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EventsControllerTriggerBulkResponse:
         r"""Bulk trigger event
 
@@ -478,6 +533,7 @@ class Novu(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -491,7 +547,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.BulkTriggerEventDto)
         request = cast(models.BulkTriggerEventDto, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/v1/events/trigger/bulk",
             base_url=base_url,
@@ -502,6 +558,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.BulkTriggerEventDto
@@ -548,12 +605,22 @@ class Novu(BaseSDK):
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
-        if utils.match_response(http_res, ["429", "503"], "*"):
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -578,6 +645,7 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EventsControllerBroadcastEventToAllResponse:
         r"""Broadcast event to all
 
@@ -588,6 +656,7 @@ class Novu(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -601,7 +670,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.TriggerEventToAllRequestDto)
         request = cast(models.TriggerEventToAllRequestDto, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/v1/events/trigger/broadcast",
             base_url=base_url,
@@ -612,6 +681,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TriggerEventToAllRequestDto
@@ -658,12 +728,22 @@ class Novu(BaseSDK):
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
-        if utils.match_response(http_res, ["429", "503"], "*"):
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -688,6 +768,7 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EventsControllerBroadcastEventToAllResponse:
         r"""Broadcast event to all
 
@@ -698,6 +779,7 @@ class Novu(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -711,7 +793,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.TriggerEventToAllRequestDto)
         request = cast(models.TriggerEventToAllRequestDto, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/v1/events/trigger/broadcast",
             base_url=base_url,
@@ -722,6 +804,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TriggerEventToAllRequestDto
@@ -768,12 +851,22 @@ class Novu(BaseSDK):
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
-        if utils.match_response(http_res, ["429", "503"], "*"):
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -795,6 +888,7 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EventsControllerCancelResponse:
         r"""Cancel triggered event
 
@@ -807,6 +901,7 @@ class Novu(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -820,7 +915,7 @@ class Novu(BaseSDK):
             transaction_id=transaction_id,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/v1/events/trigger/{transactionId}",
             base_url=base_url,
@@ -831,6 +926,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
@@ -872,12 +968,22 @@ class Novu(BaseSDK):
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
-        if utils.match_response(http_res, ["429", "503"], "*"):
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -899,6 +1005,7 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EventsControllerCancelResponse:
         r"""Cancel triggered event
 
@@ -911,6 +1018,7 @@ class Novu(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -924,7 +1032,7 @@ class Novu(BaseSDK):
             transaction_id=transaction_id,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/v1/events/trigger/{transactionId}",
             base_url=base_url,
@@ -935,6 +1043,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
@@ -976,12 +1085,22 @@ class Novu(BaseSDK):
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
-        if utils.match_response(http_res, ["429", "503"], "*"):
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1003,12 +1122,14 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SupportControllerFetchUserOrganizationsResponseBody:
         r"""
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -1022,7 +1143,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.PlainCardRequestDto)
         request = cast(models.PlainCardRequestDto, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/v1/support/user-organizations",
             base_url=base_url,
@@ -1033,6 +1154,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.PlainCardRequestDto
@@ -1070,7 +1192,12 @@ class Novu(BaseSDK):
                 http_res.text,
                 models.SupportControllerFetchUserOrganizationsResponseBody,
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1092,12 +1219,14 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SupportControllerFetchUserOrganizationsResponseBody:
         r"""
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -1111,7 +1240,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.PlainCardRequestDto)
         request = cast(models.PlainCardRequestDto, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/v1/support/user-organizations",
             base_url=base_url,
@@ -1122,6 +1251,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.PlainCardRequestDto
@@ -1159,7 +1289,12 @@ class Novu(BaseSDK):
                 http_res.text,
                 models.SupportControllerFetchUserOrganizationsResponseBody,
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1183,12 +1318,14 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ):
         r"""
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -1202,7 +1339,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.CreateSupportThreadDto)
         request = cast(models.CreateSupportThreadDto, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/v1/support/create-thread",
             base_url=base_url,
@@ -1213,6 +1350,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="*/*",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateSupportThreadDto
@@ -1247,7 +1385,12 @@ class Novu(BaseSDK):
 
         if utils.match_response(http_res, "201", "*"):
             return
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1271,12 +1414,14 @@ class Novu(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ):
         r"""
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -1290,7 +1435,7 @@ class Novu(BaseSDK):
             request = utils.unmarshal(request, models.CreateSupportThreadDto)
         request = cast(models.CreateSupportThreadDto, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/v1/support/create-thread",
             base_url=base_url,
@@ -1301,6 +1446,7 @@ class Novu(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="*/*",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateSupportThreadDto
@@ -1335,7 +1481,12 @@ class Novu(BaseSDK):
 
         if utils.match_response(http_res, "201", "*"):
             return
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

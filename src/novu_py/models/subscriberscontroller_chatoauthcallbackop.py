@@ -5,7 +5,7 @@ from novu_py.types import BaseModel
 from novu_py.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
 import pydantic
 from typing import Any, Dict, List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class SubscribersControllerChatOauthCallbackRequestTypedDict(TypedDict):
@@ -61,10 +61,14 @@ class SubscribersControllerChatOauthCallbackRequest(BaseModel):
     r"""Optional integration identifier"""
 
 
-SubscribersControllerChatOauthCallbackResponseResultTypedDict = Union[str, str]
+SubscribersControllerChatOauthCallbackResponseResultTypedDict = TypeAliasType(
+    "SubscribersControllerChatOauthCallbackResponseResultTypedDict", Union[str, str]
+)
 
 
-SubscribersControllerChatOauthCallbackResponseResult = Union[str, str]
+SubscribersControllerChatOauthCallbackResponseResult = TypeAliasType(
+    "SubscribersControllerChatOauthCallbackResponseResult", Union[str, str]
+)
 
 
 class SubscribersControllerChatOauthCallbackResponseTypedDict(TypedDict):

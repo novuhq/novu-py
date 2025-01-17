@@ -22,15 +22,14 @@ Returns a list of messages, could paginate using the `page` query parameter
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.messages.retrieve()
+    res = novu.messages.retrieve()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -63,15 +62,14 @@ Deletes a message entity from the Novu platform
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.messages.delete(message_id="<id>")
+    res = novu.messages.delete(message_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -104,15 +102,14 @@ Deletes messages entity from the Novu platform using TransactionId of message
 from novu_py import Novu
 import os
 
-s = Novu(
+with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
-)
+) as novu:
 
-res = s.messages.delete_by_transaction_id(transaction_id="<id>")
+    res = novu.messages.delete_by_transaction_id(transaction_id="<id>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 

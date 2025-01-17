@@ -6,15 +6,19 @@ from novu_py.types import BaseModel, Nullable, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, List, Optional, Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
-ValidationErrorDtoValueTypedDict = Union[
-    str, float, bool, Dict[str, Any], List[Dict[str, Any]]
-]
+ValidationErrorDtoValueTypedDict = TypeAliasType(
+    "ValidationErrorDtoValueTypedDict",
+    Union[str, float, bool, Dict[str, Any], List[Dict[str, Any]]],
+)
 
 
-ValidationErrorDtoValue = Union[str, float, bool, Dict[str, Any], List[Dict[str, Any]]]
+ValidationErrorDtoValue = TypeAliasType(
+    "ValidationErrorDtoValue",
+    Union[str, float, bool, Dict[str, Any], List[Dict[str, Any]]],
+)
 
 
 class ErrorsTypedDict(TypedDict):
