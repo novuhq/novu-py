@@ -3,7 +3,12 @@
 from __future__ import annotations
 from .feedresponsedto import FeedResponseDto, FeedResponseDtoTypedDict
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -17,6 +22,8 @@ class SubscribersControllerGetNotificationsFeedRequestTypedDict(TypedDict):
     seen: NotRequired[bool]
     payload: NotRequired[str]
     r"""Base64 encoded string of the partial payload JSON object"""
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerGetNotificationsFeedRequest(BaseModel):
@@ -51,6 +58,13 @@ class SubscribersControllerGetNotificationsFeedRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Base64 encoded string of the partial payload JSON object"""
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerGetNotificationsFeedResponseTypedDict(TypedDict):

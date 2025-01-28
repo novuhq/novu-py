@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -17,6 +22,8 @@ class SubscribersControllerChatAccessOauthRequestTypedDict(TypedDict):
     r"""The ID of the environment, must be a valid MongoDB ID"""
     integration_identifier: NotRequired[str]
     r"""Optional integration identifier"""
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerChatAccessOauthRequest(BaseModel):
@@ -52,6 +59,13 @@ class SubscribersControllerChatAccessOauthRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Optional integration identifier"""
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerChatAccessOauthResponseTypedDict(TypedDict):

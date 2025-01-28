@@ -4,7 +4,7 @@ from __future__ import annotations
 from .activitiesresponsedto import ActivitiesResponseDto, ActivitiesResponseDtoTypedDict
 from .channeltypeenum import ChannelTypeEnum
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, QueryParamMetadata
+from novu_py.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -29,6 +29,8 @@ class NotificationsControllerListNotificationsRequestTypedDict(TypedDict):
     r"""Date filter for records after this timestamp"""
     before: NotRequired[str]
     r"""Date filter for records before this timestamp"""
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class NotificationsControllerListNotificationsRequest(BaseModel):
@@ -90,6 +92,13 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Date filter for records before this timestamp"""
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class NotificationsControllerListNotificationsResponseTypedDict(TypedDict):

@@ -158,6 +158,8 @@ from .emailblockstyles import EmailBlockStyles, EmailBlockStylesTypedDict
 from .emailblocktypeenum import EmailBlockTypeEnum
 from .errordto import ErrorDto, ErrorDtoData
 from .eventscontroller_broadcasteventtoallop import (
+    EventsControllerBroadcastEventToAllRequest,
+    EventsControllerBroadcastEventToAllRequestTypedDict,
     EventsControllerBroadcastEventToAllResponse,
     EventsControllerBroadcastEventToAllResponseTypedDict,
 )
@@ -168,10 +170,14 @@ from .eventscontroller_cancelop import (
     EventsControllerCancelResponseTypedDict,
 )
 from .eventscontroller_triggerbulkop import (
+    EventsControllerTriggerBulkRequest,
+    EventsControllerTriggerBulkRequestTypedDict,
     EventsControllerTriggerBulkResponse,
     EventsControllerTriggerBulkResponseTypedDict,
 )
 from .eventscontroller_triggerop import (
+    EventsControllerTriggerRequest,
+    EventsControllerTriggerRequestTypedDict,
     EventsControllerTriggerResponse,
     EventsControllerTriggerResponseTypedDict,
 )
@@ -201,10 +207,14 @@ from .integrationresponsedto import (
     IntegrationResponseDtoTypedDict,
 )
 from .integrationscontroller_createintegrationop import (
+    IntegrationsControllerCreateIntegrationRequest,
+    IntegrationsControllerCreateIntegrationRequestTypedDict,
     IntegrationsControllerCreateIntegrationResponse,
     IntegrationsControllerCreateIntegrationResponseTypedDict,
 )
 from .integrationscontroller_getactiveintegrationsop import (
+    IntegrationsControllerGetActiveIntegrationsRequest,
+    IntegrationsControllerGetActiveIntegrationsRequestTypedDict,
     IntegrationsControllerGetActiveIntegrationsResponse,
     IntegrationsControllerGetActiveIntegrationsResponseTypedDict,
 )
@@ -215,6 +225,8 @@ from .integrationscontroller_getwebhooksupportstatusop import (
     IntegrationsControllerGetWebhookSupportStatusResponseTypedDict,
 )
 from .integrationscontroller_listintegrationsop import (
+    IntegrationsControllerListIntegrationsRequest,
+    IntegrationsControllerListIntegrationsRequestTypedDict,
     IntegrationsControllerListIntegrationsResponse,
     IntegrationsControllerListIntegrationsResponseTypedDict,
 )
@@ -314,6 +326,8 @@ from .notificationscontroller_getactivitygraphstatsop import (
     NotificationsControllerGetActivityGraphStatsResponseTypedDict,
 )
 from .notificationscontroller_getactivitystatsop import (
+    NotificationsControllerGetActivityStatsRequest,
+    NotificationsControllerGetActivityStatsRequestTypedDict,
     NotificationsControllerGetActivityStatsResponse,
     NotificationsControllerGetActivityStatsResponseTypedDict,
 )
@@ -411,6 +425,8 @@ from .subscriberpayloaddto import (
 )
 from .subscriberresponsedto import SubscriberResponseDto, SubscriberResponseDtoTypedDict
 from .subscriberscontroller_bulkcreatesubscribersop import (
+    SubscribersControllerBulkCreateSubscribersRequest,
+    SubscribersControllerBulkCreateSubscribersRequestTypedDict,
     SubscribersControllerBulkCreateSubscribersResponse,
     SubscribersControllerBulkCreateSubscribersResponseTypedDict,
 )
@@ -429,6 +445,8 @@ from .subscriberscontroller_chatoauthcallbackop import (
     SubscribersControllerChatOauthCallbackResponseTypedDict,
 )
 from .subscriberscontroller_createsubscriberop import (
+    SubscribersControllerCreateSubscriberRequest,
+    SubscribersControllerCreateSubscriberRequestTypedDict,
     SubscribersControllerCreateSubscriberResponse,
     SubscribersControllerCreateSubscriberResponseTypedDict,
 )
@@ -537,9 +555,13 @@ from .subscriberscontroller_updatesubscriberpreferenceop import (
     SubscribersControllerUpdateSubscriberPreferenceResponse,
     SubscribersControllerUpdateSubscriberPreferenceResponseTypedDict,
 )
+from .supportcontroller_createthreadop import (
+    SupportControllerCreateThreadRequest,
+    SupportControllerCreateThreadRequestTypedDict,
+)
 from .supportcontroller_fetchuserorganizationsop import (
-    SupportControllerFetchUserOrganizationsResponseBody,
-    SupportControllerFetchUserOrganizationsResponseBodyTypedDict,
+    SupportControllerFetchUserOrganizationsRequest,
+    SupportControllerFetchUserOrganizationsRequestTypedDict,
 )
 from .templateresponse import TemplateResponse, TemplateResponseTypedDict
 from .tenantpayloaddto import (
@@ -566,6 +588,8 @@ from .topicscontroller_assignop import (
     TopicsControllerAssignResponseTypedDict,
 )
 from .topicscontroller_createtopicop import (
+    TopicsControllerCreateTopicRequest,
+    TopicsControllerCreateTopicRequestTypedDict,
     TopicsControllerCreateTopicResponse,
     TopicsControllerCreateTopicResponseTypedDict,
 )
@@ -819,14 +843,20 @@ __all__ = [
     "ErrorDtoData",
     "Errors",
     "ErrorsTypedDict",
+    "EventsControllerBroadcastEventToAllRequest",
+    "EventsControllerBroadcastEventToAllRequestTypedDict",
     "EventsControllerBroadcastEventToAllResponse",
     "EventsControllerBroadcastEventToAllResponseTypedDict",
     "EventsControllerCancelRequest",
     "EventsControllerCancelRequestTypedDict",
     "EventsControllerCancelResponse",
     "EventsControllerCancelResponseTypedDict",
+    "EventsControllerTriggerBulkRequest",
+    "EventsControllerTriggerBulkRequestTypedDict",
     "EventsControllerTriggerBulkResponse",
     "EventsControllerTriggerBulkResponseTypedDict",
+    "EventsControllerTriggerRequest",
+    "EventsControllerTriggerRequestTypedDict",
     "EventsControllerTriggerResponse",
     "EventsControllerTriggerResponseTypedDict",
     "ExecutionDetailsSourceEnum",
@@ -849,14 +879,20 @@ __all__ = [
     "GetTopicResponseDtoTypedDict",
     "IntegrationResponseDto",
     "IntegrationResponseDtoTypedDict",
+    "IntegrationsControllerCreateIntegrationRequest",
+    "IntegrationsControllerCreateIntegrationRequestTypedDict",
     "IntegrationsControllerCreateIntegrationResponse",
     "IntegrationsControllerCreateIntegrationResponseTypedDict",
+    "IntegrationsControllerGetActiveIntegrationsRequest",
+    "IntegrationsControllerGetActiveIntegrationsRequestTypedDict",
     "IntegrationsControllerGetActiveIntegrationsResponse",
     "IntegrationsControllerGetActiveIntegrationsResponseTypedDict",
     "IntegrationsControllerGetWebhookSupportStatusRequest",
     "IntegrationsControllerGetWebhookSupportStatusRequestTypedDict",
     "IntegrationsControllerGetWebhookSupportStatusResponse",
     "IntegrationsControllerGetWebhookSupportStatusResponseTypedDict",
+    "IntegrationsControllerListIntegrationsRequest",
+    "IntegrationsControllerListIntegrationsRequestTypedDict",
     "IntegrationsControllerListIntegrationsResponse",
     "IntegrationsControllerListIntegrationsResponseTypedDict",
     "IntegrationsControllerRemoveIntegrationRequest",
@@ -957,6 +993,8 @@ __all__ = [
     "NotificationsControllerGetActivityGraphStatsRequestTypedDict",
     "NotificationsControllerGetActivityGraphStatsResponse",
     "NotificationsControllerGetActivityGraphStatsResponseTypedDict",
+    "NotificationsControllerGetActivityStatsRequest",
+    "NotificationsControllerGetActivityStatsRequestTypedDict",
     "NotificationsControllerGetActivityStatsResponse",
     "NotificationsControllerGetActivityStatsResponseTypedDict",
     "NotificationsControllerGetNotificationRequest",
@@ -1013,6 +1051,8 @@ __all__ = [
     "SubscriberPayloadDtoTypedDict",
     "SubscriberResponseDto",
     "SubscriberResponseDtoTypedDict",
+    "SubscribersControllerBulkCreateSubscribersRequest",
+    "SubscribersControllerBulkCreateSubscribersRequestTypedDict",
     "SubscribersControllerBulkCreateSubscribersResponse",
     "SubscribersControllerBulkCreateSubscribersResponseTypedDict",
     "SubscribersControllerChatAccessOauthRequest",
@@ -1025,6 +1065,8 @@ __all__ = [
     "SubscribersControllerChatOauthCallbackResponseResult",
     "SubscribersControllerChatOauthCallbackResponseResultTypedDict",
     "SubscribersControllerChatOauthCallbackResponseTypedDict",
+    "SubscribersControllerCreateSubscriberRequest",
+    "SubscribersControllerCreateSubscriberRequestTypedDict",
     "SubscribersControllerCreateSubscriberResponse",
     "SubscribersControllerCreateSubscriberResponseTypedDict",
     "SubscribersControllerDeleteSubscriberCredentialsRequest",
@@ -1097,8 +1139,10 @@ __all__ = [
     "SubscribersControllerUpdateSubscriberRequestTypedDict",
     "SubscribersControllerUpdateSubscriberResponse",
     "SubscribersControllerUpdateSubscriberResponseTypedDict",
-    "SupportControllerFetchUserOrganizationsResponseBody",
-    "SupportControllerFetchUserOrganizationsResponseBodyTypedDict",
+    "SupportControllerCreateThreadRequest",
+    "SupportControllerCreateThreadRequestTypedDict",
+    "SupportControllerFetchUserOrganizationsRequest",
+    "SupportControllerFetchUserOrganizationsRequestTypedDict",
     "TLSOptions",
     "TLSOptionsTypedDict",
     "TemplateResponse",
@@ -1127,6 +1171,8 @@ __all__ = [
     "TopicsControllerAssignRequestTypedDict",
     "TopicsControllerAssignResponse",
     "TopicsControllerAssignResponseTypedDict",
+    "TopicsControllerCreateTopicRequest",
+    "TopicsControllerCreateTopicRequestTypedDict",
     "TopicsControllerCreateTopicResponse",
     "TopicsControllerCreateTopicResponseTypedDict",
     "TopicsControllerDeleteTopicRequest",

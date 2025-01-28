@@ -1,3 +1,4 @@
+from .novuhook import NovuHooks
 from .types import Hooks
 
 
@@ -8,6 +9,8 @@ from .types import Hooks
 
 def init_hooks(hooks: Hooks):
     # pylint: disable=unused-argument
-    """Add hooks by calling hooks.register{sdk_init/before_request/after_success/after_error}Hook
-    with an instance of a hook that implements that specific Hook interface
-    Hooks are registered per SDK instance, and are valid for the lifetime of the SDK instance"""
+        my_hook = NovuHooks()
+        hooks.register_before_request_hook(my_hook)
+        hooks.register_after_success_hook(my_hook)
+        hooks.register_after_error_hook(my_hook)
+        hooks.register_sdk_init_hook(my_hook)

@@ -6,14 +6,16 @@ from .deletemessageresponsedto import (
     DeleteMessageResponseDtoTypedDict,
 )
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, PathParamMetadata
+from novu_py.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
 import pydantic
-from typing import Dict, List
-from typing_extensions import Annotated, TypedDict
+from typing import Dict, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class MessagesControllerDeleteMessageRequestTypedDict(TypedDict):
     message_id: str
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class MessagesControllerDeleteMessageRequest(BaseModel):
@@ -22,6 +24,13 @@ class MessagesControllerDeleteMessageRequest(BaseModel):
         pydantic.Field(alias="messageId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class MessagesControllerDeleteMessageResponseTypedDict(TypedDict):

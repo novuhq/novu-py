@@ -4,7 +4,7 @@ from __future__ import annotations
 from .activitiesresponsedto import ActivitiesResponseDto, ActivitiesResponseDtoTypedDict
 from .channeltypeenum import ChannelTypeEnum
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, QueryParamMetadata
+from novu_py.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -17,6 +17,8 @@ class MessagesControllerGetMessagesRequestTypedDict(TypedDict):
     transaction_id: NotRequired[List[str]]
     page: NotRequired[float]
     limit: NotRequired[float]
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class MessagesControllerGetMessagesRequest(BaseModel):
@@ -47,6 +49,13 @@ class MessagesControllerGetMessagesRequest(BaseModel):
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 10
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class MessagesControllerGetMessagesResponseTypedDict(TypedDict):

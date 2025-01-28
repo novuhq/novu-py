@@ -3,7 +3,7 @@
 from __future__ import annotations
 from .subscriberresponsedto import SubscriberResponseDto, SubscriberResponseDtoTypedDict
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, QueryParamMetadata
+from novu_py.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from typing import Callable, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -12,6 +12,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class SubscribersControllerListSubscribersRequestTypedDict(TypedDict):
     page: NotRequired[float]
     limit: NotRequired[float]
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerListSubscribersRequest(BaseModel):
@@ -24,6 +26,13 @@ class SubscribersControllerListSubscribersRequest(BaseModel):
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 10
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerListSubscribersResponseBodyTypedDict(TypedDict):

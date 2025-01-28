@@ -6,7 +6,7 @@ from .filtertopicsresponsedto import (
     FilterTopicsResponseDtoTypedDict,
 )
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, QueryParamMetadata
+from novu_py.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -19,6 +19,8 @@ class TopicsControllerListTopicsRequestTypedDict(TypedDict):
     r"""The number of items to return per page (default: 10)"""
     key: NotRequired[str]
     r"""A filter key to apply to the results"""
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class TopicsControllerListTopicsRequest(BaseModel):
@@ -40,6 +42,13 @@ class TopicsControllerListTopicsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""A filter key to apply to the results"""
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class TopicsControllerListTopicsResponseTypedDict(TypedDict):

@@ -6,8 +6,24 @@ from .activitystatsresponsedto import (
     ActivityStatsResponseDtoTypedDict,
 )
 from novu_py.types import BaseModel
-from typing import Dict, List
-from typing_extensions import TypedDict
+from novu_py.utils import FieldMetadata, HeaderMetadata
+import pydantic
+from typing import Dict, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class NotificationsControllerGetActivityStatsRequestTypedDict(TypedDict):
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
+
+
+class NotificationsControllerGetActivityStatsRequest(BaseModel):
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class NotificationsControllerGetActivityStatsResponseTypedDict(TypedDict):

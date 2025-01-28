@@ -37,6 +37,7 @@ with Novu(
 | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `subscriber_id`                                                                                                           | *str*                                                                                                                     | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
 | `include_inactive_channels`                                                                                               | *Optional[bool]*                                                                                                          | :heavy_minus_sign:                                                                                                        | A flag which specifies if the inactive workflow channels should be included in the retrieved preferences. Default is true |
+| `idempotency_key`                                                                                                         | *Optional[str]*                                                                                                           | :heavy_minus_sign:                                                                                                        | A header for idempotency purposes                                                                                         |
 | `retries`                                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                          | :heavy_minus_sign:                                                                                                        | Configuration to override the default retry behavior of the client.                                                       |
 
 ### Response
@@ -45,11 +46,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## update_global
 
@@ -78,6 +81,7 @@ with Novu(
 | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `subscriber_id`                                                                                                   | *str*                                                                                                             | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
 | `update_subscriber_global_preferences_request_dto`                                                                | [models.UpdateSubscriberGlobalPreferencesRequestDto](../../models/updatesubscriberglobalpreferencesrequestdto.md) | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `idempotency_key`                                                                                                 | *Optional[str]*                                                                                                   | :heavy_minus_sign:                                                                                                | A header for idempotency purposes                                                                                 |
 | `retries`                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                  | :heavy_minus_sign:                                                                                                | Configuration to override the default retry behavior of the client.                                               |
 
 ### Response
@@ -86,11 +90,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## retrieve_by_level
 
@@ -121,6 +127,7 @@ with Novu(
 | `preference_level`                                                                                                        | [models.Parameter](../../models/parameter.md)                                                                             | :heavy_check_mark:                                                                                                        | the preferences level to be retrieved (template / global)                                                                 |
 | `subscriber_id`                                                                                                           | *str*                                                                                                                     | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
 | `include_inactive_channels`                                                                                               | *Optional[bool]*                                                                                                          | :heavy_minus_sign:                                                                                                        | A flag which specifies if the inactive workflow channels should be included in the retrieved preferences. Default is true |
+| `idempotency_key`                                                                                                         | *Optional[str]*                                                                                                           | :heavy_minus_sign:                                                                                                        | A header for idempotency purposes                                                                                         |
 | `retries`                                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                          | :heavy_minus_sign:                                                                                                        | Configuration to override the default retry behavior of the client.                                                       |
 
 ### Response
@@ -129,11 +136,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## update
 
@@ -163,6 +172,7 @@ with Novu(
 | `subscriber_id`                                                                                     | *str*                                                                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `workflow_id`                                                                                       | *str*                                                                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `update_subscriber_preference_request_dto`                                                          | [models.UpdateSubscriberPreferenceRequestDto](../../models/updatesubscriberpreferencerequestdto.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `idempotency_key`                                                                                   | *Optional[str]*                                                                                     | :heavy_minus_sign:                                                                                  | A header for idempotency purposes                                                                   |
 | `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
 
 ### Response
@@ -171,8 +181,10 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
