@@ -4,10 +4,10 @@ from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from novu_py import models, utils
 from novu_py._hooks import HookContext
-from novu_py.types import BaseModel, OptionalNullable, UNSET
+from novu_py.types import OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from novu_py.webhooks import Webhooks
-from typing import Any, List, Mapping, Optional, Union, cast
+from typing import Any, List, Mapping, Optional, Union
 
 
 class Integrations(BaseSDK):
@@ -28,6 +28,7 @@ class Integrations(BaseSDK):
     def list(
         self,
         *,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -37,6 +38,7 @@ class Integrations(BaseSDK):
 
         Return all the integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
 
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -49,12 +51,17 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        request = models.IntegrationsControllerListIntegrationsRequest(
+            idempotency_key=idempotency_key,
+        )
+
         req = self._build_request(
             method="GET",
             path="/v1/integrations",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -70,7 +77,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -86,7 +93,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -98,7 +121,14 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -109,6 +139,9 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -137,6 +170,7 @@ class Integrations(BaseSDK):
     async def list_async(
         self,
         *,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -146,6 +180,7 @@ class Integrations(BaseSDK):
 
         Return all the integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
 
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -158,12 +193,17 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        request = models.IntegrationsControllerListIntegrationsRequest(
+            idempotency_key=idempotency_key,
+        )
+
         req = self._build_request_async(
             method="GET",
             path="/v1/integrations",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -179,7 +219,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -195,7 +235,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -207,7 +263,14 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -218,6 +281,9 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -246,10 +312,11 @@ class Integrations(BaseSDK):
     def create(
         self,
         *,
-        request: Union[
+        create_integration_request_dto: Union[
             models.CreateIntegrationRequestDto,
             models.CreateIntegrationRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -259,7 +326,8 @@ class Integrations(BaseSDK):
 
         Create an integration for the current environment the user is based on the API key provided
 
-        :param request: The request object to send.
+        :param create_integration_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -273,9 +341,12 @@ class Integrations(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateIntegrationRequestDto)
-        request = cast(models.CreateIntegrationRequestDto, request)
+        request = models.IntegrationsControllerCreateIntegrationRequest(
+            idempotency_key=idempotency_key,
+            create_integration_request_dto=utils.get_pydantic_model(
+                create_integration_request_dto, models.CreateIntegrationRequestDto
+            ),
+        )
 
         req = self._build_request(
             method="POST",
@@ -291,7 +362,11 @@ class Integrations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.CreateIntegrationRequestDto
+                request.create_integration_request_dto,
+                False,
+                False,
+                "json",
+                models.CreateIntegrationRequestDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -301,7 +376,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -317,7 +392,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -329,7 +420,14 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -340,6 +438,9 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -368,10 +469,11 @@ class Integrations(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Union[
+        create_integration_request_dto: Union[
             models.CreateIntegrationRequestDto,
             models.CreateIntegrationRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -381,7 +483,8 @@ class Integrations(BaseSDK):
 
         Create an integration for the current environment the user is based on the API key provided
 
-        :param request: The request object to send.
+        :param create_integration_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -395,9 +498,12 @@ class Integrations(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateIntegrationRequestDto)
-        request = cast(models.CreateIntegrationRequestDto, request)
+        request = models.IntegrationsControllerCreateIntegrationRequest(
+            idempotency_key=idempotency_key,
+            create_integration_request_dto=utils.get_pydantic_model(
+                create_integration_request_dto, models.CreateIntegrationRequestDto
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -413,7 +519,11 @@ class Integrations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.CreateIntegrationRequestDto
+                request.create_integration_request_dto,
+                False,
+                False,
+                "json",
+                models.CreateIntegrationRequestDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -423,7 +533,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -439,7 +549,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -451,7 +577,14 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -462,6 +595,9 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -490,6 +626,7 @@ class Integrations(BaseSDK):
     def list_active(
         self,
         *,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -499,6 +636,7 @@ class Integrations(BaseSDK):
 
         Return all the active integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
 
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -511,12 +649,17 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        request = models.IntegrationsControllerGetActiveIntegrationsRequest(
+            idempotency_key=idempotency_key,
+        )
+
         req = self._build_request(
             method="GET",
             path="/v1/integrations/active",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -532,7 +675,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -548,7 +691,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -560,7 +719,14 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -571,6 +737,9 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -599,6 +768,7 @@ class Integrations(BaseSDK):
     async def list_active_async(
         self,
         *,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -608,6 +778,7 @@ class Integrations(BaseSDK):
 
         Return all the active integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
 
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -620,12 +791,17 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        request = models.IntegrationsControllerGetActiveIntegrationsRequest(
+            idempotency_key=idempotency_key,
+        )
+
         req = self._build_request_async(
             method="GET",
             path="/v1/integrations/active",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -641,7 +817,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -657,7 +833,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -669,7 +861,14 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -680,6 +879,9 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -713,6 +915,7 @@ class Integrations(BaseSDK):
             models.UpdateIntegrationRequestDto,
             models.UpdateIntegrationRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -722,6 +925,7 @@ class Integrations(BaseSDK):
 
         :param integration_id:
         :param update_integration_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -737,6 +941,7 @@ class Integrations(BaseSDK):
 
         request = models.IntegrationsControllerUpdateIntegrationByIDRequest(
             integration_id=integration_id,
+            idempotency_key=idempotency_key,
             update_integration_request_dto=utils.get_pydantic_model(
                 update_integration_request_dto, models.UpdateIntegrationRequestDto
             ),
@@ -770,7 +975,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -786,7 +991,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -798,7 +1019,11 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "405", "409", "413", "415"],
+            "application/json",
+        ):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, ["404", "429"], "*"):
@@ -806,9 +1031,15 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "414", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -842,6 +1073,7 @@ class Integrations(BaseSDK):
             models.UpdateIntegrationRequestDto,
             models.UpdateIntegrationRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -851,6 +1083,7 @@ class Integrations(BaseSDK):
 
         :param integration_id:
         :param update_integration_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -866,6 +1099,7 @@ class Integrations(BaseSDK):
 
         request = models.IntegrationsControllerUpdateIntegrationByIDRequest(
             integration_id=integration_id,
+            idempotency_key=idempotency_key,
             update_integration_request_dto=utils.get_pydantic_model(
                 update_integration_request_dto, models.UpdateIntegrationRequestDto
             ),
@@ -899,7 +1133,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -915,7 +1149,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -927,7 +1177,11 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "405", "409", "413", "415"],
+            "application/json",
+        ):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, ["404", "429"], "*"):
@@ -935,9 +1189,15 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "414", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -967,6 +1227,7 @@ class Integrations(BaseSDK):
         self,
         *,
         integration_id: str,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -975,6 +1236,7 @@ class Integrations(BaseSDK):
         r"""Delete integration
 
         :param integration_id:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -990,6 +1252,7 @@ class Integrations(BaseSDK):
 
         request = models.IntegrationsControllerRemoveIntegrationRequest(
             integration_id=integration_id,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request(
@@ -1013,7 +1276,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1029,7 +1292,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1041,7 +1320,14 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1052,6 +1338,9 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1081,6 +1370,7 @@ class Integrations(BaseSDK):
         self,
         *,
         integration_id: str,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1089,6 +1379,7 @@ class Integrations(BaseSDK):
         r"""Delete integration
 
         :param integration_id:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1104,6 +1395,7 @@ class Integrations(BaseSDK):
 
         request = models.IntegrationsControllerRemoveIntegrationRequest(
             integration_id=integration_id,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request_async(
@@ -1127,7 +1419,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1143,7 +1435,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1155,7 +1463,14 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1166,6 +1481,9 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1195,6 +1513,7 @@ class Integrations(BaseSDK):
         self,
         *,
         integration_id: str,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1203,6 +1522,7 @@ class Integrations(BaseSDK):
         r"""Set integration as primary
 
         :param integration_id:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1218,6 +1538,7 @@ class Integrations(BaseSDK):
 
         request = models.IntegrationsControllerSetIntegrationAsPrimaryRequest(
             integration_id=integration_id,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request(
@@ -1241,7 +1562,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1257,7 +1578,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1269,7 +1606,11 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "405", "409", "413", "415"],
+            "application/json",
+        ):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, ["404", "429"], "*"):
@@ -1277,9 +1618,15 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "414", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1309,6 +1656,7 @@ class Integrations(BaseSDK):
         self,
         *,
         integration_id: str,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1317,6 +1665,7 @@ class Integrations(BaseSDK):
         r"""Set integration as primary
 
         :param integration_id:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1332,6 +1681,7 @@ class Integrations(BaseSDK):
 
         request = models.IntegrationsControllerSetIntegrationAsPrimaryRequest(
             integration_id=integration_id,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request_async(
@@ -1355,7 +1705,7 @@ class Integrations(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1371,7 +1721,23 @@ class Integrations(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1383,7 +1749,11 @@ class Integrations(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "405", "409", "413", "415"],
+            "application/json",
+        ):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, ["404", "429"], "*"):
@@ -1391,9 +1761,15 @@ class Integrations(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "414", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
             raise models.ValidationErrorDto(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

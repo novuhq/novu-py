@@ -36,6 +36,7 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Authentication](#authentication)
+  * [Resource Management](#resource-management)
   * [Debugging](#debugging)
 * [Development](#development)
   * [Maturity](#maturity)
@@ -45,6 +46,11 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
 The SDK can be installed with either *pip* or *poetry* package managers.
 
@@ -90,7 +96,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         name="workflow_identifier",
         to={
             "subscriber_id": "<id>",
@@ -130,7 +136,7 @@ async def main():
         api_key=os.getenv("NOVU_API_KEY", ""),
     ) as novu:
 
-        res = await novu.trigger_async(request=novu_py.TriggerEventRequestDto(
+        res = await novu.trigger_async(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
             name="workflow_identifier",
             to={
                 "subscriber_id": "<id>",
@@ -169,7 +175,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger_bulk(request={
+    res = novu.trigger_bulk(bulk_trigger_event_dto={
         "events": [
             novu_py.TriggerEventRequestDto(
                 name="workflow_identifier",
@@ -257,7 +263,7 @@ async def main():
         api_key=os.getenv("NOVU_API_KEY", ""),
     ) as novu:
 
-        res = await novu.trigger_bulk_async(request={
+        res = await novu.trigger_bulk_async(bulk_trigger_event_dto={
             "events": [
                 novu_py.TriggerEventRequestDto(
                     name="workflow_identifier",
@@ -343,7 +349,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger_broadcast(request={
+    res = novu.trigger_broadcast(trigger_event_to_all_request_dto={
         "name": "<value>",
         "payload": {
             "comment_id": "string",
@@ -371,7 +377,7 @@ async def main():
         api_key=os.getenv("NOVU_API_KEY", ""),
     ) as novu:
 
-        res = await novu.trigger_broadcast_async(request={
+        res = await novu.trigger_broadcast_async(trigger_event_to_all_request_dto={
             "name": "<value>",
             "payload": {
                 "comment_id": "string",
@@ -546,7 +552,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.list()
+    res = novu.subscribers.list(limit=10)
 
     while res is not None:
         # Handle items
@@ -572,7 +578,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         name="workflow_identifier",
         to={
             "subscriber_id": "<id>",
@@ -611,7 +617,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         name="workflow_identifier",
         to={
             "subscriber_id": "<id>",
@@ -654,11 +660,13 @@ By default, an API error will raise a models.APIError exception, which has the f
 
 When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `trigger_async` method may raise the following exceptions:
 
-| Error Type                | Status Code   | Content Type     |
-| ------------------------- | ------------- | ---------------- |
-| models.ErrorDto           | 400, 404, 409 | application/json |
-| models.ValidationErrorDto | 422           | application/json |
-| models.APIError           | 4XX, 5XX      | \*/\*            |
+| Error Type                | Status Code                            | Content Type     |
+| ------------------------- | -------------------------------------- | ---------------- |
+| models.ErrorDto           | 400, 401, 403, 404, 405, 409, 413, 415 | application/json |
+| models.ErrorDto           | 414                                    | application/json |
+| models.ValidationErrorDto | 422                                    | application/json |
+| models.ErrorDto           | 500                                    | application/json |
+| models.APIError           | 4XX, 5XX                               | \*/\*            |
 
 ### Example
 
@@ -673,7 +681,7 @@ with Novu(
     res = None
     try:
 
-        res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+        res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
             name="workflow_identifier",
             to={
                 "subscriber_id": "<id>",
@@ -700,8 +708,14 @@ with Novu(
     except models.ErrorDto as e:
         # handle e.data: models.ErrorDtoData
         raise(e)
+    except models.ErrorDto as e:
+        # handle e.data: models.ErrorDtoData
+        raise(e)
     except models.ValidationErrorDto as e:
         # handle e.data: models.ValidationErrorDtoData
+        raise(e)
+    except models.ErrorDto as e:
+        # handle e.data: models.ErrorDtoData
         raise(e)
     except models.APIError as e:
         # handle exception
@@ -733,7 +747,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         name="workflow_identifier",
         to={
             "subscriber_id": "<id>",
@@ -772,7 +786,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         name="workflow_identifier",
         to={
             "subscriber_id": "<id>",
@@ -901,7 +915,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         name="workflow_identifier",
         to={
             "subscriber_id": "<id>",
@@ -927,6 +941,32 @@ with Novu(
 
 ```
 <!-- End Authentication [security] -->
+
+<!-- Start Resource Management [resource-management] -->
+## Resource Management
+
+The `Novu` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
+
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
+
+```python
+from novu_py import Novu
+import os
+def main():
+    with Novu(
+        api_key=os.getenv("NOVU_API_KEY", ""),
+    ) as novu:
+        # Rest of application here...
+
+
+# Or when using async:
+async def amain():
+    async with Novu(
+        api_key=os.getenv("NOVU_API_KEY", ""),
+    ) as novu:
+        # Rest of application here...
+```
+<!-- End Resource Management [resource-management] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging

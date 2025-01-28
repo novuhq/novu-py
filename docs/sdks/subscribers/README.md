@@ -29,7 +29,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.list()
+    res = novu.subscribers.list(limit=10)
 
     while res is not None:
         # Handle items
@@ -44,6 +44,7 @@ with Novu(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `page`                                                              | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `limit`                                                             | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -52,11 +53,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## create
 
@@ -72,7 +75,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.create(request={
+    res = novu.subscribers.create(create_subscriber_request_dto={
         "subscriber_id": "<id>",
     })
 
@@ -85,7 +88,8 @@ with Novu(
 
 | Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `request`                                                                       | [models.CreateSubscriberRequestDto](../../models/createsubscriberrequestdto.md) | :heavy_check_mark:                                                              | The request object to use for the request.                                      |
+| `create_subscriber_request_dto`                                                 | [models.CreateSubscriberRequestDto](../../models/createsubscriberrequestdto.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `idempotency_key`                                                               | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | A header for idempotency purposes                                               |
 | `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
 
 ### Response
@@ -94,11 +98,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## retrieve
 
@@ -127,6 +133,7 @@ with Novu(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `subscriber_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `include_topics`                                                    | *Optional[bool]*                                                    | :heavy_minus_sign:                                                  | Includes the topics associated with the subscriber                  |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -135,11 +142,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## update
 
@@ -185,6 +194,7 @@ with Novu(
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | `subscriber_id`                                                                 | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
 | `update_subscriber_request_dto`                                                 | [models.UpdateSubscriberRequestDto](../../models/updatesubscriberrequestdto.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `idempotency_key`                                                               | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | A header for idempotency purposes                                               |
 | `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
 
 ### Response
@@ -193,11 +203,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## delete
 
@@ -225,6 +237,7 @@ with Novu(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `subscriber_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -233,11 +246,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## create_bulk
 
@@ -256,7 +271,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.create_bulk(request={
+    res = novu.subscribers.create_bulk(bulk_subscriber_create_dto={
         "subscribers": [
             {
                 "subscriber_id": "<id>",
@@ -273,7 +288,8 @@ with Novu(
 
 | Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `request`                                                                 | [models.BulkSubscriberCreateDto](../../models/bulksubscribercreatedto.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
+| `bulk_subscriber_create_dto`                                              | [models.BulkSubscriberCreateDto](../../models/bulksubscribercreatedto.md) | :heavy_check_mark:                                                        | N/A                                                                       |
+| `idempotency_key`                                                         | *Optional[str]*                                                           | :heavy_minus_sign:                                                        | A header for idempotency purposes                                         |
 | `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |
 
 ### Response
@@ -282,8 +298,10 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |

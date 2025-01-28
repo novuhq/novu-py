@@ -6,7 +6,12 @@ from .updatesubscriberpreferenceresponsedto import (
     UpdateSubscriberPreferenceResponseDtoTypedDict,
 )
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -16,6 +21,8 @@ class SubscribersControllerListSubscriberPreferencesRequestTypedDict(TypedDict):
     subscriber_id: str
     include_inactive_channels: NotRequired[bool]
     r"""A flag which specifies if the inactive workflow channels should be included in the retrieved preferences. Default is true"""
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerListSubscriberPreferencesRequest(BaseModel):
@@ -31,6 +38,13 @@ class SubscribersControllerListSubscriberPreferencesRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""A flag which specifies if the inactive workflow channels should be included in the retrieved preferences. Default is true"""
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerListSubscriberPreferencesResponseTypedDict(TypedDict):

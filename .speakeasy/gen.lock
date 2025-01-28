@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: b1fd0ef1cec87c9511fb1b1bd0b2bf6b
+  docChecksum: 3ac3729e9dd62326b08dfc02c3dbbc09
   docVersion: "1.0"
-  speakeasyVersion: 1.469.0
-  generationVersion: 2.493.21
-  releaseVersion: 0.1.0
-  configChecksum: 8427559fffb93ae5b7c73ec993985fd1
+  speakeasyVersion: 1.476.2
+  generationVersion: 2.495.1
+  releaseVersion: 0.1.1
+  configChecksum: 81f525074c07c0ccbbde33149f606962
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.10.2
+    core: 5.10.5
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -116,10 +116,13 @@ generatedFiles:
   - docs/models/emailblocktypeenum.md
   - docs/models/errordto.md
   - docs/models/errors.md
+  - docs/models/eventscontrollerbroadcasteventtoallrequest.md
   - docs/models/eventscontrollerbroadcasteventtoallresponse.md
   - docs/models/eventscontrollercancelrequest.md
   - docs/models/eventscontrollercancelresponse.md
+  - docs/models/eventscontrollertriggerbulkrequest.md
   - docs/models/eventscontrollertriggerbulkresponse.md
+  - docs/models/eventscontrollertriggerrequest.md
   - docs/models/eventscontrollertriggerresponse.md
   - docs/models/executiondetailssourceenum.md
   - docs/models/executiondetailsstatusenum.md
@@ -132,10 +135,13 @@ generatedFiles:
   - docs/models/getsubscriberpreferencesresponsedto.md
   - docs/models/gettopicresponsedto.md
   - docs/models/integrationresponsedto.md
+  - docs/models/integrationscontrollercreateintegrationrequest.md
   - docs/models/integrationscontrollercreateintegrationresponse.md
+  - docs/models/integrationscontrollergetactiveintegrationsrequest.md
   - docs/models/integrationscontrollergetactiveintegrationsresponse.md
   - docs/models/integrationscontrollergetwebhooksupportstatusrequest.md
   - docs/models/integrationscontrollergetwebhooksupportstatusresponse.md
+  - docs/models/integrationscontrollerlistintegrationsrequest.md
   - docs/models/integrationscontrollerlistintegrationsresponse.md
   - docs/models/integrationscontrollerremoveintegrationrequest.md
   - docs/models/integrationscontrollerremoveintegrationresponse.md
@@ -179,6 +185,7 @@ generatedFiles:
   - docs/models/notificationgroup.md
   - docs/models/notificationscontrollergetactivitygraphstatsrequest.md
   - docs/models/notificationscontrollergetactivitygraphstatsresponse.md
+  - docs/models/notificationscontrollergetactivitystatsrequest.md
   - docs/models/notificationscontrollergetactivitystatsresponse.md
   - docs/models/notificationscontrollergetnotificationrequest.md
   - docs/models/notificationscontrollergetnotificationresponse.md
@@ -225,12 +232,14 @@ generatedFiles:
   - docs/models/subscriberfeedresponsedto.md
   - docs/models/subscriberpayloaddto.md
   - docs/models/subscriberresponsedto.md
+  - docs/models/subscriberscontrollerbulkcreatesubscribersrequest.md
   - docs/models/subscriberscontrollerbulkcreatesubscribersresponse.md
   - docs/models/subscriberscontrollerchataccessoauthrequest.md
   - docs/models/subscriberscontrollerchataccessoauthresponse.md
   - docs/models/subscriberscontrollerchatoauthcallbackrequest.md
   - docs/models/subscriberscontrollerchatoauthcallbackresponse.md
   - docs/models/subscriberscontrollerchatoauthcallbackresponseresult.md
+  - docs/models/subscriberscontrollercreatesubscriberrequest.md
   - docs/models/subscriberscontrollercreatesubscriberresponse.md
   - docs/models/subscriberscontrollerdeletesubscribercredentialsrequest.md
   - docs/models/subscriberscontrollerdeletesubscribercredentialsresponse.md
@@ -267,7 +276,8 @@ generatedFiles:
   - docs/models/subscriberscontrollerupdatesubscriberpreferenceresponse.md
   - docs/models/subscriberscontrollerupdatesubscriberrequest.md
   - docs/models/subscriberscontrollerupdatesubscriberresponse.md
-  - docs/models/supportcontrollerfetchuserorganizationsresponsebody.md
+  - docs/models/supportcontrollercreatethreadrequest.md
+  - docs/models/supportcontrollerfetchuserorganizationsrequest.md
   - docs/models/templateresponse.md
   - docs/models/tenant.md
   - docs/models/tenantpayloaddto.md
@@ -282,6 +292,7 @@ generatedFiles:
   - docs/models/topicpayloaddto.md
   - docs/models/topicscontrollerassignrequest.md
   - docs/models/topicscontrollerassignresponse.md
+  - docs/models/topicscontrollercreatetopicrequest.md
   - docs/models/topicscontrollercreatetopicresponse.md
   - docs/models/topicscontrollerdeletetopicrequest.md
   - docs/models/topicscontrollerdeletetopicresponse.md
@@ -496,6 +507,7 @@ generatedFiles:
   - src/novu_py/models/subscriberscontroller_updatesubscriberonlineflagop.py
   - src/novu_py/models/subscriberscontroller_updatesubscriberop.py
   - src/novu_py/models/subscriberscontroller_updatesubscriberpreferenceop.py
+  - src/novu_py/models/supportcontroller_createthreadop.py
   - src/novu_py/models/supportcontroller_fetchuserorganizationsop.py
   - src/novu_py/models/templateresponse.py
   - src/novu_py/models/tenantpayloaddto.py
@@ -571,19 +583,27 @@ examples:
           application/json: {"acknowledged": false, "status": "processed"}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   EventsController_triggerBulk:
     speakeasy-default-events-controller-trigger-bulk:
       requestBody:
-        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": [{"topicKey": "<value>", "type": "Subscriber"}]}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": ["SUBSCRIBER_ID", "SUBSCRIBER_ID"]}]}
+        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": {"topicKey": "<value>", "type": "Subscriber"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": ["SUBSCRIBER_ID", "SUBSCRIBER_ID"]}]}
       responses:
         "201":
           application/json: [{"acknowledged": true, "status": "error"}, {"acknowledged": true, "status": "no_workflow_active_steps_defined"}, {"acknowledged": true, "status": "trigger_not_active"}]
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   EventsController_broadcastEventToAll:
     speakeasy-default-events-controller-broadcast-event-to-all:
       requestBody:
@@ -593,70 +613,97 @@ examples:
           application/json: {"acknowledged": true, "status": "trigger_not_active"}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   EventsController_cancel:
     speakeasy-default-events-controller-cancel:
       parameters:
         path:
           transactionId: "<id>"
+        header: {}
       responses:
         "200":
           application/json: {"data": true}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SupportController_fetchUserOrganizations:
     speakeasy-default-support-controller-fetch-user-organizations:
       requestBody:
         application/json: {"timestamp": "<value>"}
-      responses:
-        "201":
-          application/json: {}
   SupportController_createThread:
     speakeasy-default-support-controller-create-thread:
       requestBody:
         application/json: {"text": "<value>"}
   NotificationsController_listNotifications:
     speakeasy-default-notifications-controller-list-notifications:
+      parameters:
+        query:
+          page: 0
+        header: {}
       responses:
         "200":
-          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": "6783.16", "page": "1777.06"}
+          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": 6783.17, "page": 1777.06}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   NotificationsController_getNotification:
     speakeasy-default-notifications-controller-get-notification:
       parameters:
         path:
           notificationId: "<id>"
+        header: {}
       responses:
         "200":
           application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   NotificationsController_getActivityStats:
     speakeasy-default-notifications-controller-get-activity-stats:
       responses:
         "200":
-          application/json: {"weeklySent": "3704.57", "monthlySent": "9198.30"}
+          application/json: {"weeklySent": 3704.56, "monthlySent": 9198.31}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   NotificationsController_getActivityGraphStats:
     speakeasy-default-notifications-controller-get-activity-graph-stats:
       responses:
         "200":
-          application/json: [{"_id": "<id>", "count": "4718.99", "templates": ["<value>", "<value>", "<value>"], "channels": []}]
+          application/json: [{"_id": "<id>", "count": 4718.99, "templates": ["<value>", "<value>", "<value>"], "channels": []}, {"_id": "<id>", "count": 3081.94, "templates": ["<value>", "<value>"], "channels": ["email", "email"]}]
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   IntegrationsController_listIntegrations:
     speakeasy-default-integrations-controller-list-integrations:
       responses:
@@ -664,8 +711,12 @@ examples:
           application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "active": false, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "in_app", "credentials": {}, "active": false, "deleted": false, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": true, "primary": false}]
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   IntegrationsController_createIntegration:
     speakeasy-default-integrations-controller-create-integration:
       requestBody:
@@ -675,8 +726,12 @@ examples:
           application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": true, "primary": true}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   IntegrationsController_getActiveIntegrations:
     speakeasy-default-integrations-controller-get-active-integrations:
       responses:
@@ -684,13 +739,18 @@ examples:
           application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "email", "credentials": {}, "active": true, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": false, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": false, "deleted": true, "primary": true}]
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   IntegrationsController_updateIntegrationById:
     speakeasy-default-integrations-controller-update-integration-by-id:
       parameters:
         path:
           integrationId: "<id>"
+        header: {}
       requestBody:
         application/json: {}
       responses:
@@ -698,185 +758,261 @@ examples:
           application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": true, "primary": false}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   IntegrationsController_removeIntegration:
     speakeasy-default-integrations-controller-remove-integration:
       parameters:
         path:
           integrationId: "<id>"
+        header: {}
       responses:
         "200":
           application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": false, "primary": false}]
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   IntegrationsController_setIntegrationAsPrimary:
     speakeasy-default-integrations-controller-set-integration-as-primary:
       parameters:
         path:
           integrationId: "<id>"
+        header: {}
       responses:
         "200":
           application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "email", "credentials": {}, "active": false, "deleted": false, "primary": true}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   IntegrationsController_getWebhookSupportStatus:
     speakeasy-default-integrations-controller-get-webhook-support-status:
       parameters:
         path:
           providerOrIntegrationId: "<id>"
+        header: {}
       responses:
         "200":
           application/json: true
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-  SubscribersController_listSubscribers:
-    speakeasy-default-subscribers-controller-list-subscribers:
-      responses:
-        "200":
-          application/json: {"page": "7685.78", "hasMore": false, "pageSize": "6783.16", "data": []}
-        "400":
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  SubscribersController_listSubscribers:
+    speakeasy-default-subscribers-controller-list-subscribers:
+      parameters:
+        query:
+          limit: 10
+        header: {}
+      responses:
+        "200":
+          application/json: {"page": 7685.78, "hasMore": false, "pageSize": 6783.17, "data": []}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_createSubscriber:
     speakeasy-default-subscribers-controller-create-subscriber:
       requestBody:
         application/json: {"subscriberId": "<id>"}
       responses:
         "201":
-          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "<value>", "updatedAt": "<value>"}
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1708663449380", "updatedAt": "1738005064987"}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_getSubscriber:
     speakeasy-default-subscribers-controller-get-subscriber:
       parameters:
         path:
           subscriberId: "<id>"
         query: {}
+        header: {}
       responses:
         "200":
-          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "push-webhook", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "<value>", "updatedAt": "<value>"}
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "push-webhook", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1709353768650", "updatedAt": "1737982515806"}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_updateSubscriber:
     speakeasy-default-subscribers-controller-update-subscriber:
       parameters:
         path:
           subscriberId: "<id>"
+        header: {}
       requestBody:
         application/json: {"email": "john.doe@example.com", "firstName": "John", "lastName": "Doe", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "data": {"preferences": {"notifications": true, "theme": "dark"}, "tags": ["premium", "newsletter"]}}
       responses:
         "200":
-          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "<value>", "updatedAt": "<value>"}
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1721903096925", "updatedAt": "1738021267731"}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_removeSubscriber:
     speakeasy-default-subscribers-controller-remove-subscriber:
       parameters:
         path:
           subscriberId: "<id>"
+        header: {}
       responses:
         "200":
           application/json: {"acknowledged": false, "status": "deleted"}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_bulkCreateSubscribers:
     speakeasy-default-subscribers-controller-bulk-create-subscribers:
       requestBody:
         application/json: {"subscribers": [{"subscriberId": "<id>"}]}
       responses:
         "201":
-          application/json: {"updated": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "created": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "failed": [{}]}
+          application/json: {"updated": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "created": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "failed": [{}, {}]}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_updateSubscriberChannel:
     speakeasy-default-subscribers-controller-update-subscriber-channel:
       parameters:
         path:
           subscriberId: "<id>"
+        header: {}
       requestBody:
         application/json: {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
       responses:
         "200":
-          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "<value>", "updatedAt": "<value>"}
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1721903097033", "updatedAt": "1738021267839"}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_modifySubscriberChannel:
     speakeasy-default-subscribers-controller-modify-subscriber-channel:
       parameters:
         path:
           subscriberId: "<id>"
+        header: {}
       requestBody:
         application/json: {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
       responses:
         "200":
-          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "apns", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "<value>", "updatedAt": "<value>"}
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "apns", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1737934104331", "updatedAt": "1737984054712"}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_deleteSubscriberCredentials:
     speakeasy-default-subscribers-controller-delete-subscriber-credentials:
       parameters:
         path:
           subscriberId: "<id>"
           providerId: "<id>"
+        header: {}
       responses:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_updateSubscriberOnlineFlag:
     speakeasy-default-subscribers-controller-update-subscriber-online-flag:
       parameters:
         path:
           subscriberId: "<id>"
+        header: {}
       requestBody:
         application/json: {"isOnline": false}
       responses:
         "200":
-          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "<value>", "updatedAt": "<value>"}
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "mattermost", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1732956531629", "updatedAt": "1737953136019"}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_listSubscriberPreferences:
     speakeasy-default-subscribers-controller-list-subscriber-preferences:
       parameters:
         path:
           subscriberId: "<id>"
         query: {}
+        header: {}
       responses:
         "200":
           application/json: [{"template": {"_id": "<id>", "name": "<value>", "critical": false, "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}]}, "preference": {"enabled": true, "channels": {}}}, {"template": {"_id": "<id>", "name": "<value>", "critical": false, "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}]}, "preference": {"enabled": true, "channels": {}}}, {"template": {"_id": "<id>", "name": "<value>", "critical": true, "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}]}, "preference": {"enabled": true, "channels": {}}}]
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_updateSubscriberGlobalPreferences:
     speakeasy-default-subscribers-controller-update-subscriber-global-preferences:
       parameters:
         path:
           subscriberId: "<id>"
+        header: {}
       requestBody:
         application/json: {}
       responses:
@@ -884,8 +1020,12 @@ examples:
           application/json: {"preference": {"enabled": true, "channels": {}}}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_getSubscriberPreferenceByLevel:
     speakeasy-default-subscribers-controller-get-subscriber-preference-by-level:
       parameters:
@@ -893,19 +1033,25 @@ examples:
           parameter: "template"
           subscriberId: "<id>"
         query: {}
+        header: {}
       responses:
         "200":
-          application/json: [{"preference": {"enabled": true, "channels": {}}}]
+          application/json: [{"preference": {"enabled": true, "channels": {}}}, {"preference": {"enabled": true, "channels": {}}}]
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_updateSubscriberPreference:
     speakeasy-default-subscribers-controller-update-subscriber-preference:
       parameters:
         path:
           subscriberId: "<id>"
           parameter: "<id>"
+        header: {}
       requestBody:
         application/json: {}
       responses:
@@ -913,63 +1059,90 @@ examples:
           application/json: {"template": {"_id": "<id>", "name": "<value>", "critical": false, "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}, {"name": "<value>"}]}]}, "preference": {"enabled": false, "channels": {}}}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_getNotificationsFeed:
     "":
       parameters:
         path:
           subscriberId: "<id>"
         query:
+          limit: 10
           payload: "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="
+        header: {}
       responses:
         "200":
-          application/json: {"totalCount": 5, "hasMore": true, "data": [{"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "push", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}, {"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "push", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}, {"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "in_app", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}], "pageSize": 2, "page": 1}
+          application/json: {"totalCount": 5, "hasMore": true, "data": [{"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "push", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {"data": {}}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}, {"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "push", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {"data": {}}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}, {"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "in_app", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {"data": {}}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}], "pageSize": 2, "page": 1}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}}}
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {"key": "value"}}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_getUnseenCount:
     speakeasy-default-subscribers-controller-get-unseen-count:
       parameters:
         path:
           subscriberId: "<id>"
-        query: {}
+        query:
+          seen: false
+          limit: 100
+        header: {}
       responses:
         "200":
-          application/json: {"count": "2166.35"}
+          application/json: {"count": 2166.35}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_markMessagesAs:
     speakeasy-default-subscribers-controller-mark-messages-as:
       parameters:
         path:
           subscriberId: "<id>"
+        header: {}
       requestBody:
-        application/json: {"messageId": "<value>", "markAs": "unread"}
+        application/json: {"messageId": "<id>", "markAs": "unread"}
       responses:
         "201":
-          application/json: []
+          application/json: [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"subscriberId": "<id>", "channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "ryver", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1724534307257", "updatedAt": "1738004369670"}, "createdAt": "1727833351047", "content": {"type": "button", "content": "<value>"}, "transactionId": "<id>", "channel": "email", "read": false, "seen": true, "cta": {"data": {}}, "status": "error"}]
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_markAllUnreadAsRead:
     speakeasy-default-subscribers-controller-mark-all-unread-as-read:
       parameters:
         path:
           subscriberId: "<id>"
+        header: {}
       requestBody:
         application/json: {"markAs": "seen"}
       responses:
         "201":
-          application/json: "4603.37"
+          application/json: 4603.37
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_markActionAsSeen:
     speakeasy-default-subscribers-controller-mark-action-as-seen:
       parameters:
@@ -977,15 +1150,20 @@ examples:
           messageId: "<id>"
           type: "<value>"
           subscriberId: "<id>"
+        header: {}
       requestBody:
         application/json: {"status": "done"}
       responses:
         "201":
-          application/json: {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"subscriberId": "<id>", "channels": [{"providerId": "push-webhook", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "<value>", "updatedAt": "<value>"}, "createdAt": "<value>", "content": {"type": "text", "content": "<value>"}, "transactionId": "<id>", "channel": "in_app", "read": true, "seen": true, "cta": {}, "status": "warning"}
+          application/json: {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"subscriberId": "<id>", "channels": [{"providerId": "push-webhook", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "ryver", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1736959617112", "updatedAt": "1737949583813"}, "createdAt": "1714542159810", "content": {"type": "text", "content": "<value>"}, "transactionId": "<id>", "channel": "sms", "read": true, "seen": true, "cta": {"data": {}}, "status": "sent"}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_chatOauthCallback:
     speakeasy-default-subscribers-controller-chat-oauth-callback:
       parameters:
@@ -996,6 +1174,7 @@ examples:
           hmacHash: "<value>"
           environmentId: "<id>"
           code: "<value>"
+        header: {}
       responses:
         "200":
           text/html: "<value>"
@@ -1003,8 +1182,12 @@ examples:
           application/json: "<value>"
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_chatAccessOauth:
     speakeasy-default-subscribers-controller-chat-access-oauth:
       parameters:
@@ -1014,43 +1197,67 @@ examples:
         query:
           hmacHash: "<value>"
           environmentId: "<id>"
+        header: {}
       responses:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   MessagesController_getMessages:
     speakeasy-default-messages-controller-get-messages:
+      parameters:
+        query:
+          page: 0
+          limit: 10
+        header: {}
       responses:
         "200":
-          application/json: {"hasMore": true, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": "3129.93", "page": "3234.02"}
+          application/json: {"hasMore": true, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": 3129.93, "page": 3234.02}
         "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   MessagesController_deleteMessage:
     speakeasy-default-messages-controller-delete-message:
       parameters:
         path:
           messageId: "<id>"
+        header: {}
       responses:
         "200":
           application/json: {"acknowledged": false, "status": "deleted"}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   MessagesController_deleteMessagesByTransactionId:
     speakeasy-default-messages-controller-delete-messages-by-transaction-id:
       parameters:
         path:
           transactionId: "<id>"
         query: {}
+        header: {}
       responses:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   TopicsController_createTopic:
     speakeasy-default-topics-controller-create-topic:
       requestBody:
@@ -1060,8 +1267,12 @@ examples:
           application/json: {"key": "<key>"}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   TopicsController_listTopics:
     "":
       parameters:
@@ -1069,40 +1280,56 @@ examples:
           page: 0
           pageSize: 10
           key: "exampleKey"
+        header: {}
       responses:
         "200":
           application/json: {"data": [], "page": 1, "pageSize": 10, "totalCount": 10}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {"key": "<value>", "key1": "<value>"}}}}
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {"key": "value"}}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   TopicsController_deleteTopic:
     speakeasy-default-topics-controller-delete-topic:
       parameters:
         path:
           topicKey: "<value>"
+        header: {}
       responses:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   TopicsController_getTopic:
     speakeasy-default-topics-controller-get-topic:
       parameters:
         path:
           topicKey: "<value>"
+        header: {}
       responses:
         "200":
           application/json: {"_organizationId": "<id>", "_environmentId": "<id>", "key": "<key>", "name": "<value>", "subscribers": ["<value>"]}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   TopicsController_renameTopic:
     speakeasy-default-topics-controller-rename-topic:
       parameters:
         path:
           topicKey: "<value>"
+        header: {}
       requestBody:
         application/json: {"name": "<value>"}
       responses:
@@ -1110,13 +1337,18 @@ examples:
           application/json: {"_organizationId": "<id>", "_environmentId": "<id>", "key": "<key>", "name": "<value>", "subscribers": ["<value>", "<value>", "<value>"]}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   TopicsController_assign:
     speakeasy-default-topics-controller-assign:
       parameters:
         path:
           topicKey: "<value>"
+        header: {}
       requestBody:
         application/json: {"subscribers": ["<value>", "<value>", "<value>"]}
       responses:
@@ -1124,31 +1356,46 @@ examples:
           application/json: {"succeeded": []}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   TopicsController_getTopicSubscriber:
     speakeasy-default-topics-controller-get-topic-subscriber:
       parameters:
         path:
           externalSubscriberId: "<id>"
           topicKey: "<value>"
+        header: {}
       responses:
         "200":
           application/json: {"_organizationId": "org_123456789", "_environmentId": "env_123456789", "_subscriberId": "sub_123456789", "_topicId": "topic_123456789", "topicKey": "my_topic_key", "externalSubscriberId": "external_subscriber_123"}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   TopicsController_removeSubscribers:
     speakeasy-default-topics-controller-remove-subscribers:
       parameters:
         path:
           topicKey: "<value>"
+        header: {}
       requestBody:
         application/json: {"subscribers": ["<value>", "<value>"]}
       responses:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+examplesVersion: 1.0.0
 generatedTests: {}

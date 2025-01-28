@@ -17,6 +17,7 @@ class Credentials(BaseSDK):
             models.UpdateSubscriberChannelRequestDto,
             models.UpdateSubscriberChannelRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -28,6 +29,7 @@ class Credentials(BaseSDK):
 
         :param subscriber_id:
         :param update_subscriber_channel_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,6 +45,7 @@ class Credentials(BaseSDK):
 
         request = models.SubscribersControllerUpdateSubscriberChannelRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             update_subscriber_channel_request_dto=utils.get_pydantic_model(
                 update_subscriber_channel_request_dto,
                 models.UpdateSubscriberChannelRequestDto,
@@ -77,7 +80,7 @@ class Credentials(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -93,7 +96,23 @@ class Credentials(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -105,7 +124,14 @@ class Credentials(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -116,6 +142,9 @@ class Credentials(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -149,6 +178,7 @@ class Credentials(BaseSDK):
             models.UpdateSubscriberChannelRequestDto,
             models.UpdateSubscriberChannelRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -160,6 +190,7 @@ class Credentials(BaseSDK):
 
         :param subscriber_id:
         :param update_subscriber_channel_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -175,6 +206,7 @@ class Credentials(BaseSDK):
 
         request = models.SubscribersControllerUpdateSubscriberChannelRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             update_subscriber_channel_request_dto=utils.get_pydantic_model(
                 update_subscriber_channel_request_dto,
                 models.UpdateSubscriberChannelRequestDto,
@@ -209,7 +241,7 @@ class Credentials(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -225,7 +257,23 @@ class Credentials(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -237,7 +285,14 @@ class Credentials(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -248,6 +303,9 @@ class Credentials(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -281,6 +339,7 @@ class Credentials(BaseSDK):
             models.UpdateSubscriberChannelRequestDto,
             models.UpdateSubscriberChannelRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -293,6 +352,7 @@ class Credentials(BaseSDK):
 
         :param subscriber_id:
         :param update_subscriber_channel_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -308,6 +368,7 @@ class Credentials(BaseSDK):
 
         request = models.SubscribersControllerModifySubscriberChannelRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             update_subscriber_channel_request_dto=utils.get_pydantic_model(
                 update_subscriber_channel_request_dto,
                 models.UpdateSubscriberChannelRequestDto,
@@ -342,7 +403,7 @@ class Credentials(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -358,7 +419,23 @@ class Credentials(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -370,7 +447,14 @@ class Credentials(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -381,6 +465,9 @@ class Credentials(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -414,6 +501,7 @@ class Credentials(BaseSDK):
             models.UpdateSubscriberChannelRequestDto,
             models.UpdateSubscriberChannelRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -426,6 +514,7 @@ class Credentials(BaseSDK):
 
         :param subscriber_id:
         :param update_subscriber_channel_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -441,6 +530,7 @@ class Credentials(BaseSDK):
 
         request = models.SubscribersControllerModifySubscriberChannelRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             update_subscriber_channel_request_dto=utils.get_pydantic_model(
                 update_subscriber_channel_request_dto,
                 models.UpdateSubscriberChannelRequestDto,
@@ -475,7 +565,7 @@ class Credentials(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -491,7 +581,23 @@ class Credentials(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -503,7 +609,14 @@ class Credentials(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -514,6 +627,9 @@ class Credentials(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -544,6 +660,7 @@ class Credentials(BaseSDK):
         *,
         subscriber_id: str,
         provider_id: str,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -555,6 +672,7 @@ class Credentials(BaseSDK):
 
         :param subscriber_id:
         :param provider_id:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -571,6 +689,7 @@ class Credentials(BaseSDK):
         request = models.SubscribersControllerDeleteSubscriberCredentialsRequest(
             subscriber_id=subscriber_id,
             provider_id=provider_id,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request(
@@ -594,7 +713,7 @@ class Credentials(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -610,7 +729,23 @@ class Credentials(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -619,7 +754,14 @@ class Credentials(BaseSDK):
             return models.SubscribersControllerDeleteSubscriberCredentialsResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -630,6 +772,9 @@ class Credentials(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -660,6 +805,7 @@ class Credentials(BaseSDK):
         *,
         subscriber_id: str,
         provider_id: str,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -671,6 +817,7 @@ class Credentials(BaseSDK):
 
         :param subscriber_id:
         :param provider_id:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -687,6 +834,7 @@ class Credentials(BaseSDK):
         request = models.SubscribersControllerDeleteSubscriberCredentialsRequest(
             subscriber_id=subscriber_id,
             provider_id=provider_id,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request_async(
@@ -710,7 +858,7 @@ class Credentials(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -726,7 +874,23 @@ class Credentials(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -735,7 +899,14 @@ class Credentials(BaseSDK):
             return models.SubscribersControllerDeleteSubscriberCredentialsResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -746,6 +917,9 @@ class Credentials(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

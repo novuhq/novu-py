@@ -25,7 +25,7 @@ with Novu(
 ) as novu:
 
     res = novu.subscribers.messages.mark_all_as(subscriber_id="<id>", message_mark_as_request_dto={
-        "message_id": "<value>",
+        "message_id": "<id>",
         "mark_as": novu_py.MarkAs.UNREAD,
     })
 
@@ -40,6 +40,7 @@ with Novu(
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | `subscriber_id`                                                           | *str*                                                                     | :heavy_check_mark:                                                        | N/A                                                                       |
 | `message_mark_as_request_dto`                                             | [models.MessageMarkAsRequestDto](../../models/messagemarkasrequestdto.md) | :heavy_check_mark:                                                        | N/A                                                                       |
+| `idempotency_key`                                                         | *Optional[str]*                                                           | :heavy_minus_sign:                                                        | A header for idempotency purposes                                         |
 | `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |
 
 ### Response
@@ -48,11 +49,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## mark_all
 
@@ -84,6 +87,7 @@ with Novu(
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | `subscriber_id`                                                                 | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
 | `mark_all_message_as_request_dto`                                               | [models.MarkAllMessageAsRequestDto](../../models/markallmessageasrequestdto.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `idempotency_key`                                                               | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | A header for idempotency purposes                                               |
 | `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
 
 ### Response
@@ -92,11 +96,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## update_as_seen
 
@@ -113,8 +119,13 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.messages.update_as_seen(message_id="<id>", type_="<value>", subscriber_id="<id>", mark_message_action_as_seen_dto={
-        "status": novu_py.MarkMessageActionAsSeenDtoStatus.DONE,
+    res = novu.subscribers.messages.update_as_seen(request={
+        "message_id": "<id>",
+        "type": "<value>",
+        "subscriber_id": "<id>",
+        "mark_message_action_as_seen_dto": {
+            "status": novu_py.MarkMessageActionAsSeenDtoStatus.DONE,
+        },
     })
 
     # Handle response
@@ -124,13 +135,10 @@ with Novu(
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `message_id`                                                                    | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `type`                                                                          | *Any*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `subscriber_id`                                                                 | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `mark_message_action_as_seen_dto`                                               | [models.MarkMessageActionAsSeenDto](../../models/markmessageactionasseendto.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
+| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                           | [models.SubscribersControllerMarkActionAsSeenRequest](../../models/subscriberscontrollermarkactionasseenrequest.md) | :heavy_check_mark:                                                                                                  | The request object to use for the request.                                                                          |
+| `retries`                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                    | :heavy_minus_sign:                                                                                                  | Configuration to override the default retry behavior of the client.                                                 |
 
 ### Response
 
@@ -138,8 +146,10 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |

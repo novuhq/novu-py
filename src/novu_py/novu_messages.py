@@ -3,9 +3,9 @@
 from .basesdk import BaseSDK
 from novu_py import models, utils
 from novu_py._hooks import HookContext
-from novu_py.types import OptionalNullable, UNSET
+from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional, Union, cast
 
 
 class NovuMessages(BaseSDK):
@@ -16,6 +16,7 @@ class NovuMessages(BaseSDK):
         message_mark_as_request_dto: Union[
             models.MessageMarkAsRequestDto, models.MessageMarkAsRequestDtoTypedDict
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -25,6 +26,7 @@ class NovuMessages(BaseSDK):
 
         :param subscriber_id:
         :param message_mark_as_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -40,6 +42,7 @@ class NovuMessages(BaseSDK):
 
         request = models.SubscribersControllerMarkMessagesAsRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             message_mark_as_request_dto=utils.get_pydantic_model(
                 message_mark_as_request_dto, models.MessageMarkAsRequestDto
             ),
@@ -73,7 +76,7 @@ class NovuMessages(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -89,7 +92,23 @@ class NovuMessages(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -101,7 +120,14 @@ class NovuMessages(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -112,6 +138,9 @@ class NovuMessages(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -144,6 +173,7 @@ class NovuMessages(BaseSDK):
         message_mark_as_request_dto: Union[
             models.MessageMarkAsRequestDto, models.MessageMarkAsRequestDtoTypedDict
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -153,6 +183,7 @@ class NovuMessages(BaseSDK):
 
         :param subscriber_id:
         :param message_mark_as_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -168,6 +199,7 @@ class NovuMessages(BaseSDK):
 
         request = models.SubscribersControllerMarkMessagesAsRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             message_mark_as_request_dto=utils.get_pydantic_model(
                 message_mark_as_request_dto, models.MessageMarkAsRequestDto
             ),
@@ -201,7 +233,7 @@ class NovuMessages(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -217,7 +249,23 @@ class NovuMessages(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -229,7 +277,14 @@ class NovuMessages(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -240,6 +295,9 @@ class NovuMessages(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -273,6 +331,7 @@ class NovuMessages(BaseSDK):
             models.MarkAllMessageAsRequestDto,
             models.MarkAllMessageAsRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -282,6 +341,7 @@ class NovuMessages(BaseSDK):
 
         :param subscriber_id:
         :param mark_all_message_as_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -297,6 +357,7 @@ class NovuMessages(BaseSDK):
 
         request = models.SubscribersControllerMarkAllUnreadAsReadRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             mark_all_message_as_request_dto=utils.get_pydantic_model(
                 mark_all_message_as_request_dto, models.MarkAllMessageAsRequestDto
             ),
@@ -330,7 +391,7 @@ class NovuMessages(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -346,7 +407,23 @@ class NovuMessages(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -356,7 +433,14 @@ class NovuMessages(BaseSDK):
                 result=utils.unmarshal_json(http_res.text, float),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -367,6 +451,9 @@ class NovuMessages(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -400,6 +487,7 @@ class NovuMessages(BaseSDK):
             models.MarkAllMessageAsRequestDto,
             models.MarkAllMessageAsRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -409,6 +497,7 @@ class NovuMessages(BaseSDK):
 
         :param subscriber_id:
         :param mark_all_message_as_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -424,6 +513,7 @@ class NovuMessages(BaseSDK):
 
         request = models.SubscribersControllerMarkAllUnreadAsReadRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             mark_all_message_as_request_dto=utils.get_pydantic_model(
                 mark_all_message_as_request_dto, models.MarkAllMessageAsRequestDto
             ),
@@ -457,7 +547,7 @@ class NovuMessages(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -473,7 +563,23 @@ class NovuMessages(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -483,7 +589,14 @@ class NovuMessages(BaseSDK):
                 result=utils.unmarshal_json(http_res.text, float),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -494,6 +607,9 @@ class NovuMessages(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -522,12 +638,9 @@ class NovuMessages(BaseSDK):
     def update_as_seen(
         self,
         *,
-        message_id: str,
-        type_: Any,
-        subscriber_id: str,
-        mark_message_action_as_seen_dto: Union[
-            models.MarkMessageActionAsSeenDto,
-            models.MarkMessageActionAsSeenDtoTypedDict,
+        request: Union[
+            models.SubscribersControllerMarkActionAsSeenRequest,
+            models.SubscribersControllerMarkActionAsSeenRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -536,10 +649,7 @@ class NovuMessages(BaseSDK):
     ) -> models.SubscribersControllerMarkActionAsSeenResponse:
         r"""Mark message action as seen
 
-        :param message_id:
-        :param type:
-        :param subscriber_id:
-        :param mark_message_action_as_seen_dto:
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -553,14 +663,11 @@ class NovuMessages(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.SubscribersControllerMarkActionAsSeenRequest(
-            message_id=message_id,
-            type=type_,
-            subscriber_id=subscriber_id,
-            mark_message_action_as_seen_dto=utils.get_pydantic_model(
-                mark_message_action_as_seen_dto, models.MarkMessageActionAsSeenDto
-            ),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerMarkActionAsSeenRequest
+            )
+        request = cast(models.SubscribersControllerMarkActionAsSeenRequest, request)
 
         req = self._build_request(
             method="POST",
@@ -590,7 +697,7 @@ class NovuMessages(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -606,7 +713,23 @@ class NovuMessages(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -616,7 +739,14 @@ class NovuMessages(BaseSDK):
                 result=utils.unmarshal_json(http_res.text, models.MessageResponseDto),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -627,6 +757,9 @@ class NovuMessages(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -655,12 +788,9 @@ class NovuMessages(BaseSDK):
     async def update_as_seen_async(
         self,
         *,
-        message_id: str,
-        type_: Any,
-        subscriber_id: str,
-        mark_message_action_as_seen_dto: Union[
-            models.MarkMessageActionAsSeenDto,
-            models.MarkMessageActionAsSeenDtoTypedDict,
+        request: Union[
+            models.SubscribersControllerMarkActionAsSeenRequest,
+            models.SubscribersControllerMarkActionAsSeenRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -669,10 +799,7 @@ class NovuMessages(BaseSDK):
     ) -> models.SubscribersControllerMarkActionAsSeenResponse:
         r"""Mark message action as seen
 
-        :param message_id:
-        :param type:
-        :param subscriber_id:
-        :param mark_message_action_as_seen_dto:
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -686,14 +813,11 @@ class NovuMessages(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.SubscribersControllerMarkActionAsSeenRequest(
-            message_id=message_id,
-            type=type_,
-            subscriber_id=subscriber_id,
-            mark_message_action_as_seen_dto=utils.get_pydantic_model(
-                mark_message_action_as_seen_dto, models.MarkMessageActionAsSeenDto
-            ),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerMarkActionAsSeenRequest
+            )
+        request = cast(models.SubscribersControllerMarkActionAsSeenRequest, request)
 
         req = self._build_request_async(
             method="POST",
@@ -723,7 +847,7 @@ class NovuMessages(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -739,7 +863,23 @@ class NovuMessages(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -749,7 +889,14 @@ class NovuMessages(BaseSDK):
                 result=utils.unmarshal_json(http_res.text, models.MessageResponseDto),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -760,6 +907,9 @@ class NovuMessages(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

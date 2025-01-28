@@ -74,7 +74,7 @@ class Authentication(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -90,7 +90,23 @@ class Authentication(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -105,7 +121,14 @@ class Authentication(BaseSDK):
                 result=utils.unmarshal_json(http_res.text, str),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -116,6 +139,9 @@ class Authentication(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -200,7 +226,7 @@ class Authentication(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -216,7 +242,23 @@ class Authentication(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -231,7 +273,14 @@ class Authentication(BaseSDK):
                 result=utils.unmarshal_json(http_res.text, str),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -242,6 +291,9 @@ class Authentication(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -322,7 +374,7 @@ class Authentication(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -338,14 +390,37 @@ class Authentication(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
         data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return models.SubscribersControllerChatAccessOauthResponse(headers={})
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -356,6 +431,9 @@ class Authentication(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -436,7 +514,7 @@ class Authentication(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -452,14 +530,37 @@ class Authentication(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
         data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return models.SubscribersControllerChatAccessOauthResponse(headers={})
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -470,6 +571,9 @@ class Authentication(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

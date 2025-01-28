@@ -11,9 +11,9 @@ from novu_py.novu_messages import NovuMessages
 from novu_py.novu_notifications import NovuNotifications
 from novu_py.preferences import Preferences
 from novu_py.properties import Properties
-from novu_py.types import BaseModel, OptionalNullable, UNSET
+from novu_py.types import OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
-from typing import Any, Dict, Mapping, Optional, Union, cast
+from typing import Any, Dict, Mapping, Optional, Union
 
 
 class Subscribers(BaseSDK):
@@ -46,6 +46,7 @@ class Subscribers(BaseSDK):
         *,
         page: Optional[float] = None,
         limit: Optional[float] = 10,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -57,6 +58,7 @@ class Subscribers(BaseSDK):
 
         :param page:
         :param limit:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -73,6 +75,7 @@ class Subscribers(BaseSDK):
         request = models.SubscribersControllerListSubscribersRequest(
             page=page,
             limit=limit,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request(
@@ -96,7 +99,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -112,7 +115,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -135,6 +154,7 @@ class Subscribers(BaseSDK):
             return self.list(
                 page=next_page,
                 limit=limit,
+                idempotency_key=idempotency_key,
                 retries=retries,
             )
 
@@ -148,7 +168,14 @@ class Subscribers(BaseSDK):
                 next=next_func,
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -159,6 +186,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -189,6 +219,7 @@ class Subscribers(BaseSDK):
         *,
         page: Optional[float] = None,
         limit: Optional[float] = 10,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -200,6 +231,7 @@ class Subscribers(BaseSDK):
 
         :param page:
         :param limit:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -216,6 +248,7 @@ class Subscribers(BaseSDK):
         request = models.SubscribersControllerListSubscribersRequest(
             page=page,
             limit=limit,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request_async(
@@ -239,7 +272,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -255,7 +288,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -278,6 +327,7 @@ class Subscribers(BaseSDK):
             return self.list(
                 page=next_page,
                 limit=limit,
+                idempotency_key=idempotency_key,
                 retries=retries,
             )
 
@@ -291,7 +341,14 @@ class Subscribers(BaseSDK):
                 next=next_func,
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -302,6 +359,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -330,10 +390,11 @@ class Subscribers(BaseSDK):
     def create(
         self,
         *,
-        request: Union[
+        create_subscriber_request_dto: Union[
             models.CreateSubscriberRequestDto,
             models.CreateSubscriberRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -343,7 +404,8 @@ class Subscribers(BaseSDK):
 
         Creates a subscriber entity, in the Novu platform. The subscriber will be later used to receive notifications, and access notification feeds. Communication credentials such as email, phone number, and 3 rd party credentials i.e slack tokens could be later associated to this entity.
 
-        :param request: The request object to send.
+        :param create_subscriber_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -357,9 +419,12 @@ class Subscribers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateSubscriberRequestDto)
-        request = cast(models.CreateSubscriberRequestDto, request)
+        request = models.SubscribersControllerCreateSubscriberRequest(
+            idempotency_key=idempotency_key,
+            create_subscriber_request_dto=utils.get_pydantic_model(
+                create_subscriber_request_dto, models.CreateSubscriberRequestDto
+            ),
+        )
 
         req = self._build_request(
             method="POST",
@@ -375,7 +440,11 @@ class Subscribers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.CreateSubscriberRequestDto
+                request.create_subscriber_request_dto,
+                False,
+                False,
+                "json",
+                models.CreateSubscriberRequestDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -385,7 +454,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -401,7 +470,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -413,7 +498,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -424,6 +516,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -452,10 +547,11 @@ class Subscribers(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Union[
+        create_subscriber_request_dto: Union[
             models.CreateSubscriberRequestDto,
             models.CreateSubscriberRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -465,7 +561,8 @@ class Subscribers(BaseSDK):
 
         Creates a subscriber entity, in the Novu platform. The subscriber will be later used to receive notifications, and access notification feeds. Communication credentials such as email, phone number, and 3 rd party credentials i.e slack tokens could be later associated to this entity.
 
-        :param request: The request object to send.
+        :param create_subscriber_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -479,9 +576,12 @@ class Subscribers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateSubscriberRequestDto)
-        request = cast(models.CreateSubscriberRequestDto, request)
+        request = models.SubscribersControllerCreateSubscriberRequest(
+            idempotency_key=idempotency_key,
+            create_subscriber_request_dto=utils.get_pydantic_model(
+                create_subscriber_request_dto, models.CreateSubscriberRequestDto
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -497,7 +597,11 @@ class Subscribers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.CreateSubscriberRequestDto
+                request.create_subscriber_request_dto,
+                False,
+                False,
+                "json",
+                models.CreateSubscriberRequestDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -507,7 +611,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -523,7 +627,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -535,7 +655,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -546,6 +673,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -576,6 +706,7 @@ class Subscribers(BaseSDK):
         *,
         subscriber_id: str,
         include_topics: Optional[bool] = None,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -587,6 +718,7 @@ class Subscribers(BaseSDK):
 
         :param subscriber_id:
         :param include_topics: Includes the topics associated with the subscriber
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -603,6 +735,7 @@ class Subscribers(BaseSDK):
         request = models.SubscribersControllerGetSubscriberRequest(
             subscriber_id=subscriber_id,
             include_topics=include_topics,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request(
@@ -626,7 +759,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -642,7 +775,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -654,7 +803,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -665,6 +821,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -695,6 +854,7 @@ class Subscribers(BaseSDK):
         *,
         subscriber_id: str,
         include_topics: Optional[bool] = None,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -706,6 +866,7 @@ class Subscribers(BaseSDK):
 
         :param subscriber_id:
         :param include_topics: Includes the topics associated with the subscriber
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -722,6 +883,7 @@ class Subscribers(BaseSDK):
         request = models.SubscribersControllerGetSubscriberRequest(
             subscriber_id=subscriber_id,
             include_topics=include_topics,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request_async(
@@ -745,7 +907,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -761,7 +923,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -773,7 +951,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -784,6 +969,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -817,6 +1005,7 @@ class Subscribers(BaseSDK):
             models.UpdateSubscriberRequestDto,
             models.UpdateSubscriberRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -828,6 +1017,7 @@ class Subscribers(BaseSDK):
 
         :param subscriber_id:
         :param update_subscriber_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -843,6 +1033,7 @@ class Subscribers(BaseSDK):
 
         request = models.SubscribersControllerUpdateSubscriberRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             update_subscriber_request_dto=utils.get_pydantic_model(
                 update_subscriber_request_dto, models.UpdateSubscriberRequestDto
             ),
@@ -876,7 +1067,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -892,7 +1083,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -904,7 +1111,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -915,6 +1129,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -948,6 +1165,7 @@ class Subscribers(BaseSDK):
             models.UpdateSubscriberRequestDto,
             models.UpdateSubscriberRequestDtoTypedDict,
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -959,6 +1177,7 @@ class Subscribers(BaseSDK):
 
         :param subscriber_id:
         :param update_subscriber_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -974,6 +1193,7 @@ class Subscribers(BaseSDK):
 
         request = models.SubscribersControllerUpdateSubscriberRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
             update_subscriber_request_dto=utils.get_pydantic_model(
                 update_subscriber_request_dto, models.UpdateSubscriberRequestDto
             ),
@@ -1007,7 +1227,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1023,7 +1243,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1035,7 +1271,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1046,6 +1289,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1075,6 +1321,7 @@ class Subscribers(BaseSDK):
         self,
         *,
         subscriber_id: str,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1085,6 +1332,7 @@ class Subscribers(BaseSDK):
         Deletes a subscriber entity from the Novu platform
 
         :param subscriber_id:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1100,6 +1348,7 @@ class Subscribers(BaseSDK):
 
         request = models.SubscribersControllerRemoveSubscriberRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request(
@@ -1123,7 +1372,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1139,7 +1388,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1151,7 +1416,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1162,6 +1434,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1191,6 +1466,7 @@ class Subscribers(BaseSDK):
         self,
         *,
         subscriber_id: str,
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1201,6 +1477,7 @@ class Subscribers(BaseSDK):
         Deletes a subscriber entity from the Novu platform
 
         :param subscriber_id:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1216,6 +1493,7 @@ class Subscribers(BaseSDK):
 
         request = models.SubscribersControllerRemoveSubscriberRequest(
             subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
         )
 
         req = self._build_request_async(
@@ -1239,7 +1517,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1255,7 +1533,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1267,7 +1561,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1278,6 +1579,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1306,9 +1610,10 @@ class Subscribers(BaseSDK):
     def create_bulk(
         self,
         *,
-        request: Union[
+        bulk_subscriber_create_dto: Union[
             models.BulkSubscriberCreateDto, models.BulkSubscriberCreateDtoTypedDict
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1321,7 +1626,8 @@ class Subscribers(BaseSDK):
         The bulk API is limited to 500 subscribers per request.
 
 
-        :param request: The request object to send.
+        :param bulk_subscriber_create_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1335,9 +1641,12 @@ class Subscribers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.BulkSubscriberCreateDto)
-        request = cast(models.BulkSubscriberCreateDto, request)
+        request = models.SubscribersControllerBulkCreateSubscribersRequest(
+            idempotency_key=idempotency_key,
+            bulk_subscriber_create_dto=utils.get_pydantic_model(
+                bulk_subscriber_create_dto, models.BulkSubscriberCreateDto
+            ),
+        )
 
         req = self._build_request(
             method="POST",
@@ -1353,7 +1662,11 @@ class Subscribers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.BulkSubscriberCreateDto
+                request.bulk_subscriber_create_dto,
+                False,
+                False,
+                "json",
+                models.BulkSubscriberCreateDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1363,7 +1676,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1379,7 +1692,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1391,7 +1720,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1402,6 +1738,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1430,9 +1769,10 @@ class Subscribers(BaseSDK):
     async def create_bulk_async(
         self,
         *,
-        request: Union[
+        bulk_subscriber_create_dto: Union[
             models.BulkSubscriberCreateDto, models.BulkSubscriberCreateDtoTypedDict
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1445,7 +1785,8 @@ class Subscribers(BaseSDK):
         The bulk API is limited to 500 subscribers per request.
 
 
-        :param request: The request object to send.
+        :param bulk_subscriber_create_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1459,9 +1800,12 @@ class Subscribers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.BulkSubscriberCreateDto)
-        request = cast(models.BulkSubscriberCreateDto, request)
+        request = models.SubscribersControllerBulkCreateSubscribersRequest(
+            idempotency_key=idempotency_key,
+            bulk_subscriber_create_dto=utils.get_pydantic_model(
+                bulk_subscriber_create_dto, models.BulkSubscriberCreateDto
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -1477,7 +1821,11 @@ class Subscribers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.BulkSubscriberCreateDto
+                request.bulk_subscriber_create_dto,
+                False,
+                False,
+                "json",
+                models.BulkSubscriberCreateDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1487,7 +1835,7 @@ class Subscribers(BaseSDK):
                 retries = self.sdk_configuration.retry_config
             else:
                 retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 30000, 1.5, 3600000), True
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
                 )
 
         retry_config = None
@@ -1503,7 +1851,23 @@ class Subscribers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "409", "422", "429", "4XX", "503", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
@@ -1515,7 +1879,14 @@ class Subscribers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "404", "409"], "application/json"):
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
+        if utils.match_response(http_res, "414", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1526,6 +1897,9 @@ class Subscribers(BaseSDK):
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

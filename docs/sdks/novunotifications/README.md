@@ -24,6 +24,7 @@ with Novu(
 
     res = novu.subscribers.notifications.feed(request={
         "subscriber_id": "<id>",
+        "limit": 10,
         "payload": "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30=",
     })
 
@@ -45,11 +46,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## unseen_count
 
@@ -65,7 +68,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>")
+    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>", seen=False, limit=100)
 
     # Handle response
     print(res)
@@ -79,6 +82,7 @@ with Novu(
 | `subscriber_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `seen`                                                              | *Optional[bool]*                                                    | :heavy_minus_sign:                                                  | Indicates whether to count seen notifications.                      |
 | `limit`                                                             | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | The maximum number of notifications to return.                      |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -87,8 +91,10 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |

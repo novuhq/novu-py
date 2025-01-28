@@ -35,7 +35,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         name="workflow_identifier",
         to={
             "subscriber_id": "<id>",
@@ -65,7 +65,8 @@ with Novu(
 
 | Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `request`                                                               | [models.TriggerEventRequestDto](../../models/triggereventrequestdto.md) | :heavy_check_mark:                                                      | The request object to use for the request.                              |
+| `trigger_event_request_dto`                                             | [models.TriggerEventRequestDto](../../models/triggereventrequestdto.md) | :heavy_check_mark:                                                      | N/A                                                                     |
+| `idempotency_key`                                                       | *Optional[str]*                                                         | :heavy_minus_sign:                                                      | A header for idempotency purposes                                       |
 | `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
 
 ### Response
@@ -74,11 +75,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## trigger_bulk
 
@@ -98,7 +101,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger_bulk(request={
+    res = novu.trigger_bulk(bulk_trigger_event_dto={
         "events": [
             novu_py.TriggerEventRequestDto(
                 name="workflow_identifier",
@@ -176,7 +179,8 @@ with Novu(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `request`                                                           | [models.BulkTriggerEventDto](../../models/bulktriggereventdto.md)   | :heavy_check_mark:                                                  | The request object to use for the request.                          |
+| `bulk_trigger_event_dto`                                            | [models.BulkTriggerEventDto](../../models/bulktriggereventdto.md)   | :heavy_check_mark:                                                  | N/A                                                                 |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -185,11 +189,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## trigger_broadcast
 
@@ -206,7 +212,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger_broadcast(request={
+    res = novu.trigger_broadcast(trigger_event_to_all_request_dto={
         "name": "<value>",
         "payload": {
             "comment_id": "string",
@@ -225,7 +231,8 @@ with Novu(
 
 | Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
 | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `request`                                                                         | [models.TriggerEventToAllRequestDto](../../models/triggereventtoallrequestdto.md) | :heavy_check_mark:                                                                | The request object to use for the request.                                        |
+| `trigger_event_to_all_request_dto`                                                | [models.TriggerEventToAllRequestDto](../../models/triggereventtoallrequestdto.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `idempotency_key`                                                                 | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | A header for idempotency purposes                                                 |
 | `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
 
 ### Response
@@ -234,11 +241,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## cancel
 
@@ -269,6 +278,7 @@ with Novu(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `transaction_id`                                                    | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -277,11 +287,13 @@ with Novu(
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models.ErrorDto           | 400, 404, 409             | application/json          |
-| models.ValidationErrorDto | 422                       | application/json          |
-| models.APIError           | 4XX, 5XX                  | \*/\*                     |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## support_controller_fetch_user_organizations
 
@@ -295,12 +307,11 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.support_controller_fetch_user_organizations(request={
+    novu.support_controller_fetch_user_organizations(plain_card_request_dto={
         "timestamp": "<value>",
     })
 
-    # Handle response
-    print(res)
+    # Use the SDK ...
 
 ```
 
@@ -308,12 +319,9 @@ with Novu(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `request`                                                           | [models.PlainCardRequestDto](../../models/plaincardrequestdto.md)   | :heavy_check_mark:                                                  | The request object to use for the request.                          |
+| `plain_card_request_dto`                                            | [models.PlainCardRequestDto](../../models/plaincardrequestdto.md)   | :heavy_check_mark:                                                  | N/A                                                                 |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.SupportControllerFetchUserOrganizationsResponseBody](../../models/supportcontrollerfetchuserorganizationsresponsebody.md)**
 
 ### Errors
 
@@ -333,7 +341,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    novu.create(request={
+    novu.create(create_support_thread_dto={
         "text": "<value>",
     })
 
@@ -345,7 +353,8 @@ with Novu(
 
 | Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `request`                                                               | [models.CreateSupportThreadDto](../../models/createsupportthreaddto.md) | :heavy_check_mark:                                                      | The request object to use for the request.                              |
+| `create_support_thread_dto`                                             | [models.CreateSupportThreadDto](../../models/createsupportthreaddto.md) | :heavy_check_mark:                                                      | N/A                                                                     |
+| `idempotency_key`                                                       | *Optional[str]*                                                         | :heavy_minus_sign:                                                      | A header for idempotency purposes                                       |
 | `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
 
 ### Errors

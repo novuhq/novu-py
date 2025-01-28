@@ -3,7 +3,12 @@
 from __future__ import annotations
 from enum import Enum
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -23,6 +28,8 @@ class MessagesControllerDeleteMessagesByTransactionIDRequestTypedDict(TypedDict)
     transaction_id: str
     channel: NotRequired[QueryParamChannel]
     r"""The channel of the message to be deleted"""
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class MessagesControllerDeleteMessagesByTransactionIDRequest(BaseModel):
@@ -37,6 +44,13 @@ class MessagesControllerDeleteMessagesByTransactionIDRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The channel of the message to be deleted"""
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class MessagesControllerDeleteMessagesByTransactionIDResponseTypedDict(TypedDict):

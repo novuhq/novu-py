@@ -10,10 +10,15 @@ from .updatesubscriberpreferenceglobalresponsedto import (
     UpdateSubscriberPreferenceGlobalResponseDtoTypedDict,
 )
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, PathParamMetadata, RequestMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    RequestMetadata,
+)
 import pydantic
-from typing import Dict, List
-from typing_extensions import Annotated, TypedDict
+from typing import Dict, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class SubscribersControllerUpdateSubscriberGlobalPreferencesRequestTypedDict(TypedDict):
@@ -21,6 +26,8 @@ class SubscribersControllerUpdateSubscriberGlobalPreferencesRequestTypedDict(Typ
     update_subscriber_global_preferences_request_dto: (
         UpdateSubscriberGlobalPreferencesRequestDtoTypedDict
     )
+    idempotency_key: NotRequired[str]
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerUpdateSubscriberGlobalPreferencesRequest(BaseModel):
@@ -34,6 +41,13 @@ class SubscribersControllerUpdateSubscriberGlobalPreferencesRequest(BaseModel):
         UpdateSubscriberGlobalPreferencesRequestDto,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
+
+    idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerUpdateSubscriberGlobalPreferencesResponseTypedDict(

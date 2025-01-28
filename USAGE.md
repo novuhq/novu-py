@@ -11,7 +11,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger(request=novu_py.TriggerEventRequestDto(
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         name="workflow_identifier",
         to={
             "subscriber_id": "<id>",
@@ -51,7 +51,7 @@ async def main():
         api_key=os.getenv("NOVU_API_KEY", ""),
     ) as novu:
 
-        res = await novu.trigger_async(request=novu_py.TriggerEventRequestDto(
+        res = await novu.trigger_async(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
             name="workflow_identifier",
             to={
                 "subscriber_id": "<id>",
@@ -90,7 +90,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger_bulk(request={
+    res = novu.trigger_bulk(bulk_trigger_event_dto={
         "events": [
             novu_py.TriggerEventRequestDto(
                 name="workflow_identifier",
@@ -178,7 +178,7 @@ async def main():
         api_key=os.getenv("NOVU_API_KEY", ""),
     ) as novu:
 
-        res = await novu.trigger_bulk_async(request={
+        res = await novu.trigger_bulk_async(bulk_trigger_event_dto={
             "events": [
                 novu_py.TriggerEventRequestDto(
                     name="workflow_identifier",
@@ -264,7 +264,7 @@ with Novu(
     api_key=os.getenv("NOVU_API_KEY", ""),
 ) as novu:
 
-    res = novu.trigger_broadcast(request={
+    res = novu.trigger_broadcast(trigger_event_to_all_request_dto={
         "name": "<value>",
         "payload": {
             "comment_id": "string",
@@ -292,7 +292,7 @@ async def main():
         api_key=os.getenv("NOVU_API_KEY", ""),
     ) as novu:
 
-        res = await novu.trigger_broadcast_async(request={
+        res = await novu.trigger_broadcast_async(trigger_event_to_all_request_dto={
             "name": "<value>",
             "payload": {
                 "comment_id": "string",
