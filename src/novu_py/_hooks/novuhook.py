@@ -1,5 +1,13 @@
-import requests
 from typing import Optional, Tuple, Union
+import time
+import random
+import json
+
+try:
+    import requests
+except ImportError:
+    requests = None
+
 from .types import (
     BeforeRequestContext,
     BeforeRequestHook,
@@ -9,9 +17,6 @@ from .types import (
     AfterErrorHook,
     SDKInitHook
 )
-import time
-import random
-import json
 
 class NovuHooks(SDKInitHook, BeforeRequestHook, AfterSuccessHook, AfterErrorHook):
     def sdk_init(self, base_url: str, client: requests.Session) -> Tuple[str, requests.Session]:
@@ -68,7 +73,10 @@ class NovuHooks(SDKInitHook, BeforeRequestHook, AfterSuccessHook, AfterErrorHook
             new_response.reason = response.reason
             new_response.raw = response.raw
             new_response.encoding = response.encoding
-            new_response._content = json.dumps(json_response['data']).encode('utf-8')  # Encode to bytes
+
+            # Use .text instead of direct _content access
+            new_response.text = json.dumps(json_response['data'])
+
             return new_response
 
         return response
