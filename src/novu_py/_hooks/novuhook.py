@@ -4,7 +4,6 @@ import random
 import json
 import http.client
 import urllib.parse
-from http.client import HTTPSConnection
 
 from .types import (
     BeforeRequestContext,
@@ -16,18 +15,17 @@ from .types import (
     SDKInitHook,
     HttpClient
 )
-
 class PreparedRequest:
-    def __init__(self, method: str, url: str, headers: Dict[str, str] = {}, body: str = ''):
+    def __init__(self, method: str, url: str, headers: Optional[Dict[str, str]] = None, body: str = ''):
         self.method = method
         self.url = url
-        self.headers = headers or {}
+        self.headers = {k: v for k, v in (headers or {}).items()}
         self.body = body
 
 class Response:
-    def __init__(self, status_code: int = 200, headers: Dict[str, str] = {}, text: str = '', reason: str = ''):
+    def __init__(self, status_code: int = 200, headers: Optional[Dict[str, str]]= None, text: str = '', reason: str = ''):
         self.status_code = status_code
-        self.headers = headers or {}
+        self.headers = {k: v for k, v in (headers or {}).items()}
         self.text = text
         self.reason = reason
         self.encoding = 'utf-8'
@@ -37,13 +35,13 @@ class Response:
         return json.loads(self.text) if self.text else {}
 
 class Session:
-    def prepare_request(self, method: str, url: str, headers: Dict[str, str] = {}, data: Any = None):
+    def prepare_request(self, method: str, url: str, headers: Optional[Dict[str, str]] = None, data: Any = None):
         """
         Prepare a request without using requests library
         """
 
         # Prepare headers
-        prepared_headers = headers or {}
+        prepared_headers = {k: v for k, v in (headers or {}).items()}
 
         # Prepare body
         body = json.dumps(data) if data and isinstance(data, (dict, list)) else data
