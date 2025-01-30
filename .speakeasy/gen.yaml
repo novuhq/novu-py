@@ -16,13 +16,14 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 python:
+  version: 0.0.2
   additionalDependencies:
     dev:
-      - "pytest>=6.0.0"
-      - "flake8>=3.9.0"
+      - pytest>=6.0.0
+      - flake8>=3.9.0
     main:
-      - "requests>=2.25.0"
-      - "pydantic>=1.8.0"
+      - requests>=2.25.0
+      - pydantic>=1.8.0
   authors:
     - Speakeasy
   clientServerStatusCodesAsErrors: true
