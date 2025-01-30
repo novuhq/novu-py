@@ -39,8 +39,6 @@ class Session:
         """
         Prepare a request without using requests library
         """
-        # Parse the URL
-        parsed_url = urllib.parse.urlparse(url)
 
         # Prepare headers
         prepared_headers = headers or {}
