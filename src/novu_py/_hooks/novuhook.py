@@ -4,6 +4,7 @@ import random
 import json
 import http.client
 import urllib.parse
+from http.client import HTTPSConnection
 
 from .types import (
     BeforeRequestContext,
@@ -12,18 +13,19 @@ from .types import (
     AfterSuccessHook,
     AfterErrorContext,
     AfterErrorHook,
-    SDKInitHook
+    SDKInitHook,
+    HttpClient
 )
 
 class PreparedRequest:
-    def __init__(self, method: str, url: str, headers: Dict[str, str] = None, body: str = None):
+    def __init__(self, method: str, url: str, headers: Dict[str, str] = {}, body: str = ''):
         self.method = method
         self.url = url
         self.headers = headers or {}
         self.body = body
 
 class Response:
-    def __init__(self, status_code: int = 200, headers: Dict[str, str] = None, text: str = '', reason: str = ''):
+    def __init__(self, status_code: int = 200, headers: Dict[str, str] = {}, text: str = '', reason: str = ''):
         self.status_code = status_code
         self.headers = headers or {}
         self.text = text
@@ -35,7 +37,7 @@ class Response:
         return json.loads(self.text) if self.text else {}
 
 class Session:
-    def prepare_request(self, method: str, url: str, headers: Dict[str, str] = None, data: Any = None):
+    def prepare_request(self, method: str, url: str, headers: Dict[str, str] = {}, data: Any = None):
         """
         Prepare a request without using requests library
         """
@@ -89,7 +91,7 @@ class Session:
             conn.close()
 
 class NovuHooks(SDKInitHook, BeforeRequestHook, AfterSuccessHook, AfterErrorHook):
-    def sdk_init(self, base_url: str, client: Session) -> Tuple[str, Session]:
+    def sdk_init(self, base_url: str, client: HttpClient) -> Tuple[str, HttpClient]:
         """
         Modify the base_url or wrap the client used by the SDK here and return the updated values.
         """
