@@ -19,13 +19,13 @@ class PreparedRequest:
     def __init__(self, method: str, url: str, headers: Optional[Dict[str, str]] = None, body: str = ''):
         self.method = method
         self.url = url
-        self.headers = {k: v for k, v in (headers or {}).items()}
+        self.headers = dict((headers or {}).items())
         self.body = body
 
 class Response:
     def __init__(self, status_code: int = 200, headers: Optional[Dict[str, str]]= None, text: str = '', reason: str = ''):
         self.status_code = status_code
-        self.headers = {k: v for k, v in (headers or {}).items()}
+        self.headers = dict((headers or {}).items())
         self.text = text
         self.reason = reason
         self.encoding = 'utf-8'
@@ -41,7 +41,7 @@ class Session:
         """
 
         # Prepare headers
-        prepared_headers = {k: v for k, v in (headers or {}).items()}
+        prepared_headers = dict((headers or {}).items())
 
         # Prepare body
         body = json.dumps(data) if data and isinstance(data, (dict, list)) else data
