@@ -64,8 +64,11 @@ def get_security_from_env(security: Any, security_class: Any) -> Optional[BaseMo
 
     security_dict: Any = {}
 
-    if os.getenv("NOVU_API_KEY"):
-        security_dict["api_key"] = os.getenv("NOVU_API_KEY")
+    if os.getenv("NOVU_SECRET_KEY"):
+        security_dict["secret_key"] = os.getenv("NOVU_SECRET_KEY")
+
+    if os.getenv("NOVU_BEARER_AUTH"):
+        security_dict["bearer_auth"] = os.getenv("NOVU_BEARER_AUTH")
 
     return security_class(**security_dict) if security_dict else None
 

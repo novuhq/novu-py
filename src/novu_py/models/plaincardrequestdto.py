@@ -16,11 +16,11 @@ class Customer(BaseModel):
     pass
 
 
-class PlainCardRequestDtoTenantTypedDict(TypedDict):
+class TenantTypedDict(TypedDict):
     pass
 
 
-class PlainCardRequestDtoTenant(BaseModel):
+class Tenant(BaseModel):
     pass
 
 
@@ -36,7 +36,7 @@ class PlainCardRequestDtoTypedDict(TypedDict):
     timestamp: str
     card_keys: NotRequired[List[str]]
     customer: NotRequired[Nullable[CustomerTypedDict]]
-    tenant: NotRequired[Nullable[PlainCardRequestDtoTenantTypedDict]]
+    tenant: NotRequired[Nullable[TenantTypedDict]]
     thread: NotRequired[Nullable[ThreadTypedDict]]
 
 
@@ -47,7 +47,7 @@ class PlainCardRequestDto(BaseModel):
 
     customer: OptionalNullable[Customer] = UNSET
 
-    tenant: OptionalNullable[PlainCardRequestDtoTenant] = UNSET
+    tenant: OptionalNullable[Tenant] = UNSET
 
     thread: OptionalNullable[Thread] = UNSET
 

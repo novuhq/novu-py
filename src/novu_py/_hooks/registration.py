@@ -9,8 +9,8 @@ from .types import Hooks
 
 def init_hooks(hooks: Hooks):
     # pylint: disable=unused-argument
-        my_hook = NovuHooks()
-        hooks.register_before_request_hook(my_hook)
-        hooks.register_after_success_hook(my_hook)
-        hooks.register_after_error_hook(my_hook)
-        hooks.register_sdk_init_hook(my_hook)
+    my_hook = NovuHooks()
+    hooks.register_before_request_hook(my_hook)
+    hooks.register_after_success_hook(my_hook)
+    hooks.register_after_error_hook(my_hook)
+    hooks.register_sdk_init_hook(my_hook)

@@ -1,6 +1,14 @@
 import requests
 from typing import Optional, Tuple, Union
-from .types import BeforeRequestContext, BeforeRequestHook, AfterSuccessContext, AfterSuccessHook, AfterErrorContext, AfterErrorHook, SDKInitHook
+from .types import (
+    BeforeRequestContext,
+    BeforeRequestHook,
+    AfterSuccessContext,
+    AfterSuccessHook,
+    AfterErrorContext,
+    AfterErrorHook,
+    SDKInitHook
+)
 import time
 import random
 import json
@@ -58,6 +66,8 @@ class NovuHooks(SDKInitHook, BeforeRequestHook, AfterSuccessHook, AfterErrorHook
             new_response.status_code = response.status_code
             new_response.headers = response.headers
             new_response.reason = response.reason
+            new_response.raw = response.raw
+            new_response.encoding = response.encoding
             new_response._content = json.dumps(json_response['data']).encode('utf-8')  # Encode to bytes
             return new_response
 
