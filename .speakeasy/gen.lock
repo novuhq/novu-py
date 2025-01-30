@@ -5,8 +5,8 @@ management:
   docVersion: "1.0"
   speakeasyVersion: 1.477.2
   generationVersion: 2.497.8
-  releaseVersion: 0.0.10
-  configChecksum: 7fa3b1adba526fe4d535e31d39d59e1f
+  releaseVersion: 0.2.1
+  configChecksum: 77178376caee6dd9555e96cfc16eb02b
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
