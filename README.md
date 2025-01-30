@@ -97,7 +97,7 @@ with Novu(
     ),
 ) as novu:
 
-    novu.support_controller_fetch_user_organizations(plain_card_request_dto={
+    novu.support.fetch_user_organizations(plain_card_request_dto={
         "timestamp": "<value>",
     })
 
@@ -121,7 +121,7 @@ async def main():
         ),
     ) as novu:
 
-        await novu.support_controller_fetch_user_organizations_async(plain_card_request_dto={
+        await novu.support.fetch_user_organizations_async(plain_card_request_dto={
             "timestamp": "<value>",
         })
 
@@ -137,10 +137,11 @@ asyncio.run(main())
 <details open>
 <summary>Available methods</summary>
 
-### [Novu SDK](docs/sdks/novu/README.md)
 
-* [support_controller_fetch_user_organizations](docs/sdks/novu/README.md#support_controller_fetch_user_organizations)
-* [create](docs/sdks/novu/README.md#create)
+### [support](docs/sdks/support/README.md)
+
+* [fetch_user_organizations](docs/sdks/support/README.md#fetch_user_organizations)
+* [create_thread](docs/sdks/support/README.md#create_thread)
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -163,7 +164,7 @@ with Novu(
     ),
 ) as novu:
 
-    novu.support_controller_fetch_user_organizations(plain_card_request_dto={
+    novu.support.fetch_user_organizations(plain_card_request_dto={
         "timestamp": "<value>",
     },
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
@@ -186,7 +187,7 @@ with Novu(
     ),
 ) as novu:
 
-    novu.support_controller_fetch_user_organizations(plain_card_request_dto={
+    novu.support.fetch_user_organizations(plain_card_request_dto={
         "timestamp": "<value>",
     })
 
@@ -209,7 +210,7 @@ By default, an API error will raise a models.APIError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `support_controller_fetch_user_organizations_async` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `fetch_user_organizations_async` method may raise the following exceptions:
 
 | Error Type      | Status Code | Content Type |
 | --------------- | ----------- | ------------ |
@@ -230,7 +231,7 @@ with Novu(
 
     try:
 
-        novu.support_controller_fetch_user_organizations(plain_card_request_dto={
+        novu.support.fetch_user_organizations(plain_card_request_dto={
             "timestamp": "<value>",
         })
 
@@ -268,7 +269,7 @@ with Novu(
     ),
 ) as novu:
 
-    novu.support_controller_fetch_user_organizations(plain_card_request_dto={
+    novu.support.fetch_user_organizations(plain_card_request_dto={
         "timestamp": "<value>",
     })
 
@@ -291,7 +292,7 @@ with Novu(
     ),
 ) as novu:
 
-    novu.support_controller_fetch_user_organizations(plain_card_request_dto={
+    novu.support.fetch_user_organizations(plain_card_request_dto={
         "timestamp": "<value>",
     })
 
@@ -405,7 +406,7 @@ with Novu(
     ),
 ) as novu:
 
-    novu.support_controller_fetch_user_organizations(plain_card_request_dto={
+    novu.support.fetch_user_organizations(plain_card_request_dto={
         "timestamp": "<value>",
     })
 

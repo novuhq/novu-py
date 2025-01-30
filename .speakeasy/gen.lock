@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: d58a5f43d089b5b600889f6aa4ca9645
+  docChecksum: 1f34feb302cea102048b5efa2895d85b
   docVersion: "1.0"
   speakeasyVersion: 1.477.2
   generationVersion: 2.497.8
-  releaseVersion: 0.2.0
-  configChecksum: 44e31c014f6b6f22c8eeee7884b74831
+  releaseVersion: 0.0.10
+  configChecksum: 7fa3b1adba526fe4d535e31d39d59e1f
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -21,6 +21,7 @@ features:
     globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
     globalServerURLs: 3.1.0
+    groups: 3.0.0
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
     nullables: 1.0.0
@@ -45,6 +46,7 @@ generatedFiles:
   - docs/models/thread.md
   - docs/models/utils/retryconfig.md
   - docs/sdks/novu/README.md
+  - docs/sdks/support/README.md
   - poetry.toml
   - py.typed
   - pylintrc
@@ -68,6 +70,7 @@ generatedFiles:
   - src/novu_py/py.typed
   - src/novu_py/sdk.py
   - src/novu_py/sdkconfiguration.py
+  - src/novu_py/support.py
   - src/novu_py/types/__init__.py
   - src/novu_py/types/basemodel.py
   - src/novu_py/utils/__init__.py

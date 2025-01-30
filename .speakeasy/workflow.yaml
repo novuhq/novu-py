@@ -4,6 +4,8 @@ sources:
     novu-OAS:
         inputs:
             - location: https://api.novu.co/openapi.sdk.yaml
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/novu/novu/novu-oas
 targets:

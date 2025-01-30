@@ -11,7 +11,7 @@ with Novu(
     ),
 ) as novu:
 
-    novu.support_controller_fetch_user_organizations(plain_card_request_dto={
+    novu.support.fetch_user_organizations(plain_card_request_dto={
         "timestamp": "<value>",
     })
 
@@ -35,7 +35,7 @@ async def main():
         ),
     ) as novu:
 
-        await novu.support_controller_fetch_user_organizations_async(plain_card_request_dto={
+        await novu.support.fetch_user_organizations_async(plain_card_request_dto={
             "timestamp": "<value>",
         })
 

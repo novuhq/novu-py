@@ -1,0 +1,30 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/v1/support/create-thread"]["post"]
+    update:
+      x-speakeasy-group: support
+      x-speakeasy-name-override: createThread
+    x-speakeasy-metadata:
+      after: sdk.support.createThread()
+      before: sdk.<no_group>.SupportController_createThread()
+      created_at: 1738243738023
+      reviewed_at: 1738243790791
+      type: method-name
+  - target: $["paths"]["/v1/support/customer-details"]["post"]
+    update:
+      x-speakeasy-group: support
+      x-speakeasy-name-override: fetchUserOrganizations
+    x-speakeasy-metadata:
+      after: sdk.support.fetchUserOrganizations()
+      before: sdk.<no_group>.SupportController_fetchUserOrganizations()
+      created_at: 1738243738023
+      reviewed_at: 1738243790791
+      type: method-name
