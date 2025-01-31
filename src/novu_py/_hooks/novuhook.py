@@ -33,7 +33,7 @@ class NovuHooks(BeforeRequestHook, AfterSuccessHook):
         :param request: The request to be modified
         :return: Modified request
         """
-        auth_key = 'Authorization'
+        auth_key = 'authorization'
         idempotency_key = 'idempotency-key'
         api_key_prefix = 'ApiKey'
 
