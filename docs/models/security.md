@@ -6,4 +6,3 @@
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `secret_key`       | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `bearer_auth`      | *Optional[str]*    | :heavy_minus_sign: | N/A                |

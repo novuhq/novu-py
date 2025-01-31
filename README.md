@@ -30,6 +30,7 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [Pagination](#pagination)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -83,7 +84,7 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
-### Example
+### Trigger Notification Event
 
 ```python
 # Synchronous Example
@@ -92,16 +93,31 @@ from novu_py import Novu
 import os
 
 with Novu(
-    security=novu_py.Security(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-    ),
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    novu.support.fetch_user_organizations(plain_card_request_dto={
-        "timestamp": "<value>",
-    })
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
+        workflow_id="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
+        },
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
+        },
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -116,16 +132,294 @@ import os
 
 async def main():
     async with Novu(
-        security=novu_py.Security(
-            secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-        ),
+        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
     ) as novu:
 
-        await novu.support.fetch_user_organizations_async(plain_card_request_dto={
-            "timestamp": "<value>",
+        res = await novu.trigger_async(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
+            workflow_id="workflow_identifier",
+            to={
+                "subscriber_id": "<id>",
+            },
+            payload={
+                "comment_id": "string",
+                "post": {
+                    "text": "string",
+                },
+            },
+            overrides={
+                "fcm": {
+                    "data": {
+                        "key": "value",
+                    },
+                },
+            },
+        ))
+
+        # Handle response
+        print(res)
+
+asyncio.run(main())
+```
+
+### Trigger Notification Events in Bulk
+
+```python
+# Synchronous Example
+import novu_py
+from novu_py import Novu
+import os
+
+with Novu(
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+) as novu:
+
+    res = novu.trigger_bulk(bulk_trigger_event_dto={
+        "events": [
+            novu_py.TriggerEventRequestDto(
+                workflow_id="workflow_identifier",
+                to={
+                    "subscriber_id": "<id>",
+                },
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+            novu_py.TriggerEventRequestDto(
+                workflow_id="workflow_identifier",
+                to=[
+                    {
+                        "topic_key": "<value>",
+                        "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                    },
+                ],
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+            novu_py.TriggerEventRequestDto(
+                workflow_id="workflow_identifier",
+                to=[
+                    "SUBSCRIBER_ID",
+                    "SUBSCRIBER_ID",
+                ],
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+        ],
+    })
+
+    # Handle response
+    print(res)
+```
+
+</br>
+
+The same SDK client can also be used to make asychronous requests by importing asyncio.
+```python
+# Asynchronous Example
+import asyncio
+import novu_py
+from novu_py import Novu
+import os
+
+async def main():
+    async with Novu(
+        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    ) as novu:
+
+        res = await novu.trigger_bulk_async(bulk_trigger_event_dto={
+            "events": [
+                novu_py.TriggerEventRequestDto(
+                    workflow_id="workflow_identifier",
+                    to={
+                        "subscriber_id": "<id>",
+                    },
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
+                        },
+                    },
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
+                        },
+                    },
+                ),
+                novu_py.TriggerEventRequestDto(
+                    workflow_id="workflow_identifier",
+                    to=[
+                        {
+                            "topic_key": "<value>",
+                            "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                        },
+                    ],
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
+                        },
+                    },
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
+                        },
+                    },
+                ),
+                novu_py.TriggerEventRequestDto(
+                    workflow_id="workflow_identifier",
+                    to=[
+                        "SUBSCRIBER_ID",
+                        "SUBSCRIBER_ID",
+                    ],
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
+                        },
+                    },
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
+                        },
+                    },
+                ),
+            ],
         })
 
-        # Use the SDK ...
+        # Handle response
+        print(res)
+
+asyncio.run(main())
+```
+
+### Broadcast Event to All
+
+```python
+# Synchronous Example
+from novu_py import Novu
+import os
+
+with Novu(
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+) as novu:
+
+    res = novu.trigger_broadcast(trigger_event_to_all_request_dto={
+        "name": "<value>",
+        "payload": {
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
+        },
+    })
+
+    # Handle response
+    print(res)
+```
+
+</br>
+
+The same SDK client can also be used to make asychronous requests by importing asyncio.
+```python
+# Asynchronous Example
+import asyncio
+from novu_py import Novu
+import os
+
+async def main():
+    async with Novu(
+        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    ) as novu:
+
+        res = await novu.trigger_broadcast_async(trigger_event_to_all_request_dto={
+            "name": "<value>",
+            "payload": {
+                "comment_id": "string",
+                "post": {
+                    "text": "string",
+                },
+            },
+        })
+
+        # Handle response
+        print(res)
+
+asyncio.run(main())
+```
+
+### Cancel Triggered Event
+
+```python
+# Synchronous Example
+from novu_py import Novu
+import os
+
+with Novu(
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+) as novu:
+
+    res = novu.cancel(transaction_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+</br>
+
+The same SDK client can also be used to make asychronous requests by importing asyncio.
+```python
+# Asynchronous Example
+import asyncio
+from novu_py import Novu
+import os
+
+async def main():
+    async with Novu(
+        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    ) as novu:
+
+        res = await novu.cancel_async(transaction_id="<id>")
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -137,14 +431,130 @@ asyncio.run(main())
 <details open>
 <summary>Available methods</summary>
 
+### [integrations](docs/sdks/integrations/README.md)
 
-### [support](docs/sdks/support/README.md)
+* [list](docs/sdks/integrations/README.md#list) - Get integrations
+* [create](docs/sdks/integrations/README.md#create) - Create integration
+* [list_active](docs/sdks/integrations/README.md#list_active) - Get active integrations
+* [update](docs/sdks/integrations/README.md#update) - Update integration
+* [delete](docs/sdks/integrations/README.md#delete) - Delete integration
+* [set_as_primary](docs/sdks/integrations/README.md#set_as_primary) - Set integration as primary
 
-* [fetch_user_organizations](docs/sdks/support/README.md#fetch_user_organizations)
-* [create_thread](docs/sdks/support/README.md#create_thread)
+#### [integrations.webhooks](docs/sdks/webhooks/README.md)
+
+* [retrieve](docs/sdks/webhooks/README.md#retrieve) - Get webhook support status for provider
+
+### [messages](docs/sdks/messages/README.md)
+
+* [retrieve](docs/sdks/messages/README.md#retrieve) - Get messages
+* [delete](docs/sdks/messages/README.md#delete) - Delete message
+* [delete_by_transaction_id](docs/sdks/messages/README.md#delete_by_transaction_id) - Delete messages by transactionId
+
+### [notifications](docs/sdks/notifications/README.md)
+
+* [list](docs/sdks/notifications/README.md#list) - Get notifications
+* [retrieve](docs/sdks/notifications/README.md#retrieve) - Get notification
+
+#### [notifications.stats](docs/sdks/stats/README.md)
+
+* [retrieve](docs/sdks/stats/README.md#retrieve) - Get notification statistics
+* [graph](docs/sdks/stats/README.md#graph) - Get notification graph statistics
+
+### [Novu SDK](docs/sdks/novu/README.md)
+
+* [trigger](docs/sdks/novu/README.md#trigger) - Trigger event
+* [trigger_bulk](docs/sdks/novu/README.md#trigger_bulk) - Bulk trigger event
+* [trigger_broadcast](docs/sdks/novu/README.md#trigger_broadcast) - Broadcast event to all
+* [cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
+
+### [subscribers](docs/sdks/subscribers/README.md)
+
+* [list](docs/sdks/subscribers/README.md#list) - Get subscribers
+* [create](docs/sdks/subscribers/README.md#create) - Create subscriber
+* [retrieve_legacy](docs/sdks/subscribers/README.md#retrieve_legacy) - Get subscriber
+* [update](docs/sdks/subscribers/README.md#update) - Update subscriber
+* [~~delete_legacy~~](docs/sdks/subscribers/README.md#delete_legacy) - Delete subscriber :warning: **Deprecated**
+* [create_bulk](docs/sdks/subscribers/README.md#create_bulk) - Bulk create subscribers
+* [search](docs/sdks/subscribers/README.md#search) - Search for subscribers
+* [retrieve](docs/sdks/subscribers/README.md#retrieve) - Get subscriber
+* [patch](docs/sdks/subscribers/README.md#patch) - Patch subscriber
+* [delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
+
+#### [subscribers.authentication](docs/sdks/authentication/README.md)
+
+* [chat_access_oauth_call_back](docs/sdks/authentication/README.md#chat_access_oauth_call_back) - Handle providers oauth redirect
+* [chat_access_oauth](docs/sdks/authentication/README.md#chat_access_oauth) - Handle chat oauth
+
+#### [subscribers.credentials](docs/sdks/credentials/README.md)
+
+* [update](docs/sdks/credentials/README.md#update) - Update subscriber credentials
+* [append](docs/sdks/credentials/README.md#append) - Modify subscriber credentials
+* [delete](docs/sdks/credentials/README.md#delete) - Delete subscriber credentials by providerId
+
+#### [subscribers.messages](docs/sdks/novumessages/README.md)
+
+* [mark_all_as](docs/sdks/novumessages/README.md#mark_all_as) - Mark a subscriber messages as seen, read, unseen or unread
+* [mark_all](docs/sdks/novumessages/README.md#mark_all) - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+* [update_as_seen](docs/sdks/novumessages/README.md#update_as_seen) - Mark message action as seen
+
+#### [subscribers.notifications](docs/sdks/novunotifications/README.md)
+
+* [feed](docs/sdks/novunotifications/README.md#feed) - Get in-app notification feed for a particular subscriber
+* [unseen_count](docs/sdks/novunotifications/README.md#unseen_count) - Get the unseen in-app notifications count for subscribers feed
+
+#### [subscribers.preferences](docs/sdks/preferences/README.md)
+
+* [list](docs/sdks/preferences/README.md#list) - Get subscriber preferences
+* [update_global](docs/sdks/preferences/README.md#update_global) - Update subscriber global preferences
+* [retrieve_by_level](docs/sdks/preferences/README.md#retrieve_by_level) - Get subscriber preferences by level
+* [update](docs/sdks/preferences/README.md#update) - Update subscriber preference
+
+#### [subscribers.properties](docs/sdks/properties/README.md)
+
+* [update_online_flag](docs/sdks/properties/README.md#update_online_flag) - Update subscriber online status
+
+### [topics](docs/sdks/topics/README.md)
+
+* [create](docs/sdks/topics/README.md#create) - Topic creation
+* [list](docs/sdks/topics/README.md#list) - Get topic list filtered 
+* [delete](docs/sdks/topics/README.md#delete) - Delete topic
+* [retrieve](docs/sdks/topics/README.md#retrieve) - Get topic
+* [rename](docs/sdks/topics/README.md#rename) - Rename a topic
+
+#### [topics.subscribers](docs/sdks/novusubscribers/README.md)
+
+* [assign](docs/sdks/novusubscribers/README.md#assign) - Subscribers addition
+* [retrieve](docs/sdks/novusubscribers/README.md#retrieve) - Check topic subscriber
+* [remove](docs/sdks/novusubscribers/README.md#remove) - Subscribers removal
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `None`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```python
+from novu_py import Novu
+import os
+
+with Novu(
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+) as novu:
+
+    res = novu.subscribers.list(limit=10)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -159,17 +569,32 @@ from novu_py.utils import BackoffStrategy, RetryConfig
 import os
 
 with Novu(
-    security=novu_py.Security(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-    ),
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    novu.support.fetch_user_organizations(plain_card_request_dto={
-        "timestamp": "<value>",
-    },
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
+        workflow_id="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
+        },
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
+        },
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ),
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
@@ -182,16 +607,31 @@ import os
 
 with Novu(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    security=novu_py.Security(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-    ),
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    novu.support.fetch_user_organizations(plain_card_request_dto={
-        "timestamp": "<value>",
-    })
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
+        workflow_id="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
+        },
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
+        },
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 <!-- End Retries [retries] -->
@@ -210,11 +650,15 @@ By default, an API error will raise a models.APIError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `fetch_user_organizations_async` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `trigger_async` method may raise the following exceptions:
 
-| Error Type      | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| models.APIError | 4XX, 5XX    | \*/\*        |
+| Error Type                | Status Code                            | Content Type     |
+| ------------------------- | -------------------------------------- | ---------------- |
+| models.ErrorDto           | 414                                    | application/json |
+| models.ErrorDto           | 400, 401, 403, 404, 405, 409, 413, 415 | application/json |
+| models.ValidationErrorDto | 422                                    | application/json |
+| models.ErrorDto           | 500                                    | application/json |
+| models.APIError           | 4XX, 5XX                               | \*/\*            |
 
 ### Example
 
@@ -224,19 +668,46 @@ from novu_py import Novu, models
 import os
 
 with Novu(
-    security=novu_py.Security(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-    ),
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
-
+    res = None
     try:
 
-        novu.support.fetch_user_organizations(plain_card_request_dto={
-            "timestamp": "<value>",
-        })
+        res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
+            workflow_id="workflow_identifier",
+            to={
+                "subscriber_id": "<id>",
+            },
+            payload={
+                "comment_id": "string",
+                "post": {
+                    "text": "string",
+                },
+            },
+            overrides={
+                "fcm": {
+                    "data": {
+                        "key": "value",
+                    },
+                },
+            },
+        ))
 
-        # Use the SDK ...
+        # Handle response
+        print(res)
 
+    except models.ErrorDto as e:
+        # handle e.data: models.ErrorDtoData
+        raise(e)
+    except models.ErrorDto as e:
+        # handle e.data: models.ErrorDtoData
+        raise(e)
+    except models.ValidationErrorDto as e:
+        # handle e.data: models.ValidationErrorDtoData
+        raise(e)
+    except models.ErrorDto as e:
+        # handle e.data: models.ErrorDtoData
+        raise(e)
     except models.APIError as e:
         # handle exception
         raise(e)
@@ -264,16 +735,31 @@ import os
 
 with Novu(
     server_idx=1,
-    security=novu_py.Security(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-    ),
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    novu.support.fetch_user_organizations(plain_card_request_dto={
-        "timestamp": "<value>",
-    })
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
+        workflow_id="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
+        },
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
+        },
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
@@ -287,16 +773,31 @@ import os
 
 with Novu(
     server_url="https://api.novu.co",
-    security=novu_py.Security(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-    ),
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    novu.support.fetch_user_organizations(plain_card_request_dto={
-        "timestamp": "<value>",
-    })
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
+        workflow_id="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
+        },
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
+        },
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 <!-- End Server Selection [server] -->
@@ -387,30 +888,44 @@ s = Novu(async_client=CustomClient(httpx.AsyncClient()))
 
 ### Per-Client Security Schemes
 
-This SDK supports the following security schemes globally:
+This SDK supports the following security scheme globally:
 
-| Name          | Type   | Scheme      | Environment Variable |
-| ------------- | ------ | ----------- | -------------------- |
-| `secret_key`  | apiKey | API key     | `NOVU_SECRET_KEY`    |
-| `bearer_auth` | http   | HTTP Bearer | `NOVU_BEARER_AUTH`   |
+| Name         | Type   | Scheme  | Environment Variable |
+| ------------ | ------ | ------- | -------------------- |
+| `secret_key` | apiKey | API key | `NOVU_SECRET_KEY`    |
 
-You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
+To authenticate with the API the `secret_key` parameter must be set when initializing the SDK client instance. For example:
 ```python
 import novu_py
 from novu_py import Novu
 import os
 
 with Novu(
-    security=novu_py.Security(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-    ),
+    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    novu.support.fetch_user_organizations(plain_card_request_dto={
-        "timestamp": "<value>",
-    })
+    res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
+        workflow_id="workflow_identifier",
+        to={
+            "subscriber_id": "<id>",
+        },
+        payload={
+            "comment_id": "string",
+            "post": {
+                "text": "string",
+            },
+        },
+        overrides={
+            "fcm": {
+                "data": {
+                    "key": "value",
+                },
+            },
+        },
+    ))
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 <!-- End Authentication [security] -->
@@ -423,14 +938,11 @@ The `Novu` class implements the context manager protocol and registers a finaliz
 [context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
 
 ```python
-import novu_py
 from novu_py import Novu
 import os
 def main():
     with Novu(
-        security=novu_py.Security(
-            secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-        ),
+        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
     ) as novu:
         # Rest of application here...
 
@@ -438,9 +950,7 @@ def main():
 # Or when using async:
 async def amain():
     async with Novu(
-        security=novu_py.Security(
-            secret_key=os.getenv("NOVU_SECRET_KEY", ""),
-        ),
+        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
     ) as novu:
         # Rest of application here...
 ```

@@ -1,0 +1,11 @@
+# ActivitiesResponseDto
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `has_more`                                                                                   | *bool*                                                                                       | :heavy_check_mark:                                                                           | Indicates if there are more activities in the result set                                     |
+| `data`                                                                                       | List[[models.ActivityNotificationResponseDto](../models/activitynotificationresponsedto.md)] | :heavy_check_mark:                                                                           | Array of activity notifications                                                              |
+| `page_size`                                                                                  | *float*                                                                                      | :heavy_check_mark:                                                                           | Page size of the activities                                                                  |
+| `page`                                                                                       | *float*                                                                                      | :heavy_check_mark:                                                                           | Current page of the activities                                                               |

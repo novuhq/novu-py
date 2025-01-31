@@ -1,0 +1,11 @@
+# NotificationTrigger
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `type`                                                                               | [models.NotificationTriggerType](../models/notificationtriggertype.md)               | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `identifier`                                                                         | *str*                                                                                | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `variables`                                                                          | List[[models.NotificationTriggerVariable](../models/notificationtriggervariable.md)] | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `subscriber_variables`                                                               | List[[models.NotificationTriggerVariable](../models/notificationtriggervariable.md)] | :heavy_minus_sign:                                                                   | N/A                                                                                  |

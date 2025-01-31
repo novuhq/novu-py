@@ -1,0 +1,11 @@
+# NotificationTriggerDto
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `type`                                                                               | [models.Type](../models/type.md)                                                     | :heavy_check_mark:                                                                   | Type of the trigger                                                                  |
+| `identifier`                                                                         | *str*                                                                                | :heavy_check_mark:                                                                   | Identifier of the trigger                                                            |
+| `variables`                                                                          | List[[models.NotificationTriggerVariable](../models/notificationtriggervariable.md)] | :heavy_check_mark:                                                                   | Variables of the trigger                                                             |
+| `subscriber_variables`                                                               | List[[models.NotificationTriggerVariable](../models/notificationtriggervariable.md)] | :heavy_minus_sign:                                                                   | Subscriber variables of the trigger                                                  |
