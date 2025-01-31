@@ -33,7 +33,7 @@ with Novu(
     secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.list(limit=10)
+    res = novu.subscribers.list()
 
     while res is not None:
         # Handle items

@@ -9,11 +9,11 @@ from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class OverridesTypedDict(TypedDict):
+class TriggerEventToAllRequestDtoOverridesTypedDict(TypedDict):
     r"""This could be used to override provider specific configurations"""
 
 
-class Overrides(BaseModel):
+class TriggerEventToAllRequestDtoOverrides(BaseModel):
     r"""This could be used to override provider specific configurations"""
 
 
@@ -62,7 +62,7 @@ class TriggerEventToAllRequestDtoTypedDict(TypedDict):
     could be used to render the template, or perform routing rules based on it.
     For In-App channel, payload data are also available in <Inbox />
     """
-    overrides: NotRequired[OverridesTypedDict]
+    overrides: NotRequired[TriggerEventToAllRequestDtoOverridesTypedDict]
     r"""This could be used to override provider specific configurations"""
     transaction_id: NotRequired[str]
     r"""A unique identifier for this transaction, we will generated a UUID if not provided."""
@@ -88,7 +88,7 @@ class TriggerEventToAllRequestDto(BaseModel):
     For In-App channel, payload data are also available in <Inbox />
     """
 
-    overrides: Optional[Overrides] = None
+    overrides: Optional[TriggerEventToAllRequestDtoOverrides] = None
     r"""This could be used to override provider specific configurations"""
 
     transaction_id: Annotated[Optional[str], pydantic.Field(alias="transactionId")] = (

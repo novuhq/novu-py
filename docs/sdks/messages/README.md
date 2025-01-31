@@ -26,10 +26,7 @@ with Novu(
     secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    res = novu.messages.retrieve(request={
-        "page": 0,
-        "limit": 10,
-    })
+    res = novu.messages.retrieve(request={})
 
     # Handle response
     print(res)

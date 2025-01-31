@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: df920daa1ffe269a97cd51bb03a07002
+  docChecksum: 8a535acf4d6882a9b0f29742d4b68279
   docVersion: "1.0"
-  speakeasyVersion: 1.480.0
-  generationVersion: 2.499.0
-  releaseVersion: 0.3.0
-  configChecksum: bc8186c34fbd0f4882cade12d98ead4b
+  speakeasyVersion: 1.481.1
+  generationVersion: 2.500.5
+  releaseVersion: 0.3.1
+  configChecksum: cd9f15119203542c204e1be62977bd58
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -15,14 +15,14 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.10.7
+    core: 5.10.9
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     examples: 3.0.1
-    flattening: 3.1.0
+    flattening: 3.1.1
     globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
@@ -130,8 +130,10 @@ generatedFiles:
   - docs/models/feedresponsedto.md
   - docs/models/fieldfilterpartdto.md
   - docs/models/filtertopicsresponsedto.md
+  - docs/models/getsubscriberpreferencesdto.md
   - docs/models/getsubscriberpreferencesresponsedto.md
   - docs/models/gettopicresponsedto.md
+  - docs/models/globalpreferencedto.md
   - docs/models/integrationresponsedto.md
   - docs/models/integrationscontrollercreateintegrationrequest.md
   - docs/models/integrationscontrollercreateintegrationresponse.md
@@ -211,7 +213,10 @@ generatedFiles:
   - docs/models/ordinalvalue.md
   - docs/models/ordinalvalueenum.md
   - docs/models/overrides.md
+  - docs/models/overrideschannel.md
   - docs/models/parameter.md
+  - docs/models/patchpreferencechannelsdto.md
+  - docs/models/patchsubscriberpreferencesdto.md
   - docs/models/patchsubscriberrequestdto.md
   - docs/models/patchsubscriberrequestdtodata.md
   - docs/models/payload.md
@@ -226,6 +231,7 @@ generatedFiles:
   - docs/models/renametopicresponsedto.md
   - docs/models/replycallback.md
   - docs/models/security.md
+  - docs/models/source.md
   - docs/models/status.md
   - docs/models/stepfilterdto.md
   - docs/models/steptypeenum.md
@@ -233,6 +239,8 @@ generatedFiles:
   - docs/models/subscriberfeedresponsedto.md
   - docs/models/subscriberpayloaddto.md
   - docs/models/subscriberresponsedto.md
+  - docs/models/subscriberscontrollergetsubscriberpreferencesrequest.md
+  - docs/models/subscriberscontrollergetsubscriberpreferencesresponse.md
   - docs/models/subscriberscontrollergetsubscriberrequest.md
   - docs/models/subscriberscontrollergetsubscriberresponse.md
   - docs/models/subscriberscontrollerpatchsubscriberrequest.md
@@ -241,6 +249,8 @@ generatedFiles:
   - docs/models/subscriberscontrollerremovesubscriberresponse.md
   - docs/models/subscriberscontrollersearchsubscribersrequest.md
   - docs/models/subscriberscontrollersearchsubscribersresponse.md
+  - docs/models/subscriberscontrollerupdatesubscriberpreferencesrequest.md
+  - docs/models/subscriberscontrollerupdatesubscriberpreferencesresponse.md
   - docs/models/subscribersv1controllerbulkcreatesubscribersrequest.md
   - docs/models/subscribersv1controllerbulkcreatesubscribersresponse.md
   - docs/models/subscribersv1controllerchataccessoauthrequest.md
@@ -317,6 +327,7 @@ generatedFiles:
   - docs/models/triggereventresponsedto.md
   - docs/models/triggereventtoallrequestdto.md
   - docs/models/triggereventtoallrequestdtoactor.md
+  - docs/models/triggereventtoallrequestdtooverrides.md
   - docs/models/triggereventtoallrequestdtotenant.md
   - docs/models/triggerrecipientstypeenum.md
   - docs/models/triggerreservedvariableresponse.md
@@ -340,7 +351,9 @@ generatedFiles:
   - docs/models/validationerrordtovalue.md
   - docs/models/value.md
   - docs/models/weekdays.md
+  - docs/models/workflowinfodto.md
   - docs/models/workflowintegrationstatus.md
+  - docs/models/workflowpreferencedto.md
   - docs/models/workflowresponse.md
   - docs/models/workflowresponsedata.md
   - docs/sdks/authentication/README.md
@@ -433,8 +446,10 @@ generatedFiles:
   - src/novu_py/models/feedresponsedto.py
   - src/novu_py/models/fieldfilterpartdto.py
   - src/novu_py/models/filtertopicsresponsedto.py
+  - src/novu_py/models/getsubscriberpreferencesdto.py
   - src/novu_py/models/getsubscriberpreferencesresponsedto.py
   - src/novu_py/models/gettopicresponsedto.py
+  - src/novu_py/models/globalpreferencedto.py
   - src/novu_py/models/integrationresponsedto.py
   - src/novu_py/models/integrationscontroller_createintegrationop.py
   - src/novu_py/models/integrationscontroller_getactiveintegrationsop.py
@@ -476,6 +491,9 @@ generatedFiles:
   - src/novu_py/models/notificationtriggervariableresponse.py
   - src/novu_py/models/ordinalenum.py
   - src/novu_py/models/ordinalvalueenum.py
+  - src/novu_py/models/overrides.py
+  - src/novu_py/models/patchpreferencechannelsdto.py
+  - src/novu_py/models/patchsubscriberpreferencesdto.py
   - src/novu_py/models/patchsubscriberrequestdto.py
   - src/novu_py/models/preference.py
   - src/novu_py/models/preferencechannels.py
@@ -493,9 +511,11 @@ generatedFiles:
   - src/novu_py/models/subscriberpayloaddto.py
   - src/novu_py/models/subscriberresponsedto.py
   - src/novu_py/models/subscriberscontroller_getsubscriberop.py
+  - src/novu_py/models/subscriberscontroller_getsubscriberpreferencesop.py
   - src/novu_py/models/subscriberscontroller_patchsubscriberop.py
   - src/novu_py/models/subscriberscontroller_removesubscriberop.py
   - src/novu_py/models/subscriberscontroller_searchsubscribersop.py
+  - src/novu_py/models/subscriberscontroller_updatesubscriberpreferencesop.py
   - src/novu_py/models/subscribersv1controller_bulkcreatesubscribersop.py
   - src/novu_py/models/subscribersv1controller_chataccessoauthop.py
   - src/novu_py/models/subscribersv1controller_chatoauthcallbackop.py
@@ -549,6 +569,8 @@ generatedFiles:
   - src/novu_py/models/updatesubscriberpreferenceresponsedto.py
   - src/novu_py/models/updatesubscriberrequestdto.py
   - src/novu_py/models/validationerrordto.py
+  - src/novu_py/models/workflowinfodto.py
+  - src/novu_py/models/workflowpreferencedto.py
   - src/novu_py/models/workflowresponse.py
   - src/novu_py/notifications.py
   - src/novu_py/novu_messages.py
@@ -607,7 +629,7 @@ examples:
   EventsController_triggerBulk:
     speakeasy-default-events-controller-trigger-bulk:
       requestBody:
-        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "to": {"topicKey": "<value>", "type": "Subscriber"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "to": ["SUBSCRIBER_ID", "SUBSCRIBER_ID"]}]}
+        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "to": [{"topicKey": "<value>", "type": "Subscriber"}]}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "to": ["SUBSCRIBER_ID", "SUBSCRIBER_ID"]}]}
       responses:
         "201":
           application/json: [{"acknowledged": true, "status": "error"}, {"acknowledged": true, "status": "no_workflow_active_steps_defined"}, {"acknowledged": true, "status": "trigger_not_active"}]
@@ -1462,6 +1484,42 @@ examples:
       requestBody:
         application/json: {"subscribers": ["<value>", "<value>"]}
       responses:
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  SubscribersController_getSubscriberPreferences:
+    speakeasy-default-subscribers-controller-get-subscriber-preferences:
+      parameters:
+        path:
+          subscriberId: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"global": {"enabled": true, "channels": {}}, "workflows": [{"enabled": true, "channels": {}, "overrides": [{"channel": "in_app", "source": "template"}], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}, {"enabled": false, "channels": {}, "overrides": [], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}, {"enabled": false, "channels": {}, "overrides": [], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  SubscribersController_updateSubscriberPreferences:
+    speakeasy-default-subscribers-controller-update-subscriber-preferences:
+      parameters:
+        path:
+          subscriberId: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"channels": {}}
+      responses:
+        "200":
+          application/json: {"global": {"enabled": false, "channels": {}}, "workflows": [{"enabled": true, "channels": {}, "overrides": [{"channel": "chat", "source": "template"}, {"channel": "push", "source": "subscriber"}, {"channel": "push", "source": "template"}], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}, {"enabled": true, "channels": {}, "overrides": [], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}]}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":

@@ -24,7 +24,6 @@ with Novu(
 
     res = novu.subscribers.notifications.feed(request={
         "subscriber_id": "<id>",
-        "limit": 10,
         "payload": "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30=",
     })
 
@@ -68,7 +67,7 @@ with Novu(
     secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>", seen=False, limit=100)
+    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>")
 
     # Handle response
     print(res)

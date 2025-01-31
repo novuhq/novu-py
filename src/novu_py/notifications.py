@@ -112,7 +112,7 @@ class Notifications(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.NotificationsControllerListNotificationsResponse(
                 result=utils.unmarshal_json(
@@ -121,26 +121,28 @@ class Notifications(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
-            raise models.ValidationErrorDto(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ValidationErrorDtoData
+            )
+            raise models.ValidationErrorDto(data=response_data)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -257,7 +259,7 @@ class Notifications(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.NotificationsControllerListNotificationsResponse(
                 result=utils.unmarshal_json(
@@ -266,26 +268,28 @@ class Notifications(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
-            raise models.ValidationErrorDto(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ValidationErrorDtoData
+            )
+            raise models.ValidationErrorDto(data=response_data)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -400,7 +404,7 @@ class Notifications(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.NotificationsControllerGetNotificationResponse(
                 result=utils.unmarshal_json(
@@ -409,26 +413,28 @@ class Notifications(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
-            raise models.ValidationErrorDto(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ValidationErrorDtoData
+            )
+            raise models.ValidationErrorDto(data=response_data)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -543,7 +549,7 @@ class Notifications(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.NotificationsControllerGetNotificationResponse(
                 result=utils.unmarshal_json(
@@ -552,26 +558,28 @@ class Notifications(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ValidationErrorDtoData)
-            raise models.ValidationErrorDto(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ValidationErrorDtoData
+            )
+            raise models.ValidationErrorDto(data=response_data)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

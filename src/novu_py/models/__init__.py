@@ -192,11 +192,16 @@ from .filtertopicsresponsedto import (
     FilterTopicsResponseDto,
     FilterTopicsResponseDtoTypedDict,
 )
+from .getsubscriberpreferencesdto import (
+    GetSubscriberPreferencesDto,
+    GetSubscriberPreferencesDtoTypedDict,
+)
 from .getsubscriberpreferencesresponsedto import (
     GetSubscriberPreferencesResponseDto,
     GetSubscriberPreferencesResponseDtoTypedDict,
 )
 from .gettopicresponsedto import GetTopicResponseDto, GetTopicResponseDtoTypedDict
+from .globalpreferencedto import GlobalPreferenceDto, GlobalPreferenceDtoTypedDict
 from .integrationresponsedto import (
     Channel,
     IntegrationResponseDto,
@@ -382,6 +387,15 @@ from .notificationtriggervariableresponse import (
 )
 from .ordinalenum import OrdinalEnum
 from .ordinalvalueenum import OrdinalValueEnum
+from .overrides import Overrides, OverridesChannel, OverridesTypedDict, Source
+from .patchpreferencechannelsdto import (
+    PatchPreferenceChannelsDto,
+    PatchPreferenceChannelsDtoTypedDict,
+)
+from .patchsubscriberpreferencesdto import (
+    PatchSubscriberPreferencesDto,
+    PatchSubscriberPreferencesDtoTypedDict,
+)
 from .patchsubscriberrequestdto import (
     PatchSubscriberRequestDto,
     PatchSubscriberRequestDtoData,
@@ -430,6 +444,12 @@ from .subscriberscontroller_getsubscriberop import (
     SubscribersControllerGetSubscriberResponse,
     SubscribersControllerGetSubscriberResponseTypedDict,
 )
+from .subscriberscontroller_getsubscriberpreferencesop import (
+    SubscribersControllerGetSubscriberPreferencesRequest,
+    SubscribersControllerGetSubscriberPreferencesRequestTypedDict,
+    SubscribersControllerGetSubscriberPreferencesResponse,
+    SubscribersControllerGetSubscriberPreferencesResponseTypedDict,
+)
 from .subscriberscontroller_patchsubscriberop import (
     SubscribersControllerPatchSubscriberRequest,
     SubscribersControllerPatchSubscriberRequestTypedDict,
@@ -448,6 +468,12 @@ from .subscriberscontroller_searchsubscribersop import (
     SubscribersControllerSearchSubscribersRequestTypedDict,
     SubscribersControllerSearchSubscribersResponse,
     SubscribersControllerSearchSubscribersResponseTypedDict,
+)
+from .subscriberscontroller_updatesubscriberpreferencesop import (
+    SubscribersControllerUpdateSubscriberPreferencesRequest,
+    SubscribersControllerUpdateSubscriberPreferencesRequestTypedDict,
+    SubscribersControllerUpdateSubscriberPreferencesResponse,
+    SubscribersControllerUpdateSubscriberPreferencesResponseTypedDict,
 )
 from .subscribersv1controller_bulkcreatesubscribersop import (
     SubscribersV1ControllerBulkCreateSubscribersRequest,
@@ -665,11 +691,11 @@ from .triggereventresponsedto import (
     TriggerEventResponseDtoTypedDict,
 )
 from .triggereventtoallrequestdto import (
-    Overrides,
-    OverridesTypedDict,
     TriggerEventToAllRequestDto,
     TriggerEventToAllRequestDtoActor,
     TriggerEventToAllRequestDtoActorTypedDict,
+    TriggerEventToAllRequestDtoOverrides,
+    TriggerEventToAllRequestDtoOverridesTypedDict,
     TriggerEventToAllRequestDtoTenant,
     TriggerEventToAllRequestDtoTenantTypedDict,
     TriggerEventToAllRequestDtoTypedDict,
@@ -723,6 +749,8 @@ from .validationerrordto import (
     ValidationErrorDtoData,
     ValidationErrorDtoValue,
 )
+from .workflowinfodto import WorkflowInfoDto, WorkflowInfoDtoTypedDict
+from .workflowpreferencedto import WorkflowPreferenceDto, WorkflowPreferenceDtoTypedDict
 from .workflowresponse import (
     WorkflowIntegrationStatus,
     WorkflowIntegrationStatusTypedDict,
@@ -882,10 +910,14 @@ __all__ = [
     "FieldFilterPartDtoTypedDict",
     "FilterTopicsResponseDto",
     "FilterTopicsResponseDtoTypedDict",
+    "GetSubscriberPreferencesDto",
+    "GetSubscriberPreferencesDtoTypedDict",
     "GetSubscriberPreferencesResponseDto",
     "GetSubscriberPreferencesResponseDtoTypedDict",
     "GetTopicResponseDto",
     "GetTopicResponseDtoTypedDict",
+    "GlobalPreferenceDto",
+    "GlobalPreferenceDtoTypedDict",
     "IntegrationResponseDto",
     "IntegrationResponseDtoTypedDict",
     "IntegrationsControllerCreateIntegrationRequest",
@@ -1026,8 +1058,13 @@ __all__ = [
     "OrdinalValue",
     "OrdinalValueEnum",
     "Overrides",
+    "OverridesChannel",
     "OverridesTypedDict",
     "Parameter",
+    "PatchPreferenceChannelsDto",
+    "PatchPreferenceChannelsDtoTypedDict",
+    "PatchSubscriberPreferencesDto",
+    "PatchSubscriberPreferencesDtoTypedDict",
     "PatchSubscriberRequestDto",
     "PatchSubscriberRequestDtoData",
     "PatchSubscriberRequestDtoDataTypedDict",
@@ -1053,6 +1090,7 @@ __all__ = [
     "ReplyCallbackTypedDict",
     "Security",
     "SecurityTypedDict",
+    "Source",
     "Status",
     "StepFilterDto",
     "StepFilterDtoTypedDict",
@@ -1065,6 +1103,10 @@ __all__ = [
     "SubscriberPayloadDtoTypedDict",
     "SubscriberResponseDto",
     "SubscriberResponseDtoTypedDict",
+    "SubscribersControllerGetSubscriberPreferencesRequest",
+    "SubscribersControllerGetSubscriberPreferencesRequestTypedDict",
+    "SubscribersControllerGetSubscriberPreferencesResponse",
+    "SubscribersControllerGetSubscriberPreferencesResponseTypedDict",
     "SubscribersControllerGetSubscriberRequest",
     "SubscribersControllerGetSubscriberRequestTypedDict",
     "SubscribersControllerGetSubscriberResponse",
@@ -1081,6 +1123,10 @@ __all__ = [
     "SubscribersControllerSearchSubscribersRequestTypedDict",
     "SubscribersControllerSearchSubscribersResponse",
     "SubscribersControllerSearchSubscribersResponseTypedDict",
+    "SubscribersControllerUpdateSubscriberPreferencesRequest",
+    "SubscribersControllerUpdateSubscriberPreferencesRequestTypedDict",
+    "SubscribersControllerUpdateSubscriberPreferencesResponse",
+    "SubscribersControllerUpdateSubscriberPreferencesResponseTypedDict",
     "SubscribersV1ControllerBulkCreateSubscribersRequest",
     "SubscribersV1ControllerBulkCreateSubscribersRequestTypedDict",
     "SubscribersV1ControllerBulkCreateSubscribersResponse",
@@ -1230,6 +1276,8 @@ __all__ = [
     "TriggerEventToAllRequestDto",
     "TriggerEventToAllRequestDtoActor",
     "TriggerEventToAllRequestDtoActorTypedDict",
+    "TriggerEventToAllRequestDtoOverrides",
+    "TriggerEventToAllRequestDtoOverridesTypedDict",
     "TriggerEventToAllRequestDtoTenant",
     "TriggerEventToAllRequestDtoTenantTypedDict",
     "TriggerEventToAllRequestDtoTypedDict",
@@ -1266,8 +1314,12 @@ __all__ = [
     "ValidationErrorDtoValue",
     "Value",
     "WeekDays",
+    "WorkflowInfoDto",
+    "WorkflowInfoDtoTypedDict",
     "WorkflowIntegrationStatus",
     "WorkflowIntegrationStatusTypedDict",
+    "WorkflowPreferenceDto",
+    "WorkflowPreferenceDtoTypedDict",
     "WorkflowResponse",
     "WorkflowResponseData",
     "WorkflowResponseDataTypedDict",

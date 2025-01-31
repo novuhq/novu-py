@@ -66,6 +66,37 @@ pip install novu-py
 ```bash
 poetry add novu-py
 ```
+
+### Shell and script usage with `uv`
+
+You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+
+```shell
+uvx --from novu-py python
+```
+
+It's also possible to write a standalone Python script without needing to set up a whole project like so:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "novu-py",
+# ]
+# ///
+
+from novu_py import Novu
+
+sdk = Novu(
+  # SDK arguments
+)
+
+# Rest of script here...
+```
+
+Once that is saved to a file, you can run it with `uv run script.py` where
+`script.py` can be replaced with the actual file name.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start IDE Support [idesupport] -->
@@ -504,7 +535,9 @@ asyncio.run(main())
 * [list](docs/sdks/preferences/README.md#list) - Get subscriber preferences
 * [update_global](docs/sdks/preferences/README.md#update_global) - Update subscriber global preferences
 * [retrieve_by_level](docs/sdks/preferences/README.md#retrieve_by_level) - Get subscriber preferences by level
-* [update](docs/sdks/preferences/README.md#update) - Update subscriber preference
+* [update_legacy](docs/sdks/preferences/README.md#update_legacy) - Update subscriber preference
+* [retrieve](docs/sdks/preferences/README.md#retrieve) - Get subscriber preferences
+* [update](docs/sdks/preferences/README.md#update) - Update subscriber global or workflow specific preferences
 
 #### [subscribers.properties](docs/sdks/properties/README.md)
 
@@ -543,7 +576,7 @@ with Novu(
     secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    res = novu.subscribers.list(limit=10)
+    res = novu.subscribers.list()
 
     while res is not None:
         # Handle items

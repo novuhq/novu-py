@@ -74,7 +74,7 @@ with Novu(
     secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    res = novu.topics.list(page=0, page_size=10, key="exampleKey")
+    res = novu.topics.list(key="exampleKey")
 
     # Handle response
     print(res)

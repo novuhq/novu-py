@@ -22,9 +22,7 @@ with Novu(
     secret_key=os.getenv("NOVU_SECRET_KEY", ""),
 ) as novu:
 
-    res = novu.notifications.list(request={
-        "page": 0,
-    })
+    res = novu.notifications.list(request={})
 
     # Handle response
     print(res)
