@@ -85,10 +85,10 @@ class Novu(BaseSDK):
         security: Any = None
         if callable(secret_key):
             # pylint: disable=unnecessary-lambda-assignment
-            security = lambda: models.Security(secret_key=secret_key())
+            security = lambda: models.Security(secret_key=f"ApiKey{secret_key()}")
         else:
-            security = models.Security(secret_key=secret_key)
-
+            security = models.Security(secret_key=f"ApiKey{secret_key}")
+            
         if server_url is not None:
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
