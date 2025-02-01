@@ -21,7 +21,7 @@ workflow:
     sources:
         novu-OAS:
             inputs:
-                - location: http://127.0.0.1:3000/openapi.sdk.yaml
+                - location: https://api.novu.co/openapi.sdk.yaml
             overlays:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             registry:
