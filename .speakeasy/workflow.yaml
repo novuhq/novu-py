@@ -19,5 +19,5 @@ targets:
             registry:
                 location: registry.speakeasyapi.dev/novu/novu/novu-oas-python-code-samples
             labelOverride:
-                fixedValue: Python (SDK)
+                fixedValue: Python
             blocking: false
