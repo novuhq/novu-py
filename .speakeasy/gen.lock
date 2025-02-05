@@ -3,10 +3,10 @@ id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
   docChecksum: b3f7cd2468458addfc2265640d61323d
   docVersion: "1.0"
-  speakeasyVersion: 1.483.0
-  generationVersion: 2.502.0
-  releaseVersion: 0.3.2
-  configChecksum: 3c24a56368a21dee3c8479edb9155137
+  speakeasyVersion: 1.484.1
+  generationVersion: 2.503.2
+  releaseVersion: 0.3.3
+  configChecksum: 7cd4b55b4f7b51e191ee7f3a2f63d90f
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
