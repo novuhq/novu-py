@@ -2,20 +2,20 @@ speakeasyVersion: 1.484.1
 sources:
     novu-OAS:
         sourceNamespace: novu-oas
-        sourceRevisionDigest: sha256:80039e912e7f118b895a0703edd14e6e3d3114baf906741125e20326cb971723
+        sourceRevisionDigest: sha256:3c883b168e1783744a16c908e3a69b3f36443e150da8cde51013031094766498
         sourceBlobDigest: sha256:db81ca9cc9bf732f310e4177d6b79f2389839029e46460e72e2f808d5452e26a
         tags:
             - latest
-            - speakeasy-sdk-regen-1738713839
+            - speakeasy-sdk-regen-1738742359
             - "1.0"
 targets:
     novu:
         source: novu-OAS
         sourceNamespace: novu-oas
-        sourceRevisionDigest: sha256:80039e912e7f118b895a0703edd14e6e3d3114baf906741125e20326cb971723
+        sourceRevisionDigest: sha256:3c883b168e1783744a16c908e3a69b3f36443e150da8cde51013031094766498
         sourceBlobDigest: sha256:db81ca9cc9bf732f310e4177d6b79f2389839029e46460e72e2f808d5452e26a
         codeSamplesNamespace: novu-oas-python-code-samples
-        codeSamplesRevisionDigest: sha256:739edd0d8894985119391f8a86c5f962de00308205c14d7a2487a93e595d9a99
+        codeSamplesRevisionDigest: sha256:00a74842af61666058a7cb0315fddfd5b66e1b4869f39e8cd6869ec08ace8117
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -38,5 +38,5 @@ workflow:
                 registry:
                     location: registry.speakeasyapi.dev/novu/novu/novu-oas-python-code-samples
                 labelOverride:
-                    fixedValue: Python (SDK)
+                    fixedValue: Python
                 blocking: false
