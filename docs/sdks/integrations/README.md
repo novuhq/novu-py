@@ -23,10 +23,9 @@ Return all the integrations the user has created for that organization. Review v
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.integrations.list()
@@ -66,10 +65,9 @@ Create an integration for the current environment the user is based on the API k
 ```python
 import novu_py
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.integrations.create(create_integration_request_dto={
@@ -112,10 +110,9 @@ Return all the active integrations the user has created for that organization. R
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.integrations.list_active()
@@ -154,10 +151,9 @@ Update integration
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.integrations.update(integration_id="<id>", update_integration_request_dto={})
@@ -198,10 +194,9 @@ Delete integration
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.integrations.delete(integration_id="<id>")
@@ -241,10 +236,9 @@ Set integration as primary
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.integrations.set_as_primary(integration_id="<id>")

@@ -18,10 +18,9 @@ Subscriber credentials associated to the delivery methods such as slack and push
 ```python
 import novu_py
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.credentials.update(subscriber_id="<id>", update_subscriber_channel_request_dto={
@@ -81,10 +80,9 @@ Subscriber credentials associated to the delivery methods such as slack and push
 ```python
 import novu_py
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.credentials.append(subscriber_id="<id>", update_subscriber_channel_request_dto={
@@ -141,10 +139,9 @@ Delete subscriber credentials such as slack and expo tokens.
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.credentials.delete(subscriber_id="<id>", provider_id="<id>")

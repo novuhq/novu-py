@@ -14,7 +14,6 @@ from novu_py.properties import Properties
 from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from typing import Any, Dict, Mapping, Optional, Union, cast
-from typing_extensions import deprecated
 
 
 class Subscribers(BaseSDK):
@@ -24,10 +23,10 @@ class Subscribers(BaseSDK):
 
     credentials: Credentials
     properties: Properties
-    preferences: Preferences
     notifications: NovuNotifications
     messages: NovuMessages
     authentication: Authentication
+    preferences: Preferences
 
     def __init__(self, sdk_config: SDKConfiguration) -> None:
         BaseSDK.__init__(self, sdk_config)
@@ -37,10 +36,10 @@ class Subscribers(BaseSDK):
     def _init_sdks(self):
         self.credentials = Credentials(self.sdk_configuration)
         self.properties = Properties(self.sdk_configuration)
-        self.preferences = Preferences(self.sdk_configuration)
         self.notifications = NovuNotifications(self.sdk_configuration)
         self.messages = NovuMessages(self.sdk_configuration)
         self.authentication = Authentication(self.sdk_configuration)
+        self.preferences = Preferences(self.sdk_configuration)
 
     def list(
         self,
@@ -109,6 +108,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersV1Controller_listSubscribers",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -284,6 +284,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersV1Controller_listSubscribers",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -342,1248 +343,6 @@ class Subscribers(BaseSDK):
                     models.SubscribersV1ControllerListSubscribersResponseBody,
                 ),
                 next=next_func,
-                headers=utils.get_response_headers(http_res.headers),
-            )
-        if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(
-            http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
-            "application/json",
-        ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
-            )
-            raise models.ValidationErrorDto(data=response_data)
-        if utils.match_response(http_res, "429", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "503", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def create(
-        self,
-        *,
-        create_subscriber_request_dto: Union[
-            models.CreateSubscriberRequestDto,
-            models.CreateSubscriberRequestDtoTypedDict,
-        ],
-        idempotency_key: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerCreateSubscriberResponse:
-        r"""Create subscriber
-
-        Creates a subscriber entity, in the Novu platform. The subscriber will be later used to receive notifications, and access notification feeds. Communication credentials such as email, phone number, and 3 rd party credentials i.e slack tokens could be later associated to this entity.
-
-        :param create_subscriber_request_dto:
-        :param idempotency_key: A header for idempotency purposes
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.SubscribersV1ControllerCreateSubscriberRequest(
-            idempotency_key=idempotency_key,
-            create_subscriber_request_dto=utils.get_pydantic_model(
-                create_subscriber_request_dto, models.CreateSubscriberRequestDto
-            ),
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/v1/subscribers",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_subscriber_request_dto,
-                False,
-                False,
-                "json",
-                models.CreateSubscriberRequestDto,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["408", "409", "429", "5XX"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="SubscribersV1Controller_createSubscriber",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return models.SubscribersV1ControllerCreateSubscriberResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.SubscriberResponseDto
-                ),
-                headers=utils.get_response_headers(http_res.headers),
-            )
-        if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(
-            http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
-            "application/json",
-        ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
-            )
-            raise models.ValidationErrorDto(data=response_data)
-        if utils.match_response(http_res, "429", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "503", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def create_async(
-        self,
-        *,
-        create_subscriber_request_dto: Union[
-            models.CreateSubscriberRequestDto,
-            models.CreateSubscriberRequestDtoTypedDict,
-        ],
-        idempotency_key: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerCreateSubscriberResponse:
-        r"""Create subscriber
-
-        Creates a subscriber entity, in the Novu platform. The subscriber will be later used to receive notifications, and access notification feeds. Communication credentials such as email, phone number, and 3 rd party credentials i.e slack tokens could be later associated to this entity.
-
-        :param create_subscriber_request_dto:
-        :param idempotency_key: A header for idempotency purposes
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.SubscribersV1ControllerCreateSubscriberRequest(
-            idempotency_key=idempotency_key,
-            create_subscriber_request_dto=utils.get_pydantic_model(
-                create_subscriber_request_dto, models.CreateSubscriberRequestDto
-            ),
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/v1/subscribers",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_subscriber_request_dto,
-                False,
-                False,
-                "json",
-                models.CreateSubscriberRequestDto,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["408", "409", "429", "5XX"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="SubscribersV1Controller_createSubscriber",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return models.SubscribersV1ControllerCreateSubscriberResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.SubscriberResponseDto
-                ),
-                headers=utils.get_response_headers(http_res.headers),
-            )
-        if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(
-            http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
-            "application/json",
-        ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
-            )
-            raise models.ValidationErrorDto(data=response_data)
-        if utils.match_response(http_res, "429", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "503", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def retrieve_legacy(
-        self,
-        *,
-        subscriber_id: str,
-        include_topics: Optional[bool] = None,
-        idempotency_key: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerGetSubscriberResponse:
-        r"""Get subscriber
-
-        Get subscriber by your internal id used to identify the subscriber
-
-        :param subscriber_id:
-        :param include_topics: Includes the topics associated with the subscriber
-        :param idempotency_key: A header for idempotency purposes
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.SubscribersV1ControllerGetSubscriberRequest(
-            subscriber_id=subscriber_id,
-            include_topics=include_topics,
-            idempotency_key=idempotency_key,
-        )
-
-        req = self._build_request(
-            method="GET",
-            path="/v1/subscribers/{subscriberId}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["408", "409", "429", "5XX"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="SubscribersV1Controller_getSubscriber",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.SubscribersV1ControllerGetSubscriberResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.SubscriberResponseDto
-                ),
-                headers=utils.get_response_headers(http_res.headers),
-            )
-        if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(
-            http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
-            "application/json",
-        ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
-            )
-            raise models.ValidationErrorDto(data=response_data)
-        if utils.match_response(http_res, "429", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "503", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def retrieve_legacy_async(
-        self,
-        *,
-        subscriber_id: str,
-        include_topics: Optional[bool] = None,
-        idempotency_key: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerGetSubscriberResponse:
-        r"""Get subscriber
-
-        Get subscriber by your internal id used to identify the subscriber
-
-        :param subscriber_id:
-        :param include_topics: Includes the topics associated with the subscriber
-        :param idempotency_key: A header for idempotency purposes
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.SubscribersV1ControllerGetSubscriberRequest(
-            subscriber_id=subscriber_id,
-            include_topics=include_topics,
-            idempotency_key=idempotency_key,
-        )
-
-        req = self._build_request_async(
-            method="GET",
-            path="/v1/subscribers/{subscriberId}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["408", "409", "429", "5XX"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="SubscribersV1Controller_getSubscriber",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.SubscribersV1ControllerGetSubscriberResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.SubscriberResponseDto
-                ),
-                headers=utils.get_response_headers(http_res.headers),
-            )
-        if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(
-            http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
-            "application/json",
-        ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
-            )
-            raise models.ValidationErrorDto(data=response_data)
-        if utils.match_response(http_res, "429", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "503", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def update(
-        self,
-        *,
-        subscriber_id: str,
-        update_subscriber_request_dto: Union[
-            models.UpdateSubscriberRequestDto,
-            models.UpdateSubscriberRequestDtoTypedDict,
-        ],
-        idempotency_key: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerUpdateSubscriberResponse:
-        r"""Update subscriber
-
-        Used to update the subscriber entity with new information
-
-        :param subscriber_id:
-        :param update_subscriber_request_dto:
-        :param idempotency_key: A header for idempotency purposes
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.SubscribersV1ControllerUpdateSubscriberRequest(
-            subscriber_id=subscriber_id,
-            idempotency_key=idempotency_key,
-            update_subscriber_request_dto=utils.get_pydantic_model(
-                update_subscriber_request_dto, models.UpdateSubscriberRequestDto
-            ),
-        )
-
-        req = self._build_request(
-            method="PUT",
-            path="/v1/subscribers/{subscriberId}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_subscriber_request_dto,
-                False,
-                False,
-                "json",
-                models.UpdateSubscriberRequestDto,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["408", "409", "429", "5XX"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="SubscribersV1Controller_updateSubscriber",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.SubscribersV1ControllerUpdateSubscriberResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.SubscriberResponseDto
-                ),
-                headers=utils.get_response_headers(http_res.headers),
-            )
-        if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(
-            http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
-            "application/json",
-        ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
-            )
-            raise models.ValidationErrorDto(data=response_data)
-        if utils.match_response(http_res, "429", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "503", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def update_async(
-        self,
-        *,
-        subscriber_id: str,
-        update_subscriber_request_dto: Union[
-            models.UpdateSubscriberRequestDto,
-            models.UpdateSubscriberRequestDtoTypedDict,
-        ],
-        idempotency_key: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerUpdateSubscriberResponse:
-        r"""Update subscriber
-
-        Used to update the subscriber entity with new information
-
-        :param subscriber_id:
-        :param update_subscriber_request_dto:
-        :param idempotency_key: A header for idempotency purposes
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.SubscribersV1ControllerUpdateSubscriberRequest(
-            subscriber_id=subscriber_id,
-            idempotency_key=idempotency_key,
-            update_subscriber_request_dto=utils.get_pydantic_model(
-                update_subscriber_request_dto, models.UpdateSubscriberRequestDto
-            ),
-        )
-
-        req = self._build_request_async(
-            method="PUT",
-            path="/v1/subscribers/{subscriberId}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_subscriber_request_dto,
-                False,
-                False,
-                "json",
-                models.UpdateSubscriberRequestDto,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["408", "409", "429", "5XX"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="SubscribersV1Controller_updateSubscriber",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.SubscribersV1ControllerUpdateSubscriberResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.SubscriberResponseDto
-                ),
-                headers=utils.get_response_headers(http_res.headers),
-            )
-        if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(
-            http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
-            "application/json",
-        ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
-            )
-            raise models.ValidationErrorDto(data=response_data)
-        if utils.match_response(http_res, "429", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "503", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
-    def delete_legacy(
-        self,
-        *,
-        subscriber_id: str,
-        idempotency_key: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerRemoveSubscriberResponse:
-        r"""Delete subscriber
-
-        Deletes a subscriber entity from the Novu platform
-
-        :param subscriber_id:
-        :param idempotency_key: A header for idempotency purposes
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.SubscribersV1ControllerRemoveSubscriberRequest(
-            subscriber_id=subscriber_id,
-            idempotency_key=idempotency_key,
-        )
-
-        req = self._build_request(
-            method="DELETE",
-            path="/v1/subscribers/{subscriberId}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["408", "409", "429", "5XX"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="SubscribersV1Controller_removeSubscriber",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.SubscribersV1ControllerRemoveSubscriberResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.DeleteSubscriberResponseDto
-                ),
-                headers=utils.get_response_headers(http_res.headers),
-            )
-        if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(
-            http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
-            "application/json",
-        ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
-            )
-            raise models.ValidationErrorDto(data=response_data)
-        if utils.match_response(http_res, "429", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
-        if utils.match_response(http_res, "503", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
-    async def delete_legacy_async(
-        self,
-        *,
-        subscriber_id: str,
-        idempotency_key: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerRemoveSubscriberResponse:
-        r"""Delete subscriber
-
-        Deletes a subscriber entity from the Novu platform
-
-        :param subscriber_id:
-        :param idempotency_key: A header for idempotency purposes
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.SubscribersV1ControllerRemoveSubscriberRequest(
-            subscriber_id=subscriber_id,
-            idempotency_key=idempotency_key,
-        )
-
-        req = self._build_request_async(
-            method="DELETE",
-            path="/v1/subscribers/{subscriberId}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["408", "409", "429", "5XX"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="SubscribersV1Controller_removeSubscriber",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.SubscribersV1ControllerRemoveSubscriberResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.DeleteSubscriberResponseDto
-                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
@@ -1712,6 +471,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersV1Controller_bulkCreateSubscribers",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1873,6 +633,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersV1Controller_bulkCreateSubscribers",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2020,6 +781,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersController_searchSubscribers",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2167,6 +929,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersController_searchSubscribers",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2199,6 +962,326 @@ class Subscribers(BaseSDK):
             return models.SubscribersControllerSearchSubscribersResponse(
                 result=utils.unmarshal_json(
                     http_res.text, models.ListSubscribersResponseDto
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ValidationErrorDtoData
+            )
+            raise models.ValidationErrorDto(data=response_data)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def create(
+        self,
+        *,
+        create_subscriber_request_dto: Union[
+            models.CreateSubscriberRequestDto,
+            models.CreateSubscriberRequestDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerCreateSubscriberResponse:
+        r"""Create subscriber
+
+        Create subscriber with the given data
+
+        :param create_subscriber_request_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = models.SubscribersControllerCreateSubscriberRequest(
+            idempotency_key=idempotency_key,
+            create_subscriber_request_dto=utils.get_pydantic_model(
+                create_subscriber_request_dto, models.CreateSubscriberRequestDto
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/subscribers",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.create_subscriber_request_dto,
+                False,
+                False,
+                "json",
+                models.CreateSubscriberRequestDto,
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="SubscribersController_createSubscriber",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return models.SubscribersControllerCreateSubscriberResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, models.SubscriberResponseDto
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ValidationErrorDtoData
+            )
+            raise models.ValidationErrorDto(data=response_data)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
+            raise models.ErrorDto(data=response_data)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def create_async(
+        self,
+        *,
+        create_subscriber_request_dto: Union[
+            models.CreateSubscriberRequestDto,
+            models.CreateSubscriberRequestDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerCreateSubscriberResponse:
+        r"""Create subscriber
+
+        Create subscriber with the given data
+
+        :param create_subscriber_request_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = models.SubscribersControllerCreateSubscriberRequest(
+            idempotency_key=idempotency_key,
+            create_subscriber_request_dto=utils.get_pydantic_model(
+                create_subscriber_request_dto, models.CreateSubscriberRequestDto
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/subscribers",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.create_subscriber_request_dto,
+                False,
+                False,
+                "json",
+                models.CreateSubscriberRequestDto,
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="SubscribersController_createSubscriber",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return models.SubscribersControllerCreateSubscriberResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, models.SubscriberResponseDto
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -2314,6 +1397,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersController_getSubscriber",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2461,6 +1545,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersController_getSubscriber",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2622,6 +1707,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersController_patchSubscriber",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2783,6 +1869,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersController_patchSubscriber",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2930,6 +2017,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersController_removeSubscriber",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -3077,6 +2165,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="SubscribersController_removeSubscriber",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

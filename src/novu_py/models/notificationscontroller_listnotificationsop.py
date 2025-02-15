@@ -23,6 +23,8 @@ class NotificationsControllerListNotificationsRequestTypedDict(TypedDict):
     r"""Array of subscriber IDs or a single subscriber ID"""
     page: NotRequired[float]
     r"""Page number for pagination"""
+    limit: NotRequired[float]
+    r"""Limit for pagination"""
     transaction_id: NotRequired[str]
     r"""Transaction ID for filtering"""
     after: NotRequired[str]
@@ -73,6 +75,12 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 0
     r"""Page number for pagination"""
+
+    limit: Annotated[
+        Optional[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 10
+    r"""Limit for pagination"""
 
     transaction_id: Annotated[
         Optional[str],

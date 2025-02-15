@@ -16,10 +16,9 @@ Handle providers oauth redirect
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.authentication.chat_access_oauth_call_back(request={
@@ -64,10 +63,9 @@ Handle chat oauth
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.authentication.chat_access_oauth(request={

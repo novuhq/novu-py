@@ -76,7 +76,6 @@ from .buttontypeenum import ButtonTypeEnum
 from .channelcredentials import ChannelCredentials, ChannelCredentialsTypedDict
 from .channelcredentialsdto import ChannelCredentialsDto, ChannelCredentialsDtoTypedDict
 from .channelctatypeenum import ChannelCTATypeEnum
-from .channelpreference import ChannelPreference, ChannelPreferenceTypedDict
 from .channelsettingsdto import (
     ChannelSettingsDto,
     ChannelSettingsDtoProviderID,
@@ -122,11 +121,6 @@ from .deletemessageresponsedto import (
     DeleteMessageResponseDto,
     DeleteMessageResponseDtoStatus,
     DeleteMessageResponseDtoTypedDict,
-)
-from .deletesubscriberresponsedto import (
-    DeleteSubscriberResponseDto,
-    DeleteSubscriberResponseDtoStatus,
-    DeleteSubscriberResponseDtoTypedDict,
 )
 from .digestmetadatadto import DigestMetadataDto, DigestMetadataDtoTypedDict, Unit
 from .digestregularmetadata import (
@@ -195,10 +189,6 @@ from .filtertopicsresponsedto import (
 from .getsubscriberpreferencesdto import (
     GetSubscriberPreferencesDto,
     GetSubscriberPreferencesDtoTypedDict,
-)
-from .getsubscriberpreferencesresponsedto import (
-    GetSubscriberPreferencesResponseDto,
-    GetSubscriberPreferencesResponseDtoTypedDict,
 )
 from .gettopicresponsedto import GetTopicResponseDto, GetTopicResponseDtoTypedDict
 from .globalpreferencedto import GlobalPreferenceDto, GlobalPreferenceDtoTypedDict
@@ -370,20 +360,9 @@ from .notificationtriggerdto import (
     NotificationTriggerDtoTypedDict,
     Type,
 )
-from .notificationtriggerresponse import (
-    NotificationTriggerResponse,
-    NotificationTriggerResponseTypedDict,
-)
 from .notificationtriggervariable import (
     NotificationTriggerVariable,
     NotificationTriggerVariableTypedDict,
-)
-from .notificationtriggervariableresponse import (
-    NotificationTriggerVariableResponse,
-    NotificationTriggerVariableResponseType,
-    NotificationTriggerVariableResponseTypedDict,
-    NotificationTriggerVariableResponseValue,
-    NotificationTriggerVariableResponseValueTypedDict,
 )
 from .ordinalenum import OrdinalEnum
 from .ordinalvalueenum import OrdinalValueEnum
@@ -402,7 +381,6 @@ from .patchsubscriberrequestdto import (
     PatchSubscriberRequestDtoDataTypedDict,
     PatchSubscriberRequestDtoTypedDict,
 )
-from .preference import Preference, PreferenceTypedDict
 from .preferencechannels import PreferenceChannels, PreferenceChannelsTypedDict
 from .providersidenum import ProvidersIDEnum
 from .removesubscriberresponsedto import (
@@ -438,6 +416,12 @@ from .subscriberpayloaddto import (
     SubscriberPayloadDtoTypedDict,
 )
 from .subscriberresponsedto import SubscriberResponseDto, SubscriberResponseDtoTypedDict
+from .subscriberscontroller_createsubscriberop import (
+    SubscribersControllerCreateSubscriberRequest,
+    SubscribersControllerCreateSubscriberRequestTypedDict,
+    SubscribersControllerCreateSubscriberResponse,
+    SubscribersControllerCreateSubscriberResponseTypedDict,
+)
 from .subscriberscontroller_getsubscriberop import (
     SubscribersControllerGetSubscriberRequest,
     SubscribersControllerGetSubscriberRequestTypedDict,
@@ -495,12 +479,6 @@ from .subscribersv1controller_chatoauthcallbackop import (
     SubscribersV1ControllerChatOauthCallbackResponseResultTypedDict,
     SubscribersV1ControllerChatOauthCallbackResponseTypedDict,
 )
-from .subscribersv1controller_createsubscriberop import (
-    SubscribersV1ControllerCreateSubscriberRequest,
-    SubscribersV1ControllerCreateSubscriberRequestTypedDict,
-    SubscribersV1ControllerCreateSubscriberResponse,
-    SubscribersV1ControllerCreateSubscriberResponseTypedDict,
-)
 from .subscribersv1controller_deletesubscribercredentialsop import (
     SubscribersV1ControllerDeleteSubscriberCredentialsRequest,
     SubscribersV1ControllerDeleteSubscriberCredentialsRequestTypedDict,
@@ -513,30 +491,11 @@ from .subscribersv1controller_getnotificationsfeedop import (
     SubscribersV1ControllerGetNotificationsFeedResponse,
     SubscribersV1ControllerGetNotificationsFeedResponseTypedDict,
 )
-from .subscribersv1controller_getsubscriberop import (
-    SubscribersV1ControllerGetSubscriberRequest,
-    SubscribersV1ControllerGetSubscriberRequestTypedDict,
-    SubscribersV1ControllerGetSubscriberResponse,
-    SubscribersV1ControllerGetSubscriberResponseTypedDict,
-)
-from .subscribersv1controller_getsubscriberpreferencebylevelop import (
-    Parameter,
-    SubscribersV1ControllerGetSubscriberPreferenceByLevelRequest,
-    SubscribersV1ControllerGetSubscriberPreferenceByLevelRequestTypedDict,
-    SubscribersV1ControllerGetSubscriberPreferenceByLevelResponse,
-    SubscribersV1ControllerGetSubscriberPreferenceByLevelResponseTypedDict,
-)
 from .subscribersv1controller_getunseencountop import (
     SubscribersV1ControllerGetUnseenCountRequest,
     SubscribersV1ControllerGetUnseenCountRequestTypedDict,
     SubscribersV1ControllerGetUnseenCountResponse,
     SubscribersV1ControllerGetUnseenCountResponseTypedDict,
-)
-from .subscribersv1controller_listsubscriberpreferencesop import (
-    SubscribersV1ControllerListSubscriberPreferencesRequest,
-    SubscribersV1ControllerListSubscriberPreferencesRequestTypedDict,
-    SubscribersV1ControllerListSubscriberPreferencesResponse,
-    SubscribersV1ControllerListSubscriberPreferencesResponseTypedDict,
 )
 from .subscribersv1controller_listsubscribersop import (
     SubscribersV1ControllerListSubscribersRequest,
@@ -570,23 +529,11 @@ from .subscribersv1controller_modifysubscriberchannelop import (
     SubscribersV1ControllerModifySubscriberChannelResponse,
     SubscribersV1ControllerModifySubscriberChannelResponseTypedDict,
 )
-from .subscribersv1controller_removesubscriberop import (
-    SubscribersV1ControllerRemoveSubscriberRequest,
-    SubscribersV1ControllerRemoveSubscriberRequestTypedDict,
-    SubscribersV1ControllerRemoveSubscriberResponse,
-    SubscribersV1ControllerRemoveSubscriberResponseTypedDict,
-)
 from .subscribersv1controller_updatesubscriberchannelop import (
     SubscribersV1ControllerUpdateSubscriberChannelRequest,
     SubscribersV1ControllerUpdateSubscriberChannelRequestTypedDict,
     SubscribersV1ControllerUpdateSubscriberChannelResponse,
     SubscribersV1ControllerUpdateSubscriberChannelResponseTypedDict,
-)
-from .subscribersv1controller_updatesubscriberglobalpreferencesop import (
-    SubscribersV1ControllerUpdateSubscriberGlobalPreferencesRequest,
-    SubscribersV1ControllerUpdateSubscriberGlobalPreferencesRequestTypedDict,
-    SubscribersV1ControllerUpdateSubscriberGlobalPreferencesResponse,
-    SubscribersV1ControllerUpdateSubscriberGlobalPreferencesResponseTypedDict,
 )
 from .subscribersv1controller_updatesubscriberonlineflagop import (
     SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest,
@@ -594,19 +541,6 @@ from .subscribersv1controller_updatesubscriberonlineflagop import (
     SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse,
     SubscribersV1ControllerUpdateSubscriberOnlineFlagResponseTypedDict,
 )
-from .subscribersv1controller_updatesubscriberop import (
-    SubscribersV1ControllerUpdateSubscriberRequest,
-    SubscribersV1ControllerUpdateSubscriberRequestTypedDict,
-    SubscribersV1ControllerUpdateSubscriberResponse,
-    SubscribersV1ControllerUpdateSubscriberResponseTypedDict,
-)
-from .subscribersv1controller_updatesubscriberpreferenceop import (
-    SubscribersV1ControllerUpdateSubscriberPreferenceRequest,
-    SubscribersV1ControllerUpdateSubscriberPreferenceRequestTypedDict,
-    SubscribersV1ControllerUpdateSubscriberPreferenceResponse,
-    SubscribersV1ControllerUpdateSubscriberPreferenceResponseTypedDict,
-)
-from .templateresponse import TemplateResponse, TemplateResponseTypedDict
 from .tenantpayloaddto import (
     TenantPayloadDto,
     TenantPayloadDtoData,
@@ -701,12 +635,6 @@ from .triggereventtoallrequestdto import (
     TriggerEventToAllRequestDtoTypedDict,
 )
 from .triggerrecipientstypeenum import TriggerRecipientsTypeEnum
-from .triggerreservedvariableresponse import (
-    TriggerReservedVariableResponse,
-    TriggerReservedVariableResponseType,
-    TriggerReservedVariableResponseTypedDict,
-)
-from .triggertypeenum import TriggerTypeEnum
 from .unseencountresponse import UnseenCountResponse, UnseenCountResponseTypedDict
 from .updatedsubscriberdto import UpdatedSubscriberDto, UpdatedSubscriberDtoTypedDict
 from .updateintegrationrequestdto import (
@@ -718,29 +646,9 @@ from .updatesubscriberchannelrequestdto import (
     UpdateSubscriberChannelRequestDtoProviderID,
     UpdateSubscriberChannelRequestDtoTypedDict,
 )
-from .updatesubscriberglobalpreferencesrequestdto import (
-    UpdateSubscriberGlobalPreferencesRequestDto,
-    UpdateSubscriberGlobalPreferencesRequestDtoTypedDict,
-)
 from .updatesubscriberonlineflagrequestdto import (
     UpdateSubscriberOnlineFlagRequestDto,
     UpdateSubscriberOnlineFlagRequestDtoTypedDict,
-)
-from .updatesubscriberpreferenceglobalresponsedto import (
-    UpdateSubscriberPreferenceGlobalResponseDto,
-    UpdateSubscriberPreferenceGlobalResponseDtoTypedDict,
-)
-from .updatesubscriberpreferencerequestdto import (
-    UpdateSubscriberPreferenceRequestDto,
-    UpdateSubscriberPreferenceRequestDtoTypedDict,
-)
-from .updatesubscriberpreferenceresponsedto import (
-    UpdateSubscriberPreferenceResponseDto,
-    UpdateSubscriberPreferenceResponseDtoTypedDict,
-)
-from .updatesubscriberrequestdto import (
-    UpdateSubscriberRequestDto,
-    UpdateSubscriberRequestDtoTypedDict,
 )
 from .validationerrordto import (
     Errors,
@@ -750,6 +658,7 @@ from .validationerrordto import (
     ValidationErrorDtoValue,
 )
 from .workflowinfodto import WorkflowInfoDto, WorkflowInfoDtoTypedDict
+from .workfloworiginenum import WorkflowOriginEnum
 from .workflowpreferencedto import WorkflowPreferenceDto, WorkflowPreferenceDtoTypedDict
 from .workflowresponse import (
     WorkflowIntegrationStatus,
@@ -812,8 +721,6 @@ __all__ = [
     "ChannelCredentialsDto",
     "ChannelCredentialsDtoTypedDict",
     "ChannelCredentialsTypedDict",
-    "ChannelPreference",
-    "ChannelPreferenceTypedDict",
     "ChannelSettingsDto",
     "ChannelSettingsDtoProviderID",
     "ChannelSettingsDtoTypedDict",
@@ -854,9 +761,6 @@ __all__ = [
     "DeleteMessageResponseDto",
     "DeleteMessageResponseDtoStatus",
     "DeleteMessageResponseDtoTypedDict",
-    "DeleteSubscriberResponseDto",
-    "DeleteSubscriberResponseDtoStatus",
-    "DeleteSubscriberResponseDtoTypedDict",
     "DigestMetadataDto",
     "DigestMetadataDtoTypedDict",
     "DigestRegularMetadata",
@@ -912,8 +816,6 @@ __all__ = [
     "FilterTopicsResponseDtoTypedDict",
     "GetSubscriberPreferencesDto",
     "GetSubscriberPreferencesDtoTypedDict",
-    "GetSubscriberPreferencesResponseDto",
-    "GetSubscriberPreferencesResponseDtoTypedDict",
     "GetTopicResponseDto",
     "GetTopicResponseDtoTypedDict",
     "GlobalPreferenceDto",
@@ -1021,16 +923,9 @@ __all__ = [
     "NotificationTrigger",
     "NotificationTriggerDto",
     "NotificationTriggerDtoTypedDict",
-    "NotificationTriggerResponse",
-    "NotificationTriggerResponseTypedDict",
     "NotificationTriggerType",
     "NotificationTriggerTypedDict",
     "NotificationTriggerVariable",
-    "NotificationTriggerVariableResponse",
-    "NotificationTriggerVariableResponseType",
-    "NotificationTriggerVariableResponseTypedDict",
-    "NotificationTriggerVariableResponseValue",
-    "NotificationTriggerVariableResponseValueTypedDict",
     "NotificationTriggerVariableTypedDict",
     "NotificationsControllerGetActivityGraphStatsRequest",
     "NotificationsControllerGetActivityGraphStatsRequestTypedDict",
@@ -1060,7 +955,6 @@ __all__ = [
     "Overrides",
     "OverridesChannel",
     "OverridesTypedDict",
-    "Parameter",
     "PatchPreferenceChannelsDto",
     "PatchPreferenceChannelsDtoTypedDict",
     "PatchSubscriberPreferencesDto",
@@ -1071,10 +965,8 @@ __all__ = [
     "PatchSubscriberRequestDtoTypedDict",
     "Payload",
     "PayloadTypedDict",
-    "Preference",
     "PreferenceChannels",
     "PreferenceChannelsTypedDict",
-    "PreferenceTypedDict",
     "ProviderID",
     "ProvidersIDEnum",
     "QueryParamChannel",
@@ -1103,6 +995,10 @@ __all__ = [
     "SubscriberPayloadDtoTypedDict",
     "SubscriberResponseDto",
     "SubscriberResponseDtoTypedDict",
+    "SubscribersControllerCreateSubscriberRequest",
+    "SubscribersControllerCreateSubscriberRequestTypedDict",
+    "SubscribersControllerCreateSubscriberResponse",
+    "SubscribersControllerCreateSubscriberResponseTypedDict",
     "SubscribersControllerGetSubscriberPreferencesRequest",
     "SubscribersControllerGetSubscriberPreferencesRequestTypedDict",
     "SubscribersControllerGetSubscriberPreferencesResponse",
@@ -1141,10 +1037,6 @@ __all__ = [
     "SubscribersV1ControllerChatOauthCallbackResponseResult",
     "SubscribersV1ControllerChatOauthCallbackResponseResultTypedDict",
     "SubscribersV1ControllerChatOauthCallbackResponseTypedDict",
-    "SubscribersV1ControllerCreateSubscriberRequest",
-    "SubscribersV1ControllerCreateSubscriberRequestTypedDict",
-    "SubscribersV1ControllerCreateSubscriberResponse",
-    "SubscribersV1ControllerCreateSubscriberResponseTypedDict",
     "SubscribersV1ControllerDeleteSubscriberCredentialsRequest",
     "SubscribersV1ControllerDeleteSubscriberCredentialsRequestTypedDict",
     "SubscribersV1ControllerDeleteSubscriberCredentialsResponse",
@@ -1153,22 +1045,10 @@ __all__ = [
     "SubscribersV1ControllerGetNotificationsFeedRequestTypedDict",
     "SubscribersV1ControllerGetNotificationsFeedResponse",
     "SubscribersV1ControllerGetNotificationsFeedResponseTypedDict",
-    "SubscribersV1ControllerGetSubscriberPreferenceByLevelRequest",
-    "SubscribersV1ControllerGetSubscriberPreferenceByLevelRequestTypedDict",
-    "SubscribersV1ControllerGetSubscriberPreferenceByLevelResponse",
-    "SubscribersV1ControllerGetSubscriberPreferenceByLevelResponseTypedDict",
-    "SubscribersV1ControllerGetSubscriberRequest",
-    "SubscribersV1ControllerGetSubscriberRequestTypedDict",
-    "SubscribersV1ControllerGetSubscriberResponse",
-    "SubscribersV1ControllerGetSubscriberResponseTypedDict",
     "SubscribersV1ControllerGetUnseenCountRequest",
     "SubscribersV1ControllerGetUnseenCountRequestTypedDict",
     "SubscribersV1ControllerGetUnseenCountResponse",
     "SubscribersV1ControllerGetUnseenCountResponseTypedDict",
-    "SubscribersV1ControllerListSubscriberPreferencesRequest",
-    "SubscribersV1ControllerListSubscriberPreferencesRequestTypedDict",
-    "SubscribersV1ControllerListSubscriberPreferencesResponse",
-    "SubscribersV1ControllerListSubscriberPreferencesResponseTypedDict",
     "SubscribersV1ControllerListSubscribersRequest",
     "SubscribersV1ControllerListSubscribersRequestTypedDict",
     "SubscribersV1ControllerListSubscribersResponse",
@@ -1191,34 +1071,16 @@ __all__ = [
     "SubscribersV1ControllerModifySubscriberChannelRequestTypedDict",
     "SubscribersV1ControllerModifySubscriberChannelResponse",
     "SubscribersV1ControllerModifySubscriberChannelResponseTypedDict",
-    "SubscribersV1ControllerRemoveSubscriberRequest",
-    "SubscribersV1ControllerRemoveSubscriberRequestTypedDict",
-    "SubscribersV1ControllerRemoveSubscriberResponse",
-    "SubscribersV1ControllerRemoveSubscriberResponseTypedDict",
     "SubscribersV1ControllerUpdateSubscriberChannelRequest",
     "SubscribersV1ControllerUpdateSubscriberChannelRequestTypedDict",
     "SubscribersV1ControllerUpdateSubscriberChannelResponse",
     "SubscribersV1ControllerUpdateSubscriberChannelResponseTypedDict",
-    "SubscribersV1ControllerUpdateSubscriberGlobalPreferencesRequest",
-    "SubscribersV1ControllerUpdateSubscriberGlobalPreferencesRequestTypedDict",
-    "SubscribersV1ControllerUpdateSubscriberGlobalPreferencesResponse",
-    "SubscribersV1ControllerUpdateSubscriberGlobalPreferencesResponseTypedDict",
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest",
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagRequestTypedDict",
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse",
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagResponseTypedDict",
-    "SubscribersV1ControllerUpdateSubscriberPreferenceRequest",
-    "SubscribersV1ControllerUpdateSubscriberPreferenceRequestTypedDict",
-    "SubscribersV1ControllerUpdateSubscriberPreferenceResponse",
-    "SubscribersV1ControllerUpdateSubscriberPreferenceResponseTypedDict",
-    "SubscribersV1ControllerUpdateSubscriberRequest",
-    "SubscribersV1ControllerUpdateSubscriberRequestTypedDict",
-    "SubscribersV1ControllerUpdateSubscriberResponse",
-    "SubscribersV1ControllerUpdateSubscriberResponseTypedDict",
     "TLSOptions",
     "TLSOptionsTypedDict",
-    "TemplateResponse",
-    "TemplateResponseTypedDict",
     "Tenant",
     "TenantPayloadDto",
     "TenantPayloadDtoData",
@@ -1282,10 +1144,6 @@ __all__ = [
     "TriggerEventToAllRequestDtoTenantTypedDict",
     "TriggerEventToAllRequestDtoTypedDict",
     "TriggerRecipientsTypeEnum",
-    "TriggerReservedVariableResponse",
-    "TriggerReservedVariableResponseType",
-    "TriggerReservedVariableResponseTypedDict",
-    "TriggerTypeEnum",
     "Type",
     "Unit",
     "UnseenCountResponse",
@@ -1295,18 +1153,8 @@ __all__ = [
     "UpdateSubscriberChannelRequestDto",
     "UpdateSubscriberChannelRequestDtoProviderID",
     "UpdateSubscriberChannelRequestDtoTypedDict",
-    "UpdateSubscriberGlobalPreferencesRequestDto",
-    "UpdateSubscriberGlobalPreferencesRequestDtoTypedDict",
     "UpdateSubscriberOnlineFlagRequestDto",
     "UpdateSubscriberOnlineFlagRequestDtoTypedDict",
-    "UpdateSubscriberPreferenceGlobalResponseDto",
-    "UpdateSubscriberPreferenceGlobalResponseDtoTypedDict",
-    "UpdateSubscriberPreferenceRequestDto",
-    "UpdateSubscriberPreferenceRequestDtoTypedDict",
-    "UpdateSubscriberPreferenceResponseDto",
-    "UpdateSubscriberPreferenceResponseDtoTypedDict",
-    "UpdateSubscriberRequestDto",
-    "UpdateSubscriberRequestDtoTypedDict",
     "UpdatedSubscriberDto",
     "UpdatedSubscriberDtoTypedDict",
     "ValidationErrorDto",
@@ -1318,6 +1166,7 @@ __all__ = [
     "WorkflowInfoDtoTypedDict",
     "WorkflowIntegrationStatus",
     "WorkflowIntegrationStatusTypedDict",
+    "WorkflowOriginEnum",
     "WorkflowPreferenceDto",
     "WorkflowPreferenceDtoTypedDict",
     "WorkflowResponse",

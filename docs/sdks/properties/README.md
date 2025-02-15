@@ -15,10 +15,9 @@ Used to update the subscriber isOnline flag.
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.properties.update_online_flag(subscriber_id="<id>", update_subscriber_online_flag_request_dto={

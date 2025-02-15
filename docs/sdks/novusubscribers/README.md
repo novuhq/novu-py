@@ -17,10 +17,9 @@ Add subscribers to a topic by key
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.topics.subscribers.assign(topic_key="<value>", add_subscribers_request_dto={
@@ -67,10 +66,9 @@ Check if a subscriber belongs to a certain topic
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.topics.subscribers.retrieve(external_subscriber_id="<id>", topic_key="<value>")
@@ -111,10 +109,9 @@ Remove subscribers from a topic
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.topics.subscribers.remove(topic_key="<value>", remove_subscribers_request_dto={
