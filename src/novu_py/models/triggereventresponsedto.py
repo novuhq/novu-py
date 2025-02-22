@@ -17,6 +17,7 @@ class Status(str, Enum):
     NO_WORKFLOW_STEPS_DEFINED = "no_workflow_steps_defined"
     PROCESSED = "processed"
     NO_TENANT_FOUND = "no_tenant_found"
+    INVALID_RECIPIENTS = "invalid_recipients"
 
 
 class TriggerEventResponseDtoTypedDict(TypedDict):

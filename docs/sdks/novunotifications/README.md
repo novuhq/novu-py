@@ -16,10 +16,9 @@ Get in-app notification feed for a particular subscriber
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.notifications.feed(request={
@@ -61,10 +60,9 @@ Get the unseen in-app notifications count for subscribers feed
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>")
