@@ -16,10 +16,9 @@ Get notifications
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.notifications.list(request={})
@@ -58,10 +57,9 @@ Get notification
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.notifications.retrieve(notification_id="<id>")

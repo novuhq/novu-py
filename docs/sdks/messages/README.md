@@ -20,10 +20,9 @@ Returns a list of messages, could paginate using the `page` query parameter
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.messages.retrieve(request={})
@@ -62,10 +61,9 @@ Deletes a message entity from the Novu platform
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.messages.delete(message_id="<id>")
@@ -105,10 +103,9 @@ Deletes messages entity from the Novu platform using TransactionId of message
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.messages.delete_by_transaction_id(transaction_id="<id>")

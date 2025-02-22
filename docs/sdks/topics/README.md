@@ -22,10 +22,9 @@ Create a topic
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.topics.create(create_topic_request_dto={
@@ -68,10 +67,9 @@ Returns a list of topics that can be paginated using the `page` query parameter 
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.topics.list(key="exampleKey")
@@ -113,10 +111,9 @@ Delete a topic by its topic key if it has no subscribers
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.topics.delete(topic_key="<value>")
@@ -156,10 +153,9 @@ Get a topic by its topic key
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.topics.retrieve(topic_key="<value>")
@@ -199,10 +195,9 @@ Rename a topic by providing a new name
 
 ```python
 from novu_py import Novu
-import os
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.topics.rename(topic_key="<value>", rename_topic_request_dto={
