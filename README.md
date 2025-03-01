@@ -36,7 +36,6 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
   * [Resource Management](#resource-management)
   * [Debugging](#debugging)
 * [Development](#development)
-  * [Maturity](#maturity)
   * [Contributions](#contributions)
 
 <!-- End Table of Contents [toc] -->
@@ -118,10 +117,10 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 # Synchronous Example
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
@@ -156,11 +155,11 @@ The same SDK client can also be used to make asychronous requests by importing a
 import asyncio
 import novu_py
 from novu_py import Novu
-import os
 
 async def main():
+
     async with Novu(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+        secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
 
         res = await novu.trigger_async(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
@@ -195,10 +194,10 @@ asyncio.run(main())
 # Synchronous Example
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger_bulk(bulk_trigger_event_dto={
@@ -279,11 +278,11 @@ The same SDK client can also be used to make asychronous requests by importing a
 import asyncio
 import novu_py
 from novu_py import Novu
-import os
 
 async def main():
+
     async with Novu(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+        secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
 
         res = await novu.trigger_bulk_async(bulk_trigger_event_dto={
@@ -363,10 +362,10 @@ asyncio.run(main())
 ```python
 # Synchronous Example
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger_broadcast(trigger_event_to_all_request_dto={
@@ -390,11 +389,11 @@ The same SDK client can also be used to make asychronous requests by importing a
 # Asynchronous Example
 import asyncio
 from novu_py import Novu
-import os
 
 async def main():
+
     async with Novu(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+        secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
 
         res = await novu.trigger_broadcast_async(trigger_event_to_all_request_dto={
@@ -418,10 +417,10 @@ asyncio.run(main())
 ```python
 # Synchronous Example
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.cancel(transaction_id="<id>")
@@ -437,11 +436,11 @@ The same SDK client can also be used to make asychronous requests by importing a
 # Asynchronous Example
 import asyncio
 from novu_py import Novu
-import os
 
 async def main():
+
     async with Novu(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+        secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
 
         res = await novu.cancel_async(transaction_id="<id>")
@@ -498,12 +497,9 @@ asyncio.run(main())
 ### [subscribers](docs/sdks/subscribers/README.md)
 
 * [list](docs/sdks/subscribers/README.md#list) - Get subscribers
-* [create](docs/sdks/subscribers/README.md#create) - Create subscriber
-* [retrieve_legacy](docs/sdks/subscribers/README.md#retrieve_legacy) - Get subscriber
-* [update](docs/sdks/subscribers/README.md#update) - Update subscriber
-* [~~delete_legacy~~](docs/sdks/subscribers/README.md#delete_legacy) - Delete subscriber :warning: **Deprecated**
 * [create_bulk](docs/sdks/subscribers/README.md#create_bulk) - Bulk create subscribers
 * [search](docs/sdks/subscribers/README.md#search) - Search for subscribers
+* [create](docs/sdks/subscribers/README.md#create) - Create subscriber
 * [retrieve](docs/sdks/subscribers/README.md#retrieve) - Get subscriber
 * [patch](docs/sdks/subscribers/README.md#patch) - Patch subscriber
 * [delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
@@ -533,10 +529,6 @@ asyncio.run(main())
 #### [subscribers.preferences](docs/sdks/preferences/README.md)
 
 * [list](docs/sdks/preferences/README.md#list) - Get subscriber preferences
-* [update_global](docs/sdks/preferences/README.md#update_global) - Update subscriber global preferences
-* [retrieve_by_level](docs/sdks/preferences/README.md#retrieve_by_level) - Get subscriber preferences by level
-* [update_legacy](docs/sdks/preferences/README.md#update_legacy) - Update subscriber preference
-* [retrieve](docs/sdks/preferences/README.md#retrieve) - Get subscriber preferences
 * [update](docs/sdks/preferences/README.md#update) - Update subscriber global or workflow specific preferences
 
 #### [subscribers.properties](docs/sdks/properties/README.md)
@@ -570,10 +562,10 @@ return value of `Next` is `None`, then there are no more pages to be fetched.
 Here's an example of one such pagination call:
 ```python
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.list()
@@ -596,10 +588,10 @@ To change the default retry strategy for a single API call, simply provide a `Re
 import novu_py
 from novu_py import Novu
 from novu_py.utils import BackoffStrategy, RetryConfig
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
@@ -633,11 +625,11 @@ If you'd like to override the default retry strategy for all operations that sup
 import novu_py
 from novu_py import Novu
 from novu_py.utils import BackoffStrategy, RetryConfig
-import os
+
 
 with Novu(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
@@ -695,10 +687,10 @@ When custom error responses are specified for an operation, the SDK may also rai
 ```python
 import novu_py
 from novu_py import Novu, models
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
     res = None
     try:
@@ -751,21 +743,21 @@ with Novu(
 
 You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| #   | Server                   |
-| --- | ------------------------ |
-| 0   | `https://api.novu.co`    |
-| 1   | `https://eu.api.novu.co` |
+| #   | Server                   | Description |
+| --- | ------------------------ | ----------- |
+| 0   | `https://api.novu.co`    |             |
+| 1   | `https://eu.api.novu.co` |             |
 
 #### Example
 
 ```python
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
     server_idx=1,
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
@@ -799,11 +791,11 @@ The default server can also be overridden globally by passing a URL to the `serv
 ```python
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
     server_url="https://api.novu.co",
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
@@ -928,10 +920,10 @@ To authenticate with the API the `secret_key` parameter must be set when initial
 ```python
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
@@ -969,18 +961,19 @@ The `Novu` class implements the context manager protocol and registers a finaliz
 
 ```python
 from novu_py import Novu
-import os
 def main():
+
     with Novu(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+        secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
         # Rest of application here...
 
 
 # Or when using async:
 async def amain():
+
     async with Novu(
-        secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+        secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
         # Rest of application here...
 ```

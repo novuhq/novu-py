@@ -16,8 +16,6 @@ class PatchSubscriberRequestDtoData(BaseModel):
 
 
 class PatchSubscriberRequestDtoTypedDict(TypedDict):
-    subscriber_id: NotRequired[Nullable[str]]
-    r"""Unique identifier of the subscriber"""
     first_name: NotRequired[Nullable[str]]
     r"""First name of the subscriber"""
     last_name: NotRequired[Nullable[str]]
@@ -37,11 +35,6 @@ class PatchSubscriberRequestDtoTypedDict(TypedDict):
 
 
 class PatchSubscriberRequestDto(BaseModel):
-    subscriber_id: Annotated[
-        OptionalNullable[str], pydantic.Field(alias="subscriberId")
-    ] = UNSET
-    r"""Unique identifier of the subscriber"""
-
     first_name: Annotated[OptionalNullable[str], pydantic.Field(alias="firstName")] = (
         UNSET
     )
@@ -73,7 +66,6 @@ class PatchSubscriberRequestDto(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "subscriberId",
             "firstName",
             "lastName",
             "email",
@@ -84,7 +76,6 @@ class PatchSubscriberRequestDto(BaseModel):
             "data",
         ]
         nullable_fields = [
-            "subscriberId",
             "firstName",
             "lastName",
             "email",

@@ -48,6 +48,8 @@ class SubscriberResponseDtoTypedDict(TypedDict):
     r"""The version of the subscriber document."""
     data: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional custom data for the subscriber"""
+    timezone: NotRequired[str]
+    r"""Timezone of the subscriber"""
 
 
 class SubscriberResponseDto(BaseModel):
@@ -115,6 +117,9 @@ class SubscriberResponseDto(BaseModel):
     data: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Additional custom data for the subscriber"""
 
+    timezone: Optional[str] = None
+    r"""Timezone of the subscriber"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -131,6 +136,7 @@ class SubscriberResponseDto(BaseModel):
             "lastOnlineAt",
             "__v",
             "data",
+            "timezone",
         ]
         nullable_fields = ["email", "data"]
         null_default_fields = []
