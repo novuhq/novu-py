@@ -33,6 +33,8 @@ class SubscriberPayloadDtoTypedDict(TypedDict):
     r"""An optional payload object that can contain any properties."""
     channels: NotRequired[List[SubscriberChannelDtoTypedDict]]
     r"""An optional array of subscriber channels."""
+    timezone: NotRequired[str]
+    r"""The timezone of the subscriber."""
 
 
 class SubscriberPayloadDto(BaseModel):
@@ -62,3 +64,6 @@ class SubscriberPayloadDto(BaseModel):
 
     channels: Optional[List[SubscriberChannelDto]] = None
     r"""An optional array of subscriber channels."""
+
+    timezone: Optional[str] = None
+    r"""The timezone of the subscriber."""

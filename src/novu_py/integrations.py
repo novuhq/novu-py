@@ -51,6 +51,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerListIntegrationsRequest(
             idempotency_key=idempotency_key,
@@ -86,6 +88,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_listIntegrations",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -195,6 +198,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerListIntegrationsRequest(
             idempotency_key=idempotency_key,
@@ -230,6 +235,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_listIntegrations",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -344,6 +350,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerCreateIntegrationRequest(
             idempotency_key=idempotency_key,
@@ -389,6 +397,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_createIntegration",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -503,6 +512,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerCreateIntegrationRequest(
             idempotency_key=idempotency_key,
@@ -548,6 +559,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_createIntegration",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -657,6 +669,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerGetActiveIntegrationsRequest(
             idempotency_key=idempotency_key,
@@ -692,6 +706,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_getActiveIntegrations",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -801,6 +816,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerGetActiveIntegrationsRequest(
             idempotency_key=idempotency_key,
@@ -836,6 +853,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_getActiveIntegrations",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -950,6 +968,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerUpdateIntegrationByIDRequest(
             integration_id=integration_id,
@@ -996,6 +1016,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_updateIntegrationById",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1110,6 +1131,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerUpdateIntegrationByIDRequest(
             integration_id=integration_id,
@@ -1156,6 +1179,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_updateIntegrationById",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1265,6 +1289,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerRemoveIntegrationRequest(
             integration_id=integration_id,
@@ -1301,6 +1327,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_removeIntegration",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1410,6 +1437,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerRemoveIntegrationRequest(
             integration_id=integration_id,
@@ -1446,6 +1475,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_removeIntegration",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1555,6 +1585,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerSetIntegrationAsPrimaryRequest(
             integration_id=integration_id,
@@ -1591,6 +1623,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_setIntegrationAsPrimary",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1700,6 +1733,8 @@ class Integrations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IntegrationsControllerSetIntegrationAsPrimaryRequest(
             integration_id=integration_id,
@@ -1736,6 +1771,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="IntegrationsController_setIntegrationAsPrimary",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
