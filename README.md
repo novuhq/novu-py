@@ -9,18 +9,14 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/novu)
 ![PyPI - License](https://img.shields.io/pypi/l/novu)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+---
+The [Python Novu](https://novu.co) SDK and package provides a fluent and expressive interface for interacting with [Novu's API](https://api.novu.co/api) and managing notifications.
 <div align="left">
     <a href="https://www.speakeasy.com/?utm_source=novu-py&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
 </div>
-
----
-
-The [Python Novu](https://novu.co) SDK and package provides a fluent and expressive interface for interacting with [Novu's API](https://api.novu.co/api) and managing notifications.
-
-
 <br /><br />
 <!-- Start Summary [summary] -->
 ## Summary
