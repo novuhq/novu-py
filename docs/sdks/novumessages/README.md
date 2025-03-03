@@ -18,10 +18,10 @@ Mark a subscriber messages as seen, read, unseen or unread
 ```python
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.messages.mark_all_as(subscriber_id="<id>", message_mark_as_request_dto={
@@ -66,10 +66,10 @@ Marks all the subscriber messages as read, unread, seen or unseen. Optionally yo
 ```python
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.messages.mark_all(subscriber_id="<id>", mark_all_message_as_request_dto={
@@ -113,10 +113,10 @@ Mark message action as seen
 ```python
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.subscribers.messages.update_as_seen(request={

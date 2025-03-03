@@ -5,6 +5,7 @@ from .notificationtriggerdto import (
     NotificationTriggerDto,
     NotificationTriggerDtoTypedDict,
 )
+from .workfloworiginenum import WorkflowOriginEnum
 from novu_py.types import BaseModel
 import pydantic
 from typing import List, Optional
@@ -18,6 +19,8 @@ class ActivityNotificationTemplateResponseDtoTypedDict(TypedDict):
     r"""Triggers of the template"""
     id: NotRequired[str]
     r"""Unique identifier of the template"""
+    origin: NotRequired[WorkflowOriginEnum]
+    r"""Origin of the workflow"""
 
 
 class ActivityNotificationTemplateResponseDto(BaseModel):
@@ -29,3 +32,6 @@ class ActivityNotificationTemplateResponseDto(BaseModel):
 
     id: Annotated[Optional[str], pydantic.Field(alias="_id")] = None
     r"""Unique identifier of the template"""
+
+    origin: Optional[WorkflowOriginEnum] = None
+    r"""Origin of the workflow"""

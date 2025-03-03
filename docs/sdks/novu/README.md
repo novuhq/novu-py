@@ -27,10 +27,10 @@ Novu Documentation
 ```python
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
@@ -92,10 +92,10 @@ with Novu(
 ```python
 import novu_py
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger_bulk(bulk_trigger_event_dto={
@@ -201,10 +201,10 @@ Trigger a broadcast event to all existing subscribers, could be used to send ann
 
 ```python
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.trigger_broadcast(trigger_event_to_all_request_dto={
@@ -255,10 +255,10 @@ with Novu(
 
 ```python
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.cancel(transaction_id="<id>")
