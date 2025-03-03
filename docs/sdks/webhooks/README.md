@@ -15,10 +15,10 @@ Return the status of the webhook for this provider, if it is supported or if it 
 
 ```python
 from novu_py import Novu
-import os
+
 
 with Novu(
-    secret_key=os.getenv("NOVU_SECRET_KEY", ""),
+    secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
     res = novu.integrations.webhooks.retrieve(provider_or_integration_id="<id>")

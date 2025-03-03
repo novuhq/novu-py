@@ -13,13 +13,13 @@ from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class SubscribersV1ControllerCreateSubscriberRequestTypedDict(TypedDict):
+class SubscribersControllerCreateSubscriberRequestTypedDict(TypedDict):
     create_subscriber_request_dto: CreateSubscriberRequestDtoTypedDict
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
 
-class SubscribersV1ControllerCreateSubscriberRequest(BaseModel):
+class SubscribersControllerCreateSubscriberRequest(BaseModel):
     create_subscriber_request_dto: Annotated[
         CreateSubscriberRequestDto,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
@@ -33,12 +33,12 @@ class SubscribersV1ControllerCreateSubscriberRequest(BaseModel):
     r"""A header for idempotency purposes"""
 
 
-class SubscribersV1ControllerCreateSubscriberResponseTypedDict(TypedDict):
+class SubscribersControllerCreateSubscriberResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
     result: SubscriberResponseDtoTypedDict
 
 
-class SubscribersV1ControllerCreateSubscriberResponse(BaseModel):
+class SubscribersControllerCreateSubscriberResponse(BaseModel):
     headers: Dict[str, List[str]]
 
     result: SubscriberResponseDto

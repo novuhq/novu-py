@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: b3f7cd2468458addfc2265640d61323d
+  docChecksum: cdef9e13ef961f6f914da55cb4979082
   docVersion: "1.0"
-  speakeasyVersion: 1.484.1
-  generationVersion: 2.503.2
-  releaseVersion: 0.3.4
-  configChecksum: 2b8eb569bf51f66648a4714dba6fa621
+  speakeasyVersion: 1.508.1
+  generationVersion: 2.536.0
+  releaseVersion: 0.4.0
+  configChecksum: c6c96e77e62ceb23e2aea73fc8fb749d
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.10.9
+    core: 5.12.1
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -23,18 +23,18 @@ features:
     envVarSecurityUsage: 0.3.2
     examples: 3.0.1
     flattening: 3.1.1
-    globalSecurity: 3.0.2
+    globalSecurity: 3.0.3
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.0
     groups: 3.0.0
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
-    nullables: 1.0.0
-    pagination: 3.0.3
+    nullables: 1.0.1
+    pagination: 3.0.4
     responseFormat: 1.0.1
     retries: 3.0.2
-    sdkHooks: 1.0.0
+    sdkHooks: 1.0.1
     unions: 3.0.4
 generatedFiles:
   - .devcontainer/README.md
@@ -72,7 +72,6 @@ generatedFiles:
   - docs/models/channelcredentials.md
   - docs/models/channelcredentialsdto.md
   - docs/models/channelctatypeenum.md
-  - docs/models/channelpreference.md
   - docs/models/channels.md
   - docs/models/channelsettingsdto.md
   - docs/models/channelsettingsdtoproviderid.md
@@ -84,7 +83,6 @@ generatedFiles:
   - docs/models/createintegrationrequestdto.md
   - docs/models/createintegrationrequestdtochannel.md
   - docs/models/createsubscriberrequestdto.md
-  - docs/models/createsubscriberrequestdtodata.md
   - docs/models/createtopicrequestdto.md
   - docs/models/createtopicresponsedto.md
   - docs/models/credentialsdto.md
@@ -97,8 +95,6 @@ generatedFiles:
   - docs/models/delayscheduledmetadatatype.md
   - docs/models/deletemessageresponsedto.md
   - docs/models/deletemessageresponsedtostatus.md
-  - docs/models/deletesubscriberresponsedto.md
-  - docs/models/deletesubscriberresponsedtostatus.md
   - docs/models/digestmetadatadto.md
   - docs/models/digestregularmetadata.md
   - docs/models/digestregularmetadatatype.md
@@ -131,7 +127,6 @@ generatedFiles:
   - docs/models/fieldfilterpartdto.md
   - docs/models/filtertopicsresponsedto.md
   - docs/models/getsubscriberpreferencesdto.md
-  - docs/models/getsubscriberpreferencesresponsedto.md
   - docs/models/gettopicresponsedto.md
   - docs/models/globalpreferencedto.md
   - docs/models/integrationresponsedto.md
@@ -198,12 +193,8 @@ generatedFiles:
   - docs/models/notificationstepdtometadata.md
   - docs/models/notificationtrigger.md
   - docs/models/notificationtriggerdto.md
-  - docs/models/notificationtriggerresponse.md
   - docs/models/notificationtriggertype.md
   - docs/models/notificationtriggervariable.md
-  - docs/models/notificationtriggervariableresponse.md
-  - docs/models/notificationtriggervariableresponsetype.md
-  - docs/models/notificationtriggervariableresponsevalue.md
   - docs/models/on.md
   - docs/models/one.md
   - docs/models/operator.md
@@ -214,13 +205,11 @@ generatedFiles:
   - docs/models/ordinalvalueenum.md
   - docs/models/overrides.md
   - docs/models/overrideschannel.md
-  - docs/models/parameter.md
   - docs/models/patchpreferencechannelsdto.md
   - docs/models/patchsubscriberpreferencesdto.md
   - docs/models/patchsubscriberrequestdto.md
   - docs/models/patchsubscriberrequestdtodata.md
   - docs/models/payload.md
-  - docs/models/preference.md
   - docs/models/preferencechannels.md
   - docs/models/providerid.md
   - docs/models/providersidenum.md
@@ -239,6 +228,8 @@ generatedFiles:
   - docs/models/subscriberfeedresponsedto.md
   - docs/models/subscriberpayloaddto.md
   - docs/models/subscriberresponsedto.md
+  - docs/models/subscriberscontrollercreatesubscriberrequest.md
+  - docs/models/subscriberscontrollercreatesubscriberresponse.md
   - docs/models/subscriberscontrollergetsubscriberpreferencesrequest.md
   - docs/models/subscriberscontrollergetsubscriberpreferencesresponse.md
   - docs/models/subscriberscontrollergetsubscriberrequest.md
@@ -258,20 +249,12 @@ generatedFiles:
   - docs/models/subscribersv1controllerchatoauthcallbackrequest.md
   - docs/models/subscribersv1controllerchatoauthcallbackresponse.md
   - docs/models/subscribersv1controllerchatoauthcallbackresponseresult.md
-  - docs/models/subscribersv1controllercreatesubscriberrequest.md
-  - docs/models/subscribersv1controllercreatesubscriberresponse.md
   - docs/models/subscribersv1controllerdeletesubscribercredentialsrequest.md
   - docs/models/subscribersv1controllerdeletesubscribercredentialsresponse.md
   - docs/models/subscribersv1controllergetnotificationsfeedrequest.md
   - docs/models/subscribersv1controllergetnotificationsfeedresponse.md
-  - docs/models/subscribersv1controllergetsubscriberpreferencebylevelrequest.md
-  - docs/models/subscribersv1controllergetsubscriberpreferencebylevelresponse.md
-  - docs/models/subscribersv1controllergetsubscriberrequest.md
-  - docs/models/subscribersv1controllergetsubscriberresponse.md
   - docs/models/subscribersv1controllergetunseencountrequest.md
   - docs/models/subscribersv1controllergetunseencountresponse.md
-  - docs/models/subscribersv1controllerlistsubscriberpreferencesrequest.md
-  - docs/models/subscribersv1controllerlistsubscriberpreferencesresponse.md
   - docs/models/subscribersv1controllerlistsubscribersrequest.md
   - docs/models/subscribersv1controllerlistsubscribersresponse.md
   - docs/models/subscribersv1controllerlistsubscribersresponsebody.md
@@ -283,19 +266,10 @@ generatedFiles:
   - docs/models/subscribersv1controllermarkmessagesasresponse.md
   - docs/models/subscribersv1controllermodifysubscriberchannelrequest.md
   - docs/models/subscribersv1controllermodifysubscriberchannelresponse.md
-  - docs/models/subscribersv1controllerremovesubscriberrequest.md
-  - docs/models/subscribersv1controllerremovesubscriberresponse.md
   - docs/models/subscribersv1controllerupdatesubscriberchannelrequest.md
   - docs/models/subscribersv1controllerupdatesubscriberchannelresponse.md
-  - docs/models/subscribersv1controllerupdatesubscriberglobalpreferencesrequest.md
-  - docs/models/subscribersv1controllerupdatesubscriberglobalpreferencesresponse.md
   - docs/models/subscribersv1controllerupdatesubscriberonlineflagrequest.md
   - docs/models/subscribersv1controllerupdatesubscriberonlineflagresponse.md
-  - docs/models/subscribersv1controllerupdatesubscriberpreferencerequest.md
-  - docs/models/subscribersv1controllerupdatesubscriberpreferenceresponse.md
-  - docs/models/subscribersv1controllerupdatesubscriberrequest.md
-  - docs/models/subscribersv1controllerupdatesubscriberresponse.md
-  - docs/models/templateresponse.md
   - docs/models/tenant.md
   - docs/models/tenantpayloaddto.md
   - docs/models/tenantpayloaddtodata.md
@@ -330,9 +304,6 @@ generatedFiles:
   - docs/models/triggereventtoallrequestdtooverrides.md
   - docs/models/triggereventtoallrequestdtotenant.md
   - docs/models/triggerrecipientstypeenum.md
-  - docs/models/triggerreservedvariableresponse.md
-  - docs/models/triggerreservedvariableresponsetype.md
-  - docs/models/triggertypeenum.md
   - docs/models/type.md
   - docs/models/unit.md
   - docs/models/unseencountresponse.md
@@ -340,12 +311,7 @@ generatedFiles:
   - docs/models/updateintegrationrequestdto.md
   - docs/models/updatesubscriberchannelrequestdto.md
   - docs/models/updatesubscriberchannelrequestdtoproviderid.md
-  - docs/models/updatesubscriberglobalpreferencesrequestdto.md
   - docs/models/updatesubscriberonlineflagrequestdto.md
-  - docs/models/updatesubscriberpreferenceglobalresponsedto.md
-  - docs/models/updatesubscriberpreferencerequestdto.md
-  - docs/models/updatesubscriberpreferenceresponsedto.md
-  - docs/models/updatesubscriberrequestdto.md
   - docs/models/utils/retryconfig.md
   - docs/models/validationerrordto.md
   - docs/models/validationerrordtovalue.md
@@ -353,6 +319,7 @@ generatedFiles:
   - docs/models/weekdays.md
   - docs/models/workflowinfodto.md
   - docs/models/workflowintegrationstatus.md
+  - docs/models/workfloworiginenum.md
   - docs/models/workflowpreferencedto.md
   - docs/models/workflowresponse.md
   - docs/models/workflowresponsedata.md
@@ -411,7 +378,6 @@ generatedFiles:
   - src/novu_py/models/channelcredentials.py
   - src/novu_py/models/channelcredentialsdto.py
   - src/novu_py/models/channelctatypeenum.py
-  - src/novu_py/models/channelpreference.py
   - src/novu_py/models/channelsettingsdto.py
   - src/novu_py/models/channeltypeenum.py
   - src/novu_py/models/createdsubscriberdto.py
@@ -424,7 +390,6 @@ generatedFiles:
   - src/novu_py/models/delayregularmetadata.py
   - src/novu_py/models/delayscheduledmetadata.py
   - src/novu_py/models/deletemessageresponsedto.py
-  - src/novu_py/models/deletesubscriberresponsedto.py
   - src/novu_py/models/digestmetadatadto.py
   - src/novu_py/models/digestregularmetadata.py
   - src/novu_py/models/digesttimedconfigdto.py
@@ -447,7 +412,6 @@ generatedFiles:
   - src/novu_py/models/fieldfilterpartdto.py
   - src/novu_py/models/filtertopicsresponsedto.py
   - src/novu_py/models/getsubscriberpreferencesdto.py
-  - src/novu_py/models/getsubscriberpreferencesresponsedto.py
   - src/novu_py/models/gettopicresponsedto.py
   - src/novu_py/models/globalpreferencedto.py
   - src/novu_py/models/integrationresponsedto.py
@@ -486,16 +450,13 @@ generatedFiles:
   - src/novu_py/models/notificationstepdto.py
   - src/novu_py/models/notificationtrigger.py
   - src/novu_py/models/notificationtriggerdto.py
-  - src/novu_py/models/notificationtriggerresponse.py
   - src/novu_py/models/notificationtriggervariable.py
-  - src/novu_py/models/notificationtriggervariableresponse.py
   - src/novu_py/models/ordinalenum.py
   - src/novu_py/models/ordinalvalueenum.py
   - src/novu_py/models/overrides.py
   - src/novu_py/models/patchpreferencechannelsdto.py
   - src/novu_py/models/patchsubscriberpreferencesdto.py
   - src/novu_py/models/patchsubscriberrequestdto.py
-  - src/novu_py/models/preference.py
   - src/novu_py/models/preferencechannels.py
   - src/novu_py/models/providersidenum.py
   - src/novu_py/models/removesubscriberresponsedto.py
@@ -510,6 +471,7 @@ generatedFiles:
   - src/novu_py/models/subscriberfeedresponsedto.py
   - src/novu_py/models/subscriberpayloaddto.py
   - src/novu_py/models/subscriberresponsedto.py
+  - src/novu_py/models/subscriberscontroller_createsubscriberop.py
   - src/novu_py/models/subscriberscontroller_getsubscriberop.py
   - src/novu_py/models/subscriberscontroller_getsubscriberpreferencesop.py
   - src/novu_py/models/subscriberscontroller_patchsubscriberop.py
@@ -519,25 +481,16 @@ generatedFiles:
   - src/novu_py/models/subscribersv1controller_bulkcreatesubscribersop.py
   - src/novu_py/models/subscribersv1controller_chataccessoauthop.py
   - src/novu_py/models/subscribersv1controller_chatoauthcallbackop.py
-  - src/novu_py/models/subscribersv1controller_createsubscriberop.py
   - src/novu_py/models/subscribersv1controller_deletesubscribercredentialsop.py
   - src/novu_py/models/subscribersv1controller_getnotificationsfeedop.py
-  - src/novu_py/models/subscribersv1controller_getsubscriberop.py
-  - src/novu_py/models/subscribersv1controller_getsubscriberpreferencebylevelop.py
   - src/novu_py/models/subscribersv1controller_getunseencountop.py
-  - src/novu_py/models/subscribersv1controller_listsubscriberpreferencesop.py
   - src/novu_py/models/subscribersv1controller_listsubscribersop.py
   - src/novu_py/models/subscribersv1controller_markactionasseenop.py
   - src/novu_py/models/subscribersv1controller_markallunreadasreadop.py
   - src/novu_py/models/subscribersv1controller_markmessagesasop.py
   - src/novu_py/models/subscribersv1controller_modifysubscriberchannelop.py
-  - src/novu_py/models/subscribersv1controller_removesubscriberop.py
   - src/novu_py/models/subscribersv1controller_updatesubscriberchannelop.py
-  - src/novu_py/models/subscribersv1controller_updatesubscriberglobalpreferencesop.py
   - src/novu_py/models/subscribersv1controller_updatesubscriberonlineflagop.py
-  - src/novu_py/models/subscribersv1controller_updatesubscriberop.py
-  - src/novu_py/models/subscribersv1controller_updatesubscriberpreferenceop.py
-  - src/novu_py/models/templateresponse.py
   - src/novu_py/models/tenantpayloaddto.py
   - src/novu_py/models/textalignenum.py
   - src/novu_py/models/timedconfig.py
@@ -556,20 +509,14 @@ generatedFiles:
   - src/novu_py/models/triggereventresponsedto.py
   - src/novu_py/models/triggereventtoallrequestdto.py
   - src/novu_py/models/triggerrecipientstypeenum.py
-  - src/novu_py/models/triggerreservedvariableresponse.py
-  - src/novu_py/models/triggertypeenum.py
   - src/novu_py/models/unseencountresponse.py
   - src/novu_py/models/updatedsubscriberdto.py
   - src/novu_py/models/updateintegrationrequestdto.py
   - src/novu_py/models/updatesubscriberchannelrequestdto.py
-  - src/novu_py/models/updatesubscriberglobalpreferencesrequestdto.py
   - src/novu_py/models/updatesubscriberonlineflagrequestdto.py
-  - src/novu_py/models/updatesubscriberpreferenceglobalresponsedto.py
-  - src/novu_py/models/updatesubscriberpreferencerequestdto.py
-  - src/novu_py/models/updatesubscriberpreferenceresponsedto.py
-  - src/novu_py/models/updatesubscriberrequestdto.py
   - src/novu_py/models/validationerrordto.py
   - src/novu_py/models/workflowinfodto.py
+  - src/novu_py/models/workfloworiginenum.py
   - src/novu_py/models/workflowpreferencedto.py
   - src/novu_py/models/workflowresponse.py
   - src/novu_py/notifications.py
@@ -678,6 +625,7 @@ examples:
       parameters:
         query:
           page: 0
+          limit: 10
         header: {}
       responses:
         "200":
@@ -1520,6 +1468,21 @@ examples:
       responses:
         "200":
           application/json: {"global": {"enabled": false, "channels": {}}, "workflows": [{"enabled": true, "channels": {}, "overrides": [{"channel": "chat", "source": "template"}, {"channel": "push", "source": "subscriber"}, {"channel": "push", "source": "template"}], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}, {"enabled": true, "channels": {}, "overrides": [], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  SubscribersController_createSubscriber:
+    speakeasy-default-subscribers-controller-create-subscriber:
+      requestBody:
+        application/json: {"subscriberId": "<id>"}
+      responses:
+        "201":
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1711649461332", "updatedAt": "1740991076939"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
