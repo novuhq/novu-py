@@ -13,9 +13,9 @@ with Novu(
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         workflow_id="workflow_identifier",
-        to={
-            "subscriber_id": "<id>",
-        },
+        to=novu_py.SubscriberPayloadDto(
+            subscriber_id="<id>",
+        ),
         payload={
             "comment_id": "string",
             "post": {
@@ -52,9 +52,9 @@ async def main():
 
         res = await novu.trigger_async(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
             workflow_id="workflow_identifier",
-            to={
-                "subscriber_id": "<id>",
-            },
+            to=novu_py.SubscriberPayloadDto(
+                subscriber_id="<id>",
+            ),
             payload={
                 "comment_id": "string",
                 "post": {
@@ -92,9 +92,9 @@ with Novu(
         "events": [
             novu_py.TriggerEventRequestDto(
                 workflow_id="workflow_identifier",
-                to={
-                    "subscriber_id": "<id>",
-                },
+                to=novu_py.SubscriberPayloadDto(
+                    subscriber_id="<id>",
+                ),
                 payload={
                     "comment_id": "string",
                     "post": {
@@ -112,10 +112,10 @@ with Novu(
             novu_py.TriggerEventRequestDto(
                 workflow_id="workflow_identifier",
                 to=[
-                    {
-                        "topic_key": "<value>",
-                        "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-                    },
+                    novu_py.TopicPayloadDto(
+                        topic_key="<value>",
+                        type=novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                    ),
                 ],
                 payload={
                     "comment_id": "string",
@@ -177,9 +177,9 @@ async def main():
             "events": [
                 novu_py.TriggerEventRequestDto(
                     workflow_id="workflow_identifier",
-                    to={
-                        "subscriber_id": "<id>",
-                    },
+                    to=novu_py.SubscriberPayloadDto(
+                        subscriber_id="<id>",
+                    ),
                     payload={
                         "comment_id": "string",
                         "post": {
@@ -197,10 +197,10 @@ async def main():
                 novu_py.TriggerEventRequestDto(
                     workflow_id="workflow_identifier",
                     to=[
-                        {
-                            "topic_key": "<value>",
-                            "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-                        },
+                        novu_py.TopicPayloadDto(
+                            topic_key="<value>",
+                            type=novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                        ),
                     ],
                     payload={
                         "comment_id": "string",
