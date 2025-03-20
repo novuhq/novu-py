@@ -1,3 +1,5 @@
+<!-- speakeasy-ignore-start -->
+
 <div align="center">
   <a href="https://novu.co?utm_source=github" target="_blank">
   <picture>
@@ -25,11 +27,7 @@
 The notification platform that turns complex multi-channel delivery into a single <Inbox /> component. Built for developers, designed for growth, powered by open source.
 </div>
 
-  <p align="center">
-    <br />
-    <a href="https://github.novu.co?utm_campaign=gh_org_profile&utm_source=github" rel="dofollow"><strong>Visit our main GitHub Repository »</strong></a>
-    <br />
-  </p>
+<!-- speakeasy-ignore-end -->
   
 # Python Novu SDK
 
