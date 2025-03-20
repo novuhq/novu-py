@@ -6,7 +6,7 @@ from novu_py.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class OverridesChannel(str, Enum):
+class Channel(str, Enum):
     r"""The channel type which is overridden"""
 
     IN_APP = "in_app"
@@ -25,14 +25,14 @@ class Source(str, Enum):
 
 
 class OverridesTypedDict(TypedDict):
-    channel: OverridesChannel
+    channel: Channel
     r"""The channel type which is overridden"""
     source: Source
     r"""The source of overrides"""
 
 
 class Overrides(BaseModel):
-    channel: OverridesChannel
+    channel: Channel
     r"""The channel type which is overridden"""
 
     source: Source

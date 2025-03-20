@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: cdef9e13ef961f6f914da55cb4979082
+  docChecksum: 660098195de80bc69b0f039f95fb1e3e
   docVersion: "1.0"
-  speakeasyVersion: 1.508.1
-  generationVersion: 2.536.0
-  releaseVersion: 0.4.0
-  configChecksum: c6c96e77e62ceb23e2aea73fc8fb749d
+  speakeasyVersion: 1.521.0
+  generationVersion: 2.558.2
+  releaseVersion: 0.4.1
+  configChecksum: f19e4b39527a83df06db795dfd7d03ac
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.12.1
+    core: 5.12.4
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -74,7 +74,6 @@ generatedFiles:
   - docs/models/channelctatypeenum.md
   - docs/models/channels.md
   - docs/models/channelsettingsdto.md
-  - docs/models/channelsettingsdtoproviderid.md
   - docs/models/channeltypeenum.md
   - docs/models/content.md
   - docs/models/controls.md
@@ -87,7 +86,6 @@ generatedFiles:
   - docs/models/createtopicresponsedto.md
   - docs/models/credentialsdto.md
   - docs/models/data.md
-  - docs/models/databooleandto.md
   - docs/models/delayregularmetadata.md
   - docs/models/delayregularmetadatatype.md
   - docs/models/delayregularmetadataunit.md
@@ -130,6 +128,7 @@ generatedFiles:
   - docs/models/gettopicresponsedto.md
   - docs/models/globalpreferencedto.md
   - docs/models/integrationresponsedto.md
+  - docs/models/integrationresponsedtochannel.md
   - docs/models/integrationscontrollercreateintegrationrequest.md
   - docs/models/integrationscontrollercreateintegrationresponse.md
   - docs/models/integrationscontrollergetactiveintegrationsrequest.md
@@ -147,7 +146,6 @@ generatedFiles:
   - docs/models/issues.md
   - docs/models/listsubscribersresponsedto.md
   - docs/models/markallmessageasrequestdto.md
-  - docs/models/markallmessageasrequestdtomarkas.md
   - docs/models/markas.md
   - docs/models/markmessageactionasseendto.md
   - docs/models/markmessageactionasseendtopayload.md
@@ -161,6 +159,7 @@ generatedFiles:
   - docs/models/messagectadata.md
   - docs/models/messageid.md
   - docs/models/messagemarkasrequestdto.md
+  - docs/models/messagemarkasrequestdtomarkas.md
   - docs/models/messageresponsedto.md
   - docs/models/messageresponsedtooverrides.md
   - docs/models/messageresponsedtopayload.md
@@ -204,11 +203,9 @@ generatedFiles:
   - docs/models/ordinalvalue.md
   - docs/models/ordinalvalueenum.md
   - docs/models/overrides.md
-  - docs/models/overrideschannel.md
   - docs/models/patchpreferencechannelsdto.md
   - docs/models/patchsubscriberpreferencesdto.md
   - docs/models/patchsubscriberrequestdto.md
-  - docs/models/patchsubscriberrequestdtodata.md
   - docs/models/payload.md
   - docs/models/preferencechannels.md
   - docs/models/providerid.md
@@ -225,8 +222,10 @@ generatedFiles:
   - docs/models/stepfilterdto.md
   - docs/models/steptypeenum.md
   - docs/models/subscriberchanneldto.md
+  - docs/models/subscriberchanneldtoproviderid.md
   - docs/models/subscriberfeedresponsedto.md
   - docs/models/subscriberpayloaddto.md
+  - docs/models/subscriberpayloaddtodata.md
   - docs/models/subscriberresponsedto.md
   - docs/models/subscriberscontrollercreatesubscriberrequest.md
   - docs/models/subscriberscontrollercreatesubscriberresponse.md
@@ -342,7 +341,7 @@ generatedFiles:
   - py.typed
   - pylintrc
   - pyproject.toml
-  - scripts/prepare-readme.py
+  - scripts/prepare_readme.py
   - scripts/publish.sh
   - src/novu_py/__init__.py
   - src/novu_py/_hooks/__init__.py
@@ -386,7 +385,6 @@ generatedFiles:
   - src/novu_py/models/createtopicrequestdto.py
   - src/novu_py/models/createtopicresponsedto.py
   - src/novu_py/models/credentialsdto.py
-  - src/novu_py/models/databooleandto.py
   - src/novu_py/models/delayregularmetadata.py
   - src/novu_py/models/delayscheduledmetadata.py
   - src/novu_py/models/deletemessageresponsedto.py
@@ -629,7 +627,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": 6783.17, "page": 1777.06}
+          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "push", "executionDetails": [{"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "bandwidth", "source": "Payload"}, {"_id": "<id>", "status": "Success", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "nodemailer", "source": "Payload"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": true, "type": "BOOLEAN", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "SMALLER", "on": "payload"}]}, {"isNegated": false, "type": "GROUP", "value": "AND", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "plivo", "status": "<value>"}, {"_id": "<id>", "type": "delay", "executionDetails": [], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "TEXT", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "SMALLER", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "ALL_IN", "on": "subscriber"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "maqsam", "status": "<value>"}, {"_id": "<id>", "type": "delay", "executionDetails": [{"_id": "<id>", "status": "ReadConfirmation", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "sendinblue", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "bandwidth", "status": "<value>"}]}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "custom", "executionDetails": [], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "MULTI_LIST", "value": "OR", "children": []}, {"isNegated": true, "type": "BOOLEAN", "value": "OR", "children": [{"field": "<value>", "value": "<value>", "operator": "SMALLER", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "SMALLER_EQUAL", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "subscriber"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "nodemailer", "status": "<value>"}, {"_id": "<id>", "type": "sms", "executionDetails": [{"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "sendgrid", "source": "Payload"}, {"_id": "<id>", "status": "Failed", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "getstream", "source": "Webhook"}, {"_id": "<id>", "status": "Pending", "detail": "<value>", "isRetry": false, "isTest": false, "providerId": "mailgun", "source": "Internal"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "NUMBER", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "BETWEEN", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "subscriber"}]}, {"isNegated": false, "type": "DATE", "value": "AND", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "ses", "status": "<value>"}, {"_id": "<id>", "type": "custom", "executionDetails": [{"_id": "<id>", "status": "Failed", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "mailtrap", "source": "Webhook"}, {"_id": "<id>", "status": "Success", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "plunk", "source": "Credentials"}, {"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "pusher-beams", "source": "Internal"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "isend-sms", "status": "<value>"}]}], "pageSize": 6783.17, "page": 1777.06}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -646,7 +644,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "custom", "executionDetails": [{"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "azure-sms", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "apns", "status": "<value>"}, {"_id": "<id>", "type": "custom", "executionDetails": [], "step": {"_id": "<id>", "active": true, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "bandwidth", "status": "<value>"}]}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1259,7 +1257,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"hasMore": true, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": 3129.93, "page": 3234.02}
+          application/json: {"hasMore": true, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "custom", "executionDetails": [{"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "azure-sms", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "apns", "status": "<value>"}, {"_id": "<id>", "type": "custom", "executionDetails": [], "step": {"_id": "<id>", "active": true, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "bandwidth", "status": "<value>"}]}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "in_app", "executionDetails": [{"_id": "<id>", "status": "Success", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "msteams", "source": "Payload"}], "step": {"_id": "<id>", "active": true, "filters": [{"isNegated": false, "type": "STATEMENT", "value": "OR", "children": [{"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}]}, {"isNegated": false, "type": "LIST", "value": "OR", "children": [{"field": "<value>", "value": "<value>", "operator": "LARGER_EQUAL", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "LARGER_EQUAL", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "IN", "on": "payload"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "braze", "status": "<value>"}, {"_id": "<id>", "type": "push", "executionDetails": [], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "NOT_LIKE", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "messagebird", "status": "<value>"}]}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "email", "executionDetails": [], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "LIST", "value": "OR", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "nexmo", "status": "<value>"}, {"_id": "<id>", "type": "trigger", "executionDetails": [{"_id": "<id>", "status": "ReadConfirmation", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "push-webhook", "source": "Webhook"}, {"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "postmark", "source": "Internal"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "infobip-sms", "status": "<value>"}, {"_id": "<id>", "type": "email", "executionDetails": [{"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "termii", "source": "Payload"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": true, "type": "LIST", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "NOT_IN", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "EQUAL", "on": "subscriber"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "novu", "status": "<value>"}]}], "pageSize": 3129.93, "page": 3234.02}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":

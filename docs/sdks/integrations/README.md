@@ -10,10 +10,10 @@ With the help of the Integration Store, you can easily integrate your favorite d
 
 * [list](#list) - Get integrations
 * [create](#create) - Create integration
-* [list_active](#list_active) - Get active integrations
 * [update](#update) - Update integration
 * [delete](#delete) - Delete integration
 * [set_as_primary](#set_as_primary) - Set integration as primary
+* [list_active](#list_active) - Get active integrations
 
 ## list
 
@@ -93,48 +93,6 @@ with Novu(
 ### Response
 
 **[models.IntegrationsControllerCreateIntegrationResponse](../../models/integrationscontrollercreateintegrationresponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models.ErrorDto                        | 414                                    | application/json                       |
-| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| models.ValidationErrorDto              | 422                                    | application/json                       |
-| models.ErrorDto                        | 500                                    | application/json                       |
-| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
-
-## list_active
-
-Return all the active integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
-
-### Example Usage
-
-```python
-from novu_py import Novu
-
-
-with Novu(
-    secret_key="YOUR_SECRET_KEY_HERE",
-) as novu:
-
-    res = novu.integrations.list_active()
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.IntegrationsControllerGetActiveIntegrationsResponse](../../models/integrationscontrollergetactiveintegrationsresponse.md)**
 
 ### Errors
 
@@ -275,3 +233,45 @@ with Novu(
 | models.ValidationErrorDto         | 422                               | application/json                  |
 | models.ErrorDto                   | 500                               | application/json                  |
 | models.APIError                   | 4XX, 5XX                          | \*/\*                             |
+
+## list_active
+
+Return all the active integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
+
+### Example Usage
+
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.integrations.list_active()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.IntegrationsControllerGetActiveIntegrationsResponse](../../models/integrationscontrollergetactiveintegrationsresponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |

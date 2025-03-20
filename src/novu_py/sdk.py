@@ -24,19 +24,19 @@ class Novu(BaseSDK):
     https://docs.novu.co - Novu Documentation
     """
 
-    notifications: Notifications
-    integrations: Integrations
-    r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
-    https://docs.novu.co/channels-and-providers/integration-store
-    """
     subscribers: Subscribers
     r"""A subscriber in Novu represents someone who should receive a message. A subscriber’s profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
     https://docs.novu.co/subscribers/subscribers
+    """
+    integrations: Integrations
+    r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
+    https://docs.novu.co/channels-and-providers/integration-store
     """
     messages: Messages
     r"""A message in Novu represents a notification delivered to a recipient on a particular channel. Messages contain information about the request that triggered its delivery, a view of the data sent to the recipient, and a timeline of its lifecycle events. Learn more about messages.
     https://docs.novu.co/workflows/messages
     """
+    notifications: Notifications
     topics: Topics
     r"""Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
     https://docs.novu.co/subscribers/topics
@@ -138,10 +138,10 @@ class Novu(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
-        self.notifications = Notifications(self.sdk_configuration)
-        self.integrations = Integrations(self.sdk_configuration)
         self.subscribers = Subscribers(self.sdk_configuration)
+        self.integrations = Integrations(self.sdk_configuration)
         self.messages = Messages(self.sdk_configuration)
+        self.notifications = Notifications(self.sdk_configuration)
         self.topics = Topics(self.sdk_configuration)
 
     def __enter__(self):
@@ -496,26 +496,24 @@ class Novu(BaseSDK):
             http_res,
         )
 
-    def trigger_bulk(
+    def cancel(
         self,
         *,
-        bulk_trigger_event_dto: Union[
-            models.BulkTriggerEventDto, models.BulkTriggerEventDtoTypedDict
-        ],
+        transaction_id: str,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.EventsControllerTriggerBulkResponse:
-        r"""Bulk trigger event
+    ) -> models.EventsControllerCancelResponse:
+        r"""Cancel triggered event
 
 
-        Using this endpoint you can trigger multiple events at once, to avoid multiple calls to the API.
-        The bulk API is limited to 100 events per request.
+        Using a previously generated transactionId during the event trigger,
+        will cancel any active or pending workflows. This is useful to cancel active digests, delays etc...
 
 
-        :param bulk_trigger_event_dto:
+        :param transaction_id:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -532,33 +530,24 @@ class Novu(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.EventsControllerTriggerBulkRequest(
+        request = models.EventsControllerCancelRequest(
+            transaction_id=transaction_id,
             idempotency_key=idempotency_key,
-            bulk_trigger_event_dto=utils.get_pydantic_model(
-                bulk_trigger_event_dto, models.BulkTriggerEventDto
-            ),
         )
 
         req = self._build_request(
-            method="POST",
-            path="/v1/events/trigger/bulk",
+            method="DELETE",
+            path="/v1/events/trigger/{transactionId}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=True,
-            request_has_path_params=False,
+            request_body_required=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.bulk_trigger_event_dto,
-                False,
-                False,
-                "json",
-                models.BulkTriggerEventDto,
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -577,7 +566,7 @@ class Novu(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="EventsController_triggerBulk",
+                operation_id="EventsController_cancel",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -605,11 +594,9 @@ class Novu(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return models.EventsControllerTriggerBulkResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.TriggerEventResponseDto]
-                ),
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EventsControllerCancelResponse(
+                result=utils.unmarshal_json(http_res.text, bool),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
@@ -660,26 +647,24 @@ class Novu(BaseSDK):
             http_res,
         )
 
-    async def trigger_bulk_async(
+    async def cancel_async(
         self,
         *,
-        bulk_trigger_event_dto: Union[
-            models.BulkTriggerEventDto, models.BulkTriggerEventDtoTypedDict
-        ],
+        transaction_id: str,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.EventsControllerTriggerBulkResponse:
-        r"""Bulk trigger event
+    ) -> models.EventsControllerCancelResponse:
+        r"""Cancel triggered event
 
 
-        Using this endpoint you can trigger multiple events at once, to avoid multiple calls to the API.
-        The bulk API is limited to 100 events per request.
+        Using a previously generated transactionId during the event trigger,
+        will cancel any active or pending workflows. This is useful to cancel active digests, delays etc...
 
 
-        :param bulk_trigger_event_dto:
+        :param transaction_id:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -696,33 +681,24 @@ class Novu(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.EventsControllerTriggerBulkRequest(
+        request = models.EventsControllerCancelRequest(
+            transaction_id=transaction_id,
             idempotency_key=idempotency_key,
-            bulk_trigger_event_dto=utils.get_pydantic_model(
-                bulk_trigger_event_dto, models.BulkTriggerEventDto
-            ),
         )
 
         req = self._build_request_async(
-            method="POST",
-            path="/v1/events/trigger/bulk",
+            method="DELETE",
+            path="/v1/events/trigger/{transactionId}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=True,
-            request_has_path_params=False,
+            request_body_required=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.bulk_trigger_event_dto,
-                False,
-                False,
-                "json",
-                models.BulkTriggerEventDto,
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -741,7 +717,7 @@ class Novu(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="EventsController_triggerBulk",
+                operation_id="EventsController_cancel",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -769,11 +745,9 @@ class Novu(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return models.EventsControllerTriggerBulkResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.TriggerEventResponseDto]
-                ),
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EventsControllerCancelResponse(
+                result=utils.unmarshal_json(http_res.text, bool),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
@@ -1152,24 +1126,26 @@ class Novu(BaseSDK):
             http_res,
         )
 
-    def cancel(
+    def trigger_bulk(
         self,
         *,
-        transaction_id: str,
+        bulk_trigger_event_dto: Union[
+            models.BulkTriggerEventDto, models.BulkTriggerEventDtoTypedDict
+        ],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.EventsControllerCancelResponse:
-        r"""Cancel triggered event
+    ) -> models.EventsControllerTriggerBulkResponse:
+        r"""Bulk trigger event
 
 
-        Using a previously generated transactionId during the event trigger,
-        will cancel any active or pending workflows. This is useful to cancel active digests, delays etc...
+        Using this endpoint you can trigger multiple events at once, to avoid multiple calls to the API.
+        The bulk API is limited to 100 events per request.
 
 
-        :param transaction_id:
+        :param bulk_trigger_event_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1186,24 +1162,33 @@ class Novu(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.EventsControllerCancelRequest(
-            transaction_id=transaction_id,
+        request = models.EventsControllerTriggerBulkRequest(
             idempotency_key=idempotency_key,
+            bulk_trigger_event_dto=utils.get_pydantic_model(
+                bulk_trigger_event_dto, models.BulkTriggerEventDto
+            ),
         )
 
         req = self._build_request(
-            method="DELETE",
-            path="/v1/events/trigger/{transactionId}",
+            method="POST",
+            path="/v1/events/trigger/bulk",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
-            request_has_path_params=True,
+            request_body_required=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.bulk_trigger_event_dto,
+                False,
+                False,
+                "json",
+                models.BulkTriggerEventDto,
+            ),
             timeout_ms=timeout_ms,
         )
 
@@ -1222,7 +1207,7 @@ class Novu(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="EventsController_cancel",
+                operation_id="EventsController_triggerBulk",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1250,9 +1235,11 @@ class Novu(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.EventsControllerCancelResponse(
-                result=utils.unmarshal_json(http_res.text, models.DataBooleanDto),
+        if utils.match_response(http_res, "201", "application/json"):
+            return models.EventsControllerTriggerBulkResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[models.TriggerEventResponseDto]
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
@@ -1303,24 +1290,26 @@ class Novu(BaseSDK):
             http_res,
         )
 
-    async def cancel_async(
+    async def trigger_bulk_async(
         self,
         *,
-        transaction_id: str,
+        bulk_trigger_event_dto: Union[
+            models.BulkTriggerEventDto, models.BulkTriggerEventDtoTypedDict
+        ],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.EventsControllerCancelResponse:
-        r"""Cancel triggered event
+    ) -> models.EventsControllerTriggerBulkResponse:
+        r"""Bulk trigger event
 
 
-        Using a previously generated transactionId during the event trigger,
-        will cancel any active or pending workflows. This is useful to cancel active digests, delays etc...
+        Using this endpoint you can trigger multiple events at once, to avoid multiple calls to the API.
+        The bulk API is limited to 100 events per request.
 
 
-        :param transaction_id:
+        :param bulk_trigger_event_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1337,24 +1326,33 @@ class Novu(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.EventsControllerCancelRequest(
-            transaction_id=transaction_id,
+        request = models.EventsControllerTriggerBulkRequest(
             idempotency_key=idempotency_key,
+            bulk_trigger_event_dto=utils.get_pydantic_model(
+                bulk_trigger_event_dto, models.BulkTriggerEventDto
+            ),
         )
 
         req = self._build_request_async(
-            method="DELETE",
-            path="/v1/events/trigger/{transactionId}",
+            method="POST",
+            path="/v1/events/trigger/bulk",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
-            request_has_path_params=True,
+            request_body_required=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.bulk_trigger_event_dto,
+                False,
+                False,
+                "json",
+                models.BulkTriggerEventDto,
+            ),
             timeout_ms=timeout_ms,
         )
 
@@ -1373,7 +1371,7 @@ class Novu(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="EventsController_cancel",
+                operation_id="EventsController_triggerBulk",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1401,9 +1399,11 @@ class Novu(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.EventsControllerCancelResponse(
-                result=utils.unmarshal_json(http_res.text, models.DataBooleanDto),
+        if utils.match_response(http_res, "201", "application/json"):
+            return models.EventsControllerTriggerBulkResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[models.TriggerEventResponseDto]
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):

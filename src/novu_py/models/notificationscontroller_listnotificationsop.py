@@ -28,9 +28,9 @@ class NotificationsControllerListNotificationsRequestTypedDict(TypedDict):
     transaction_id: NotRequired[str]
     r"""Transaction ID for filtering"""
     after: NotRequired[str]
-    r"""Date filter for records after this timestamp"""
+    r"""Date filter for records after this timestamp. Defaults to earliest date allowed by subscription plan"""
     before: NotRequired[str]
-    r"""Date filter for records before this timestamp"""
+    r"""Date filter for records before this timestamp. Defaults to current time of request (now)"""
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
@@ -93,13 +93,13 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Date filter for records after this timestamp"""
+    r"""Date filter for records after this timestamp. Defaults to earliest date allowed by subscription plan"""
 
     before: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Date filter for records before this timestamp"""
+    r"""Date filter for records before this timestamp. Defaults to current time of request (now)"""
 
     idempotency_key: Annotated[
         Optional[str],

@@ -78,8 +78,8 @@ from .channelcredentialsdto import ChannelCredentialsDto, ChannelCredentialsDtoT
 from .channelctatypeenum import ChannelCTATypeEnum
 from .channelsettingsdto import (
     ChannelSettingsDto,
-    ChannelSettingsDtoProviderID,
     ChannelSettingsDtoTypedDict,
+    ProviderID,
 )
 from .channeltypeenum import ChannelTypeEnum
 from .createdsubscriberdto import CreatedSubscriberDto, CreatedSubscriberDtoTypedDict
@@ -103,7 +103,6 @@ from .credentialsdto import (
     TLSOptions,
     TLSOptionsTypedDict,
 )
-from .databooleandto import DataBooleanDto, DataBooleanDtoTypedDict
 from .delayregularmetadata import (
     DelayRegularMetadata,
     DelayRegularMetadataType,
@@ -191,8 +190,8 @@ from .getsubscriberpreferencesdto import (
 from .gettopicresponsedto import GetTopicResponseDto, GetTopicResponseDtoTypedDict
 from .globalpreferencedto import GlobalPreferenceDto, GlobalPreferenceDtoTypedDict
 from .integrationresponsedto import (
-    Channel,
     IntegrationResponseDto,
+    IntegrationResponseDtoChannel,
     IntegrationResponseDtoTypedDict,
 )
 from .integrationscontroller_createintegrationop import (
@@ -245,8 +244,8 @@ from .markallmessageasrequestdto import (
     FeedIdentifier,
     FeedIdentifierTypedDict,
     MarkAllMessageAsRequestDto,
-    MarkAllMessageAsRequestDtoMarkAs,
     MarkAllMessageAsRequestDtoTypedDict,
+    MarkAs,
 )
 from .markmessageactionasseendto import (
     MarkMessageActionAsSeenDto,
@@ -267,10 +266,10 @@ from .messagebutton import MessageButton, MessageButtonTypedDict
 from .messagecta import MessageCTA, MessageCTATypedDict
 from .messagectadata import MessageCTAData, MessageCTADataTypedDict
 from .messagemarkasrequestdto import (
-    MarkAs,
     MessageID,
     MessageIDTypedDict,
     MessageMarkAsRequestDto,
+    MessageMarkAsRequestDtoMarkAs,
     MessageMarkAsRequestDtoTypedDict,
 )
 from .messageresponsedto import (
@@ -364,7 +363,7 @@ from .notificationtriggervariable import (
 )
 from .ordinalenum import OrdinalEnum
 from .ordinalvalueenum import OrdinalValueEnum
-from .overrides import Overrides, OverridesChannel, OverridesTypedDict, Source
+from .overrides import Channel, Overrides, OverridesTypedDict, Source
 from .patchpreferencechannelsdto import (
     PatchPreferenceChannelsDto,
     PatchPreferenceChannelsDtoTypedDict,
@@ -374,9 +373,9 @@ from .patchsubscriberpreferencesdto import (
     PatchSubscriberPreferencesDtoTypedDict,
 )
 from .patchsubscriberrequestdto import (
+    Data,
+    DataTypedDict,
     PatchSubscriberRequestDto,
-    PatchSubscriberRequestDtoData,
-    PatchSubscriberRequestDtoDataTypedDict,
     PatchSubscriberRequestDtoTypedDict,
 )
 from .preferencechannels import PreferenceChannels, PreferenceChannelsTypedDict
@@ -399,8 +398,8 @@ from .security import Security, SecurityTypedDict
 from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict, Value
 from .steptypeenum import StepTypeEnum
 from .subscriberchanneldto import (
-    ProviderID,
     SubscriberChannelDto,
+    SubscriberChannelDtoProviderID,
     SubscriberChannelDtoTypedDict,
 )
 from .subscriberfeedresponsedto import (
@@ -408,9 +407,9 @@ from .subscriberfeedresponsedto import (
     SubscriberFeedResponseDtoTypedDict,
 )
 from .subscriberpayloaddto import (
-    Data,
-    DataTypedDict,
     SubscriberPayloadDto,
+    SubscriberPayloadDtoData,
+    SubscriberPayloadDtoDataTypedDict,
     SubscriberPayloadDtoTypedDict,
 )
 from .subscriberresponsedto import SubscriberResponseDto, SubscriberResponseDtoTypedDict
@@ -720,7 +719,6 @@ __all__ = [
     "ChannelCredentialsDtoTypedDict",
     "ChannelCredentialsTypedDict",
     "ChannelSettingsDto",
-    "ChannelSettingsDtoProviderID",
     "ChannelSettingsDtoTypedDict",
     "ChannelTypeEnum",
     "Channels",
@@ -744,8 +742,6 @@ __all__ = [
     "CredentialsDto",
     "CredentialsDtoTypedDict",
     "Data",
-    "DataBooleanDto",
-    "DataBooleanDtoTypedDict",
     "DataTypedDict",
     "DelayRegularMetadata",
     "DelayRegularMetadataType",
@@ -817,6 +813,7 @@ __all__ = [
     "GlobalPreferenceDto",
     "GlobalPreferenceDtoTypedDict",
     "IntegrationResponseDto",
+    "IntegrationResponseDtoChannel",
     "IntegrationResponseDtoTypedDict",
     "IntegrationsControllerCreateIntegrationRequest",
     "IntegrationsControllerCreateIntegrationRequestTypedDict",
@@ -851,7 +848,6 @@ __all__ = [
     "ListSubscribersResponseDto",
     "ListSubscribersResponseDtoTypedDict",
     "MarkAllMessageAsRequestDto",
-    "MarkAllMessageAsRequestDtoMarkAs",
     "MarkAllMessageAsRequestDtoTypedDict",
     "MarkAs",
     "MarkMessageActionAsSeenDto",
@@ -875,6 +871,7 @@ __all__ = [
     "MessageID",
     "MessageIDTypedDict",
     "MessageMarkAsRequestDto",
+    "MessageMarkAsRequestDtoMarkAs",
     "MessageMarkAsRequestDtoTypedDict",
     "MessageResponseDto",
     "MessageResponseDtoOverrides",
@@ -949,15 +946,12 @@ __all__ = [
     "OrdinalValue",
     "OrdinalValueEnum",
     "Overrides",
-    "OverridesChannel",
     "OverridesTypedDict",
     "PatchPreferenceChannelsDto",
     "PatchPreferenceChannelsDtoTypedDict",
     "PatchSubscriberPreferencesDto",
     "PatchSubscriberPreferencesDtoTypedDict",
     "PatchSubscriberRequestDto",
-    "PatchSubscriberRequestDtoData",
-    "PatchSubscriberRequestDtoDataTypedDict",
     "PatchSubscriberRequestDtoTypedDict",
     "Payload",
     "PayloadTypedDict",
@@ -984,10 +978,13 @@ __all__ = [
     "StepFilterDtoTypedDict",
     "StepTypeEnum",
     "SubscriberChannelDto",
+    "SubscriberChannelDtoProviderID",
     "SubscriberChannelDtoTypedDict",
     "SubscriberFeedResponseDto",
     "SubscriberFeedResponseDtoTypedDict",
     "SubscriberPayloadDto",
+    "SubscriberPayloadDtoData",
+    "SubscriberPayloadDtoDataTypedDict",
     "SubscriberPayloadDtoTypedDict",
     "SubscriberResponseDto",
     "SubscriberResponseDtoTypedDict",

@@ -1,6 +1,6 @@
-# ChannelSettingsDtoProviderID
+# SubscriberChannelDtoProviderID
 
-The provider identifier for the credentials
+The ID of the chat or push provider.
 
 
 ## Values
