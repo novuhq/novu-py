@@ -14,7 +14,7 @@ MessageIDTypedDict = TypeAliasType("MessageIDTypedDict", Union[str, List[str]])
 MessageID = TypeAliasType("MessageID", Union[str, List[str]])
 
 
-class MarkAs(str, Enum):
+class MessageMarkAsRequestDtoMarkAs(str, Enum):
     READ = "read"
     SEEN = "seen"
     UNREAD = "unread"
@@ -23,10 +23,10 @@ class MarkAs(str, Enum):
 
 class MessageMarkAsRequestDtoTypedDict(TypedDict):
     message_id: MessageIDTypedDict
-    mark_as: MarkAs
+    mark_as: MessageMarkAsRequestDtoMarkAs
 
 
 class MessageMarkAsRequestDto(BaseModel):
     message_id: Annotated[MessageID, pydantic.Field(alias="messageId")]
 
-    mark_as: Annotated[MarkAs, pydantic.Field(alias="markAs")]
+    mark_as: Annotated[MessageMarkAsRequestDtoMarkAs, pydantic.Field(alias="markAs")]

@@ -7,11 +7,11 @@ from pydantic import model_serializer
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PatchSubscriberRequestDtoDataTypedDict(TypedDict):
+class DataTypedDict(TypedDict):
     r"""Additional custom data for the subscriber"""
 
 
-class PatchSubscriberRequestDtoData(BaseModel):
+class Data(BaseModel):
     r"""Additional custom data for the subscriber"""
 
 
@@ -30,7 +30,7 @@ class PatchSubscriberRequestDtoTypedDict(TypedDict):
     r"""Timezone of the subscriber"""
     locale: NotRequired[Nullable[str]]
     r"""Locale of the subscriber"""
-    data: NotRequired[Nullable[PatchSubscriberRequestDtoDataTypedDict]]
+    data: NotRequired[Nullable[DataTypedDict]]
     r"""Additional custom data for the subscriber"""
 
 
@@ -60,7 +60,7 @@ class PatchSubscriberRequestDto(BaseModel):
     locale: OptionalNullable[str] = UNSET
     r"""Locale of the subscriber"""
 
-    data: OptionalNullable[PatchSubscriberRequestDtoData] = UNSET
+    data: OptionalNullable[Data] = UNSET
     r"""Additional custom data for the subscriber"""
 
     @model_serializer(mode="wrap")

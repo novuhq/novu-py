@@ -18,7 +18,7 @@ FeedIdentifier = TypeAliasType("FeedIdentifier", Union[str, List[str]])
 r"""Optional feed identifier or array of feed identifiers"""
 
 
-class MarkAllMessageAsRequestDtoMarkAs(str, Enum):
+class MarkAs(str, Enum):
     r"""Mark all subscriber messages as read, unread, seen or unseen"""
 
     READ = "read"
@@ -28,14 +28,14 @@ class MarkAllMessageAsRequestDtoMarkAs(str, Enum):
 
 
 class MarkAllMessageAsRequestDtoTypedDict(TypedDict):
-    mark_as: MarkAllMessageAsRequestDtoMarkAs
+    mark_as: MarkAs
     r"""Mark all subscriber messages as read, unread, seen or unseen"""
     feed_identifier: NotRequired[FeedIdentifierTypedDict]
     r"""Optional feed identifier or array of feed identifiers"""
 
 
 class MarkAllMessageAsRequestDto(BaseModel):
-    mark_as: Annotated[MarkAllMessageAsRequestDtoMarkAs, pydantic.Field(alias="markAs")]
+    mark_as: Annotated[MarkAs, pydantic.Field(alias="markAs")]
     r"""Mark all subscriber messages as read, unread, seen or unseen"""
 
     feed_identifier: Annotated[

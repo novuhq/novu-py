@@ -8,10 +8,14 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-DataTypedDict = TypeAliasType("DataTypedDict", Union[str, List[str], bool, float])
+SubscriberPayloadDtoDataTypedDict = TypeAliasType(
+    "SubscriberPayloadDtoDataTypedDict", Union[str, List[str], bool, float]
+)
 
 
-Data = TypeAliasType("Data", Union[str, List[str], bool, float])
+SubscriberPayloadDtoData = TypeAliasType(
+    "SubscriberPayloadDtoData", Union[str, List[str], bool, float]
+)
 
 
 class SubscriberPayloadDtoTypedDict(TypedDict):
@@ -29,7 +33,7 @@ class SubscriberPayloadDtoTypedDict(TypedDict):
     r"""An HTTP URL to the profile image of your subscriber."""
     locale: NotRequired[str]
     r"""The locale of the subscriber."""
-    data: NotRequired[Dict[str, DataTypedDict]]
+    data: NotRequired[Dict[str, SubscriberPayloadDtoDataTypedDict]]
     r"""An optional payload object that can contain any properties."""
     channels: NotRequired[List[SubscriberChannelDtoTypedDict]]
     r"""An optional array of subscriber channels."""
@@ -59,7 +63,7 @@ class SubscriberPayloadDto(BaseModel):
     locale: Optional[str] = None
     r"""The locale of the subscriber."""
 
-    data: Optional[Dict[str, Data]] = None
+    data: Optional[Dict[str, SubscriberPayloadDtoData]] = None
     r"""An optional payload object that can contain any properties."""
 
     channels: Optional[List[SubscriberChannelDto]] = None

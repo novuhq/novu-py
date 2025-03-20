@@ -14,7 +14,7 @@ from .providersidenum import ProvidersIDEnum
 from enum import Enum
 from novu_py.types import BaseModel
 import pydantic
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -55,6 +55,8 @@ class ActivityNotificationJobResponseDtoTypedDict(TypedDict):
     r"""Status of the job"""
     digest: NotRequired[DigestMetadataDtoTypedDict]
     r"""Optional digest for the job, including metadata and events"""
+    overrides: NotRequired[Dict[str, Any]]
+    r"""Optional context object for additional error details."""
     payload: NotRequired[PayloadTypedDict]
     r"""Optional payload for the job"""
     updated_at: NotRequired[str]
@@ -85,6 +87,9 @@ class ActivityNotificationJobResponseDto(BaseModel):
 
     digest: Optional[DigestMetadataDto] = None
     r"""Optional digest for the job, including metadata and events"""
+
+    overrides: Optional[Dict[str, Any]] = None
+    r"""Optional context object for additional error details."""
 
     payload: Optional[Payload] = None
     r"""Optional payload for the job"""

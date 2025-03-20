@@ -9,24 +9,21 @@ from typing import Any, List, Mapping, Optional, Union, cast
 
 
 class NovuMessages(BaseSDK):
-    def mark_all_as(
+    def update_as_seen(
         self,
         *,
-        subscriber_id: str,
-        message_mark_as_request_dto: Union[
-            models.MessageMarkAsRequestDto, models.MessageMarkAsRequestDtoTypedDict
+        request: Union[
+            models.SubscribersV1ControllerMarkActionAsSeenRequest,
+            models.SubscribersV1ControllerMarkActionAsSeenRequestTypedDict,
         ],
-        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerMarkMessagesAsResponse:
-        r"""Mark a subscriber messages as seen, read, unseen or unread
+    ) -> models.SubscribersV1ControllerMarkActionAsSeenResponse:
+        r"""Mark message action as seen
 
-        :param subscriber_id:
-        :param message_mark_as_request_dto:
-        :param idempotency_key: A header for idempotency purposes
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -42,17 +39,15 @@ class NovuMessages(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SubscribersV1ControllerMarkMessagesAsRequest(
-            subscriber_id=subscriber_id,
-            idempotency_key=idempotency_key,
-            message_mark_as_request_dto=utils.get_pydantic_model(
-                message_mark_as_request_dto, models.MessageMarkAsRequestDto
-            ),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersV1ControllerMarkActionAsSeenRequest
+            )
+        request = cast(models.SubscribersV1ControllerMarkActionAsSeenRequest, request)
 
         req = self._build_request(
             method="POST",
-            path="/v1/subscribers/{subscriberId}/messages/mark-as",
+            path="/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -64,11 +59,11 @@ class NovuMessages(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.message_mark_as_request_dto,
+                request.mark_message_action_as_seen_dto,
                 False,
                 False,
                 "json",
-                models.MessageMarkAsRequestDto,
+                models.MarkMessageActionAsSeenDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -88,7 +83,7 @@ class NovuMessages(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="SubscribersV1Controller_markMessagesAs",
+                operation_id="SubscribersV1Controller_markActionAsSeen",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -117,10 +112,8 @@ class NovuMessages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return models.SubscribersV1ControllerMarkMessagesAsResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.MessageResponseDto]
-                ),
+            return models.SubscribersV1ControllerMarkActionAsSeenResponse(
+                result=utils.unmarshal_json(http_res.text, models.MessageResponseDto),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
@@ -171,24 +164,21 @@ class NovuMessages(BaseSDK):
             http_res,
         )
 
-    async def mark_all_as_async(
+    async def update_as_seen_async(
         self,
         *,
-        subscriber_id: str,
-        message_mark_as_request_dto: Union[
-            models.MessageMarkAsRequestDto, models.MessageMarkAsRequestDtoTypedDict
+        request: Union[
+            models.SubscribersV1ControllerMarkActionAsSeenRequest,
+            models.SubscribersV1ControllerMarkActionAsSeenRequestTypedDict,
         ],
-        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerMarkMessagesAsResponse:
-        r"""Mark a subscriber messages as seen, read, unseen or unread
+    ) -> models.SubscribersV1ControllerMarkActionAsSeenResponse:
+        r"""Mark message action as seen
 
-        :param subscriber_id:
-        :param message_mark_as_request_dto:
-        :param idempotency_key: A header for idempotency purposes
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -204,17 +194,15 @@ class NovuMessages(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SubscribersV1ControllerMarkMessagesAsRequest(
-            subscriber_id=subscriber_id,
-            idempotency_key=idempotency_key,
-            message_mark_as_request_dto=utils.get_pydantic_model(
-                message_mark_as_request_dto, models.MessageMarkAsRequestDto
-            ),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersV1ControllerMarkActionAsSeenRequest
+            )
+        request = cast(models.SubscribersV1ControllerMarkActionAsSeenRequest, request)
 
         req = self._build_request_async(
             method="POST",
-            path="/v1/subscribers/{subscriberId}/messages/mark-as",
+            path="/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -226,11 +214,11 @@ class NovuMessages(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.message_mark_as_request_dto,
+                request.mark_message_action_as_seen_dto,
                 False,
                 False,
                 "json",
-                models.MessageMarkAsRequestDto,
+                models.MarkMessageActionAsSeenDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -250,7 +238,7 @@ class NovuMessages(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="SubscribersV1Controller_markMessagesAs",
+                operation_id="SubscribersV1Controller_markActionAsSeen",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -279,10 +267,8 @@ class NovuMessages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return models.SubscribersV1ControllerMarkMessagesAsResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.MessageResponseDto]
-                ),
+            return models.SubscribersV1ControllerMarkActionAsSeenResponse(
+                result=utils.unmarshal_json(http_res.text, models.MessageResponseDto),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
@@ -655,21 +641,24 @@ class NovuMessages(BaseSDK):
             http_res,
         )
 
-    def update_as_seen(
+    def mark_all_as(
         self,
         *,
-        request: Union[
-            models.SubscribersV1ControllerMarkActionAsSeenRequest,
-            models.SubscribersV1ControllerMarkActionAsSeenRequestTypedDict,
+        subscriber_id: str,
+        message_mark_as_request_dto: Union[
+            models.MessageMarkAsRequestDto, models.MessageMarkAsRequestDtoTypedDict
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerMarkActionAsSeenResponse:
-        r"""Mark message action as seen
+    ) -> models.SubscribersV1ControllerMarkMessagesAsResponse:
+        r"""Mark a subscriber messages as seen, read, unseen or unread
 
-        :param request: The request object to send.
+        :param subscriber_id:
+        :param message_mark_as_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -685,15 +674,17 @@ class NovuMessages(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, models.SubscribersV1ControllerMarkActionAsSeenRequest
-            )
-        request = cast(models.SubscribersV1ControllerMarkActionAsSeenRequest, request)
+        request = models.SubscribersV1ControllerMarkMessagesAsRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            message_mark_as_request_dto=utils.get_pydantic_model(
+                message_mark_as_request_dto, models.MessageMarkAsRequestDto
+            ),
+        )
 
         req = self._build_request(
             method="POST",
-            path="/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}",
+            path="/v1/subscribers/{subscriberId}/messages/mark-as",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -705,11 +696,11 @@ class NovuMessages(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.mark_message_action_as_seen_dto,
+                request.message_mark_as_request_dto,
                 False,
                 False,
                 "json",
-                models.MarkMessageActionAsSeenDto,
+                models.MessageMarkAsRequestDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -729,7 +720,7 @@ class NovuMessages(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="SubscribersV1Controller_markActionAsSeen",
+                operation_id="SubscribersV1Controller_markMessagesAs",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -758,8 +749,10 @@ class NovuMessages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return models.SubscribersV1ControllerMarkActionAsSeenResponse(
-                result=utils.unmarshal_json(http_res.text, models.MessageResponseDto),
+            return models.SubscribersV1ControllerMarkMessagesAsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[models.MessageResponseDto]
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
@@ -810,21 +803,24 @@ class NovuMessages(BaseSDK):
             http_res,
         )
 
-    async def update_as_seen_async(
+    async def mark_all_as_async(
         self,
         *,
-        request: Union[
-            models.SubscribersV1ControllerMarkActionAsSeenRequest,
-            models.SubscribersV1ControllerMarkActionAsSeenRequestTypedDict,
+        subscriber_id: str,
+        message_mark_as_request_dto: Union[
+            models.MessageMarkAsRequestDto, models.MessageMarkAsRequestDtoTypedDict
         ],
+        idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SubscribersV1ControllerMarkActionAsSeenResponse:
-        r"""Mark message action as seen
+    ) -> models.SubscribersV1ControllerMarkMessagesAsResponse:
+        r"""Mark a subscriber messages as seen, read, unseen or unread
 
-        :param request: The request object to send.
+        :param subscriber_id:
+        :param message_mark_as_request_dto:
+        :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -840,15 +836,17 @@ class NovuMessages(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, models.SubscribersV1ControllerMarkActionAsSeenRequest
-            )
-        request = cast(models.SubscribersV1ControllerMarkActionAsSeenRequest, request)
+        request = models.SubscribersV1ControllerMarkMessagesAsRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            message_mark_as_request_dto=utils.get_pydantic_model(
+                message_mark_as_request_dto, models.MessageMarkAsRequestDto
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
-            path="/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}",
+            path="/v1/subscribers/{subscriberId}/messages/mark-as",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -860,11 +858,11 @@ class NovuMessages(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.mark_message_action_as_seen_dto,
+                request.message_mark_as_request_dto,
                 False,
                 False,
                 "json",
-                models.MarkMessageActionAsSeenDto,
+                models.MessageMarkAsRequestDto,
             ),
             timeout_ms=timeout_ms,
         )
@@ -884,7 +882,7 @@ class NovuMessages(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="SubscribersV1Controller_markActionAsSeen",
+                operation_id="SubscribersV1Controller_markMessagesAs",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -913,8 +911,10 @@ class NovuMessages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return models.SubscribersV1ControllerMarkActionAsSeenResponse(
-                result=utils.unmarshal_json(http_res.text, models.MessageResponseDto),
+            return models.SubscribersV1ControllerMarkMessagesAsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[models.MessageResponseDto]
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):

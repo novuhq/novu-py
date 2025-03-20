@@ -13,9 +13,9 @@ with Novu(
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         workflow_id="workflow_identifier",
-        to={
-            "subscriber_id": "<id>",
-        },
+        to=novu_py.SubscriberPayloadDto(
+            subscriber_id="<id>",
+        ),
         payload={
             "comment_id": "string",
             "post": {
@@ -52,9 +52,9 @@ async def main():
 
         res = await novu.trigger_async(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
             workflow_id="workflow_identifier",
-            to={
-                "subscriber_id": "<id>",
-            },
+            to=novu_py.SubscriberPayloadDto(
+                subscriber_id="<id>",
+            ),
             payload={
                 "comment_id": "string",
                 "post": {
@@ -76,11 +76,10 @@ async def main():
 asyncio.run(main())
 ```
 
-### Trigger Notification Events in Bulk
+### Cancel Triggered Event
 
 ```python
 # Synchronous Example
-import novu_py
 from novu_py import Novu
 
 
@@ -88,71 +87,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.trigger_bulk(bulk_trigger_event_dto={
-        "events": [
-            novu_py.TriggerEventRequestDto(
-                workflow_id="workflow_identifier",
-                to={
-                    "subscriber_id": "<id>",
-                },
-                payload={
-                    "comment_id": "string",
-                    "post": {
-                        "text": "string",
-                    },
-                },
-                overrides={
-                    "fcm": {
-                        "data": {
-                            "key": "value",
-                        },
-                    },
-                },
-            ),
-            novu_py.TriggerEventRequestDto(
-                workflow_id="workflow_identifier",
-                to=[
-                    {
-                        "topic_key": "<value>",
-                        "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-                    },
-                ],
-                payload={
-                    "comment_id": "string",
-                    "post": {
-                        "text": "string",
-                    },
-                },
-                overrides={
-                    "fcm": {
-                        "data": {
-                            "key": "value",
-                        },
-                    },
-                },
-            ),
-            novu_py.TriggerEventRequestDto(
-                workflow_id="workflow_identifier",
-                to=[
-                    "SUBSCRIBER_ID",
-                    "SUBSCRIBER_ID",
-                ],
-                payload={
-                    "comment_id": "string",
-                    "post": {
-                        "text": "string",
-                    },
-                },
-                overrides={
-                    "fcm": {
-                        "data": {
-                            "key": "value",
-                        },
-                    },
-                },
-            ),
-        ],
-    })
+    res = novu.cancel(transaction_id="<id>")
 
     # Handle response
     print(res)
@@ -164,7 +99,6 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-import novu_py
 from novu_py import Novu
 
 async def main():
@@ -173,71 +107,7 @@ async def main():
         secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
 
-        res = await novu.trigger_bulk_async(bulk_trigger_event_dto={
-            "events": [
-                novu_py.TriggerEventRequestDto(
-                    workflow_id="workflow_identifier",
-                    to={
-                        "subscriber_id": "<id>",
-                    },
-                    payload={
-                        "comment_id": "string",
-                        "post": {
-                            "text": "string",
-                        },
-                    },
-                    overrides={
-                        "fcm": {
-                            "data": {
-                                "key": "value",
-                            },
-                        },
-                    },
-                ),
-                novu_py.TriggerEventRequestDto(
-                    workflow_id="workflow_identifier",
-                    to=[
-                        {
-                            "topic_key": "<value>",
-                            "type": novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-                        },
-                    ],
-                    payload={
-                        "comment_id": "string",
-                        "post": {
-                            "text": "string",
-                        },
-                    },
-                    overrides={
-                        "fcm": {
-                            "data": {
-                                "key": "value",
-                            },
-                        },
-                    },
-                ),
-                novu_py.TriggerEventRequestDto(
-                    workflow_id="workflow_identifier",
-                    to=[
-                        "SUBSCRIBER_ID",
-                        "SUBSCRIBER_ID",
-                    ],
-                    payload={
-                        "comment_id": "string",
-                        "post": {
-                            "text": "string",
-                        },
-                    },
-                    overrides={
-                        "fcm": {
-                            "data": {
-                                "key": "value",
-                            },
-                        },
-                    },
-                ),
-            ],
-        })
+        res = await novu.cancel_async(transaction_id="<id>")
 
         # Handle response
         print(res)
@@ -300,10 +170,11 @@ async def main():
 asyncio.run(main())
 ```
 
-### Cancel Triggered Event
+### Trigger Notification Events in Bulk
 
 ```python
 # Synchronous Example
+import novu_py
 from novu_py import Novu
 
 
@@ -311,7 +182,71 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.cancel(transaction_id="<id>")
+    res = novu.trigger_bulk(bulk_trigger_event_dto={
+        "events": [
+            novu_py.TriggerEventRequestDto(
+                workflow_id="workflow_identifier",
+                to=novu_py.SubscriberPayloadDto(
+                    subscriber_id="<id>",
+                ),
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+            novu_py.TriggerEventRequestDto(
+                workflow_id="workflow_identifier",
+                to=[
+                    novu_py.TopicPayloadDto(
+                        topic_key="<value>",
+                        type=novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                    ),
+                ],
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+            novu_py.TriggerEventRequestDto(
+                workflow_id="workflow_identifier",
+                to=[
+                    "SUBSCRIBER_ID",
+                    "SUBSCRIBER_ID",
+                ],
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+        ],
+    })
 
     # Handle response
     print(res)
@@ -323,6 +258,7 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
+import novu_py
 from novu_py import Novu
 
 async def main():
@@ -331,7 +267,71 @@ async def main():
         secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
 
-        res = await novu.cancel_async(transaction_id="<id>")
+        res = await novu.trigger_bulk_async(bulk_trigger_event_dto={
+            "events": [
+                novu_py.TriggerEventRequestDto(
+                    workflow_id="workflow_identifier",
+                    to=novu_py.SubscriberPayloadDto(
+                        subscriber_id="<id>",
+                    ),
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
+                        },
+                    },
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
+                        },
+                    },
+                ),
+                novu_py.TriggerEventRequestDto(
+                    workflow_id="workflow_identifier",
+                    to=[
+                        novu_py.TopicPayloadDto(
+                            topic_key="<value>",
+                            type=novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
+                        ),
+                    ],
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
+                        },
+                    },
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
+                        },
+                    },
+                ),
+                novu_py.TriggerEventRequestDto(
+                    workflow_id="workflow_identifier",
+                    to=[
+                        "SUBSCRIBER_ID",
+                        "SUBSCRIBER_ID",
+                    ],
+                    payload={
+                        "comment_id": "string",
+                        "post": {
+                            "text": "string",
+                        },
+                    },
+                    overrides={
+                        "fcm": {
+                            "data": {
+                                "key": "value",
+                            },
+                        },
+                    },
+                ),
+            ],
+        })
 
         # Handle response
         print(res)
