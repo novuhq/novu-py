@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 from novu_py.types import BaseModel
-from typing_extensions import TypedDict
+import pydantic
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class WorkflowInfoDtoTypedDict(TypedDict):
@@ -12,6 +14,8 @@ class WorkflowInfoDtoTypedDict(TypedDict):
     r"""Unique identifier of the workflow"""
     name: str
     r"""Display name of the workflow"""
+    updated_at: NotRequired[str]
+    r"""last updated date"""
 
 
 class WorkflowInfoDto(BaseModel):
@@ -23,3 +27,6 @@ class WorkflowInfoDto(BaseModel):
 
     name: str
     r"""Display name of the workflow"""
+
+    updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None
+    r"""last updated date"""
