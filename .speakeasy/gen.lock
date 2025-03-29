@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: 660098195de80bc69b0f039f95fb1e3e
+  docChecksum: add25c6cff2e2b1f4e48ec20b4d75757
   docVersion: "1.0"
-  speakeasyVersion: 1.521.0
-  generationVersion: 2.558.2
-  releaseVersion: 0.4.1
-  configChecksum: f19e4b39527a83df06db795dfd7d03ac
+  speakeasyVersion: 1.526.0
+  generationVersion: 2.563.0
+  releaseVersion: 0.4.2
+  configChecksum: 7ce3c7bff2944a29de9cd25e2d303225
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
