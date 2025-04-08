@@ -538,6 +538,12 @@ from .subscribersv1controller_updatesubscriberonlineflagop import (
     SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse,
     SubscribersV1ControllerUpdateSubscriberOnlineFlagResponseTypedDict,
 )
+from .subscribersv1controller_updatesubscriberop import (
+    SubscribersV1ControllerUpdateSubscriberRequest,
+    SubscribersV1ControllerUpdateSubscriberRequestTypedDict,
+    SubscribersV1ControllerUpdateSubscriberResponse,
+    SubscribersV1ControllerUpdateSubscriberResponseTypedDict,
+)
 from .tenantpayloaddto import (
     TenantPayloadDto,
     TenantPayloadDtoData,
@@ -646,6 +652,10 @@ from .updatesubscriberchannelrequestdto import (
 from .updatesubscriberonlineflagrequestdto import (
     UpdateSubscriberOnlineFlagRequestDto,
     UpdateSubscriberOnlineFlagRequestDtoTypedDict,
+)
+from .updatesubscriberrequestdto import (
+    UpdateSubscriberRequestDto,
+    UpdateSubscriberRequestDtoTypedDict,
 )
 from .validationerrordto import (
     Errors,
@@ -1072,6 +1082,10 @@ __all__ = [
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagRequestTypedDict",
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse",
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagResponseTypedDict",
+    "SubscribersV1ControllerUpdateSubscriberRequest",
+    "SubscribersV1ControllerUpdateSubscriberRequestTypedDict",
+    "SubscribersV1ControllerUpdateSubscriberResponse",
+    "SubscribersV1ControllerUpdateSubscriberResponseTypedDict",
     "TLSOptions",
     "TLSOptionsTypedDict",
     "Tenant",
@@ -1148,6 +1162,8 @@ __all__ = [
     "UpdateSubscriberChannelRequestDtoTypedDict",
     "UpdateSubscriberOnlineFlagRequestDto",
     "UpdateSubscriberOnlineFlagRequestDtoTypedDict",
+    "UpdateSubscriberRequestDto",
+    "UpdateSubscriberRequestDtoTypedDict",
     "UpdatedSubscriberDto",
     "UpdatedSubscriberDtoTypedDict",
     "ValidationErrorDto",

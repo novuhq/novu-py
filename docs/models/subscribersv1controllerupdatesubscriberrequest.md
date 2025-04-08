@@ -1,12 +1,10 @@
-# SubscribersV1ControllerMarkActionAsSeenRequest
+# SubscribersV1ControllerUpdateSubscriberRequest
 
 
 ## Fields
 
 | Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `message_id`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
-| `type`                                                                       | *Any*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
 | `subscriber_id`                                                              | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
 | `idempotency_key`                                                            | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | A header for idempotency purposes                                            |
-| `mark_message_action_as_seen_dto`                                            | [models.MarkMessageActionAsSeenDto](../models/markmessageactionasseendto.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `update_subscriber_request_dto`                                              | [models.UpdateSubscriberRequestDto](../models/updatesubscriberrequestdto.md) | :heavy_check_mark:                                                           | N/A                                                                          |

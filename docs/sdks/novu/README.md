@@ -35,9 +35,6 @@ with Novu(
 
     res = novu.trigger(trigger_event_request_dto=novu_py.TriggerEventRequestDto(
         workflow_id="workflow_identifier",
-        to=novu_py.SubscriberPayloadDto(
-            subscriber_id="<id>",
-        ),
         payload={
             "comment_id": "string",
             "post": {
@@ -51,6 +48,9 @@ with Novu(
                 },
             },
         },
+        to=novu_py.SubscriberPayloadDto(
+            subscriber_id="<id>",
+        ),
     ))
 
     # Handle response
@@ -201,9 +201,6 @@ with Novu(
         "events": [
             novu_py.TriggerEventRequestDto(
                 workflow_id="workflow_identifier",
-                to=novu_py.SubscriberPayloadDto(
-                    subscriber_id="<id>",
-                ),
                 payload={
                     "comment_id": "string",
                     "post": {
@@ -217,15 +214,34 @@ with Novu(
                         },
                     },
                 },
+                to=novu_py.SubscriberPayloadDto(
+                    subscriber_id="<id>",
+                ),
             ),
             novu_py.TriggerEventRequestDto(
                 workflow_id="workflow_identifier",
+                payload={
+                    "comment_id": "string",
+                    "post": {
+                        "text": "string",
+                    },
+                },
+                overrides={
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
                 to=[
                     novu_py.TopicPayloadDto(
                         topic_key="<value>",
                         type=novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
                     ),
                 ],
+            ),
+            novu_py.TriggerEventRequestDto(
+                workflow_id="workflow_identifier",
                 payload={
                     "comment_id": "string",
                     "post": {
@@ -239,26 +255,10 @@ with Novu(
                         },
                     },
                 },
-            ),
-            novu_py.TriggerEventRequestDto(
-                workflow_id="workflow_identifier",
                 to=[
                     "SUBSCRIBER_ID",
                     "SUBSCRIBER_ID",
                 ],
-                payload={
-                    "comment_id": "string",
-                    "post": {
-                        "text": "string",
-                    },
-                },
-                overrides={
-                    "fcm": {
-                        "data": {
-                            "key": "value",
-                        },
-                    },
-                },
             ),
         ],
     })
