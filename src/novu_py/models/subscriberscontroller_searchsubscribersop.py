@@ -9,11 +9,13 @@ from enum import Enum
 from novu_py.types import BaseModel
 from novu_py.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class OrderDirection(str, Enum):
+    r"""Direction of sorting"""
+
     ASC = "ASC"
     DESC = "DESC"
 
@@ -23,6 +25,14 @@ class SubscribersControllerSearchSubscribersRequestTypedDict(TypedDict):
     r"""Cursor for pagination indicating the starting point after which to fetch results."""
     before: NotRequired[str]
     r"""Cursor for pagination indicating the ending point before which to fetch results."""
+    limit: NotRequired[float]
+    r"""Limit the number of items to return"""
+    order_direction: NotRequired[OrderDirection]
+    r"""Direction of sorting"""
+    order_by: NotRequired[str]
+    r"""Field to order by"""
+    include_cursor: NotRequired[bool]
+    r"""Include cursor item in response"""
     email: NotRequired[str]
     r"""Email address of the subscriber to filter results."""
     name: NotRequired[str]
@@ -31,9 +41,6 @@ class SubscribersControllerSearchSubscribersRequestTypedDict(TypedDict):
     r"""Phone number of the subscriber to filter results."""
     subscriber_id: NotRequired[str]
     r"""Unique identifier of the subscriber to filter results."""
-    limit: NotRequired[float]
-    order_direction: NotRequired[OrderDirection]
-    order_by: NotRequired[Any]
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
@@ -50,6 +57,33 @@ class SubscribersControllerSearchSubscribersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Cursor for pagination indicating the ending point before which to fetch results."""
+
+    limit: Annotated[
+        Optional[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Limit the number of items to return"""
+
+    order_direction: Annotated[
+        Optional[OrderDirection],
+        pydantic.Field(alias="orderDirection"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Direction of sorting"""
+
+    order_by: Annotated[
+        Optional[str],
+        pydantic.Field(alias="orderBy"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Field to order by"""
+
+    include_cursor: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="includeCursor"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Include cursor item in response"""
 
     email: Annotated[
         Optional[str],
@@ -75,23 +109,6 @@ class SubscribersControllerSearchSubscribersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Unique identifier of the subscriber to filter results."""
-
-    limit: Annotated[
-        Optional[float],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-
-    order_direction: Annotated[
-        Optional[OrderDirection],
-        pydantic.Field(alias="orderDirection"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-
-    order_by: Annotated[
-        Optional[Any],
-        pydantic.Field(alias="orderBy"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
 
     idempotency_key: Annotated[
         Optional[str],

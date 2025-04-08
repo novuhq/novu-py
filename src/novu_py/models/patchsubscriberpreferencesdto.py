@@ -15,7 +15,7 @@ class PatchSubscriberPreferencesDtoTypedDict(TypedDict):
     channels: PatchPreferenceChannelsDtoTypedDict
     r"""Channel-specific preference settings"""
     workflow_id: NotRequired[str]
-    r"""If provided, update workflow specific preferences, otherwise update global preferences"""
+    r"""Workflow internal _id, identifier or slug. If provided, update workflow specific preferences, otherwise update global preferences"""
 
 
 class PatchSubscriberPreferencesDto(BaseModel):
@@ -23,4 +23,4 @@ class PatchSubscriberPreferencesDto(BaseModel):
     r"""Channel-specific preference settings"""
 
     workflow_id: Annotated[Optional[str], pydantic.Field(alias="workflowId")] = None
-    r"""If provided, update workflow specific preferences, otherwise update global preferences"""
+    r"""Workflow internal _id, identifier or slug. If provided, update workflow specific preferences, otherwise update global preferences"""

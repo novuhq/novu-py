@@ -5,8 +5,8 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
+| `id`               | *Optional[str]*    | :heavy_minus_sign: | N/A                |
 | `name`             | *str*              | :heavy_check_mark: | N/A                |
 | `environment_id`   | *str*              | :heavy_check_mark: | N/A                |
 | `organization_id`  | *str*              | :heavy_check_mark: | N/A                |
-| `id`               | *Optional[str]*    | :heavy_minus_sign: | N/A                |
 | `parent_id`        | *Optional[str]*    | :heavy_minus_sign: | N/A                |

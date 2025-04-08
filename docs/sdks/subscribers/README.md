@@ -14,6 +14,7 @@ A subscriber in Novu represents someone who should receive a message. A subscrib
 * [patch](#patch) - Patch subscriber
 * [delete](#delete) - Delete subscriber
 * [list](#list) - Get subscribers
+* [upsert](#upsert) - Upsert subscriber
 * [create_bulk](#create_bulk) - Bulk create subscribers
 
 ## search
@@ -268,6 +269,67 @@ with Novu(
 ### Response
 
 **[models.SubscribersV1ControllerListSubscribersResponse](../../models/subscribersv1controllerlistsubscribersresponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## upsert
+
+Used to upsert the subscriber entity with new information
+
+### Example Usage
+
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.subscribers.upsert(subscriber_id="<id>", update_subscriber_request_dto={
+        "email": "john.doe@example.com",
+        "first_name": "John",
+        "last_name": "Doe",
+        "phone": "+1234567890",
+        "avatar": "https://example.com/avatar.jpg",
+        "locale": "en-US",
+        "data": {
+            "preferences": {
+                "notifications": True,
+                "theme": "dark",
+            },
+            "tags": [
+                "premium",
+                "newsletter",
+            ],
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `subscriber_id`                                                                 | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
+| `update_subscriber_request_dto`                                                 | [models.UpdateSubscriberRequestDto](../../models/updatesubscriberrequestdto.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `idempotency_key`                                                               | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | A header for idempotency purposes                                               |
+| `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
+
+### Response
+
+**[models.SubscribersV1ControllerUpdateSubscriberResponse](../../models/subscribersv1controllerupdatesubscriberresponse.md)**
 
 ### Errors
 
