@@ -23,6 +23,16 @@ def generate_idempotency_key():
     random_string = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz0123456789', 9))  # Unique alphanumeric string
     return f"{timestamp}{random_string}"
 
+def clean_headers(headers: dict) -> dict:
+    """
+    Remove problematic headers from the response.
+
+    :param headers: Original headers
+    :return: Cleaned headers
+    """
+    headers.pop('content-encoding', None)
+    headers.pop('transfer-encoding', None)
+    return headers
 
 class NovuHooks(BeforeRequestHook, AfterSuccessHook):
     def before_request(self, hook_ctx: BeforeRequestContext, request: httpx.Request) -> Union[httpx.Request, Exception]:
@@ -63,6 +73,9 @@ class NovuHooks(BeforeRequestHook, AfterSuccessHook):
         """
         Modify the response after a successful request.
 
+        - Removes problematic headers.
+        - Extracts the 'data' key if the response contains only that key.
+
         :param hook_ctx: Context for the after success hook
         :param response: The response to be potentially modified
         :return: Modified or original response
@@ -84,7 +97,7 @@ class NovuHooks(BeforeRequestHook, AfterSuccessHook):
             # Create a new HTTPX response
             new_response = httpx.Response(
                 status_code=response.status_code,
-                headers=response.headers,
+                headers=clean_headers(dict(response.headers)),
                 content=json.dumps(json_response['data']).encode('utf-8'),
                 request=response.request
             )
