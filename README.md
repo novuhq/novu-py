@@ -587,6 +587,16 @@ asyncio.run(main())
 * [retrieve](docs/sdks/novusubscribers/README.md#retrieve) - Check topic subscriber
 * [remove](docs/sdks/novusubscribers/README.md#remove) - Subscribers removal
 
+### [workflows](docs/sdks/workflows/README.md)
+
+* [create](docs/sdks/workflows/README.md#create)
+* [workflow_controller_search_workflows](docs/sdks/workflows/README.md#workflow_controller_search_workflows)
+* [update](docs/sdks/workflows/README.md#update)
+* [retrieve](docs/sdks/workflows/README.md#retrieve)
+* [delete](docs/sdks/workflows/README.md#delete)
+* [workflow_controller_patch_workflow](docs/sdks/workflows/README.md#workflow_controller_patch_workflow)
+* [workflow_controller_sync](docs/sdks/workflows/README.md#workflow_controller_sync)
+
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
