@@ -6,21 +6,31 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PreferenceChannelsTypedDict(TypedDict):
+class SubscriberPreferenceChannelsTypedDict(TypedDict):
     email: NotRequired[bool]
+    r"""Email channel preference"""
     sms: NotRequired[bool]
+    r"""SMS channel preference"""
     in_app: NotRequired[bool]
+    r"""In-app channel preference"""
     chat: NotRequired[bool]
+    r"""Chat channel preference"""
     push: NotRequired[bool]
+    r"""Push notification channel preference"""
 
 
-class PreferenceChannels(BaseModel):
+class SubscriberPreferenceChannels(BaseModel):
     email: Optional[bool] = None
+    r"""Email channel preference"""
 
     sms: Optional[bool] = None
+    r"""SMS channel preference"""
 
     in_app: Optional[bool] = None
+    r"""In-app channel preference"""
 
     chat: Optional[bool] = None
+    r"""Chat channel preference"""
 
     push: Optional[bool] = None
+    r"""Push notification channel preference"""

@@ -1,4 +1,4 @@
-# WorkflowInfoDto
+# SubscriberPreferencesWorkflowInfoDto
 
 
 ## Fields

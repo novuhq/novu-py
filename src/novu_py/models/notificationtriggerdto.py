@@ -12,14 +12,14 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class Type(str, Enum):
+class NotificationTriggerDtoType(str, Enum):
     r"""Type of the trigger"""
 
     EVENT = "event"
 
 
 class NotificationTriggerDtoTypedDict(TypedDict):
-    type: Type
+    type: NotificationTriggerDtoType
     r"""Type of the trigger"""
     identifier: str
     r"""Identifier of the trigger"""
@@ -30,7 +30,7 @@ class NotificationTriggerDtoTypedDict(TypedDict):
 
 
 class NotificationTriggerDto(BaseModel):
-    type: Type
+    type: NotificationTriggerDtoType
     r"""Type of the trigger"""
 
     identifier: str

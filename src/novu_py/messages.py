@@ -112,9 +112,7 @@ class Messages(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.MessagesControllerGetMessagesResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.ActivitiesResponseDto
-                ),
+                result=utils.unmarshal_json(http_res.text, models.MessagesResponseDto),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
@@ -264,9 +262,7 @@ class Messages(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.MessagesControllerGetMessagesResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.ActivitiesResponseDto
-                ),
+                result=utils.unmarshal_json(http_res.text, models.MessagesResponseDto),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):

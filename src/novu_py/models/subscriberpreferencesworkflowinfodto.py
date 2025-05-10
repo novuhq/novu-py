@@ -7,7 +7,7 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class WorkflowInfoDtoTypedDict(TypedDict):
+class SubscriberPreferencesWorkflowInfoDtoTypedDict(TypedDict):
     slug: str
     r"""Workflow slug"""
     identifier: str
@@ -18,7 +18,7 @@ class WorkflowInfoDtoTypedDict(TypedDict):
     r"""last updated date"""
 
 
-class WorkflowInfoDto(BaseModel):
+class SubscriberPreferencesWorkflowInfoDto(BaseModel):
     slug: str
     r"""Workflow slug"""
 

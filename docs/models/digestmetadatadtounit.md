@@ -1,4 +1,6 @@
-# DigestRegularMetadataUnit
+# DigestMetadataDtoUnit
+
+Unit of the digest
 
 
 ## Values

@@ -1,4 +1,4 @@
-# TimedConfigWeekDays
+# DigestTimedConfigDtoWeekDays
 
 
 ## Values

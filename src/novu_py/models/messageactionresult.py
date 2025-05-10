@@ -7,23 +7,23 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class MessageActionResultPayloadTypedDict(TypedDict):
+class PayloadTypedDict(TypedDict):
     r"""Payload of the action result"""
 
 
-class MessageActionResultPayload(BaseModel):
+class Payload(BaseModel):
     r"""Payload of the action result"""
 
 
 class MessageActionResultTypedDict(TypedDict):
-    payload: NotRequired[MessageActionResultPayloadTypedDict]
+    payload: NotRequired[PayloadTypedDict]
     r"""Payload of the action result"""
     type: NotRequired[ButtonTypeEnum]
     r"""Type of button for the action result"""
 
 
 class MessageActionResult(BaseModel):
-    payload: Optional[MessageActionResultPayload] = None
+    payload: Optional[Payload] = None
     r"""Payload of the action result"""
 
     type: Optional[ButtonTypeEnum] = None

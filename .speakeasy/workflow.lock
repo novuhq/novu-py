@@ -1,21 +1,21 @@
-speakeasyVersion: 1.531.0
+speakeasyVersion: 1.543.4
 sources:
     novu-OAS:
         sourceNamespace: novu-oas
-        sourceRevisionDigest: sha256:88323d9cfc8891c52cbb6fd648149eefe23e2234c35da8cdc77437a875686ed9
-        sourceBlobDigest: sha256:4eaaf3fc29cc6ebbebde8743c0de136f9606cada7bce9e274364f92a4a6aac9b
+        sourceRevisionDigest: sha256:b7669fdea3fd814bf832378e48264e014ba4c966ee9490f2af40a39583da0d0c
+        sourceBlobDigest: sha256:3795e4ad5789d63d8809dd608dccb057dba9a6e6b631b32119676f0d705ec5e9
         tags:
             - latest
-            - speakeasy-sdk-regen-1744157053
-            - "1.0"
+            - speakeasy-sdk-regen-1744243452
+            - 2.1.13
 targets:
     novu:
         source: novu-OAS
         sourceNamespace: novu-oas
-        sourceRevisionDigest: sha256:88323d9cfc8891c52cbb6fd648149eefe23e2234c35da8cdc77437a875686ed9
-        sourceBlobDigest: sha256:4eaaf3fc29cc6ebbebde8743c0de136f9606cada7bce9e274364f92a4a6aac9b
+        sourceRevisionDigest: sha256:b7669fdea3fd814bf832378e48264e014ba4c966ee9490f2af40a39583da0d0c
+        sourceBlobDigest: sha256:3795e4ad5789d63d8809dd608dccb057dba9a6e6b631b32119676f0d705ec5e9
         codeSamplesNamespace: novu-oas-python-code-samples
-        codeSamplesRevisionDigest: sha256:ae5962bd977063c990197492217df0b89c34b96742fb7ca448e7ec31c8ce7696
+        codeSamplesRevisionDigest: sha256:b64eb3c65706f1bd3e03bbb2473cc67f4080babfdb1a9da5a035ca2087634eb7
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
