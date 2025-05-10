@@ -13,7 +13,7 @@ from novu_py.preferences import Preferences
 from novu_py.properties import Properties
 from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
-from typing import Any, Dict, Mapping, Optional, Union, cast
+from typing import Any, Dict, List, Mapping, Optional, Union, cast
 
 
 class Subscribers(BaseSDK):
@@ -1693,7 +1693,7 @@ class Subscribers(BaseSDK):
         def next_func() -> (
             Optional[models.SubscribersV1ControllerListSubscribersResponse]
         ):
-            body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
             page = request.page if not request.page is None else 1
             next_page = page + 1
 
@@ -1871,7 +1871,7 @@ class Subscribers(BaseSDK):
         def next_func() -> (
             Optional[models.SubscribersV1ControllerListSubscribersResponse]
         ):
-            body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
             page = request.page if not request.page is None else 1
             next_page = page + 1
 

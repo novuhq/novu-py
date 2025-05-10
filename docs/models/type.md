@@ -1,10 +1,9 @@
 # Type
 
-Type of the trigger
-
 
 ## Values
 
-| Name    | Value   |
-| ------- | ------- |
-| `EVENT` | event   |
+| Name      | Value     |
+| --------- | --------- |
+| `REGULAR` | regular   |
+| `BACKOFF` | backoff   |

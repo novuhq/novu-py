@@ -1,4 +1,4 @@
-# UpdateSubscriberChannelRequestDtoProviderID
+# ChatOrPushProviderEnum
 
 The provider identifier for the credentials
 

@@ -1,4 +1,4 @@
-# ValidationErrorDtoValue
+# Message5
 
 
 ## Supported Types
@@ -25,11 +25,5 @@ value: bool = /* values here */
 
 ```python
 value: Dict[str, Any] = /* values here */
-```
-
-### `List[Dict[str, Any]]`
-
-```python
-value: List[Dict[str, Any]] = /* values here */
 ```
 
