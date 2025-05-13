@@ -8,7 +8,7 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class DigestRegularMetadataUnit(str, Enum):
+class Unit(str, Enum):
     SECONDS = "seconds"
     MINUTES = "minutes"
     HOURS = "hours"
@@ -17,7 +17,7 @@ class DigestRegularMetadataUnit(str, Enum):
     MONTHS = "months"
 
 
-class DigestRegularMetadataType(str, Enum):
+class Type(str, Enum):
     REGULAR = "regular"
     BACKOFF = "backoff"
 
@@ -32,9 +32,9 @@ class BackoffUnit(str, Enum):
 
 
 class DigestRegularMetadataTypedDict(TypedDict):
-    type: DigestRegularMetadataType
+    type: Type
     amount: NotRequired[float]
-    unit: NotRequired[DigestRegularMetadataUnit]
+    unit: NotRequired[Unit]
     digest_key: NotRequired[str]
     backoff: NotRequired[bool]
     backoff_amount: NotRequired[float]
@@ -43,11 +43,11 @@ class DigestRegularMetadataTypedDict(TypedDict):
 
 
 class DigestRegularMetadata(BaseModel):
-    type: DigestRegularMetadataType
+    type: Type
 
     amount: Optional[float] = None
 
-    unit: Optional[DigestRegularMetadataUnit] = None
+    unit: Optional[Unit] = None
 
     digest_key: Annotated[Optional[str], pydantic.Field(alias="digestKey")] = None
 

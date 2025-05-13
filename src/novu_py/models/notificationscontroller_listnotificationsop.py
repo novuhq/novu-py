@@ -27,6 +27,8 @@ class NotificationsControllerListNotificationsRequestTypedDict(TypedDict):
     r"""Limit for pagination"""
     transaction_id: NotRequired[str]
     r"""Transaction ID for filtering"""
+    topic_key: NotRequired[str]
+    r"""Topic Key for filtering notifications by topic"""
     after: NotRequired[str]
     r"""Date filter for records after this timestamp. Defaults to earliest date allowed by subscription plan"""
     before: NotRequired[str]
@@ -88,6 +90,13 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Transaction ID for filtering"""
+
+    topic_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="topicKey"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Topic Key for filtering notifications by topic"""
 
     after: Annotated[
         Optional[str],

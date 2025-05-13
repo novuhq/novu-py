@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [update_as_seen](#update_as_seen) - Mark message action as seen
-* [mark_all](#mark_all) - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+* [mark_all](#mark_all) - Marks all the subscriber messages as read, unread, seen or unseen.
 * [mark_all_as](#mark_all_as) - Mark a subscriber messages as seen, read, unseen or unread
 
 ## update_as_seen
@@ -61,7 +61,7 @@ with Novu(
 
 ## mark_all
 
-Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+Marks all the subscriber messages as read, unread, seen or unseen.
 
 ### Example Usage
 

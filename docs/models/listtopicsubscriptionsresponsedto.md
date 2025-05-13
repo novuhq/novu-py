@@ -1,0 +1,10 @@
+# ListTopicSubscriptionsResponseDto
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `data`                                                                                 | List[[models.TopicSubscriptionResponseDto](../models/topicsubscriptionresponsedto.md)] | :heavy_check_mark:                                                                     | List of returned Topic Subscriptions                                                   |
+| `next`                                                                                 | *Nullable[str]*                                                                        | :heavy_check_mark:                                                                     | The cursor for the next page of results, or null if there are no more pages.           |
+| `previous`                                                                             | *Nullable[str]*                                                                        | :heavy_check_mark:                                                                     | The cursor for the previous page of results, or null if this is the first page.        |

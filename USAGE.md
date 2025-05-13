@@ -19,13 +19,22 @@ with Novu(
                 "text": "string",
             },
         },
-        overrides={
-            "fcm": {
-                "data": {
-                    "key": "value",
+        overrides=novu_py.Overrides(
+            steps={
+                "email-step": novu_py.StepsOverrides(
+                    providers={
+                        "sendgrid": {
+                            "templateId": "1234567890",
+                        },
+                    },
+                ),
+            },
+            providers={
+                "sendgrid": {
+                    "templateId": "1234567890",
                 },
             },
-        },
+        ),
         to=novu_py.SubscriberPayloadDto(
             subscriber_id="<id>",
         ),
@@ -58,13 +67,22 @@ async def main():
                     "text": "string",
                 },
             },
-            overrides={
-                "fcm": {
-                    "data": {
-                        "key": "value",
+            overrides=novu_py.Overrides(
+                steps={
+                    "email-step": novu_py.StepsOverrides(
+                        providers={
+                            "sendgrid": {
+                                "templateId": "1234567890",
+                            },
+                        },
+                    ),
+                },
+                providers={
+                    "sendgrid": {
+                        "templateId": "1234567890",
                     },
                 },
-            },
+            ),
             to=novu_py.SubscriberPayloadDto(
                 subscriber_id="<id>",
             ),
@@ -119,6 +137,7 @@ asyncio.run(main())
 
 ```python
 # Synchronous Example
+import novu_py
 from novu_py import Novu
 
 
@@ -126,15 +145,38 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.trigger_broadcast(trigger_event_to_all_request_dto={
-        "name": "<value>",
-        "payload": {
+    res = novu.trigger_broadcast(trigger_event_to_all_request_dto=novu_py.TriggerEventToAllRequestDto(
+        name="<value>",
+        payload={
             "comment_id": "string",
             "post": {
                 "text": "string",
             },
         },
-    })
+        overrides=novu_py.TriggerEventToAllRequestDtoOverrides(
+            steps={
+                "email-step": novu_py.StepsOverrides(
+                    providers={
+                        "sendgrid": {
+                            "templateId": "1234567890",
+                        },
+                    },
+                ),
+            },
+            providers={
+                "sendgrid": {
+                    "templateId": "1234567890",
+                },
+            },
+            **{
+                "fcm": {
+                    "data": {
+                        "key": "value",
+                    },
+                },
+            },
+        ),
+    ))
 
     # Handle response
     print(res)
@@ -146,6 +188,7 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
+import novu_py
 from novu_py import Novu
 
 async def main():
@@ -154,15 +197,38 @@ async def main():
         secret_key="YOUR_SECRET_KEY_HERE",
     ) as novu:
 
-        res = await novu.trigger_broadcast_async(trigger_event_to_all_request_dto={
-            "name": "<value>",
-            "payload": {
+        res = await novu.trigger_broadcast_async(trigger_event_to_all_request_dto=novu_py.TriggerEventToAllRequestDto(
+            name="<value>",
+            payload={
                 "comment_id": "string",
                 "post": {
                     "text": "string",
                 },
             },
-        })
+            overrides=novu_py.TriggerEventToAllRequestDtoOverrides(
+                steps={
+                    "email-step": novu_py.StepsOverrides(
+                        providers={
+                            "sendgrid": {
+                                "templateId": "1234567890",
+                            },
+                        },
+                    ),
+                },
+                providers={
+                    "sendgrid": {
+                        "templateId": "1234567890",
+                    },
+                },
+                **{
+                    "fcm": {
+                        "data": {
+                            "key": "value",
+                        },
+                    },
+                },
+            ),
+        ))
 
         # Handle response
         print(res)
@@ -192,13 +258,22 @@ with Novu(
                         "text": "string",
                     },
                 },
-                overrides={
-                    "fcm": {
-                        "data": {
-                            "key": "value",
+                overrides=novu_py.Overrides(
+                    steps={
+                        "email-step": novu_py.StepsOverrides(
+                            providers={
+                                "sendgrid": {
+                                    "templateId": "1234567890",
+                                },
+                            },
+                        ),
+                    },
+                    providers={
+                        "sendgrid": {
+                            "templateId": "1234567890",
                         },
                     },
-                },
+                ),
                 to=novu_py.SubscriberPayloadDto(
                     subscriber_id="<id>",
                 ),
@@ -211,13 +286,22 @@ with Novu(
                         "text": "string",
                     },
                 },
-                overrides={
-                    "fcm": {
-                        "data": {
-                            "key": "value",
+                overrides=novu_py.Overrides(
+                    steps={
+                        "email-step": novu_py.StepsOverrides(
+                            providers={
+                                "sendgrid": {
+                                    "templateId": "1234567890",
+                                },
+                            },
+                        ),
+                    },
+                    providers={
+                        "sendgrid": {
+                            "templateId": "1234567890",
                         },
                     },
-                },
+                ),
                 to=[
                     novu_py.TopicPayloadDto(
                         topic_key="<value>",
@@ -233,13 +317,22 @@ with Novu(
                         "text": "string",
                     },
                 },
-                overrides={
-                    "fcm": {
-                        "data": {
-                            "key": "value",
+                overrides=novu_py.Overrides(
+                    steps={
+                        "email-step": novu_py.StepsOverrides(
+                            providers={
+                                "sendgrid": {
+                                    "templateId": "1234567890",
+                                },
+                            },
+                        ),
+                    },
+                    providers={
+                        "sendgrid": {
+                            "templateId": "1234567890",
                         },
                     },
-                },
+                ),
                 to=[
                     "SUBSCRIBER_ID",
                     "SUBSCRIBER_ID",
@@ -277,13 +370,22 @@ async def main():
                             "text": "string",
                         },
                     },
-                    overrides={
-                        "fcm": {
-                            "data": {
-                                "key": "value",
+                    overrides=novu_py.Overrides(
+                        steps={
+                            "email-step": novu_py.StepsOverrides(
+                                providers={
+                                    "sendgrid": {
+                                        "templateId": "1234567890",
+                                    },
+                                },
+                            ),
+                        },
+                        providers={
+                            "sendgrid": {
+                                "templateId": "1234567890",
                             },
                         },
-                    },
+                    ),
                     to=novu_py.SubscriberPayloadDto(
                         subscriber_id="<id>",
                     ),
@@ -296,13 +398,22 @@ async def main():
                             "text": "string",
                         },
                     },
-                    overrides={
-                        "fcm": {
-                            "data": {
-                                "key": "value",
+                    overrides=novu_py.Overrides(
+                        steps={
+                            "email-step": novu_py.StepsOverrides(
+                                providers={
+                                    "sendgrid": {
+                                        "templateId": "1234567890",
+                                    },
+                                },
+                            ),
+                        },
+                        providers={
+                            "sendgrid": {
+                                "templateId": "1234567890",
                             },
                         },
-                    },
+                    ),
                     to=[
                         novu_py.TopicPayloadDto(
                             topic_key="<value>",
@@ -318,13 +429,22 @@ async def main():
                             "text": "string",
                         },
                     },
-                    overrides={
-                        "fcm": {
-                            "data": {
-                                "key": "value",
+                    overrides=novu_py.Overrides(
+                        steps={
+                            "email-step": novu_py.StepsOverrides(
+                                providers={
+                                    "sendgrid": {
+                                        "templateId": "1234567890",
+                                    },
+                                },
+                            ),
+                        },
+                        providers={
+                            "sendgrid": {
+                                "templateId": "1234567890",
                             },
                         },
-                    },
+                    ),
                     to=[
                         "SUBSCRIBER_ID",
                         "SUBSCRIBER_ID",

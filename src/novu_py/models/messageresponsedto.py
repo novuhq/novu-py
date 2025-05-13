@@ -14,11 +14,13 @@ from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-ContentTypedDict = TypeAliasType("ContentTypedDict", Union[EmailBlockTypedDict, str])
+ContentTypedDict = TypeAliasType(
+    "ContentTypedDict", Union[List[EmailBlockTypedDict], str]
+)
 r"""Content of the message, can be an email block or a string"""
 
 
-Content = TypeAliasType("Content", Union[EmailBlock, str])
+Content = TypeAliasType("Content", Union[List[EmailBlock], str])
 r"""Content of the message, can be an email block or a string"""
 
 
@@ -75,12 +77,16 @@ class MessageResponseDtoTypedDict(TypedDict):
     r"""Workflow template associated with the message"""
     template_identifier: NotRequired[str]
     r"""Identifier for the message template"""
+    delivered_at: NotRequired[List[str]]
+    r"""Array of delivery dates for the message, if the message has multiple delivery dates, for example after being snoozed"""
     last_seen_date: NotRequired[str]
     r"""Last seen date of the message, if available"""
     last_read_date: NotRequired[str]
     r"""Last read date of the message, if available"""
     subject: NotRequired[str]
     r"""Subject of the message, if applicable"""
+    snoozed_until: NotRequired[str]
+    r"""Date when the message will be unsnoozed"""
     email: NotRequired[str]
     r"""Email address associated with the message, if applicable"""
     phone: NotRequired[str]
@@ -162,6 +168,11 @@ class MessageResponseDto(BaseModel):
     ] = None
     r"""Identifier for the message template"""
 
+    delivered_at: Annotated[
+        Optional[List[str]], pydantic.Field(alias="deliveredAt")
+    ] = None
+    r"""Array of delivery dates for the message, if the message has multiple delivery dates, for example after being snoozed"""
+
     last_seen_date: Annotated[Optional[str], pydantic.Field(alias="lastSeenDate")] = (
         None
     )
@@ -174,6 +185,9 @@ class MessageResponseDto(BaseModel):
 
     subject: Optional[str] = None
     r"""Subject of the message, if applicable"""
+
+    snoozed_until: Annotated[Optional[str], pydantic.Field(alias="snoozedUntil")] = None
+    r"""Date when the message will be unsnoozed"""
 
     email: Optional[str] = None
     r"""Email address associated with the message, if applicable"""
@@ -219,9 +233,11 @@ class MessageResponseDto(BaseModel):
             "subscriber",
             "template",
             "templateIdentifier",
+            "deliveredAt",
             "lastSeenDate",
             "lastReadDate",
             "subject",
+            "snoozedUntil",
             "email",
             "phone",
             "directWebhookUrl",

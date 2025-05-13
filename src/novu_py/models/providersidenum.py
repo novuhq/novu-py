@@ -58,6 +58,7 @@ class ProvidersIDEnum(str, Enum):
     BREVO_SMS = "brevo-sms"
     EAZY_SMS = "eazy-sms"
     MOBISHASTRA = "mobishastra"
+    AFRO_MESSAGE = "afro-message"
     FCM = "fcm"
     APNS = "apns"
     EXPO = "expo"

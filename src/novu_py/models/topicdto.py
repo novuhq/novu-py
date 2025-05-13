@@ -3,28 +3,25 @@
 from __future__ import annotations
 from novu_py.types import BaseModel
 import pydantic
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class TopicDtoTypedDict(TypedDict):
-    organization_id: str
-    environment_id: str
+    id: str
+    r"""The internal unique identifier of the topic"""
     key: str
-    name: str
-    subscribers: List[str]
-    id: NotRequired[str]
+    r"""The key identifier of the topic used in your application. Should be unique on the environment level."""
+    name: NotRequired[str]
+    r"""The name of the topic"""
 
 
 class TopicDto(BaseModel):
-    organization_id: Annotated[str, pydantic.Field(alias="_organizationId")]
-
-    environment_id: Annotated[str, pydantic.Field(alias="_environmentId")]
+    id: Annotated[str, pydantic.Field(alias="_id")]
+    r"""The internal unique identifier of the topic"""
 
     key: str
+    r"""The key identifier of the topic used in your application. Should be unique on the environment level."""
 
-    name: str
-
-    subscribers: List[str]
-
-    id: Annotated[Optional[str], pydantic.Field(alias="_id")] = None
+    name: Optional[str] = None
+    r"""The name of the topic"""

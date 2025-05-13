@@ -54,8 +54,6 @@ class NotificationFeedItemDtoTypedDict(TypedDict):
     r"""Indicates whether the notification has been read by the subscriber."""
     seen: bool
     r"""Indicates whether the notification has been seen by the subscriber."""
-    deleted: bool
-    r"""Indicates whether the notification has been deleted."""
     cta: MessageCTATypedDict
     r"""Call-to-action information associated with the notification."""
     status: NotificationFeedItemDtoStatus
@@ -124,9 +122,6 @@ class NotificationFeedItemDto(BaseModel):
 
     seen: bool
     r"""Indicates whether the notification has been seen by the subscriber."""
-
-    deleted: bool
-    r"""Indicates whether the notification has been deleted."""
 
     cta: MessageCTA
     r"""Call-to-action information associated with the notification."""

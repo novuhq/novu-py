@@ -13,6 +13,7 @@ from .activitynotificationtemplateresponsedto import (
     ActivityNotificationTemplateResponseDto,
     ActivityNotificationTemplateResponseDtoTypedDict,
 )
+from .activitytopicdto import ActivityTopicDto, ActivityTopicDtoTypedDict
 from .steptypeenum import StepTypeEnum
 from novu_py.types import BaseModel
 import pydantic
@@ -78,6 +79,8 @@ class ActivityNotificationResponseDtoTypedDict(TypedDict):
     r"""Controls associated with the notification"""
     to: NotRequired[ActivityNotificationResponseDtoToTypedDict]
     r"""To field for subscriber definition"""
+    topics: NotRequired[List[ActivityTopicDtoTypedDict]]
+    r"""Topics of the notification"""
 
 
 class ActivityNotificationResponseDto(BaseModel):
@@ -132,3 +135,6 @@ class ActivityNotificationResponseDto(BaseModel):
 
     to: Optional[ActivityNotificationResponseDtoTo] = None
     r"""To field for subscriber definition"""
+
+    topics: Optional[List[ActivityTopicDto]] = None
+    r"""Topics of the notification"""

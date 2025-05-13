@@ -11,7 +11,7 @@ from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class Unit(str, Enum):
+class DigestMetadataDtoUnit(str, Enum):
     r"""Unit of the digest"""
 
     SECONDS = "seconds"
@@ -29,7 +29,7 @@ class DigestMetadataDtoTypedDict(TypedDict):
     r"""Optional key for the digest"""
     amount: NotRequired[float]
     r"""Amount for the digest"""
-    unit: NotRequired[Unit]
+    unit: NotRequired[DigestMetadataDtoUnit]
     r"""Unit of the digest"""
     events: NotRequired[List[Dict[str, Any]]]
     r"""Optional array of events associated with the digest, represented as key-value pairs"""
@@ -55,7 +55,7 @@ class DigestMetadataDto(BaseModel):
     amount: Optional[float] = None
     r"""Amount for the digest"""
 
-    unit: Optional[Unit] = None
+    unit: Optional[DigestMetadataDtoUnit] = None
     r"""Unit of the digest"""
 
     events: Optional[List[Dict[str, Any]]] = None

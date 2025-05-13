@@ -10,20 +10,20 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class MessageCTATypedDict(TypedDict):
-    data: MessageCTADataTypedDict
-    r"""Data associated with the call to action"""
     type: NotRequired[ChannelCTATypeEnum]
     r"""Type of call to action"""
+    data: NotRequired[MessageCTADataTypedDict]
+    r"""Data associated with the call to action"""
     action: NotRequired[MessageActionTypedDict]
     r"""Action associated with the call to action"""
 
 
 class MessageCTA(BaseModel):
-    data: MessageCTAData
-    r"""Data associated with the call to action"""
-
     type: Optional[ChannelCTATypeEnum] = None
     r"""Type of call to action"""
+
+    data: Optional[MessageCTAData] = None
+    r"""Data associated with the call to action"""
 
     action: Optional[MessageAction] = None
     r"""Action associated with the call to action"""

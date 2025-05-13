@@ -4,7 +4,10 @@ from __future__ import annotations
 from .notificationgroup import NotificationGroup, NotificationGroupTypedDict
 from .notificationstepdto import NotificationStepDto, NotificationStepDtoTypedDict
 from .notificationtrigger import NotificationTrigger, NotificationTriggerTypedDict
-from .preferencechannels import PreferenceChannels, PreferenceChannelsTypedDict
+from .subscriberpreferencechannels import (
+    SubscriberPreferenceChannels,
+    SubscriberPreferenceChannelsTypedDict,
+)
 from novu_py.types import BaseModel
 import pydantic
 from typing import List, Optional
@@ -32,7 +35,7 @@ class WorkflowResponseTypedDict(TypedDict):
     description: str
     active: bool
     draft: bool
-    preference_settings: PreferenceChannelsTypedDict
+    preference_settings: SubscriberPreferenceChannelsTypedDict
     critical: bool
     tags: List[str]
     steps: List[NotificationStepDtoTypedDict]
@@ -61,7 +64,7 @@ class WorkflowResponse(BaseModel):
     draft: bool
 
     preference_settings: Annotated[
-        PreferenceChannels, pydantic.Field(alias="preferenceSettings")
+        SubscriberPreferenceChannels, pydantic.Field(alias="preferenceSettings")
     ]
 
     critical: bool

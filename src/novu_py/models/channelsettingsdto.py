@@ -2,37 +2,15 @@
 
 from __future__ import annotations
 from .channelcredentials import ChannelCredentials, ChannelCredentialsTypedDict
-from enum import Enum
+from .chatorpushproviderenum import ChatOrPushProviderEnum
 from novu_py.types import BaseModel
 import pydantic
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class ProviderID(str, Enum):
-    r"""The provider identifier for the credentials"""
-
-    SLACK = "slack"
-    DISCORD = "discord"
-    MSTEAMS = "msteams"
-    MATTERMOST = "mattermost"
-    RYVER = "ryver"
-    ZULIP = "zulip"
-    GRAFANA_ON_CALL = "grafana-on-call"
-    GETSTREAM = "getstream"
-    ROCKET_CHAT = "rocket-chat"
-    WHATSAPP_BUSINESS = "whatsapp-business"
-    FCM = "fcm"
-    APNS = "apns"
-    EXPO = "expo"
-    ONE_SIGNAL = "one-signal"
-    PUSHPAD = "pushpad"
-    PUSH_WEBHOOK = "push-webhook"
-    PUSHER_BEAMS = "pusher-beams"
-
-
 class ChannelSettingsDtoTypedDict(TypedDict):
-    provider_id: ProviderID
+    provider_id: ChatOrPushProviderEnum
     r"""The provider identifier for the credentials"""
     credentials: ChannelCredentialsTypedDict
     r"""Credentials payload for the specified provider"""
@@ -43,7 +21,7 @@ class ChannelSettingsDtoTypedDict(TypedDict):
 
 
 class ChannelSettingsDto(BaseModel):
-    provider_id: Annotated[ProviderID, pydantic.Field(alias="providerId")]
+    provider_id: Annotated[ChatOrPushProviderEnum, pydantic.Field(alias="providerId")]
     r"""The provider identifier for the credentials"""
 
     credentials: ChannelCredentials

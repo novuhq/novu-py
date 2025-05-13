@@ -32,11 +32,11 @@ class ActivityNotificationJobResponseDtoType(str, Enum):
     CUSTOM = "custom"
 
 
-class PayloadTypedDict(TypedDict):
+class ActivityNotificationJobResponseDtoPayloadTypedDict(TypedDict):
     r"""Optional payload for the job"""
 
 
-class Payload(BaseModel):
+class ActivityNotificationJobResponseDtoPayload(BaseModel):
     r"""Optional payload for the job"""
 
 
@@ -57,7 +57,7 @@ class ActivityNotificationJobResponseDtoTypedDict(TypedDict):
     r"""Optional digest for the job, including metadata and events"""
     overrides: NotRequired[Dict[str, Any]]
     r"""Optional context object for additional error details."""
-    payload: NotRequired[PayloadTypedDict]
+    payload: NotRequired[ActivityNotificationJobResponseDtoPayloadTypedDict]
     r"""Optional payload for the job"""
     updated_at: NotRequired[str]
     r"""Updated time of the notification"""
@@ -91,7 +91,7 @@ class ActivityNotificationJobResponseDto(BaseModel):
     overrides: Optional[Dict[str, Any]] = None
     r"""Optional context object for additional error details."""
 
-    payload: Optional[Payload] = None
+    payload: Optional[ActivityNotificationJobResponseDtoPayload] = None
     r"""Optional payload for the job"""
 
     updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None
