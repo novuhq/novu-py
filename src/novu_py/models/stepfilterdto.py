@@ -10,7 +10,7 @@ from typing import List
 from typing_extensions import Annotated, TypedDict
 
 
-class Value(str, Enum):
+class StepFilterDtoValue(str, Enum):
     AND = "AND"
     OR = "OR"
 
@@ -18,7 +18,7 @@ class Value(str, Enum):
 class StepFilterDtoTypedDict(TypedDict):
     is_negated: bool
     type: BuilderFieldTypeEnum
-    value: Value
+    value: StepFilterDtoValue
     children: List[FieldFilterPartDtoTypedDict]
 
 
@@ -27,6 +27,6 @@ class StepFilterDto(BaseModel):
 
     type: BuilderFieldTypeEnum
 
-    value: Value
+    value: StepFilterDtoValue
 
     children: List[FieldFilterPartDto]

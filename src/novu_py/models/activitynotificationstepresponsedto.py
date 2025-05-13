@@ -26,11 +26,11 @@ class ControlVariables(BaseModel):
     r"""Control variables"""
 
 
-class MetadataTypedDict(TypedDict):
+class ActivityNotificationStepResponseDtoMetadataTypedDict(TypedDict):
     r"""Metadata for the workflow step"""
 
 
-class Metadata(BaseModel):
+class ActivityNotificationStepResponseDtoMetadata(BaseModel):
     r"""Metadata for the workflow step"""
 
 
@@ -57,7 +57,7 @@ class ActivityNotificationStepResponseDtoTypedDict(TypedDict):
     r"""Reply callback settings"""
     control_variables: NotRequired[ControlVariablesTypedDict]
     r"""Control variables"""
-    metadata: NotRequired[MetadataTypedDict]
+    metadata: NotRequired[ActivityNotificationStepResponseDtoMetadataTypedDict]
     r"""Metadata for the workflow step"""
     issues: NotRequired[IssuesTypedDict]
     r"""Step issues"""
@@ -95,7 +95,7 @@ class ActivityNotificationStepResponseDto(BaseModel):
     ] = None
     r"""Control variables"""
 
-    metadata: Optional[Metadata] = None
+    metadata: Optional[ActivityNotificationStepResponseDtoMetadata] = None
     r"""Metadata for the workflow step"""
 
     issues: Optional[Issues] = None

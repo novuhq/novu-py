@@ -1,0 +1,10 @@
+# TopicsControllerCreateTopicSubscriptionsRequest
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `topic_key`                                                                                  | *str*                                                                                        | :heavy_check_mark:                                                                           | The key identifier of the topic                                                              |
+| `idempotency_key`                                                                            | *Optional[str]*                                                                              | :heavy_minus_sign:                                                                           | A header for idempotency purposes                                                            |
+| `create_topic_subscriptions_request_dto`                                                     | [models.CreateTopicSubscriptionsRequestDto](../models/createtopicsubscriptionsrequestdto.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |

@@ -61,7 +61,7 @@ with Novu(
 
 ## create
 
-Create subscriber with the given data
+Create subscriber with the given data, if the subscriber already exists, it will be updated
 
 ### Example Usage
 

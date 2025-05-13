@@ -9,11 +9,12 @@ from novu_py.authentication import Authentication
 from novu_py.credentials import Credentials
 from novu_py.novu_messages import NovuMessages
 from novu_py.novu_notifications import NovuNotifications
+from novu_py.novu_topics import NovuTopics
 from novu_py.preferences import Preferences
 from novu_py.properties import Properties
 from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
-from typing import Any, Dict, Mapping, Optional, Union, cast
+from typing import Any, Dict, List, Mapping, Optional, Union, cast
 
 
 class Subscribers(BaseSDK):
@@ -22,6 +23,7 @@ class Subscribers(BaseSDK):
     """
 
     preferences: Preferences
+    topics: NovuTopics
     credentials: Credentials
     authentication: Authentication
     messages: NovuMessages
@@ -35,6 +37,7 @@ class Subscribers(BaseSDK):
 
     def _init_sdks(self):
         self.preferences = Preferences(self.sdk_configuration)
+        self.topics = NovuTopics(self.sdk_configuration)
         self.credentials = Credentials(self.sdk_configuration)
         self.authentication = Authentication(self.sdk_configuration)
         self.messages = NovuMessages(self.sdk_configuration)
@@ -356,7 +359,7 @@ class Subscribers(BaseSDK):
     ) -> models.SubscribersControllerCreateSubscriberResponse:
         r"""Create subscriber
 
-        Create subscriber with the given data
+        Create subscriber with the given data, if the subscriber already exists, it will be updated
 
         :param create_subscriber_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -518,7 +521,7 @@ class Subscribers(BaseSDK):
     ) -> models.SubscribersControllerCreateSubscriberResponse:
         r"""Create subscriber
 
-        Create subscriber with the given data
+        Create subscriber with the given data, if the subscriber already exists, it will be updated
 
         :param create_subscriber_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -1693,7 +1696,7 @@ class Subscribers(BaseSDK):
         def next_func() -> (
             Optional[models.SubscribersV1ControllerListSubscribersResponse]
         ):
-            body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
             page = request.page if not request.page is None else 1
             next_page = page + 1
 
@@ -1871,7 +1874,7 @@ class Subscribers(BaseSDK):
         def next_func() -> (
             Optional[models.SubscribersV1ControllerListSubscribersResponse]
         ):
-            body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
             page = request.page if not request.page is None else 1
             next_page = page + 1
 

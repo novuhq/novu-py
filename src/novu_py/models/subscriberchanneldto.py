@@ -9,7 +9,7 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class SubscriberChannelDtoProviderID(str, Enum):
+class ProviderID(str, Enum):
     r"""The ID of the chat or push provider."""
 
     SLACK = "slack"
@@ -32,7 +32,7 @@ class SubscriberChannelDtoProviderID(str, Enum):
 
 
 class SubscriberChannelDtoTypedDict(TypedDict):
-    provider_id: SubscriberChannelDtoProviderID
+    provider_id: ProviderID
     r"""The ID of the chat or push provider."""
     credentials: ChannelCredentialsDtoTypedDict
     r"""Credentials for the channel."""
@@ -41,9 +41,7 @@ class SubscriberChannelDtoTypedDict(TypedDict):
 
 
 class SubscriberChannelDto(BaseModel):
-    provider_id: Annotated[
-        SubscriberChannelDtoProviderID, pydantic.Field(alias="providerId")
-    ]
+    provider_id: Annotated[ProviderID, pydantic.Field(alias="providerId")]
     r"""The ID of the chat or push provider."""
 
     credentials: ChannelCredentialsDto

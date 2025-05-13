@@ -28,6 +28,10 @@ class Novu(BaseSDK):
     r"""A subscriber in Novu represents someone who should receive a message. A subscriber’s profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
     https://docs.novu.co/subscribers/subscribers
     """
+    topics: Topics
+    r"""Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
+    https://docs.novu.co/subscribers/topics
+    """
     integrations: Integrations
     r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
     https://docs.novu.co/channels-and-providers/integration-store
@@ -37,10 +41,6 @@ class Novu(BaseSDK):
     https://docs.novu.co/workflows/messages
     """
     notifications: Notifications
-    topics: Topics
-    r"""Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
-    https://docs.novu.co/subscribers/topics
-    """
 
     def __init__(
         self,
@@ -139,10 +139,10 @@ class Novu(BaseSDK):
 
     def _init_sdks(self):
         self.subscribers = Subscribers(self.sdk_configuration)
+        self.topics = Topics(self.sdk_configuration)
         self.integrations = Integrations(self.sdk_configuration)
         self.messages = Messages(self.sdk_configuration)
         self.notifications = Notifications(self.sdk_configuration)
-        self.topics = Topics(self.sdk_configuration)
 
     def __enter__(self):
         return self

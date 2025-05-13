@@ -14,11 +14,12 @@ generation:
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: false
+    sharedErrorComponentsApr2025: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 python:
-  version: 0.4.3
+  version: 1.0.0
   additionalDependencies:
     dev:
       - pytest>=6.0.0

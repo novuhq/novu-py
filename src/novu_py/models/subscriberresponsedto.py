@@ -28,7 +28,7 @@ class SubscriberResponseDtoTypedDict(TypedDict):
     r"""The first name of the subscriber."""
     last_name: NotRequired[str]
     r"""The last name of the subscriber."""
-    email: NotRequired[Nullable[str]]
+    email: NotRequired[str]
     r"""The email address of the subscriber."""
     phone: NotRequired[str]
     r"""The phone number of the subscriber."""
@@ -80,7 +80,7 @@ class SubscriberResponseDto(BaseModel):
     last_name: Annotated[Optional[str], pydantic.Field(alias="lastName")] = None
     r"""The last name of the subscriber."""
 
-    email: OptionalNullable[str] = UNSET
+    email: Optional[str] = None
     r"""The email address of the subscriber."""
 
     phone: Optional[str] = None
@@ -138,7 +138,7 @@ class SubscriberResponseDto(BaseModel):
             "data",
             "timezone",
         ]
-        nullable_fields = ["email", "data"]
+        nullable_fields = ["data"]
         null_default_fields = []
 
         serialized = handler(self)

@@ -5,7 +5,7 @@ from enum import Enum
 
 
 class StepTypeEnum(str, Enum):
-    r"""Channels of the notification"""
+    r"""Type of the step"""
 
     IN_APP = "in_app"
     EMAIL = "email"

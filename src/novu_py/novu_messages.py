@@ -333,7 +333,7 @@ class NovuMessages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerMarkAllUnreadAsReadResponse:
-        r"""Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+        r"""Marks all the subscriber messages as read, unread, seen or unseen.
 
         :param subscriber_id:
         :param mark_all_message_as_request_dto:
@@ -494,7 +494,7 @@ class NovuMessages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerMarkAllUnreadAsReadResponse:
-        r"""Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+        r"""Marks all the subscriber messages as read, unread, seen or unseen.
 
         :param subscriber_id:
         :param mark_all_message_as_request_dto:

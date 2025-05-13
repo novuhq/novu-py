@@ -18,8 +18,8 @@ from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-NotificationStepDtoMetadataTypedDict = TypeAliasType(
-    "NotificationStepDtoMetadataTypedDict",
+MetadataTypedDict = TypeAliasType(
+    "MetadataTypedDict",
     Union[
         DelayScheduledMetadataTypedDict,
         DelayRegularMetadataTypedDict,
@@ -30,8 +30,8 @@ NotificationStepDtoMetadataTypedDict = TypeAliasType(
 r"""Metadata associated with the workflow step. Can vary based on the type of step."""
 
 
-NotificationStepDtoMetadata = TypeAliasType(
-    "NotificationStepDtoMetadata",
+Metadata = TypeAliasType(
+    "Metadata",
     Union[
         DelayScheduledMetadata,
         DelayRegularMetadata,
@@ -61,7 +61,7 @@ class NotificationStepDtoTypedDict(TypedDict):
     r"""Filters applied to this notification step."""
     parent_id: NotRequired[str]
     r"""ID of the parent notification step, if applicable."""
-    metadata: NotRequired[NotificationStepDtoMetadataTypedDict]
+    metadata: NotRequired[MetadataTypedDict]
     r"""Metadata associated with the workflow step. Can vary based on the type of step."""
     reply_callback: NotRequired[ReplyCallbackTypedDict]
     r"""Callback information for replies, including whether it is active and the callback URL."""
@@ -98,7 +98,7 @@ class NotificationStepDto(BaseModel):
     parent_id: Annotated[Optional[str], pydantic.Field(alias="_parentId")] = None
     r"""ID of the parent notification step, if applicable."""
 
-    metadata: Optional[NotificationStepDtoMetadata] = None
+    metadata: Optional[Metadata] = None
     r"""Metadata associated with the workflow step. Can vary based on the type of step."""
 
     reply_callback: Annotated[

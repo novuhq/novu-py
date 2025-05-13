@@ -2,10 +2,39 @@
 
 from __future__ import annotations
 from novu_py import utils
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET
 import pydantic
-from typing import Any, Dict, Optional
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Optional, Union
+from typing_extensions import Annotated, TypeAliasType, TypedDict
+
+
+Message5TypedDict = TypeAliasType(
+    "Message5TypedDict", Union[str, float, bool, Dict[str, Any]]
+)
+
+
+Message5 = TypeAliasType("Message5", Union[str, float, bool, Dict[str, Any]])
+
+
+class Message4TypedDict(TypedDict):
+    pass
+
+
+class Message4(BaseModel):
+    pass
+
+
+MessageTypedDict = TypeAliasType(
+    "MessageTypedDict",
+    Union[Message4TypedDict, str, float, bool, List[Nullable[Message5TypedDict]]],
+)
+r"""Value that failed validation"""
+
+
+Message = TypeAliasType(
+    "Message", Union[Message4, str, float, bool, List[Nullable[Message5]]]
+)
+r"""Value that failed validation"""
 
 
 class ErrorDtoData(BaseModel):
@@ -18,8 +47,8 @@ class ErrorDtoData(BaseModel):
     path: str
     r"""The path where the error occurred."""
 
-    message: str
-    r"""A detailed error message."""
+    message: OptionalNullable[Message] = UNSET
+    r"""Value that failed validation"""
 
     ctx: Optional[Dict[str, Any]] = None
     r"""Optional context object for additional error details."""

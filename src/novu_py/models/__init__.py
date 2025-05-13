@@ -12,10 +12,10 @@ from .activitynotificationexecutiondetailresponsedto import (
 )
 from .activitynotificationjobresponsedto import (
     ActivityNotificationJobResponseDto,
+    ActivityNotificationJobResponseDtoPayload,
+    ActivityNotificationJobResponseDtoPayloadTypedDict,
     ActivityNotificationJobResponseDtoType,
     ActivityNotificationJobResponseDtoTypedDict,
-    Payload,
-    PayloadTypedDict,
 )
 from .activitynotificationresponsedto import (
     ActivityNotificationResponseDto,
@@ -29,6 +29,8 @@ from .activitynotificationresponsedto import (
 )
 from .activitynotificationstepresponsedto import (
     ActivityNotificationStepResponseDto,
+    ActivityNotificationStepResponseDtoMetadata,
+    ActivityNotificationStepResponseDtoMetadataTypedDict,
     ActivityNotificationStepResponseDtoReplyCallback,
     ActivityNotificationStepResponseDtoReplyCallbackTypedDict,
     ActivityNotificationStepResponseDtoTypedDict,
@@ -36,8 +38,6 @@ from .activitynotificationstepresponsedto import (
     ControlVariablesTypedDict,
     Issues,
     IssuesTypedDict,
-    Metadata,
-    MetadataTypedDict,
 )
 from .activitynotificationsubscriberresponsedto import (
     ActivityNotificationSubscriberResponseDto,
@@ -51,17 +51,10 @@ from .activitystatsresponsedto import (
     ActivityStatsResponseDto,
     ActivityStatsResponseDtoTypedDict,
 )
+from .activitytopicdto import ActivityTopicDto, ActivityTopicDtoTypedDict
 from .actorfeeditemdto import ActorFeedItemDto, ActorFeedItemDtoTypedDict
 from .actortypeenum import ActorTypeEnum
-from .addsubscribersrequestdto import (
-    AddSubscribersRequestDto,
-    AddSubscribersRequestDtoTypedDict,
-)
 from .apierror import APIError
-from .assignsubscribertotopicdto import (
-    AssignSubscriberToTopicDto,
-    AssignSubscriberToTopicDtoTypedDict,
-)
 from .builderfieldtypeenum import BuilderFieldTypeEnum
 from .bulkcreatesubscriberresponsedto import (
     BulkCreateSubscriberResponseDto,
@@ -76,12 +69,19 @@ from .buttontypeenum import ButtonTypeEnum
 from .channelcredentials import ChannelCredentials, ChannelCredentialsTypedDict
 from .channelcredentialsdto import ChannelCredentialsDto, ChannelCredentialsDtoTypedDict
 from .channelctatypeenum import ChannelCTATypeEnum
-from .channelsettingsdto import (
-    ChannelSettingsDto,
-    ChannelSettingsDtoTypedDict,
-    ProviderID,
-)
+from .channelsettingsdto import ChannelSettingsDto, ChannelSettingsDtoTypedDict
 from .channeltypeenum import ChannelTypeEnum
+from .chatorpushproviderenum import ChatOrPushProviderEnum
+from .constraintvalidation import (
+    ConstraintValidation,
+    ConstraintValidationTypedDict,
+    Five,
+    FiveTypedDict,
+    Four,
+    FourTypedDict,
+    Value,
+    ValueTypedDict,
+)
 from .createdsubscriberdto import CreatedSubscriberDto, CreatedSubscriberDtoTypedDict
 from .createintegrationrequestdto import (
     CreateIntegrationRequestDto,
@@ -92,10 +92,17 @@ from .createsubscriberrequestdto import (
     CreateSubscriberRequestDto,
     CreateSubscriberRequestDtoTypedDict,
 )
-from .createtopicrequestdto import CreateTopicRequestDto, CreateTopicRequestDtoTypedDict
-from .createtopicresponsedto import (
-    CreateTopicResponseDto,
-    CreateTopicResponseDtoTypedDict,
+from .createtopicsubscriptionsrequestdto import (
+    CreateTopicSubscriptionsRequestDto,
+    CreateTopicSubscriptionsRequestDtoTypedDict,
+)
+from .createtopicsubscriptionsresponsedto import (
+    CreateTopicSubscriptionsResponseDto,
+    CreateTopicSubscriptionsResponseDtoTypedDict,
+)
+from .createupdatetopicrequestdto import (
+    CreateUpdateTopicRequestDto,
+    CreateUpdateTopicRequestDtoTypedDict,
 )
 from .credentialsdto import (
     CredentialsDto,
@@ -119,18 +126,34 @@ from .deletemessageresponsedto import (
     DeleteMessageResponseDtoStatus,
     DeleteMessageResponseDtoTypedDict,
 )
-from .digestmetadatadto import DigestMetadataDto, DigestMetadataDtoTypedDict, Unit
+from .deletetopicresponsedto import (
+    DeleteTopicResponseDto,
+    DeleteTopicResponseDtoTypedDict,
+)
+from .deletetopicsubscriptionsrequestdto import (
+    DeleteTopicSubscriptionsRequestDto,
+    DeleteTopicSubscriptionsRequestDtoTypedDict,
+)
+from .deletetopicsubscriptionsresponsedto import (
+    DeleteTopicSubscriptionsResponseDto,
+    DeleteTopicSubscriptionsResponseDtoTypedDict,
+)
+from .digestmetadatadto import (
+    DigestMetadataDto,
+    DigestMetadataDtoTypedDict,
+    DigestMetadataDtoUnit,
+)
 from .digestregularmetadata import (
     BackoffUnit,
     DigestRegularMetadata,
-    DigestRegularMetadataType,
     DigestRegularMetadataTypedDict,
-    DigestRegularMetadataUnit,
+    Type,
+    Unit,
 )
 from .digesttimedconfigdto import (
     DigestTimedConfigDto,
     DigestTimedConfigDtoTypedDict,
-    WeekDays,
+    DigestTimedConfigDtoWeekDays,
 )
 from .digesttimedmetadata import (
     DigestTimedMetadata,
@@ -143,7 +166,14 @@ from .digestunitenum import DigestUnitEnum
 from .emailblock import EmailBlock, EmailBlockTypedDict
 from .emailblockstyles import EmailBlockStyles, EmailBlockStylesTypedDict
 from .emailblocktypeenum import EmailBlockTypeEnum
-from .errordto import ErrorDto, ErrorDtoData
+from .errordto import (
+    ErrorDto,
+    ErrorDtoData,
+    Message,
+    Message4,
+    Message4TypedDict,
+    Message5,
+)
 from .eventscontroller_broadcasteventtoallop import (
     EventsControllerBroadcastEventToAllRequest,
     EventsControllerBroadcastEventToAllRequestTypedDict,
@@ -170,7 +200,6 @@ from .eventscontroller_triggerop import (
 )
 from .executiondetailssourceenum import ExecutionDetailsSourceEnum
 from .executiondetailsstatusenum import ExecutionDetailsStatusEnum
-from .failedassignmentsdto import FailedAssignmentsDto, FailedAssignmentsDtoTypedDict
 from .failedoperationdto import FailedOperationDto, FailedOperationDtoTypedDict
 from .feedresponsedto import FeedResponseDto, FeedResponseDtoTypedDict
 from .fieldfilterpartdto import (
@@ -179,19 +208,13 @@ from .fieldfilterpartdto import (
     On,
     Operator,
 )
-from .filtertopicsresponsedto import (
-    FilterTopicsResponseDto,
-    FilterTopicsResponseDtoTypedDict,
-)
 from .getsubscriberpreferencesdto import (
     GetSubscriberPreferencesDto,
     GetSubscriberPreferencesDtoTypedDict,
 )
-from .gettopicresponsedto import GetTopicResponseDto, GetTopicResponseDtoTypedDict
-from .globalpreferencedto import GlobalPreferenceDto, GlobalPreferenceDtoTypedDict
 from .integrationresponsedto import (
+    Channel,
     IntegrationResponseDto,
-    IntegrationResponseDtoChannel,
     IntegrationResponseDtoTypedDict,
 )
 from .integrationscontroller_createintegrationop import (
@@ -240,6 +263,11 @@ from .listsubscribersresponsedto import (
     ListSubscribersResponseDto,
     ListSubscribersResponseDtoTypedDict,
 )
+from .listtopicsresponsedto import ListTopicsResponseDto, ListTopicsResponseDtoTypedDict
+from .listtopicsubscriptionsresponsedto import (
+    ListTopicSubscriptionsResponseDto,
+    ListTopicSubscriptionsResponseDtoTypedDict,
+)
 from .markallmessageasrequestdto import (
     FeedIdentifier,
     FeedIdentifierTypedDict,
@@ -257,9 +285,9 @@ from .markmessageactionasseendto import (
 from .messageaction import MessageAction, MessageActionTypedDict
 from .messageactionresult import (
     MessageActionResult,
-    MessageActionResultPayload,
-    MessageActionResultPayloadTypedDict,
     MessageActionResultTypedDict,
+    Payload,
+    PayloadTypedDict,
 )
 from .messageactionstatusenum import MessageActionStatusEnum
 from .messagebutton import MessageButton, MessageButtonTypedDict
@@ -301,9 +329,11 @@ from .messagescontroller_getmessagesop import (
     MessagesControllerGetMessagesResponse,
     MessagesControllerGetMessagesResponseTypedDict,
 )
+from .messagesresponsedto import MessagesResponseDto, MessagesResponseDtoTypedDict
 from .messagestatusenum import MessageStatusEnum
 from .messagetemplate import MessageTemplate, MessageTemplateTypedDict
 from .messagetemplatedto import MessageTemplateDto, MessageTemplateDtoTypedDict
+from .metadto import MetaDto, MetaDtoTypedDict
 from .monthlytypeenum import MonthlyTypeEnum
 from .notificationfeeditemdto import (
     NotificationFeedItemDto,
@@ -342,9 +372,9 @@ from .notificationstepdata import (
     NotificationStepDataTypedDict,
 )
 from .notificationstepdto import (
+    Metadata,
+    MetadataTypedDict,
     NotificationStepDto,
-    NotificationStepDtoMetadata,
-    NotificationStepDtoMetadataTypedDict,
     NotificationStepDtoTypedDict,
 )
 from .notificationtrigger import (
@@ -354,8 +384,8 @@ from .notificationtrigger import (
 )
 from .notificationtriggerdto import (
     NotificationTriggerDto,
+    NotificationTriggerDtoType,
     NotificationTriggerDtoTypedDict,
-    Type,
 )
 from .notificationtriggervariable import (
     NotificationTriggerVariable,
@@ -363,7 +393,6 @@ from .notificationtriggervariable import (
 )
 from .ordinalenum import OrdinalEnum
 from .ordinalvalueenum import OrdinalValueEnum
-from .overrides import Channel, Overrides, OverridesTypedDict, Source
 from .patchpreferencechannelsdto import (
     PatchPreferenceChannelsDto,
     PatchPreferenceChannelsDtoTypedDict,
@@ -378,39 +407,48 @@ from .patchsubscriberrequestdto import (
     PatchSubscriberRequestDto,
     PatchSubscriberRequestDtoTypedDict,
 )
-from .preferencechannels import PreferenceChannels, PreferenceChannelsTypedDict
+from .preferenceoverridesourceenum import PreferenceOverrideSourceEnum
 from .providersidenum import ProvidersIDEnum
 from .removesubscriberresponsedto import (
     RemoveSubscriberResponseDto,
     RemoveSubscriberResponseDtoTypedDict,
 )
-from .removesubscribersrequestdto import (
-    RemoveSubscribersRequestDto,
-    RemoveSubscribersRequestDtoTypedDict,
-)
-from .renametopicrequestdto import RenameTopicRequestDto, RenameTopicRequestDtoTypedDict
-from .renametopicresponsedto import (
-    RenameTopicResponseDto,
-    RenameTopicResponseDtoTypedDict,
-)
 from .replycallback import ReplyCallback, ReplyCallbackTypedDict
 from .security import Security, SecurityTypedDict
-from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict, Value
+from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict, StepFilterDtoValue
+from .stepsoverrides import StepsOverrides, StepsOverridesTypedDict
 from .steptypeenum import StepTypeEnum
 from .subscriberchanneldto import (
+    ProviderID,
     SubscriberChannelDto,
-    SubscriberChannelDtoProviderID,
     SubscriberChannelDtoTypedDict,
 )
+from .subscriberdto import SubscriberDto, SubscriberDtoTypedDict
 from .subscriberfeedresponsedto import (
     SubscriberFeedResponseDto,
     SubscriberFeedResponseDtoTypedDict,
+)
+from .subscriberglobalpreferencedto import (
+    SubscriberGlobalPreferenceDto,
+    SubscriberGlobalPreferenceDtoTypedDict,
 )
 from .subscriberpayloaddto import (
     SubscriberPayloadDto,
     SubscriberPayloadDtoData,
     SubscriberPayloadDtoDataTypedDict,
     SubscriberPayloadDtoTypedDict,
+)
+from .subscriberpreferencechannels import (
+    SubscriberPreferenceChannels,
+    SubscriberPreferenceChannelsTypedDict,
+)
+from .subscriberpreferenceoverridedto import (
+    SubscriberPreferenceOverrideDto,
+    SubscriberPreferenceOverrideDtoTypedDict,
+)
+from .subscriberpreferencesworkflowinfodto import (
+    SubscriberPreferencesWorkflowInfoDto,
+    SubscriberPreferencesWorkflowInfoDtoTypedDict,
 )
 from .subscriberresponsedto import SubscriberResponseDto, SubscriberResponseDtoTypedDict
 from .subscriberscontroller_createsubscriberop import (
@@ -430,6 +468,13 @@ from .subscriberscontroller_getsubscriberpreferencesop import (
     SubscribersControllerGetSubscriberPreferencesRequestTypedDict,
     SubscribersControllerGetSubscriberPreferencesResponse,
     SubscribersControllerGetSubscriberPreferencesResponseTypedDict,
+)
+from .subscriberscontroller_listsubscribertopicsop import (
+    QueryParamOrderDirection,
+    SubscribersControllerListSubscriberTopicsRequest,
+    SubscribersControllerListSubscriberTopicsRequestTypedDict,
+    SubscribersControllerListSubscriberTopicsResponse,
+    SubscribersControllerListSubscriberTopicsResponseTypedDict,
 )
 from .subscriberscontroller_patchsubscriberop import (
     SubscribersControllerPatchSubscriberRequest,
@@ -544,6 +589,21 @@ from .subscribersv1controller_updatesubscriberop import (
     SubscribersV1ControllerUpdateSubscriberResponse,
     SubscribersV1ControllerUpdateSubscriberResponseTypedDict,
 )
+from .subscriberworkflowpreferencedto import (
+    SubscriberWorkflowPreferenceDto,
+    SubscriberWorkflowPreferenceDtoTypedDict,
+)
+from .subscriptiondto import (
+    Subscriber,
+    SubscriberTypedDict,
+    SubscriptionDto,
+    SubscriptionDtoTypedDict,
+)
+from .subscriptionerrordto import SubscriptionErrorDto, SubscriptionErrorDtoTypedDict
+from .subscriptionsdeleteerrordto import (
+    SubscriptionsDeleteErrorDto,
+    SubscriptionsDeleteErrorDtoTypedDict,
+)
 from .tenantpayloaddto import (
     TenantPayloadDto,
     TenantPayloadDtoData,
@@ -557,21 +617,16 @@ from .timedconfig import (
     OrdinalValue,
     TimedConfig,
     TimedConfigTypedDict,
-    TimedConfigWeekDays,
+    WeekDays,
 )
 from .topicdto import TopicDto, TopicDtoTypedDict
 from .topicpayloaddto import TopicPayloadDto, TopicPayloadDtoTypedDict
-from .topicscontroller_assignop import (
-    TopicsControllerAssignRequest,
-    TopicsControllerAssignRequestTypedDict,
-    TopicsControllerAssignResponse,
-    TopicsControllerAssignResponseTypedDict,
-)
-from .topicscontroller_createtopicop import (
-    TopicsControllerCreateTopicRequest,
-    TopicsControllerCreateTopicRequestTypedDict,
-    TopicsControllerCreateTopicResponse,
-    TopicsControllerCreateTopicResponseTypedDict,
+from .topicresponsedto import TopicResponseDto, TopicResponseDtoTypedDict
+from .topicscontroller_createtopicsubscriptionsop import (
+    TopicsControllerCreateTopicSubscriptionsRequest,
+    TopicsControllerCreateTopicSubscriptionsRequestTypedDict,
+    TopicsControllerCreateTopicSubscriptionsResponse,
+    TopicsControllerCreateTopicSubscriptionsResponseTypedDict,
 )
 from .topicscontroller_deletetopicop import (
     TopicsControllerDeleteTopicRequest,
@@ -579,42 +634,62 @@ from .topicscontroller_deletetopicop import (
     TopicsControllerDeleteTopicResponse,
     TopicsControllerDeleteTopicResponseTypedDict,
 )
+from .topicscontroller_deletetopicsubscriptionsop import (
+    TopicsControllerDeleteTopicSubscriptionsRequest,
+    TopicsControllerDeleteTopicSubscriptionsRequestTypedDict,
+    TopicsControllerDeleteTopicSubscriptionsResponse,
+    TopicsControllerDeleteTopicSubscriptionsResponseTypedDict,
+)
 from .topicscontroller_gettopicop import (
     TopicsControllerGetTopicRequest,
     TopicsControllerGetTopicRequestTypedDict,
     TopicsControllerGetTopicResponse,
     TopicsControllerGetTopicResponseTypedDict,
 )
-from .topicscontroller_gettopicsubscriberop import (
-    TopicsControllerGetTopicSubscriberRequest,
-    TopicsControllerGetTopicSubscriberRequestTypedDict,
-    TopicsControllerGetTopicSubscriberResponse,
-    TopicsControllerGetTopicSubscriberResponseTypedDict,
-)
 from .topicscontroller_listtopicsop import (
+    TopicsControllerListTopicsQueryParamOrderDirection,
     TopicsControllerListTopicsRequest,
     TopicsControllerListTopicsRequestTypedDict,
     TopicsControllerListTopicsResponse,
     TopicsControllerListTopicsResponseTypedDict,
 )
-from .topicscontroller_removesubscribersop import (
-    TopicsControllerRemoveSubscribersRequest,
-    TopicsControllerRemoveSubscribersRequestTypedDict,
-    TopicsControllerRemoveSubscribersResponse,
-    TopicsControllerRemoveSubscribersResponseTypedDict,
+from .topicscontroller_listtopicsubscriptionsop import (
+    TopicsControllerListTopicSubscriptionsQueryParamOrderDirection,
+    TopicsControllerListTopicSubscriptionsRequest,
+    TopicsControllerListTopicSubscriptionsRequestTypedDict,
+    TopicsControllerListTopicSubscriptionsResponse,
+    TopicsControllerListTopicSubscriptionsResponseTypedDict,
 )
-from .topicscontroller_renametopicop import (
-    TopicsControllerRenameTopicRequest,
-    TopicsControllerRenameTopicRequestTypedDict,
-    TopicsControllerRenameTopicResponse,
-    TopicsControllerRenameTopicResponseTypedDict,
+from .topicscontroller_updatetopicop import (
+    TopicsControllerUpdateTopicRequest,
+    TopicsControllerUpdateTopicRequestTypedDict,
+    TopicsControllerUpdateTopicResponse,
+    TopicsControllerUpdateTopicResponseTypedDict,
+)
+from .topicscontroller_upserttopicop import (
+    TopicsControllerUpsertTopicRequest,
+    TopicsControllerUpsertTopicRequestTypedDict,
+    TopicsControllerUpsertTopicResponse,
+    TopicsControllerUpsertTopicResponseTypedDict,
 )
 from .topicsubscriberdto import TopicSubscriberDto, TopicSubscriberDtoTypedDict
+from .topicsubscriptionresponsedto import (
+    TopicSubscriptionResponseDto,
+    TopicSubscriptionResponseDtoTypedDict,
+)
+from .topicsv1controller_gettopicsubscriberop import (
+    TopicsV1ControllerGetTopicSubscriberRequest,
+    TopicsV1ControllerGetTopicSubscriberRequestTypedDict,
+    TopicsV1ControllerGetTopicSubscriberResponse,
+    TopicsV1ControllerGetTopicSubscriberResponseTypedDict,
+)
 from .triggereventrequestdto import (
     Actor,
     ActorTypedDict,
     One,
     OneTypedDict,
+    Overrides,
+    OverridesTypedDict,
     Tenant,
     TenantTypedDict,
     To,
@@ -646,7 +721,6 @@ from .updateintegrationrequestdto import (
 )
 from .updatesubscriberchannelrequestdto import (
     UpdateSubscriberChannelRequestDto,
-    UpdateSubscriberChannelRequestDtoProviderID,
     UpdateSubscriberChannelRequestDtoTypedDict,
 )
 from .updatesubscriberonlineflagrequestdto import (
@@ -657,16 +731,16 @@ from .updatesubscriberrequestdto import (
     UpdateSubscriberRequestDto,
     UpdateSubscriberRequestDtoTypedDict,
 )
+from .updatetopicrequestdto import UpdateTopicRequestDto, UpdateTopicRequestDtoTypedDict
 from .validationerrordto import (
-    Errors,
-    ErrorsTypedDict,
+    MessageValidationErrorDto4,
+    MessageValidationErrorDto4TypedDict,
+    MessageValidationErrorDto5,
     ValidationErrorDto,
     ValidationErrorDtoData,
-    ValidationErrorDtoValue,
+    ValidationErrorDtoMessage,
 )
-from .workflowinfodto import WorkflowInfoDto, WorkflowInfoDtoTypedDict
 from .workfloworiginenum import WorkflowOriginEnum
-from .workflowpreferencedto import WorkflowPreferenceDto, WorkflowPreferenceDtoTypedDict
 from .workflowresponse import (
     WorkflowIntegrationStatus,
     WorkflowIntegrationStatusTypedDict,
@@ -686,6 +760,8 @@ __all__ = [
     "ActivityNotificationExecutionDetailResponseDto",
     "ActivityNotificationExecutionDetailResponseDtoTypedDict",
     "ActivityNotificationJobResponseDto",
+    "ActivityNotificationJobResponseDtoPayload",
+    "ActivityNotificationJobResponseDtoPayloadTypedDict",
     "ActivityNotificationJobResponseDtoType",
     "ActivityNotificationJobResponseDtoTypedDict",
     "ActivityNotificationResponseDto",
@@ -695,6 +771,8 @@ __all__ = [
     "ActivityNotificationResponseDtoToTypedDict",
     "ActivityNotificationResponseDtoTypedDict",
     "ActivityNotificationStepResponseDto",
+    "ActivityNotificationStepResponseDtoMetadata",
+    "ActivityNotificationStepResponseDtoMetadataTypedDict",
     "ActivityNotificationStepResponseDtoReplyCallback",
     "ActivityNotificationStepResponseDtoReplyCallbackTypedDict",
     "ActivityNotificationStepResponseDtoTypedDict",
@@ -704,15 +782,13 @@ __all__ = [
     "ActivityNotificationTemplateResponseDtoTypedDict",
     "ActivityStatsResponseDto",
     "ActivityStatsResponseDtoTypedDict",
+    "ActivityTopicDto",
+    "ActivityTopicDtoTypedDict",
     "Actor",
     "ActorFeedItemDto",
     "ActorFeedItemDtoTypedDict",
     "ActorTypeEnum",
     "ActorTypedDict",
-    "AddSubscribersRequestDto",
-    "AddSubscribersRequestDtoTypedDict",
-    "AssignSubscriberToTopicDto",
-    "AssignSubscriberToTopicDtoTypedDict",
     "BackoffUnit",
     "BuilderFieldTypeEnum",
     "BulkCreateSubscriberResponseDto",
@@ -732,6 +808,9 @@ __all__ = [
     "ChannelSettingsDtoTypedDict",
     "ChannelTypeEnum",
     "Channels",
+    "ChatOrPushProviderEnum",
+    "ConstraintValidation",
+    "ConstraintValidationTypedDict",
     "Content",
     "ContentTypedDict",
     "ControlVariables",
@@ -743,10 +822,12 @@ __all__ = [
     "CreateIntegrationRequestDtoTypedDict",
     "CreateSubscriberRequestDto",
     "CreateSubscriberRequestDtoTypedDict",
-    "CreateTopicRequestDto",
-    "CreateTopicRequestDtoTypedDict",
-    "CreateTopicResponseDto",
-    "CreateTopicResponseDtoTypedDict",
+    "CreateTopicSubscriptionsRequestDto",
+    "CreateTopicSubscriptionsRequestDtoTypedDict",
+    "CreateTopicSubscriptionsResponseDto",
+    "CreateTopicSubscriptionsResponseDtoTypedDict",
+    "CreateUpdateTopicRequestDto",
+    "CreateUpdateTopicRequestDtoTypedDict",
     "CreatedSubscriberDto",
     "CreatedSubscriberDtoTypedDict",
     "CredentialsDto",
@@ -763,14 +844,20 @@ __all__ = [
     "DeleteMessageResponseDto",
     "DeleteMessageResponseDtoStatus",
     "DeleteMessageResponseDtoTypedDict",
+    "DeleteTopicResponseDto",
+    "DeleteTopicResponseDtoTypedDict",
+    "DeleteTopicSubscriptionsRequestDto",
+    "DeleteTopicSubscriptionsRequestDtoTypedDict",
+    "DeleteTopicSubscriptionsResponseDto",
+    "DeleteTopicSubscriptionsResponseDtoTypedDict",
     "DigestMetadataDto",
     "DigestMetadataDtoTypedDict",
+    "DigestMetadataDtoUnit",
     "DigestRegularMetadata",
-    "DigestRegularMetadataType",
     "DigestRegularMetadataTypedDict",
-    "DigestRegularMetadataUnit",
     "DigestTimedConfigDto",
     "DigestTimedConfigDtoTypedDict",
+    "DigestTimedConfigDtoWeekDays",
     "DigestTimedMetadata",
     "DigestTimedMetadataType",
     "DigestTimedMetadataTypedDict",
@@ -784,8 +871,6 @@ __all__ = [
     "EmailBlockTypedDict",
     "ErrorDto",
     "ErrorDtoData",
-    "Errors",
-    "ErrorsTypedDict",
     "EventsControllerBroadcastEventToAllRequest",
     "EventsControllerBroadcastEventToAllRequestTypedDict",
     "EventsControllerBroadcastEventToAllResponse",
@@ -804,8 +889,6 @@ __all__ = [
     "EventsControllerTriggerResponseTypedDict",
     "ExecutionDetailsSourceEnum",
     "ExecutionDetailsStatusEnum",
-    "FailedAssignmentsDto",
-    "FailedAssignmentsDtoTypedDict",
     "FailedOperationDto",
     "FailedOperationDtoTypedDict",
     "FeedIdentifier",
@@ -814,16 +897,13 @@ __all__ = [
     "FeedResponseDtoTypedDict",
     "FieldFilterPartDto",
     "FieldFilterPartDtoTypedDict",
-    "FilterTopicsResponseDto",
-    "FilterTopicsResponseDtoTypedDict",
+    "Five",
+    "FiveTypedDict",
+    "Four",
+    "FourTypedDict",
     "GetSubscriberPreferencesDto",
     "GetSubscriberPreferencesDtoTypedDict",
-    "GetTopicResponseDto",
-    "GetTopicResponseDtoTypedDict",
-    "GlobalPreferenceDto",
-    "GlobalPreferenceDtoTypedDict",
     "IntegrationResponseDto",
-    "IntegrationResponseDtoChannel",
     "IntegrationResponseDtoTypedDict",
     "IntegrationsControllerCreateIntegrationRequest",
     "IntegrationsControllerCreateIntegrationRequestTypedDict",
@@ -857,6 +937,10 @@ __all__ = [
     "IssuesTypedDict",
     "ListSubscribersResponseDto",
     "ListSubscribersResponseDtoTypedDict",
+    "ListTopicSubscriptionsResponseDto",
+    "ListTopicSubscriptionsResponseDtoTypedDict",
+    "ListTopicsResponseDto",
+    "ListTopicsResponseDtoTypedDict",
     "MarkAllMessageAsRequestDto",
     "MarkAllMessageAsRequestDtoTypedDict",
     "MarkAs",
@@ -865,10 +949,12 @@ __all__ = [
     "MarkMessageActionAsSeenDtoPayloadTypedDict",
     "MarkMessageActionAsSeenDtoStatus",
     "MarkMessageActionAsSeenDtoTypedDict",
+    "Message",
+    "Message4",
+    "Message4TypedDict",
+    "Message5",
     "MessageAction",
     "MessageActionResult",
-    "MessageActionResultPayload",
-    "MessageActionResultPayloadTypedDict",
     "MessageActionResultTypedDict",
     "MessageActionStatusEnum",
     "MessageActionTypedDict",
@@ -894,6 +980,9 @@ __all__ = [
     "MessageTemplateDto",
     "MessageTemplateDtoTypedDict",
     "MessageTemplateTypedDict",
+    "MessageValidationErrorDto4",
+    "MessageValidationErrorDto4TypedDict",
+    "MessageValidationErrorDto5",
     "MessagesControllerDeleteMessageRequest",
     "MessagesControllerDeleteMessageRequestTypedDict",
     "MessagesControllerDeleteMessageResponse",
@@ -906,6 +995,10 @@ __all__ = [
     "MessagesControllerGetMessagesRequestTypedDict",
     "MessagesControllerGetMessagesResponse",
     "MessagesControllerGetMessagesResponseTypedDict",
+    "MessagesResponseDto",
+    "MessagesResponseDtoTypedDict",
+    "MetaDto",
+    "MetaDtoTypedDict",
     "Metadata",
     "MetadataTypedDict",
     "MonthlyType",
@@ -920,11 +1013,10 @@ __all__ = [
     "NotificationStepDataMetadataTypedDict",
     "NotificationStepDataTypedDict",
     "NotificationStepDto",
-    "NotificationStepDtoMetadata",
-    "NotificationStepDtoMetadataTypedDict",
     "NotificationStepDtoTypedDict",
     "NotificationTrigger",
     "NotificationTriggerDto",
+    "NotificationTriggerDtoType",
     "NotificationTriggerDtoTypedDict",
     "NotificationTriggerType",
     "NotificationTriggerTypedDict",
@@ -965,39 +1057,48 @@ __all__ = [
     "PatchSubscriberRequestDtoTypedDict",
     "Payload",
     "PayloadTypedDict",
-    "PreferenceChannels",
-    "PreferenceChannelsTypedDict",
+    "PreferenceOverrideSourceEnum",
     "ProviderID",
     "ProvidersIDEnum",
     "QueryParamChannel",
+    "QueryParamOrderDirection",
     "RemoveSubscriberResponseDto",
     "RemoveSubscriberResponseDtoTypedDict",
-    "RemoveSubscribersRequestDto",
-    "RemoveSubscribersRequestDtoTypedDict",
-    "RenameTopicRequestDto",
-    "RenameTopicRequestDtoTypedDict",
-    "RenameTopicResponseDto",
-    "RenameTopicResponseDtoTypedDict",
     "ReplyCallback",
     "ReplyCallbackTypedDict",
     "Security",
     "SecurityTypedDict",
-    "Source",
     "Status",
     "StepFilterDto",
     "StepFilterDtoTypedDict",
+    "StepFilterDtoValue",
     "StepTypeEnum",
+    "StepsOverrides",
+    "StepsOverridesTypedDict",
+    "Subscriber",
     "SubscriberChannelDto",
-    "SubscriberChannelDtoProviderID",
     "SubscriberChannelDtoTypedDict",
+    "SubscriberDto",
+    "SubscriberDtoTypedDict",
     "SubscriberFeedResponseDto",
     "SubscriberFeedResponseDtoTypedDict",
+    "SubscriberGlobalPreferenceDto",
+    "SubscriberGlobalPreferenceDtoTypedDict",
     "SubscriberPayloadDto",
     "SubscriberPayloadDtoData",
     "SubscriberPayloadDtoDataTypedDict",
     "SubscriberPayloadDtoTypedDict",
+    "SubscriberPreferenceChannels",
+    "SubscriberPreferenceChannelsTypedDict",
+    "SubscriberPreferenceOverrideDto",
+    "SubscriberPreferenceOverrideDtoTypedDict",
+    "SubscriberPreferencesWorkflowInfoDto",
+    "SubscriberPreferencesWorkflowInfoDtoTypedDict",
     "SubscriberResponseDto",
     "SubscriberResponseDtoTypedDict",
+    "SubscriberTypedDict",
+    "SubscriberWorkflowPreferenceDto",
+    "SubscriberWorkflowPreferenceDtoTypedDict",
     "SubscribersControllerCreateSubscriberRequest",
     "SubscribersControllerCreateSubscriberRequestTypedDict",
     "SubscribersControllerCreateSubscriberResponse",
@@ -1010,6 +1111,10 @@ __all__ = [
     "SubscribersControllerGetSubscriberRequestTypedDict",
     "SubscribersControllerGetSubscriberResponse",
     "SubscribersControllerGetSubscriberResponseTypedDict",
+    "SubscribersControllerListSubscriberTopicsRequest",
+    "SubscribersControllerListSubscriberTopicsRequestTypedDict",
+    "SubscribersControllerListSubscriberTopicsResponse",
+    "SubscribersControllerListSubscriberTopicsResponseTypedDict",
     "SubscribersControllerPatchSubscriberRequest",
     "SubscribersControllerPatchSubscriberRequestTypedDict",
     "SubscribersControllerPatchSubscriberResponse",
@@ -1086,6 +1191,12 @@ __all__ = [
     "SubscribersV1ControllerUpdateSubscriberRequestTypedDict",
     "SubscribersV1ControllerUpdateSubscriberResponse",
     "SubscribersV1ControllerUpdateSubscriberResponseTypedDict",
+    "SubscriptionDto",
+    "SubscriptionDtoTypedDict",
+    "SubscriptionErrorDto",
+    "SubscriptionErrorDtoTypedDict",
+    "SubscriptionsDeleteErrorDto",
+    "SubscriptionsDeleteErrorDtoTypedDict",
     "TLSOptions",
     "TLSOptionsTypedDict",
     "Tenant",
@@ -1097,47 +1208,56 @@ __all__ = [
     "TextAlignEnum",
     "TimedConfig",
     "TimedConfigTypedDict",
-    "TimedConfigWeekDays",
     "To",
     "ToTypedDict",
     "TopicDto",
     "TopicDtoTypedDict",
     "TopicPayloadDto",
     "TopicPayloadDtoTypedDict",
+    "TopicResponseDto",
+    "TopicResponseDtoTypedDict",
     "TopicSubscriberDto",
     "TopicSubscriberDtoTypedDict",
-    "TopicsControllerAssignRequest",
-    "TopicsControllerAssignRequestTypedDict",
-    "TopicsControllerAssignResponse",
-    "TopicsControllerAssignResponseTypedDict",
-    "TopicsControllerCreateTopicRequest",
-    "TopicsControllerCreateTopicRequestTypedDict",
-    "TopicsControllerCreateTopicResponse",
-    "TopicsControllerCreateTopicResponseTypedDict",
+    "TopicSubscriptionResponseDto",
+    "TopicSubscriptionResponseDtoTypedDict",
+    "TopicsControllerCreateTopicSubscriptionsRequest",
+    "TopicsControllerCreateTopicSubscriptionsRequestTypedDict",
+    "TopicsControllerCreateTopicSubscriptionsResponse",
+    "TopicsControllerCreateTopicSubscriptionsResponseTypedDict",
     "TopicsControllerDeleteTopicRequest",
     "TopicsControllerDeleteTopicRequestTypedDict",
     "TopicsControllerDeleteTopicResponse",
     "TopicsControllerDeleteTopicResponseTypedDict",
+    "TopicsControllerDeleteTopicSubscriptionsRequest",
+    "TopicsControllerDeleteTopicSubscriptionsRequestTypedDict",
+    "TopicsControllerDeleteTopicSubscriptionsResponse",
+    "TopicsControllerDeleteTopicSubscriptionsResponseTypedDict",
     "TopicsControllerGetTopicRequest",
     "TopicsControllerGetTopicRequestTypedDict",
     "TopicsControllerGetTopicResponse",
     "TopicsControllerGetTopicResponseTypedDict",
-    "TopicsControllerGetTopicSubscriberRequest",
-    "TopicsControllerGetTopicSubscriberRequestTypedDict",
-    "TopicsControllerGetTopicSubscriberResponse",
-    "TopicsControllerGetTopicSubscriberResponseTypedDict",
+    "TopicsControllerListTopicSubscriptionsQueryParamOrderDirection",
+    "TopicsControllerListTopicSubscriptionsRequest",
+    "TopicsControllerListTopicSubscriptionsRequestTypedDict",
+    "TopicsControllerListTopicSubscriptionsResponse",
+    "TopicsControllerListTopicSubscriptionsResponseTypedDict",
+    "TopicsControllerListTopicsQueryParamOrderDirection",
     "TopicsControllerListTopicsRequest",
     "TopicsControllerListTopicsRequestTypedDict",
     "TopicsControllerListTopicsResponse",
     "TopicsControllerListTopicsResponseTypedDict",
-    "TopicsControllerRemoveSubscribersRequest",
-    "TopicsControllerRemoveSubscribersRequestTypedDict",
-    "TopicsControllerRemoveSubscribersResponse",
-    "TopicsControllerRemoveSubscribersResponseTypedDict",
-    "TopicsControllerRenameTopicRequest",
-    "TopicsControllerRenameTopicRequestTypedDict",
-    "TopicsControllerRenameTopicResponse",
-    "TopicsControllerRenameTopicResponseTypedDict",
+    "TopicsControllerUpdateTopicRequest",
+    "TopicsControllerUpdateTopicRequestTypedDict",
+    "TopicsControllerUpdateTopicResponse",
+    "TopicsControllerUpdateTopicResponseTypedDict",
+    "TopicsControllerUpsertTopicRequest",
+    "TopicsControllerUpsertTopicRequestTypedDict",
+    "TopicsControllerUpsertTopicResponse",
+    "TopicsControllerUpsertTopicResponseTypedDict",
+    "TopicsV1ControllerGetTopicSubscriberRequest",
+    "TopicsV1ControllerGetTopicSubscriberRequestTypedDict",
+    "TopicsV1ControllerGetTopicSubscriberResponse",
+    "TopicsV1ControllerGetTopicSubscriberResponseTypedDict",
     "TriggerEventRequestDto",
     "TriggerEventRequestDtoTypedDict",
     "TriggerEventResponseDto",
@@ -1158,26 +1278,24 @@ __all__ = [
     "UpdateIntegrationRequestDto",
     "UpdateIntegrationRequestDtoTypedDict",
     "UpdateSubscriberChannelRequestDto",
-    "UpdateSubscriberChannelRequestDtoProviderID",
     "UpdateSubscriberChannelRequestDtoTypedDict",
     "UpdateSubscriberOnlineFlagRequestDto",
     "UpdateSubscriberOnlineFlagRequestDtoTypedDict",
     "UpdateSubscriberRequestDto",
     "UpdateSubscriberRequestDtoTypedDict",
+    "UpdateTopicRequestDto",
+    "UpdateTopicRequestDtoTypedDict",
     "UpdatedSubscriberDto",
     "UpdatedSubscriberDtoTypedDict",
     "ValidationErrorDto",
     "ValidationErrorDtoData",
-    "ValidationErrorDtoValue",
+    "ValidationErrorDtoMessage",
     "Value",
+    "ValueTypedDict",
     "WeekDays",
-    "WorkflowInfoDto",
-    "WorkflowInfoDtoTypedDict",
     "WorkflowIntegrationStatus",
     "WorkflowIntegrationStatusTypedDict",
     "WorkflowOriginEnum",
-    "WorkflowPreferenceDto",
-    "WorkflowPreferenceDtoTypedDict",
     "WorkflowResponse",
     "WorkflowResponseData",
     "WorkflowResponseDataTypedDict",
