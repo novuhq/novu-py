@@ -74,7 +74,7 @@ with Novu(
 
     res = novu.integrations.create(create_integration_request_dto={
         "provider_id": "<id>",
-        "channel": novu_py.CreateIntegrationRequestDtoChannel.SMS,
+        "channel": novu_py.CreateIntegrationRequestDtoChannel.EMAIL,
     })
 
     # Handle response

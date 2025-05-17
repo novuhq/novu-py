@@ -28,9 +28,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.topics.list(request={
-        "key": "exampleKey",
-    })
+    res = novu.topics.list()
 
     # Handle response
     print(res)
