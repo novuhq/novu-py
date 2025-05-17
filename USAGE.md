@@ -35,9 +35,14 @@ with Novu(
                 },
             },
         ),
-        to=novu_py.SubscriberPayloadDto(
-            subscriber_id="<id>",
-        ),
+        to=[
+            novu_py.SubscriberPayloadDto(
+                subscriber_id="<id>",
+            ),
+            novu_py.SubscriberPayloadDto(
+                subscriber_id="<id>",
+            ),
+        ],
     ))
 
     # Handle response
@@ -83,9 +88,14 @@ async def main():
                     },
                 },
             ),
-            to=novu_py.SubscriberPayloadDto(
-                subscriber_id="<id>",
-            ),
+            to=[
+                novu_py.SubscriberPayloadDto(
+                    subscriber_id="<id>",
+                ),
+                novu_py.SubscriberPayloadDto(
+                    subscriber_id="<id>",
+                ),
+            ],
         ))
 
         # Handle response
@@ -302,12 +312,9 @@ with Novu(
                         },
                     },
                 ),
-                to=[
-                    novu_py.TopicPayloadDto(
-                        topic_key="<value>",
-                        type=novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-                    ),
-                ],
+                to=novu_py.SubscriberPayloadDto(
+                    subscriber_id="<id>",
+                ),
             ),
             novu_py.TriggerEventRequestDto(
                 workflow_id="workflow_identifier",
@@ -333,10 +340,9 @@ with Novu(
                         },
                     },
                 ),
-                to=[
-                    "SUBSCRIBER_ID",
-                    "SUBSCRIBER_ID",
-                ],
+                to=novu_py.SubscriberPayloadDto(
+                    subscriber_id="<id>",
+                ),
             ),
         ],
     })
@@ -414,12 +420,9 @@ async def main():
                             },
                         },
                     ),
-                    to=[
-                        novu_py.TopicPayloadDto(
-                            topic_key="<value>",
-                            type=novu_py.TriggerRecipientsTypeEnum.SUBSCRIBER,
-                        ),
-                    ],
+                    to=novu_py.SubscriberPayloadDto(
+                        subscriber_id="<id>",
+                    ),
                 ),
                 novu_py.TriggerEventRequestDto(
                     workflow_id="workflow_identifier",
@@ -445,10 +448,9 @@ async def main():
                             },
                         },
                     ),
-                    to=[
-                        "SUBSCRIBER_ID",
-                        "SUBSCRIBER_ID",
-                    ],
+                    to=novu_py.SubscriberPayloadDto(
+                        subscriber_id="<id>",
+                    ),
                 ),
             ],
         })

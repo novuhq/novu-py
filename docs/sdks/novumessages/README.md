@@ -29,7 +29,7 @@ with Novu(
         "type": "<value>",
         "subscriber_id": "<id>",
         "mark_message_action_as_seen_dto": {
-            "status": novu_py.MarkMessageActionAsSeenDtoStatus.DONE,
+            "status": novu_py.MarkMessageActionAsSeenDtoStatus.PENDING,
         },
     })
 
@@ -75,7 +75,7 @@ with Novu(
 ) as novu:
 
     res = novu.subscribers.messages.mark_all(subscriber_id="<id>", mark_all_message_as_request_dto={
-        "mark_as": novu_py.MarkAs.SEEN,
+        "mark_as": novu_py.MarkAs.READ,
     })
 
     # Handle response
@@ -122,8 +122,8 @@ with Novu(
 ) as novu:
 
     res = novu.subscribers.messages.mark_all_as(subscriber_id="<id>", message_mark_as_request_dto={
-        "message_id": "<id>",
-        "mark_as": novu_py.MessageMarkAsRequestDtoMarkAs.UNREAD,
+        "message_id": [],
+        "mark_as": novu_py.MessageMarkAsRequestDtoMarkAs.SEEN,
     })
 
     # Handle response
