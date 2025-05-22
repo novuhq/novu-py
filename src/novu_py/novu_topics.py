@@ -21,9 +21,10 @@ class NovuTopics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersControllerListSubscriberTopicsResponse:
-        r"""List topics a subscriber is subscribed to
+        r"""Retrieve subscriber subscriptions
 
-        List topic subscriptions for a subscriber with pagination and filtering
+        Retrieve subscriber's topic subscriptions by its unique key identifier **subscriberId**.
+        Checkout all available filters in the query section.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -173,9 +174,10 @@ class NovuTopics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersControllerListSubscriberTopicsResponse:
-        r"""List topics a subscriber is subscribed to
+        r"""Retrieve subscriber subscriptions
 
-        List topic subscriptions for a subscriber with pagination and filtering
+        Retrieve subscriber's topic subscriptions by its unique key identifier **subscriberId**.
+        Checkout all available filters in the query section.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method

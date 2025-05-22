@@ -19,9 +19,10 @@ class Preferences(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersControllerGetSubscriberPreferencesResponse:
-        r"""Get subscriber preferences
+        r"""Retrieve subscriber preferences
 
-        Get subscriber global and workflow specific preferences
+        Retrieve subscriber channel preferences by its unique key identifier **subscriberId**.
+        This API returns all five channels preferences for all workflows and global preferences.
 
         :param subscriber_id:
         :param idempotency_key: A header for idempotency purposes
@@ -169,9 +170,10 @@ class Preferences(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersControllerGetSubscriberPreferencesResponse:
-        r"""Get subscriber preferences
+        r"""Retrieve subscriber preferences
 
-        Get subscriber global and workflow specific preferences
+        Retrieve subscriber channel preferences by its unique key identifier **subscriberId**.
+        This API returns all five channels preferences for all workflows and global preferences.
 
         :param subscriber_id:
         :param idempotency_key: A header for idempotency purposes
@@ -323,9 +325,11 @@ class Preferences(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersControllerUpdateSubscriberPreferencesResponse:
-        r"""Update subscriber global or workflow specific preferences
+        r"""Update subscriber preferences
 
-        Update subscriber global or workflow specific preferences
+        Update subscriber preferences by its unique key identifier **subscriberId**.
+        **workflowId** is optional field, if provided, this API will update that workflow preference,
+        otherwise it will update global preferences
 
         :param subscriber_id:
         :param patch_subscriber_preferences_dto:
@@ -488,9 +492,11 @@ class Preferences(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersControllerUpdateSubscriberPreferencesResponse:
-        r"""Update subscriber global or workflow specific preferences
+        r"""Update subscriber preferences
 
-        Update subscriber global or workflow specific preferences
+        Update subscriber preferences by its unique key identifier **subscriberId**.
+        **workflowId** is optional field, if provided, this API will update that workflow preference,
+        otherwise it will update global preferences
 
         :param subscriber_id:
         :param patch_subscriber_preferences_dto:

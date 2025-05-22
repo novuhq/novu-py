@@ -23,6 +23,9 @@ class Subscriptions(BaseSDK):
     ) -> models.TopicsControllerListTopicSubscriptionsResponse:
         r"""List topic subscriptions
 
+        List all topics that a subscriber is subscribed to.
+        Checkout all available filters in the query section.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -172,6 +175,9 @@ class Subscriptions(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerListTopicSubscriptionsResponse:
         r"""List topic subscriptions
+
+        List all topics that a subscriber is subscribed to.
+        Checkout all available filters in the query section.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -323,7 +329,10 @@ class Subscriptions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerCreateTopicSubscriptionsResponse:
-        r"""Create topic subscriptions, if the topic does not exist, it will be created.
+        r"""Create topic subscriptions
+
+        This api will create subscription for subscriberIds for a topic.
+        Its like subscribing to a common interest group. if topic does not exist, it will be created.
 
         :param topic_key: The key identifier of the topic
         :param create_topic_subscriptions_request_dto:
@@ -487,7 +496,10 @@ class Subscriptions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerCreateTopicSubscriptionsResponse:
-        r"""Create topic subscriptions, if the topic does not exist, it will be created.
+        r"""Create topic subscriptions
+
+        This api will create subscription for subscriberIds for a topic.
+        Its like subscribing to a common interest group. if topic does not exist, it will be created.
 
         :param topic_key: The key identifier of the topic
         :param create_topic_subscriptions_request_dto:
@@ -653,6 +665,8 @@ class Subscriptions(BaseSDK):
     ) -> models.TopicsControllerDeleteTopicSubscriptionsResponse:
         r"""Delete topic subscriptions
 
+        Delete subscriptions for subscriberIds for a topic.
+
         :param topic_key: The key identifier of the topic
         :param delete_topic_subscriptions_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -816,6 +830,8 @@ class Subscriptions(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerDeleteTopicSubscriptionsResponse:
         r"""Delete topic subscriptions
+
+        Delete subscriptions for subscriberIds for a topic.
 
         :param topic_key: The key identifier of the topic
         :param delete_topic_subscriptions_request_dto:

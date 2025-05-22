@@ -8,13 +8,15 @@ A message in Novu represents a notification delivered to a recipient on a partic
 
 ### Available Operations
 
-* [retrieve](#retrieve) - Get messages
-* [delete](#delete) - Delete message
+* [retrieve](#retrieve) - List all messages
+* [delete](#delete) - Delete a message
 * [delete_by_transaction_id](#delete_by_transaction_id) - Delete messages by transactionId
 
 ## retrieve
 
-Returns a list of messages, could paginate using the `page` query parameter
+List all messages for the current environment. 
+    This API supports filtering by **channel**, **subscriberId**, and **transactionId**. 
+    This API returns a paginated list of messages.
 
 ### Example Usage
 
@@ -56,7 +58,8 @@ with Novu(
 
 ## delete
 
-Deletes a message entity from the Novu platform
+Delete a message entity from the Novu platform by **messageId**. 
+    This action is irreversible. **messageId** is required and of mongodbId type.
 
 ### Example Usage
 
@@ -68,7 +71,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.messages.delete(message_id="<id>")
+    res = novu.messages.delete(message_id="507f1f77bcf86cd799439011")
 
     # Handle response
     print(res)
@@ -77,11 +80,11 @@ with Novu(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `message_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `message_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | 507f1f77bcf86cd799439011                                            |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |                                                                     |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 
@@ -99,7 +102,8 @@ with Novu(
 
 ## delete_by_transaction_id
 
-Deletes messages entity from the Novu platform using TransactionId of message
+Delete multiple messages from the Novu platform using **transactionId** of triggered event. 
+    This API supports filtering by **channel** and delete all messages associated with the **transactionId**.
 
 ### Example Usage
 
@@ -111,7 +115,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.messages.delete_by_transaction_id(transaction_id="<id>")
+    res = novu.messages.delete_by_transaction_id(transaction_id="507f1f77bcf86cd799439011")
 
     # Handle response
     print(res)
@@ -120,12 +124,12 @@ with Novu(
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `transaction_id`                                                        | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `channel`                                                               | [Optional[models.QueryParamChannel]](../../models/queryparamchannel.md) | :heavy_minus_sign:                                                      | The channel of the message to be deleted                                |
-| `idempotency_key`                                                       | *Optional[str]*                                                         | :heavy_minus_sign:                                                      | A header for idempotency purposes                                       |
-| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             | Example                                                                 |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `transaction_id`                                                        | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     | 507f1f77bcf86cd799439011                                                |
+| `channel`                                                               | [Optional[models.QueryParamChannel]](../../models/queryparamchannel.md) | :heavy_minus_sign:                                                      | The channel of the message to be deleted                                |                                                                         |
+| `idempotency_key`                                                       | *Optional[str]*                                                         | :heavy_minus_sign:                                                      | A header for idempotency purposes                                       |                                                                         |
+| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |                                                                         |
 
 ### Response
 

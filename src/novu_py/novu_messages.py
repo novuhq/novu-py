@@ -21,7 +21,10 @@ class NovuMessages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerMarkActionAsSeenResponse:
-        r"""Mark message action as seen
+        r"""Update notification action status
+
+        Update in-app (inbox) notification's action status by its unique key identifier **messageId** and type field **type**.
+        **type** field can be **primary** or **secondary**
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -176,7 +179,10 @@ class NovuMessages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerMarkActionAsSeenResponse:
-        r"""Mark message action as seen
+        r"""Update notification action status
+
+        Update in-app (inbox) notification's action status by its unique key identifier **messageId** and type field **type**.
+        **type** field can be **primary** or **secondary**
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -333,7 +339,9 @@ class NovuMessages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerMarkAllUnreadAsReadResponse:
-        r"""Marks all the subscriber messages as read, unread, seen or unseen.
+        r"""Update all notifications state
+
+        Update all subscriber in-app (inbox) notifications state such as read, unread, seen or unseen by **subscriberId**.
 
         :param subscriber_id:
         :param mark_all_message_as_request_dto:
@@ -494,7 +502,9 @@ class NovuMessages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerMarkAllUnreadAsReadResponse:
-        r"""Marks all the subscriber messages as read, unread, seen or unseen.
+        r"""Update all notifications state
+
+        Update all subscriber in-app (inbox) notifications state such as read, unread, seen or unseen by **subscriberId**.
 
         :param subscriber_id:
         :param mark_all_message_as_request_dto:
@@ -654,7 +664,10 @@ class NovuMessages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerMarkMessagesAsResponse:
-        r"""Mark a subscriber messages as seen, read, unseen or unread
+        r"""Update notifications state
+
+        Update subscriber's multiple in-app (inbox) notifications state such as seen, read, unseen or unread by **subscriberId**.
+        **messageId** is of type mongodbId of notifications
 
         :param subscriber_id:
         :param message_mark_as_request_dto:
@@ -816,7 +829,10 @@ class NovuMessages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerMarkMessagesAsResponse:
-        r"""Mark a subscriber messages as seen, read, unseen or unread
+        r"""Update notifications state
+
+        Update subscriber's multiple in-app (inbox) notifications state such as seen, read, unseen or unread by **subscriberId**.
+        **messageId** is of type mongodbId of notifications
 
         :param subscriber_id:
         :param message_mark_as_request_dto:

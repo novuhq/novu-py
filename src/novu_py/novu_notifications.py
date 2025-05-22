@@ -21,7 +21,9 @@ class NovuNotifications(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerGetNotificationsFeedResponse:
-        r"""Get in-app notification feed for a particular subscriber
+        r"""Retrieve subscriber notifications
+
+        Retrieve subscriber in-app (inbox) notifications by its unique key identifier **subscriberId**.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -171,7 +173,9 @@ class NovuNotifications(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerGetNotificationsFeedResponse:
-        r"""Get in-app notification feed for a particular subscriber
+        r"""Retrieve subscriber notifications
+
+        Retrieve subscriber in-app (inbox) notifications by its unique key identifier **subscriberId**.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -321,7 +325,9 @@ class NovuNotifications(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerGetUnseenCountResponse:
-        r"""Get the unseen in-app notifications count for subscribers feed
+        r"""Retrieve unseen notifications count
+
+        Retrieve unseen in-app (inbox) notifications count for a subscriber by its unique key identifier **subscriberId**.
 
         :param subscriber_id:
         :param seen: Indicates whether to count seen notifications.
@@ -473,7 +479,9 @@ class NovuNotifications(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerGetUnseenCountResponse:
-        r"""Get the unseen in-app notifications count for subscribers feed
+        r"""Retrieve unseen notifications count
+
+        Retrieve unseen in-app (inbox) notifications count for a subscriber by its unique key identifier **subscriberId**.
 
         :param subscriber_id:
         :param seen: Indicates whether to count seen notifications.

@@ -9,7 +9,7 @@
 
 ## update_online_flag
 
-Used to update the subscriber isOnline flag.
+Update the subscriber online status by its unique key identifier **subscriberId**
 
 ### Example Usage
 

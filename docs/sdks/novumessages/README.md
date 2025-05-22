@@ -5,13 +5,14 @@
 
 ### Available Operations
 
-* [update_as_seen](#update_as_seen) - Mark message action as seen
-* [mark_all](#mark_all) - Marks all the subscriber messages as read, unread, seen or unseen.
-* [mark_all_as](#mark_all_as) - Mark a subscriber messages as seen, read, unseen or unread
+* [update_as_seen](#update_as_seen) - Update notification action status
+* [mark_all](#mark_all) - Update all notifications state
+* [mark_all_as](#mark_all_as) - Update notifications state
 
 ## update_as_seen
 
-Mark message action as seen
+Update in-app (inbox) notification's action status by its unique key identifier **messageId** and type field **type**. 
+      **type** field can be **primary** or **secondary**
 
 ### Example Usage
 
@@ -29,7 +30,7 @@ with Novu(
         "type": "<value>",
         "subscriber_id": "<id>",
         "mark_message_action_as_seen_dto": {
-            "status": novu_py.MarkMessageActionAsSeenDtoStatus.DONE,
+            "status": novu_py.MarkMessageActionAsSeenDtoStatus.PENDING,
         },
     })
 
@@ -61,7 +62,7 @@ with Novu(
 
 ## mark_all
 
-Marks all the subscriber messages as read, unread, seen or unseen.
+Update all subscriber in-app (inbox) notifications state such as read, unread, seen or unseen by **subscriberId**.
 
 ### Example Usage
 
@@ -75,7 +76,7 @@ with Novu(
 ) as novu:
 
     res = novu.subscribers.messages.mark_all(subscriber_id="<id>", mark_all_message_as_request_dto={
-        "mark_as": novu_py.MarkAs.SEEN,
+        "mark_as": novu_py.MarkAs.READ,
     })
 
     # Handle response
@@ -108,7 +109,8 @@ with Novu(
 
 ## mark_all_as
 
-Mark a subscriber messages as seen, read, unseen or unread
+Update subscriber's multiple in-app (inbox) notifications state such as seen, read, unseen or unread by **subscriberId**. 
+      **messageId** is of type mongodbId of notifications
 
 ### Example Usage
 
@@ -122,8 +124,8 @@ with Novu(
 ) as novu:
 
     res = novu.subscribers.messages.mark_all_as(subscriber_id="<id>", message_mark_as_request_dto={
-        "message_id": "<id>",
-        "mark_as": novu_py.MessageMarkAsRequestDtoMarkAs.UNREAD,
+        "message_id": [],
+        "mark_as": novu_py.MessageMarkAsRequestDtoMarkAs.SEEN,
     })
 
     # Handle response

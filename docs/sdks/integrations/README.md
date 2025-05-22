@@ -8,16 +8,16 @@ With the help of the Integration Store, you can easily integrate your favorite d
 
 ### Available Operations
 
-* [list](#list) - Get integrations
-* [create](#create) - Create integration
-* [update](#update) - Update integration
-* [delete](#delete) - Delete integration
-* [set_as_primary](#set_as_primary) - Set integration as primary
-* [list_active](#list_active) - Get active integrations
+* [list](#list) - List all integrations
+* [create](#create) - Create an integration
+* [update](#update) - Update an integration
+* [delete](#delete) - Delete an integration
+* [set_as_primary](#set_as_primary) - Update integration as primary
+* [list_active](#list_active) - List active integrations
 
 ## list
 
-Return all the integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
+List all the channels integrations created in the organization
 
 ### Example Usage
 
@@ -59,7 +59,8 @@ with Novu(
 
 ## create
 
-Create an integration for the current environment the user is based on the API key provided
+Create an integration for the current environment the user is based on the API key provided. 
+    Each provider supports different credentials, check the provider documentation for more details.
 
 ### Example Usage
 
@@ -74,7 +75,7 @@ with Novu(
 
     res = novu.integrations.create(create_integration_request_dto={
         "provider_id": "<id>",
-        "channel": novu_py.CreateIntegrationRequestDtoChannel.SMS,
+        "channel": novu_py.CreateIntegrationRequestDtoChannel.EMAIL,
     })
 
     # Handle response
@@ -106,7 +107,8 @@ with Novu(
 
 ## update
 
-Update integration
+Update an integration by its unique key identifier **integrationId**. 
+    Each provider supports different credentials, check the provider documentation for more details.
 
 ### Example Usage
 
@@ -150,7 +152,8 @@ with Novu(
 
 ## delete
 
-Delete integration
+Delete an integration by its unique key identifier **integrationId**. 
+    This action is irreversible.
 
 ### Example Usage
 
@@ -193,7 +196,9 @@ with Novu(
 
 ## set_as_primary
 
-Set integration as primary
+Update an integration as **primary** by its unique key identifier **integrationId**. 
+    This API will set the integration as primary for that channel in the current environment. 
+    Primary integration is used to deliver notification for sms and email channels in the workflow.
 
 ### Example Usage
 
@@ -236,7 +241,7 @@ with Novu(
 
 ## list_active
 
-Return all the active integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
+List all the active integrations created in the organization
 
 ### Example Usage
 

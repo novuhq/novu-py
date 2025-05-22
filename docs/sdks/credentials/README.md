@@ -5,13 +5,14 @@
 
 ### Available Operations
 
-* [update](#update) - Update subscriber credentials
-* [append](#append) - Modify subscriber credentials
-* [delete](#delete) - Delete subscriber credentials by providerId
+* [update](#update) - Update provider credentials
+* [append](#append) - Upsert provider credentials
+* [delete](#delete) - Delete provider credentials
 
 ## update
 
-Subscriber credentials associated to the delivery methods such as slack and push tokens.
+Update credentials for a provider such as slack and push tokens. 
+      **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
 
 ### Example Usage
 
@@ -25,7 +26,7 @@ with Novu(
 ) as novu:
 
     res = novu.subscribers.credentials.update(subscriber_id="<id>", update_subscriber_channel_request_dto={
-        "provider_id": novu_py.ChatOrPushProviderEnum.PUSHPAD,
+        "provider_id": novu_py.ChatOrPushProviderEnum.SLACK,
         "credentials": {
             "webhook_url": "https://example.com/webhook",
             "channel": "general",
@@ -72,9 +73,8 @@ with Novu(
 
 ## append
 
-Subscriber credentials associated to the delivery methods such as slack and push tokens.
-
-    This endpoint appends provided credentials and deviceTokens to the existing ones.
+Update credentials for a provider such as **slack** and **FCM**. 
+      **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
 
 ### Example Usage
 
@@ -88,7 +88,7 @@ with Novu(
 ) as novu:
 
     res = novu.subscribers.credentials.append(subscriber_id="<id>", update_subscriber_channel_request_dto={
-        "provider_id": novu_py.ChatOrPushProviderEnum.ZULIP,
+        "provider_id": novu_py.ChatOrPushProviderEnum.ONE_SIGNAL,
         "credentials": {
             "webhook_url": "https://example.com/webhook",
             "channel": "general",
@@ -135,7 +135,8 @@ with Novu(
 
 ## delete
 
-Delete subscriber credentials such as slack and expo tokens.
+Delete subscriber credentials for a provider such as **slack** and **FCM** by **providerId**. 
+    This action is irreversible and will remove the credentials for the provider for particular **subscriberId**.
 
 ### Example Usage
 

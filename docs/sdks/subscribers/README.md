@@ -3,23 +3,22 @@
 
 ## Overview
 
-A subscriber in Novu represents someone who should receive a message. A subscriber’s profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
+A subscriber in Novu represents someone who should receive a message. A subscriber's profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
 <https://docs.novu.co/subscribers/subscribers>
 
 ### Available Operations
 
-* [search](#search) - Search for subscribers
-* [create](#create) - Create subscriber
-* [retrieve](#retrieve) - Get subscriber
-* [patch](#patch) - Patch subscriber
+* [search](#search) - Search subscribers
+* [create](#create) - Create a subscriber
+* [retrieve](#retrieve) - Retrieve a subscriber
+* [patch](#patch) - Update a subscriber
 * [delete](#delete) - Delete subscriber
-* [list](#list) - Get subscribers
-* [upsert](#upsert) - Upsert subscriber
 * [create_bulk](#create_bulk) - Bulk create subscribers
 
 ## search
 
-Search for subscribers
+Search subscribers by their **email**, **phone**, **subscriberId** and **name**. 
+    The search is case sensitive and supports pagination.Checkout all available filters in the query section.
 
 ### Example Usage
 
@@ -61,7 +60,8 @@ with Novu(
 
 ## create
 
-Create subscriber with the given data, if the subscriber already exists, it will be updated
+Create a subscriber with the subscriber attributes. 
+      **subscriberId** is a required field, rest other fields are optional, if the subscriber already exists, it will be updated
 
 ### Example Usage
 
@@ -106,7 +106,8 @@ with Novu(
 
 ## retrieve
 
-Get subscriber by your internal id used to identify the subscriber
+Retrive a subscriber by its unique key identifier **subscriberId**. 
+    **subscriberId** field is required.
 
 ### Example Usage
 
@@ -149,7 +150,8 @@ with Novu(
 
 ## patch
 
-Patch subscriber by your internal id used to identify the subscriber
+Update a subscriber by its unique key identifier **subscriberId**. 
+    **subscriberId** is a required field, rest other fields are optional
 
 ### Example Usage
 
@@ -193,7 +195,7 @@ with Novu(
 
 ## delete
 
-Deletes a subscriber entity from the Novu platform
+Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions
 
 ### Example Usage
 
@@ -234,118 +236,10 @@ with Novu(
 | models.ErrorDto                        | 500                                    | application/json                       |
 | models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
-## list
-
-Returns a list of subscribers, could paginated using the `page` and `limit` query parameter
-
-### Example Usage
-
-```python
-from novu_py import Novu
-
-
-with Novu(
-    secret_key="YOUR_SECRET_KEY_HERE",
-) as novu:
-
-    res = novu.subscribers.list()
-
-    while res is not None:
-        # Handle items
-
-        res = res.next()
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `page`                                                              | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `limit`                                                             | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.SubscribersV1ControllerListSubscribersResponse](../../models/subscribersv1controllerlistsubscribersresponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models.ErrorDto                        | 414                                    | application/json                       |
-| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| models.ValidationErrorDto              | 422                                    | application/json                       |
-| models.ErrorDto                        | 500                                    | application/json                       |
-| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
-
-## upsert
-
-Used to upsert the subscriber entity with new information
-
-### Example Usage
-
-```python
-from novu_py import Novu
-
-
-with Novu(
-    secret_key="YOUR_SECRET_KEY_HERE",
-) as novu:
-
-    res = novu.subscribers.upsert(subscriber_id="<id>", update_subscriber_request_dto={
-        "email": "john.doe@example.com",
-        "first_name": "John",
-        "last_name": "Doe",
-        "phone": "+1234567890",
-        "avatar": "https://example.com/avatar.jpg",
-        "locale": "en-US",
-        "data": {
-            "preferences": {
-                "notifications": True,
-                "theme": "dark",
-            },
-            "tags": [
-                "premium",
-                "newsletter",
-            ],
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `subscriber_id`                                                                 | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `update_subscriber_request_dto`                                                 | [models.UpdateSubscriberRequestDto](../../models/updatesubscriberrequestdto.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `idempotency_key`                                                               | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | A header for idempotency purposes                                               |
-| `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
-
-### Response
-
-**[models.SubscribersV1ControllerUpdateSubscriberResponse](../../models/subscribersv1controllerupdatesubscriberresponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models.ErrorDto                        | 414                                    | application/json                       |
-| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| models.ValidationErrorDto              | 422                                    | application/json                       |
-| models.ErrorDto                        | 500                                    | application/json                       |
-| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
-
 ## create_bulk
 
 
-      Using this endpoint you can create multiple subscribers at once, to avoid multiple calls to the API.
-      The bulk API is limited to 500 subscribers per request.
+      Using this endpoint multiple subscribers can be created at once. The bulk API is limited to 500 subscribers per request.
     
 
 ### Example Usage
