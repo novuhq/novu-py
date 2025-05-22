@@ -40,7 +40,11 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerListTopicsResponse:
-        r"""Get topics list
+        r"""List all topics
+
+        This api returns a paginated list of topics.
+        Topics can be filtered by **key**, **name**, or **includeCursor** to paginate through the list.
+        Checkout all available filters in the query section.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -188,7 +192,11 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerListTopicsResponse:
-        r"""Get topics list
+        r"""List all topics
+
+        This api returns a paginated list of topics.
+        Topics can be filtered by **key**, **name**, or **includeCursor** to paginate through the list.
+        Checkout all available filters in the query section.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -337,7 +345,7 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerUpsertTopicResponse:
-        r"""Create or update a topic
+        r"""Create a topic
 
         Creates a new topic if it does not exist, or updates an existing topic if it already exists
 
@@ -497,7 +505,7 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerUpsertTopicResponse:
-        r"""Create or update a topic
+        r"""Create a topic
 
         Creates a new topic if it does not exist, or updates an existing topic if it already exists
 
@@ -654,7 +662,9 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerGetTopicResponse:
-        r"""Get topic by key
+        r"""Retrieve a topic
+
+        Retrieve a topic by its unique key identifier **topicKey**
 
         :param topic_key: The key identifier of the topic
         :param idempotency_key: A header for idempotency purposes
@@ -800,7 +810,9 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerGetTopicResponse:
-        r"""Get topic by key
+        r"""Retrieve a topic
+
+        Retrieve a topic by its unique key identifier **topicKey**
 
         :param topic_key: The key identifier of the topic
         :param idempotency_key: A header for idempotency purposes
@@ -949,7 +961,9 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerUpdateTopicResponse:
-        r"""Update topic by key
+        r"""Update a topic
+
+        Update a topic name by its unique key identifier **topicKey**
 
         :param topic_key: The key identifier of the topic
         :param update_topic_request_dto:
@@ -1109,7 +1123,9 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerUpdateTopicResponse:
-        r"""Update topic by key
+        r"""Update a topic
+
+        Update a topic name by its unique key identifier **topicKey**
 
         :param topic_key: The key identifier of the topic
         :param update_topic_request_dto:
@@ -1266,7 +1282,10 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerDeleteTopicResponse:
-        r"""Delete topic by key
+        r"""Delete a topic
+
+        Delete a topic by its unique key identifier **topicKey**.
+        This action is irreversible and will remove all subscriptions to the topic.
 
         :param topic_key: The key identifier of the topic
         :param idempotency_key: A header for idempotency purposes
@@ -1414,7 +1433,10 @@ class Topics(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerDeleteTopicResponse:
-        r"""Delete topic by key
+        r"""Delete a topic
+
+        Delete a topic by its unique key identifier **topicKey**.
+        This action is irreversible and will remove all subscriptions to the topic.
 
         :param topic_key: The key identifier of the topic
         :param idempotency_key: A header for idempotency purposes

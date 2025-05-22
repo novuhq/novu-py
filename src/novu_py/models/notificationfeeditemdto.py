@@ -40,8 +40,6 @@ class NotificationFeedItemDtoTypedDict(TypedDict):
     r"""Unique identifier for the notification instance."""
     subscriber_id: str
     r"""Unique identifier for the subscriber receiving the notification."""
-    feed_id: str
-    r"""Identifier for the feed associated with the notification."""
     job_id: str
     r"""Identifier for the job that triggered the notification."""
     transaction_id: str
@@ -58,6 +56,8 @@ class NotificationFeedItemDtoTypedDict(TypedDict):
     r"""Call-to-action information associated with the notification."""
     status: NotificationFeedItemDtoStatus
     r"""Current status of the notification."""
+    feed_id: NotRequired[Nullable[str]]
+    r"""Identifier for the feed associated with the notification."""
     created_at: NotRequired[Nullable[datetime]]
     r"""Timestamp indicating when the notification was created."""
     updated_at: NotRequired[Nullable[datetime]]
@@ -102,9 +102,6 @@ class NotificationFeedItemDto(BaseModel):
     subscriber_id: Annotated[str, pydantic.Field(alias="_subscriberId")]
     r"""Unique identifier for the subscriber receiving the notification."""
 
-    feed_id: Annotated[str, pydantic.Field(alias="_feedId")]
-    r"""Identifier for the feed associated with the notification."""
-
     job_id: Annotated[str, pydantic.Field(alias="_jobId")]
     r"""Identifier for the job that triggered the notification."""
 
@@ -128,6 +125,9 @@ class NotificationFeedItemDto(BaseModel):
 
     status: NotificationFeedItemDtoStatus
     r"""Current status of the notification."""
+
+    feed_id: Annotated[OptionalNullable[str], pydantic.Field(alias="_feedId")] = UNSET
+    r"""Identifier for the feed associated with the notification."""
 
     created_at: Annotated[
         OptionalNullable[datetime], pydantic.Field(alias="createdAt")
@@ -172,6 +172,7 @@ class NotificationFeedItemDto(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "_feedId",
             "createdAt",
             "updatedAt",
             "actor",
@@ -184,6 +185,7 @@ class NotificationFeedItemDto(BaseModel):
             "overrides",
         ]
         nullable_fields = [
+            "_feedId",
             "createdAt",
             "updatedAt",
             "templateIdentifier",

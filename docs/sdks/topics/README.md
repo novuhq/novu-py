@@ -8,15 +8,17 @@ Topics are a way to group subscribers together so that they can be notified of e
 
 ### Available Operations
 
-* [list](#list) - Get topics list
-* [create](#create) - Create or update a topic
-* [get](#get) - Get topic by key
-* [update](#update) - Update topic by key
-* [delete](#delete) - Delete topic by key
+* [list](#list) - List all topics
+* [create](#create) - Create a topic
+* [get](#get) - Retrieve a topic
+* [update](#update) - Update a topic
+* [delete](#delete) - Delete a topic
 
 ## list
 
-Get topics list
+This api returns a paginated list of topics.
+    Topics can be filtered by **key**, **name**, or **includeCursor** to paginate through the list. 
+    Checkout all available filters in the query section.
 
 ### Example Usage
 
@@ -28,9 +30,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.topics.list(request={
-        "key": "exampleKey",
-    })
+    res = novu.topics.list()
 
     # Handle response
     print(res)
@@ -106,7 +106,7 @@ with Novu(
 
 ## get
 
-Get topic by key
+Retrieve a topic by its unique key identifier **topicKey**
 
 ### Example Usage
 
@@ -149,7 +149,7 @@ with Novu(
 
 ## update
 
-Update topic by key
+Update a topic name by its unique key identifier **topicKey**
 
 ### Example Usage
 
@@ -195,7 +195,8 @@ with Novu(
 
 ## delete
 
-Delete topic by key
+Delete a topic by its unique key identifier **topicKey**. 
+    This action is irreversible and will remove all subscriptions to the topic.
 
 ### Example Usage
 

@@ -25,9 +25,11 @@ class Messages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.MessagesControllerGetMessagesResponse:
-        r"""Get messages
+        r"""List all messages
 
-        Returns a list of messages, could paginate using the `page` query parameter
+        List all messages for the current environment.
+        This API supports filtering by **channel**, **subscriberId**, and **transactionId**.
+        This API returns a paginated list of messages.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -175,9 +177,11 @@ class Messages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.MessagesControllerGetMessagesResponse:
-        r"""Get messages
+        r"""List all messages
 
-        Returns a list of messages, could paginate using the `page` query parameter
+        List all messages for the current environment.
+        This API supports filtering by **channel**, **subscriberId**, and **transactionId**.
+        This API returns a paginated list of messages.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -323,9 +327,10 @@ class Messages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.MessagesControllerDeleteMessageResponse:
-        r"""Delete message
+        r"""Delete a message
 
-        Deletes a message entity from the Novu platform
+        Delete a message entity from the Novu platform by **messageId**.
+        This action is irreversible. **messageId** is required and of mongodbId type.
 
         :param message_id:
         :param idempotency_key: A header for idempotency purposes
@@ -473,9 +478,10 @@ class Messages(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.MessagesControllerDeleteMessageResponse:
-        r"""Delete message
+        r"""Delete a message
 
-        Deletes a message entity from the Novu platform
+        Delete a message entity from the Novu platform by **messageId**.
+        This action is irreversible. **messageId** is required and of mongodbId type.
 
         :param message_id:
         :param idempotency_key: A header for idempotency purposes
@@ -626,7 +632,8 @@ class Messages(BaseSDK):
     ) -> models.MessagesControllerDeleteMessagesByTransactionIDResponse:
         r"""Delete messages by transactionId
 
-        Deletes messages entity from the Novu platform using TransactionId of message
+        Delete multiple messages from the Novu platform using **transactionId** of triggered event.
+        This API supports filtering by **channel** and delete all messages associated with the **transactionId**.
 
         :param transaction_id:
         :param channel: The channel of the message to be deleted
@@ -776,7 +783,8 @@ class Messages(BaseSDK):
     ) -> models.MessagesControllerDeleteMessagesByTransactionIDResponse:
         r"""Delete messages by transactionId
 
-        Deletes messages entity from the Novu platform using TransactionId of message
+        Delete multiple messages from the Novu platform using **transactionId** of triggered event.
+        This API supports filtering by **channel** and delete all messages associated with the **transactionId**.
 
         :param transaction_id:
         :param channel: The channel of the message to be deleted

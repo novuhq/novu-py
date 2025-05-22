@@ -25,7 +25,7 @@ class Properties(BaseSDK):
     ) -> models.SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse:
         r"""Update subscriber online status
 
-        Used to update the subscriber isOnline flag.
+        Update the subscriber online status by its unique key identifier **subscriberId**
 
         :param subscriber_id:
         :param update_subscriber_online_flag_request_dto:
@@ -191,7 +191,7 @@ class Properties(BaseSDK):
     ) -> models.SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse:
         r"""Update subscriber online status
 
-        Used to update the subscriber isOnline flag.
+        Update the subscriber online status by its unique key identifier **subscriberId**
 
         :param subscriber_id:
         :param update_subscriber_online_flag_request_dto:

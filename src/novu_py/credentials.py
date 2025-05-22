@@ -23,9 +23,10 @@ class Credentials(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerUpdateSubscriberChannelResponse:
-        r"""Update subscriber credentials
+        r"""Update provider credentials
 
-        Subscriber credentials associated to the delivery methods such as slack and push tokens.
+        Update credentials for a provider such as slack and push tokens.
+        **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
 
         :param subscriber_id:
         :param update_subscriber_channel_request_dto:
@@ -189,9 +190,10 @@ class Credentials(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerUpdateSubscriberChannelResponse:
-        r"""Update subscriber credentials
+        r"""Update provider credentials
 
-        Subscriber credentials associated to the delivery methods such as slack and push tokens.
+        Update credentials for a provider such as slack and push tokens.
+        **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
 
         :param subscriber_id:
         :param update_subscriber_channel_request_dto:
@@ -355,11 +357,10 @@ class Credentials(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerModifySubscriberChannelResponse:
-        r"""Modify subscriber credentials
+        r"""Upsert provider credentials
 
-        Subscriber credentials associated to the delivery methods such as slack and push tokens.
-
-        This endpoint appends provided credentials and deviceTokens to the existing ones.
+        Update credentials for a provider such as **slack** and **FCM**.
+        **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
 
         :param subscriber_id:
         :param update_subscriber_channel_request_dto:
@@ -523,11 +524,10 @@ class Credentials(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerModifySubscriberChannelResponse:
-        r"""Modify subscriber credentials
+        r"""Upsert provider credentials
 
-        Subscriber credentials associated to the delivery methods such as slack and push tokens.
-
-        This endpoint appends provided credentials and deviceTokens to the existing ones.
+        Update credentials for a provider such as **slack** and **FCM**.
+        **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
 
         :param subscriber_id:
         :param update_subscriber_channel_request_dto:
@@ -688,9 +688,10 @@ class Credentials(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerDeleteSubscriberCredentialsResponse:
-        r"""Delete subscriber credentials by providerId
+        r"""Delete provider credentials
 
-        Delete subscriber credentials such as slack and expo tokens.
+        Delete subscriber credentials for a provider such as **slack** and **FCM** by **providerId**.
+        This action is irreversible and will remove the credentials for the provider for particular **subscriberId**.
 
         :param subscriber_id:
         :param provider_id:
@@ -838,9 +839,10 @@ class Credentials(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersV1ControllerDeleteSubscriberCredentialsResponse:
-        r"""Delete subscriber credentials by providerId
+        r"""Delete provider credentials
 
-        Delete subscriber credentials such as slack and expo tokens.
+        Delete subscriber credentials for a provider such as **slack** and **FCM** by **providerId**.
+        This action is irreversible and will remove the credentials for the provider for particular **subscriberId**.
 
         :param subscriber_id:
         :param provider_id:
