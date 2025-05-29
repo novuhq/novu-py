@@ -6,17 +6,30 @@ from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 import httpx
+import importlib
 from novu_py import models, utils
 from novu_py._hooks import HookContext, SDKHooks
-from novu_py.integrations import Integrations
-from novu_py.messages import Messages
-from novu_py.notifications import Notifications
-from novu_py.subscribers import Subscribers
-from novu_py.topics import Topics
 from novu_py.types import OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
-from typing import Any, Callable, Dict, List, Mapping, Optional, Union, cast
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    List,
+    Mapping,
+    Optional,
+    TYPE_CHECKING,
+    Union,
+    cast,
+)
 import weakref
+
+if TYPE_CHECKING:
+    from novu_py.integrations import Integrations
+    from novu_py.messages import Messages
+    from novu_py.notifications import Notifications
+    from novu_py.subscribers import Subscribers
+    from novu_py.topics import Topics
 
 
 class Novu(BaseSDK):
@@ -24,23 +37,30 @@ class Novu(BaseSDK):
     https://docs.novu.co - Novu Documentation
     """
 
-    subscribers: Subscribers
+    subscribers: "Subscribers"
     r"""A subscriber in Novu represents someone who should receive a message. A subscriber's profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
     https://docs.novu.co/subscribers/subscribers
     """
-    topics: Topics
+    topics: "Topics"
     r"""Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
     https://docs.novu.co/subscribers/topics
     """
-    integrations: Integrations
+    integrations: "Integrations"
     r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
     https://docs.novu.co/channels-and-providers/integration-store
     """
-    messages: Messages
+    messages: "Messages"
     r"""A message in Novu represents a notification delivered to a recipient on a particular channel. Messages contain information about the request that triggered its delivery, a view of the data sent to the recipient, and a timeline of its lifecycle events. Learn more about messages.
     https://docs.novu.co/workflows/messages
     """
-    notifications: Notifications
+    notifications: "Notifications"
+    _sub_sdk_map = {
+        "subscribers": ("novu_py.subscribers", "Subscribers"),
+        "topics": ("novu_py.topics", "Topics"),
+        "integrations": ("novu_py.integrations", "Integrations"),
+        "messages": ("novu_py.messages", "Messages"),
+        "notifications": ("novu_py.notifications", "Notifications"),
+    }
 
     def __init__(
         self,
@@ -135,14 +155,32 @@ class Novu(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
-        self._init_sdks()
+    def __getattr__(self, name: str):
+        if name in self._sub_sdk_map:
+            module_path, class_name = self._sub_sdk_map[name]
+            try:
+                module = importlib.import_module(module_path)
+                klass = getattr(module, class_name)
+                instance = klass(self.sdk_configuration)
+                setattr(self, name, instance)
+                return instance
+            except ImportError as e:
+                raise AttributeError(
+                    f"Failed to import module {module_path} for attribute {name}: {e}"
+                ) from e
+            except AttributeError as e:
+                raise AttributeError(
+                    f"Failed to find class {class_name} in module {module_path} for attribute {name}: {e}"
+                ) from e
 
-    def _init_sdks(self):
-        self.subscribers = Subscribers(self.sdk_configuration)
-        self.topics = Topics(self.sdk_configuration)
-        self.integrations = Integrations(self.sdk_configuration)
-        self.messages = Messages(self.sdk_configuration)
-        self.notifications = Notifications(self.sdk_configuration)
+        raise AttributeError(
+            f"'{type(self).__name__}' object has no attribute '{name}'"
+        )
+
+    def __dir__(self):
+        default_attrs = list(super().__dir__())
+        lazy_attrs = list(self._sub_sdk_map.keys())
+        return sorted(list(set(default_attrs + lazy_attrs)))
 
     def __enter__(self):
         return self

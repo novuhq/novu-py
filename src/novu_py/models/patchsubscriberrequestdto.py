@@ -4,15 +4,8 @@ from __future__ import annotations
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
+from typing import Any, Dict
 from typing_extensions import Annotated, NotRequired, TypedDict
-
-
-class DataTypedDict(TypedDict):
-    r"""Additional custom data for the subscriber"""
-
-
-class Data(BaseModel):
-    r"""Additional custom data for the subscriber"""
 
 
 class PatchSubscriberRequestDtoTypedDict(TypedDict):
@@ -30,7 +23,7 @@ class PatchSubscriberRequestDtoTypedDict(TypedDict):
     r"""Timezone of the subscriber"""
     locale: NotRequired[Nullable[str]]
     r"""Locale of the subscriber"""
-    data: NotRequired[Nullable[DataTypedDict]]
+    data: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional custom data for the subscriber"""
 
 
@@ -60,7 +53,7 @@ class PatchSubscriberRequestDto(BaseModel):
     locale: OptionalNullable[str] = UNSET
     r"""Locale of the subscriber"""
 
-    data: OptionalNullable[Data] = UNSET
+    data: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Additional custom data for the subscriber"""
 
     @model_serializer(mode="wrap")
