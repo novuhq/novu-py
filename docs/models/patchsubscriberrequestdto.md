@@ -3,13 +3,13 @@
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `first_name`                                       | *OptionalNullable[str]*                            | :heavy_minus_sign:                                 | First name of the subscriber                       |
-| `last_name`                                        | *OptionalNullable[str]*                            | :heavy_minus_sign:                                 | Last name of the subscriber                        |
-| `email`                                            | *OptionalNullable[str]*                            | :heavy_minus_sign:                                 | Email address of the subscriber                    |
-| `phone`                                            | *OptionalNullable[str]*                            | :heavy_minus_sign:                                 | Phone number of the subscriber                     |
-| `avatar`                                           | *OptionalNullable[str]*                            | :heavy_minus_sign:                                 | Avatar URL or identifier                           |
-| `timezone`                                         | *OptionalNullable[str]*                            | :heavy_minus_sign:                                 | Timezone of the subscriber                         |
-| `locale`                                           | *OptionalNullable[str]*                            | :heavy_minus_sign:                                 | Locale of the subscriber                           |
-| `data`                                             | [OptionalNullable[models.Data]](../models/data.md) | :heavy_minus_sign:                                 | Additional custom data for the subscriber          |
+| Field                                     | Type                                      | Required                                  | Description                               |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| `first_name`                              | *OptionalNullable[str]*                   | :heavy_minus_sign:                        | First name of the subscriber              |
+| `last_name`                               | *OptionalNullable[str]*                   | :heavy_minus_sign:                        | Last name of the subscriber               |
+| `email`                                   | *OptionalNullable[str]*                   | :heavy_minus_sign:                        | Email address of the subscriber           |
+| `phone`                                   | *OptionalNullable[str]*                   | :heavy_minus_sign:                        | Phone number of the subscriber            |
+| `avatar`                                  | *OptionalNullable[str]*                   | :heavy_minus_sign:                        | Avatar URL or identifier                  |
+| `timezone`                                | *OptionalNullable[str]*                   | :heavy_minus_sign:                        | Timezone of the subscriber                |
+| `locale`                                  | *OptionalNullable[str]*                   | :heavy_minus_sign:                        | Locale of the subscriber                  |
+| `data`                                    | Dict[str, *Any*]                          | :heavy_minus_sign:                        | Additional custom data for the subscriber |

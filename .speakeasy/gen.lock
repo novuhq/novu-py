@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: baa321e91152730707971356530a50a0
+  docChecksum: f9adf74149dc4ebe57b2d8d11bab3191
   docVersion: 2.2.0
-  speakeasyVersion: 1.548.4
-  generationVersion: 2.605.6
-  releaseVersion: 1.1.0
-  configChecksum: bbadc89fc7f4e2a02dec146a90276311
+  speakeasyVersion: 1.552.0
+  generationVersion: 2.610.0
+  releaseVersion: 1.2.0
+  configChecksum: 725b8ff9258968d62971fc6637ba082d
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.18.1
+    core: 5.19.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -227,7 +227,6 @@ generatedFiles:
   - docs/models/subscriberfeedresponsedto.md
   - docs/models/subscriberglobalpreferencedto.md
   - docs/models/subscriberpayloaddto.md
-  - docs/models/subscriberpayloaddtodata.md
   - docs/models/subscriberpreferencechannels.md
   - docs/models/subscriberpreferenceoverridedto.md
   - docs/models/subscriberpreferencesworkflowinfodto.md
