@@ -3,10 +3,10 @@ id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
   docChecksum: f9adf74149dc4ebe57b2d8d11bab3191
   docVersion: 2.2.0
-  speakeasyVersion: 1.552.0
-  generationVersion: 2.610.0
-  releaseVersion: 1.2.0
-  configChecksum: 725b8ff9258968d62971fc6637ba082d
+  speakeasyVersion: 1.554.1
+  generationVersion: 2.616.1
+  releaseVersion: 1.3.0
+  configChecksum: cf831d1a48bf4787dcf2b3ccfdf4211a
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.19.0
+    core: 5.19.1
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -33,7 +33,7 @@ features:
     nullables: 1.0.1
     responseFormat: 1.0.1
     retries: 3.0.2
-    sdkHooks: 1.0.1
+    sdkHooks: 1.1.0
     unions: 3.0.4
 generatedFiles:
   - .devcontainer/README.md

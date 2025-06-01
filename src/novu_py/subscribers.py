@@ -109,6 +109,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_searchSubscribers",
                 oauth2_scopes=[],
@@ -262,6 +263,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_searchSubscribers",
                 oauth2_scopes=[],
@@ -425,6 +427,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_createSubscriber",
                 oauth2_scopes=[],
@@ -588,6 +591,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_createSubscriber",
                 oauth2_scopes=[],
@@ -739,6 +743,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_getSubscriber",
                 oauth2_scopes=[],
@@ -890,6 +895,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_getSubscriber",
                 oauth2_scopes=[],
@@ -1055,6 +1061,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_patchSubscriber",
                 oauth2_scopes=[],
@@ -1220,6 +1227,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_patchSubscriber",
                 oauth2_scopes=[],
@@ -1370,6 +1378,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_removeSubscriber",
                 oauth2_scopes=[],
@@ -1520,6 +1529,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_removeSubscriber",
                 oauth2_scopes=[],
@@ -1683,6 +1693,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersV1Controller_bulkCreateSubscribers",
                 oauth2_scopes=[],
@@ -1846,6 +1857,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersV1Controller_bulkCreateSubscribers",
                 oauth2_scopes=[],

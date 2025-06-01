@@ -135,15 +135,15 @@ class Novu(BaseSDK):
 
         hooks = SDKHooks()
 
+        # pylint: disable=protected-access
+        self.sdk_configuration.__dict__["_hooks"] = hooks
+
         current_server_url, *_ = self.sdk_configuration.get_server_details()
         server_url, self.sdk_configuration.client = hooks.sdk_init(
             current_server_url, client
         )
         if current_server_url != server_url:
             self.sdk_configuration.server_url = server_url
-
-        # pylint: disable=protected-access
-        self.sdk_configuration.__dict__["_hooks"] = hooks
 
         weakref.finalize(
             self,
@@ -285,6 +285,7 @@ class Novu(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_trigger",
                 oauth2_scopes=[],
@@ -450,6 +451,7 @@ class Novu(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_trigger",
                 oauth2_scopes=[],
@@ -603,6 +605,7 @@ class Novu(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_cancel",
                 oauth2_scopes=[],
@@ -754,6 +757,7 @@ class Novu(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_cancel",
                 oauth2_scopes=[],
@@ -916,6 +920,7 @@ class Novu(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_broadcastEventToAll",
                 oauth2_scopes=[],
@@ -1080,6 +1085,7 @@ class Novu(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_broadcastEventToAll",
                 oauth2_scopes=[],
@@ -1244,6 +1250,7 @@ class Novu(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_triggerBulk",
                 oauth2_scopes=[],
@@ -1408,6 +1415,7 @@ class Novu(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_triggerBulk",
                 oauth2_scopes=[],
