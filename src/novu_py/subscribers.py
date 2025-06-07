@@ -109,6 +109,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_searchSubscribers",
                 oauth2_scopes=[],
@@ -262,6 +263,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_searchSubscribers",
                 oauth2_scopes=[],
@@ -425,6 +427,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_createSubscriber",
                 oauth2_scopes=[],
@@ -588,6 +591,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_createSubscriber",
                 oauth2_scopes=[],
@@ -684,7 +688,7 @@ class Subscribers(BaseSDK):
     ) -> models.SubscribersControllerGetSubscriberResponse:
         r"""Retrieve a subscriber
 
-        Retrive a subscriber by its unique key identifier **subscriberId**.
+        Retrieve a subscriber by its unique key identifier **subscriberId**.
         **subscriberId** field is required.
 
         :param subscriber_id:
@@ -739,6 +743,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_getSubscriber",
                 oauth2_scopes=[],
@@ -835,7 +840,7 @@ class Subscribers(BaseSDK):
     ) -> models.SubscribersControllerGetSubscriberResponse:
         r"""Retrieve a subscriber
 
-        Retrive a subscriber by its unique key identifier **subscriberId**.
+        Retrieve a subscriber by its unique key identifier **subscriberId**.
         **subscriberId** field is required.
 
         :param subscriber_id:
@@ -890,6 +895,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_getSubscriber",
                 oauth2_scopes=[],
@@ -1055,6 +1061,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_patchSubscriber",
                 oauth2_scopes=[],
@@ -1220,6 +1227,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_patchSubscriber",
                 oauth2_scopes=[],
@@ -1314,9 +1322,10 @@ class Subscribers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersControllerRemoveSubscriberResponse:
-        r"""Delete subscriber
+        r"""Delete a subscriber
 
-        Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions
+        Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions.
+        **subscriberId** is a required field.
 
         :param subscriber_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1370,6 +1379,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_removeSubscriber",
                 oauth2_scopes=[],
@@ -1464,9 +1474,10 @@ class Subscribers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SubscribersControllerRemoveSubscriberResponse:
-        r"""Delete subscriber
+        r"""Delete a subscriber
 
-        Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions
+        Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions.
+        **subscriberId** is a required field.
 
         :param subscriber_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1520,6 +1531,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersController_removeSubscriber",
                 oauth2_scopes=[],
@@ -1683,6 +1695,7 @@ class Subscribers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersV1Controller_bulkCreateSubscribers",
                 oauth2_scopes=[],
@@ -1846,6 +1859,7 @@ class Subscribers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="SubscribersV1Controller_bulkCreateSubscribers",
                 oauth2_scopes=[],
