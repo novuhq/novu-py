@@ -25,6 +25,7 @@ from typing import (
 import weakref
 
 if TYPE_CHECKING:
+    from novu_py.environments import Environments
     from novu_py.integrations import Integrations
     from novu_py.messages import Messages
     from novu_py.notifications import Notifications
@@ -45,6 +46,10 @@ class Novu(BaseSDK):
     r"""Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
     https://docs.novu.co/subscribers/topics
     """
+    environments: "Environments"
+    r"""Environments allow you to manage different stages of your application development lifecycle. Each environment has its own set of API keys and configurations, enabling you to separate development, staging, and production workflows.
+    https://docs.novu.co/platform/environments
+    """
     integrations: "Integrations"
     r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
     https://docs.novu.co/channels-and-providers/integration-store
@@ -57,6 +62,7 @@ class Novu(BaseSDK):
     _sub_sdk_map = {
         "subscribers": ("novu_py.subscribers", "Subscribers"),
         "topics": ("novu_py.topics", "Topics"),
+        "environments": ("novu_py.environments", "Environments"),
         "integrations": ("novu_py.integrations", "Integrations"),
         "messages": ("novu_py.messages", "Messages"),
         "notifications": ("novu_py.notifications", "Notifications"),
@@ -135,15 +141,15 @@ class Novu(BaseSDK):
 
         hooks = SDKHooks()
 
+        # pylint: disable=protected-access
+        self.sdk_configuration.__dict__["_hooks"] = hooks
+
         current_server_url, *_ = self.sdk_configuration.get_server_details()
         server_url, self.sdk_configuration.client = hooks.sdk_init(
             current_server_url, client
         )
         if current_server_url != server_url:
             self.sdk_configuration.server_url = server_url
-
-        # pylint: disable=protected-access
-        self.sdk_configuration.__dict__["_hooks"] = hooks
 
         weakref.finalize(
             self,
@@ -285,6 +291,7 @@ class Novu(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_trigger",
                 oauth2_scopes=[],
@@ -321,12 +328,17 @@ class Novu(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.PayloadValidationExceptionDtoData
+            )
+            raise models.PayloadValidationExceptionDto(data=response_data)
         if utils.match_response(http_res, "414", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
@@ -450,6 +462,7 @@ class Novu(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_trigger",
                 oauth2_scopes=[],
@@ -486,12 +499,17 @@ class Novu(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.PayloadValidationExceptionDtoData
+            )
+            raise models.PayloadValidationExceptionDto(data=response_data)
         if utils.match_response(http_res, "414", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
@@ -603,6 +621,7 @@ class Novu(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_cancel",
                 oauth2_scopes=[],
@@ -754,6 +773,7 @@ class Novu(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_cancel",
                 oauth2_scopes=[],
@@ -916,6 +936,7 @@ class Novu(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_broadcastEventToAll",
                 oauth2_scopes=[],
@@ -952,12 +973,17 @@ class Novu(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.PayloadValidationExceptionDtoData
+            )
+            raise models.PayloadValidationExceptionDto(data=response_data)
         if utils.match_response(http_res, "414", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
@@ -1080,6 +1106,7 @@ class Novu(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_broadcastEventToAll",
                 oauth2_scopes=[],
@@ -1116,12 +1143,17 @@ class Novu(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.PayloadValidationExceptionDtoData
+            )
+            raise models.PayloadValidationExceptionDto(data=response_data)
         if utils.match_response(http_res, "414", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
@@ -1244,6 +1276,7 @@ class Novu(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_triggerBulk",
                 oauth2_scopes=[],
@@ -1280,12 +1313,17 @@ class Novu(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.PayloadValidationExceptionDtoData
+            )
+            raise models.PayloadValidationExceptionDto(data=response_data)
         if utils.match_response(http_res, "414", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
@@ -1408,6 +1446,7 @@ class Novu(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_triggerBulk",
                 oauth2_scopes=[],
@@ -1444,12 +1483,17 @@ class Novu(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.PayloadValidationExceptionDtoData
+            )
+            raise models.PayloadValidationExceptionDto(data=response_data)
         if utils.match_response(http_res, "414", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
             raise models.ErrorDto(data=response_data)
         if utils.match_response(
             http_res,
-            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)

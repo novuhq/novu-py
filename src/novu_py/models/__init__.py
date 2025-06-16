@@ -53,6 +53,11 @@ if TYPE_CHECKING:
     from .actorfeeditemdto import ActorFeedItemDto, ActorFeedItemDtoTypedDict
     from .actortypeenum import ActorTypeEnum
     from .apierror import APIError
+    from .apikeydto import APIKeyDto, APIKeyDtoTypedDict
+    from .bridgeconfigurationdto import (
+        BridgeConfigurationDto,
+        BridgeConfigurationDtoTypedDict,
+    )
     from .builderfieldtypeenum import BuilderFieldTypeEnum
     from .bulkcreatesubscriberresponsedto import (
         BulkCreateSubscriberResponseDto,
@@ -86,6 +91,10 @@ if TYPE_CHECKING:
     from .createdsubscriberdto import (
         CreatedSubscriberDto,
         CreatedSubscriberDtoTypedDict,
+    )
+    from .createenvironmentrequestdto import (
+        CreateEnvironmentRequestDto,
+        CreateEnvironmentRequestDtoTypedDict,
     )
     from .createintegrationrequestdto import (
         CreateIntegrationRequestDto,
@@ -170,6 +179,34 @@ if TYPE_CHECKING:
     from .emailblock import EmailBlock, EmailBlockTypedDict
     from .emailblockstyles import EmailBlockStyles, EmailBlockStylesTypedDict
     from .emailblocktypeenum import EmailBlockTypeEnum
+    from .environmentresponsedto import (
+        EnvironmentResponseDto,
+        EnvironmentResponseDtoTypedDict,
+    )
+    from .environmentscontrollerv1_createenvironmentop import (
+        EnvironmentsControllerV1CreateEnvironmentRequest,
+        EnvironmentsControllerV1CreateEnvironmentRequestTypedDict,
+        EnvironmentsControllerV1CreateEnvironmentResponse,
+        EnvironmentsControllerV1CreateEnvironmentResponseTypedDict,
+    )
+    from .environmentscontrollerv1_deleteenvironmentop import (
+        EnvironmentsControllerV1DeleteEnvironmentRequest,
+        EnvironmentsControllerV1DeleteEnvironmentRequestTypedDict,
+        EnvironmentsControllerV1DeleteEnvironmentResponse,
+        EnvironmentsControllerV1DeleteEnvironmentResponseTypedDict,
+    )
+    from .environmentscontrollerv1_listmyenvironmentsop import (
+        EnvironmentsControllerV1ListMyEnvironmentsRequest,
+        EnvironmentsControllerV1ListMyEnvironmentsRequestTypedDict,
+        EnvironmentsControllerV1ListMyEnvironmentsResponse,
+        EnvironmentsControllerV1ListMyEnvironmentsResponseTypedDict,
+    )
+    from .environmentscontrollerv1_updatemyenvironmentop import (
+        EnvironmentsControllerV1UpdateMyEnvironmentRequest,
+        EnvironmentsControllerV1UpdateMyEnvironmentRequestTypedDict,
+        EnvironmentsControllerV1UpdateMyEnvironmentResponse,
+        EnvironmentsControllerV1UpdateMyEnvironmentResponseTypedDict,
+    )
     from .errordto import (
         ErrorDto,
         ErrorDtoData,
@@ -215,6 +252,10 @@ if TYPE_CHECKING:
     from .getsubscriberpreferencesdto import (
         GetSubscriberPreferencesDto,
         GetSubscriberPreferencesDtoTypedDict,
+    )
+    from .inboundparsedomaindto import (
+        InBoundParseDomainDto,
+        InBoundParseDomainDtoTypedDict,
     )
     from .integrationresponsedto import (
         Channel,
@@ -393,6 +434,26 @@ if TYPE_CHECKING:
     from .patchsubscriberrequestdto import (
         PatchSubscriberRequestDto,
         PatchSubscriberRequestDtoTypedDict,
+    )
+    from .payloadvalidationerrordto import (
+        PayloadValidationErrorDto,
+        PayloadValidationErrorDtoTypedDict,
+        PayloadValidationErrorDtoValue,
+        PayloadValidationErrorDtoValueTypedDict,
+        Value4,
+        Value4TypedDict,
+        Value5,
+        Value5TypedDict,
+    )
+    from .payloadvalidationexceptiondto import (
+        MessagePayloadValidationExceptionDto4,
+        MessagePayloadValidationExceptionDto4TypedDict,
+        MessagePayloadValidationExceptionDto5,
+        PayloadValidationExceptionDto,
+        PayloadValidationExceptionDtoData,
+        PayloadValidationExceptionDtoMessage,
+        Schema,
+        SchemaTypedDict,
     )
     from .preferenceoverridesourceenum import PreferenceOverrideSourceEnum
     from .providersidenum import ProvidersIDEnum
@@ -683,6 +744,10 @@ if TYPE_CHECKING:
         UpdatedSubscriberDto,
         UpdatedSubscriberDtoTypedDict,
     )
+    from .updateenvironmentrequestdto import (
+        UpdateEnvironmentRequestDto,
+        UpdateEnvironmentRequestDtoTypedDict,
+    )
     from .updateintegrationrequestdto import (
         UpdateIntegrationRequestDto,
         UpdateIntegrationRequestDtoTypedDict,
@@ -719,6 +784,8 @@ if TYPE_CHECKING:
 
 __all__ = [
     "APIError",
+    "APIKeyDto",
+    "APIKeyDtoTypedDict",
     "ActivitiesResponseDto",
     "ActivitiesResponseDtoTypedDict",
     "ActivityNotificationExecutionDetailResponseDto",
@@ -752,6 +819,8 @@ __all__ = [
     "ActorTypeEnum",
     "ActorTypedDict",
     "BackoffUnit",
+    "BridgeConfigurationDto",
+    "BridgeConfigurationDtoTypedDict",
     "BuilderFieldTypeEnum",
     "BulkCreateSubscriberResponseDto",
     "BulkCreateSubscriberResponseDtoTypedDict",
@@ -778,6 +847,8 @@ __all__ = [
     "ControlVariablesTypedDict",
     "Controls",
     "ControlsTypedDict",
+    "CreateEnvironmentRequestDto",
+    "CreateEnvironmentRequestDtoTypedDict",
     "CreateIntegrationRequestDto",
     "CreateIntegrationRequestDtoChannel",
     "CreateIntegrationRequestDtoTypedDict",
@@ -830,6 +901,24 @@ __all__ = [
     "EmailBlockStylesTypedDict",
     "EmailBlockTypeEnum",
     "EmailBlockTypedDict",
+    "EnvironmentResponseDto",
+    "EnvironmentResponseDtoTypedDict",
+    "EnvironmentsControllerV1CreateEnvironmentRequest",
+    "EnvironmentsControllerV1CreateEnvironmentRequestTypedDict",
+    "EnvironmentsControllerV1CreateEnvironmentResponse",
+    "EnvironmentsControllerV1CreateEnvironmentResponseTypedDict",
+    "EnvironmentsControllerV1DeleteEnvironmentRequest",
+    "EnvironmentsControllerV1DeleteEnvironmentRequestTypedDict",
+    "EnvironmentsControllerV1DeleteEnvironmentResponse",
+    "EnvironmentsControllerV1DeleteEnvironmentResponseTypedDict",
+    "EnvironmentsControllerV1ListMyEnvironmentsRequest",
+    "EnvironmentsControllerV1ListMyEnvironmentsRequestTypedDict",
+    "EnvironmentsControllerV1ListMyEnvironmentsResponse",
+    "EnvironmentsControllerV1ListMyEnvironmentsResponseTypedDict",
+    "EnvironmentsControllerV1UpdateMyEnvironmentRequest",
+    "EnvironmentsControllerV1UpdateMyEnvironmentRequestTypedDict",
+    "EnvironmentsControllerV1UpdateMyEnvironmentResponse",
+    "EnvironmentsControllerV1UpdateMyEnvironmentResponseTypedDict",
     "ErrorDto",
     "ErrorDtoData",
     "EventsControllerBroadcastEventToAllRequest",
@@ -864,6 +953,8 @@ __all__ = [
     "FourTypedDict",
     "GetSubscriberPreferencesDto",
     "GetSubscriberPreferencesDtoTypedDict",
+    "InBoundParseDomainDto",
+    "InBoundParseDomainDtoTypedDict",
     "IntegrationResponseDto",
     "IntegrationResponseDtoTypedDict",
     "IntegrationsControllerCreateIntegrationRequest",
@@ -926,6 +1017,9 @@ __all__ = [
     "MessageMarkAsRequestDto",
     "MessageMarkAsRequestDtoMarkAs",
     "MessageMarkAsRequestDtoTypedDict",
+    "MessagePayloadValidationExceptionDto4",
+    "MessagePayloadValidationExceptionDto4TypedDict",
+    "MessagePayloadValidationExceptionDto5",
     "MessageResponseDto",
     "MessageResponseDtoOverrides",
     "MessageResponseDtoOverridesTypedDict",
@@ -1006,6 +1100,13 @@ __all__ = [
     "PatchSubscriberRequestDtoTypedDict",
     "Payload",
     "PayloadTypedDict",
+    "PayloadValidationErrorDto",
+    "PayloadValidationErrorDtoTypedDict",
+    "PayloadValidationErrorDtoValue",
+    "PayloadValidationErrorDtoValueTypedDict",
+    "PayloadValidationExceptionDto",
+    "PayloadValidationExceptionDtoData",
+    "PayloadValidationExceptionDtoMessage",
     "PreferenceOverrideSourceEnum",
     "ProviderID",
     "ProvidersIDEnum",
@@ -1015,6 +1116,8 @@ __all__ = [
     "RemoveSubscriberResponseDtoTypedDict",
     "ReplyCallback",
     "ReplyCallbackTypedDict",
+    "Schema",
+    "SchemaTypedDict",
     "Security",
     "SecurityTypedDict",
     "Status",
@@ -1202,6 +1305,8 @@ __all__ = [
     "Unit",
     "UnseenCountResponse",
     "UnseenCountResponseTypedDict",
+    "UpdateEnvironmentRequestDto",
+    "UpdateEnvironmentRequestDtoTypedDict",
     "UpdateIntegrationRequestDto",
     "UpdateIntegrationRequestDtoTypedDict",
     "UpdateSubscriberChannelRequestDto",
@@ -1216,6 +1321,10 @@ __all__ = [
     "ValidationErrorDtoData",
     "ValidationErrorDtoMessage",
     "Value",
+    "Value4",
+    "Value4TypedDict",
+    "Value5",
+    "Value5TypedDict",
     "ValueTypedDict",
     "WeekDays",
     "WorkflowIntegrationStatus",
@@ -1265,6 +1374,10 @@ _dynamic_imports: dict[str, str] = {
     "ActorFeedItemDtoTypedDict": ".actorfeeditemdto",
     "ActorTypeEnum": ".actortypeenum",
     "APIError": ".apierror",
+    "APIKeyDto": ".apikeydto",
+    "APIKeyDtoTypedDict": ".apikeydto",
+    "BridgeConfigurationDto": ".bridgeconfigurationdto",
+    "BridgeConfigurationDtoTypedDict": ".bridgeconfigurationdto",
     "BuilderFieldTypeEnum": ".builderfieldtypeenum",
     "BulkCreateSubscriberResponseDto": ".bulkcreatesubscriberresponsedto",
     "BulkCreateSubscriberResponseDtoTypedDict": ".bulkcreatesubscriberresponsedto",
@@ -1292,6 +1405,8 @@ _dynamic_imports: dict[str, str] = {
     "ValueTypedDict": ".constraintvalidation",
     "CreatedSubscriberDto": ".createdsubscriberdto",
     "CreatedSubscriberDtoTypedDict": ".createdsubscriberdto",
+    "CreateEnvironmentRequestDto": ".createenvironmentrequestdto",
+    "CreateEnvironmentRequestDtoTypedDict": ".createenvironmentrequestdto",
     "CreateIntegrationRequestDto": ".createintegrationrequestdto",
     "CreateIntegrationRequestDtoChannel": ".createintegrationrequestdto",
     "CreateIntegrationRequestDtoTypedDict": ".createintegrationrequestdto",
@@ -1345,6 +1460,24 @@ _dynamic_imports: dict[str, str] = {
     "EmailBlockStyles": ".emailblockstyles",
     "EmailBlockStylesTypedDict": ".emailblockstyles",
     "EmailBlockTypeEnum": ".emailblocktypeenum",
+    "EnvironmentResponseDto": ".environmentresponsedto",
+    "EnvironmentResponseDtoTypedDict": ".environmentresponsedto",
+    "EnvironmentsControllerV1CreateEnvironmentRequest": ".environmentscontrollerv1_createenvironmentop",
+    "EnvironmentsControllerV1CreateEnvironmentRequestTypedDict": ".environmentscontrollerv1_createenvironmentop",
+    "EnvironmentsControllerV1CreateEnvironmentResponse": ".environmentscontrollerv1_createenvironmentop",
+    "EnvironmentsControllerV1CreateEnvironmentResponseTypedDict": ".environmentscontrollerv1_createenvironmentop",
+    "EnvironmentsControllerV1DeleteEnvironmentRequest": ".environmentscontrollerv1_deleteenvironmentop",
+    "EnvironmentsControllerV1DeleteEnvironmentRequestTypedDict": ".environmentscontrollerv1_deleteenvironmentop",
+    "EnvironmentsControllerV1DeleteEnvironmentResponse": ".environmentscontrollerv1_deleteenvironmentop",
+    "EnvironmentsControllerV1DeleteEnvironmentResponseTypedDict": ".environmentscontrollerv1_deleteenvironmentop",
+    "EnvironmentsControllerV1ListMyEnvironmentsRequest": ".environmentscontrollerv1_listmyenvironmentsop",
+    "EnvironmentsControllerV1ListMyEnvironmentsRequestTypedDict": ".environmentscontrollerv1_listmyenvironmentsop",
+    "EnvironmentsControllerV1ListMyEnvironmentsResponse": ".environmentscontrollerv1_listmyenvironmentsop",
+    "EnvironmentsControllerV1ListMyEnvironmentsResponseTypedDict": ".environmentscontrollerv1_listmyenvironmentsop",
+    "EnvironmentsControllerV1UpdateMyEnvironmentRequest": ".environmentscontrollerv1_updatemyenvironmentop",
+    "EnvironmentsControllerV1UpdateMyEnvironmentRequestTypedDict": ".environmentscontrollerv1_updatemyenvironmentop",
+    "EnvironmentsControllerV1UpdateMyEnvironmentResponse": ".environmentscontrollerv1_updatemyenvironmentop",
+    "EnvironmentsControllerV1UpdateMyEnvironmentResponseTypedDict": ".environmentscontrollerv1_updatemyenvironmentop",
     "ErrorDto": ".errordto",
     "ErrorDtoData": ".errordto",
     "Message": ".errordto",
@@ -1379,6 +1512,8 @@ _dynamic_imports: dict[str, str] = {
     "Operator": ".fieldfilterpartdto",
     "GetSubscriberPreferencesDto": ".getsubscriberpreferencesdto",
     "GetSubscriberPreferencesDtoTypedDict": ".getsubscriberpreferencesdto",
+    "InBoundParseDomainDto": ".inboundparsedomaindto",
+    "InBoundParseDomainDtoTypedDict": ".inboundparsedomaindto",
     "Channel": ".integrationresponsedto",
     "IntegrationResponseDto": ".integrationresponsedto",
     "IntegrationResponseDtoTypedDict": ".integrationresponsedto",
@@ -1508,6 +1643,22 @@ _dynamic_imports: dict[str, str] = {
     "PatchSubscriberPreferencesDtoTypedDict": ".patchsubscriberpreferencesdto",
     "PatchSubscriberRequestDto": ".patchsubscriberrequestdto",
     "PatchSubscriberRequestDtoTypedDict": ".patchsubscriberrequestdto",
+    "PayloadValidationErrorDto": ".payloadvalidationerrordto",
+    "PayloadValidationErrorDtoTypedDict": ".payloadvalidationerrordto",
+    "PayloadValidationErrorDtoValue": ".payloadvalidationerrordto",
+    "PayloadValidationErrorDtoValueTypedDict": ".payloadvalidationerrordto",
+    "Value4": ".payloadvalidationerrordto",
+    "Value4TypedDict": ".payloadvalidationerrordto",
+    "Value5": ".payloadvalidationerrordto",
+    "Value5TypedDict": ".payloadvalidationerrordto",
+    "MessagePayloadValidationExceptionDto4": ".payloadvalidationexceptiondto",
+    "MessagePayloadValidationExceptionDto4TypedDict": ".payloadvalidationexceptiondto",
+    "MessagePayloadValidationExceptionDto5": ".payloadvalidationexceptiondto",
+    "PayloadValidationExceptionDto": ".payloadvalidationexceptiondto",
+    "PayloadValidationExceptionDtoData": ".payloadvalidationexceptiondto",
+    "PayloadValidationExceptionDtoMessage": ".payloadvalidationexceptiondto",
+    "Schema": ".payloadvalidationexceptiondto",
+    "SchemaTypedDict": ".payloadvalidationexceptiondto",
     "PreferenceOverrideSourceEnum": ".preferenceoverridesourceenum",
     "ProvidersIDEnum": ".providersidenum",
     "RemoveSubscriberResponseDto": ".removesubscriberresponsedto",
@@ -1714,6 +1865,8 @@ _dynamic_imports: dict[str, str] = {
     "UnseenCountResponseTypedDict": ".unseencountresponse",
     "UpdatedSubscriberDto": ".updatedsubscriberdto",
     "UpdatedSubscriberDtoTypedDict": ".updatedsubscriberdto",
+    "UpdateEnvironmentRequestDto": ".updateenvironmentrequestdto",
+    "UpdateEnvironmentRequestDtoTypedDict": ".updateenvironmentrequestdto",
     "UpdateIntegrationRequestDto": ".updateintegrationrequestdto",
     "UpdateIntegrationRequestDtoTypedDict": ".updateintegrationrequestdto",
     "UpdateSubscriberChannelRequestDto": ".updatesubscriberchannelrequestdto",
