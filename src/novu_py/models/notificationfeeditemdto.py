@@ -32,8 +32,6 @@ class NotificationFeedItemDtoTypedDict(TypedDict):
     r"""Identifier for the template used to generate the notification."""
     environment_id: str
     r"""Identifier for the environment where the notification is sent."""
-    message_template_id: str
-    r"""Identifier for the message template used."""
     organization_id: str
     r"""Identifier for the organization sending the notification."""
     notification_id: str
@@ -56,6 +54,8 @@ class NotificationFeedItemDtoTypedDict(TypedDict):
     r"""Call-to-action information associated with the notification."""
     status: NotificationFeedItemDtoStatus
     r"""Current status of the notification."""
+    message_template_id: NotRequired[str]
+    r"""Identifier for the message template used."""
     feed_id: NotRequired[Nullable[str]]
     r"""Identifier for the feed associated with the notification."""
     created_at: NotRequired[Nullable[datetime]]
@@ -90,9 +90,6 @@ class NotificationFeedItemDto(BaseModel):
     environment_id: Annotated[str, pydantic.Field(alias="_environmentId")]
     r"""Identifier for the environment where the notification is sent."""
 
-    message_template_id: Annotated[str, pydantic.Field(alias="_messageTemplateId")]
-    r"""Identifier for the message template used."""
-
     organization_id: Annotated[str, pydantic.Field(alias="_organizationId")]
     r"""Identifier for the organization sending the notification."""
 
@@ -125,6 +122,11 @@ class NotificationFeedItemDto(BaseModel):
 
     status: NotificationFeedItemDtoStatus
     r"""Current status of the notification."""
+
+    message_template_id: Annotated[
+        Optional[str], pydantic.Field(alias="_messageTemplateId")
+    ] = None
+    r"""Identifier for the message template used."""
 
     feed_id: Annotated[OptionalNullable[str], pydantic.Field(alias="_feedId")] = UNSET
     r"""Identifier for the feed associated with the notification."""
@@ -172,6 +174,7 @@ class NotificationFeedItemDto(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "_messageTemplateId",
             "_feedId",
             "createdAt",
             "updatedAt",

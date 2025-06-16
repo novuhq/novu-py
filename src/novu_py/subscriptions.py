@@ -23,7 +23,7 @@ class Subscriptions(BaseSDK):
     ) -> models.TopicsControllerListTopicSubscriptionsResponse:
         r"""List topic subscriptions
 
-        List all topics that a subscriber is subscribed to.
+        List all subscriptions of subscribers for a topic.
         Checkout all available filters in the query section.
 
         :param request: The request object to send.
@@ -78,6 +78,7 @@ class Subscriptions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="TopicsController_listTopicSubscriptions",
                 oauth2_scopes=[],
@@ -176,7 +177,7 @@ class Subscriptions(BaseSDK):
     ) -> models.TopicsControllerListTopicSubscriptionsResponse:
         r"""List topic subscriptions
 
-        List all topics that a subscriber is subscribed to.
+        List all subscriptions of subscribers for a topic.
         Checkout all available filters in the query section.
 
         :param request: The request object to send.
@@ -231,6 +232,7 @@ class Subscriptions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="TopicsController_listTopicSubscriptions",
                 oauth2_scopes=[],
@@ -398,6 +400,7 @@ class Subscriptions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="TopicsController_createTopicSubscriptions",
                 oauth2_scopes=[],
@@ -565,6 +568,7 @@ class Subscriptions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="TopicsController_createTopicSubscriptions",
                 oauth2_scopes=[],
@@ -731,6 +735,7 @@ class Subscriptions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="TopicsController_deleteTopicSubscriptions",
                 oauth2_scopes=[],
@@ -897,6 +902,7 @@ class Subscriptions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="TopicsController_deleteTopicSubscriptions",
                 oauth2_scopes=[],

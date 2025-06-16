@@ -76,6 +76,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_listIntegrations",
                 oauth2_scopes=[],
@@ -223,6 +224,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_listIntegrations",
                 oauth2_scopes=[],
@@ -386,6 +388,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_createIntegration",
                 oauth2_scopes=[],
@@ -549,6 +552,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_createIntegration",
                 oauth2_scopes=[],
@@ -715,6 +719,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_updateIntegrationById",
                 oauth2_scopes=[],
@@ -881,6 +886,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_updateIntegrationById",
                 oauth2_scopes=[],
@@ -1032,6 +1038,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_removeIntegration",
                 oauth2_scopes=[],
@@ -1183,6 +1190,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_removeIntegration",
                 oauth2_scopes=[],
@@ -1335,6 +1343,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_setIntegrationAsPrimary",
                 oauth2_scopes=[],
@@ -1487,6 +1496,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_setIntegrationAsPrimary",
                 oauth2_scopes=[],
@@ -1634,6 +1644,7 @@ class Integrations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_getActiveIntegrations",
                 oauth2_scopes=[],
@@ -1781,6 +1792,7 @@ class Integrations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_getActiveIntegrations",
                 oauth2_scopes=[],

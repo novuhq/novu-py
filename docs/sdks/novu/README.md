@@ -64,13 +64,14 @@ with Novu(
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models.ErrorDto                        | 414                                    | application/json                       |
-| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| models.ValidationErrorDto              | 422                                    | application/json                       |
-| models.ErrorDto                        | 500                                    | application/json                       |
-| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                           | Status Code                          | Content Type                         |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| models.PayloadValidationExceptionDto | 400                                  | application/json                     |
+| models.ErrorDto                      | 414                                  | application/json                     |
+| models.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415    | application/json                     |
+| models.ValidationErrorDto            | 422                                  | application/json                     |
+| models.ErrorDto                      | 500                                  | application/json                     |
+| models.APIError                      | 4XX, 5XX                             | \*/\*                                |
 
 ## cancel
 
@@ -173,13 +174,14 @@ with Novu(
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models.ErrorDto                        | 414                                    | application/json                       |
-| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| models.ValidationErrorDto              | 422                                    | application/json                       |
-| models.ErrorDto                        | 500                                    | application/json                       |
-| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                           | Status Code                          | Content Type                         |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| models.PayloadValidationExceptionDto | 400                                  | application/json                     |
+| models.ErrorDto                      | 414                                  | application/json                     |
+| models.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415    | application/json                     |
+| models.ValidationErrorDto            | 422                                  | application/json                     |
+| models.ErrorDto                      | 500                                  | application/json                     |
+| models.APIError                      | 4XX, 5XX                             | \*/\*                                |
 
 ## trigger_bulk
 
@@ -256,10 +258,11 @@ with Novu(
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models.ErrorDto                        | 414                                    | application/json                       |
-| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| models.ValidationErrorDto              | 422                                    | application/json                       |
-| models.ErrorDto                        | 500                                    | application/json                       |
-| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                           | Status Code                          | Content Type                         |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| models.PayloadValidationExceptionDto | 400                                  | application/json                     |
+| models.ErrorDto                      | 414                                  | application/json                     |
+| models.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415    | application/json                     |
+| models.ValidationErrorDto            | 422                                  | application/json                     |
+| models.ErrorDto                      | 500                                  | application/json                     |
+| models.APIError                      | 4XX, 5XX                             | \*/\*                                |
