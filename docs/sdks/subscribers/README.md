@@ -12,7 +12,7 @@ A subscriber in Novu represents someone who should receive a message. A subscrib
 * [create](#create) - Create a subscriber
 * [retrieve](#retrieve) - Retrieve a subscriber
 * [patch](#patch) - Update a subscriber
-* [delete](#delete) - Delete subscriber
+* [delete](#delete) - Delete a subscriber
 * [create_bulk](#create_bulk) - Bulk create subscribers
 
 ## search
@@ -106,7 +106,7 @@ with Novu(
 
 ## retrieve
 
-Retrive a subscriber by its unique key identifier **subscriberId**. 
+Retrieve a subscriber by its unique key identifier **subscriberId**. 
     **subscriberId** field is required.
 
 ### Example Usage
@@ -195,7 +195,8 @@ with Novu(
 
 ## delete
 
-Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions
+Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions. 
+      **subscriberId** is a required field.
 
 ### Example Usage
 

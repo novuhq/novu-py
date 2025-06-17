@@ -1,0 +1,10 @@
+# WorkflowControllerPatchWorkflowRequest
+
+
+## Fields
+
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `workflow_id`                                            | *str*                                                    | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotency_key`                                        | *Optional[str]*                                          | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `patch_workflow_dto`                                     | [models.PatchWorkflowDto](../models/patchworkflowdto.md) | :heavy_check_mark:                                       | Workflow patch details                                   |

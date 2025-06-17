@@ -67,7 +67,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>")
+    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>", seen=False, limit=100)
 
     # Handle response
     print(res)
