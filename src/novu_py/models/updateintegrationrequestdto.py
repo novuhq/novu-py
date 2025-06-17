@@ -16,8 +16,6 @@ class UpdateIntegrationRequestDtoTypedDict(TypedDict):
     active: NotRequired[bool]
     r"""If the integration is active the validation on the credentials field will run"""
     credentials: NotRequired[CredentialsDtoTypedDict]
-    remove_novu_branding: NotRequired[bool]
-    r"""If true, the Novu branding will be removed from the Inbox component"""
     check: NotRequired[bool]
     conditions: NotRequired[List[StepFilterDtoTypedDict]]
 
@@ -35,11 +33,6 @@ class UpdateIntegrationRequestDto(BaseModel):
     r"""If the integration is active the validation on the credentials field will run"""
 
     credentials: Optional[CredentialsDto] = None
-
-    remove_novu_branding: Annotated[
-        Optional[bool], pydantic.Field(alias="removeNovuBranding")
-    ] = None
-    r"""If true, the Novu branding will be removed from the Inbox component"""
 
     check: Optional[bool] = None
 

@@ -442,6 +442,13 @@ asyncio.run(main())
 <details open>
 <summary>Available methods</summary>
 
+### [environments](docs/sdks/environments/README.md)
+
+* [create](docs/sdks/environments/README.md#create) - Create an environment
+* [list](docs/sdks/environments/README.md#list) - List all environments
+* [update](docs/sdks/environments/README.md#update) - Update an environment
+* [delete](docs/sdks/environments/README.md#delete) - Delete an environment
+
 ### [integrations](docs/sdks/integrations/README.md)
 
 * [list](docs/sdks/integrations/README.md#list) - List all integrations
@@ -475,7 +482,7 @@ asyncio.run(main())
 * [create](docs/sdks/subscribers/README.md#create) - Create a subscriber
 * [retrieve](docs/sdks/subscribers/README.md#retrieve) - Retrieve a subscriber
 * [patch](docs/sdks/subscribers/README.md#patch) - Update a subscriber
-* [delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
+* [delete](docs/sdks/subscribers/README.md#delete) - Delete a subscriber
 * [create_bulk](docs/sdks/subscribers/README.md#create_bulk) - Bulk create subscribers
 
 #### [subscribers.credentials](docs/sdks/credentials/README.md)
@@ -525,6 +532,20 @@ asyncio.run(main())
 * [list](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
+
+### [workflows](docs/sdks/workflows/README.md)
+
+* [create](docs/sdks/workflows/README.md#create) - Create a workflow
+* [list](docs/sdks/workflows/README.md#list) - List all workflows
+* [update](docs/sdks/workflows/README.md#update) - Update a workflow
+* [get](docs/sdks/workflows/README.md#get) - Retrieve a workflow
+* [delete](docs/sdks/workflows/README.md#delete) - Delete a workflow
+* [patch](docs/sdks/workflows/README.md#patch) - Update a workflow
+* [sync](docs/sdks/workflows/README.md#sync) - Sync a workflow
+
+#### [workflows.steps](docs/sdks/steps/README.md)
+
+* [retrieve](docs/sdks/steps/README.md#retrieve) - Retrieve workflow step
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -609,13 +630,14 @@ By default, an API error will raise a models.APIError exception, which has the f
 
 When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `trigger_async` method may raise the following exceptions:
 
-| Error Type                | Status Code                            | Content Type     |
-| ------------------------- | -------------------------------------- | ---------------- |
-| models.ErrorDto           | 414                                    | application/json |
-| models.ErrorDto           | 400, 401, 403, 404, 405, 409, 413, 415 | application/json |
-| models.ValidationErrorDto | 422                                    | application/json |
-| models.ErrorDto           | 500                                    | application/json |
-| models.APIError           | 4XX, 5XX                               | \*/\*            |
+| Error Type                           | Status Code                       | Content Type     |
+| ------------------------------------ | --------------------------------- | ---------------- |
+| models.PayloadValidationExceptionDto | 400                               | application/json |
+| models.ErrorDto                      | 414                               | application/json |
+| models.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415 | application/json |
+| models.ValidationErrorDto            | 422                               | application/json |
+| models.ErrorDto                      | 500                               | application/json |
+| models.APIError                      | 4XX, 5XX                          | \*/\*            |
 
 ### Example
 
@@ -645,6 +667,9 @@ with Novu(
         # Handle response
         print(res)
 
+    except models.PayloadValidationExceptionDto as e:
+        # handle e.data: models.PayloadValidationExceptionDtoData
+        raise(e)
     except models.ErrorDto as e:
         # handle e.data: models.ErrorDtoData
         raise(e)

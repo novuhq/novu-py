@@ -1,0 +1,13 @@
+# UpdateEnvironmentRequestDto
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `name`                                                                         | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `identifier`                                                                   | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `parent_id`                                                                    | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `color`                                                                        | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `dns`                                                                          | [Optional[models.InBoundParseDomainDto]](../models/inboundparsedomaindto.md)   | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `bridge`                                                                       | [Optional[models.BridgeConfigurationDto]](../models/bridgeconfigurationdto.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
