@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: 819178f35f0aedea0d22376d5631951b
-  docVersion: 2.2.0
-  speakeasyVersion: 1.563.4
-  generationVersion: 2.630.6
-  releaseVersion: 1.3.0
-  configChecksum: 1193cf3f543a0f3b026462c94179fa0d
+  docChecksum: 2a6bf8fe8763cd0d4c48d3b07999be89
+  docVersion: 2.3.0
+  speakeasyVersion: 1.571.2
+  generationVersion: 2.640.2
+  releaseVersion: 1.4.0
+  configChecksum: a53536da3441da13d201c5b664709edf
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -110,7 +110,6 @@ generatedFiles:
   - docs/models/customstepupsertdtocontrolvalues.md
   - docs/models/data.md
   - docs/models/delaycontroldto.md
-  - docs/models/delaycontroldtounit.md
   - docs/models/delaycontrolsmetadataresponsedto.md
   - docs/models/delayregularmetadata.md
   - docs/models/delayregularmetadatatype.md
@@ -124,8 +123,6 @@ generatedFiles:
   - docs/models/delaystepresponsedtounit.md
   - docs/models/delaystepupsertdto.md
   - docs/models/delaystepupsertdtocontrolvalues.md
-  - docs/models/delaystepupsertdtotype.md
-  - docs/models/delaystepupsertdtounit.md
   - docs/models/deletemessageresponsedto.md
   - docs/models/deletemessageresponsedtostatus.md
   - docs/models/deletetopicresponsedto.md
@@ -147,8 +144,6 @@ generatedFiles:
   - docs/models/digeststepresponsedtounit.md
   - docs/models/digeststepupsertdto.md
   - docs/models/digeststepupsertdtocontrolvalues.md
-  - docs/models/digeststepupsertdtotype.md
-  - docs/models/digeststepupsertdtounit.md
   - docs/models/digesttimedconfigdto.md
   - docs/models/digesttimedconfigdtoweekdays.md
   - docs/models/digesttimedmetadata.md
@@ -169,7 +164,6 @@ generatedFiles:
   - docs/models/emailstepresponsedtoslug.md
   - docs/models/emailstepupsertdto.md
   - docs/models/emailstepupsertdtocontrolvalues.md
-  - docs/models/emailstepupsertdtoeditortype.md
   - docs/models/environmentresponsedto.md
   - docs/models/environmentscontrollerv1createenvironmentrequest.md
   - docs/models/environmentscontrollerv1createenvironmentresponse.md
@@ -224,6 +218,7 @@ generatedFiles:
   - docs/models/listtopicsubscriptionsresponsedto.md
   - docs/models/listworkflowresponse.md
   - docs/models/lookbackwindowdto.md
+  - docs/models/lookbackwindowdtounit.md
   - docs/models/markallmessageasrequestdto.md
   - docs/models/markas.md
   - docs/models/markmessageactionasseendto.md
@@ -314,6 +309,7 @@ generatedFiles:
   - docs/models/redirectdto.md
   - docs/models/removesubscriberresponsedto.md
   - docs/models/replycallback.md
+  - docs/models/resourceoriginenum.md
   - docs/models/runtimeissuedto.md
   - docs/models/schema.md
   - docs/models/security.md
@@ -474,7 +470,6 @@ generatedFiles:
   - docs/models/workflowcreationsourceenum.md
   - docs/models/workflowintegrationstatus.md
   - docs/models/workflowlistresponsedto.md
-  - docs/models/workfloworiginenum.md
   - docs/models/workflowpreferencedto.md
   - docs/models/workflowpreferencesdto.md
   - docs/models/workflowpreferencesresponsedto.md
@@ -673,6 +668,7 @@ generatedFiles:
   - src/novu_py/models/redirectdto.py
   - src/novu_py/models/removesubscriberresponsedto.py
   - src/novu_py/models/replycallback.py
+  - src/novu_py/models/resourceoriginenum.py
   - src/novu_py/models/runtimeissuedto.py
   - src/novu_py/models/security.py
   - src/novu_py/models/smscontroldto.py
@@ -764,7 +760,6 @@ generatedFiles:
   - src/novu_py/models/workflowcontroller_updateop.py
   - src/novu_py/models/workflowcreationsourceenum.py
   - src/novu_py/models/workflowlistresponsedto.py
-  - src/novu_py/models/workfloworiginenum.py
   - src/novu_py/models/workflowpreferencedto.py
   - src/novu_py/models/workflowpreferencesdto.py
   - src/novu_py/models/workflowpreferencesresponsedto.py
