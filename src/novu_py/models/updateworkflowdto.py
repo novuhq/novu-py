@@ -9,8 +9,8 @@ from .emailstepupsertdto import EmailStepUpsertDto, EmailStepUpsertDtoTypedDict
 from .inappstepupsertdto import InAppStepUpsertDto, InAppStepUpsertDtoTypedDict
 from .preferencesrequestdto import PreferencesRequestDto, PreferencesRequestDtoTypedDict
 from .pushstepupsertdto import PushStepUpsertDto, PushStepUpsertDtoTypedDict
+from .resourceoriginenum import ResourceOriginEnum
 from .smsstepupsertdto import SmsStepUpsertDto, SmsStepUpsertDtoTypedDict
-from .workfloworiginenum import WorkflowOriginEnum
 from novu_py.types import BaseModel
 from novu_py.utils import get_discriminator
 import pydantic
@@ -56,7 +56,7 @@ class UpdateWorkflowDtoTypedDict(TypedDict):
     r"""Steps of the workflow"""
     preferences: PreferencesRequestDtoTypedDict
     r"""Workflow preferences"""
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
     description: NotRequired[str]
     r"""Description of the workflow"""
@@ -82,7 +82,7 @@ class UpdateWorkflowDto(BaseModel):
     preferences: PreferencesRequestDto
     r"""Workflow preferences"""
 
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
 
     description: Optional[str] = None
