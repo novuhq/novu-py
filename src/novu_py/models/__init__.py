@@ -173,12 +173,7 @@ if TYPE_CHECKING:
         CustomStepUpsertDtoControlValuesTypedDict,
         CustomStepUpsertDtoTypedDict,
     )
-    from .delaycontroldto import (
-        DelayControlDto,
-        DelayControlDtoTypedDict,
-        DelayControlDtoUnit,
-        Type,
-    )
+    from .delaycontroldto import DelayControlDto, DelayControlDtoTypedDict, Type, Unit
     from .delaycontrolsmetadataresponsedto import (
         DelayControlsMetadataResponseDto,
         DelayControlsMetadataResponseDtoTypedDict,
@@ -208,9 +203,7 @@ if TYPE_CHECKING:
         DelayStepUpsertDto,
         DelayStepUpsertDtoControlValues,
         DelayStepUpsertDtoControlValuesTypedDict,
-        DelayStepUpsertDtoType,
         DelayStepUpsertDtoTypedDict,
-        DelayStepUpsertDtoUnit,
     )
     from .deletemessageresponsedto import (
         DeleteMessageResponseDto,
@@ -265,9 +258,7 @@ if TYPE_CHECKING:
         DigestStepUpsertDto,
         DigestStepUpsertDtoControlValues,
         DigestStepUpsertDtoControlValuesTypedDict,
-        DigestStepUpsertDtoType,
         DigestStepUpsertDtoTypedDict,
-        DigestStepUpsertDtoUnit,
     )
     from .digesttimedconfigdto import (
         DigestTimedConfigDto,
@@ -304,7 +295,6 @@ if TYPE_CHECKING:
         EmailStepUpsertDto,
         EmailStepUpsertDtoControlValues,
         EmailStepUpsertDtoControlValuesTypedDict,
-        EmailStepUpsertDtoEditorType,
         EmailStepUpsertDtoTypedDict,
     )
     from .environmentresponsedto import (
@@ -461,7 +451,17 @@ if TYPE_CHECKING:
         ListWorkflowResponse,
         ListWorkflowResponseTypedDict,
     )
-    from .lookbackwindowdto import LookBackWindowDto, LookBackWindowDtoTypedDict, Unit
+    from .logscontroller_getlogsop import (
+        LogsControllerGetLogsRequest,
+        LogsControllerGetLogsRequestTypedDict,
+        LogsControllerGetLogsResponseBody,
+        LogsControllerGetLogsResponseBodyTypedDict,
+    )
+    from .lookbackwindowdto import (
+        LookBackWindowDto,
+        LookBackWindowDtoTypedDict,
+        LookBackWindowDtoUnit,
+    )
     from .markallmessageasrequestdto import (
         FeedIdentifier,
         FeedIdentifierTypedDict,
@@ -529,6 +529,7 @@ if TYPE_CHECKING:
     from .messagetemplatedto import MessageTemplateDto, MessageTemplateDtoTypedDict
     from .metadto import MetaDto, MetaDtoTypedDict
     from .monthlytypeenum import MonthlyTypeEnum
+    from .no_response_error import NoResponseError
     from .notificationfeeditemdto import (
         NotificationFeedItemDto,
         NotificationFeedItemDtoStatus,
@@ -573,6 +574,7 @@ if TYPE_CHECKING:
         NotificationTriggerVariable,
         NotificationTriggerVariableTypedDict,
     )
+    from .novuerror import NovuError
     from .ordinalenum import OrdinalEnum
     from .ordinalvalueenum import OrdinalValueEnum
     from .patchpreferencechannelsdto import (
@@ -649,6 +651,8 @@ if TYPE_CHECKING:
         RemoveSubscriberResponseDtoTypedDict,
     )
     from .replycallback import ReplyCallback, ReplyCallbackTypedDict
+    from .resourceoriginenum import ResourceOriginEnum
+    from .responsevalidationerror import ResponseValidationError
     from .runtimeissuedto import IssueType, RuntimeIssueDto, RuntimeIssueDtoTypedDict
     from .security import Security, SecurityTypedDict
     from .smscontroldto import SmsControlDto, SmsControlDtoTypedDict
@@ -1064,7 +1068,6 @@ if TYPE_CHECKING:
         WorkflowListResponseDto,
         WorkflowListResponseDtoTypedDict,
     )
-    from .workfloworiginenum import WorkflowOriginEnum
     from .workflowpreferencedto import (
         WorkflowPreferenceDto,
         WorkflowPreferenceDtoTypedDict,
@@ -1228,7 +1231,6 @@ __all__ = [
     "DataTypedDict",
     "DelayControlDto",
     "DelayControlDtoTypedDict",
-    "DelayControlDtoUnit",
     "DelayControlsMetadataResponseDto",
     "DelayControlsMetadataResponseDtoTypedDict",
     "DelayRegularMetadata",
@@ -1249,9 +1251,7 @@ __all__ = [
     "DelayStepUpsertDto",
     "DelayStepUpsertDtoControlValues",
     "DelayStepUpsertDtoControlValuesTypedDict",
-    "DelayStepUpsertDtoType",
     "DelayStepUpsertDtoTypedDict",
-    "DelayStepUpsertDtoUnit",
     "DeleteMessageResponseDto",
     "DeleteMessageResponseDtoStatus",
     "DeleteMessageResponseDtoTypedDict",
@@ -1285,9 +1285,7 @@ __all__ = [
     "DigestStepUpsertDto",
     "DigestStepUpsertDtoControlValues",
     "DigestStepUpsertDtoControlValuesTypedDict",
-    "DigestStepUpsertDtoType",
     "DigestStepUpsertDtoTypedDict",
-    "DigestStepUpsertDtoUnit",
     "DigestTimedConfigDto",
     "DigestTimedConfigDtoTypedDict",
     "DigestTimedConfigDtoWeekDays",
@@ -1318,7 +1316,6 @@ __all__ = [
     "EmailStepUpsertDto",
     "EmailStepUpsertDtoControlValues",
     "EmailStepUpsertDtoControlValuesTypedDict",
-    "EmailStepUpsertDtoEditorType",
     "EmailStepUpsertDtoTypedDict",
     "EnvironmentResponseDto",
     "EnvironmentResponseDtoTypedDict",
@@ -1423,8 +1420,13 @@ __all__ = [
     "ListTopicsResponseDtoTypedDict",
     "ListWorkflowResponse",
     "ListWorkflowResponseTypedDict",
+    "LogsControllerGetLogsRequest",
+    "LogsControllerGetLogsRequestTypedDict",
+    "LogsControllerGetLogsResponseBody",
+    "LogsControllerGetLogsResponseBodyTypedDict",
     "LookBackWindowDto",
     "LookBackWindowDtoTypedDict",
+    "LookBackWindowDtoUnit",
     "MarkAllMessageAsRequestDto",
     "MarkAllMessageAsRequestDtoTypedDict",
     "MarkAs",
@@ -1490,6 +1492,7 @@ __all__ = [
     "MetadataTypedDict",
     "MonthlyType",
     "MonthlyTypeEnum",
+    "NoResponseError",
     "NotificationFeedItemDto",
     "NotificationFeedItemDtoStatus",
     "NotificationFeedItemDtoTypedDict",
@@ -1517,6 +1520,7 @@ __all__ = [
     "NotificationsControllerListNotificationsRequestTypedDict",
     "NotificationsControllerListNotificationsResponse",
     "NotificationsControllerListNotificationsResponseTypedDict",
+    "NovuError",
     "On",
     "One",
     "OneTypedDict",
@@ -1578,6 +1582,8 @@ __all__ = [
     "RemoveSubscriberResponseDtoTypedDict",
     "ReplyCallback",
     "ReplyCallbackTypedDict",
+    "ResourceOriginEnum",
+    "ResponseValidationError",
     "RuntimeIssueDto",
     "RuntimeIssueDtoTypedDict",
     "Schema",
@@ -1878,7 +1884,6 @@ __all__ = [
     "WorkflowIntegrationStatusTypedDict",
     "WorkflowListResponseDto",
     "WorkflowListResponseDtoTypedDict",
-    "WorkflowOriginEnum",
     "WorkflowPreferenceDto",
     "WorkflowPreferenceDtoTypedDict",
     "WorkflowPreferencesDto",
@@ -2028,8 +2033,8 @@ _dynamic_imports: dict[str, str] = {
     "CustomStepUpsertDtoTypedDict": ".customstepupsertdto",
     "DelayControlDto": ".delaycontroldto",
     "DelayControlDtoTypedDict": ".delaycontroldto",
-    "DelayControlDtoUnit": ".delaycontroldto",
     "Type": ".delaycontroldto",
+    "Unit": ".delaycontroldto",
     "DelayControlsMetadataResponseDto": ".delaycontrolsmetadataresponsedto",
     "DelayControlsMetadataResponseDtoTypedDict": ".delaycontrolsmetadataresponsedto",
     "DelayRegularMetadata": ".delayregularmetadata",
@@ -2050,9 +2055,7 @@ _dynamic_imports: dict[str, str] = {
     "DelayStepUpsertDto": ".delaystepupsertdto",
     "DelayStepUpsertDtoControlValues": ".delaystepupsertdto",
     "DelayStepUpsertDtoControlValuesTypedDict": ".delaystepupsertdto",
-    "DelayStepUpsertDtoType": ".delaystepupsertdto",
     "DelayStepUpsertDtoTypedDict": ".delaystepupsertdto",
-    "DelayStepUpsertDtoUnit": ".delaystepupsertdto",
     "DeleteMessageResponseDto": ".deletemessageresponsedto",
     "DeleteMessageResponseDtoStatus": ".deletemessageresponsedto",
     "DeleteMessageResponseDtoTypedDict": ".deletemessageresponsedto",
@@ -2087,9 +2090,7 @@ _dynamic_imports: dict[str, str] = {
     "DigestStepUpsertDto": ".digeststepupsertdto",
     "DigestStepUpsertDtoControlValues": ".digeststepupsertdto",
     "DigestStepUpsertDtoControlValuesTypedDict": ".digeststepupsertdto",
-    "DigestStepUpsertDtoType": ".digeststepupsertdto",
     "DigestStepUpsertDtoTypedDict": ".digeststepupsertdto",
-    "DigestStepUpsertDtoUnit": ".digeststepupsertdto",
     "DigestTimedConfigDto": ".digesttimedconfigdto",
     "DigestTimedConfigDtoTypedDict": ".digesttimedconfigdto",
     "DigestTimedConfigDtoWeekDays": ".digesttimedconfigdto",
@@ -2120,7 +2121,6 @@ _dynamic_imports: dict[str, str] = {
     "EmailStepUpsertDto": ".emailstepupsertdto",
     "EmailStepUpsertDtoControlValues": ".emailstepupsertdto",
     "EmailStepUpsertDtoControlValuesTypedDict": ".emailstepupsertdto",
-    "EmailStepUpsertDtoEditorType": ".emailstepupsertdto",
     "EmailStepUpsertDtoTypedDict": ".emailstepupsertdto",
     "EnvironmentResponseDto": ".environmentresponsedto",
     "EnvironmentResponseDtoTypedDict": ".environmentresponsedto",
@@ -2225,9 +2225,13 @@ _dynamic_imports: dict[str, str] = {
     "ListTopicSubscriptionsResponseDtoTypedDict": ".listtopicsubscriptionsresponsedto",
     "ListWorkflowResponse": ".listworkflowresponse",
     "ListWorkflowResponseTypedDict": ".listworkflowresponse",
+    "LogsControllerGetLogsRequest": ".logscontroller_getlogsop",
+    "LogsControllerGetLogsRequestTypedDict": ".logscontroller_getlogsop",
+    "LogsControllerGetLogsResponseBody": ".logscontroller_getlogsop",
+    "LogsControllerGetLogsResponseBodyTypedDict": ".logscontroller_getlogsop",
     "LookBackWindowDto": ".lookbackwindowdto",
     "LookBackWindowDtoTypedDict": ".lookbackwindowdto",
-    "Unit": ".lookbackwindowdto",
+    "LookBackWindowDtoUnit": ".lookbackwindowdto",
     "FeedIdentifier": ".markallmessageasrequestdto",
     "FeedIdentifierTypedDict": ".markallmessageasrequestdto",
     "MarkAllMessageAsRequestDto": ".markallmessageasrequestdto",
@@ -2287,6 +2291,7 @@ _dynamic_imports: dict[str, str] = {
     "MetaDto": ".metadto",
     "MetaDtoTypedDict": ".metadto",
     "MonthlyTypeEnum": ".monthlytypeenum",
+    "NoResponseError": ".no_response_error",
     "NotificationFeedItemDto": ".notificationfeeditemdto",
     "NotificationFeedItemDtoStatus": ".notificationfeeditemdto",
     "NotificationFeedItemDtoTypedDict": ".notificationfeeditemdto",
@@ -2316,6 +2321,7 @@ _dynamic_imports: dict[str, str] = {
     "NotificationTriggerDtoTypedDict": ".notificationtriggerdto",
     "NotificationTriggerVariable": ".notificationtriggervariable",
     "NotificationTriggerVariableTypedDict": ".notificationtriggervariable",
+    "NovuError": ".novuerror",
     "OrdinalEnum": ".ordinalenum",
     "OrdinalValueEnum": ".ordinalvalueenum",
     "PatchPreferenceChannelsDto": ".patchpreferencechannelsdto",
@@ -2377,6 +2383,8 @@ _dynamic_imports: dict[str, str] = {
     "RemoveSubscriberResponseDtoTypedDict": ".removesubscriberresponsedto",
     "ReplyCallback": ".replycallback",
     "ReplyCallbackTypedDict": ".replycallback",
+    "ResourceOriginEnum": ".resourceoriginenum",
+    "ResponseValidationError": ".responsevalidationerror",
     "IssueType": ".runtimeissuedto",
     "RuntimeIssueDto": ".runtimeissuedto",
     "RuntimeIssueDtoTypedDict": ".runtimeissuedto",
@@ -2673,7 +2681,6 @@ _dynamic_imports: dict[str, str] = {
     "WorkflowCreationSourceEnum": ".workflowcreationsourceenum",
     "WorkflowListResponseDto": ".workflowlistresponsedto",
     "WorkflowListResponseDtoTypedDict": ".workflowlistresponsedto",
-    "WorkflowOriginEnum": ".workfloworiginenum",
     "WorkflowPreferenceDto": ".workflowpreferencedto",
     "WorkflowPreferenceDtoTypedDict": ".workflowpreferencedto",
     "All": ".workflowpreferencesdto",

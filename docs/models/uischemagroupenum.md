@@ -15,3 +15,4 @@ Group of the UI Schema
 | `CHAT`   | CHAT     |
 | `PUSH`   | PUSH     |
 | `SKIP`   | SKIP     |
+| `LAYOUT` | LAYOUT   |
