@@ -8,9 +8,9 @@ from .digeststepresponsedto import DigestStepResponseDto, DigestStepResponseDtoT
 from .emailstepresponsedto import EmailStepResponseDto, EmailStepResponseDtoTypedDict
 from .inappstepresponsedto import InAppStepResponseDto, InAppStepResponseDtoTypedDict
 from .pushstepresponsedto import PushStepResponseDto, PushStepResponseDtoTypedDict
+from .resourceoriginenum import ResourceOriginEnum
 from .runtimeissuedto import RuntimeIssueDto, RuntimeIssueDtoTypedDict
 from .smsstepresponsedto import SmsStepResponseDto, SmsStepResponseDtoTypedDict
-from .workfloworiginenum import WorkflowOriginEnum
 from .workflowpreferencesresponsedto import (
     WorkflowPreferencesResponseDto,
     WorkflowPreferencesResponseDtoTypedDict,
@@ -77,7 +77,7 @@ class WorkflowResponseDtoTypedDict(TypedDict):
     r"""Creation timestamp"""
     steps: List[WorkflowResponseDtoStepsTypedDict]
     r"""Steps of the workflow"""
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
     preferences: WorkflowPreferencesResponseDtoTypedDict
     r"""Preferences for the workflow"""
@@ -123,7 +123,7 @@ class WorkflowResponseDto(BaseModel):
     steps: List[WorkflowResponseDtoSteps]
     r"""Steps of the workflow"""
 
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
 
     preferences: WorkflowPreferencesResponseDto

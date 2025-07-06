@@ -1,4 +1,4 @@
-# WorkflowOriginEnum
+# ResourceOriginEnum
 
 Origin of the workflow
 
