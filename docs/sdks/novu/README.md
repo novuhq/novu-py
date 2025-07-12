@@ -13,6 +13,7 @@ Novu Documentation
 * [cancel](#cancel) - Cancel triggered event
 * [trigger_broadcast](#trigger_broadcast) - Broadcast event to all
 * [trigger_bulk](#trigger_bulk) - Bulk trigger event
+* [retrieve](#retrieve)
 
 ## trigger
 
@@ -266,3 +267,39 @@ with Novu(
 | models.ValidationErrorDto            | 422                                  | application/json                     |
 | models.ErrorDto                      | 500                                  | application/json                     |
 | models.APIError                      | 4XX, 5XX                             | \*/\*                                |
+
+## retrieve
+
+### Example Usage
+
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.retrieve()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `request`                                                                           | [models.LogsControllerGetLogsRequest](../../models/logscontrollergetlogsrequest.md) | :heavy_check_mark:                                                                  | The request object to use for the request.                                          |
+| `retries`                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                    | :heavy_minus_sign:                                                                  | Configuration to override the default retry behavior of the client.                 |
+
+### Response
+
+**[models.LogsControllerGetLogsResponseBody](../../models/logscontrollergetlogsresponsebody.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

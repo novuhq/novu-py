@@ -8,9 +8,9 @@ from .digeststepresponsedto import DigestStepResponseDto, DigestStepResponseDtoT
 from .emailstepresponsedto import EmailStepResponseDto, EmailStepResponseDtoTypedDict
 from .inappstepresponsedto import InAppStepResponseDto, InAppStepResponseDtoTypedDict
 from .pushstepresponsedto import PushStepResponseDto, PushStepResponseDtoTypedDict
+from .resourceoriginenum import ResourceOriginEnum
 from .runtimeissuedto import RuntimeIssueDto, RuntimeIssueDtoTypedDict
 from .smsstepresponsedto import SmsStepResponseDto, SmsStepResponseDtoTypedDict
-from .workfloworiginenum import WorkflowOriginEnum
 from .workflowpreferencesresponsedto import (
     WorkflowPreferencesResponseDto,
     WorkflowPreferencesResponseDtoTypedDict,
@@ -77,7 +77,7 @@ class WorkflowResponseDtoTypedDict(TypedDict):
     r"""Creation timestamp"""
     steps: List[WorkflowResponseDtoStepsTypedDict]
     r"""Steps of the workflow"""
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
     preferences: WorkflowPreferencesResponseDtoTypedDict
     r"""Preferences for the workflow"""
@@ -89,16 +89,18 @@ class WorkflowResponseDtoTypedDict(TypedDict):
     r"""Tags associated with the workflow"""
     active: NotRequired[bool]
     r"""Whether the workflow is active"""
+    validate_payload: NotRequired[bool]
+    r"""Enable or disable payload schema validation"""
+    payload_schema: NotRequired[Dict[str, Any]]
+    r"""The payload JSON Schema for the workflow"""
+    is_translation_enabled: NotRequired[bool]
+    r"""Enable or disable translations for this workflow"""
     issues: NotRequired[Dict[str, RuntimeIssueDtoTypedDict]]
     r"""Runtime issues for workflow creation and update"""
     last_triggered_at: NotRequired[Nullable[str]]
     r"""Timestamp of the last workflow trigger"""
-    payload_schema: NotRequired[Nullable[Dict[str, Any]]]
-    r"""The payload JSON Schema for the workflow"""
     payload_example: NotRequired[Nullable[Dict[str, Any]]]
     r"""Generated payload example based on the payload schema"""
-    validate_payload: NotRequired[bool]
-    r"""Whether payload schema validation is enabled"""
 
 
 class WorkflowResponseDto(BaseModel):
@@ -123,7 +125,7 @@ class WorkflowResponseDto(BaseModel):
     steps: List[WorkflowResponseDtoSteps]
     r"""Steps of the workflow"""
 
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
 
     preferences: WorkflowPreferencesResponseDto
@@ -141,6 +143,21 @@ class WorkflowResponseDto(BaseModel):
     active: Optional[bool] = False
     r"""Whether the workflow is active"""
 
+    validate_payload: Annotated[
+        Optional[bool], pydantic.Field(alias="validatePayload")
+    ] = None
+    r"""Enable or disable payload schema validation"""
+
+    payload_schema: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
+    ] = None
+    r"""The payload JSON Schema for the workflow"""
+
+    is_translation_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="isTranslationEnabled")
+    ] = False
+    r"""Enable or disable translations for this workflow"""
+
     issues: Optional[Dict[str, RuntimeIssueDto]] = None
     r"""Runtime issues for workflow creation and update"""
 
@@ -149,20 +166,10 @@ class WorkflowResponseDto(BaseModel):
     ] = UNSET
     r"""Timestamp of the last workflow trigger"""
 
-    payload_schema: Annotated[
-        OptionalNullable[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
-    ] = UNSET
-    r"""The payload JSON Schema for the workflow"""
-
     payload_example: Annotated[
         OptionalNullable[Dict[str, Any]], pydantic.Field(alias="payloadExample")
     ] = UNSET
     r"""Generated payload example based on the payload schema"""
-
-    validate_payload: Annotated[
-        Optional[bool], pydantic.Field(alias="validatePayload")
-    ] = None
-    r"""Whether payload schema validation is enabled"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -170,13 +177,14 @@ class WorkflowResponseDto(BaseModel):
             "description",
             "tags",
             "active",
+            "validatePayload",
+            "payloadSchema",
+            "isTranslationEnabled",
             "issues",
             "lastTriggeredAt",
-            "payloadSchema",
             "payloadExample",
-            "validatePayload",
         ]
-        nullable_fields = ["lastTriggeredAt", "payloadSchema", "payloadExample"]
+        nullable_fields = ["lastTriggeredAt", "payloadExample"]
         null_default_fields = []
 
         serialized = handler(self)
