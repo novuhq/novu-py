@@ -20,6 +20,8 @@ class PatchWorkflowDtoTypedDict(TypedDict):
     r"""The payload JSON Schema for the workflow"""
     validate_payload: NotRequired[bool]
     r"""Enable or disable payload schema validation"""
+    is_translation_enabled: NotRequired[bool]
+    r"""Enable or disable translations for this workflow"""
 
 
 class PatchWorkflowDto(BaseModel):
@@ -44,3 +46,8 @@ class PatchWorkflowDto(BaseModel):
         Optional[bool], pydantic.Field(alias="validatePayload")
     ] = None
     r"""Enable or disable payload schema validation"""
+
+    is_translation_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="isTranslationEnabled")
+    ] = None
+    r"""Enable or disable translations for this workflow"""
