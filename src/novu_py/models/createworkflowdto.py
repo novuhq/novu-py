@@ -62,14 +62,16 @@ class CreateWorkflowDtoTypedDict(TypedDict):
     r"""Tags associated with the workflow"""
     active: NotRequired[bool]
     r"""Whether the workflow is active"""
+    validate_payload: NotRequired[bool]
+    r"""Enable or disable payload schema validation"""
+    payload_schema: NotRequired[Dict[str, Any]]
+    r"""The payload JSON Schema for the workflow"""
+    is_translation_enabled: NotRequired[bool]
+    r"""Enable or disable translations for this workflow"""
     source: NotRequired[WorkflowCreationSourceEnum]
     r"""Source of workflow creation"""
     preferences: NotRequired[PreferencesRequestDtoTypedDict]
     r"""Workflow preferences"""
-    payload_schema: NotRequired[Dict[str, Any]]
-    r"""The payload JSON Schema for the workflow"""
-    validate_payload: NotRequired[bool]
-    r"""Enable or disable payload schema validation"""
 
 
 class CreateWorkflowDto(BaseModel):
@@ -91,6 +93,21 @@ class CreateWorkflowDto(BaseModel):
     active: Optional[bool] = False
     r"""Whether the workflow is active"""
 
+    validate_payload: Annotated[
+        Optional[bool], pydantic.Field(alias="validatePayload")
+    ] = None
+    r"""Enable or disable payload schema validation"""
+
+    payload_schema: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
+    ] = None
+    r"""The payload JSON Schema for the workflow"""
+
+    is_translation_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="isTranslationEnabled")
+    ] = False
+    r"""Enable or disable translations for this workflow"""
+
     source: Annotated[
         Optional[WorkflowCreationSourceEnum], pydantic.Field(alias="__source")
     ] = WorkflowCreationSourceEnum.EDITOR
@@ -98,13 +115,3 @@ class CreateWorkflowDto(BaseModel):
 
     preferences: Optional[PreferencesRequestDto] = None
     r"""Workflow preferences"""
-
-    payload_schema: Annotated[
-        Optional[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
-    ] = None
-    r"""The payload JSON Schema for the workflow"""
-
-    validate_payload: Annotated[
-        Optional[bool], pydantic.Field(alias="validatePayload")
-    ] = None
-    r"""Enable or disable payload schema validation"""

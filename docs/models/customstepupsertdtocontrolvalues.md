@@ -1,10 +1,19 @@
 # CustomStepUpsertDtoControlValues
 
-Control values for the Custom step
+Control values for the Custom step.
 
 
-## Fields
+## Supported Types
 
-| Field                               | Type                                | Required                            | Description                         |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| `custom`                            | Dict[str, *Any*]                    | :heavy_minus_sign:                  | Custom control values for the step. |
+### `models.CustomControlDto`
+
+```python
+value: models.CustomControlDto = /* values here */
+```
+
+### `Dict[str, Any]`
+
+```python
+value: Dict[str, Any] = /* values here */
+```
+
