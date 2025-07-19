@@ -9,8 +9,8 @@ from .emailstepupsertdto import EmailStepUpsertDto, EmailStepUpsertDtoTypedDict
 from .inappstepupsertdto import InAppStepUpsertDto, InAppStepUpsertDtoTypedDict
 from .preferencesrequestdto import PreferencesRequestDto, PreferencesRequestDtoTypedDict
 from .pushstepupsertdto import PushStepUpsertDto, PushStepUpsertDtoTypedDict
+from .resourceoriginenum import ResourceOriginEnum
 from .smsstepupsertdto import SmsStepUpsertDto, SmsStepUpsertDtoTypedDict
-from .workfloworiginenum import WorkflowOriginEnum
 from novu_py.types import BaseModel
 from novu_py.utils import get_discriminator
 import pydantic
@@ -56,7 +56,7 @@ class UpdateWorkflowDtoTypedDict(TypedDict):
     r"""Steps of the workflow"""
     preferences: PreferencesRequestDtoTypedDict
     r"""Workflow preferences"""
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
     description: NotRequired[str]
     r"""Description of the workflow"""
@@ -64,12 +64,14 @@ class UpdateWorkflowDtoTypedDict(TypedDict):
     r"""Tags associated with the workflow"""
     active: NotRequired[bool]
     r"""Whether the workflow is active"""
-    workflow_id: NotRequired[str]
-    r"""Workflow ID (allowed only for code-first workflows)"""
-    payload_schema: NotRequired[Dict[str, Any]]
-    r"""The payload JSON Schema for the workflow"""
     validate_payload: NotRequired[bool]
     r"""Enable or disable payload schema validation"""
+    payload_schema: NotRequired[Dict[str, Any]]
+    r"""The payload JSON Schema for the workflow"""
+    is_translation_enabled: NotRequired[bool]
+    r"""Enable or disable translations for this workflow"""
+    workflow_id: NotRequired[str]
+    r"""Workflow ID (allowed only for code-first workflows)"""
 
 
 class UpdateWorkflowDto(BaseModel):
@@ -82,7 +84,7 @@ class UpdateWorkflowDto(BaseModel):
     preferences: PreferencesRequestDto
     r"""Workflow preferences"""
 
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
 
     description: Optional[str] = None
@@ -94,15 +96,20 @@ class UpdateWorkflowDto(BaseModel):
     active: Optional[bool] = False
     r"""Whether the workflow is active"""
 
-    workflow_id: Annotated[Optional[str], pydantic.Field(alias="workflowId")] = None
-    r"""Workflow ID (allowed only for code-first workflows)"""
+    validate_payload: Annotated[
+        Optional[bool], pydantic.Field(alias="validatePayload")
+    ] = None
+    r"""Enable or disable payload schema validation"""
 
     payload_schema: Annotated[
         Optional[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
     ] = None
     r"""The payload JSON Schema for the workflow"""
 
-    validate_payload: Annotated[
-        Optional[bool], pydantic.Field(alias="validatePayload")
-    ] = None
-    r"""Enable or disable payload schema validation"""
+    is_translation_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="isTranslationEnabled")
+    ] = False
+    r"""Enable or disable translations for this workflow"""
+
+    workflow_id: Annotated[Optional[str], pydantic.Field(alias="workflowId")] = None
+    r"""Workflow ID (allowed only for code-first workflows)"""

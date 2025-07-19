@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .constraintvalidation import ConstraintValidation
-from novu_py import utils
+import httpx
+from novu_py.models import NovuError
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET
 import pydantic
 from typing import Any, Dict, List, Optional, Union
@@ -78,11 +79,15 @@ class ValidationErrorDtoData(BaseModel):
     """
 
 
-class ValidationErrorDto(Exception):
+class ValidationErrorDto(NovuError):
     data: ValidationErrorDtoData
 
-    def __init__(self, data: ValidationErrorDtoData):
+    def __init__(
+        self,
+        data: ValidationErrorDtoData,
+        raw_response: httpx.Response,
+        body: Optional[str] = None,
+    ):
+        message = body or raw_response.text
+        super().__init__(message, raw_response, body)
         self.data = data
-
-    def __str__(self) -> str:
-        return utils.marshal_json(self.data, ValidationErrorDtoData)
