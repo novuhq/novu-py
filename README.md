@@ -444,6 +444,7 @@ asyncio.run(main())
 
 ### [environments](docs/sdks/environments/README.md)
 
+* [get_tags](docs/sdks/environments/README.md#get_tags) - Get environment tags
 * [create](docs/sdks/environments/README.md#create) - Create an environment
 * [list](docs/sdks/environments/README.md#list) - List all environments
 * [update](docs/sdks/environments/README.md#update) - Update an environment
@@ -475,6 +476,7 @@ asyncio.run(main())
 * [cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
 * [trigger_broadcast](docs/sdks/novu/README.md#trigger_broadcast) - Broadcast event to all
 * [trigger_bulk](docs/sdks/novu/README.md#trigger_bulk) - Bulk trigger event
+* [retrieve](docs/sdks/novu/README.md#retrieve)
 
 ### [subscribers](docs/sdks/subscribers/README.md)
 
@@ -487,8 +489,8 @@ asyncio.run(main())
 
 #### [subscribers.credentials](docs/sdks/credentials/README.md)
 
-* [update](docs/sdks/credentials/README.md#update) - Update provider credentials
-* [append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
+* [update](docs/sdks/credentials/README.md#update) - Upsert provider credentials
+* [append](docs/sdks/credentials/README.md#append) - Create or Partially Update provider credentials
 * [delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
 #### [subscribers.messages](docs/sdks/novumessages/README.md)
@@ -617,30 +619,18 @@ with Novu(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
+[`NovuError`](./src/novu_py/models/novuerror.py) is the base class for all HTTP error responses. It has the following properties:
 
-By default, an API error will raise a models.APIError exception, which has the following properties:
-
-| Property        | Type             | Description           |
-|-----------------|------------------|-----------------------|
-| `.status_code`  | *int*            | The HTTP status code  |
-| `.message`      | *str*            | The error message     |
-| `.raw_response` | *httpx.Response* | The raw HTTP response |
-| `.body`         | *str*            | The response content  |
-
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `trigger_async` method may raise the following exceptions:
-
-| Error Type                           | Status Code                       | Content Type     |
-| ------------------------------------ | --------------------------------- | ---------------- |
-| models.PayloadValidationExceptionDto | 400                               | application/json |
-| models.ErrorDto                      | 414                               | application/json |
-| models.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415 | application/json |
-| models.ValidationErrorDto            | 422                               | application/json |
-| models.ErrorDto                      | 500                               | application/json |
-| models.APIError                      | 4XX, 5XX                          | \*/\*            |
+| Property           | Type             | Description                                                                             |
+| ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
+| `err.message`      | `str`            | Error message                                                                           |
+| `err.status_code`  | `int`            | HTTP response status code eg `404`                                                      |
+| `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
+| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
+| `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
-
 ```python
 import novu_py
 from novu_py import Novu, models
@@ -667,25 +657,47 @@ with Novu(
         # Handle response
         print(res)
 
-    except models.PayloadValidationExceptionDto as e:
-        # handle e.data: models.PayloadValidationExceptionDtoData
-        raise(e)
-    except models.ErrorDto as e:
-        # handle e.data: models.ErrorDtoData
-        raise(e)
-    except models.ErrorDto as e:
-        # handle e.data: models.ErrorDtoData
-        raise(e)
-    except models.ValidationErrorDto as e:
-        # handle e.data: models.ValidationErrorDtoData
-        raise(e)
-    except models.ErrorDto as e:
-        # handle e.data: models.ErrorDtoData
-        raise(e)
-    except models.APIError as e:
-        # handle exception
-        raise(e)
+
+    except models.NovuError as e:
+        # The base class for HTTP error responses
+        print(e.message)
+        print(e.status_code)
+        print(e.body)
+        print(e.headers)
+        print(e.raw_response)
+
+        # Depending on the method different errors may be thrown
+        if isinstance(e, models.PayloadValidationExceptionDto):
+            print(e.data.status_code)  # float
+            print(e.data.timestamp)  # str
+            print(e.data.path)  # str
+            print(e.data.message)  # OptionalNullable[novu_py.PayloadValidationExceptionDtoMessage]
+            print(e.data.ctx)  # Optional[Dict[str, Any]]
 ```
+
+### Error Classes
+**Primary errors:**
+* [`NovuError`](./src/novu_py/models/novuerror.py): The base class for HTTP error responses.
+  * [`ErrorDto`](./src/novu_py/models/errordto.py): *
+  * [`ValidationErrorDto`](./src/novu_py/models/validationerrordto.py): Unprocessable Entity. Status code `422`. *
+
+<details><summary>Less common errors (6)</summary>
+
+<br />
+
+**Network errors:**
+* [`httpx.RequestError`](https://www.python-httpx.org/exceptions/#httpx.RequestError): Base class for request errors.
+    * [`httpx.ConnectError`](https://www.python-httpx.org/exceptions/#httpx.ConnectError): HTTP client was unable to make a request to a server.
+    * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
+
+
+**Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 56 methods.*
+* [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+
+</details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

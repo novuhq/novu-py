@@ -1,4 +1,4 @@
-# StepIntegrationIssueEnum
+# IntegrationIssueEnum
 
 Type of integration issue
 
