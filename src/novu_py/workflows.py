@@ -7,6 +7,7 @@ from novu_py._hooks import HookContext
 from novu_py.steps import Steps
 from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
+from novu_py.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional, Union, cast
 
 
@@ -134,56 +135,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return models.WorkflowControllerCreateResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def create_async(
         self,
@@ -294,56 +280,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return models.WorkflowControllerCreateResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def list(
         self,
@@ -445,56 +416,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerSearchWorkflowsResponse(
-                result=utils.unmarshal_json(http_res.text, models.ListWorkflowResponse),
+                result=unmarshal_json_response(models.ListWorkflowResponse, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def list_async(
         self,
@@ -596,56 +552,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerSearchWorkflowsResponse(
-                result=utils.unmarshal_json(http_res.text, models.ListWorkflowResponse),
+                result=unmarshal_json_response(models.ListWorkflowResponse, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update(
         self,
@@ -759,56 +700,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerUpdateResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_async(
         self,
@@ -922,56 +848,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerUpdateResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def get(
         self,
@@ -1074,56 +985,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerGetWorkflowResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def get_async(
         self,
@@ -1226,56 +1122,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerGetWorkflowResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def delete(
         self,
@@ -1376,52 +1257,37 @@ class Workflows(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return models.WorkflowControllerRemoveWorkflowResponse(headers={})
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def delete_async(
         self,
@@ -1522,52 +1388,37 @@ class Workflows(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return models.WorkflowControllerRemoveWorkflowResponse(headers={})
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def patch(
         self,
@@ -1681,56 +1532,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerPatchWorkflowResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def patch_async(
         self,
@@ -1844,56 +1680,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerPatchWorkflowResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def sync(
         self,
@@ -2003,56 +1824,41 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerSyncResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def sync_async(
         self,
@@ -2162,53 +1968,38 @@ class Workflows(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.WorkflowControllerSyncResponse(
-                result=utils.unmarshal_json(http_res.text, models.WorkflowResponseDto),
+                result=unmarshal_json_response(models.WorkflowResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)

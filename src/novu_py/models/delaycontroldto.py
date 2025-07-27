@@ -13,7 +13,7 @@ class Type(str, Enum):
     REGULAR = "regular"
 
 
-class DelayControlDtoUnit(str, Enum):
+class Unit(str, Enum):
     r"""Unit of time for the delay amount."""
 
     SECONDS = "seconds"
@@ -27,7 +27,7 @@ class DelayControlDtoUnit(str, Enum):
 class DelayControlDtoTypedDict(TypedDict):
     amount: float
     r"""Amount of time to delay."""
-    unit: DelayControlDtoUnit
+    unit: Unit
     r"""Unit of time for the delay amount."""
     skip: NotRequired[Dict[str, Any]]
     r"""JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference."""
@@ -39,7 +39,7 @@ class DelayControlDto(BaseModel):
     amount: float
     r"""Amount of time to delay."""
 
-    unit: DelayControlDtoUnit
+    unit: Unit
     r"""Unit of time for the delay amount."""
 
     skip: Optional[Dict[str, Any]] = None

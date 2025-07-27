@@ -1,4 +1,4 @@
-# StepContentIssueEnum
+# ContentIssueEnum
 
 Type of step content issue
 
