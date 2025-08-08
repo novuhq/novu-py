@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .payloadvalidationerrordto import PayloadValidationErrorDto
-from novu_py import utils
+import httpx
+from novu_py.models import NovuError
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET
 import pydantic
 from typing import Any, Dict, List, Optional, Union
@@ -93,11 +94,15 @@ class PayloadValidationExceptionDtoData(BaseModel):
     r"""The JSON schema that was used for validation"""
 
 
-class PayloadValidationExceptionDto(Exception):
+class PayloadValidationExceptionDto(NovuError):
     data: PayloadValidationExceptionDtoData
 
-    def __init__(self, data: PayloadValidationExceptionDtoData):
+    def __init__(
+        self,
+        data: PayloadValidationExceptionDtoData,
+        raw_response: httpx.Response,
+        body: Optional[str] = None,
+    ):
+        message = body or raw_response.text
+        super().__init__(message, raw_response, body)
         self.data = data
-
-    def __str__(self) -> str:
-        return utils.marshal_json(self.data, PayloadValidationExceptionDtoData)

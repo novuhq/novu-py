@@ -9,21 +9,64 @@ Novu Documentation
 
 ### Available Operations
 
+* [retrieve](#retrieve)
 * [trigger](#trigger) - Trigger event
 * [cancel](#cancel) - Cancel triggered event
 * [trigger_broadcast](#trigger_broadcast) - Broadcast event to all
 * [trigger_bulk](#trigger_bulk) - Bulk trigger event
 
-## trigger
-
-
-    Trigger event is the main (and only) way to send notifications to subscribers. 
-    The trigger identifier is used to match the particular workflow associated with it. 
-    Additional information can be passed according the body interface below.
-    
+## retrieve
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="ActivityController_getLogs" method="get" path="/v1/activity/requests" -->
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.retrieve(request={
+        "status_codes": [
+            200,
+            404,
+            500,
+        ],
+        "created_gte": 1640995200,
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `request`                                                                                   | [models.ActivityControllerGetLogsRequest](../../models/activitycontrollergetlogsrequest.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
+| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
+
+### Response
+
+**[models.GetRequestsResponseDto](../../models/getrequestsresponsedto.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## trigger
+
+    Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+    To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="EventsController_trigger" method="post" path="/v1/events/trigger" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -82,6 +125,7 @@ with Novu(
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="EventsController_cancel" method="delete" path="/v1/events/trigger/{transactionId}" -->
 ```python
 from novu_py import Novu
 
@@ -127,6 +171,7 @@ Trigger a broadcast event to all existing subscribers, could be used to send ann
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="EventsController_broadcastEventToAll" method="post" path="/v1/events/trigger/broadcast" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -192,6 +237,7 @@ with Novu(
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="EventsController_triggerBulk" method="post" path="/v1/events/trigger/bulk" -->
 ```python
 import novu_py
 from novu_py import Novu

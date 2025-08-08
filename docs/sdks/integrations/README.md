@@ -4,7 +4,7 @@
 ## Overview
 
 With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
-<https://docs.novu.co/channels-and-providers/integration-store>
+<https://docs.novu.co/platform/integrations/overview>
 
 ### Available Operations
 
@@ -21,6 +21,7 @@ List all the channels integrations created in the organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_listIntegrations" method="get" path="/v1/integrations" -->
 ```python
 from novu_py import Novu
 
@@ -64,6 +65,7 @@ Create an integration for the current environment the user is based on the API k
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_createIntegration" method="post" path="/v1/integrations" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -112,6 +114,7 @@ Update an integration by its unique key identifier **integrationId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_updateIntegrationById" method="put" path="/v1/integrations/{integrationId}" -->
 ```python
 from novu_py import Novu
 
@@ -157,6 +160,7 @@ Delete an integration by its unique key identifier **integrationId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_removeIntegration" method="delete" path="/v1/integrations/{integrationId}" -->
 ```python
 from novu_py import Novu
 
@@ -202,6 +206,7 @@ Update an integration as **primary** by its unique key identifier **integrationI
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_setIntegrationAsPrimary" method="post" path="/v1/integrations/{integrationId}/set-primary" -->
 ```python
 from novu_py import Novu
 
@@ -245,6 +250,7 @@ List all the active integrations created in the organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_getActiveIntegrations" method="get" path="/v1/integrations/active" -->
 ```python
 from novu_py import Novu
 

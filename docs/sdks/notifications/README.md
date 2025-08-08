@@ -17,6 +17,7 @@ List all notification events (triggered events) for the current environment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="NotificationsController_listNotifications" method="get" path="/v1/notifications" -->
 ```python
 from novu_py import Novu
 
@@ -61,6 +62,7 @@ Retrieve an event by its unique key identifier **notificationId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="NotificationsController_getNotification" method="get" path="/v1/notifications/{notificationId}" -->
 ```python
 from novu_py import Novu
 

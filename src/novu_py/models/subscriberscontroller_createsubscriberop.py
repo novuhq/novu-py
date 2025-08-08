@@ -7,19 +7,31 @@ from .createsubscriberrequestdto import (
 )
 from .subscriberresponsedto import SubscriberResponseDto, SubscriberResponseDtoTypedDict
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    QueryParamMetadata,
+    RequestMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class SubscribersControllerCreateSubscriberRequestTypedDict(TypedDict):
+    fail_if_exists: bool
     create_subscriber_request_dto: CreateSubscriberRequestDtoTypedDict
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
 
 class SubscribersControllerCreateSubscriberRequest(BaseModel):
+    fail_if_exists: Annotated[
+        bool,
+        pydantic.Field(alias="failIfExists"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ]
+
     create_subscriber_request_dto: Annotated[
         CreateSubscriberRequestDto,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),

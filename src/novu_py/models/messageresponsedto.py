@@ -41,12 +41,8 @@ class MessageResponseDtoOverrides(BaseModel):
 
 
 class MessageResponseDtoTypedDict(TypedDict):
-    template_id: str
-    r"""Template ID associated with the message"""
     environment_id: str
     r"""Environment ID where the message is sent"""
-    message_template_id: str
-    r"""Message template ID"""
     organization_id: str
     r"""Organization ID associated with the message"""
     notification_id: str
@@ -55,8 +51,6 @@ class MessageResponseDtoTypedDict(TypedDict):
     r"""Subscriber ID associated with the message"""
     created_at: str
     r"""Creation date of the message"""
-    content: ContentTypedDict
-    r"""Content of the message, can be an email block or a string"""
     transaction_id: str
     r"""Transaction ID associated with the message"""
     channel: ChannelTypeEnum
@@ -71,6 +65,10 @@ class MessageResponseDtoTypedDict(TypedDict):
     r"""Status of the message"""
     id: NotRequired[str]
     r"""Unique identifier for the message"""
+    template_id: NotRequired[Nullable[str]]
+    r"""Template ID associated with the message"""
+    message_template_id: NotRequired[Nullable[str]]
+    r"""Message template ID"""
     subscriber: NotRequired[SubscriberResponseDtoTypedDict]
     r"""Subscriber details, if available"""
     template: NotRequired[WorkflowResponseTypedDict]
@@ -83,6 +81,8 @@ class MessageResponseDtoTypedDict(TypedDict):
     r"""Last seen date of the message, if available"""
     last_read_date: NotRequired[str]
     r"""Last read date of the message, if available"""
+    content: NotRequired[Nullable[ContentTypedDict]]
+    r"""Content of the message, can be an email block or a string"""
     subject: NotRequired[str]
     r"""Subject of the message, if applicable"""
     snoozed_until: NotRequired[str]
@@ -112,14 +112,8 @@ class MessageResponseDtoTypedDict(TypedDict):
 
 
 class MessageResponseDto(BaseModel):
-    template_id: Annotated[str, pydantic.Field(alias="_templateId")]
-    r"""Template ID associated with the message"""
-
     environment_id: Annotated[str, pydantic.Field(alias="_environmentId")]
     r"""Environment ID where the message is sent"""
-
-    message_template_id: Annotated[str, pydantic.Field(alias="_messageTemplateId")]
-    r"""Message template ID"""
 
     organization_id: Annotated[str, pydantic.Field(alias="_organizationId")]
     r"""Organization ID associated with the message"""
@@ -132,9 +126,6 @@ class MessageResponseDto(BaseModel):
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""Creation date of the message"""
-
-    content: Content
-    r"""Content of the message, can be an email block or a string"""
 
     transaction_id: Annotated[str, pydantic.Field(alias="transactionId")]
     r"""Transaction ID associated with the message"""
@@ -156,6 +147,16 @@ class MessageResponseDto(BaseModel):
 
     id: Annotated[Optional[str], pydantic.Field(alias="_id")] = None
     r"""Unique identifier for the message"""
+
+    template_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="_templateId")
+    ] = UNSET
+    r"""Template ID associated with the message"""
+
+    message_template_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="_messageTemplateId")
+    ] = UNSET
+    r"""Message template ID"""
 
     subscriber: Optional[SubscriberResponseDto] = None
     r"""Subscriber details, if available"""
@@ -182,6 +183,9 @@ class MessageResponseDto(BaseModel):
         None
     )
     r"""Last read date of the message, if available"""
+
+    content: OptionalNullable[Content] = UNSET
+    r"""Content of the message, can be an email block or a string"""
 
     subject: Optional[str] = None
     r"""Subject of the message, if applicable"""
@@ -230,12 +234,15 @@ class MessageResponseDto(BaseModel):
     def serialize_model(self, handler):
         optional_fields = [
             "_id",
+            "_templateId",
+            "_messageTemplateId",
             "subscriber",
             "template",
             "templateIdentifier",
             "deliveredAt",
             "lastSeenDate",
             "lastReadDate",
+            "content",
             "subject",
             "snoozedUntil",
             "email",
@@ -250,7 +257,7 @@ class MessageResponseDto(BaseModel):
             "payload",
             "overrides",
         ]
-        nullable_fields = ["_feedId"]
+        nullable_fields = ["_templateId", "_messageTemplateId", "content", "_feedId"]
         null_default_fields = []
 
         serialized = handler(self)

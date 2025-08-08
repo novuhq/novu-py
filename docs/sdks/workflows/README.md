@@ -22,6 +22,7 @@ Creates a new workflow in the Novu Cloud environment
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="WorkflowController_create" method="post" path="/v2/workflows" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -98,6 +99,7 @@ Retrieves a list of workflows with optional filtering and pagination
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="WorkflowController_searchWorkflows" method="get" path="/v2/workflows" -->
 ```python
 from novu_py import Novu
 
@@ -140,6 +142,7 @@ Updates the details of an existing workflow, here **workflowId** is the identifi
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="WorkflowController_update" method="put" path="/v2/workflows/{workflowId}" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -180,7 +183,7 @@ with Novu(
                 },
             ),
         ),
-        origin=novu_py.WorkflowOriginEnum.EXTERNAL,
+        origin=novu_py.ResourceOriginEnum.EXTERNAL,
     ))
 
     # Handle response
@@ -217,6 +220,7 @@ Fetches details of a specific workflow by its unique identifier **workflowId**
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="WorkflowController_getWorkflow" method="get" path="/v2/workflows/{workflowId}" -->
 ```python
 from novu_py import Novu
 
@@ -261,6 +265,7 @@ Removes a specific workflow by its unique identifier **workflowId**
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="WorkflowController_removeWorkflow" method="delete" path="/v2/workflows/{workflowId}" -->
 ```python
 from novu_py import Novu
 
@@ -304,6 +309,7 @@ Partially updates a workflow by its unique identifier **workflowId**
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="WorkflowController_patchWorkflow" method="patch" path="/v2/workflows/{workflowId}" -->
 ```python
 from novu_py import Novu
 
@@ -348,6 +354,7 @@ Synchronizes a workflow to the target environment
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="WorkflowController_sync" method="put" path="/v2/workflows/{workflowId}/sync" -->
 ```python
 from novu_py import Novu
 

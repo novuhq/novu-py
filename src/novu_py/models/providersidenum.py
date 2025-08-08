@@ -59,6 +59,8 @@ class ProvidersIDEnum(str, Enum):
     EAZY_SMS = "eazy-sms"
     MOBISHASTRA = "mobishastra"
     AFRO_MESSAGE = "afro-message"
+    SMSMODE = "smsmode"
+    IMEDIA = "imedia"
     FCM = "fcm"
     APNS = "apns"
     EXPO = "expo"
@@ -77,3 +79,4 @@ class ProvidersIDEnum(str, Enum):
     GETSTREAM = "getstream"
     ROCKET_CHAT = "rocket-chat"
     WHATSAPP_BUSINESS = "whatsapp-business"
+    CHAT_WEBHOOK = "chat-webhook"

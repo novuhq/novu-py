@@ -26,7 +26,7 @@ class NotificationsControllerListNotificationsRequestTypedDict(TypedDict):
     limit: NotRequired[float]
     r"""Limit for pagination"""
     transaction_id: NotRequired[str]
-    r"""Transaction ID for filtering"""
+    r"""The transaction ID to filter by"""
     topic_key: NotRequired[str]
     r"""Topic Key for filtering notifications by topic"""
     after: NotRequired[str]
@@ -89,7 +89,7 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
         pydantic.Field(alias="transactionId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Transaction ID for filtering"""
+    r"""The transaction ID to filter by"""
 
     topic_key: Annotated[
         Optional[str],

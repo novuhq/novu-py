@@ -14,6 +14,7 @@ Retrieve subscriber's topic subscriptions by its unique key identifier **subscri
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersController_listSubscriberTopics" method="get" path="/v2/subscribers/{subscriberId}/subscriptions" -->
 ```python
 from novu_py import Novu
 

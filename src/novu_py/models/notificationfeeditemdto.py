@@ -76,8 +76,12 @@ class NotificationFeedItemDtoTypedDict(TypedDict):
     r"""Device tokens for push notifications, if applicable."""
     payload: NotRequired[Dict[str, Any]]
     r"""The payload that was used to send the notification trigger."""
+    data: NotRequired[Nullable[Dict[str, Any]]]
+    r"""The data sent with the notification."""
     overrides: NotRequired[Dict[str, Any]]
     r"""Provider-specific overrides used when triggering the notification."""
+    tags: NotRequired[Nullable[List[str]]]
+    r"""Tags associated with the workflow that triggered the notification."""
 
 
 class NotificationFeedItemDto(BaseModel):
@@ -168,8 +172,14 @@ class NotificationFeedItemDto(BaseModel):
     payload: Optional[Dict[str, Any]] = None
     r"""The payload that was used to send the notification trigger."""
 
+    data: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""The data sent with the notification."""
+
     overrides: Optional[Dict[str, Any]] = None
     r"""Provider-specific overrides used when triggering the notification."""
+
+    tags: OptionalNullable[List[str]] = UNSET
+    r"""Tags associated with the workflow that triggered the notification."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -185,7 +195,9 @@ class NotificationFeedItemDto(BaseModel):
             "subject",
             "deviceTokens",
             "payload",
+            "data",
             "overrides",
+            "tags",
         ]
         nullable_fields = [
             "_feedId",
@@ -195,6 +207,8 @@ class NotificationFeedItemDto(BaseModel):
             "providerId",
             "subject",
             "deviceTokens",
+            "data",
+            "tags",
         ]
         null_default_fields = []
 

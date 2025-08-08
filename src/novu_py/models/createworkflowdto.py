@@ -11,10 +11,10 @@ from .preferencesrequestdto import PreferencesRequestDto, PreferencesRequestDtoT
 from .pushstepupsertdto import PushStepUpsertDto, PushStepUpsertDtoTypedDict
 from .smsstepupsertdto import SmsStepUpsertDto, SmsStepUpsertDtoTypedDict
 from .workflowcreationsourceenum import WorkflowCreationSourceEnum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from novu_py.utils import get_discriminator
 import pydantic
-from pydantic import Discriminator, Tag
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -62,14 +62,16 @@ class CreateWorkflowDtoTypedDict(TypedDict):
     r"""Tags associated with the workflow"""
     active: NotRequired[bool]
     r"""Whether the workflow is active"""
+    validate_payload: NotRequired[bool]
+    r"""Enable or disable payload schema validation"""
+    payload_schema: NotRequired[Nullable[Dict[str, Any]]]
+    r"""The payload JSON Schema for the workflow"""
+    is_translation_enabled: NotRequired[bool]
+    r"""Enable or disable translations for this workflow"""
     source: NotRequired[WorkflowCreationSourceEnum]
     r"""Source of workflow creation"""
     preferences: NotRequired[PreferencesRequestDtoTypedDict]
     r"""Workflow preferences"""
-    payload_schema: NotRequired[Dict[str, Any]]
-    r"""The payload JSON Schema for the workflow"""
-    validate_payload: NotRequired[bool]
-    r"""Enable or disable payload schema validation"""
 
 
 class CreateWorkflowDto(BaseModel):
@@ -91,6 +93,21 @@ class CreateWorkflowDto(BaseModel):
     active: Optional[bool] = False
     r"""Whether the workflow is active"""
 
+    validate_payload: Annotated[
+        Optional[bool], pydantic.Field(alias="validatePayload")
+    ] = None
+    r"""Enable or disable payload schema validation"""
+
+    payload_schema: Annotated[
+        OptionalNullable[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
+    ] = UNSET
+    r"""The payload JSON Schema for the workflow"""
+
+    is_translation_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="isTranslationEnabled")
+    ] = False
+    r"""Enable or disable translations for this workflow"""
+
     source: Annotated[
         Optional[WorkflowCreationSourceEnum], pydantic.Field(alias="__source")
     ] = WorkflowCreationSourceEnum.EDITOR
@@ -99,12 +116,41 @@ class CreateWorkflowDto(BaseModel):
     preferences: Optional[PreferencesRequestDto] = None
     r"""Workflow preferences"""
 
-    payload_schema: Annotated[
-        Optional[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
-    ] = None
-    r"""The payload JSON Schema for the workflow"""
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "description",
+            "tags",
+            "active",
+            "validatePayload",
+            "payloadSchema",
+            "isTranslationEnabled",
+            "__source",
+            "preferences",
+        ]
+        nullable_fields = ["payloadSchema"]
+        null_default_fields = []
 
-    validate_payload: Annotated[
-        Optional[bool], pydantic.Field(alias="validatePayload")
-    ] = None
-    r"""Enable or disable payload schema validation"""
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m

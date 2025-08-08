@@ -7,19 +7,31 @@ from .createupdatetopicrequestdto import (
 )
 from .topicresponsedto import TopicResponseDto, TopicResponseDtoTypedDict
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    QueryParamMetadata,
+    RequestMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class TopicsControllerUpsertTopicRequestTypedDict(TypedDict):
+    fail_if_exists: bool
     create_update_topic_request_dto: CreateUpdateTopicRequestDtoTypedDict
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
 
 class TopicsControllerUpsertTopicRequest(BaseModel):
+    fail_if_exists: Annotated[
+        bool,
+        pydantic.Field(alias="failIfExists"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ]
+
     create_update_topic_request_dto: Annotated[
         CreateUpdateTopicRequestDto,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),

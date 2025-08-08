@@ -22,6 +22,7 @@ This api returns a paginated list of topics.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="TopicsController_listTopics" method="get" path="/v2/topics" -->
 ```python
 from novu_py import Novu
 
@@ -60,10 +61,11 @@ with Novu(
 
 ## create
 
-Creates a new topic if it does not exist, or updates an existing topic if it already exists
+Creates a new topic if it does not exist, or updates an existing topic if it already exists. Use ?failIfExists=true to prevent updates.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="TopicsController_upsertTopic" method="post" path="/v2/topics" -->
 ```python
 from novu_py import Novu
 
@@ -72,7 +74,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.topics.create(create_update_topic_request_dto={
+    res = novu.topics.create(fail_if_exists=True, create_update_topic_request_dto={
         "key": "task:12345",
         "name": "Task Title",
     })
@@ -86,6 +88,7 @@ with Novu(
 
 | Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
 | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `fail_if_exists`                                                                  | *bool*                                                                            | :heavy_check_mark:                                                                | N/A                                                                               |
 | `create_update_topic_request_dto`                                                 | [models.CreateUpdateTopicRequestDto](../../models/createupdatetopicrequestdto.md) | :heavy_check_mark:                                                                | N/A                                                                               |
 | `idempotency_key`                                                                 | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | A header for idempotency purposes                                                 |
 | `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
@@ -96,13 +99,14 @@ with Novu(
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models.ErrorDto                        | 414                                    | application/json                       |
-| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| models.ValidationErrorDto              | 422                                    | application/json                       |
-| models.ErrorDto                        | 500                                    | application/json                       |
-| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models.TopicResponseDtoError      | 409                               | application/json                  |
+| models.ErrorDto                   | 414                               | application/json                  |
+| models.ErrorDto                   | 400, 401, 403, 404, 405, 413, 415 | application/json                  |
+| models.ValidationErrorDto         | 422                               | application/json                  |
+| models.ErrorDto                   | 500                               | application/json                  |
+| models.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## get
 
@@ -110,6 +114,7 @@ Retrieve a topic by its unique key identifier **topicKey**
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="TopicsController_getTopic" method="get" path="/v2/topics/{topicKey}" -->
 ```python
 from novu_py import Novu
 
@@ -153,6 +158,7 @@ Update a topic name by its unique key identifier **topicKey**
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="TopicsController_updateTopic" method="patch" path="/v2/topics/{topicKey}" -->
 ```python
 from novu_py import Novu
 
@@ -200,6 +206,7 @@ Delete a topic by its unique key identifier **topicKey**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="TopicsController_deleteTopic" method="delete" path="/v2/topics/{topicKey}" -->
 ```python
 from novu_py import Novu
 
