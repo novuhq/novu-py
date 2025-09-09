@@ -21,12 +21,14 @@ class NotificationsControllerListNotificationsRequestTypedDict(TypedDict):
     r"""Search term (deprecated)"""
     subscriber_ids: NotRequired[List[str]]
     r"""Array of subscriber IDs or a single subscriber ID"""
+    severity: NotRequired[List[str]]
+    r"""Array of severity levels or a single severity level"""
     page: NotRequired[float]
     r"""Page number for pagination"""
     limit: NotRequired[float]
     r"""Limit for pagination"""
     transaction_id: NotRequired[str]
-    r"""Transaction ID for filtering"""
+    r"""The transaction ID to filter by"""
     topic_key: NotRequired[str]
     r"""Topic Key for filtering notifications by topic"""
     after: NotRequired[str]
@@ -72,6 +74,12 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
     ] = None
     r"""Array of subscriber IDs or a single subscriber ID"""
 
+    severity: Annotated[
+        Optional[List[str]],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Array of severity levels or a single severity level"""
+
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -89,7 +97,7 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
         pydantic.Field(alias="transactionId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Transaction ID for filtering"""
+    r"""The transaction ID to filter by"""
 
     topic_key: Annotated[
         Optional[str],

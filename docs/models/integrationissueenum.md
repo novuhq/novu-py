@@ -1,4 +1,4 @@
-# StepIntegrationIssueEnum
+# IntegrationIssueEnum
 
 Type of integration issue
 
@@ -8,3 +8,4 @@ Type of integration issue
 | Name                  | Value                 |
 | --------------------- | --------------------- |
 | `MISSING_INTEGRATION` | MISSING_INTEGRATION   |
+| `INBOX_NOT_CONNECTED` | INBOX_NOT_CONNECTED   |

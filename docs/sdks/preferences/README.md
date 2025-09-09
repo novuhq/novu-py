@@ -7,6 +7,7 @@
 
 * [list](#list) - Retrieve subscriber preferences
 * [update](#update) - Update subscriber preferences
+* [bulk_update](#bulk_update) - Bulk update subscriber preferences
 
 ## list
 
@@ -15,7 +16,9 @@ Retrieve subscriber channel preferences by its unique key identifier **subscribe
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersController_getSubscriberPreferences" method="get" path="/v2/subscribers/{subscriberId}/preferences" -->
 ```python
+import novu_py
 from novu_py import Novu
 
 
@@ -23,7 +26,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.subscribers.preferences.list(subscriber_id="<id>")
+    res = novu.subscribers.preferences.list(subscriber_id="<id>", criticality=novu_py.Criticality.ALL)
 
     # Handle response
     print(res)
@@ -35,6 +38,7 @@ with Novu(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `subscriber_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `criticality`                                                       | [models.Criticality](../../models/criticality.md)                   | :heavy_check_mark:                                                  | N/A                                                                 |
 | `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
@@ -60,6 +64,7 @@ Update subscriber preferences by its unique key identifier **subscriberId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersController_updateSubscriberPreferences" method="patch" path="/v2/subscribers/{subscriberId}/preferences" -->
 ```python
 from novu_py import Novu
 
@@ -89,6 +94,54 @@ with Novu(
 ### Response
 
 **[models.SubscribersControllerUpdateSubscriberPreferencesResponse](../../models/subscriberscontrollerupdatesubscriberpreferencesresponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## bulk_update
+
+Bulk update subscriber preferences by its unique key identifier **subscriberId**. 
+    This API allows updating multiple workflow preferences in a single request.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="SubscribersController_bulkUpdateSubscriberPreferences" method="patch" path="/v2/subscribers/{subscriberId}/preferences/bulk" -->
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.subscribers.preferences.bulk_update(subscriber_id="<id>", bulk_update_subscriber_preferences_dto={
+        "preferences": [],
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `subscriber_id`                                                                                 | *str*                                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `bulk_update_subscriber_preferences_dto`                                                        | [models.BulkUpdateSubscriberPreferencesDto](../../models/bulkupdatesubscriberpreferencesdto.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `idempotency_key`                                                                               | *Optional[str]*                                                                                 | :heavy_minus_sign:                                                                              | A header for idempotency purposes                                                               |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
+
+### Response
+
+**[models.SubscribersControllerBulkUpdateSubscriberPreferencesResponse](../../models/subscriberscontrollerbulkupdatesubscriberpreferencesresponse.md)**
 
 ### Errors
 

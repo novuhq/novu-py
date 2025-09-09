@@ -4,7 +4,7 @@ from __future__ import annotations
 from enum import Enum
 
 
-class WorkflowOriginEnum(str, Enum):
+class ResourceOriginEnum(str, Enum):
     r"""Origin of the workflow"""
 
     NOVU_CLOUD = "novu-cloud"

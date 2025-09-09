@@ -15,3 +15,4 @@ class UISchemaGroupEnum(str, Enum):
     CHAT = "CHAT"
     PUSH = "PUSH"
     SKIP = "SKIP"
+    LAYOUT = "LAYOUT"

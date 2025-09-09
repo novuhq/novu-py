@@ -7,9 +7,9 @@ from .inappcontrolsmetadataresponsedto import (
     InAppControlsMetadataResponseDtoTypedDict,
 )
 from .redirectdto import RedirectDto, RedirectDtoTypedDict
+from .resourceoriginenum import ResourceOriginEnum
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
-from .workfloworiginenum import WorkflowOriginEnum
 from novu_py.types import BaseModel
 import pydantic
 from pydantic import ConfigDict
@@ -113,7 +113,7 @@ class InAppStepResponseDtoTypedDict(TypedDict):
     r"""Slug of the step"""
     type: StepTypeEnum
     r"""Type of the step"""
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
     workflow_id: str
     r"""Workflow identifier"""
@@ -147,7 +147,7 @@ class InAppStepResponseDto(BaseModel):
     type: StepTypeEnum
     r"""Type of the step"""
 
-    origin: WorkflowOriginEnum
+    origin: ResourceOriginEnum
     r"""Origin of the workflow"""
 
     workflow_id: Annotated[str, pydantic.Field(alias="workflowId")]

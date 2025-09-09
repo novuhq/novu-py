@@ -47,3 +47,5 @@
 | `channel_id`                                           | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |
 | `phone_number_identification`                          | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |
 | `access_key`                                           | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |
+| `app_sid`                                              | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |
+| `sender_id`                                            | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |

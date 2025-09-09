@@ -48,7 +48,7 @@ PreferencesRequestDtoAll = WorkflowPreferenceDto
 r"""A preference for the workflow. The values specified here will be used if no preference is specified for a channel."""
 
 
-class WorkflowTypedDict(TypedDict):
+class PreferencesRequestDtoWorkflowTypedDict(TypedDict):
     r"""Workflow-specific preferences"""
 
     all: PreferencesRequestDtoAllTypedDict
@@ -57,7 +57,7 @@ class WorkflowTypedDict(TypedDict):
     r"""Preferences for different communication channels"""
 
 
-class Workflow(BaseModel):
+class PreferencesRequestDtoWorkflow(BaseModel):
     r"""Workflow-specific preferences"""
 
     all: PreferencesRequestDtoAll
@@ -70,7 +70,7 @@ class Workflow(BaseModel):
 class PreferencesRequestDtoTypedDict(TypedDict):
     user: NotRequired[Nullable[UserTypedDict]]
     r"""User workflow preferences"""
-    workflow: NotRequired[Nullable[WorkflowTypedDict]]
+    workflow: NotRequired[Nullable[PreferencesRequestDtoWorkflowTypedDict]]
     r"""Workflow-specific preferences"""
 
 
@@ -78,7 +78,7 @@ class PreferencesRequestDto(BaseModel):
     user: OptionalNullable[User] = UNSET
     r"""User workflow preferences"""
 
-    workflow: OptionalNullable[Workflow] = UNSET
+    workflow: OptionalNullable[PreferencesRequestDtoWorkflow] = UNSET
     r"""Workflow-specific preferences"""
 
     @model_serializer(mode="wrap")

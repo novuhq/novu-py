@@ -6,7 +6,7 @@ from novu_py.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class Unit(str, Enum):
+class LookBackWindowDtoUnit(str, Enum):
     r"""Unit of time for the look-back window."""
 
     SECONDS = "seconds"
@@ -20,7 +20,7 @@ class Unit(str, Enum):
 class LookBackWindowDtoTypedDict(TypedDict):
     amount: float
     r"""Amount of time for the look-back window."""
-    unit: Unit
+    unit: LookBackWindowDtoUnit
     r"""Unit of time for the look-back window."""
 
 
@@ -28,5 +28,5 @@ class LookBackWindowDto(BaseModel):
     amount: float
     r"""Amount of time for the look-back window."""
 
-    unit: Unit
+    unit: LookBackWindowDtoUnit
     r"""Unit of time for the look-back window."""

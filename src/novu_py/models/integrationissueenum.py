@@ -4,7 +4,8 @@ from __future__ import annotations
 from enum import Enum
 
 
-class StepIntegrationIssueEnum(str, Enum):
+class IntegrationIssueEnum(str, Enum):
     r"""Type of integration issue"""
 
     MISSING_INTEGRATION = "MISSING_INTEGRATION"
+    INBOX_NOT_CONNECTED = "INBOX_NOT_CONNECTED"

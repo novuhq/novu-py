@@ -4,7 +4,7 @@ from __future__ import annotations
 from enum import Enum
 
 
-class StepContentIssueEnum(str, Enum):
+class ContentIssueEnum(str, Enum):
     r"""Type of step content issue"""
 
     ILLEGAL_VARIABLE_IN_CONTROL_VALUE = "ILLEGAL_VARIABLE_IN_CONTROL_VALUE"

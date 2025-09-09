@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -26,6 +27,8 @@ class EmailControlDtoTypedDict(TypedDict):
     r"""Type of editor to use for the body."""
     disable_output_sanitization: NotRequired[bool]
     r"""Disable sanitization of the output."""
+    layout_id: NotRequired[Nullable[str]]
+    r"""Layout ID to use for the email. Null means no layout, undefined means default layout."""
 
 
 class EmailControlDto(BaseModel):
@@ -47,3 +50,44 @@ class EmailControlDto(BaseModel):
         Optional[bool], pydantic.Field(alias="disableOutputSanitization")
     ] = False
     r"""Disable sanitization of the output."""
+
+    layout_id: Annotated[OptionalNullable[str], pydantic.Field(alias="layoutId")] = (
+        UNSET
+    )
+    r"""Layout ID to use for the email. Null means no layout, undefined means default layout."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "skip",
+            "body",
+            "editorType",
+            "disableOutputSanitization",
+            "layoutId",
+        ]
+        nullable_fields = ["layoutId"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m

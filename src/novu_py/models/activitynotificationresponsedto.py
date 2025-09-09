@@ -14,6 +14,7 @@ from .activitynotificationtemplateresponsedto import (
     ActivityNotificationTemplateResponseDtoTypedDict,
 )
 from .activitytopicdto import ActivityTopicDto, ActivityTopicDtoTypedDict
+from .severitylevelenum import SeverityLevelEnum
 from .steptypeenum import StepTypeEnum
 from novu_py.types import BaseModel
 import pydantic
@@ -81,6 +82,10 @@ class ActivityNotificationResponseDtoTypedDict(TypedDict):
     r"""To field for subscriber definition"""
     topics: NotRequired[List[ActivityTopicDtoTypedDict]]
     r"""Topics of the notification"""
+    severity: NotRequired[SeverityLevelEnum]
+    r"""Severity of the workflow"""
+    critical: NotRequired[bool]
+    r"""Criticality of the notification"""
 
 
 class ActivityNotificationResponseDto(BaseModel):
@@ -138,3 +143,9 @@ class ActivityNotificationResponseDto(BaseModel):
 
     topics: Optional[List[ActivityTopicDto]] = None
     r"""Topics of the notification"""
+
+    severity: Optional[SeverityLevelEnum] = None
+    r"""Severity of the workflow"""
+
+    critical: Optional[bool] = None
+    r"""Criticality of the notification"""

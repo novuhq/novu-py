@@ -7,7 +7,12 @@ from .createsubscriberrequestdto import (
 )
 from .subscriberresponsedto import SubscriberResponseDto, SubscriberResponseDtoTypedDict
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    QueryParamMetadata,
+    RequestMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -15,6 +20,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class SubscribersControllerCreateSubscriberRequestTypedDict(TypedDict):
     create_subscriber_request_dto: CreateSubscriberRequestDtoTypedDict
+    fail_if_exists: NotRequired[bool]
+    r"""If true, the request will fail if a subscriber with the same subscriberId already exists"""
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
@@ -24,6 +31,13 @@ class SubscribersControllerCreateSubscriberRequest(BaseModel):
         CreateSubscriberRequestDto,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
+
+    fail_if_exists: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="failIfExists"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""If true, the request will fail if a subscriber with the same subscriberId already exists"""
 
     idempotency_key: Annotated[
         Optional[str],

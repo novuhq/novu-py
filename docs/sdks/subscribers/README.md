@@ -22,6 +22,7 @@ Search subscribers by their **email**, **phone**, **subscriberId** and **name**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersController_searchSubscribers" method="get" path="/v2/subscribers" -->
 ```python
 from novu_py import Novu
 
@@ -65,6 +66,7 @@ Create a subscriber with the subscriber attributes.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersController_createSubscriber" method="post" path="/v2/subscribers" -->
 ```python
 from novu_py import Novu
 
@@ -84,11 +86,12 @@ with Novu(
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `create_subscriber_request_dto`                                                 | [models.CreateSubscriberRequestDto](../../models/createsubscriberrequestdto.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `idempotency_key`                                                               | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | A header for idempotency purposes                                               |
-| `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `create_subscriber_request_dto`                                                          | [models.CreateSubscriberRequestDto](../../models/createsubscriberrequestdto.md)          | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `fail_if_exists`                                                                         | *Optional[bool]*                                                                         | :heavy_minus_sign:                                                                       | If true, the request will fail if a subscriber with the same subscriberId already exists |
+| `idempotency_key`                                                                        | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
+| `retries`                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                         | :heavy_minus_sign:                                                                       | Configuration to override the default retry behavior of the client.                      |
 
 ### Response
 
@@ -96,13 +99,14 @@ with Novu(
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models.ErrorDto                        | 414                                    | application/json                       |
-| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| models.ValidationErrorDto              | 422                                    | application/json                       |
-| models.ErrorDto                        | 500                                    | application/json                       |
-| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models.SubscriberResponseDtoError | 409                               | application/json                  |
+| models.ErrorDto                   | 414                               | application/json                  |
+| models.ErrorDto                   | 400, 401, 403, 404, 405, 413, 415 | application/json                  |
+| models.ValidationErrorDto         | 422                               | application/json                  |
+| models.ErrorDto                   | 500                               | application/json                  |
+| models.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## retrieve
 
@@ -111,6 +115,7 @@ Retrieve a subscriber by its unique key identifier **subscriberId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersController_getSubscriber" method="get" path="/v2/subscribers/{subscriberId}" -->
 ```python
 from novu_py import Novu
 
@@ -155,6 +160,7 @@ Update a subscriber by its unique key identifier **subscriberId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersController_patchSubscriber" method="patch" path="/v2/subscribers/{subscriberId}" -->
 ```python
 from novu_py import Novu
 
@@ -200,6 +206,7 @@ Deletes a subscriber entity from the Novu platform along with associated message
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersController_removeSubscriber" method="delete" path="/v2/subscribers/{subscriberId}" -->
 ```python
 from novu_py import Novu
 
@@ -245,6 +252,7 @@ with Novu(
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersV1Controller_bulkCreateSubscribers" method="post" path="/v1/subscribers/bulk" -->
 ```python
 from novu_py import Novu
 

@@ -58,6 +58,8 @@ class CredentialsDtoTypedDict(TypedDict):
     channel_id: NotRequired[str]
     phone_number_identification: NotRequired[str]
     access_key: NotRequired[str]
+    app_sid: NotRequired[str]
+    sender_id: NotRequired[str]
 
 
 class CredentialsDto(BaseModel):
@@ -162,3 +164,7 @@ class CredentialsDto(BaseModel):
     ] = None
 
     access_key: Annotated[Optional[str], pydantic.Field(alias="accessKey")] = None
+
+    app_sid: Annotated[Optional[str], pydantic.Field(alias="appSid")] = None
+
+    sender_id: Annotated[Optional[str], pydantic.Field(alias="senderId")] = None

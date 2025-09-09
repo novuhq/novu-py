@@ -1,6 +1,6 @@
-# DelayControlDtoUnit
+# LookBackWindowDtoUnit
 
-Unit of time for the delay amount.
+Unit of time for the look-back window.
 
 
 ## Values

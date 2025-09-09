@@ -5,15 +5,28 @@ from .getsubscriberpreferencesdto import (
     GetSubscriberPreferencesDto,
     GetSubscriberPreferencesDtoTypedDict,
 )
+from enum import Enum
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class Criticality(str, Enum):
+    CRITICAL = "critical"
+    NON_CRITICAL = "nonCritical"
+    ALL = "all"
+
+
 class SubscribersControllerGetSubscriberPreferencesRequestTypedDict(TypedDict):
     subscriber_id: str
+    criticality: Criticality
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
@@ -23,6 +36,10 @@ class SubscribersControllerGetSubscriberPreferencesRequest(BaseModel):
         str,
         pydantic.Field(alias="subscriberId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
+    ]
+
+    criticality: Annotated[
+        Criticality, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
     ]
 
     idempotency_key: Annotated[
