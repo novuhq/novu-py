@@ -28,3 +28,10 @@ actions:
       created_at: 1738243738023
       reviewed_at: 1738243790791
       type: method-name
+  - target: $["paths"]["/v2/translations/master-json"]["post"]
+    update:
+      x-speakeasy-name-override: import_master_json
+    x-speakeasy-metadata:
+      after: sdk.master.import_master_json()
+      before: sdk.master.import()
+      type: method-name
