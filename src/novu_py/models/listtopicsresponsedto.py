@@ -3,9 +3,10 @@
 from __future__ import annotations
 from .topicresponsedto import TopicResponseDto, TopicResponseDtoTypedDict
 from novu_py.types import BaseModel, Nullable, UNSET_SENTINEL
+import pydantic
 from pydantic import model_serializer
 from typing import List
-from typing_extensions import TypedDict
+from typing_extensions import Annotated, TypedDict
 
 
 class ListTopicsResponseDtoTypedDict(TypedDict):
@@ -15,6 +16,10 @@ class ListTopicsResponseDtoTypedDict(TypedDict):
     r"""The cursor for the next page of results, or null if there are no more pages."""
     previous: Nullable[str]
     r"""The cursor for the previous page of results, or null if this is the first page."""
+    total_count: float
+    r"""The total count of items (up to 50,000)"""
+    total_count_capped: bool
+    r"""Whether there are more than 50,000 results available"""
 
 
 class ListTopicsResponseDto(BaseModel):
@@ -26,6 +31,12 @@ class ListTopicsResponseDto(BaseModel):
 
     previous: Nullable[str]
     r"""The cursor for the previous page of results, or null if this is the first page."""
+
+    total_count: Annotated[float, pydantic.Field(alias="totalCount")]
+    r"""The total count of items (up to 50,000)"""
+
+    total_count_capped: Annotated[bool, pydantic.Field(alias="totalCountCapped")]
+    r"""Whether there are more than 50,000 results available"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

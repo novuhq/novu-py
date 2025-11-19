@@ -21,6 +21,10 @@ with Novu(
         },
         overrides=novu_py.Overrides(),
         to="SUBSCRIBER_ID",
+        actor="<value>",
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -29,7 +33,8 @@ with Novu(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -52,6 +57,10 @@ async def main():
             },
             overrides=novu_py.Overrides(),
             to="SUBSCRIBER_ID",
+            actor="<value>",
+            context={
+                "key": "org-acme",
+            },
         ))
 
         # Handle response
@@ -79,7 +88,8 @@ with Novu(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -128,6 +138,16 @@ with Novu(
                 },
             },
         ),
+        actor=novu_py.SubscriberPayloadDto(
+            first_name="John",
+            last_name="Doe",
+            email="john.doe@example.com",
+            phone="+1234567890",
+            avatar="https://example.com/avatar.jpg",
+            locale="en-US",
+            timezone="America/New_York",
+            subscriber_id="<id>",
+        ),
     ))
 
     # Handle response
@@ -136,7 +156,8 @@ with Novu(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -165,6 +186,16 @@ async def main():
                         },
                     },
                 },
+            ),
+            actor=novu_py.SubscriberPayloadDto(
+                first_name="John",
+                last_name="Doe",
+                email="john.doe@example.com",
+                phone="+1234567890",
+                avatar="https://example.com/avatar.jpg",
+                locale="en-US",
+                timezone="America/New_York",
+                subscriber_id="<id>",
             ),
         ))
 
@@ -230,7 +261,8 @@ with Novu(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio

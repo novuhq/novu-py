@@ -11,9 +11,10 @@ class Type(str, Enum):
     r"""Type of the delay. Currently only 'regular' is supported by the schema."""
 
     REGULAR = "regular"
+    TIMED = "timed"
 
 
-class DelayControlDtoUnit(str, Enum):
+class Unit(str, Enum):
     r"""Unit of time for the delay amount."""
 
     SECONDS = "seconds"
@@ -25,25 +26,30 @@ class DelayControlDtoUnit(str, Enum):
 
 
 class DelayControlDtoTypedDict(TypedDict):
-    amount: float
-    r"""Amount of time to delay."""
-    unit: DelayControlDtoUnit
-    r"""Unit of time for the delay amount."""
     skip: NotRequired[Dict[str, Any]]
     r"""JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference."""
     type: NotRequired[Type]
     r"""Type of the delay. Currently only 'regular' is supported by the schema."""
+    amount: NotRequired[float]
+    r"""Amount of time to delay."""
+    unit: NotRequired[Unit]
+    r"""Unit of time for the delay amount."""
+    cron: NotRequired[str]
+    r"""Cron expression for the delay. Min length 1."""
 
 
 class DelayControlDto(BaseModel):
-    amount: float
-    r"""Amount of time to delay."""
-
-    unit: DelayControlDtoUnit
-    r"""Unit of time for the delay amount."""
-
     skip: Optional[Dict[str, Any]] = None
     r"""JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference."""
 
     type: Optional[Type] = Type.REGULAR
     r"""Type of the delay. Currently only 'regular' is supported by the schema."""
+
+    amount: Optional[float] = None
+    r"""Amount of time to delay."""
+
+    unit: Optional[Unit] = None
+    r"""Unit of time for the delay amount."""
+
+    cron: Optional[str] = None
+    r"""Cron expression for the delay. Min length 1."""

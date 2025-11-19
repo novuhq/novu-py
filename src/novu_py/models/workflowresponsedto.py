@@ -8,9 +8,14 @@ from .digeststepresponsedto import DigestStepResponseDto, DigestStepResponseDtoT
 from .emailstepresponsedto import EmailStepResponseDto, EmailStepResponseDtoTypedDict
 from .inappstepresponsedto import InAppStepResponseDto, InAppStepResponseDtoTypedDict
 from .pushstepresponsedto import PushStepResponseDto, PushStepResponseDtoTypedDict
+from .resourceoriginenum import ResourceOriginEnum
 from .runtimeissuedto import RuntimeIssueDto, RuntimeIssueDtoTypedDict
+from .severitylevelenum import SeverityLevelEnum
 from .smsstepresponsedto import SmsStepResponseDto, SmsStepResponseDtoTypedDict
-from .workfloworiginenum import WorkflowOriginEnum
+from .throttlestepresponsedto import (
+    ThrottleStepResponseDto,
+    ThrottleStepResponseDtoTypedDict,
+)
 from .workflowpreferencesresponsedto import (
     WorkflowPreferencesResponseDto,
     WorkflowPreferencesResponseDtoTypedDict,
@@ -24,12 +29,134 @@ from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class SlugTypedDict(TypedDict):
-    r"""Slug of the workflow"""
+class WorkflowResponseDtoUpdatedByTypedDict(TypedDict):
+    r"""User who last updated the workflow"""
+
+    id: str
+    r"""User ID"""
+    first_name: NotRequired[Nullable[str]]
+    r"""User first name"""
+    last_name: NotRequired[Nullable[str]]
+    r"""User last name"""
+    external_id: NotRequired[Nullable[str]]
+    r"""User external ID"""
 
 
-class Slug(BaseModel):
-    r"""Slug of the workflow"""
+class WorkflowResponseDtoUpdatedBy(BaseModel):
+    r"""User who last updated the workflow"""
+
+    id: Annotated[str, pydantic.Field(alias="_id")]
+    r"""User ID"""
+
+    first_name: Annotated[OptionalNullable[str], pydantic.Field(alias="firstName")] = (
+        UNSET
+    )
+    r"""User first name"""
+
+    last_name: Annotated[OptionalNullable[str], pydantic.Field(alias="lastName")] = (
+        UNSET
+    )
+    r"""User last name"""
+
+    external_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="externalId")
+    ] = UNSET
+    r"""User external ID"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["firstName", "lastName", "externalId"]
+        nullable_fields = ["firstName", "lastName", "externalId"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
+class LastPublishedByTypedDict(TypedDict):
+    r"""User who last published the workflow"""
+
+    id: str
+    r"""User ID"""
+    first_name: NotRequired[Nullable[str]]
+    r"""User first name"""
+    last_name: NotRequired[Nullable[str]]
+    r"""User last name"""
+    external_id: NotRequired[Nullable[str]]
+    r"""User external ID"""
+
+
+class LastPublishedBy(BaseModel):
+    r"""User who last published the workflow"""
+
+    id: Annotated[str, pydantic.Field(alias="_id")]
+    r"""User ID"""
+
+    first_name: Annotated[OptionalNullable[str], pydantic.Field(alias="firstName")] = (
+        UNSET
+    )
+    r"""User first name"""
+
+    last_name: Annotated[OptionalNullable[str], pydantic.Field(alias="lastName")] = (
+        UNSET
+    )
+    r"""User last name"""
+
+    external_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="externalId")
+    ] = UNSET
+    r"""User external ID"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["firstName", "lastName", "externalId"]
+        nullable_fields = ["firstName", "lastName", "externalId"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 WorkflowResponseDtoStepsTypedDict = TypeAliasType(
@@ -43,6 +170,7 @@ WorkflowResponseDtoStepsTypedDict = TypeAliasType(
         DelayStepResponseDtoTypedDict,
         DigestStepResponseDtoTypedDict,
         CustomStepResponseDtoTypedDict,
+        ThrottleStepResponseDtoTypedDict,
     ],
 )
 
@@ -57,6 +185,7 @@ WorkflowResponseDtoSteps = Annotated[
         Annotated[DelayStepResponseDto, Tag("delay")],
         Annotated[DigestStepResponseDto, Tag("digest")],
         Annotated[CustomStepResponseDto, Tag("custom")],
+        Annotated[ThrottleStepResponseDto, Tag("throttle")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
@@ -66,10 +195,10 @@ class WorkflowResponseDtoTypedDict(TypedDict):
     name: str
     r"""Name of the workflow"""
     id: str
-    r"""Unique identifier of the workflow"""
+    r"""Database identifier of the workflow"""
     workflow_id: str
     r"""Workflow identifier"""
-    slug: SlugTypedDict
+    slug: str
     r"""Slug of the workflow"""
     updated_at: str
     r"""Last updated timestamp"""
@@ -77,28 +206,38 @@ class WorkflowResponseDtoTypedDict(TypedDict):
     r"""Creation timestamp"""
     steps: List[WorkflowResponseDtoStepsTypedDict]
     r"""Steps of the workflow"""
-    origin: WorkflowOriginEnum
-    r"""Origin of the workflow"""
+    origin: ResourceOriginEnum
+    r"""Origin of the layout"""
     preferences: WorkflowPreferencesResponseDtoTypedDict
     r"""Preferences for the workflow"""
     status: WorkflowStatusEnum
     r"""Status of the workflow"""
+    severity: SeverityLevelEnum
+    r"""Severity of the workflow"""
     description: NotRequired[str]
     r"""Description of the workflow"""
     tags: NotRequired[List[str]]
     r"""Tags associated with the workflow"""
     active: NotRequired[bool]
     r"""Whether the workflow is active"""
+    validate_payload: NotRequired[bool]
+    r"""Enable or disable payload schema validation"""
+    payload_schema: NotRequired[Nullable[Dict[str, Any]]]
+    r"""The payload JSON Schema for the workflow"""
+    is_translation_enabled: NotRequired[bool]
+    r"""Enable or disable translations for this workflow"""
+    updated_by: NotRequired[Nullable[WorkflowResponseDtoUpdatedByTypedDict]]
+    r"""User who last updated the workflow"""
+    last_published_at: NotRequired[Nullable[str]]
+    r"""Timestamp of the last workflow publication"""
+    last_published_by: NotRequired[Nullable[LastPublishedByTypedDict]]
+    r"""User who last published the workflow"""
     issues: NotRequired[Dict[str, RuntimeIssueDtoTypedDict]]
     r"""Runtime issues for workflow creation and update"""
     last_triggered_at: NotRequired[Nullable[str]]
     r"""Timestamp of the last workflow trigger"""
-    payload_schema: NotRequired[Nullable[Dict[str, Any]]]
-    r"""The payload JSON Schema for the workflow"""
     payload_example: NotRequired[Nullable[Dict[str, Any]]]
     r"""Generated payload example based on the payload schema"""
-    validate_payload: NotRequired[bool]
-    r"""Whether payload schema validation is enabled"""
 
 
 class WorkflowResponseDto(BaseModel):
@@ -106,12 +245,12 @@ class WorkflowResponseDto(BaseModel):
     r"""Name of the workflow"""
 
     id: Annotated[str, pydantic.Field(alias="_id")]
-    r"""Unique identifier of the workflow"""
+    r"""Database identifier of the workflow"""
 
     workflow_id: Annotated[str, pydantic.Field(alias="workflowId")]
     r"""Workflow identifier"""
 
-    slug: Slug
+    slug: str
     r"""Slug of the workflow"""
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
@@ -123,14 +262,17 @@ class WorkflowResponseDto(BaseModel):
     steps: List[WorkflowResponseDtoSteps]
     r"""Steps of the workflow"""
 
-    origin: WorkflowOriginEnum
-    r"""Origin of the workflow"""
+    origin: ResourceOriginEnum
+    r"""Origin of the layout"""
 
     preferences: WorkflowPreferencesResponseDto
     r"""Preferences for the workflow"""
 
     status: WorkflowStatusEnum
     r"""Status of the workflow"""
+
+    severity: SeverityLevelEnum
+    r"""Severity of the workflow"""
 
     description: Optional[str] = None
     r"""Description of the workflow"""
@@ -141,6 +283,37 @@ class WorkflowResponseDto(BaseModel):
     active: Optional[bool] = False
     r"""Whether the workflow is active"""
 
+    validate_payload: Annotated[
+        Optional[bool], pydantic.Field(alias="validatePayload")
+    ] = None
+    r"""Enable or disable payload schema validation"""
+
+    payload_schema: Annotated[
+        OptionalNullable[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
+    ] = UNSET
+    r"""The payload JSON Schema for the workflow"""
+
+    is_translation_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="isTranslationEnabled")
+    ] = False
+    r"""Enable or disable translations for this workflow"""
+
+    updated_by: Annotated[
+        OptionalNullable[WorkflowResponseDtoUpdatedBy],
+        pydantic.Field(alias="updatedBy"),
+    ] = UNSET
+    r"""User who last updated the workflow"""
+
+    last_published_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="lastPublishedAt")
+    ] = UNSET
+    r"""Timestamp of the last workflow publication"""
+
+    last_published_by: Annotated[
+        OptionalNullable[LastPublishedBy], pydantic.Field(alias="lastPublishedBy")
+    ] = UNSET
+    r"""User who last published the workflow"""
+
     issues: Optional[Dict[str, RuntimeIssueDto]] = None
     r"""Runtime issues for workflow creation and update"""
 
@@ -149,20 +322,10 @@ class WorkflowResponseDto(BaseModel):
     ] = UNSET
     r"""Timestamp of the last workflow trigger"""
 
-    payload_schema: Annotated[
-        OptionalNullable[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
-    ] = UNSET
-    r"""The payload JSON Schema for the workflow"""
-
     payload_example: Annotated[
         OptionalNullable[Dict[str, Any]], pydantic.Field(alias="payloadExample")
     ] = UNSET
     r"""Generated payload example based on the payload schema"""
-
-    validate_payload: Annotated[
-        Optional[bool], pydantic.Field(alias="validatePayload")
-    ] = None
-    r"""Whether payload schema validation is enabled"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -170,13 +333,24 @@ class WorkflowResponseDto(BaseModel):
             "description",
             "tags",
             "active",
+            "validatePayload",
+            "payloadSchema",
+            "isTranslationEnabled",
+            "updatedBy",
+            "lastPublishedAt",
+            "lastPublishedBy",
             "issues",
             "lastTriggeredAt",
-            "payloadSchema",
             "payloadExample",
-            "validatePayload",
         ]
-        nullable_fields = ["lastTriggeredAt", "payloadSchema", "payloadExample"]
+        nullable_fields = [
+            "payloadSchema",
+            "updatedBy",
+            "lastPublishedAt",
+            "lastPublishedBy",
+            "lastTriggeredAt",
+            "payloadExample",
+        ]
         null_default_fields = []
 
         serialized = handler(self)

@@ -1,16 +1,29 @@
 # Status
 
-Status of the trigger
+Status of the event
 
 
 ## Values
 
-| Name                               | Value                              |
-| ---------------------------------- | ---------------------------------- |
-| `ERROR`                            | error                              |
-| `TRIGGER_NOT_ACTIVE`               | trigger_not_active                 |
-| `NO_WORKFLOW_ACTIVE_STEPS_DEFINED` | no_workflow_active_steps_defined   |
-| `NO_WORKFLOW_STEPS_DEFINED`        | no_workflow_steps_defined          |
-| `PROCESSED`                        | processed                          |
-| `NO_TENANT_FOUND`                  | no_tenant_found                    |
-| `INVALID_RECIPIENTS`               | invalid_recipients                 |
+| Name           | Value          |
+| -------------- | -------------- |
+| `OPENED`       | opened         |
+| `REJECTED`     | rejected       |
+| `SENT`         | sent           |
+| `DEFERRED`     | deferred       |
+| `DELIVERED`    | delivered      |
+| `BOUNCED`      | bounced        |
+| `DROPPED`      | dropped        |
+| `CLICKED`      | clicked        |
+| `BLOCKED`      | blocked        |
+| `SPAM`         | spam           |
+| `UNSUBSCRIBED` | unsubscribed   |
+| `DELAYED`      | delayed        |
+| `COMPLAINT`    | complaint      |
+| `CREATED`      | created        |
+| `ACCEPTED`     | accepted       |
+| `QUEUED`       | queued         |
+| `SENDING`      | sending        |
+| `FAILED`       | failed         |
+| `UNDELIVERED`  | undelivered    |
+| `DISMISSED`    | dismissed      |

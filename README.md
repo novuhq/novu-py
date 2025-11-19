@@ -84,7 +84,15 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
 >
 > Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
-The SDK can be installed with either *pip* or *poetry* package managers.
+The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
+
+### uv
+
+*uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
+
+```bash
+uv add novu-py
+```
 
 ### PIP
 
@@ -169,6 +177,10 @@ with Novu(
         },
         overrides=novu_py.Overrides(),
         to="SUBSCRIBER_ID",
+        actor="<value>",
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -177,7 +189,8 @@ with Novu(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -200,6 +213,10 @@ async def main():
             },
             overrides=novu_py.Overrides(),
             to="SUBSCRIBER_ID",
+            actor="<value>",
+            context={
+                "key": "org-acme",
+            },
         ))
 
         # Handle response
@@ -227,7 +244,8 @@ with Novu(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -276,6 +294,16 @@ with Novu(
                 },
             },
         ),
+        actor=novu_py.SubscriberPayloadDto(
+            first_name="John",
+            last_name="Doe",
+            email="john.doe@example.com",
+            phone="+1234567890",
+            avatar="https://example.com/avatar.jpg",
+            locale="en-US",
+            timezone="America/New_York",
+            subscriber_id="<id>",
+        ),
     ))
 
     # Handle response
@@ -284,7 +312,8 @@ with Novu(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -313,6 +342,16 @@ async def main():
                         },
                     },
                 },
+            ),
+            actor=novu_py.SubscriberPayloadDto(
+                first_name="John",
+                last_name="Doe",
+                email="john.doe@example.com",
+                phone="+1234567890",
+                avatar="https://example.com/avatar.jpg",
+                locale="en-US",
+                timezone="America/New_York",
+                subscriber_id="<id>",
             ),
         ))
 
@@ -378,7 +417,8 @@ with Novu(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -442,8 +482,21 @@ asyncio.run(main())
 <details open>
 <summary>Available methods</summary>
 
+### [activity](docs/sdks/activity/README.md)
+
+* [track](docs/sdks/activity/README.md#track) - Track activity and engagement events
+
+### [contexts](docs/sdks/contexts/README.md)
+
+* [create](docs/sdks/contexts/README.md#create) - Create a context
+* [list](docs/sdks/contexts/README.md#list) - List all contexts
+* [update](docs/sdks/contexts/README.md#update) - Update a context
+* [retrieve](docs/sdks/contexts/README.md#retrieve) - Retrieve a context
+* [delete](docs/sdks/contexts/README.md#delete) - Delete a context
+
 ### [environments](docs/sdks/environments/README.md)
 
+* [get_tags](docs/sdks/environments/README.md#get_tags) - Get environment tags
 * [create](docs/sdks/environments/README.md#create) - Create an environment
 * [list](docs/sdks/environments/README.md#list) - List all environments
 * [update](docs/sdks/environments/README.md#update) - Update an environment
@@ -455,8 +508,20 @@ asyncio.run(main())
 * [create](docs/sdks/integrations/README.md#create) - Create an integration
 * [update](docs/sdks/integrations/README.md#update) - Update an integration
 * [delete](docs/sdks/integrations/README.md#delete) - Delete an integration
+* [integrations_controller_auto_configure_integration](docs/sdks/integrations/README.md#integrations_controller_auto_configure_integration) - Auto-configure an integration for inbound webhooks
 * [set_as_primary](docs/sdks/integrations/README.md#set_as_primary) - Update integration as primary
 * [list_active](docs/sdks/integrations/README.md#list_active) - List active integrations
+
+### [layouts](docs/sdks/layouts/README.md)
+
+* [create](docs/sdks/layouts/README.md#create) - Create a layout
+* [list](docs/sdks/layouts/README.md#list) - List all layouts
+* [update](docs/sdks/layouts/README.md#update) - Update a layout
+* [retrieve](docs/sdks/layouts/README.md#retrieve) - Retrieve a layout
+* [delete](docs/sdks/layouts/README.md#delete) - Delete a layout
+* [duplicate](docs/sdks/layouts/README.md#duplicate) - Duplicate a layout
+* [generate_preview](docs/sdks/layouts/README.md#generate_preview) - Generate layout preview
+* [usage](docs/sdks/layouts/README.md#usage) - Get layout usage
 
 ### [messages](docs/sdks/messages/README.md)
 
@@ -506,6 +571,7 @@ asyncio.run(main())
 
 * [list](docs/sdks/preferences/README.md#list) - Retrieve subscriber preferences
 * [update](docs/sdks/preferences/README.md#update) - Update subscriber preferences
+* [bulk_update](docs/sdks/preferences/README.md#bulk_update) - Bulk update subscriber preferences
 
 #### [subscribers.properties](docs/sdks/properties/README.md)
 
@@ -532,6 +598,24 @@ asyncio.run(main())
 * [list](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
+
+### [translations](docs/sdks/translations/README.md)
+
+* [create](docs/sdks/translations/README.md#create) - Create a translation
+* [retrieve](docs/sdks/translations/README.md#retrieve) - Retrieve a translation
+* [delete](docs/sdks/translations/README.md#delete) - Delete a translation
+* [upload](docs/sdks/translations/README.md#upload) - Upload translation files
+
+#### [translations.groups](docs/sdks/groups/README.md)
+
+* [delete](docs/sdks/groups/README.md#delete) - Delete a translation group
+* [retrieve](docs/sdks/groups/README.md#retrieve) - Retrieve a translation group
+
+#### [translations.master](docs/sdks/master/README.md)
+
+* [retrieve](docs/sdks/master/README.md#retrieve) - Retrieve master translations JSON
+* [import_master_json](docs/sdks/master/README.md#import_master_json) - Import master translations JSON
+* [upload](docs/sdks/master/README.md#upload) - Upload master translations JSON file
 
 ### [workflows](docs/sdks/workflows/README.md)
 
@@ -576,6 +660,10 @@ with Novu(
         },
         overrides=novu_py.Overrides(),
         to="SUBSCRIBER_ID",
+        actor="<value>",
+        context={
+            "key": "org-acme",
+        },
     ),
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
@@ -606,6 +694,10 @@ with Novu(
         },
         overrides=novu_py.Overrides(),
         to="SUBSCRIBER_ID",
+        actor="<value>",
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -617,30 +709,18 @@ with Novu(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
+[`NovuError`](./src/novu_py/models/novuerror.py) is the base class for all HTTP error responses. It has the following properties:
 
-By default, an API error will raise a models.APIError exception, which has the following properties:
-
-| Property        | Type             | Description           |
-|-----------------|------------------|-----------------------|
-| `.status_code`  | *int*            | The HTTP status code  |
-| `.message`      | *str*            | The error message     |
-| `.raw_response` | *httpx.Response* | The raw HTTP response |
-| `.body`         | *str*            | The response content  |
-
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `trigger_async` method may raise the following exceptions:
-
-| Error Type                           | Status Code                       | Content Type     |
-| ------------------------------------ | --------------------------------- | ---------------- |
-| models.PayloadValidationExceptionDto | 400                               | application/json |
-| models.ErrorDto                      | 414                               | application/json |
-| models.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415 | application/json |
-| models.ValidationErrorDto            | 422                               | application/json |
-| models.ErrorDto                      | 500                               | application/json |
-| models.APIError                      | 4XX, 5XX                          | \*/\*            |
+| Property           | Type             | Description                                                                             |
+| ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
+| `err.message`      | `str`            | Error message                                                                           |
+| `err.status_code`  | `int`            | HTTP response status code eg `404`                                                      |
+| `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
+| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
+| `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
-
 ```python
 import novu_py
 from novu_py import Novu, models
@@ -662,30 +742,58 @@ with Novu(
             },
             overrides=novu_py.Overrides(),
             to="SUBSCRIBER_ID",
+            actor="<value>",
+            context={
+                "key": "org-acme",
+            },
         ))
 
         # Handle response
         print(res)
 
-    except models.PayloadValidationExceptionDto as e:
-        # handle e.data: models.PayloadValidationExceptionDtoData
-        raise(e)
-    except models.ErrorDto as e:
-        # handle e.data: models.ErrorDtoData
-        raise(e)
-    except models.ErrorDto as e:
-        # handle e.data: models.ErrorDtoData
-        raise(e)
-    except models.ValidationErrorDto as e:
-        # handle e.data: models.ValidationErrorDtoData
-        raise(e)
-    except models.ErrorDto as e:
-        # handle e.data: models.ErrorDtoData
-        raise(e)
-    except models.APIError as e:
-        # handle exception
-        raise(e)
+
+    except models.NovuError as e:
+        # The base class for HTTP error responses
+        print(e.message)
+        print(e.status_code)
+        print(e.body)
+        print(e.headers)
+        print(e.raw_response)
+
+        # Depending on the method different errors may be thrown
+        if isinstance(e, models.PayloadValidationExceptionDto):
+            print(e.data.status_code)  # float
+            print(e.data.timestamp)  # str
+            print(e.data.path)  # str
+            print(e.data.message)  # OptionalNullable[novu_py.PayloadValidationExceptionDtoMessage]
+            print(e.data.ctx)  # Optional[Dict[str, Any]]
 ```
+
+### Error Classes
+**Primary errors:**
+* [`NovuError`](./src/novu_py/models/novuerror.py): The base class for HTTP error responses.
+  * [`ErrorDto`](./src/novu_py/models/errordto.py): *
+  * [`ValidationErrorDto`](./src/novu_py/models/validationerrordto.py): Unprocessable Entity. Status code `422`. *
+
+<details><summary>Less common errors (8)</summary>
+
+<br />
+
+**Network errors:**
+* [`httpx.RequestError`](https://www.python-httpx.org/exceptions/#httpx.RequestError): Base class for request errors.
+    * [`httpx.ConnectError`](https://www.python-httpx.org/exceptions/#httpx.ConnectError): HTTP client was unable to make a request to a server.
+    * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
+
+
+**Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 80 methods.*
+* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 80 methods.*
+* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 80 methods.*
+* [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+
+</details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -708,7 +816,7 @@ from novu_py import Novu
 
 
 with Novu(
-    server_idx=1,
+    server_idx=0,
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
@@ -722,6 +830,10 @@ with Novu(
         },
         overrides=novu_py.Overrides(),
         to="SUBSCRIBER_ID",
+        actor="<value>",
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -752,6 +864,10 @@ with Novu(
         },
         overrides=novu_py.Overrides(),
         to="SUBSCRIBER_ID",
+        actor="<value>",
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -872,6 +988,10 @@ with Novu(
         },
         overrides=novu_py.Overrides(),
         to="SUBSCRIBER_ID",
+        actor="<value>",
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response

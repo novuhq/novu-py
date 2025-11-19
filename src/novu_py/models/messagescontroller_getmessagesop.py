@@ -15,6 +15,8 @@ class MessagesControllerGetMessagesRequestTypedDict(TypedDict):
     r"""Channel type through which the message is sent"""
     subscriber_id: NotRequired[str]
     transaction_id: NotRequired[List[str]]
+    context_keys: NotRequired[List[str]]
+    r"""Filter by exact context keys, order insensitive (format: \"type:id\")"""
     page: NotRequired[float]
     limit: NotRequired[float]
     idempotency_key: NotRequired[str]
@@ -39,6 +41,13 @@ class MessagesControllerGetMessagesRequest(BaseModel):
         pydantic.Field(alias="transactionId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+
+    context_keys: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="contextKeys"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by exact context keys, order insensitive (format: \"type:id\")"""
 
     page: Annotated[
         Optional[float],

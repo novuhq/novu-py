@@ -17,6 +17,8 @@ The ID of the chat or push provider.
 | `GETSTREAM`         | getstream           |
 | `ROCKET_CHAT`       | rocket-chat         |
 | `WHATSAPP_BUSINESS` | whatsapp-business   |
+| `CHAT_WEBHOOK`      | chat-webhook        |
+| `NOVU_SLACK`        | novu-slack          |
 | `FCM`               | fcm                 |
 | `APNS`              | apns                |
 | `EXPO`              | expo                |
@@ -24,3 +26,4 @@ The ID of the chat or push provider.
 | `PUSHPAD`           | pushpad             |
 | `PUSH_WEBHOOK`      | push-webhook        |
 | `PUSHER_BEAMS`      | pusher-beams        |
+| `APPIO`             | appio               |

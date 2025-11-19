@@ -16,6 +16,7 @@ Update in-app (inbox) notification's action status by its unique key identifier 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersV1Controller_markActionAsSeen" method="post" path="/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -66,6 +67,7 @@ Update all subscriber in-app (inbox) notifications state such as read, unread, s
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersV1Controller_markAllUnreadAsRead" method="post" path="/v1/subscribers/{subscriberId}/messages/mark-all" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -114,6 +116,7 @@ Update subscriber's multiple in-app (inbox) notifications state such as seen, re
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersV1Controller_markMessagesAs" method="post" path="/v1/subscribers/{subscriberId}/messages/mark-as" -->
 ```python
 import novu_py
 from novu_py import Novu

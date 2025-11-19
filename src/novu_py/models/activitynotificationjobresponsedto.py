@@ -29,6 +29,7 @@ class ActivityNotificationJobResponseDtoType(str, Enum):
     DIGEST = "digest"
     TRIGGER = "trigger"
     DELAY = "delay"
+    THROTTLE = "throttle"
     CUSTOM = "custom"
 
 
@@ -61,6 +62,8 @@ class ActivityNotificationJobResponseDtoTypedDict(TypedDict):
     r"""Optional payload for the job"""
     updated_at: NotRequired[str]
     r"""Updated time of the notification"""
+    schedule_extensions_count: NotRequired[float]
+    r"""The number of times the digest/delay job has been extended to align with the subscribers schedule"""
 
 
 class ActivityNotificationJobResponseDto(BaseModel):
@@ -96,3 +99,8 @@ class ActivityNotificationJobResponseDto(BaseModel):
 
     updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None
     r"""Updated time of the notification"""
+
+    schedule_extensions_count: Annotated[
+        Optional[float], pydantic.Field(alias="scheduleExtensionsCount")
+    ] = None
+    r"""The number of times the digest/delay job has been extended to align with the subscribers schedule"""

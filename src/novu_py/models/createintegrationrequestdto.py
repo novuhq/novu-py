@@ -20,6 +20,14 @@ class CreateIntegrationRequestDtoChannel(str, Enum):
     PUSH = "push"
 
 
+class ConfigurationsTypedDict(TypedDict):
+    r"""Configurations for the integration"""
+
+
+class Configurations(BaseModel):
+    r"""Configurations for the integration"""
+
+
 class CreateIntegrationRequestDtoTypedDict(TypedDict):
     provider_id: str
     r"""The provider ID for the integration"""
@@ -39,6 +47,8 @@ class CreateIntegrationRequestDtoTypedDict(TypedDict):
     r"""Flag to check the integration status"""
     conditions: NotRequired[List[StepFilterDtoTypedDict]]
     r"""Conditions for the integration"""
+    configurations: NotRequired[ConfigurationsTypedDict]
+    r"""Configurations for the integration"""
 
 
 class CreateIntegrationRequestDto(BaseModel):
@@ -70,3 +80,6 @@ class CreateIntegrationRequestDto(BaseModel):
 
     conditions: Optional[List[StepFilterDto]] = None
     r"""Conditions for the integration"""
+
+    configurations: Optional[Configurations] = None
+    r"""Configurations for the integration"""

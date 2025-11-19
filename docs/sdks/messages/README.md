@@ -20,6 +20,7 @@ List all messages for the current environment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="MessagesController_getMessages" method="get" path="/v1/messages" -->
 ```python
 from novu_py import Novu
 
@@ -28,7 +29,12 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.messages.retrieve(request={})
+    res = novu.messages.retrieve(request={
+        "context_keys": [
+            "tenant:org-123",
+            "region:us-east-1",
+        ],
+    })
 
     # Handle response
     print(res)
@@ -63,6 +69,7 @@ Delete a message entity from the Novu platform by **messageId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="MessagesController_deleteMessage" method="delete" path="/v1/messages/{messageId}" -->
 ```python
 from novu_py import Novu
 
@@ -107,6 +114,7 @@ Delete multiple messages from the Novu platform using **transactionId** of trigg
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="MessagesController_deleteMessagesByTransactionId" method="delete" path="/v1/messages/transaction/{transactionId}" -->
 ```python
 from novu_py import Novu
 

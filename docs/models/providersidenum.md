@@ -59,6 +59,11 @@ Provider ID of the job
 | `EAZY_SMS`          | eazy-sms            |
 | `MOBISHASTRA`       | mobishastra         |
 | `AFRO_MESSAGE`      | afro-message        |
+| `UNIFONIC`          | unifonic            |
+| `SMSMODE`           | smsmode             |
+| `IMEDIA`            | imedia              |
+| `SINCH`             | sinch               |
+| `ISENDPRO_SMS`      | isendpro-sms        |
 | `FCM`               | fcm                 |
 | `APNS`              | apns                |
 | `EXPO`              | expo                |
@@ -66,6 +71,7 @@ Provider ID of the job
 | `PUSHPAD`           | pushpad             |
 | `PUSH_WEBHOOK`      | push-webhook        |
 | `PUSHER_BEAMS`      | pusher-beams        |
+| `APPIO`             | appio               |
 | `NOVU`              | novu                |
 | `SLACK`             | slack               |
 | `DISCORD`           | discord             |
@@ -77,3 +83,5 @@ Provider ID of the job
 | `GETSTREAM`         | getstream           |
 | `ROCKET_CHAT`       | rocket-chat         |
 | `WHATSAPP_BUSINESS` | whatsapp-business   |
+| `CHAT_WEBHOOK`      | chat-webhook        |
+| `NOVU_SLACK`        | novu-slack          |

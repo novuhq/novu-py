@@ -16,14 +16,12 @@ Novu Documentation
 
 ## trigger
 
-
-    Trigger event is the main (and only) way to send notifications to subscribers. 
-    The trigger identifier is used to match the particular workflow associated with it. 
-    Additional information can be passed according the body interface below.
-    
+    Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+    To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="EventsController_trigger" method="post" path="/v1/events/trigger" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -43,6 +41,10 @@ with Novu(
         },
         overrides=novu_py.Overrides(),
         to="SUBSCRIBER_ID",
+        actor="<value>",
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -82,6 +84,7 @@ with Novu(
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="EventsController_cancel" method="delete" path="/v1/events/trigger/{transactionId}" -->
 ```python
 from novu_py import Novu
 
@@ -127,6 +130,7 @@ Trigger a broadcast event to all existing subscribers, could be used to send ann
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="EventsController_broadcastEventToAll" method="post" path="/v1/events/trigger/broadcast" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -152,6 +156,16 @@ with Novu(
                     },
                 },
             },
+        ),
+        actor=novu_py.SubscriberPayloadDto(
+            first_name="John",
+            last_name="Doe",
+            email="john.doe@example.com",
+            phone="+1234567890",
+            avatar="https://example.com/avatar.jpg",
+            locale="en-US",
+            timezone="America/New_York",
+            subscriber_id="<id>",
         ),
     ))
 
@@ -192,6 +206,7 @@ with Novu(
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="EventsController_triggerBulk" method="post" path="/v1/events/trigger/bulk" -->
 ```python
 import novu_py
 from novu_py import Novu

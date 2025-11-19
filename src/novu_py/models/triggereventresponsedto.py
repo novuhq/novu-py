@@ -8,7 +8,7 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class Status(str, Enum):
+class TriggerEventResponseDtoStatus(str, Enum):
     r"""Status of the trigger"""
 
     ERROR = "error"
@@ -23,7 +23,7 @@ class Status(str, Enum):
 class TriggerEventResponseDtoTypedDict(TypedDict):
     acknowledged: bool
     r"""Indicates whether the trigger was acknowledged or not"""
-    status: Status
+    status: TriggerEventResponseDtoStatus
     r"""Status of the trigger"""
     error: NotRequired[List[str]]
     r"""In case of an error, this field will contain the error message(s)"""
@@ -35,7 +35,7 @@ class TriggerEventResponseDto(BaseModel):
     acknowledged: bool
     r"""Indicates whether the trigger was acknowledged or not"""
 
-    status: Status
+    status: TriggerEventResponseDtoStatus
     r"""Status of the trigger"""
 
     error: Optional[List[str]] = None

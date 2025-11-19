@@ -13,7 +13,7 @@ from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class OrderDirection(str, Enum):
+class QueryParamOrderDirection(str, Enum):
     r"""Direction of sorting"""
 
     ASC = "ASC"
@@ -27,7 +27,7 @@ class SubscribersControllerSearchSubscribersRequestTypedDict(TypedDict):
     r"""Cursor for pagination indicating the ending point before which to fetch results."""
     limit: NotRequired[float]
     r"""Limit the number of items to return"""
-    order_direction: NotRequired[OrderDirection]
+    order_direction: NotRequired[QueryParamOrderDirection]
     r"""Direction of sorting"""
     order_by: NotRequired[str]
     r"""Field to order by"""
@@ -65,7 +65,7 @@ class SubscribersControllerSearchSubscribersRequest(BaseModel):
     r"""Limit the number of items to return"""
 
     order_direction: Annotated[
-        Optional[OrderDirection],
+        Optional[QueryParamOrderDirection],
         pydantic.Field(alias="orderDirection"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None

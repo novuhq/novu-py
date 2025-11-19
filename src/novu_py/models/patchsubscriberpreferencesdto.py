@@ -5,6 +5,7 @@ from .patchpreferencechannelsdto import (
     PatchPreferenceChannelsDto,
     PatchPreferenceChannelsDtoTypedDict,
 )
+from .scheduledto import ScheduleDto, ScheduleDtoTypedDict
 from novu_py.types import BaseModel
 import pydantic
 from typing import Optional
@@ -12,15 +13,20 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PatchSubscriberPreferencesDtoTypedDict(TypedDict):
-    channels: PatchPreferenceChannelsDtoTypedDict
+    channels: NotRequired[PatchPreferenceChannelsDtoTypedDict]
     r"""Channel-specific preference settings"""
     workflow_id: NotRequired[str]
     r"""Workflow internal _id, identifier or slug. If provided, update workflow specific preferences, otherwise update global preferences"""
+    schedule: NotRequired[ScheduleDtoTypedDict]
+    r"""Subscriber schedule"""
 
 
 class PatchSubscriberPreferencesDto(BaseModel):
-    channels: PatchPreferenceChannelsDto
+    channels: Optional[PatchPreferenceChannelsDto] = None
     r"""Channel-specific preference settings"""
 
     workflow_id: Annotated[Optional[str], pydantic.Field(alias="workflowId")] = None
     r"""Workflow internal _id, identifier or slug. If provided, update workflow specific preferences, otherwise update global preferences"""
+
+    schedule: Optional[ScheduleDto] = None
+    r"""Subscriber schedule"""

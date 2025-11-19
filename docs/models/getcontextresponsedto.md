@@ -1,0 +1,12 @@
+# GetContextResponseDto
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `type`                                                                     | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `id`                                                                       | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `data`                                                                     | [models.GetContextResponseDtoData](../models/getcontextresponsedtodata.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| `created_at`                                                               | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `updated_at`                                                               | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |

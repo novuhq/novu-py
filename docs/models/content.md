@@ -1,19 +1,9 @@
 # Content
 
-Content of the message, can be an email block or a string
+Translation content as JSON object
 
 
-## Supported Types
+## Fields
 
-### `List[models.EmailBlock]`
-
-```python
-value: List[models.EmailBlock] = /* values here */
-```
-
-### `str`
-
-```python
-value: str = /* values here */
-```
-
+| Field       | Type        | Required    | Description |
+| ----------- | ----------- | ----------- | ----------- |

@@ -1,29 +1,9 @@
 # Data
 
+Optional custom data to associate with this context.
 
-## Supported Types
 
-### `str`
+## Fields
 
-```python
-value: str = /* values here */
-```
-
-### `List[str]`
-
-```python
-value: List[str] = /* values here */
-```
-
-### `bool`
-
-```python
-value: bool = /* values here */
-```
-
-### `float`
-
-```python
-value: float = /* values here */
-```
-
+| Field       | Type        | Required    | Description |
+| ----------- | ----------- | ----------- | ----------- |
