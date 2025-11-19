@@ -5,9 +5,9 @@ from .delaycontrolsmetadataresponsedto import (
     DelayControlsMetadataResponseDto,
     DelayControlsMetadataResponseDtoTypedDict,
 )
+from .resourceoriginenum import ResourceOriginEnum
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
-from .workfloworiginenum import WorkflowOriginEnum
 from enum import Enum
 from novu_py.types import BaseModel
 import pydantic
@@ -20,6 +20,7 @@ class DelayStepResponseDtoType(str, Enum):
     r"""Type of the delay. Currently only 'regular' is supported by the schema."""
 
     REGULAR = "regular"
+    TIMED = "timed"
 
 
 class DelayStepResponseDtoUnit(str, Enum):
@@ -36,14 +37,16 @@ class DelayStepResponseDtoUnit(str, Enum):
 class DelayStepResponseDtoControlValuesTypedDict(TypedDict):
     r"""Control values for the delay step"""
 
-    amount: float
-    r"""Amount of time to delay."""
-    unit: DelayStepResponseDtoUnit
-    r"""Unit of time for the delay amount."""
     skip: NotRequired[Dict[str, Any]]
     r"""JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference."""
     type: NotRequired[DelayStepResponseDtoType]
     r"""Type of the delay. Currently only 'regular' is supported by the schema."""
+    amount: NotRequired[float]
+    r"""Amount of time to delay."""
+    unit: NotRequired[DelayStepResponseDtoUnit]
+    r"""Unit of time for the delay amount."""
+    cron: NotRequired[str]
+    r"""Cron expression for the delay. Min length 1."""
 
 
 class DelayStepResponseDtoControlValues(BaseModel):
@@ -54,17 +57,20 @@ class DelayStepResponseDtoControlValues(BaseModel):
     )
     __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
 
-    amount: float
-    r"""Amount of time to delay."""
-
-    unit: DelayStepResponseDtoUnit
-    r"""Unit of time for the delay amount."""
-
     skip: Optional[Dict[str, Any]] = None
     r"""JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference."""
 
     type: Optional[DelayStepResponseDtoType] = DelayStepResponseDtoType.REGULAR
     r"""Type of the delay. Currently only 'regular' is supported by the schema."""
+
+    amount: Optional[float] = None
+    r"""Amount of time to delay."""
+
+    unit: Optional[DelayStepResponseDtoUnit] = None
+    r"""Unit of time for the delay amount."""
+
+    cron: Optional[str] = None
+    r"""Cron expression for the delay. Min length 1."""
 
     @property
     def additional_properties(self):
@@ -73,14 +79,6 @@ class DelayStepResponseDtoControlValues(BaseModel):
     @additional_properties.setter
     def additional_properties(self, value):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
-
-
-class DelayStepResponseDtoSlugTypedDict(TypedDict):
-    r"""Slug of the step"""
-
-
-class DelayStepResponseDtoSlug(BaseModel):
-    r"""Slug of the step"""
 
 
 class DelayStepResponseDtoTypedDict(TypedDict):
@@ -94,12 +92,12 @@ class DelayStepResponseDtoTypedDict(TypedDict):
     r"""Database identifier of the step"""
     name: str
     r"""Name of the step"""
-    slug: DelayStepResponseDtoSlugTypedDict
+    slug: str
     r"""Slug of the step"""
     type: StepTypeEnum
     r"""Type of the step"""
-    origin: WorkflowOriginEnum
-    r"""Origin of the workflow"""
+    origin: ResourceOriginEnum
+    r"""Origin of the layout"""
     workflow_id: str
     r"""Workflow identifier"""
     workflow_database_id: str
@@ -126,14 +124,14 @@ class DelayStepResponseDto(BaseModel):
     name: str
     r"""Name of the step"""
 
-    slug: DelayStepResponseDtoSlug
+    slug: str
     r"""Slug of the step"""
 
     type: StepTypeEnum
     r"""Type of the step"""
 
-    origin: WorkflowOriginEnum
-    r"""Origin of the workflow"""
+    origin: ResourceOriginEnum
+    r"""Origin of the layout"""
 
     workflow_id: Annotated[str, pydantic.Field(alias="workflowId")]
     r"""Workflow identifier"""

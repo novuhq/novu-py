@@ -5,10 +5,10 @@ The recipients list of people who will receive the notification.
 
 ## Supported Types
 
-### `List[models.One]`
+### `List[models.To1]`
 
 ```python
-value: List[models.One] = /* values here */
+value: List[models.To1] = /* values here */
 ```
 
 ### `str`

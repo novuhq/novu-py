@@ -4,15 +4,21 @@ from __future__ import annotations
 from .triggerrecipientstypeenum import TriggerRecipientsTypeEnum
 from novu_py.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class TopicPayloadDtoTypedDict(TypedDict):
     topic_key: str
     type: TriggerRecipientsTypeEnum
+    exclude: NotRequired[List[str]]
+    r"""Optional array of subscriber IDs to exclude from the topic trigger"""
 
 
 class TopicPayloadDto(BaseModel):
     topic_key: Annotated[str, pydantic.Field(alias="topicKey")]
 
     type: TriggerRecipientsTypeEnum
+
+    exclude: Optional[List[str]] = None
+    r"""Optional array of subscriber IDs to exclude from the topic trigger"""

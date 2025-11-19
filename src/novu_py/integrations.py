@@ -5,12 +5,13 @@ from novu_py import models, utils
 from novu_py._hooks import HookContext
 from novu_py.types import OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
+from novu_py.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
 class Integrations(BaseSDK):
     r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
-    https://docs.novu.co/channels-and-providers/integration-store
+    https://docs.novu.co/platform/integrations/overview
     """
 
     def list(
@@ -79,7 +80,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_listIntegrations",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -108,58 +109,43 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerListIntegrationsResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.IntegrationResponseDto]
+                result=unmarshal_json_response(
+                    List[models.IntegrationResponseDto], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def list_async(
         self,
@@ -227,7 +213,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_listIntegrations",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -256,58 +242,43 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerListIntegrationsResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.IntegrationResponseDto]
+                result=unmarshal_json_response(
+                    List[models.IntegrationResponseDto], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def create(
         self,
@@ -391,7 +362,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_createIntegration",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -420,58 +391,41 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return models.IntegrationsControllerCreateIntegrationResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.IntegrationResponseDto
-                ),
+                result=unmarshal_json_response(models.IntegrationResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def create_async(
         self,
@@ -555,7 +509,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_createIntegration",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -584,58 +538,41 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return models.IntegrationsControllerCreateIntegrationResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.IntegrationResponseDto
-                ),
+                result=unmarshal_json_response(models.IntegrationResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update(
         self,
@@ -722,7 +659,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_updateIntegrationById",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -751,58 +688,41 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerUpdateIntegrationByIDResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.IntegrationResponseDto
-                ),
+                result=unmarshal_json_response(models.IntegrationResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_async(
         self,
@@ -889,7 +809,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_updateIntegrationById",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -918,58 +838,41 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerUpdateIntegrationByIDResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.IntegrationResponseDto
-                ),
+                result=unmarshal_json_response(models.IntegrationResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def delete(
         self,
@@ -1041,7 +944,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_removeIntegration",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1070,58 +973,43 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerRemoveIntegrationResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.IntegrationResponseDto]
+                result=unmarshal_json_response(
+                    List[models.IntegrationResponseDto], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def delete_async(
         self,
@@ -1193,7 +1081,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_removeIntegration",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1222,58 +1110,317 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerRemoveIntegrationResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.IntegrationResponseDto]
+                result=unmarshal_json_response(
+                    List[models.IntegrationResponseDto], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
+        raise models.APIError("Unexpected response received", http_res)
+
+    def integrations_controller_auto_configure_integration(
+        self,
+        *,
+        integration_id: str,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.IntegrationsControllerAutoConfigureIntegrationResponse:
+        r"""Auto-configure an integration for inbound webhooks
+
+        Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support.
+        This will automatically generate required webhook signing keys and configure webhook endpoints.
+
+        :param integration_id:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.IntegrationsControllerAutoConfigureIntegrationRequest(
+            integration_id=integration_id,
+            idempotency_key=idempotency_key,
         )
+
+        req = self._build_request(
+            method="POST",
+            path="/v1/integrations/{integrationId}/auto-configure",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="IntegrationsController_autoConfigureIntegration",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.IntegrationsControllerAutoConfigureIntegrationResponse(
+                result=unmarshal_json_response(
+                    models.AutoConfigureIntegrationResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, ["404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def integrations_controller_auto_configure_integration_async(
+        self,
+        *,
+        integration_id: str,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.IntegrationsControllerAutoConfigureIntegrationResponse:
+        r"""Auto-configure an integration for inbound webhooks
+
+        Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support.
+        This will automatically generate required webhook signing keys and configure webhook endpoints.
+
+        :param integration_id:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.IntegrationsControllerAutoConfigureIntegrationRequest(
+            integration_id=integration_id,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v1/integrations/{integrationId}/auto-configure",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="IntegrationsController_autoConfigureIntegration",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.IntegrationsControllerAutoConfigureIntegrationResponse(
+                result=unmarshal_json_response(
+                    models.AutoConfigureIntegrationResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, ["404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
 
     def set_as_primary(
         self,
@@ -1346,7 +1493,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_setIntegrationAsPrimary",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1375,58 +1522,41 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerSetIntegrationAsPrimaryResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.IntegrationResponseDto
-                ),
+                result=unmarshal_json_response(models.IntegrationResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def set_as_primary_async(
         self,
@@ -1499,7 +1629,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_setIntegrationAsPrimary",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1528,58 +1658,41 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerSetIntegrationAsPrimaryResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.IntegrationResponseDto
-                ),
+                result=unmarshal_json_response(models.IntegrationResponseDto, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def list_active(
         self,
@@ -1647,7 +1760,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_getActiveIntegrations",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1676,58 +1789,43 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerGetActiveIntegrationsResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.IntegrationResponseDto]
+                result=unmarshal_json_response(
+                    List[models.IntegrationResponseDto], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def list_active_async(
         self,
@@ -1795,7 +1893,7 @@ class Integrations(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="IntegrationsController_getActiveIntegrations",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1824,55 +1922,40 @@ class Integrations(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.IntegrationsControllerGetActiveIntegrationsResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.IntegrationResponseDto]
+                result=unmarshal_json_response(
+                    List[models.IntegrationResponseDto], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)

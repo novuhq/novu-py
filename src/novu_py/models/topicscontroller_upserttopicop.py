@@ -7,7 +7,12 @@ from .createupdatetopicrequestdto import (
 )
 from .topicresponsedto import TopicResponseDto, TopicResponseDtoTypedDict
 from novu_py.types import BaseModel
-from novu_py.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from novu_py.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    QueryParamMetadata,
+    RequestMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -15,6 +20,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class TopicsControllerUpsertTopicRequestTypedDict(TypedDict):
     create_update_topic_request_dto: CreateUpdateTopicRequestDtoTypedDict
+    fail_if_exists: NotRequired[bool]
+    r"""If true, the request will fail if a topic with the same key already exists"""
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
@@ -24,6 +31,13 @@ class TopicsControllerUpsertTopicRequest(BaseModel):
         CreateUpdateTopicRequestDto,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
+
+    fail_if_exists: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="failIfExists"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""If true, the request will fail if a topic with the same key already exists"""
 
     idempotency_key: Annotated[
         Optional[str],

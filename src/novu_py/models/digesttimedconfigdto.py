@@ -36,6 +36,8 @@ class DigestTimedConfigDtoTypedDict(TypedDict):
     r"""Type of monthly schedule"""
     cron_expression: NotRequired[str]
     r"""Cron expression for scheduling"""
+    until_date: NotRequired[str]
+    r"""Until date for scheduling"""
 
 
 class DigestTimedConfigDto(BaseModel):
@@ -69,3 +71,6 @@ class DigestTimedConfigDto(BaseModel):
         Optional[str], pydantic.Field(alias="cronExpression")
     ] = None
     r"""Cron expression for scheduling"""
+
+    until_date: Annotated[Optional[str], pydantic.Field(alias="untilDate")] = None
+    r"""Until date for scheduling"""

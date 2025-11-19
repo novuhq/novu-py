@@ -22,6 +22,8 @@ class ProviderID(str, Enum):
     GETSTREAM = "getstream"
     ROCKET_CHAT = "rocket-chat"
     WHATSAPP_BUSINESS = "whatsapp-business"
+    CHAT_WEBHOOK = "chat-webhook"
+    NOVU_SLACK = "novu-slack"
     FCM = "fcm"
     APNS = "apns"
     EXPO = "expo"
@@ -29,6 +31,7 @@ class ProviderID(str, Enum):
     PUSHPAD = "pushpad"
     PUSH_WEBHOOK = "push-webhook"
     PUSHER_BEAMS = "pusher-beams"
+    APPIO = "appio"
 
 
 class SubscriberChannelDtoTypedDict(TypedDict):

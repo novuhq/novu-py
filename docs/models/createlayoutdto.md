@@ -1,0 +1,11 @@
+# CreateLayoutDto
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `layout_id`                                                                        | *str*                                                                              | :heavy_check_mark:                                                                 | Unique identifier for the layout                                                   |
+| `name`                                                                             | *str*                                                                              | :heavy_check_mark:                                                                 | Name of the layout                                                                 |
+| `is_translation_enabled`                                                           | *Optional[bool]*                                                                   | :heavy_minus_sign:                                                                 | Enable or disable translations for this layout                                     |
+| `source`                                                                           | [Optional[models.LayoutCreationSourceEnum]](../models/layoutcreationsourceenum.md) | :heavy_minus_sign:                                                                 | Source of layout creation                                                          |

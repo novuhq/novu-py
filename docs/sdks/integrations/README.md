@@ -4,7 +4,7 @@
 ## Overview
 
 With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
-<https://docs.novu.co/channels-and-providers/integration-store>
+<https://docs.novu.co/platform/integrations/overview>
 
 ### Available Operations
 
@@ -12,6 +12,7 @@ With the help of the Integration Store, you can easily integrate your favorite d
 * [create](#create) - Create an integration
 * [update](#update) - Update an integration
 * [delete](#delete) - Delete an integration
+* [integrations_controller_auto_configure_integration](#integrations_controller_auto_configure_integration) - Auto-configure an integration for inbound webhooks
 * [set_as_primary](#set_as_primary) - Update integration as primary
 * [list_active](#list_active) - List active integrations
 
@@ -21,6 +22,7 @@ List all the channels integrations created in the organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_listIntegrations" method="get" path="/v1/integrations" -->
 ```python
 from novu_py import Novu
 
@@ -64,6 +66,7 @@ Create an integration for the current environment the user is based on the API k
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_createIntegration" method="post" path="/v1/integrations" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -112,6 +115,7 @@ Update an integration by its unique key identifier **integrationId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_updateIntegrationById" method="put" path="/v1/integrations/{integrationId}" -->
 ```python
 from novu_py import Novu
 
@@ -157,6 +161,7 @@ Delete an integration by its unique key identifier **integrationId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_removeIntegration" method="delete" path="/v1/integrations/{integrationId}" -->
 ```python
 from novu_py import Novu
 
@@ -194,6 +199,51 @@ with Novu(
 | models.ErrorDto                        | 500                                    | application/json                       |
 | models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
+## integrations_controller_auto_configure_integration
+
+Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support. 
+    This will automatically generate required webhook signing keys and configure webhook endpoints.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="IntegrationsController_autoConfigureIntegration" method="post" path="/v1/integrations/{integrationId}/auto-configure" -->
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.integrations.integrations_controller_auto_configure_integration(integration_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `integration_id`                                                    | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.IntegrationsControllerAutoConfigureIntegrationResponse](../../models/integrationscontrollerautoconfigureintegrationresponse.md)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| models.ErrorDto                   | 414                               | application/json                  |
+| models.ErrorDto                   | 400, 401, 403, 405, 409, 413, 415 | application/json                  |
+| models.ValidationErrorDto         | 422                               | application/json                  |
+| models.ErrorDto                   | 500                               | application/json                  |
+| models.APIError                   | 4XX, 5XX                          | \*/\*                             |
+
 ## set_as_primary
 
 Update an integration as **primary** by its unique key identifier **integrationId**. 
@@ -202,6 +252,7 @@ Update an integration as **primary** by its unique key identifier **integrationI
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_setIntegrationAsPrimary" method="post" path="/v1/integrations/{integrationId}/set-primary" -->
 ```python
 from novu_py import Novu
 
@@ -245,6 +296,7 @@ List all the active integrations created in the organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="IntegrationsController_getActiveIntegrations" method="get" path="/v1/integrations/active" -->
 ```python
 from novu_py import Novu
 

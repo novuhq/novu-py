@@ -9,12 +9,13 @@ from .emailstepupsertdto import EmailStepUpsertDto, EmailStepUpsertDtoTypedDict
 from .inappstepupsertdto import InAppStepUpsertDto, InAppStepUpsertDtoTypedDict
 from .preferencesrequestdto import PreferencesRequestDto, PreferencesRequestDtoTypedDict
 from .pushstepupsertdto import PushStepUpsertDto, PushStepUpsertDtoTypedDict
+from .resourceoriginenum import ResourceOriginEnum
+from .severitylevelenum import SeverityLevelEnum
 from .smsstepupsertdto import SmsStepUpsertDto, SmsStepUpsertDtoTypedDict
-from .workfloworiginenum import WorkflowOriginEnum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from novu_py.utils import get_discriminator
 import pydantic
-from pydantic import Discriminator, Tag
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -56,20 +57,24 @@ class UpdateWorkflowDtoTypedDict(TypedDict):
     r"""Steps of the workflow"""
     preferences: PreferencesRequestDtoTypedDict
     r"""Workflow preferences"""
-    origin: WorkflowOriginEnum
-    r"""Origin of the workflow"""
+    origin: ResourceOriginEnum
+    r"""Origin of the layout"""
     description: NotRequired[str]
     r"""Description of the workflow"""
     tags: NotRequired[List[str]]
     r"""Tags associated with the workflow"""
     active: NotRequired[bool]
     r"""Whether the workflow is active"""
-    workflow_id: NotRequired[str]
-    r"""Workflow ID (allowed only for code-first workflows)"""
-    payload_schema: NotRequired[Dict[str, Any]]
-    r"""The payload JSON Schema for the workflow"""
     validate_payload: NotRequired[bool]
     r"""Enable or disable payload schema validation"""
+    payload_schema: NotRequired[Nullable[Dict[str, Any]]]
+    r"""The payload JSON Schema for the workflow"""
+    is_translation_enabled: NotRequired[bool]
+    r"""Enable or disable translations for this workflow"""
+    workflow_id: NotRequired[str]
+    r"""Workflow ID (allowed only for code-first workflows)"""
+    severity: NotRequired[SeverityLevelEnum]
+    r"""Severity of the workflow"""
 
 
 class UpdateWorkflowDto(BaseModel):
@@ -82,8 +87,8 @@ class UpdateWorkflowDto(BaseModel):
     preferences: PreferencesRequestDto
     r"""Workflow preferences"""
 
-    origin: WorkflowOriginEnum
-    r"""Origin of the workflow"""
+    origin: ResourceOriginEnum
+    r"""Origin of the layout"""
 
     description: Optional[str] = None
     r"""Description of the workflow"""
@@ -94,15 +99,62 @@ class UpdateWorkflowDto(BaseModel):
     active: Optional[bool] = False
     r"""Whether the workflow is active"""
 
-    workflow_id: Annotated[Optional[str], pydantic.Field(alias="workflowId")] = None
-    r"""Workflow ID (allowed only for code-first workflows)"""
-
-    payload_schema: Annotated[
-        Optional[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
-    ] = None
-    r"""The payload JSON Schema for the workflow"""
-
     validate_payload: Annotated[
         Optional[bool], pydantic.Field(alias="validatePayload")
     ] = None
     r"""Enable or disable payload schema validation"""
+
+    payload_schema: Annotated[
+        OptionalNullable[Dict[str, Any]], pydantic.Field(alias="payloadSchema")
+    ] = UNSET
+    r"""The payload JSON Schema for the workflow"""
+
+    is_translation_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="isTranslationEnabled")
+    ] = False
+    r"""Enable or disable translations for this workflow"""
+
+    workflow_id: Annotated[Optional[str], pydantic.Field(alias="workflowId")] = None
+    r"""Workflow ID (allowed only for code-first workflows)"""
+
+    severity: Optional[SeverityLevelEnum] = None
+    r"""Severity of the workflow"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "description",
+            "tags",
+            "active",
+            "validatePayload",
+            "payloadSchema",
+            "isTranslationEnabled",
+            "workflowId",
+            "severity",
+        ]
+        nullable_fields = ["payloadSchema"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m

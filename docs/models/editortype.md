@@ -1,11 +1,11 @@
 # EditorType
 
-Type of editor to use for the body.
+Editor type of the layout.
 
 
 ## Values
 
 | Name    | Value   |
 | ------- | ------- |
-| `BLOCK` | block   |
 | `HTML`  | html    |
+| `BLOCK` | block   |

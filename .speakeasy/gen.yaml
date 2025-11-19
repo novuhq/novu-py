@@ -19,8 +19,16 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 python:
-  version: 1.3.0
+  version: 3.11.0
   additionalDependencies:
     dev:
       - pytest>=6.0.0
@@ -28,6 +36,10 @@ python:
     main:
       - requests>=2.25.0
       - pydantic>=1.8.0
+  allowedRedefinedBuiltins:
+    - id
+    - object
+  asyncMode: both
   authors:
     - Speakeasy
   baseErrorName: NovuError
@@ -51,12 +63,15 @@ python:
       shared: ""
       webhooks: ""
   inputModelSuffix: input
+  license: ""
   maxMethodParams: 4
   methodArguments: infer-optional-args
   moduleName: ""
   outputModelSuffix: output
+  packageManager: poetry
   packageName: novu-py
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2

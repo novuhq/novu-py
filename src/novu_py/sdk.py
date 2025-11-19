@@ -11,6 +11,8 @@ from novu_py import models, utils
 from novu_py._hooks import HookContext, SDKHooks
 from novu_py.types import OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
+from novu_py.utils.unmarshal_json_response import unmarshal_json_response
+import sys
 from typing import (
     Any,
     Callable,
@@ -25,12 +27,16 @@ from typing import (
 import weakref
 
 if TYPE_CHECKING:
+    from novu_py.activity import Activity
+    from novu_py.contexts import Contexts
     from novu_py.environments import Environments
     from novu_py.integrations import Integrations
+    from novu_py.layouts import Layouts
     from novu_py.messages import Messages
     from novu_py.notifications import Notifications
     from novu_py.subscribers import Subscribers
     from novu_py.topics import Topics
+    from novu_py.translations import Translations
     from novu_py.workflows import Workflows
 
 
@@ -39,6 +45,16 @@ class Novu(BaseSDK):
     https://docs.novu.co - Novu Documentation
     """
 
+    contexts: "Contexts"
+    environments: "Environments"
+    r"""Environments allow you to manage different stages of your application development lifecycle. Each environment has its own set of API keys and configurations, enabling you to separate development, staging, and production workflows.
+    https://docs.novu.co/platform/environments
+    """
+    activity: "Activity"
+    layouts: "Layouts"
+    r"""Layouts are reusable wrappers for your email notifications.
+    https://docs.novu.co/platform/workflow/layouts
+    """
     subscribers: "Subscribers"
     r"""A subscriber in Novu represents someone who should receive a message. A subscriber's profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
     https://docs.novu.co/subscribers/subscribers
@@ -47,17 +63,17 @@ class Novu(BaseSDK):
     r"""Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
     https://docs.novu.co/subscribers/topics
     """
+    translations: "Translations"
+    r"""Used to localize your notifications to different languages.
+    https://docs.novu.co/platform/workflow/translations
+    """
     workflows: "Workflows"
     r"""All notifications are sent via a workflow. Each workflow acts as a container for the logic and blueprint that are associated with a type of notification in your system.
     https://docs.novu.co/workflows
     """
-    environments: "Environments"
-    r"""Environments allow you to manage different stages of your application development lifecycle. Each environment has its own set of API keys and configurations, enabling you to separate development, staging, and production workflows.
-    https://docs.novu.co/platform/environments
-    """
     integrations: "Integrations"
     r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
-    https://docs.novu.co/channels-and-providers/integration-store
+    https://docs.novu.co/platform/integrations/overview
     """
     messages: "Messages"
     r"""A message in Novu represents a notification delivered to a recipient on a particular channel. Messages contain information about the request that triggered its delivery, a view of the data sent to the recipient, and a timeline of its lifecycle events. Learn more about messages.
@@ -65,10 +81,14 @@ class Novu(BaseSDK):
     """
     notifications: "Notifications"
     _sub_sdk_map = {
+        "contexts": ("novu_py.contexts", "Contexts"),
+        "environments": ("novu_py.environments", "Environments"),
+        "activity": ("novu_py.activity", "Activity"),
+        "layouts": ("novu_py.layouts", "Layouts"),
         "subscribers": ("novu_py.subscribers", "Subscribers"),
         "topics": ("novu_py.topics", "Topics"),
+        "translations": ("novu_py.translations", "Translations"),
         "workflows": ("novu_py.workflows", "Workflows"),
-        "environments": ("novu_py.environments", "Environments"),
         "integrations": ("novu_py.integrations", "Integrations"),
         "messages": ("novu_py.messages", "Messages"),
         "notifications": ("novu_py.notifications", "Notifications"),
@@ -99,7 +119,7 @@ class Novu(BaseSDK):
         """
         client_supplied = True
         if client is None:
-            client = httpx.Client()
+            client = httpx.Client(follow_redirects=True)
             client_supplied = False
 
         assert issubclass(
@@ -108,7 +128,7 @@ class Novu(BaseSDK):
 
         async_client_supplied = True
         if async_client is None:
-            async_client = httpx.AsyncClient()
+            async_client = httpx.AsyncClient(follow_redirects=True)
             async_client_supplied = False
 
         if debug_logger is None:
@@ -143,6 +163,7 @@ class Novu(BaseSDK):
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,
             ),
+            parent_ref=self,
         )
 
         hooks = SDKHooks()
@@ -167,13 +188,24 @@ class Novu(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
+    def dynamic_import(self, modname, retries=3):
+        for attempt in range(retries):
+            try:
+                return importlib.import_module(modname)
+            except KeyError:
+                # Clear any half-initialized module and retry
+                sys.modules.pop(modname, None)
+                if attempt == retries - 1:
+                    break
+        raise KeyError(f"Failed to import module '{modname}' after {retries} attempts")
+
     def __getattr__(self, name: str):
         if name in self._sub_sdk_map:
             module_path, class_name = self._sub_sdk_map[name]
             try:
-                module = importlib.import_module(module_path)
+                module = self.dynamic_import(module_path)
                 klass = getattr(module, class_name)
-                instance = klass(self.sdk_configuration)
+                instance = klass(self.sdk_configuration, parent_ref=self)
                 setattr(self, name, instance)
                 return instance
             except ImportError as e:
@@ -230,11 +262,8 @@ class Novu(BaseSDK):
     ) -> models.EventsControllerTriggerResponse:
         r"""Trigger event
 
-
-        Trigger event is the main (and only) way to send notifications to subscribers.
-        The trigger identifier is used to match the particular workflow associated with it.
-        Additional information can be passed according the body interface below.
-
+        Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+        To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
 
         :param trigger_event_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -300,7 +329,7 @@ class Novu(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_trigger",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -329,63 +358,48 @@ class Novu(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return models.EventsControllerTriggerResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.TriggerEventResponseDto
+                result=unmarshal_json_response(
+                    models.TriggerEventResponseDto, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.PayloadValidationExceptionDtoData
+            response_data = unmarshal_json_response(
+                models.PayloadValidationExceptionDtoData, http_res
             )
-            raise models.PayloadValidationExceptionDto(data=response_data)
+            raise models.PayloadValidationExceptionDto(response_data, http_res)
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def trigger_async(
         self,
@@ -401,11 +415,8 @@ class Novu(BaseSDK):
     ) -> models.EventsControllerTriggerResponse:
         r"""Trigger event
 
-
-        Trigger event is the main (and only) way to send notifications to subscribers.
-        The trigger identifier is used to match the particular workflow associated with it.
-        Additional information can be passed according the body interface below.
-
+        Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+        To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
 
         :param trigger_event_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -471,7 +482,7 @@ class Novu(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_trigger",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -500,63 +511,48 @@ class Novu(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return models.EventsControllerTriggerResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.TriggerEventResponseDto
+                result=unmarshal_json_response(
+                    models.TriggerEventResponseDto, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.PayloadValidationExceptionDtoData
+            response_data = unmarshal_json_response(
+                models.PayloadValidationExceptionDtoData, http_res
             )
-            raise models.PayloadValidationExceptionDto(data=response_data)
+            raise models.PayloadValidationExceptionDto(response_data, http_res)
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def cancel(
         self,
@@ -630,7 +626,7 @@ class Novu(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_cancel",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -659,56 +655,41 @@ class Novu(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.EventsControllerCancelResponse(
-                result=utils.unmarshal_json(http_res.text, bool),
+                result=unmarshal_json_response(bool, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def cancel_async(
         self,
@@ -782,7 +763,7 @@ class Novu(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_cancel",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -811,56 +792,41 @@ class Novu(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.EventsControllerCancelResponse(
-                result=utils.unmarshal_json(http_res.text, bool),
+                result=unmarshal_json_response(bool, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["400", "401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def trigger_broadcast(
         self,
@@ -945,7 +911,7 @@ class Novu(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_broadcastEventToAll",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -974,63 +940,48 @@ class Novu(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, ["200", "201"], "application/json"):
             return models.EventsControllerBroadcastEventToAllResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.TriggerEventResponseDto
+                result=unmarshal_json_response(
+                    models.TriggerEventResponseDto, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.PayloadValidationExceptionDtoData
+            response_data = unmarshal_json_response(
+                models.PayloadValidationExceptionDtoData, http_res
             )
-            raise models.PayloadValidationExceptionDto(data=response_data)
+            raise models.PayloadValidationExceptionDto(response_data, http_res)
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def trigger_broadcast_async(
         self,
@@ -1115,7 +1066,7 @@ class Novu(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_broadcastEventToAll",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1144,63 +1095,48 @@ class Novu(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, ["200", "201"], "application/json"):
             return models.EventsControllerBroadcastEventToAllResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, models.TriggerEventResponseDto
+                result=unmarshal_json_response(
+                    models.TriggerEventResponseDto, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.PayloadValidationExceptionDtoData
+            response_data = unmarshal_json_response(
+                models.PayloadValidationExceptionDtoData, http_res
             )
-            raise models.PayloadValidationExceptionDto(data=response_data)
+            raise models.PayloadValidationExceptionDto(response_data, http_res)
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def trigger_bulk(
         self,
@@ -1285,7 +1221,7 @@ class Novu(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_triggerBulk",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1314,63 +1250,48 @@ class Novu(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return models.EventsControllerTriggerBulkResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.TriggerEventResponseDto]
+                result=unmarshal_json_response(
+                    List[models.TriggerEventResponseDto], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.PayloadValidationExceptionDtoData
+            response_data = unmarshal_json_response(
+                models.PayloadValidationExceptionDtoData, http_res
             )
-            raise models.PayloadValidationExceptionDto(data=response_data)
+            raise models.PayloadValidationExceptionDto(response_data, http_res)
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def trigger_bulk_async(
         self,
@@ -1455,7 +1376,7 @@ class Novu(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="EventsController_triggerBulk",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1484,60 +1405,45 @@ class Novu(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return models.EventsControllerTriggerBulkResponse(
-                result=utils.unmarshal_json(
-                    http_res.text, List[models.TriggerEventResponseDto]
+                result=unmarshal_json_response(
+                    List[models.TriggerEventResponseDto], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.PayloadValidationExceptionDtoData
+            response_data = unmarshal_json_response(
+                models.PayloadValidationExceptionDtoData, http_res
             )
-            raise models.PayloadValidationExceptionDto(data=response_data)
+            raise models.PayloadValidationExceptionDto(response_data, http_res)
         if utils.match_response(http_res, "414", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(
             http_res,
             ["401", "403", "404", "405", "409", "413", "415"],
             "application/json",
         ):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.ValidationErrorDtoData
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
             )
-            raise models.ValidationErrorDto(data=response_data)
+            raise models.ValidationErrorDto(response_data, http_res)
         if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorDtoData)
-            raise models.ErrorDto(data=response_data)
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
         if utils.match_response(http_res, "503", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)

@@ -21,12 +21,12 @@ class CreateSubscriberRequestDtoTypedDict(TypedDict):
     r"""Phone number of the subscriber"""
     avatar: NotRequired[Nullable[str]]
     r"""Avatar URL or identifier"""
-    timezone: NotRequired[Nullable[str]]
-    r"""Timezone of the subscriber"""
     locale: NotRequired[Nullable[str]]
     r"""Locale of the subscriber"""
+    timezone: NotRequired[Nullable[str]]
+    r"""Timezone of the subscriber"""
     data: NotRequired[Nullable[Dict[str, Any]]]
-    r"""Additional custom data for the subscriber"""
+    r"""Additional custom data associated with the subscriber"""
 
 
 class CreateSubscriberRequestDto(BaseModel):
@@ -52,14 +52,14 @@ class CreateSubscriberRequestDto(BaseModel):
     avatar: OptionalNullable[str] = UNSET
     r"""Avatar URL or identifier"""
 
-    timezone: OptionalNullable[str] = UNSET
-    r"""Timezone of the subscriber"""
-
     locale: OptionalNullable[str] = UNSET
     r"""Locale of the subscriber"""
 
+    timezone: OptionalNullable[str] = UNSET
+    r"""Timezone of the subscriber"""
+
     data: OptionalNullable[Dict[str, Any]] = UNSET
-    r"""Additional custom data for the subscriber"""
+    r"""Additional custom data associated with the subscriber"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -69,8 +69,8 @@ class CreateSubscriberRequestDto(BaseModel):
             "email",
             "phone",
             "avatar",
-            "timezone",
             "locale",
+            "timezone",
             "data",
         ]
         nullable_fields = [
@@ -79,8 +79,8 @@ class CreateSubscriberRequestDto(BaseModel):
             "email",
             "phone",
             "avatar",
-            "timezone",
             "locale",
+            "timezone",
             "data",
         ]
         null_default_fields = []

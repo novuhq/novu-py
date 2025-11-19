@@ -2,10 +2,19 @@
 
 from __future__ import annotations
 from .apikeydto import APIKeyDto, APIKeyDtoTypedDict
-from novu_py.types import BaseModel
+from enum import Enum
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class EnvironmentResponseDtoType(str, Enum):
+    r"""Type of the environment"""
+
+    DEV = "dev"
+    PROD = "prod"
 
 
 class EnvironmentResponseDtoTypedDict(TypedDict):
@@ -17,6 +26,8 @@ class EnvironmentResponseDtoTypedDict(TypedDict):
     r"""Organization ID associated with the environment"""
     identifier: str
     r"""Unique identifier for the environment"""
+    type: NotRequired[Nullable[EnvironmentResponseDtoType]]
+    r"""Type of the environment"""
     api_keys: NotRequired[List[APIKeyDtoTypedDict]]
     r"""List of API keys associated with the environment"""
     parent_id: NotRequired[str]
@@ -38,6 +49,9 @@ class EnvironmentResponseDto(BaseModel):
     identifier: str
     r"""Unique identifier for the environment"""
 
+    type: OptionalNullable[EnvironmentResponseDtoType] = UNSET
+    r"""Type of the environment"""
+
     api_keys: Annotated[Optional[List[APIKeyDto]], pydantic.Field(alias="apiKeys")] = (
         None
     )
@@ -48,3 +62,33 @@ class EnvironmentResponseDto(BaseModel):
 
     slug: Optional[str] = None
     r"""URL-friendly slug for the environment"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["type", "apiKeys", "_parentId", "slug"]
+        nullable_fields = ["type"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m

@@ -14,35 +14,12 @@ from .activitynotificationtemplateresponsedto import (
     ActivityNotificationTemplateResponseDtoTypedDict,
 )
 from .activitytopicdto import ActivityTopicDto, ActivityTopicDtoTypedDict
+from .severitylevelenum import SeverityLevelEnum
 from .steptypeenum import StepTypeEnum
 from novu_py.types import BaseModel
 import pydantic
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-
-
-class ActivityNotificationResponseDtoPayloadTypedDict(TypedDict):
-    r"""Payload of the notification"""
-
-
-class ActivityNotificationResponseDtoPayload(BaseModel):
-    r"""Payload of the notification"""
-
-
-class ControlsTypedDict(TypedDict):
-    r"""Controls associated with the notification"""
-
-
-class Controls(BaseModel):
-    r"""Controls associated with the notification"""
-
-
-class ActivityNotificationResponseDtoToTypedDict(TypedDict):
-    r"""To field for subscriber definition"""
-
-
-class ActivityNotificationResponseDtoTo(BaseModel):
-    r"""To field for subscriber definition"""
 
 
 class ActivityNotificationResponseDtoTypedDict(TypedDict):
@@ -71,16 +48,22 @@ class ActivityNotificationResponseDtoTypedDict(TypedDict):
     r"""Template of the notification"""
     jobs: NotRequired[List[ActivityNotificationJobResponseDtoTypedDict]]
     r"""Jobs of the notification"""
-    payload: NotRequired[ActivityNotificationResponseDtoPayloadTypedDict]
+    payload: NotRequired[Dict[str, Any]]
     r"""Payload of the notification"""
     tags: NotRequired[List[str]]
     r"""Tags associated with the notification"""
-    controls: NotRequired[ControlsTypedDict]
+    controls: NotRequired[Dict[str, Any]]
     r"""Controls associated with the notification"""
-    to: NotRequired[ActivityNotificationResponseDtoToTypedDict]
+    to: NotRequired[Dict[str, Any]]
     r"""To field for subscriber definition"""
     topics: NotRequired[List[ActivityTopicDtoTypedDict]]
     r"""Topics of the notification"""
+    severity: NotRequired[SeverityLevelEnum]
+    r"""Severity of the workflow"""
+    critical: NotRequired[bool]
+    r"""Criticality of the notification"""
+    context_keys: NotRequired[List[str]]
+    r"""Context (single or multi) in which the notification was sent"""
 
 
 class ActivityNotificationResponseDto(BaseModel):
@@ -124,17 +107,28 @@ class ActivityNotificationResponseDto(BaseModel):
     jobs: Optional[List[ActivityNotificationJobResponseDto]] = None
     r"""Jobs of the notification"""
 
-    payload: Optional[ActivityNotificationResponseDtoPayload] = None
+    payload: Optional[Dict[str, Any]] = None
     r"""Payload of the notification"""
 
     tags: Optional[List[str]] = None
     r"""Tags associated with the notification"""
 
-    controls: Optional[Controls] = None
+    controls: Optional[Dict[str, Any]] = None
     r"""Controls associated with the notification"""
 
-    to: Optional[ActivityNotificationResponseDtoTo] = None
+    to: Optional[Dict[str, Any]] = None
     r"""To field for subscriber definition"""
 
     topics: Optional[List[ActivityTopicDto]] = None
     r"""Topics of the notification"""
+
+    severity: Optional[SeverityLevelEnum] = None
+    r"""Severity of the workflow"""
+
+    critical: Optional[bool] = None
+    r"""Criticality of the notification"""
+
+    context_keys: Annotated[
+        Optional[List[str]], pydantic.Field(alias="contextKeys")
+    ] = None
+    r"""Context (single or multi) in which the notification was sent"""

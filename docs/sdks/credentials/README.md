@@ -11,11 +11,12 @@
 
 ## update
 
-Update credentials for a provider such as slack and push tokens. 
-      **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
+Update credentials for a provider such as **slack** and **FCM**. 
+      **providerId** is required field. This API creates the **deviceTokens** or replaces the existing ones.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersV1Controller_updateSubscriberChannel" method="put" path="/v1/subscribers/{subscriberId}/credentials" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -73,11 +74,12 @@ with Novu(
 
 ## append
 
-Update credentials for a provider such as **slack** and **FCM**. 
-      **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
+Upsert credentials for a provider such as **slack** and **FCM**. 
+      **providerId** is required field. This API creates **deviceTokens** or appends to the existing ones.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersV1Controller_modifySubscriberChannel" method="patch" path="/v1/subscribers/{subscriberId}/credentials" -->
 ```python
 import novu_py
 from novu_py import Novu
@@ -140,6 +142,7 @@ Delete subscriber credentials for a provider such as **slack** and **FCM** by **
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="SubscribersV1Controller_deleteSubscriberCredentials" method="delete" path="/v1/subscribers/{subscriberId}/credentials/{providerId}" -->
 ```python
 from novu_py import Novu
 

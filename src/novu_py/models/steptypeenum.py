@@ -15,4 +15,5 @@ class StepTypeEnum(str, Enum):
     DIGEST = "digest"
     TRIGGER = "trigger"
     DELAY = "delay"
+    THROTTLE = "throttle"
     CUSTOM = "custom"

@@ -2,21 +2,13 @@
 
 from __future__ import annotations
 from .controlsmetadatadto import ControlsMetadataDto, ControlsMetadataDtoTypedDict
+from .resourceoriginenum import ResourceOriginEnum
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
-from .workfloworiginenum import WorkflowOriginEnum
 from novu_py.types import BaseModel
 import pydantic
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-
-
-class StepResponseDtoSlugTypedDict(TypedDict):
-    r"""Slug of the step"""
-
-
-class StepResponseDtoSlug(BaseModel):
-    r"""Slug of the step"""
 
 
 class StepResponseDtoTypedDict(TypedDict):
@@ -30,12 +22,12 @@ class StepResponseDtoTypedDict(TypedDict):
     r"""Database identifier of the step"""
     name: str
     r"""Name of the step"""
-    slug: StepResponseDtoSlugTypedDict
+    slug: str
     r"""Slug of the step"""
     type: StepTypeEnum
     r"""Type of the step"""
-    origin: WorkflowOriginEnum
-    r"""Origin of the workflow"""
+    origin: ResourceOriginEnum
+    r"""Origin of the layout"""
     workflow_id: str
     r"""Workflow identifier"""
     workflow_database_id: str
@@ -62,14 +54,14 @@ class StepResponseDto(BaseModel):
     name: str
     r"""Name of the step"""
 
-    slug: StepResponseDtoSlug
+    slug: str
     r"""Slug of the step"""
 
     type: StepTypeEnum
     r"""Type of the step"""
 
-    origin: WorkflowOriginEnum
-    r"""Origin of the workflow"""
+    origin: ResourceOriginEnum
+    r"""Origin of the layout"""
 
     workflow_id: Annotated[str, pydantic.Field(alias="workflowId")]
     r"""Workflow identifier"""

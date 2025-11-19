@@ -9,6 +9,14 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class UpdateIntegrationRequestDtoConfigurationsTypedDict(TypedDict):
+    r"""Configurations for the integration"""
+
+
+class UpdateIntegrationRequestDtoConfigurations(BaseModel):
+    r"""Configurations for the integration"""
+
+
 class UpdateIntegrationRequestDtoTypedDict(TypedDict):
     name: NotRequired[str]
     identifier: NotRequired[str]
@@ -18,6 +26,8 @@ class UpdateIntegrationRequestDtoTypedDict(TypedDict):
     credentials: NotRequired[CredentialsDtoTypedDict]
     check: NotRequired[bool]
     conditions: NotRequired[List[StepFilterDtoTypedDict]]
+    configurations: NotRequired[UpdateIntegrationRequestDtoConfigurationsTypedDict]
+    r"""Configurations for the integration"""
 
 
 class UpdateIntegrationRequestDto(BaseModel):
@@ -37,3 +47,6 @@ class UpdateIntegrationRequestDto(BaseModel):
     check: Optional[bool] = None
 
     conditions: Optional[List[StepFilterDto]] = None
+
+    configurations: Optional[UpdateIntegrationRequestDtoConfigurations] = None
+    r"""Configurations for the integration"""

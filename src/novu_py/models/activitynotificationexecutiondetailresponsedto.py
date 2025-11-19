@@ -22,12 +22,12 @@ class ActivityNotificationExecutionDetailResponseDtoTypedDict(TypedDict):
     r"""Whether the execution is a retry or not"""
     is_test: bool
     r"""Whether the execution is a test or not"""
-    provider_id: ProvidersIDEnum
-    r"""Provider ID of the job"""
     source: ExecutionDetailsSourceEnum
     r"""Source of the execution detail"""
     created_at: NotRequired[str]
     r"""Creation time of the execution detail"""
+    provider_id: NotRequired[ProvidersIDEnum]
+    r"""Provider ID of the job"""
     raw: NotRequired[Nullable[str]]
     r"""Raw data of the execution"""
 
@@ -48,21 +48,23 @@ class ActivityNotificationExecutionDetailResponseDto(BaseModel):
     is_test: Annotated[bool, pydantic.Field(alias="isTest")]
     r"""Whether the execution is a test or not"""
 
-    provider_id: Annotated[ProvidersIDEnum, pydantic.Field(alias="providerId")]
-    r"""Provider ID of the job"""
-
     source: ExecutionDetailsSourceEnum
     r"""Source of the execution detail"""
 
     created_at: Annotated[Optional[str], pydantic.Field(alias="createdAt")] = None
     r"""Creation time of the execution detail"""
 
+    provider_id: Annotated[
+        Optional[ProvidersIDEnum], pydantic.Field(alias="providerId")
+    ] = None
+    r"""Provider ID of the job"""
+
     raw: OptionalNullable[str] = UNSET
     r"""Raw data of the execution"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["createdAt", "raw"]
+        optional_fields = ["createdAt", "providerId", "raw"]
         nullable_fields = ["raw"]
         null_default_fields = []
 

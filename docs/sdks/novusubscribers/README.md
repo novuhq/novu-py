@@ -13,6 +13,7 @@ Check if a subscriber belongs to a certain topic
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="TopicsV1Controller_getTopicSubscriber" method="get" path="/v1/topics/{topicKey}/subscribers/{externalSubscriberId}" -->
 ```python
 from novu_py import Novu
 

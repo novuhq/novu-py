@@ -1,0 +1,20 @@
+# LayoutResponseDto
+
+
+## Fields
+
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `id`                                                         | *str*                                                        | :heavy_check_mark:                                           | Unique internal identifier of the layout                     |
+| `layout_id`                                                  | *str*                                                        | :heavy_check_mark:                                           | Unique identifier for the layout                             |
+| `slug`                                                       | *str*                                                        | :heavy_check_mark:                                           | Slug of the layout                                           |
+| `name`                                                       | *str*                                                        | :heavy_check_mark:                                           | Name of the layout                                           |
+| `is_default`                                                 | *bool*                                                       | :heavy_check_mark:                                           | Whether the layout is the default layout                     |
+| `is_translation_enabled`                                     | *bool*                                                       | :heavy_check_mark:                                           | Whether the layout translations are enabled                  |
+| `updated_at`                                                 | *str*                                                        | :heavy_check_mark:                                           | Last updated timestamp                                       |
+| `updated_by`                                                 | [OptionalNullable[models.UpdatedBy]](../models/updatedby.md) | :heavy_minus_sign:                                           | User who last updated the layout                             |
+| `created_at`                                                 | *str*                                                        | :heavy_check_mark:                                           | Creation timestamp                                           |
+| `origin`                                                     | [models.ResourceOriginEnum](../models/resourceoriginenum.md) | :heavy_check_mark:                                           | Origin of the layout                                         |
+| `type`                                                       | [models.ResourceTypeEnum](../models/resourcetypeenum.md)     | :heavy_check_mark:                                           | Type of the layout                                           |
+| `variables`                                                  | Dict[str, *Any*]                                             | :heavy_minus_sign:                                           | The variables JSON Schema for the layout                     |
+| `controls`                                                   | [models.LayoutControlsDto](../models/layoutcontrolsdto.md)   | :heavy_check_mark:                                           | Controls metadata for the layout                             |
