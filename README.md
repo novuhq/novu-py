@@ -64,6 +64,7 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -304,6 +305,9 @@ with Novu(
             timezone="America/New_York",
             subscriber_id="<id>",
         ),
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -353,6 +357,9 @@ async def main():
                 timezone="America/New_York",
                 subscriber_id="<id>",
             ),
+            context={
+                "key": "org-acme",
+            },
         ))
 
         # Handle response
@@ -633,6 +640,37 @@ asyncio.run(main())
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start File uploads [file-upload] -->
+## File uploads
+
+Certain SDK methods accept file objects as part of a request body or multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
+
+> [!TIP]
+>
+> For endpoints that handle file uploads bytes arrays can also be used. However, using streams is recommended for large files.
+>
+
+```python
+import novu_py
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.translations.upload(request_body={
+        "resource_id": "welcome-email",
+        "resource_type": novu_py.TranslationControllerUploadTranslationFilesResourceType.WORKFLOW,
+        "files": [],
+    })
+
+    # Handle response
+    print(res)
+
+```
+<!-- End File uploads [file-upload] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
