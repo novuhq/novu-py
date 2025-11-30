@@ -68,6 +68,7 @@ class Activity(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body, False, False, "json", Any
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -167,6 +168,7 @@ class Activity(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body, False, False, "json", Any
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

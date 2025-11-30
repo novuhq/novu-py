@@ -1,4 +1,4 @@
-# UploadTranslationsRequestDtoResourceType
+# TranslationControllerUploadTranslationFilesResourceType
 
 The resource type to associate localizations with
 

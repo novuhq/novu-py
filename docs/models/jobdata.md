@@ -1,6 +1,4 @@
-# LayoutsModel
-
-All translations for given locale organized by layout identifier
+# JobData
 
 
 ## Fields
