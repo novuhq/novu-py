@@ -8,6 +8,7 @@
 * [list](#list) - List topic subscriptions
 * [create](#create) - Create topic subscriptions
 * [delete](#delete) - Delete topic subscriptions
+* [update](#update) - Update a topic subscription
 
 ## list
 
@@ -72,9 +73,29 @@ with Novu(
 ) as novu:
 
     res = novu.topics.subscriptions.create(topic_key="<value>", create_topic_subscriptions_request_dto={
-        "subscriber_ids": [
-            "subscriberId1",
-            "subscriberId2",
+        "subscriptions": [
+            {
+                "identifier": "subscriber-123-subscription-a",
+                "subscriber_id": "subscriber-123",
+            },
+            {
+                "identifier": "subscriber-456-subscription-b",
+                "subscriber_id": "subscriber-456",
+            },
+        ],
+        "name": "My Topic",
+        "preferences": [
+            {
+                "condition": {
+                    "===": [
+                        {
+                            "var": "tier",
+                        },
+                        "premium",
+                    ],
+                },
+                "workflow_id": "workflow-123",
+            },
         ],
     })
 
@@ -145,6 +166,67 @@ with Novu(
 ### Response
 
 **[models.TopicsControllerDeleteTopicSubscriptionsResponse](../../models/topicscontrollerdeletetopicsubscriptionsresponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## update
+
+Update a subscription by its unique identifier **subscriptionId** for a topic. You can update the preferences and name associated with the subscription.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="TopicsController_updateTopicSubscription" method="patch" path="/v2/topics/{topicKey}/subscriptions/{subscriptionId}" -->
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.topics.subscriptions.update(topic_key="<value>", subscription_id="<id>", update_topic_subscription_request_dto={
+        "name": "My Subscription",
+        "preferences": [
+            {
+                "condition": {
+                    "===": [
+                        {
+                            "var": "tier",
+                        },
+                        "premium",
+                    ],
+                },
+                "workflow_id": "workflow-123",
+            },
+        ],
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `topic_key`                                                                                   | *str*                                                                                         | :heavy_check_mark:                                                                            | The key identifier of the topic                                                               |
+| `subscription_id`                                                                             | *str*                                                                                         | :heavy_check_mark:                                                                            | The unique identifier of the subscription                                                     |
+| `update_topic_subscription_request_dto`                                                       | [models.UpdateTopicSubscriptionRequestDto](../../models/updatetopicsubscriptionrequestdto.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `idempotency_key`                                                                             | *Optional[str]*                                                                               | :heavy_minus_sign:                                                                            | A header for idempotency purposes                                                             |
+| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
+
+### Response
+
+**[models.TopicsControllerUpdateTopicSubscriptionResponse](../../models/topicscontrollerupdatetopicsubscriptionresponse.md)**
 
 ### Errors
 

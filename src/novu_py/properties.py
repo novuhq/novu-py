@@ -75,6 +75,7 @@ class Properties(BaseSDK):
                 "json",
                 models.UpdateSubscriberOnlineFlagRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -225,6 +226,7 @@ class Properties(BaseSDK):
                 "json",
                 models.UpdateSubscriberOnlineFlagRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

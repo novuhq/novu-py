@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: 777c91461aa238ac8872dafa82c0d325
+  docChecksum: f8bc819fc349004b2c3a6b4aaf09107a
   docVersion: 3.11.0
-  speakeasyVersion: 1.658.2
-  generationVersion: 2.755.9
-  releaseVersion: 3.11.0
-  configChecksum: 90a6caf27dc211c8900718eb23f17e0b
+  speakeasyVersion: 1.665.0
+  generationVersion: 2.767.2
+  releaseVersion: 3.12.0
+  configChecksum: 44ee78b9d2c05d3eb6e8d04a175d7f9d
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.23.9
+    core: 5.23.13
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -29,12 +29,14 @@ features:
     globalServerURLs: 3.2.0
     groups: 3.0.1
     methodArguments: 1.0.2
+    multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.1
     responseFormat: 1.0.1
-    retries: 3.0.2
-    sdkHooks: 1.1.0
+    retries: 3.0.3
+    sdkHooks: 1.2.0
     unions: 3.1.0
+    uploadStreams: 1.0.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -91,6 +93,7 @@ generatedFiles:
   - docs/models/content.md
   - docs/models/contentissueenum.md
   - docs/models/context.md
+  - docs/models/context2.md
   - docs/models/contextscontrollercreatecontextrequest.md
   - docs/models/contextscontrollercreatecontextresponse.md
   - docs/models/contextscontrollerdeletecontextrequest.md
@@ -111,8 +114,8 @@ generatedFiles:
   - docs/models/createintegrationrequestdtochannel.md
   - docs/models/createlayoutdto.md
   - docs/models/createsubscriberrequestdto.md
+  - docs/models/createsubscriptionsresponsedto.md
   - docs/models/createtopicsubscriptionsrequestdto.md
-  - docs/models/createtopicsubscriptionsresponsedto.md
   - docs/models/createtranslationrequestdto.md
   - docs/models/createupdatetopicrequestdto.md
   - docs/models/createworkflowdto.md
@@ -210,6 +213,8 @@ generatedFiles:
   - docs/models/feedidentifier.md
   - docs/models/feedresponsedto.md
   - docs/models/fieldfilterpartdto.md
+  - docs/models/file.md
+  - docs/models/files.md
   - docs/models/five.md
   - docs/models/four.md
   - docs/models/friday.md
@@ -222,6 +227,8 @@ generatedFiles:
   - docs/models/getpreferencesresponsedto.md
   - docs/models/getpreferencesresponsedtodata.md
   - docs/models/getsubscriberpreferencesdto.md
+  - docs/models/grouppreferencefilterdetailsdto.md
+  - docs/models/grouppreferencefilterdto.md
   - docs/models/importmasterjsonrequestdto.md
   - docs/models/importmasterjsonresponsedto.md
   - docs/models/inappcontroldto.md
@@ -251,6 +258,7 @@ generatedFiles:
   - docs/models/integrationscontrollerupdateintegrationbyidresponse.md
   - docs/models/issues.md
   - docs/models/issuetype.md
+  - docs/models/jobdata.md
   - docs/models/lastpublishedby.md
   - docs/models/layoutcontrolsdto.md
   - docs/models/layoutcontrolvaluesdto.md
@@ -275,7 +283,6 @@ generatedFiles:
   - docs/models/layoutscontrollerlistresponse.md
   - docs/models/layoutscontrollerupdaterequest.md
   - docs/models/layoutscontrollerupdateresponse.md
-  - docs/models/layoutsmodel.md
   - docs/models/listcontextsresponsedto.md
   - docs/models/listlayoutresponsedto.md
   - docs/models/listsubscribersresponsedto.md
@@ -289,7 +296,6 @@ generatedFiles:
   - docs/models/markmessageactionasseendto.md
   - docs/models/markmessageactionasseendtopayload.md
   - docs/models/markmessageactionasseendtostatus.md
-  - docs/models/masterjson.md
   - docs/models/message.md
   - docs/models/message4.md
   - docs/models/message5.md
@@ -305,7 +311,6 @@ generatedFiles:
   - docs/models/messagepayloadvalidationexceptiondto4.md
   - docs/models/messagepayloadvalidationexceptiondto5.md
   - docs/models/messageresponsedto.md
-  - docs/models/messageresponsedtocontent.md
   - docs/models/messageresponsedtooverrides.md
   - docs/models/messageresponsedtopayload.md
   - docs/models/messagescontrollerdeletemessagerequest.md
@@ -363,6 +368,7 @@ generatedFiles:
   - docs/models/placeholder5.md
   - docs/models/preferencelevelenum.md
   - docs/models/preferenceoverridesourceenum.md
+  - docs/models/preferencesmodel.md
   - docs/models/preferencesrequestdto.md
   - docs/models/preferencesrequestdtoall.md
   - docs/models/preferencesrequestdtoworkflow.md
@@ -460,8 +466,14 @@ generatedFiles:
   - docs/models/subscribersv1controllerupdatesubscriberonlineflagresponse.md
   - docs/models/subscriberworkflowpreferencedto.md
   - docs/models/subscriptiondto.md
+  - docs/models/subscriptiondtosubscriber.md
   - docs/models/subscriptionerrordto.md
+  - docs/models/subscriptionpreferencedto.md
+  - docs/models/subscriptionpreferencedtodata.md
+  - docs/models/subscriptionpreferencedtoworkflow.md
+  - docs/models/subscriptionresponsedto.md
   - docs/models/subscriptionsdeleteerrordto.md
+  - docs/models/subscriptionsmodel.md
   - docs/models/sunday.md
   - docs/models/syncworkflowdto.md
   - docs/models/target.md
@@ -505,9 +517,12 @@ generatedFiles:
   - docs/models/topicscontrollerlisttopicsubscriptionsresponse.md
   - docs/models/topicscontrollerupdatetopicrequest.md
   - docs/models/topicscontrollerupdatetopicresponse.md
+  - docs/models/topicscontrollerupdatetopicsubscriptionrequest.md
+  - docs/models/topicscontrollerupdatetopicsubscriptionresponse.md
   - docs/models/topicscontrollerupserttopicrequest.md
   - docs/models/topicscontrollerupserttopicresponse.md
   - docs/models/topicsubscriberdto.md
+  - docs/models/topicsubscriberidentifierdto.md
   - docs/models/topicsubscriptionresponsedto.md
   - docs/models/topicsv1controllergettopicsubscriberrequest.md
   - docs/models/topicsv1controllergettopicsubscriberresponse.md
@@ -522,11 +537,13 @@ generatedFiles:
   - docs/models/translationcontrollergettranslationgroupendpointrequest.md
   - docs/models/translationcontrollerimportmasterjsonendpointrequest.md
   - docs/models/translationcontrolleruploadmasterjsonendpointrequest.md
+  - docs/models/translationcontrolleruploadmasterjsonendpointrequestbody.md
   - docs/models/translationcontrolleruploadtranslationfilesrequest.md
+  - docs/models/translationcontrolleruploadtranslationfilesrequestbody.md
+  - docs/models/translationcontrolleruploadtranslationfilesresourcetype.md
   - docs/models/translationgroupdto.md
   - docs/models/translationgroupdtoresourcetype.md
   - docs/models/translationresponsedto.md
-  - docs/models/translationresponsedtocontent.md
   - docs/models/translationresponsedtoresourcetype.md
   - docs/models/triggereventrequestdto.md
   - docs/models/triggereventresponsedto.md
@@ -534,6 +551,7 @@ generatedFiles:
   - docs/models/triggereventtoallrequestdto.md
   - docs/models/triggereventtoallrequestdtoactor.md
   - docs/models/triggereventtoallrequestdtochannels.md
+  - docs/models/triggereventtoallrequestdtocontext.md
   - docs/models/triggereventtoallrequestdtooverrides.md
   - docs/models/triggereventtoallrequestdtotenant.md
   - docs/models/triggerrecipientstypeenum.md
@@ -557,10 +575,10 @@ generatedFiles:
   - docs/models/updatesubscriberchannelrequestdto.md
   - docs/models/updatesubscriberonlineflagrequestdto.md
   - docs/models/updatetopicrequestdto.md
+  - docs/models/updatetopicsubscriptionrequestdto.md
+  - docs/models/updatetopicsubscriptionrequestdtopreferences.md
   - docs/models/updateworkflowdto.md
   - docs/models/updateworkflowdtosteps.md
-  - docs/models/uploadtranslationsrequestdto.md
-  - docs/models/uploadtranslationsrequestdtoresourcetype.md
   - docs/models/uploadtranslationsresponsedto.md
   - docs/models/user.md
   - docs/models/userall.md
@@ -599,6 +617,7 @@ generatedFiles:
   - docs/models/workflowlistresponsedtolastpublishedby.md
   - docs/models/workflowlistresponsedtoupdatedby.md
   - docs/models/workflowpreferencedto.md
+  - docs/models/workflowpreferencerequestdto.md
   - docs/models/workflowpreferencesdto.md
   - docs/models/workflowpreferencesresponsedto.md
   - docs/models/workflowpreferencesresponsedtoall.md
@@ -609,7 +628,6 @@ generatedFiles:
   - docs/models/workflowresponsedtosortfield.md
   - docs/models/workflowresponsedtosteps.md
   - docs/models/workflowresponsedtoupdatedby.md
-  - docs/models/workflowsmodel.md
   - docs/models/workflowstatusenum.md
   - docs/sdks/activity/README.md
   - docs/sdks/contexts/README.md
@@ -705,8 +723,8 @@ generatedFiles:
   - src/novu_py/models/createintegrationrequestdto.py
   - src/novu_py/models/createlayoutdto.py
   - src/novu_py/models/createsubscriberrequestdto.py
+  - src/novu_py/models/createsubscriptionsresponsedto.py
   - src/novu_py/models/createtopicsubscriptionsrequestdto.py
-  - src/novu_py/models/createtopicsubscriptionsresponsedto.py
   - src/novu_py/models/createtranslationrequestdto.py
   - src/novu_py/models/createupdatetopicrequestdto.py
   - src/novu_py/models/createworkflowdto.py
@@ -771,6 +789,8 @@ generatedFiles:
   - src/novu_py/models/getmasterjsonresponsedto.py
   - src/novu_py/models/getpreferencesresponsedto.py
   - src/novu_py/models/getsubscriberpreferencesdto.py
+  - src/novu_py/models/grouppreferencefilterdetailsdto.py
+  - src/novu_py/models/grouppreferencefilterdto.py
   - src/novu_py/models/importmasterjsonrequestdto.py
   - src/novu_py/models/importmasterjsonresponsedto.py
   - src/novu_py/models/inappcontroldto.py
@@ -911,6 +931,8 @@ generatedFiles:
   - src/novu_py/models/subscriberworkflowpreferencedto.py
   - src/novu_py/models/subscriptiondto.py
   - src/novu_py/models/subscriptionerrordto.py
+  - src/novu_py/models/subscriptionpreferencedto.py
+  - src/novu_py/models/subscriptionresponsedto.py
   - src/novu_py/models/subscriptionsdeleteerrordto.py
   - src/novu_py/models/syncworkflowdto.py
   - src/novu_py/models/tenantpayloaddto.py
@@ -932,8 +954,10 @@ generatedFiles:
   - src/novu_py/models/topicscontroller_listtopicsop.py
   - src/novu_py/models/topicscontroller_listtopicsubscriptionsop.py
   - src/novu_py/models/topicscontroller_updatetopicop.py
+  - src/novu_py/models/topicscontroller_updatetopicsubscriptionop.py
   - src/novu_py/models/topicscontroller_upserttopicop.py
   - src/novu_py/models/topicsubscriberdto.py
+  - src/novu_py/models/topicsubscriberidentifierdto.py
   - src/novu_py/models/topicsubscriptionresponsedto.py
   - src/novu_py/models/topicsv1controller_gettopicsubscriberop.py
   - src/novu_py/models/translationcontroller_createtranslationendpointop.py
@@ -964,8 +988,8 @@ generatedFiles:
   - src/novu_py/models/updatesubscriberchannelrequestdto.py
   - src/novu_py/models/updatesubscriberonlineflagrequestdto.py
   - src/novu_py/models/updatetopicrequestdto.py
+  - src/novu_py/models/updatetopicsubscriptionrequestdto.py
   - src/novu_py/models/updateworkflowdto.py
-  - src/novu_py/models/uploadtranslationsrequestdto.py
   - src/novu_py/models/uploadtranslationsresponsedto.py
   - src/novu_py/models/validationerrordto.py
   - src/novu_py/models/webhookresultdto.py
@@ -981,6 +1005,7 @@ generatedFiles:
   - src/novu_py/models/workflowinfodto.py
   - src/novu_py/models/workflowlistresponsedto.py
   - src/novu_py/models/workflowpreferencedto.py
+  - src/novu_py/models/workflowpreferencerequestdto.py
   - src/novu_py/models/workflowpreferencesdto.py
   - src/novu_py/models/workflowpreferencesresponsedto.py
   - src/novu_py/models/workflowresponse.py
@@ -1059,7 +1084,7 @@ examples:
   EventsController_broadcastEventToAll:
     speakeasy-default-events-controller-broadcast-event-to-all:
       requestBody:
-        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "actor": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}}
+        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "actor": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}, "context": {"key": "org-acme"}}
       responses:
         "200":
           application/json: {"acknowledged": false, "status": "invalid_recipients"}
@@ -1520,7 +1545,7 @@ examples:
         path:
           topicKey: "<value>"
       requestBody:
-        application/json: {"subscriberIds": ["subscriberId1", "subscriberId2"]}
+        application/json: {"subscriptions": [{"identifier": "subscriber-123-subscription-a", "subscriberId": "subscriber-123"}, {"identifier": "subscriber-456-subscription-b", "subscriberId": "subscriber-456"}], "name": "My Topic", "preferences": [{"condition": {"===": [{"var": "tier"}, "premium"]}, "workflowId": "workflow-123"}]}
       responses:
         "201":
           application/json: {"data": [{"_id": "64f5e95d3d7946d80d0cb679", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}], "meta": {"totalCount": 3, "successful": 2, "failed": 1}, "errors": [{"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}, {"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}, {"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}]}
@@ -2215,10 +2240,10 @@ examples:
   TranslationController_createTranslationEndpoint:
     speakeasy-default-translation-controller-create-translation-endpoint:
       requestBody:
-        application/json: {"resourceId": "welcome-email", "resourceType": "layout", "locale": "en_US", "content": {}}
+        application/json: {"resourceId": "welcome-email", "resourceType": "layout", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}}
       responses:
         "200":
-          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
+          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
   TranslationController_getSingleTranslation:
     speakeasy-default-translation-controller-get-single-translation:
       parameters:
@@ -2228,7 +2253,7 @@ examples:
           locale: "en_US"
       responses:
         "200":
-          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
+          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
   TranslationController_deleteTranslationEndpoint:
     speakeasy-default-translation-controller-delete-translation-endpoint:
       parameters:
@@ -2239,7 +2264,7 @@ examples:
   TranslationController_uploadTranslationFiles:
     speakeasy-default-translation-controller-upload-translation-files:
       requestBody:
-        multipart/form-data: {"resourceId": "welcome-email", "resourceType": "workflow"}
+        multipart/form-data: {"resourceId": "welcome-email", "resourceType": "workflow", "files": []}
       responses:
         "200":
           application/json: {"totalFiles": 3, "successfulUploads": 2, "failedUploads": 1, "errors": ["Invalid JSON in file: es-ES.json"]}
@@ -2265,16 +2290,18 @@ examples:
           locale: "en_US"
       responses:
         "200":
-          application/json: {"workflows": {}, "layouts": {}}
+          application/json: {"workflows": {"welcome-email": {"welcome.title": "Welcome to our platform", "welcome.message": "Hello there!"}, "password-reset": {"reset.title": "Reset your password", "reset.message": "Click the link to reset"}}, "layouts": {"default-layout": {"layout.title": "Default layout", "layout.message": "Hello there!"}}}
   TranslationController_importMasterJsonEndpoint:
     speakeasy-default-translation-controller-import-master-json-endpoint:
       requestBody:
-        application/json: {"locale": "en_US", "masterJson": {}}
+        application/json: {"locale": "en_US", "masterJson": {"workflows": {"welcome-email": {"welcome.title": "Welcome to our platform", "welcome.message": "Hello there!"}, "password-reset": {"reset.title": "Reset your password", "reset.message": "Click the link to reset"}}}}
       responses:
         "200":
           application/json: {"success": true, "message": "Successfully imported translations for 2 resources: welcome-email, password-reset", "successful": ["welcome-email", "password-reset"], "failed": ["missing-workflow"]}
   TranslationController_uploadMasterJsonEndpoint:
     speakeasy-default-translation-controller-upload-master-json-endpoint:
+      requestBody:
+        multipart/form-data: {"file": "x-file: example.file"}
       responses:
         "200":
           application/json: {"success": true, "message": "Successfully imported translations for 2 resources: welcome-email, password-reset", "successful": ["welcome-email", "password-reset"], "failed": ["missing-workflow"]}
@@ -2294,6 +2321,25 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": ["xx xx xx "]}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_updateTopicSubscription:
+    speakeasy-default-topics-controller-update-topic-subscription:
+      parameters:
+        path:
+          topicKey: "<value>"
+          subscriptionId: "<id>"
+      requestBody:
+        application/json: {"name": "My Subscription", "preferences": [{"condition": {"===": [{"var": "tier"}, "premium"]}, "workflowId": "workflow-123"}]}
+      responses:
+        "200":
+          application/json: {"_id": "64f5e95d3d7946d80d0cb679", "identifier": "tk=product-updates:si=subscriber-123", "name": "My Subscription", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "preferences": [{"subscriptionId": "64f5e95d3d7946d80d0cb679", "workflow": {"id": "64a1b2c3d4e5f6g7h8i9j0k1", "identifier": "welcome-email", "name": "Welcome Email Workflow", "critical": false, "tags": ["user-onboarding", "email"], "data": {}, "severity": "medium"}, "enabled": true, "condition": {"and": [{"===": [{"var": "tier"}, "premium"]}]}}], "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": false}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `novu.workflows.get()`:  `response` **Changed** **Breaking** :warning:\n* `novu.trigger()`:  `request.trigger_event_request_dto` **Changed** **Breaking** :warning:\n* `novu.notifications.retrieve()`:  `response` **Changed** **Breaking** :warning:\n* `novu.notifications.list()`: \n  *  `request` **Changed**\n  *  `response.data.[]` **Changed** **Breaking** :warning:\n* `novu.messages.retrieve()`: \n  *  `request.context_keys` **Added**\n  *  `response.data.[]` **Changed** **Breaking** :warning:\n* `novu.workflows.steps.retrieve()`:  `response` **Changed** **Breaking** :warning:\n* `novu.workflows.sync()`:  `response` **Changed** **Breaking** :warning:\n* `novu.workflows.patch()`: \n  *  `request.patch_workflow_dto` **Changed**\n  *  `response` **Changed** **Breaking** :warning:\n* `novu.subscribers.create()`: \n  *  `request.fail_if_exists` **Added**\n  *  `error` **Changed** **Breaking** :warning:\n* `novu.workflows.update()`: \n  *  `request.update_workflow_dto` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `novu.topics.create()`: \n  *  `request.fail_if_exists` **Added**\n  *  `error` **Changed** **Breaking** :warning:\n* `novu.subscribers.messages.mark_all_as()`:  `response.[]` **Changed** **Breaking** :warning:\n* `novu.subscribers.messages.update_as_seen()`:  `response` **Changed** **Breaking** :warning:\n* `novu.workflows.create()`: \n  *  `request.create_workflow_dto` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `novu.trigger_broadcast()`:  `request.trigger_event_to_all_request_dto` **Changed** **Breaking** :warning:\n* `novu.trigger_bulk()`: \n  *  `request.bulk_trigger_event_dto.events.[]` **Changed** **Breaking** :warning:\n* `novu.subscribers.preferences.bulk_update()`: **Added**\n* `novu.topics.list()`:  `response` **Changed**\n* `novu.translations.delete()`: **Added**\n* `novu.translations.upload()`: **Added**\n* `novu.translations.groups.delete()`: **Added**\n* `novu.translations.groups.retrieve()`: **Added**\n* `novu.translations.master.retrieve()`: **Added**\n* `novu.translations.master.import_master_json()`: **Added**\n* `novu.translations.master.upload()`: **Added**\n* `novu.integrations.integrations_controller_auto_configure_integration()`: **Added**\n* `novu.translations.create()`: **Added**\n* `novu.layouts.usage()`: **Added**\n* `novu.contexts.list()`: **Added**\n* `novu.layouts.generate_preview()`: **Added**\n* `novu.contexts.create()`: **Added**\n* `novu.subscribers.preferences.list()`: \n  *  `request.criticality` **Added**\n  *  `response.global.schedule` **Added**\n* `novu.subscribers.preferences.update()`: \n  *  `request.patch_subscriber_preferences_dto` **Changed**\n  *  `response.global.schedule` **Added**\n* `novu.subscribers.topics.list()`:  `response` **Changed**\n* `novu.layouts.duplicate()`: **Added**\n* `novu.layouts.delete()`: **Added**\n* `novu.subscribers.notifications.feed()`:  `response.data.[]` **Changed**\n* `novu.translations.retrieve()`: **Added**\n* `novu.layouts.retrieve()`: **Added**\n* `novu.topics.subscriptions.list()`:  `response` **Changed**\n* `novu.subscribers.search()`:  `response` **Changed**\n* `novu.workflows.list()`:  `response.workflows.[]` **Changed**\n* `novu.layouts.update()`: **Added**\n* `novu.layouts.list()`: **Added**\n* `novu.layouts.create()`: **Added**\n* `novu.activity.track()`: **Added**\n* `novu.environments.get_tags()`: **Added**\n* `novu.environments.create()`:  `response.type` **Added**\n* `novu.environments.list()`:  `response.[].type` **Added**\n* `novu.environments.update()`:  `response.type` **Added**\n* `novu.integrations.list()`:  `response.[]` **Changed**\n* `novu.integrations.create()`: \n  *  `request.create_integration_request_dto` **Changed**\n  *  `response` **Changed**\n* `novu.integrations.update()`: \n  *  `request.update_integration_request_dto` **Changed**\n  *  `response` **Changed**\n* `novu.integrations.delete()`:  `response.[]` **Changed**\n* `novu.integrations.set_as_primary()`:  `response` **Changed**\n* `novu.integrations.list_active()`:  `response.[]` **Changed**\n* `novu.contexts.delete()`: **Added**\n* `novu.contexts.retrieve()`: **Added**\n* `novu.contexts.update()`: **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `novu.translations.create()`: \n  *  `request.create_translation_request_dto.content` **Changed** **Breaking** :warning:\n  *  `response.content` **Changed** **Breaking** :warning:\n* `novu.translations.master.upload()`:  `request_body` **Added** **Breaking** :warning:\n* `novu.translations.master.import_master_json()`: \n  *  `request.import_master_json_request_dto.master_json` **Changed** **Breaking** :warning:\n* `novu.translations.master.retrieve()`:  `response` **Changed** **Breaking** :warning:\n* `novu.translations.upload()`:  `request` **Changed** **Breaking** :warning:\n* `novu.translations.retrieve()`:  `response.content` **Changed** **Breaking** :warning:\n* `novu.topics.subscriptions.create()`: \n  *  `request.create_topic_subscriptions_request_dto` **Changed**\n  *  `response.data.[]` **Changed**\n* `novu.topics.subscriptions.delete()`:  `response.data.[].identifier` **Added**\n* `novu.topics.subscriptions.update()`: **Added**\n* `novu.trigger_bulk()`:  `response.[].job_data` **Added**\n* `novu.trigger_broadcast()`: \n  *  `request.trigger_event_to_all_request_dto.context` **Added**\n  *  `response.job_data` **Added**\n* `novu.trigger()`:  `response.job_data` **Added**\n* `novu.integrations.list()`:  `response.[].credentials.tenant_id` **Added**\n* `novu.integrations.create()`: \n  *  `request.create_integration_request_dto.credentials.tenant_id` **Added**\n  *  `response.credentials.tenant_id` **Added**\n* `novu.integrations.update()`: \n  *  `request.update_integration_request_dto.credentials.tenant_id` **Added**\n  *  `response.credentials.tenant_id` **Added**\n* `novu.integrations.delete()`:  `response.[].credentials.tenant_id` **Added**\n* `novu.integrations.set_as_primary()`:  `response.credentials.tenant_id` **Added**\n* `novu.integrations.list_active()`:  `response.[].credentials.tenant_id` **Added**\n"

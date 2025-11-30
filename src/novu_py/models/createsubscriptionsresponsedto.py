@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 from .metadto import MetaDto, MetaDtoTypedDict
-from .subscriptiondto import SubscriptionDto, SubscriptionDtoTypedDict
 from .subscriptionerrordto import SubscriptionErrorDto, SubscriptionErrorDtoTypedDict
+from .subscriptionresponsedto import (
+    SubscriptionResponseDto,
+    SubscriptionResponseDtoTypedDict,
+)
 from novu_py.types import BaseModel
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class CreateTopicSubscriptionsResponseDtoTypedDict(TypedDict):
-    data: List[SubscriptionDtoTypedDict]
+class CreateSubscriptionsResponseDtoTypedDict(TypedDict):
+    data: List[SubscriptionResponseDtoTypedDict]
     r"""The list of successfully created subscriptions"""
     meta: MetaDtoTypedDict
     r"""Metadata about the operation"""
@@ -18,8 +21,8 @@ class CreateTopicSubscriptionsResponseDtoTypedDict(TypedDict):
     r"""The list of errors for failed subscription attempts"""
 
 
-class CreateTopicSubscriptionsResponseDto(BaseModel):
-    data: List[SubscriptionDto]
+class CreateSubscriptionsResponseDto(BaseModel):
+    data: List[SubscriptionResponseDto]
     r"""The list of successfully created subscriptions"""
 
     meta: MetaDto
