@@ -1,5 +1,4 @@
-# Master
-(*translations.master*)
+# Translations.Master
 
 ## Overview
 
@@ -66,7 +65,18 @@ with Novu(
 
     res = novu.translations.master.import_master_json(import_master_json_request_dto={
         "locale": "en_US",
-        "master_json": {},
+        "master_json": {
+            "workflows": {
+                "welcome-email": {
+                    "welcome.title": "Welcome to our platform",
+                    "welcome.message": "Hello there!",
+                },
+                "password-reset": {
+                    "reset.title": "Reset your password",
+                    "reset.message": "Click the link to reset",
+                },
+            },
+        },
     })
 
     # Handle response
@@ -107,7 +117,12 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.translations.master.upload()
+    res = novu.translations.master.upload(request_body={
+        "file": {
+            "file_name": "example.file",
+            "content": open("example.file", "rb"),
+        },
+    })
 
     # Handle response
     print(res)
@@ -116,10 +131,11 @@ with Novu(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request_body`                                                                                                                              | [models.TranslationControllerUploadMasterJSONEndpointRequestBody](../../models/translationcontrolleruploadmasterjsonendpointrequestbody.md) | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
+| `idempotency_key`                                                                                                                           | *Optional[str]*                                                                                                                             | :heavy_minus_sign:                                                                                                                          | A header for idempotency purposes                                                                                                           |
+| `retries`                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                            | :heavy_minus_sign:                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                         |
 
 ### Response
 

@@ -1,5 +1,4 @@
-# NovuTopics
-(*subscribers.topics*)
+# Subscribers.Topics
 
 ## Overview
 
@@ -25,6 +24,7 @@ with Novu(
 
     res = novu.subscribers.topics.list(request={
         "subscriber_id": "<id>",
+        "limit": 10,
     })
 
     # Handle response

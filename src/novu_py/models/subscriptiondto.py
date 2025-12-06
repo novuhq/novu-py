@@ -5,10 +5,11 @@ from .topicdto import TopicDto, TopicDtoTypedDict
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class SubscriberTypedDict(TypedDict):
+class SubscriptionDtoSubscriberTypedDict(TypedDict):
     r"""The subscriber information"""
 
     id: str
@@ -25,7 +26,7 @@ class SubscriberTypedDict(TypedDict):
     r"""The email of the subscriber"""
 
 
-class Subscriber(BaseModel):
+class SubscriptionDtoSubscriber(BaseModel):
     r"""The subscriber information"""
 
     id: Annotated[str, pydantic.Field(alias="_id")]
@@ -86,12 +87,14 @@ class SubscriptionDtoTypedDict(TypedDict):
     r"""The unique identifier of the subscription"""
     topic: TopicDtoTypedDict
     r"""The topic information"""
-    subscriber: Nullable[SubscriberTypedDict]
+    subscriber: Nullable[SubscriptionDtoSubscriberTypedDict]
     r"""The subscriber information"""
     created_at: str
     r"""The creation date of the subscription"""
     updated_at: str
     r"""The last update date of the subscription"""
+    identifier: NotRequired[str]
+    r"""The identifier of the subscription"""
 
 
 class SubscriptionDto(BaseModel):
@@ -101,7 +104,7 @@ class SubscriptionDto(BaseModel):
     topic: TopicDto
     r"""The topic information"""
 
-    subscriber: Nullable[Subscriber]
+    subscriber: Nullable[SubscriptionDtoSubscriber]
     r"""The subscriber information"""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
@@ -110,9 +113,12 @@ class SubscriptionDto(BaseModel):
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
     r"""The last update date of the subscription"""
 
+    identifier: Optional[str] = None
+    r"""The identifier of the subscription"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
+        optional_fields = ["identifier"]
         nullable_fields = ["subscriber"]
         null_default_fields = []
 

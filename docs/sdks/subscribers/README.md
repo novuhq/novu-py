@@ -1,5 +1,4 @@
 # Subscribers
-(*subscribers*)
 
 ## Overview
 
@@ -31,7 +30,9 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.subscribers.search()
+    res = novu.subscribers.search(request={
+        "limit": 10,
+    })
 
     # Handle response
     print(res)

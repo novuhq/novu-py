@@ -3,32 +3,35 @@
 from __future__ import annotations
 from novu_py.types import BaseModel
 import pydantic
+from typing import Any, Dict
 from typing_extensions import Annotated, TypedDict
-
-
-class GetContextResponseDtoDataTypedDict(TypedDict):
-    pass
-
-
-class GetContextResponseDtoData(BaseModel):
-    pass
 
 
 class GetContextResponseDtoTypedDict(TypedDict):
     type: str
+    r"""Context type (e.g., tenant, app, workspace)"""
     id: str
-    data: GetContextResponseDtoDataTypedDict
+    r"""Unique identifier for this context"""
+    data: Dict[str, Any]
+    r"""Custom data associated with this context"""
     created_at: str
+    r"""Creation timestamp"""
     updated_at: str
+    r"""Last update timestamp"""
 
 
 class GetContextResponseDto(BaseModel):
     type: str
+    r"""Context type (e.g., tenant, app, workspace)"""
 
     id: str
+    r"""Unique identifier for this context"""
 
-    data: GetContextResponseDtoData
+    data: Dict[str, Any]
+    r"""Custom data associated with this context"""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
+    r"""Creation timestamp"""
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
+    r"""Last update timestamp"""
