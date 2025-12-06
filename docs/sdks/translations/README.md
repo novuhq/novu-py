@@ -1,5 +1,4 @@
 # Translations
-(*translations*)
 
 ## Overview
 
@@ -33,7 +32,10 @@ with Novu(
         "resource_id": "welcome-email",
         "resource_type": novu_py.ResourceType.LAYOUT,
         "locale": "en_US",
-        "content": {},
+        "content": {
+            "welcome.title": "Welcome",
+            "welcome.message": "Hello there!",
+        },
     })
 
     # Handle response
@@ -142,7 +144,7 @@ with Novu(
 
 ## upload
 
-Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json
+Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json. Supports both "files" and "files[]" field names for backwards compatibility.
 
 ### Example Usage
 
@@ -156,9 +158,10 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.translations.upload(upload_translations_request_dto={
+    res = novu.translations.upload(request_body={
         "resource_id": "welcome-email",
-        "resource_type": novu_py.UploadTranslationsRequestDtoResourceType.WORKFLOW,
+        "resource_type": novu_py.TranslationControllerUploadTranslationFilesResourceType.WORKFLOW,
+        "files": [],
     })
 
     # Handle response
@@ -168,11 +171,11 @@ with Novu(
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `upload_translations_request_dto`                                                   | [models.UploadTranslationsRequestDto](../../models/uploadtranslationsrequestdto.md) | :heavy_check_mark:                                                                  | Translation files upload body details                                               |
-| `idempotency_key`                                                                   | *Optional[str]*                                                                     | :heavy_minus_sign:                                                                  | A header for idempotency purposes                                                   |
-| `retries`                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                    | :heavy_minus_sign:                                                                  | Configuration to override the default retry behavior of the client.                 |
+| Parameter                                                                                                                               | Type                                                                                                                                    | Required                                                                                                                                | Description                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `request_body`                                                                                                                          | [models.TranslationControllerUploadTranslationFilesRequestBody](../../models/translationcontrolleruploadtranslationfilesrequestbody.md) | :heavy_check_mark:                                                                                                                      | N/A                                                                                                                                     |
+| `idempotency_key`                                                                                                                       | *Optional[str]*                                                                                                                         | :heavy_minus_sign:                                                                                                                      | A header for idempotency purposes                                                                                                       |
+| `retries`                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                        | :heavy_minus_sign:                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                     |
 
 ### Response
 

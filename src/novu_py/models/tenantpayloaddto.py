@@ -6,18 +6,18 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class TenantPayloadDtoDataTypedDict(TypedDict):
+class DataTypedDict(TypedDict):
     pass
 
 
-class TenantPayloadDtoData(BaseModel):
+class Data(BaseModel):
     pass
 
 
 class TenantPayloadDtoTypedDict(TypedDict):
     identifier: NotRequired[str]
     name: NotRequired[str]
-    data: NotRequired[TenantPayloadDtoDataTypedDict]
+    data: NotRequired[DataTypedDict]
 
 
 class TenantPayloadDto(BaseModel):
@@ -25,4 +25,4 @@ class TenantPayloadDto(BaseModel):
 
     name: Optional[str] = None
 
-    data: Optional[TenantPayloadDtoData] = None
+    data: Optional[Data] = None

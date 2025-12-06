@@ -1,5 +1,4 @@
-# Groups
-(*translations.groups*)
+# Translations.Groups
 
 ## Overview
 

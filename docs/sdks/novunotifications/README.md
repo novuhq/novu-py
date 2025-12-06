@@ -1,5 +1,4 @@
-# NovuNotifications
-(*subscribers.notifications*)
+# Subscribers.Notifications
 
 ## Overview
 
@@ -25,6 +24,7 @@ with Novu(
 
     res = novu.subscribers.notifications.feed(request={
         "subscriber_id": "<id>",
+        "page": 0,
         "payload": "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30=",
     })
 

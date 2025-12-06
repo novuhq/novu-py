@@ -1,5 +1,4 @@
 # Workflows
-(*workflows*)
 
 ## Overview
 
@@ -108,7 +107,10 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.workflows.list()
+    res = novu.workflows.list(request={
+        "limit": 10,
+        "offset": 0,
+    })
 
     # Handle response
     print(res)

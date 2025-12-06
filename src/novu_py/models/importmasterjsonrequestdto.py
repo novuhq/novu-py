@@ -3,21 +3,14 @@
 from __future__ import annotations
 from novu_py.types import BaseModel
 import pydantic
+from typing import Any, Dict
 from typing_extensions import Annotated, TypedDict
-
-
-class MasterJSONTypedDict(TypedDict):
-    r"""Master JSON object containing all translations organized by workflow identifier"""
-
-
-class MasterJSON(BaseModel):
-    r"""Master JSON object containing all translations organized by workflow identifier"""
 
 
 class ImportMasterJSONRequestDtoTypedDict(TypedDict):
     locale: str
     r"""The locale for which translations are being imported"""
-    master_json: MasterJSONTypedDict
+    master_json: Dict[str, Any]
     r"""Master JSON object containing all translations organized by workflow identifier"""
 
 
@@ -25,5 +18,5 @@ class ImportMasterJSONRequestDto(BaseModel):
     locale: str
     r"""The locale for which translations are being imported"""
 
-    master_json: Annotated[MasterJSON, pydantic.Field(alias="masterJson")]
+    master_json: Annotated[Dict[str, Any], pydantic.Field(alias="masterJson")]
     r"""Master JSON object containing all translations organized by workflow identifier"""

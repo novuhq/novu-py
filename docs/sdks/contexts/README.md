@@ -1,5 +1,4 @@
 # Contexts
-(*contexts*)
 
 ## Overview
 
@@ -31,7 +30,13 @@ with Novu(
     res = novu.contexts.create(create_context_request_dto={
         "type": "tenant",
         "id": "org-acme",
-        "data": {},
+        "data": {
+            "tenantName": "Acme Corp",
+            "region": "us-east-1",
+            "settings": {
+                "theme": "dark",
+            },
+        },
     })
 
     # Handle response
@@ -81,6 +86,7 @@ with Novu(
 ) as novu:
 
     res = novu.contexts.list(request={
+        "limit": 10,
         "id": "tenant-prod-123",
         "search": "tenant",
     })
@@ -129,7 +135,13 @@ with Novu(
 ) as novu:
 
     res = novu.contexts.update(id="<id>", type_="<value>", update_context_request_dto={
-        "data": {},
+        "data": {
+            "tenantName": "Acme Corp",
+            "region": "us-east-1",
+            "settings": {
+                "theme": "dark",
+            },
+        },
     })
 
     # Handle response

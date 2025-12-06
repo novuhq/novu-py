@@ -148,6 +148,9 @@ with Novu(
             timezone="America/New_York",
             subscriber_id="<id>",
         ),
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -197,6 +200,9 @@ async def main():
                 timezone="America/New_York",
                 subscriber_id="<id>",
             ),
+            context={
+                "key": "org-acme",
+            },
         ))
 
         # Handle response
