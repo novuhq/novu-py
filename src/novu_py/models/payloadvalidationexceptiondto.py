@@ -67,30 +67,22 @@ class Schema(BaseModel):
 class PayloadValidationExceptionDtoData(BaseModel):
     status_code: Annotated[float, pydantic.Field(alias="statusCode")]
     r"""HTTP status code of the error response."""
-
     timestamp: str
     r"""Timestamp of when the error occurred."""
-
     path: str
     r"""The path where the error occurred."""
-
     type: str
     r"""Type identifier for payload validation errors"""
-
     errors: List[PayloadValidationErrorDto]
     r"""Array of detailed validation errors"""
-
     message: OptionalNullable[PayloadValidationExceptionDtoMessage] = UNSET
     r"""Value that failed validation"""
-
     ctx: Optional[Dict[str, Any]] = None
     r"""Optional context object for additional error details."""
-
     error_id: Annotated[Optional[str], pydantic.Field(alias="errorId")] = None
     r"""Optional unique identifier for the error, useful for tracking using Sentry and
     New Relic, only available for 500.
     """
-
     schema_: Annotated[Optional[Schema], pydantic.Field(alias="schema")] = None
     r"""The JSON schema that was used for validation"""
 

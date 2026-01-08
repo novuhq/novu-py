@@ -20,6 +20,14 @@ class TriggerEventResponseDtoStatus(str, Enum):
     INVALID_RECIPIENTS = "invalid_recipients"
 
 
+class JobDataTypedDict(TypedDict):
+    pass
+
+
+class JobData(BaseModel):
+    pass
+
+
 class TriggerEventResponseDtoTypedDict(TypedDict):
     acknowledged: bool
     r"""Indicates whether the trigger was acknowledged or not"""
@@ -29,6 +37,7 @@ class TriggerEventResponseDtoTypedDict(TypedDict):
     r"""In case of an error, this field will contain the error message(s)"""
     transaction_id: NotRequired[str]
     r"""The returned transaction ID of the trigger"""
+    job_data: NotRequired[JobDataTypedDict]
 
 
 class TriggerEventResponseDto(BaseModel):
@@ -45,3 +54,5 @@ class TriggerEventResponseDto(BaseModel):
         None
     )
     r"""The returned transaction ID of the trigger"""
+
+    job_data: Annotated[Optional[JobData], pydantic.Field(alias="jobData")] = None

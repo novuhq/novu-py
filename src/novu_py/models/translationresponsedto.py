@@ -4,6 +4,7 @@ from __future__ import annotations
 from enum import Enum
 from novu_py.types import BaseModel
 import pydantic
+from typing import Any, Dict
 from typing_extensions import Annotated, TypedDict
 
 
@@ -14,14 +15,6 @@ class TranslationResponseDtoResourceType(str, Enum):
     LAYOUT = "layout"
 
 
-class TranslationResponseDtoContentTypedDict(TypedDict):
-    r"""Translation content as JSON object"""
-
-
-class TranslationResponseDtoContent(BaseModel):
-    r"""Translation content as JSON object"""
-
-
 class TranslationResponseDtoTypedDict(TypedDict):
     resource_id: str
     r"""Resource identifier"""
@@ -29,7 +22,7 @@ class TranslationResponseDtoTypedDict(TypedDict):
     r"""Resource type"""
     locale: str
     r"""Locale code"""
-    content: TranslationResponseDtoContentTypedDict
+    content: Dict[str, Any]
     r"""Translation content as JSON object"""
     created_at: str
     r"""Creation timestamp"""
@@ -49,7 +42,7 @@ class TranslationResponseDto(BaseModel):
     locale: str
     r"""Locale code"""
 
-    content: TranslationResponseDtoContent
+    content: Dict[str, Any]
     r"""Translation content as JSON object"""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]

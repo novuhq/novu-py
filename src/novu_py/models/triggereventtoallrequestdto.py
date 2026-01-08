@@ -157,6 +157,35 @@ If a new tenant object is provided, we will create a new tenant.
 """
 
 
+class TriggerEventToAllRequestDtoContext2TypedDict(TypedDict):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+    data: NotRequired[Dict[str, Any]]
+    r"""Optional additional context data"""
+
+
+class TriggerEventToAllRequestDtoContext2(BaseModel):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+
+    data: Optional[Dict[str, Any]] = None
+    r"""Optional additional context data"""
+
+
+TriggerEventToAllRequestDtoContextTypedDict = TypeAliasType(
+    "TriggerEventToAllRequestDtoContextTypedDict",
+    Union[TriggerEventToAllRequestDtoContext2TypedDict, str],
+)
+
+
+TriggerEventToAllRequestDtoContext = TypeAliasType(
+    "TriggerEventToAllRequestDtoContext",
+    Union[TriggerEventToAllRequestDtoContext2, str],
+)
+
+
 class TriggerEventToAllRequestDtoTypedDict(TypedDict):
     name: str
     r"""The trigger identifier associated for the template you wish to send. This identifier can be found on the template page."""
@@ -179,6 +208,7 @@ class TriggerEventToAllRequestDtoTypedDict(TypedDict):
     If a new tenant object is provided, we will create a new tenant.
 
     """
+    context: NotRequired[Dict[str, TriggerEventToAllRequestDtoContextTypedDict]]
 
 
 class TriggerEventToAllRequestDto(BaseModel):
@@ -210,3 +240,5 @@ class TriggerEventToAllRequestDto(BaseModel):
     If a new tenant object is provided, we will create a new tenant.
 
     """
+
+    context: Optional[Dict[str, TriggerEventToAllRequestDtoContext]] = None

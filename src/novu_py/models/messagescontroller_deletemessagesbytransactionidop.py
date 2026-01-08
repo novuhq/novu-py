@@ -14,7 +14,7 @@ from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class QueryParamChannel(str, Enum):
+class MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel(str, Enum):
     r"""The channel of the message to be deleted"""
 
     IN_APP = "in_app"
@@ -26,7 +26,9 @@ class QueryParamChannel(str, Enum):
 
 class MessagesControllerDeleteMessagesByTransactionIDRequestTypedDict(TypedDict):
     transaction_id: str
-    channel: NotRequired[QueryParamChannel]
+    channel: NotRequired[
+        MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel
+    ]
     r"""The channel of the message to be deleted"""
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
@@ -40,7 +42,7 @@ class MessagesControllerDeleteMessagesByTransactionIDRequest(BaseModel):
     ]
 
     channel: Annotated[
-        Optional[QueryParamChannel],
+        Optional[MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The channel of the message to be deleted"""

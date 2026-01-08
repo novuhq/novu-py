@@ -69,6 +69,7 @@ class NovuMessages(BaseSDK):
                 "json",
                 models.MarkMessageActionAsSeenDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -213,6 +214,7 @@ class NovuMessages(BaseSDK):
                 "json",
                 models.MarkMessageActionAsSeenDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -362,6 +364,7 @@ class NovuMessages(BaseSDK):
                 "json",
                 models.MarkAllMessageAsRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -511,6 +514,7 @@ class NovuMessages(BaseSDK):
                 "json",
                 models.MarkAllMessageAsRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -660,6 +664,7 @@ class NovuMessages(BaseSDK):
                 "json",
                 models.MessageMarkAsRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -811,6 +816,7 @@ class NovuMessages(BaseSDK):
                 "json",
                 models.MessageMarkAsRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

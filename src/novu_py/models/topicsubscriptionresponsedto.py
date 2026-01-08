@@ -11,6 +11,8 @@ from typing_extensions import Annotated, TypedDict
 class TopicSubscriptionResponseDtoTypedDict(TypedDict):
     id: str
     r"""The identifier of the subscription"""
+    identifier: str
+    r"""The identifier of the subscription"""
     created_at: str
     r"""The date and time the subscription was created"""
     topic: TopicResponseDtoTypedDict
@@ -21,6 +23,9 @@ class TopicSubscriptionResponseDtoTypedDict(TypedDict):
 
 class TopicSubscriptionResponseDto(BaseModel):
     id: Annotated[str, pydantic.Field(alias="_id")]
+    r"""The identifier of the subscription"""
+
+    identifier: str
     r"""The identifier of the subscription"""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]

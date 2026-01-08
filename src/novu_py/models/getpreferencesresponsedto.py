@@ -65,6 +65,14 @@ class Workflow(BaseModel):
     r"""Custom data associated with the workflow"""
 
 
+class ConditionTypedDict(TypedDict):
+    r"""Condition using JSON Logic rules"""
+
+
+class Condition(BaseModel):
+    r"""Condition using JSON Logic rules"""
+
+
 class GetPreferencesResponseDtoTypedDict(TypedDict):
     level: PreferenceLevelEnum
     r"""The level of the preference (global or template)"""
@@ -74,6 +82,8 @@ class GetPreferencesResponseDtoTypedDict(TypedDict):
     r"""Channel-specific preference settings"""
     workflow: NotRequired[Nullable[WorkflowTypedDict]]
     r"""Workflow information if this is a template-level preference"""
+    condition: NotRequired[Nullable[ConditionTypedDict]]
+    r"""Condition using JSON Logic rules"""
 
 
 class GetPreferencesResponseDto(BaseModel):
@@ -89,10 +99,13 @@ class GetPreferencesResponseDto(BaseModel):
     workflow: OptionalNullable[Workflow] = UNSET
     r"""Workflow information if this is a template-level preference"""
 
+    condition: OptionalNullable[Condition] = UNSET
+    r"""Condition using JSON Logic rules"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["workflow"]
-        nullable_fields = ["workflow"]
+        optional_fields = ["workflow", "condition"]
+        nullable_fields = ["workflow", "condition"]
         null_default_fields = []
 
         serialized = handler(self)

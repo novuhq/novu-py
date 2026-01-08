@@ -2,22 +2,15 @@
 
 from __future__ import annotations
 from novu_py.types import BaseModel
+from typing import Any, Dict
 from typing_extensions import TypedDict
 
 
-class UpdateContextRequestDtoDataTypedDict(TypedDict):
-    r"""Custom data to associate with this context. Replaces existing data."""
-
-
-class UpdateContextRequestDtoData(BaseModel):
-    r"""Custom data to associate with this context. Replaces existing data."""
-
-
 class UpdateContextRequestDtoTypedDict(TypedDict):
-    data: UpdateContextRequestDtoDataTypedDict
+    data: Dict[str, Any]
     r"""Custom data to associate with this context. Replaces existing data."""
 
 
 class UpdateContextRequestDto(BaseModel):
-    data: UpdateContextRequestDtoData
+    data: Dict[str, Any]
     r"""Custom data to associate with this context. Replaces existing data."""

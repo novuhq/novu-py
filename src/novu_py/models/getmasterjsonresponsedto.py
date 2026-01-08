@@ -2,35 +2,20 @@
 
 from __future__ import annotations
 from novu_py.types import BaseModel
+from typing import Any, Dict
 from typing_extensions import TypedDict
 
 
-class WorkflowsModelTypedDict(TypedDict):
-    r"""All translations for given locale organized by workflow identifier"""
-
-
-class WorkflowsModel(BaseModel):
-    r"""All translations for given locale organized by workflow identifier"""
-
-
-class LayoutsModelTypedDict(TypedDict):
-    r"""All translations for given locale organized by layout identifier"""
-
-
-class LayoutsModel(BaseModel):
-    r"""All translations for given locale organized by layout identifier"""
-
-
 class GetMasterJSONResponseDtoTypedDict(TypedDict):
-    workflows: WorkflowsModelTypedDict
+    workflows: Dict[str, Any]
     r"""All translations for given locale organized by workflow identifier"""
-    layouts: LayoutsModelTypedDict
+    layouts: Dict[str, Any]
     r"""All translations for given locale organized by layout identifier"""
 
 
 class GetMasterJSONResponseDto(BaseModel):
-    workflows: WorkflowsModel
+    workflows: Dict[str, Any]
     r"""All translations for given locale organized by workflow identifier"""
 
-    layouts: LayoutsModel
+    layouts: Dict[str, Any]
     r"""All translations for given locale organized by layout identifier"""

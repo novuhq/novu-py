@@ -92,6 +92,7 @@ class Translations(BaseSDK):
                 "json",
                 models.CreateTranslationRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -194,6 +195,7 @@ class Translations(BaseSDK):
                 "json",
                 models.CreateTranslationRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -290,6 +292,7 @@ class Translations(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -386,6 +389,7 @@ class Translations(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -482,6 +486,7 @@ class Translations(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -578,6 +583,7 @@ class Translations(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -622,9 +628,9 @@ class Translations(BaseSDK):
     def upload(
         self,
         *,
-        upload_translations_request_dto: Union[
-            models.UploadTranslationsRequestDto,
-            models.UploadTranslationsRequestDtoTypedDict,
+        request_body: Union[
+            models.TranslationControllerUploadTranslationFilesRequestBody,
+            models.TranslationControllerUploadTranslationFilesRequestBodyTypedDict,
         ],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -634,9 +640,9 @@ class Translations(BaseSDK):
     ) -> models.UploadTranslationsResponseDto:
         r"""Upload translation files
 
-        Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json
+        Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json. Supports both \"files\" and \"files[]\" field names for backwards compatibility.
 
-        :param upload_translations_request_dto: Translation files upload body details
+        :param request_body:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -655,8 +661,9 @@ class Translations(BaseSDK):
 
         request = models.TranslationControllerUploadTranslationFilesRequest(
             idempotency_key=idempotency_key,
-            upload_translations_request_dto=utils.get_pydantic_model(
-                upload_translations_request_dto, models.UploadTranslationsRequestDto
+            request_body=utils.get_pydantic_model(
+                request_body,
+                models.TranslationControllerUploadTranslationFilesRequestBody,
             ),
         )
 
@@ -674,12 +681,13 @@ class Translations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.upload_translations_request_dto,
+                request.request_body,
                 False,
                 False,
                 "multipart",
-                models.UploadTranslationsRequestDto,
+                models.TranslationControllerUploadTranslationFilesRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -726,9 +734,9 @@ class Translations(BaseSDK):
     async def upload_async(
         self,
         *,
-        upload_translations_request_dto: Union[
-            models.UploadTranslationsRequestDto,
-            models.UploadTranslationsRequestDtoTypedDict,
+        request_body: Union[
+            models.TranslationControllerUploadTranslationFilesRequestBody,
+            models.TranslationControllerUploadTranslationFilesRequestBodyTypedDict,
         ],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -738,9 +746,9 @@ class Translations(BaseSDK):
     ) -> models.UploadTranslationsResponseDto:
         r"""Upload translation files
 
-        Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json
+        Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json. Supports both \"files\" and \"files[]\" field names for backwards compatibility.
 
-        :param upload_translations_request_dto: Translation files upload body details
+        :param request_body:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -759,8 +767,9 @@ class Translations(BaseSDK):
 
         request = models.TranslationControllerUploadTranslationFilesRequest(
             idempotency_key=idempotency_key,
-            upload_translations_request_dto=utils.get_pydantic_model(
-                upload_translations_request_dto, models.UploadTranslationsRequestDto
+            request_body=utils.get_pydantic_model(
+                request_body,
+                models.TranslationControllerUploadTranslationFilesRequestBody,
             ),
         )
 
@@ -778,12 +787,13 @@ class Translations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.upload_translations_request_dto,
+                request.request_body,
                 False,
                 False,
                 "multipart",
-                models.UploadTranslationsRequestDto,
+                models.TranslationControllerUploadTranslationFilesRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

@@ -121,11 +121,11 @@ ToTypedDict = TypeAliasType(
         TopicPayloadDtoTypedDict, SubscriberPayloadDtoTypedDict, List[To1TypedDict], str
     ],
 )
-r"""The recipients list of people who will receive the notification."""
+r"""The recipients list of people who will receive the notification. Maximum number of recipients can be 100."""
 
 
 To = TypeAliasType("To", Union[TopicPayloadDto, SubscriberPayloadDto, List[To1], str])
-r"""The recipients list of people who will receive the notification."""
+r"""The recipients list of people who will receive the notification. Maximum number of recipients can be 100."""
 
 
 ActorTypedDict = TypeAliasType(
@@ -158,7 +158,7 @@ Existing tenants will be updated with the provided details.
 """
 
 
-class TwoTypedDict(TypedDict):
+class TriggerEventRequestDtoContext2TypedDict(TypedDict):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -166,7 +166,7 @@ class TwoTypedDict(TypedDict):
     r"""Optional additional context data"""
 
 
-class Two(BaseModel):
+class TriggerEventRequestDtoContext2(BaseModel):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -175,17 +175,22 @@ class Two(BaseModel):
     r"""Optional additional context data"""
 
 
-ContextTypedDict = TypeAliasType("ContextTypedDict", Union[TwoTypedDict, str])
+TriggerEventRequestDtoContextTypedDict = TypeAliasType(
+    "TriggerEventRequestDtoContextTypedDict",
+    Union[TriggerEventRequestDtoContext2TypedDict, str],
+)
 
 
-Context = TypeAliasType("Context", Union[Two, str])
+TriggerEventRequestDtoContext = TypeAliasType(
+    "TriggerEventRequestDtoContext", Union[TriggerEventRequestDtoContext2, str]
+)
 
 
 class TriggerEventRequestDtoTypedDict(TypedDict):
     workflow_id: str
     r"""The trigger identifier of the workflow you wish to send. This identifier can be found on the workflow page."""
     to: ToTypedDict
-    r"""The recipients list of people who will receive the notification."""
+    r"""The recipients list of people who will receive the notification. Maximum number of recipients can be 100."""
     payload: NotRequired[Dict[str, Any]]
     r"""The payload object is used to pass additional custom information that could be
     used to render the workflow, or perform routing rules based on it.
@@ -206,7 +211,7 @@ class TriggerEventRequestDtoTypedDict(TypedDict):
     r"""It is used to specify a tenant context during trigger event.
     Existing tenants will be updated with the provided details.
     """
-    context: NotRequired[Dict[str, ContextTypedDict]]
+    context: NotRequired[Dict[str, TriggerEventRequestDtoContextTypedDict]]
 
 
 class TriggerEventRequestDto(BaseModel):
@@ -214,7 +219,7 @@ class TriggerEventRequestDto(BaseModel):
     r"""The trigger identifier of the workflow you wish to send. This identifier can be found on the workflow page."""
 
     to: To
-    r"""The recipients list of people who will receive the notification."""
+    r"""The recipients list of people who will receive the notification. Maximum number of recipients can be 100."""
 
     payload: Optional[Dict[str, Any]] = None
     r"""The payload object is used to pass additional custom information that could be
@@ -243,4 +248,4 @@ class TriggerEventRequestDto(BaseModel):
     Existing tenants will be updated with the provided details.
     """
 
-    context: Optional[Dict[str, Context]] = None
+    context: Optional[Dict[str, TriggerEventRequestDtoContext]] = None

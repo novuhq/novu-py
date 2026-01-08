@@ -28,6 +28,8 @@ import weakref
 
 if TYPE_CHECKING:
     from novu_py.activity import Activity
+    from novu_py.channel_connections import ChannelConnections
+    from novu_py.channel_endpoints import ChannelEndpoints
     from novu_py.contexts import Contexts
     from novu_py.environments import Environments
     from novu_py.integrations import Integrations
@@ -71,6 +73,8 @@ class Novu(BaseSDK):
     r"""All notifications are sent via a workflow. Each workflow acts as a container for the logic and blueprint that are associated with a type of notification in your system.
     https://docs.novu.co/workflows
     """
+    channel_connections: "ChannelConnections"
+    channel_endpoints: "ChannelEndpoints"
     integrations: "Integrations"
     r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
     https://docs.novu.co/platform/integrations/overview
@@ -89,6 +93,8 @@ class Novu(BaseSDK):
         "topics": ("novu_py.topics", "Topics"),
         "translations": ("novu_py.translations", "Translations"),
         "workflows": ("novu_py.workflows", "Workflows"),
+        "channel_connections": ("novu_py.channel_connections", "ChannelConnections"),
+        "channel_endpoints": ("novu_py.channel_endpoints", "ChannelEndpoints"),
         "integrations": ("novu_py.integrations", "Integrations"),
         "messages": ("novu_py.messages", "Messages"),
         "notifications": ("novu_py.notifications", "Notifications"),
@@ -262,7 +268,7 @@ class Novu(BaseSDK):
     ) -> models.EventsControllerTriggerResponse:
         r"""Trigger event
 
-        Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+        Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Maximum number of recipients can be 100. Additional information can be passed according the body interface below.
         To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
 
         :param trigger_event_request_dto:
@@ -309,6 +315,7 @@ class Novu(BaseSDK):
                 "json",
                 models.TriggerEventRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -415,7 +422,7 @@ class Novu(BaseSDK):
     ) -> models.EventsControllerTriggerResponse:
         r"""Trigger event
 
-        Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+        Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Maximum number of recipients can be 100. Additional information can be passed according the body interface below.
         To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
 
         :param trigger_event_request_dto:
@@ -462,6 +469,7 @@ class Novu(BaseSDK):
                 "json",
                 models.TriggerEventRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -606,6 +614,7 @@ class Novu(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -743,6 +752,7 @@ class Novu(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -891,6 +901,7 @@ class Novu(BaseSDK):
                 "json",
                 models.TriggerEventToAllRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1046,6 +1057,7 @@ class Novu(BaseSDK):
                 "json",
                 models.TriggerEventToAllRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1201,6 +1213,7 @@ class Novu(BaseSDK):
                 "json",
                 models.BulkTriggerEventDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1356,6 +1369,7 @@ class Novu(BaseSDK):
                 "json",
                 models.BulkTriggerEventDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

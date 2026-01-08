@@ -58,22 +58,16 @@ r"""Value that failed validation"""
 class ValidationErrorDtoData(BaseModel):
     status_code: Annotated[float, pydantic.Field(alias="statusCode")]
     r"""HTTP status code of the error response."""
-
     timestamp: str
     r"""Timestamp of when the error occurred."""
-
     path: str
     r"""The path where the error occurred."""
-
     errors: Dict[str, ConstraintValidation]
     r"""A record of validation errors keyed by field name"""
-
     message: OptionalNullable[ValidationErrorDtoMessage] = UNSET
     r"""Value that failed validation"""
-
     ctx: Optional[Dict[str, Any]] = None
     r"""Optional context object for additional error details."""
-
     error_id: Annotated[Optional[str], pydantic.Field(alias="errorId")] = None
     r"""Optional unique identifier for the error, useful for tracking using Sentry and
     New Relic, only available for 500.

@@ -31,6 +31,8 @@ class NotificationsControllerListNotificationsRequestTypedDict(TypedDict):
     r"""The transaction ID to filter by"""
     topic_key: NotRequired[str]
     r"""Topic Key for filtering notifications by topic"""
+    subscription_id: NotRequired[str]
+    r"""Subscription ID for filtering notifications by subscription"""
     context_keys: NotRequired[List[str]]
     r"""Filter by exact context keys, order insensitive (format: \"type:id\")"""
     after: NotRequired[str]
@@ -107,6 +109,13 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Topic Key for filtering notifications by topic"""
+
+    subscription_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="subscriptionId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Subscription ID for filtering notifications by subscription"""
 
     context_keys: Annotated[
         Optional[List[str]],

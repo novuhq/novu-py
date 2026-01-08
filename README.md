@@ -64,6 +64,7 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -304,6 +305,9 @@ with Novu(
             timezone="America/New_York",
             subscriber_id="<id>",
         ),
+        context={
+            "key": "org-acme",
+        },
     ))
 
     # Handle response
@@ -353,6 +357,9 @@ async def main():
                 timezone="America/New_York",
                 subscriber_id="<id>",
             ),
+            context={
+                "key": "org-acme",
+            },
         ))
 
         # Handle response
@@ -482,11 +489,34 @@ asyncio.run(main())
 <details open>
 <summary>Available methods</summary>
 
-### [activity](docs/sdks/activity/README.md)
+### [Novu SDK](docs/sdks/novu/README.md)
+
+* [trigger](docs/sdks/novu/README.md#trigger) - Trigger event
+* [cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
+* [trigger_broadcast](docs/sdks/novu/README.md#trigger_broadcast) - Broadcast event to all
+* [trigger_bulk](docs/sdks/novu/README.md#trigger_bulk) - Bulk trigger event
+
+### [Activity](docs/sdks/activity/README.md)
 
 * [track](docs/sdks/activity/README.md#track) - Track activity and engagement events
 
-### [contexts](docs/sdks/contexts/README.md)
+### [ChannelConnections](docs/sdks/channelconnections/README.md)
+
+* [list](docs/sdks/channelconnections/README.md#list) - List all channel connections
+* [create](docs/sdks/channelconnections/README.md#create) - Create a channel connection
+* [retrieve](docs/sdks/channelconnections/README.md#retrieve) - Retrieve a channel connection
+* [update](docs/sdks/channelconnections/README.md#update) - Update a channel connection
+* [delete](docs/sdks/channelconnections/README.md#delete) - Delete a channel connection
+
+### [ChannelEndpoints](docs/sdks/channelendpoints/README.md)
+
+* [list](docs/sdks/channelendpoints/README.md#list) - List all channel endpoints
+* [create](docs/sdks/channelendpoints/README.md#create) - Create a channel endpoint
+* [retrieve](docs/sdks/channelendpoints/README.md#retrieve) - Retrieve a channel endpoint
+* [update](docs/sdks/channelendpoints/README.md#update) - Update a channel endpoint
+* [delete](docs/sdks/channelendpoints/README.md#delete) - Delete a channel endpoint
+
+### [Contexts](docs/sdks/contexts/README.md)
 
 * [create](docs/sdks/contexts/README.md#create) - Create a context
 * [list](docs/sdks/contexts/README.md#list) - List all contexts
@@ -494,7 +524,7 @@ asyncio.run(main())
 * [retrieve](docs/sdks/contexts/README.md#retrieve) - Retrieve a context
 * [delete](docs/sdks/contexts/README.md#delete) - Delete a context
 
-### [environments](docs/sdks/environments/README.md)
+### [Environments](docs/sdks/environments/README.md)
 
 * [get_tags](docs/sdks/environments/README.md#get_tags) - Get environment tags
 * [create](docs/sdks/environments/README.md#create) - Create an environment
@@ -502,7 +532,7 @@ asyncio.run(main())
 * [update](docs/sdks/environments/README.md#update) - Update an environment
 * [delete](docs/sdks/environments/README.md#delete) - Delete an environment
 
-### [integrations](docs/sdks/integrations/README.md)
+### [Integrations](docs/sdks/integrations/README.md)
 
 * [list](docs/sdks/integrations/README.md#list) - List all integrations
 * [create](docs/sdks/integrations/README.md#create) - Create an integration
@@ -511,8 +541,9 @@ asyncio.run(main())
 * [integrations_controller_auto_configure_integration](docs/sdks/integrations/README.md#integrations_controller_auto_configure_integration) - Auto-configure an integration for inbound webhooks
 * [set_as_primary](docs/sdks/integrations/README.md#set_as_primary) - Update integration as primary
 * [list_active](docs/sdks/integrations/README.md#list_active) - List active integrations
+* [generate_chat_o_auth_url](docs/sdks/integrations/README.md#generate_chat_o_auth_url) - Generate chat OAuth URL
 
-### [layouts](docs/sdks/layouts/README.md)
+### [Layouts](docs/sdks/layouts/README.md)
 
 * [create](docs/sdks/layouts/README.md#create) - Create a layout
 * [list](docs/sdks/layouts/README.md#list) - List all layouts
@@ -523,25 +554,18 @@ asyncio.run(main())
 * [generate_preview](docs/sdks/layouts/README.md#generate_preview) - Generate layout preview
 * [usage](docs/sdks/layouts/README.md#usage) - Get layout usage
 
-### [messages](docs/sdks/messages/README.md)
+### [Messages](docs/sdks/messages/README.md)
 
 * [retrieve](docs/sdks/messages/README.md#retrieve) - List all messages
 * [delete](docs/sdks/messages/README.md#delete) - Delete a message
 * [delete_by_transaction_id](docs/sdks/messages/README.md#delete_by_transaction_id) - Delete messages by transactionId
 
-### [notifications](docs/sdks/notifications/README.md)
+### [Notifications](docs/sdks/notifications/README.md)
 
 * [list](docs/sdks/notifications/README.md#list) - List all events
 * [retrieve](docs/sdks/notifications/README.md#retrieve) - Retrieve an event
 
-### [Novu SDK](docs/sdks/novu/README.md)
-
-* [trigger](docs/sdks/novu/README.md#trigger) - Trigger event
-* [cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
-* [trigger_broadcast](docs/sdks/novu/README.md#trigger_broadcast) - Broadcast event to all
-* [trigger_bulk](docs/sdks/novu/README.md#trigger_bulk) - Bulk trigger event
-
-### [subscribers](docs/sdks/subscribers/README.md)
+### [Subscribers](docs/sdks/subscribers/README.md)
 
 * [search](docs/sdks/subscribers/README.md#search) - Search subscribers
 * [create](docs/sdks/subscribers/README.md#create) - Create a subscriber
@@ -550,38 +574,38 @@ asyncio.run(main())
 * [delete](docs/sdks/subscribers/README.md#delete) - Delete a subscriber
 * [create_bulk](docs/sdks/subscribers/README.md#create_bulk) - Bulk create subscribers
 
-#### [subscribers.credentials](docs/sdks/credentials/README.md)
+#### [Subscribers.Credentials](docs/sdks/credentials/README.md)
 
 * [update](docs/sdks/credentials/README.md#update) - Update provider credentials
 * [append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
 * [delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
-#### [subscribers.messages](docs/sdks/novumessages/README.md)
+#### [Subscribers.Messages](docs/sdks/novumessages/README.md)
 
 * [update_as_seen](docs/sdks/novumessages/README.md#update_as_seen) - Update notification action status
 * [mark_all](docs/sdks/novumessages/README.md#mark_all) - Update all notifications state
 * [mark_all_as](docs/sdks/novumessages/README.md#mark_all_as) - Update notifications state
 
-#### [subscribers.notifications](docs/sdks/novunotifications/README.md)
+#### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
 
 * [feed](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications
 * [unseen_count](docs/sdks/novunotifications/README.md#unseen_count) - Retrieve unseen notifications count
 
-#### [subscribers.preferences](docs/sdks/preferences/README.md)
+#### [Subscribers.Preferences](docs/sdks/preferences/README.md)
 
 * [list](docs/sdks/preferences/README.md#list) - Retrieve subscriber preferences
 * [update](docs/sdks/preferences/README.md#update) - Update subscriber preferences
 * [bulk_update](docs/sdks/preferences/README.md#bulk_update) - Bulk update subscriber preferences
 
-#### [subscribers.properties](docs/sdks/properties/README.md)
+#### [Subscribers.Properties](docs/sdks/properties/README.md)
 
 * [update_online_flag](docs/sdks/properties/README.md#update_online_flag) - Update subscriber online status
 
-#### [subscribers.topics](docs/sdks/novutopics/README.md)
+#### [Subscribers.Topics](docs/sdks/novutopics/README.md)
 
 * [list](docs/sdks/novutopics/README.md#list) - Retrieve subscriber subscriptions
 
-### [topics](docs/sdks/topics/README.md)
+### [Topics](docs/sdks/topics/README.md)
 
 * [list](docs/sdks/topics/README.md#list) - List all topics
 * [create](docs/sdks/topics/README.md#create) - Create a topic
@@ -589,35 +613,37 @@ asyncio.run(main())
 * [update](docs/sdks/topics/README.md#update) - Update a topic
 * [delete](docs/sdks/topics/README.md#delete) - Delete a topic
 
-#### [topics.subscribers](docs/sdks/novusubscribers/README.md)
+#### [Topics.Subscribers](docs/sdks/novusubscribers/README.md)
 
 * [retrieve](docs/sdks/novusubscribers/README.md#retrieve) - Check topic subscriber
 
-#### [topics.subscriptions](docs/sdks/subscriptions/README.md)
+#### [Topics.Subscriptions](docs/sdks/subscriptions/README.md)
 
 * [list](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
+* [get_subscription](docs/sdks/subscriptions/README.md#get_subscription) - Get a topic subscription
+* [update](docs/sdks/subscriptions/README.md#update) - Update a topic subscription
 
-### [translations](docs/sdks/translations/README.md)
+### [Translations](docs/sdks/translations/README.md)
 
 * [create](docs/sdks/translations/README.md#create) - Create a translation
 * [retrieve](docs/sdks/translations/README.md#retrieve) - Retrieve a translation
 * [delete](docs/sdks/translations/README.md#delete) - Delete a translation
 * [upload](docs/sdks/translations/README.md#upload) - Upload translation files
 
-#### [translations.groups](docs/sdks/groups/README.md)
+#### [Translations.Groups](docs/sdks/groups/README.md)
 
 * [delete](docs/sdks/groups/README.md#delete) - Delete a translation group
 * [retrieve](docs/sdks/groups/README.md#retrieve) - Retrieve a translation group
 
-#### [translations.master](docs/sdks/master/README.md)
+#### [Translations.Master](docs/sdks/master/README.md)
 
 * [retrieve](docs/sdks/master/README.md#retrieve) - Retrieve master translations JSON
 * [import_master_json](docs/sdks/master/README.md#import_master_json) - Import master translations JSON
 * [upload](docs/sdks/master/README.md#upload) - Upload master translations JSON file
 
-### [workflows](docs/sdks/workflows/README.md)
+### [Workflows](docs/sdks/workflows/README.md)
 
 * [create](docs/sdks/workflows/README.md#create) - Create a workflow
 * [list](docs/sdks/workflows/README.md#list) - List all workflows
@@ -627,12 +653,43 @@ asyncio.run(main())
 * [patch](docs/sdks/workflows/README.md#patch) - Update a workflow
 * [sync](docs/sdks/workflows/README.md#sync) - Sync a workflow
 
-#### [workflows.steps](docs/sdks/steps/README.md)
+#### [Workflows.Steps](docs/sdks/steps/README.md)
 
 * [retrieve](docs/sdks/steps/README.md#retrieve) - Retrieve workflow step
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start File uploads [file-upload] -->
+## File uploads
+
+Certain SDK methods accept file objects as part of a request body or multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
+
+> [!TIP]
+>
+> For endpoints that handle file uploads bytes arrays can also be used. However, using streams is recommended for large files.
+>
+
+```python
+import novu_py
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.translations.upload(request_body={
+        "resource_id": "welcome-email",
+        "resource_type": novu_py.TranslationControllerUploadTranslationFilesResourceType.WORKFLOW,
+        "files": [],
+    })
+
+    # Handle response
+    print(res)
+
+```
+<!-- End File uploads [file-upload] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -786,9 +843,9 @@ with Novu(
 
 
 **Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
-* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 80 methods.*
-* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 80 methods.*
-* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 80 methods.*
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 93 methods.*
+* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 93 methods.*
+* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 93 methods.*
 * [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

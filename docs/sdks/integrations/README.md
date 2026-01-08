@@ -1,5 +1,4 @@
 # Integrations
-(*integrations*)
 
 ## Overview
 
@@ -15,6 +14,7 @@ With the help of the Integration Store, you can easily integrate your favorite d
 * [integrations_controller_auto_configure_integration](#integrations_controller_auto_configure_integration) - Auto-configure an integration for inbound webhooks
 * [set_as_primary](#set_as_primary) - Update integration as primary
 * [list_active](#list_active) - List active integrations
+* [generate_chat_o_auth_url](#generate_chat_o_auth_url) - Generate chat OAuth URL
 
 ## list
 
@@ -322,6 +322,68 @@ with Novu(
 ### Response
 
 **[models.IntegrationsControllerGetActiveIntegrationsResponse](../../models/integrationscontrollergetactiveintegrationsresponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## generate_chat_o_auth_url
+
+Generate an OAuth URL for chat integrations like Slack and MS Teams. 
+    This URL allows subscribers to authorize the integration, enabling the system to send messages 
+    through their chat workspace. The generated URL expires after 5 minutes.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="IntegrationsController_getChatOAuthUrl" method="post" path="/v1/integrations/chat/oauth" -->
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.integrations.generate_chat_o_auth_url(generate_chat_oauth_url_request_dto={
+        "subscriber_id": "subscriber-123",
+        "integration_identifier": "<value>",
+        "connection_identifier": "slack-connection-abc123",
+        "context": {
+            "key": "org-acme",
+        },
+        "scope": [
+            "chat:write",
+            "chat:write.public",
+            "channels:read",
+            "groups:read",
+            "users:read",
+            "users:read.email",
+            "incoming-webhook",
+        ],
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `generate_chat_oauth_url_request_dto`                                                   | [models.GenerateChatOauthURLRequestDto](../../models/generatechatoauthurlrequestdto.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `idempotency_key`                                                                       | *Optional[str]*                                                                         | :heavy_minus_sign:                                                                      | A header for idempotency purposes                                                       |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
+
+### Response
+
+**[models.IntegrationsControllerGetChatOAuthURLResponse](../../models/integrationscontrollergetchatoauthurlresponse.md)**
 
 ### Errors
 

@@ -1,5 +1,4 @@
 # Layouts
-(*layouts*)
 
 ## Overview
 
@@ -79,7 +78,10 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.layouts.list()
+    res = novu.layouts.list(request={
+        "limit": 10,
+        "offset": 0,
+    })
 
     # Handle response
     print(res)
