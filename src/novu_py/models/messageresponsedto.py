@@ -14,15 +14,13 @@ from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-MessageResponseDtoContentTypedDict = TypeAliasType(
-    "MessageResponseDtoContentTypedDict", Union[List[EmailBlockTypedDict], str]
+ContentTypedDict = TypeAliasType(
+    "ContentTypedDict", Union[List[EmailBlockTypedDict], str]
 )
 r"""Content of the message, can be an email block or a string"""
 
 
-MessageResponseDtoContent = TypeAliasType(
-    "MessageResponseDtoContent", Union[List[EmailBlock], str]
-)
+Content = TypeAliasType("Content", Union[List[EmailBlock], str])
 r"""Content of the message, can be an email block or a string"""
 
 
@@ -83,7 +81,7 @@ class MessageResponseDtoTypedDict(TypedDict):
     r"""Last seen date of the message, if available"""
     last_read_date: NotRequired[str]
     r"""Last read date of the message, if available"""
-    content: NotRequired[Nullable[MessageResponseDtoContentTypedDict]]
+    content: NotRequired[Nullable[ContentTypedDict]]
     r"""Content of the message, can be an email block or a string"""
     subject: NotRequired[str]
     r"""Subject of the message, if applicable"""
@@ -188,7 +186,7 @@ class MessageResponseDto(BaseModel):
     )
     r"""Last read date of the message, if available"""
 
-    content: OptionalNullable[MessageResponseDtoContent] = UNSET
+    content: OptionalNullable[Content] = UNSET
     r"""Content of the message, can be an email block or a string"""
 
     subject: Optional[str] = None

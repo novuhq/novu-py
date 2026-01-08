@@ -101,6 +101,7 @@ class Subscribers(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -240,6 +241,7 @@ class Subscribers(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -392,6 +394,7 @@ class Subscribers(BaseSDK):
                 "json",
                 models.CreateSubscriberRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -547,6 +550,7 @@ class Subscribers(BaseSDK):
                 "json",
                 models.CreateSubscriberRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -687,6 +691,7 @@ class Subscribers(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -822,6 +827,7 @@ class Subscribers(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -971,6 +977,7 @@ class Subscribers(BaseSDK):
                 "json",
                 models.PatchSubscriberRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1120,6 +1127,7 @@ class Subscribers(BaseSDK):
                 "json",
                 models.PatchSubscriberRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1255,6 +1263,7 @@ class Subscribers(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1392,6 +1401,7 @@ class Subscribers(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1541,6 +1551,7 @@ class Subscribers(BaseSDK):
                 "json",
                 models.BulkSubscriberCreateDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1690,6 +1701,7 @@ class Subscribers(BaseSDK):
                 "json",
                 models.BulkSubscriberCreateDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

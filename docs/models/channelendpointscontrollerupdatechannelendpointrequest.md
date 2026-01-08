@@ -1,0 +1,10 @@
+# ChannelEndpointsControllerUpdateChannelEndpointRequest
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `identifier`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | The unique identifier of the channel endpoint                                          |
+| `idempotency_key`                                                                      | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | A header for idempotency purposes                                                      |
+| `update_channel_endpoint_request_dto`                                                  | [models.UpdateChannelEndpointRequestDto](../models/updatechannelendpointrequestdto.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |

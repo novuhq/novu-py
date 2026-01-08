@@ -59,6 +59,7 @@ class Master(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -149,6 +150,7 @@ class Master(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -251,6 +253,7 @@ class Master(BaseSDK):
                 "json",
                 models.ImportMasterJSONRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -353,6 +356,7 @@ class Master(BaseSDK):
                 "json",
                 models.ImportMasterJSONRequestDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -397,6 +401,10 @@ class Master(BaseSDK):
     def upload(
         self,
         *,
+        request_body: Union[
+            models.TranslationControllerUploadMasterJSONEndpointRequestBody,
+            models.TranslationControllerUploadMasterJSONEndpointRequestBodyTypedDict,
+        ],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -407,6 +415,7 @@ class Master(BaseSDK):
 
         Upload a master JSON file containing translations for multiple workflows. Locale is automatically detected from filename (e.g., en_US.json)
 
+        :param request_body:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -425,6 +434,10 @@ class Master(BaseSDK):
 
         request = models.TranslationControllerUploadMasterJSONEndpointRequest(
             idempotency_key=idempotency_key,
+            request_body=utils.get_pydantic_model(
+                request_body,
+                models.TranslationControllerUploadMasterJSONEndpointRequestBody,
+            ),
         )
 
         req = self._build_request(
@@ -433,13 +446,21 @@ class Master(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "multipart",
+                models.TranslationControllerUploadMasterJSONEndpointRequestBody,
+            ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -484,6 +505,10 @@ class Master(BaseSDK):
     async def upload_async(
         self,
         *,
+        request_body: Union[
+            models.TranslationControllerUploadMasterJSONEndpointRequestBody,
+            models.TranslationControllerUploadMasterJSONEndpointRequestBodyTypedDict,
+        ],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -494,6 +519,7 @@ class Master(BaseSDK):
 
         Upload a master JSON file containing translations for multiple workflows. Locale is automatically detected from filename (e.g., en_US.json)
 
+        :param request_body:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -512,6 +538,10 @@ class Master(BaseSDK):
 
         request = models.TranslationControllerUploadMasterJSONEndpointRequest(
             idempotency_key=idempotency_key,
+            request_body=utils.get_pydantic_model(
+                request_body,
+                models.TranslationControllerUploadMasterJSONEndpointRequestBody,
+            ),
         )
 
         req = self._build_request_async(
@@ -520,13 +550,21 @@ class Master(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "multipart",
+                models.TranslationControllerUploadMasterJSONEndpointRequestBody,
+            ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

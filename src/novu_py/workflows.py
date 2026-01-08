@@ -88,6 +88,7 @@ class Workflows(BaseSDK):
                 "json",
                 models.CreateWorkflowDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -233,6 +234,7 @@ class Workflows(BaseSDK):
                 "json",
                 models.CreateWorkflowDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -369,6 +371,7 @@ class Workflows(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -505,6 +508,7 @@ class Workflows(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -653,6 +657,7 @@ class Workflows(BaseSDK):
                 "json",
                 models.UpdateWorkflowDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -801,6 +806,7 @@ class Workflows(BaseSDK):
                 "json",
                 models.UpdateWorkflowDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -938,6 +944,7 @@ class Workflows(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1075,6 +1082,7 @@ class Workflows(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1209,6 +1217,7 @@ class Workflows(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1340,6 +1349,7 @@ class Workflows(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1485,6 +1495,7 @@ class Workflows(BaseSDK):
                 "json",
                 models.PatchWorkflowDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1633,6 +1644,7 @@ class Workflows(BaseSDK):
                 "json",
                 models.PatchWorkflowDto,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1777,6 +1789,7 @@ class Workflows(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.sync_workflow_dto, False, False, "json", models.SyncWorkflowDto
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1921,6 +1934,7 @@ class Workflows(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.sync_workflow_dto, False, False, "json", models.SyncWorkflowDto
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

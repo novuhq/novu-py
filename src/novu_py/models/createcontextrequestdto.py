@@ -2,16 +2,8 @@
 
 from __future__ import annotations
 from novu_py.types import BaseModel
-from typing import Optional
+from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class DataTypedDict(TypedDict):
-    r"""Optional custom data to associate with this context."""
-
-
-class Data(BaseModel):
-    r"""Optional custom data to associate with this context."""
 
 
 class CreateContextRequestDtoTypedDict(TypedDict):
@@ -19,7 +11,7 @@ class CreateContextRequestDtoTypedDict(TypedDict):
     r"""Context type (e.g., tenant, app, workspace). Must be lowercase alphanumeric with optional separators."""
     id: str
     r"""Unique identifier for this context. Must be lowercase alphanumeric with optional separators."""
-    data: NotRequired[DataTypedDict]
+    data: NotRequired[Dict[str, Any]]
     r"""Optional custom data to associate with this context."""
 
 
@@ -30,5 +22,5 @@ class CreateContextRequestDto(BaseModel):
     id: str
     r"""Unique identifier for this context. Must be lowercase alphanumeric with optional separators."""
 
-    data: Optional[Data] = None
+    data: Optional[Dict[str, Any]] = None
     r"""Optional custom data to associate with this context."""

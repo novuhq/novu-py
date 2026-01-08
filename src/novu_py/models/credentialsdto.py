@@ -60,6 +60,7 @@ class CredentialsDtoTypedDict(TypedDict):
     access_key: NotRequired[str]
     app_sid: NotRequired[str]
     sender_id: NotRequired[str]
+    tenant_id: NotRequired[str]
     app_io_base_url: NotRequired[str]
 
 
@@ -169,6 +170,8 @@ class CredentialsDto(BaseModel):
     app_sid: Annotated[Optional[str], pydantic.Field(alias="appSid")] = None
 
     sender_id: Annotated[Optional[str], pydantic.Field(alias="senderId")] = None
+
+    tenant_id: Annotated[Optional[str], pydantic.Field(alias="tenantId")] = None
 
     app_io_base_url: Annotated[Optional[str], pydantic.Field(alias="AppIOBaseUrl")] = (
         None

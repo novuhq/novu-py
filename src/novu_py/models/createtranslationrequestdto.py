@@ -4,6 +4,7 @@ from __future__ import annotations
 from enum import Enum
 from novu_py.types import BaseModel
 import pydantic
+from typing import Any, Dict
 from typing_extensions import Annotated, TypedDict
 
 
@@ -14,14 +15,6 @@ class ResourceType(str, Enum):
     LAYOUT = "layout"
 
 
-class ContentTypedDict(TypedDict):
-    r"""Translation content as JSON object"""
-
-
-class Content(BaseModel):
-    r"""Translation content as JSON object"""
-
-
 class CreateTranslationRequestDtoTypedDict(TypedDict):
     resource_id: str
     r"""The resource ID to associate translation with. Accepts identifier or slug format"""
@@ -29,7 +22,7 @@ class CreateTranslationRequestDtoTypedDict(TypedDict):
     r"""The resource type to associate translation with"""
     locale: str
     r"""Locale code (e.g., en_US, es_ES)"""
-    content: ContentTypedDict
+    content: Dict[str, Any]
     r"""Translation content as JSON object"""
 
 
@@ -43,5 +36,5 @@ class CreateTranslationRequestDto(BaseModel):
     locale: str
     r"""Locale code (e.g., en_US, es_ES)"""
 
-    content: Content
+    content: Dict[str, Any]
     r"""Translation content as JSON object"""
