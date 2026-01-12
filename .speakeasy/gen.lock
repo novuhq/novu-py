@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: 6f1120c97079965cbf031265a7b7f6dd
-  docVersion: 3.11.0
-  speakeasyVersion: 1.682.0
-  generationVersion: 2.791.1
-  releaseVersion: 3.12.0
-  configChecksum: 4164c5a7d9b2c859662df8546448be18
+  docChecksum: 6221030d8cc6256f7d22a9e13968c6e1
+  docVersion: 3.12.0
+  speakeasyVersion: 1.684.0
+  generationVersion: 2.793.0
+  releaseVersion: 3.13.0
+  configChecksum: 538501e3069d567b76afebe7a79dc3bc
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
 persistentEdits:
-  generation_id: 62418493-3280-4300-9775-a125c288ec5f
-  pristine_commit_hash: 979b634cb8f09dea0bb3774e050c9f5a48938c20
-  pristine_tree_hash: 954d7e37ee5a56c61f1c7a3ac00dfeda13658d23
+  generation_id: f1656257-c2ef-42e9-b993-9d8486ed8cde
+  pristine_commit_hash: 5ce3f6f25492e33fd5f326ee7c561403daf61a41
+  pristine_tree_hash: c016ca61cb4bf7c3115e63ff4e60a7c1f0c4ebc7
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.23.16
+    core: 5.23.17
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -2040,8 +2040,8 @@ trackedFiles:
     pristine_git_object: c6d7a1ecf696bdebf4095899c8f83c7bb079fa5a
   docs/models/subscriberworkflowpreferencedto.md:
     id: babd9ddc6b10
-    last_write_checksum: sha1:90c9efeb711e73dfc3efc80a968cc338326fd8b6
-    pristine_git_object: 1c65ed5829d0c1860a7bc7b2a7a55f6ef108a213
+    last_write_checksum: sha1:07068d09a5fa6afeeb2e37679ad29f9087ab7bfb
+    pristine_git_object: 04a8fd59194757f51eb4859d819c2df694e578c6
   docs/models/subscriptiondto.md:
     id: 9078b63acbf7
     last_write_checksum: sha1:d9a491b70944c51961b26ebe3f0fa4c46bba1565
@@ -2844,8 +2844,8 @@ trackedFiles:
     pristine_git_object: cbbf681a1f7a4d86cfa0fcc28e13438e5bbc8e12
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:4359fe999355b0efc1345b25d3716ba997287d0b
-    pristine_git_object: 3041ec05718ca33f5891cd362b2dee006c3f2637
+    last_write_checksum: sha1:902679b395c9528dcc31d76d6c373007149adcb3
+    pristine_git_object: 9897ae3d56f3238de6238fea78f0766ce70a46f6
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77610d735cce1bc0f71f13a746bf06e463e2ce47
@@ -2872,8 +2872,8 @@ trackedFiles:
     pristine_git_object: 955703fa58801c45f9cc8e62f4dfef8228cbf625
   src/novu_py/_version.py:
     id: 8e69485642eb
-    last_write_checksum: sha1:581cd96672a6bc2226d4bd99f1c96b053c185ccf
-    pristine_git_object: 04635824055930313ba7932673dbeca5ac12cf44
+    last_write_checksum: sha1:89d988dae3f6cf2077be84aa297cf85ca0ec967c
+    pristine_git_object: 6791609230ae253138451403a24ee65a764ce259
   src/novu_py/activity.py:
     id: 7d001a1721a3
     last_write_checksum: sha1:77d48ff32f29140960eca0e0f3d3f33770dc9733
@@ -4068,8 +4068,8 @@ trackedFiles:
     pristine_git_object: b7badadeb3179af67e8cb111ee78e08a11acbd55
   src/novu_py/models/subscriberworkflowpreferencedto.py:
     id: bb0491a0719a
-    last_write_checksum: sha1:e60f2f22f65c2510940d2c24d1cdaa63dee74da5
-    pristine_git_object: 2dad1203b3455aad41751cc746532816b627608e
+    last_write_checksum: sha1:9eb53f4350e01d3b936a698e004cba9bf8795335
+    pristine_git_object: a9613e01f63c6c8afcdb82a30737293aa590290e
   src/novu_py/models/subscriptiondto.py:
     id: 30d8e4ee09ce
     last_write_checksum: sha1:6fa50d4a1e5ca5b906b8720faeeb61946a18eb8d
@@ -4492,8 +4492,8 @@ trackedFiles:
     pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
   src/novu_py/utils/__init__.py:
     id: b38ba7e9d970
-    last_write_checksum: sha1:5d88356c206a32c694ae113178ca6325a9fc612a
-    pristine_git_object: 87192ddef2589a7778f85e1cd715d6d1e61ae0a6
+    last_write_checksum: sha1:c7c1ee47be7ac3774b042c8aee439143493ed3ce
+    pristine_git_object: f9c2edce8ecf2d2a4ab0ad36129ac70afd3d1f2f
   src/novu_py/utils/annotations.py:
     id: ef8e04eceec7
     last_write_checksum: sha1:a4824ad65f730303e4e1e3ec1febf87b4eb46dbc
@@ -4504,8 +4504,8 @@ trackedFiles:
     pristine_git_object: a6c52cd61bbe2d459046c940ce5e8c469f2f0664
   src/novu_py/utils/enums.py:
     id: 888aaac007a5
-    last_write_checksum: sha1:786ba597f79dca6fbc0d87c591752bb8d775ecb7
-    pristine_git_object: c3bc13cfc48794c143a64667f02e7949a8ce3fcc
+    last_write_checksum: sha1:bc8c3c1285ae09ba8a094ee5c3d9c7f41fa1284d
+    pristine_git_object: 3324e1bc2668c54c4d5f5a1a845675319757a828
   src/novu_py/utils/eventstreaming.py:
     id: 77d0b255afff
     last_write_checksum: sha1:bababae5d54b7efc360db701daa49e18a92c2f3b
@@ -4532,8 +4532,8 @@ trackedFiles:
     pristine_git_object: c04e0db82b68eca041f2cb2614d748fbac80fd41
   src/novu_py/utils/requestbodies.py:
     id: 259e0fae8805
-    last_write_checksum: sha1:e0a3a78158eba39880475d62d61be906625676b8
-    pristine_git_object: d5240dd5f5efffabbd9aefa2f4a349511a9c75b4
+    last_write_checksum: sha1:41885982c1cc10dc28ab857bdb22c1014612b7b3
+    pristine_git_object: 9215e4531ce128ac665fc6ceddd9b9e7062db654
   src/novu_py/utils/retries.py:
     id: 2222096a9176
     last_write_checksum: sha1:5b97ac4f59357d70c2529975d50364c88bcad607
@@ -4544,8 +4544,8 @@ trackedFiles:
     pristine_git_object: 959f145877e03635f61e76636b135f877fd963de
   src/novu_py/utils/serializers.py:
     id: ff2751084041
-    last_write_checksum: sha1:a0d184ace7371a14a7d005cca7f358a03e3d4b07
-    pristine_git_object: 378a14c0f86a867ca7b0eb7e620da82234c0ccc4
+    last_write_checksum: sha1:ce1d8d7f500a9ccba0aeca5057cee9c271f4dfd7
+    pristine_git_object: 14321eb479de81d0d9580ec8291e0ff91bf29e57
   src/novu_py/utils/unmarshal_json_response.py:
     id: 710c93db10c8
     last_write_checksum: sha1:67a6879c47445349e8a4e494ef8bec1219082086
@@ -6077,7 +6077,10 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `novu.translations.retrieve()`:  `response.content` **Changed** **Breaking** :warning:\n* `novu.translations.upload()`:  `request` **Changed** **Breaking** :warning:\n* `novu.translations.master.upload()`:  `request_body` **Added** **Breaking** :warning:\n* `novu.translations.master.import_master_json()`: \n  *  `request.import_master_json_request_dto.master_json` **Changed** **Breaking** :warning:\n* `novu.translations.master.retrieve()`:  `response` **Changed** **Breaking** :warning:\n* `novu.contexts.update()`: \n  *  `request.update_context_request_dto.data` **Changed** **Breaking** :warning:\n  *  `response.data` **Changed** **Breaking** :warning:\n* `novu.translations.create()`: \n  *  `request.create_translation_request_dto.content` **Changed** **Breaking** :warning:\n  *  `response.content` **Changed** **Breaking** :warning:\n* `novu.contexts.create()`: \n  *  `request.create_context_request_dto.data` **Changed** **Breaking** :warning:\n  *  `response.data` **Changed** **Breaking** :warning:\n* `novu.contexts.list()`:  `response.data.[].data` **Changed** **Breaking** :warning:\n* `novu.contexts.retrieve()`:  `response.data` **Changed** **Breaking** :warning:\n* `novu.channel_connections.retrieve()`: **Added**\n* `novu.topics.subscriptions.create()`: \n  *  `request.create_topic_subscriptions_request_dto` **Changed**\n  *  `response.data.[]` **Changed**\n* `novu.integrations.generate_chat_o_auth_url()`: **Added**\n* `novu.trigger()`:  `response.job_data` **Added**\n* `novu.trigger_broadcast()`: \n  *  `request.trigger_event_to_all_request_dto.context` **Added**\n  *  `response.job_data` **Added**\n* `novu.trigger_bulk()`:  `response.[].job_data` **Added**\n* `novu.channel_endpoints.retrieve()`: **Added**\n* `novu.channel_endpoints.create()`: **Added**\n* `novu.topics.subscriptions.update()`: **Added**\n* `novu.channel_endpoints.list()`: **Added**\n* `novu.topics.subscriptions.list()`:  `response.data.[].identifier` **Added**\n* `novu.subscribers.topics.list()`:  `response.data.[].identifier` **Added**\n* `novu.subscribers.notifications.feed()`:  `response.data.[].archived` **Added**\n* `novu.channel_endpoints.update()`: **Added**\n* `novu.channel_endpoints.delete()`: **Added**\n* `novu.channel_connections.delete()`: **Added**\n* `novu.subscribers.preferences.bulk_update()`:  `response.[].condition` **Added**\n* `novu.topics.subscriptions.get_subscription()`: **Added**\n* `novu.channel_connections.update()`: **Added**\n* `novu.channel_connections.list()`: **Added**\n* `novu.channel_connections.create()`: **Added**\n* `novu.topics.subscriptions.delete()`: \n  *  `request.delete_topic_subscriptions_request_dto` **Changed**\n  *  `response.data.[].identifier` **Added**\n* `novu.integrations.list()`:  `response.[].credentials.tenant_id` **Added**\n* `novu.integrations.create()`: \n  *  `request.create_integration_request_dto.credentials.tenant_id` **Added**\n  *  `response.credentials.tenant_id` **Added**\n* `novu.integrations.update()`: \n  *  `request.update_integration_request_dto.credentials.tenant_id` **Added**\n  *  `response.credentials.tenant_id` **Added**\n* `novu.integrations.delete()`:  `response.[].credentials.tenant_id` **Added**\n* `novu.integrations.set_as_primary()`:  `response.credentials.tenant_id` **Added**\n* `novu.integrations.list_active()`:  `response.[].credentials.tenant_id` **Added**\n* `novu.notifications.list()`: \n  *  `request.subscription_id` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `novu.subscribers.preferences.list()`:  `response.workflows.[].updated_at` **Added**
+  * `novu.subscribers.preferences.update()`:  `response.workflows.[].updated_at` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
