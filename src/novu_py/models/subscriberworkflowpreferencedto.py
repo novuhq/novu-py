@@ -14,8 +14,9 @@ from .subscriberpreferencesworkflowinfodto import (
     SubscriberPreferencesWorkflowInfoDtoTypedDict,
 )
 from novu_py.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+import pydantic
+from typing import List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class SubscriberWorkflowPreferenceDtoTypedDict(TypedDict):
@@ -27,6 +28,8 @@ class SubscriberWorkflowPreferenceDtoTypedDict(TypedDict):
     r"""List of preference overrides"""
     workflow: SubscriberPreferencesWorkflowInfoDtoTypedDict
     r"""Workflow information"""
+    updated_at: NotRequired[str]
+    r"""Timestamp when the subscriber last updated their preference. Only present if subscriber explicitly set preferences."""
 
 
 class SubscriberWorkflowPreferenceDto(BaseModel):
@@ -41,3 +44,6 @@ class SubscriberWorkflowPreferenceDto(BaseModel):
 
     workflow: SubscriberPreferencesWorkflowInfoDto
     r"""Workflow information"""
+
+    updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None
+    r"""Timestamp when the subscriber last updated their preference. Only present if subscriber explicitly set preferences."""
