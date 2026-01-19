@@ -27,6 +27,8 @@ class Criticality(str, Enum):
 class SubscribersControllerGetSubscriberPreferencesRequestTypedDict(TypedDict):
     subscriber_id: str
     criticality: NotRequired[Criticality]
+    context_keys: NotRequired[List[str]]
+    r"""Context keys for filtering preferences (e.g., [\"tenant:acme\"])"""
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
@@ -42,6 +44,13 @@ class SubscribersControllerGetSubscriberPreferencesRequest(BaseModel):
         Optional[Criticality],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = Criticality.NON_CRITICAL
+
+    context_keys: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="contextKeys"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Context keys for filtering preferences (e.g., [\"tenant:acme\"])"""
 
     idempotency_key: Annotated[
         Optional[str],

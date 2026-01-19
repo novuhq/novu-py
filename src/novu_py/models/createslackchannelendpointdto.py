@@ -12,7 +12,7 @@ from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class Context2TypedDict(TypedDict):
+class CreateSlackChannelEndpointDtoContext2TypedDict(TypedDict):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -20,7 +20,7 @@ class Context2TypedDict(TypedDict):
     r"""Optional additional context data"""
 
 
-class Context2(BaseModel):
+class CreateSlackChannelEndpointDtoContext2(BaseModel):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -30,12 +30,14 @@ class Context2(BaseModel):
 
 
 CreateSlackChannelEndpointDtoContextTypedDict = TypeAliasType(
-    "CreateSlackChannelEndpointDtoContextTypedDict", Union[Context2TypedDict, str]
+    "CreateSlackChannelEndpointDtoContextTypedDict",
+    Union[CreateSlackChannelEndpointDtoContext2TypedDict, str],
 )
 
 
 CreateSlackChannelEndpointDtoContext = TypeAliasType(
-    "CreateSlackChannelEndpointDtoContext", Union[Context2, str]
+    "CreateSlackChannelEndpointDtoContext",
+    Union[CreateSlackChannelEndpointDtoContext2, str],
 )
 
 

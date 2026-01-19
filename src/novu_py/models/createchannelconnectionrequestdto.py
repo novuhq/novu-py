@@ -9,7 +9,7 @@ from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class TwoTypedDict(TypedDict):
+class CreateChannelConnectionRequestDtoContext2TypedDict(TypedDict):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -17,7 +17,7 @@ class TwoTypedDict(TypedDict):
     r"""Optional additional context data"""
 
 
-class Two(BaseModel):
+class CreateChannelConnectionRequestDtoContext2(BaseModel):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -26,10 +26,16 @@ class Two(BaseModel):
     r"""Optional additional context data"""
 
 
-ContextTypedDict = TypeAliasType("ContextTypedDict", Union[TwoTypedDict, str])
+CreateChannelConnectionRequestDtoContextTypedDict = TypeAliasType(
+    "CreateChannelConnectionRequestDtoContextTypedDict",
+    Union[CreateChannelConnectionRequestDtoContext2TypedDict, str],
+)
 
 
-Context = TypeAliasType("Context", Union[Two, str])
+CreateChannelConnectionRequestDtoContext = TypeAliasType(
+    "CreateChannelConnectionRequestDtoContext",
+    Union[CreateChannelConnectionRequestDtoContext2, str],
+)
 
 
 class CreateChannelConnectionRequestDtoTypedDict(TypedDict):
@@ -41,7 +47,7 @@ class CreateChannelConnectionRequestDtoTypedDict(TypedDict):
     r"""The unique identifier for the channel connection. If not provided, one will be generated automatically."""
     subscriber_id: NotRequired[str]
     r"""The subscriber ID to link the channel connection to"""
-    context: NotRequired[Dict[str, ContextTypedDict]]
+    context: NotRequired[Dict[str, CreateChannelConnectionRequestDtoContextTypedDict]]
 
 
 class CreateChannelConnectionRequestDto(BaseModel):
@@ -60,4 +66,4 @@ class CreateChannelConnectionRequestDto(BaseModel):
     subscriber_id: Annotated[Optional[str], pydantic.Field(alias="subscriberId")] = None
     r"""The subscriber ID to link the channel connection to"""
 
-    context: Optional[Dict[str, Context]] = None
+    context: Optional[Dict[str, CreateChannelConnectionRequestDtoContext]] = None

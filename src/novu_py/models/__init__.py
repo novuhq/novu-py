@@ -79,7 +79,11 @@ if TYPE_CHECKING:
     )
     from .bulkupdatesubscriberpreferencesdto import (
         BulkUpdateSubscriberPreferencesDto,
+        BulkUpdateSubscriberPreferencesDtoContext,
+        BulkUpdateSubscriberPreferencesDtoContextTypedDict,
         BulkUpdateSubscriberPreferencesDtoTypedDict,
+        Context2,
+        Context2TypedDict,
     )
     from .buttontypeenum import ButtonTypeEnum
     from .channelconnectionscontroller_createchannelconnectionop import (
@@ -223,12 +227,12 @@ if TYPE_CHECKING:
     )
     from .controlsmetadatadto import ControlsMetadataDto, ControlsMetadataDtoTypedDict
     from .createchannelconnectionrequestdto import (
-        Context,
-        ContextTypedDict,
         CreateChannelConnectionRequestDto,
+        CreateChannelConnectionRequestDtoContext,
+        CreateChannelConnectionRequestDtoContext2,
+        CreateChannelConnectionRequestDtoContext2TypedDict,
+        CreateChannelConnectionRequestDtoContextTypedDict,
         CreateChannelConnectionRequestDtoTypedDict,
-        Two,
-        TwoTypedDict,
     )
     from .createcontextrequestdto import (
         CreateContextRequestDto,
@@ -278,10 +282,10 @@ if TYPE_CHECKING:
         CreatePhoneEndpointDtoTypedDict,
     )
     from .createslackchannelendpointdto import (
-        Context2,
-        Context2TypedDict,
         CreateSlackChannelEndpointDto,
         CreateSlackChannelEndpointDtoContext,
+        CreateSlackChannelEndpointDtoContext2,
+        CreateSlackChannelEndpointDtoContext2TypedDict,
         CreateSlackChannelEndpointDtoContextTypedDict,
         CreateSlackChannelEndpointDtoType,
         CreateSlackChannelEndpointDtoTypedDict,
@@ -972,8 +976,12 @@ if TYPE_CHECKING:
         PatchPreferenceChannelsDtoTypedDict,
     )
     from .patchsubscriberpreferencesdto import (
+        Context,
+        ContextTypedDict,
         PatchSubscriberPreferencesDto,
         PatchSubscriberPreferencesDtoTypedDict,
+        Two,
+        TwoTypedDict,
     )
     from .patchsubscriberrequestdto import (
         PatchSubscriberRequestDto,
@@ -1758,6 +1766,8 @@ __all__ = [
     "BulkUpdateSubscriberPreferenceItemDto",
     "BulkUpdateSubscriberPreferenceItemDtoTypedDict",
     "BulkUpdateSubscriberPreferencesDto",
+    "BulkUpdateSubscriberPreferencesDtoContext",
+    "BulkUpdateSubscriberPreferencesDtoContextTypedDict",
     "BulkUpdateSubscriberPreferencesDtoTypedDict",
     "ButtonTypeEnum",
     "Channel",
@@ -1873,6 +1883,10 @@ __all__ = [
     "ControlsMetadataDto",
     "ControlsMetadataDtoTypedDict",
     "CreateChannelConnectionRequestDto",
+    "CreateChannelConnectionRequestDtoContext",
+    "CreateChannelConnectionRequestDtoContext2",
+    "CreateChannelConnectionRequestDtoContext2TypedDict",
+    "CreateChannelConnectionRequestDtoContextTypedDict",
     "CreateChannelConnectionRequestDtoTypedDict",
     "CreateContextRequestDto",
     "CreateContextRequestDtoTypedDict",
@@ -1906,6 +1920,8 @@ __all__ = [
     "CreatePhoneEndpointDtoTypedDict",
     "CreateSlackChannelEndpointDto",
     "CreateSlackChannelEndpointDtoContext",
+    "CreateSlackChannelEndpointDtoContext2",
+    "CreateSlackChannelEndpointDtoContext2TypedDict",
     "CreateSlackChannelEndpointDtoContextTypedDict",
     "CreateSlackChannelEndpointDtoType",
     "CreateSlackChannelEndpointDtoTypedDict",
@@ -2975,7 +2991,11 @@ _dynamic_imports: dict[str, str] = {
     "BulkUpdateSubscriberPreferenceItemDto": ".bulkupdatesubscriberpreferenceitemdto",
     "BulkUpdateSubscriberPreferenceItemDtoTypedDict": ".bulkupdatesubscriberpreferenceitemdto",
     "BulkUpdateSubscriberPreferencesDto": ".bulkupdatesubscriberpreferencesdto",
+    "BulkUpdateSubscriberPreferencesDtoContext": ".bulkupdatesubscriberpreferencesdto",
+    "BulkUpdateSubscriberPreferencesDtoContextTypedDict": ".bulkupdatesubscriberpreferencesdto",
     "BulkUpdateSubscriberPreferencesDtoTypedDict": ".bulkupdatesubscriberpreferencesdto",
+    "Context2": ".bulkupdatesubscriberpreferencesdto",
+    "Context2TypedDict": ".bulkupdatesubscriberpreferencesdto",
     "ButtonTypeEnum": ".buttontypeenum",
     "ChannelConnectionsControllerCreateChannelConnectionRequest": ".channelconnectionscontroller_createchannelconnectionop",
     "ChannelConnectionsControllerCreateChannelConnectionRequestTypedDict": ".channelconnectionscontroller_createchannelconnectionop",
@@ -3080,12 +3100,12 @@ _dynamic_imports: dict[str, str] = {
     "ContextsControllerUpdateContextResponseTypedDict": ".contextscontroller_updatecontextop",
     "ControlsMetadataDto": ".controlsmetadatadto",
     "ControlsMetadataDtoTypedDict": ".controlsmetadatadto",
-    "Context": ".createchannelconnectionrequestdto",
-    "ContextTypedDict": ".createchannelconnectionrequestdto",
     "CreateChannelConnectionRequestDto": ".createchannelconnectionrequestdto",
+    "CreateChannelConnectionRequestDtoContext": ".createchannelconnectionrequestdto",
+    "CreateChannelConnectionRequestDtoContext2": ".createchannelconnectionrequestdto",
+    "CreateChannelConnectionRequestDtoContext2TypedDict": ".createchannelconnectionrequestdto",
+    "CreateChannelConnectionRequestDtoContextTypedDict": ".createchannelconnectionrequestdto",
     "CreateChannelConnectionRequestDtoTypedDict": ".createchannelconnectionrequestdto",
-    "Two": ".createchannelconnectionrequestdto",
-    "TwoTypedDict": ".createchannelconnectionrequestdto",
     "CreateContextRequestDto": ".createcontextrequestdto",
     "CreateContextRequestDtoTypedDict": ".createcontextrequestdto",
     "CreatedSubscriberDto": ".createdsubscriberdto",
@@ -3120,10 +3140,10 @@ _dynamic_imports: dict[str, str] = {
     "CreatePhoneEndpointDtoContextTypedDict": ".createphoneendpointdto",
     "CreatePhoneEndpointDtoType": ".createphoneendpointdto",
     "CreatePhoneEndpointDtoTypedDict": ".createphoneendpointdto",
-    "Context2": ".createslackchannelendpointdto",
-    "Context2TypedDict": ".createslackchannelendpointdto",
     "CreateSlackChannelEndpointDto": ".createslackchannelendpointdto",
     "CreateSlackChannelEndpointDtoContext": ".createslackchannelendpointdto",
+    "CreateSlackChannelEndpointDtoContext2": ".createslackchannelendpointdto",
+    "CreateSlackChannelEndpointDtoContext2TypedDict": ".createslackchannelendpointdto",
     "CreateSlackChannelEndpointDtoContextTypedDict": ".createslackchannelendpointdto",
     "CreateSlackChannelEndpointDtoType": ".createslackchannelendpointdto",
     "CreateSlackChannelEndpointDtoTypedDict": ".createslackchannelendpointdto",
@@ -3598,8 +3618,12 @@ _dynamic_imports: dict[str, str] = {
     "OrdinalValueEnum": ".ordinalvalueenum",
     "PatchPreferenceChannelsDto": ".patchpreferencechannelsdto",
     "PatchPreferenceChannelsDtoTypedDict": ".patchpreferencechannelsdto",
+    "Context": ".patchsubscriberpreferencesdto",
+    "ContextTypedDict": ".patchsubscriberpreferencesdto",
     "PatchSubscriberPreferencesDto": ".patchsubscriberpreferencesdto",
     "PatchSubscriberPreferencesDtoTypedDict": ".patchsubscriberpreferencesdto",
+    "Two": ".patchsubscriberpreferencesdto",
+    "TwoTypedDict": ".patchsubscriberpreferencesdto",
     "PatchSubscriberRequestDto": ".patchsubscriberrequestdto",
     "PatchSubscriberRequestDtoTypedDict": ".patchsubscriberrequestdto",
     "PatchWorkflowDto": ".patchworkflowdto",

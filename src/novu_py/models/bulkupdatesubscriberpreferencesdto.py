@@ -6,15 +6,45 @@ from .bulkupdatesubscriberpreferenceitemdto import (
     BulkUpdateSubscriberPreferenceItemDtoTypedDict,
 )
 from novu_py.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from typing import Any, Dict, List, Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+class Context2TypedDict(TypedDict):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+    data: NotRequired[Dict[str, Any]]
+    r"""Optional additional context data"""
+
+
+class Context2(BaseModel):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+
+    data: Optional[Dict[str, Any]] = None
+    r"""Optional additional context data"""
+
+
+BulkUpdateSubscriberPreferencesDtoContextTypedDict = TypeAliasType(
+    "BulkUpdateSubscriberPreferencesDtoContextTypedDict", Union[Context2TypedDict, str]
+)
+
+
+BulkUpdateSubscriberPreferencesDtoContext = TypeAliasType(
+    "BulkUpdateSubscriberPreferencesDtoContext", Union[Context2, str]
+)
 
 
 class BulkUpdateSubscriberPreferencesDtoTypedDict(TypedDict):
     preferences: List[BulkUpdateSubscriberPreferenceItemDtoTypedDict]
     r"""Array of workflow preferences to update (maximum 100 items)"""
+    context: NotRequired[Dict[str, BulkUpdateSubscriberPreferencesDtoContextTypedDict]]
 
 
 class BulkUpdateSubscriberPreferencesDto(BaseModel):
     preferences: List[BulkUpdateSubscriberPreferenceItemDto]
     r"""Array of workflow preferences to update (maximum 100 items)"""
+
+    context: Optional[Dict[str, BulkUpdateSubscriberPreferencesDtoContext]] = None
