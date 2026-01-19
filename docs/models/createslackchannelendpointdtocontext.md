@@ -9,9 +9,9 @@
 value: str = /* values here */
 ```
 
-### `models.Context2`
+### `models.CreateSlackChannelEndpointDtoContext2`
 
 ```python
-value: models.Context2 = /* values here */
+value: models.CreateSlackChannelEndpointDtoContext2 = /* values here */
 ```
 

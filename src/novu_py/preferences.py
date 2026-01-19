@@ -15,6 +15,7 @@ class Preferences(BaseSDK):
         *,
         subscriber_id: str,
         criticality: Optional[models.Criticality] = models.Criticality.NON_CRITICAL,
+        context_keys: Optional[List[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -28,6 +29,7 @@ class Preferences(BaseSDK):
 
         :param subscriber_id:
         :param criticality:
+        :param context_keys: Context keys for filtering preferences (e.g., [\"tenant:acme\"])
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -47,6 +49,7 @@ class Preferences(BaseSDK):
         request = models.SubscribersControllerGetSubscriberPreferencesRequest(
             subscriber_id=subscriber_id,
             criticality=criticality,
+            context_keys=context_keys,
             idempotency_key=idempotency_key,
         )
 
@@ -156,6 +159,7 @@ class Preferences(BaseSDK):
         *,
         subscriber_id: str,
         criticality: Optional[models.Criticality] = models.Criticality.NON_CRITICAL,
+        context_keys: Optional[List[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -169,6 +173,7 @@ class Preferences(BaseSDK):
 
         :param subscriber_id:
         :param criticality:
+        :param context_keys: Context keys for filtering preferences (e.g., [\"tenant:acme\"])
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -188,6 +193,7 @@ class Preferences(BaseSDK):
         request = models.SubscribersControllerGetSubscriberPreferencesRequest(
             subscriber_id=subscriber_id,
             criticality=criticality,
+            context_keys=context_keys,
             idempotency_key=idempotency_key,
         )
 
