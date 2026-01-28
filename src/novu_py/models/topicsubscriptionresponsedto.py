@@ -3,9 +3,11 @@
 from __future__ import annotations
 from .subscriberdto import SubscriberDto, SubscriberDtoTypedDict
 from .topicresponsedto import TopicResponseDto, TopicResponseDtoTypedDict
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from pydantic import model_serializer
+from typing import List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class TopicSubscriptionResponseDtoTypedDict(TypedDict):
@@ -19,6 +21,8 @@ class TopicSubscriptionResponseDtoTypedDict(TypedDict):
     r"""Topic information"""
     subscriber: SubscriberDtoTypedDict
     r"""Subscriber information"""
+    context_keys: NotRequired[List[str]]
+    r"""Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)"""
 
 
 class TopicSubscriptionResponseDto(BaseModel):
@@ -36,3 +40,24 @@ class TopicSubscriptionResponseDto(BaseModel):
 
     subscriber: SubscriberDto
     r"""Subscriber information"""
+
+    context_keys: Annotated[
+        Optional[List[str]], pydantic.Field(alias="contextKeys")
+    ] = None
+    r"""Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["contextKeys"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

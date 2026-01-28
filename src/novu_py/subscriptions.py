@@ -1007,7 +1007,7 @@ class Subscriptions(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return models.TopicsControllerGetTopicSubscriptionResponse(
                 result=unmarshal_json_response(
-                    models.SubscriptionResponseDto, http_res
+                    models.SubscriptionDetailsResponseDto, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -1147,7 +1147,7 @@ class Subscriptions(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return models.TopicsControllerGetTopicSubscriptionResponse(
                 result=unmarshal_json_response(
-                    models.SubscriptionResponseDto, http_res
+                    models.SubscriptionDetailsResponseDto, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )

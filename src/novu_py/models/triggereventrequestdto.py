@@ -7,8 +7,9 @@ from .stepsoverrides import StepsOverrides, StepsOverridesTypedDict
 from .subscriberpayloaddto import SubscriberPayloadDto, SubscriberPayloadDtoTypedDict
 from .tenantpayloaddto import TenantPayloadDto, TenantPayloadDtoTypedDict
 from .topicpayloaddto import TopicPayloadDto, TopicPayloadDtoTypedDict
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -25,6 +26,22 @@ class Channels(BaseModel):
 
     email: Optional[EmailChannelOverrides] = None
     r"""Email channel specific overrides"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["email"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class OverridesTypedDict(TypedDict):
@@ -106,6 +123,34 @@ class Overrides(BaseModel):
     severity: Optional[SeverityLevelEnum] = None
     r"""Severity of the workflow"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "steps",
+                "channels",
+                "providers",
+                "email",
+                "push",
+                "sms",
+                "chat",
+                "layoutIdentifier",
+                "severity",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 To1TypedDict = TypeAliasType(
     "To1TypedDict", Union[TopicPayloadDtoTypedDict, SubscriberPayloadDtoTypedDict, str]
@@ -173,6 +218,22 @@ class TriggerEventRequestDtoContext2(BaseModel):
 
     data: Optional[Dict[str, Any]] = None
     r"""Optional additional context data"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 TriggerEventRequestDtoContextTypedDict = TypeAliasType(
@@ -249,3 +310,21 @@ class TriggerEventRequestDto(BaseModel):
     """
 
     context: Optional[Dict[str, TriggerEventRequestDtoContext]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["payload", "overrides", "transactionId", "actor", "tenant", "context"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

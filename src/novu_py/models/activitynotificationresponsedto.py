@@ -16,8 +16,9 @@ from .activitynotificationtemplateresponsedto import (
 from .activitytopicdto import ActivityTopicDto, ActivityTopicDtoTypedDict
 from .severitylevelenum import SeverityLevelEnum
 from .steptypeenum import StepTypeEnum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -132,3 +133,39 @@ class ActivityNotificationResponseDto(BaseModel):
         Optional[List[str]], pydantic.Field(alias="contextKeys")
     ] = None
     r"""Context (single or multi) in which the notification was sent"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "_id",
+                "_templateId",
+                "_digestedNotificationId",
+                "createdAt",
+                "updatedAt",
+                "channels",
+                "subscriber",
+                "template",
+                "jobs",
+                "payload",
+                "tags",
+                "controls",
+                "to",
+                "topics",
+                "severity",
+                "critical",
+                "contextKeys",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

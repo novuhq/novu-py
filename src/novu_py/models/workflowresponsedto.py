@@ -65,31 +65,26 @@ class WorkflowResponseDtoUpdatedBy(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["firstName", "lastName", "externalId"]
-        nullable_fields = ["firstName", "lastName", "externalId"]
-        null_default_fields = []
-
+        optional_fields = set(["firstName", "lastName", "externalId"])
+        nullable_fields = set(["firstName", "lastName", "externalId"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -130,31 +125,26 @@ class LastPublishedBy(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["firstName", "lastName", "externalId"]
-        nullable_fields = ["firstName", "lastName", "externalId"]
-        null_default_fields = []
-
+        optional_fields = set(["firstName", "lastName", "externalId"])
+        nullable_fields = set(["firstName", "lastName", "externalId"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -329,50 +319,49 @@ class WorkflowResponseDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "description",
-            "tags",
-            "active",
-            "validatePayload",
-            "payloadSchema",
-            "isTranslationEnabled",
-            "updatedBy",
-            "lastPublishedAt",
-            "lastPublishedBy",
-            "issues",
-            "lastTriggeredAt",
-            "payloadExample",
-        ]
-        nullable_fields = [
-            "payloadSchema",
-            "updatedBy",
-            "lastPublishedAt",
-            "lastPublishedBy",
-            "lastTriggeredAt",
-            "payloadExample",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "description",
+                "tags",
+                "active",
+                "validatePayload",
+                "payloadSchema",
+                "isTranslationEnabled",
+                "updatedBy",
+                "lastPublishedAt",
+                "lastPublishedBy",
+                "issues",
+                "lastTriggeredAt",
+                "payloadExample",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "payloadSchema",
+                "updatedBy",
+                "lastPublishedAt",
+                "lastPublishedBy",
+                "lastTriggeredAt",
+                "payloadExample",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

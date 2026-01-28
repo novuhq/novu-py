@@ -25,7 +25,9 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.subscribers.preferences.list(subscriber_id="<id>", criticality=novu_py.Criticality.NON_CRITICAL)
+    res = novu.subscribers.preferences.list(subscriber_id="<id>", criticality=novu_py.Criticality.NON_CRITICAL, context_keys=[
+        "tenant:acme",
+    ])
 
     # Handle response
     print(res)
@@ -34,12 +36,13 @@ with Novu(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `subscriber_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `criticality`                                                       | [Optional[models.Criticality]](../../models/criticality.md)         | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `subscriber_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
+| `criticality`                                                       | [Optional[models.Criticality]](../../models/criticality.md)         | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |
+| `context_keys`                                                      | List[*str*]                                                         | :heavy_minus_sign:                                                  | Context keys for filtering preferences (e.g., ["tenant:acme"])      | [<br/>"tenant:acme"<br/>]                                           |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |                                                                     |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 
@@ -141,6 +144,9 @@ with Novu(
                 },
             },
         },
+        "context": {
+            "key": "org-acme",
+        },
     })
 
     # Handle response
@@ -189,6 +195,9 @@ with Novu(
 
     res = novu.subscribers.preferences.bulk_update(subscriber_id="<id>", bulk_update_subscriber_preferences_dto={
         "preferences": [],
+        "context": {
+            "key": "org-acme",
+        },
     })
 
     # Handle response

@@ -13,9 +13,10 @@ from .workflowpreferencerequestdto import (
     WorkflowPreferenceRequestDto,
     WorkflowPreferenceRequestDtoTypedDict,
 )
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from typing import List, Optional, Union
+from pydantic import model_serializer
+from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -26,6 +27,51 @@ SubscriptionsModelTypedDict = TypeAliasType(
 
 SubscriptionsModel = TypeAliasType(
     "SubscriptionsModel", Union[TopicSubscriberIdentifierDto, str]
+)
+
+
+class CreateTopicSubscriptionsRequestDtoContext2TypedDict(TypedDict):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+    data: NotRequired[Dict[str, Any]]
+    r"""Optional additional context data"""
+
+
+class CreateTopicSubscriptionsRequestDtoContext2(BaseModel):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+
+    data: Optional[Dict[str, Any]] = None
+    r"""Optional additional context data"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+CreateTopicSubscriptionsRequestDtoContextTypedDict = TypeAliasType(
+    "CreateTopicSubscriptionsRequestDtoContextTypedDict",
+    Union[CreateTopicSubscriptionsRequestDtoContext2TypedDict, str],
+)
+
+
+CreateTopicSubscriptionsRequestDtoContext = TypeAliasType(
+    "CreateTopicSubscriptionsRequestDtoContext",
+    Union[CreateTopicSubscriptionsRequestDtoContext2, str],
 )
 
 
@@ -50,6 +96,7 @@ class CreateTopicSubscriptionsRequestDtoTypedDict(TypedDict):
     r"""List of subscriptions to subscribe to the topic (max: 100). Can be either a string array of subscriber IDs or an array of objects with identifier and subscriberId"""
     name: NotRequired[str]
     r"""The name of the topic"""
+    context: NotRequired[Dict[str, CreateTopicSubscriptionsRequestDtoContextTypedDict]]
     preferences: NotRequired[List[PreferencesModelTypedDict]]
     r"""The preferences of the topic. Can be a simple workflow ID string, workflow preference object, or group filter object"""
 
@@ -70,5 +117,25 @@ class CreateTopicSubscriptionsRequestDto(BaseModel):
     name: Optional[str] = None
     r"""The name of the topic"""
 
+    context: Optional[Dict[str, CreateTopicSubscriptionsRequestDtoContext]] = None
+
     preferences: Optional[List[PreferencesModel]] = None
     r"""The preferences of the topic. Can be a simple workflow ID string, workflow preference object, or group filter object"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["subscriberIds", "subscriptions", "name", "context", "preferences"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

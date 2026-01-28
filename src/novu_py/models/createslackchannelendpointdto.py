@@ -6,13 +6,14 @@ from .slackchannelendpointdto import (
     SlackChannelEndpointDtoTypedDict,
 )
 from enum import Enum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class Context2TypedDict(TypedDict):
+class CreateSlackChannelEndpointDtoContext2TypedDict(TypedDict):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -20,7 +21,7 @@ class Context2TypedDict(TypedDict):
     r"""Optional additional context data"""
 
 
-class Context2(BaseModel):
+class CreateSlackChannelEndpointDtoContext2(BaseModel):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -28,14 +29,32 @@ class Context2(BaseModel):
     data: Optional[Dict[str, Any]] = None
     r"""Optional additional context data"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 CreateSlackChannelEndpointDtoContextTypedDict = TypeAliasType(
-    "CreateSlackChannelEndpointDtoContextTypedDict", Union[Context2TypedDict, str]
+    "CreateSlackChannelEndpointDtoContextTypedDict",
+    Union[CreateSlackChannelEndpointDtoContext2TypedDict, str],
 )
 
 
 CreateSlackChannelEndpointDtoContext = TypeAliasType(
-    "CreateSlackChannelEndpointDtoContext", Union[Context2, str]
+    "CreateSlackChannelEndpointDtoContext",
+    Union[CreateSlackChannelEndpointDtoContext2, str],
 )
 
 
@@ -85,3 +104,19 @@ class CreateSlackChannelEndpointDto(BaseModel):
         Optional[str], pydantic.Field(alias="connectionIdentifier")
     ] = None
     r"""The identifier of the channel connection to use for this channel endpoint."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["identifier", "context", "connectionIdentifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

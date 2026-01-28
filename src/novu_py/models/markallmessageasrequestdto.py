@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -42,3 +43,19 @@ class MarkAllMessageAsRequestDto(BaseModel):
         Optional[FeedIdentifier], pydantic.Field(alias="feedIdentifier")
     ] = None
     r"""Optional feed identifier or array of feed identifiers"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["feedIdentifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

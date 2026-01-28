@@ -6,7 +6,7 @@ from .getsubscriberpreferencesdto import (
     GetSubscriberPreferencesDtoTypedDict,
 )
 from enum import Enum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 from novu_py.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -14,6 +14,7 @@ from novu_py.utils import (
     QueryParamMetadata,
 )
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -27,6 +28,8 @@ class Criticality(str, Enum):
 class SubscribersControllerGetSubscriberPreferencesRequestTypedDict(TypedDict):
     subscriber_id: str
     criticality: NotRequired[Criticality]
+    context_keys: NotRequired[List[str]]
+    r"""Context keys for filtering preferences (e.g., [\"tenant:acme\"])"""
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
@@ -43,12 +46,35 @@ class SubscribersControllerGetSubscriberPreferencesRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = Criticality.NON_CRITICAL
 
+    context_keys: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="contextKeys"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Context keys for filtering preferences (e.g., [\"tenant:acme\"])"""
+
     idempotency_key: Annotated[
         Optional[str],
         pydantic.Field(alias="idempotency-key"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""A header for idempotency purposes"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["criticality", "contextKeys", "idempotency-key"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class SubscribersControllerGetSubscriberPreferencesResponseTypedDict(TypedDict):

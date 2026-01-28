@@ -6,10 +6,50 @@ from .patchpreferencechannelsdto import (
     PatchPreferenceChannelsDtoTypedDict,
 )
 from .scheduledto import ScheduleDto, ScheduleDtoTypedDict
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from pydantic import model_serializer
+from typing import Any, Dict, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+class TwoTypedDict(TypedDict):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+    data: NotRequired[Dict[str, Any]]
+    r"""Optional additional context data"""
+
+
+class Two(BaseModel):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+
+    data: Optional[Dict[str, Any]] = None
+    r"""Optional additional context data"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+ContextTypedDict = TypeAliasType("ContextTypedDict", Union[TwoTypedDict, str])
+
+
+Context = TypeAliasType("Context", Union[Two, str])
 
 
 class PatchSubscriberPreferencesDtoTypedDict(TypedDict):
@@ -19,6 +59,7 @@ class PatchSubscriberPreferencesDtoTypedDict(TypedDict):
     r"""Workflow internal _id, identifier or slug. If provided, update workflow specific preferences, otherwise update global preferences"""
     schedule: NotRequired[ScheduleDtoTypedDict]
     r"""Subscriber schedule"""
+    context: NotRequired[Dict[str, ContextTypedDict]]
 
 
 class PatchSubscriberPreferencesDto(BaseModel):
@@ -30,3 +71,21 @@ class PatchSubscriberPreferencesDto(BaseModel):
 
     schedule: Optional[ScheduleDto] = None
     r"""Subscriber schedule"""
+
+    context: Optional[Dict[str, Context]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["channels", "workflowId", "schedule", "context"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

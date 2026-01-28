@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .timerangedto import TimeRangeDto, TimeRangeDtoTypedDict
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -26,6 +27,22 @@ class Monday(BaseModel):
     hours: Optional[List[TimeRangeDto]] = None
     r"""Hours"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hours"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TuesdayTypedDict(TypedDict):
     r"""Tuesday schedule"""
@@ -44,6 +61,22 @@ class Tuesday(BaseModel):
 
     hours: Optional[List[TimeRangeDto]] = None
     r"""Hours"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hours"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class WednesdayTypedDict(TypedDict):
@@ -64,6 +97,22 @@ class Wednesday(BaseModel):
     hours: Optional[List[TimeRangeDto]] = None
     r"""Hours"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hours"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ThursdayTypedDict(TypedDict):
     r"""Thursday schedule"""
@@ -82,6 +131,22 @@ class Thursday(BaseModel):
 
     hours: Optional[List[TimeRangeDto]] = None
     r"""Hours"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hours"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FridayTypedDict(TypedDict):
@@ -102,6 +167,22 @@ class Friday(BaseModel):
     hours: Optional[List[TimeRangeDto]] = None
     r"""Hours"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hours"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SaturdayTypedDict(TypedDict):
     r"""Saturday schedule"""
@@ -121,6 +202,22 @@ class Saturday(BaseModel):
     hours: Optional[List[TimeRangeDto]] = None
     r"""Hours"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hours"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SundayTypedDict(TypedDict):
     r"""Sunday schedule"""
@@ -139,6 +236,22 @@ class Sunday(BaseModel):
 
     hours: Optional[List[TimeRangeDto]] = None
     r"""Hours"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hours"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class WeeklyScheduleTypedDict(TypedDict):
@@ -184,6 +297,32 @@ class WeeklySchedule(BaseModel):
     sunday: Optional[Sunday] = None
     r"""Sunday schedule"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ScheduleDtoTypedDict(TypedDict):
     is_enabled: bool
@@ -200,3 +339,19 @@ class ScheduleDto(BaseModel):
         Optional[WeeklySchedule], pydantic.Field(alias="weeklySchedule")
     ] = None
     r"""Weekly schedule"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["weeklySchedule"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

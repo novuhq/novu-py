@@ -7,7 +7,8 @@ from .subscriptionresponsedto import (
     SubscriptionResponseDto,
     SubscriptionResponseDtoTypedDict,
 )
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -30,3 +31,19 @@ class CreateSubscriptionsResponseDto(BaseModel):
 
     errors: Optional[List[SubscriptionErrorDto]] = None
     r"""The list of errors for failed subscription attempts"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["errors"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
