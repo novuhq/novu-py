@@ -12,8 +12,9 @@ from .activitynotificationstepresponsedto import (
 from .digestmetadatadto import DigestMetadataDto, DigestMetadataDtoTypedDict
 from .providersidenum import ProvidersIDEnum
 from enum import Enum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -33,11 +34,11 @@ class ActivityNotificationJobResponseDtoType(str, Enum):
     CUSTOM = "custom"
 
 
-class ActivityNotificationJobResponseDtoPayloadTypedDict(TypedDict):
+class PayloadTypedDict(TypedDict):
     r"""Optional payload for the job"""
 
 
-class ActivityNotificationJobResponseDtoPayload(BaseModel):
+class Payload(BaseModel):
     r"""Optional payload for the job"""
 
 
@@ -58,7 +59,7 @@ class ActivityNotificationJobResponseDtoTypedDict(TypedDict):
     r"""Optional digest for the job, including metadata and events"""
     overrides: NotRequired[Dict[str, Any]]
     r"""Optional context object for additional error details."""
-    payload: NotRequired[ActivityNotificationJobResponseDtoPayloadTypedDict]
+    payload: NotRequired[PayloadTypedDict]
     r"""Optional payload for the job"""
     updated_at: NotRequired[str]
     r"""Updated time of the notification"""
@@ -94,7 +95,7 @@ class ActivityNotificationJobResponseDto(BaseModel):
     overrides: Optional[Dict[str, Any]] = None
     r"""Optional context object for additional error details."""
 
-    payload: Optional[ActivityNotificationJobResponseDtoPayload] = None
+    payload: Optional[Payload] = None
     r"""Optional payload for the job"""
 
     updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None
@@ -104,3 +105,21 @@ class ActivityNotificationJobResponseDto(BaseModel):
         Optional[float], pydantic.Field(alias="scheduleExtensionsCount")
     ] = None
     r"""The number of times the digest/delay job has been extended to align with the subscribers schedule"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["digest", "overrides", "payload", "updatedAt", "scheduleExtensionsCount"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

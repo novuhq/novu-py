@@ -13,9 +13,11 @@ from .subscriberpreferencesworkflowinfodto import (
     SubscriberPreferencesWorkflowInfoDto,
     SubscriberPreferencesWorkflowInfoDtoTypedDict,
 )
-from novu_py.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from novu_py.types import BaseModel, UNSET_SENTINEL
+import pydantic
+from pydantic import model_serializer
+from typing import List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class SubscriberWorkflowPreferenceDtoTypedDict(TypedDict):
@@ -27,6 +29,8 @@ class SubscriberWorkflowPreferenceDtoTypedDict(TypedDict):
     r"""List of preference overrides"""
     workflow: SubscriberPreferencesWorkflowInfoDtoTypedDict
     r"""Workflow information"""
+    updated_at: NotRequired[str]
+    r"""Timestamp when the subscriber last updated their preference. Only present if subscriber explicitly set preferences."""
 
 
 class SubscriberWorkflowPreferenceDto(BaseModel):
@@ -41,3 +45,22 @@ class SubscriberWorkflowPreferenceDto(BaseModel):
 
     workflow: SubscriberPreferencesWorkflowInfoDto
     r"""Workflow information"""
+
+    updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None
+    r"""Timestamp when the subscriber last updated their preference. Only present if subscriber explicitly set preferences."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["updatedAt"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

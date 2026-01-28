@@ -5,8 +5,9 @@ from .deletetopicsubscriberidentifierdto import (
     DeleteTopicSubscriberIdentifierDto,
     DeleteTopicSubscriberIdentifierDtoTypedDict,
 )
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -46,3 +47,19 @@ class DeleteTopicSubscriptionsRequestDto(BaseModel):
         None
     )
     r"""List of subscriptions to unsubscribe from the topic (max: 100). Can be either a string array of subscriber IDs or an array of objects with identifier and/or subscriberId. If only subscriberId is provided, all subscriptions for that subscriber within the topic will be deleted."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["subscriberIds", "subscriptions"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

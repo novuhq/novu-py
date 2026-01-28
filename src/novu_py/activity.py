@@ -6,7 +6,7 @@ from novu_py._hooks import HookContext
 from novu_py.types import OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from novu_py.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import Any, Dict, List, Mapping, Optional
 
 
 class Activity(BaseSDK):
@@ -15,7 +15,7 @@ class Activity(BaseSDK):
         *,
         environment_id: str,
         integration_id: str,
-        request_body: Any,
+        request_body: Dict[str, Any],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -66,7 +66,7 @@ class Activity(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body, False, False, "json", Any
+                request.request_body, False, False, "json", Dict[str, Any]
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -115,7 +115,7 @@ class Activity(BaseSDK):
         *,
         environment_id: str,
         integration_id: str,
-        request_body: Any,
+        request_body: Dict[str, Any],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -166,7 +166,7 @@ class Activity(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body, False, False, "json", Any
+                request.request_body, False, False, "json", Dict[str, Any]
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,

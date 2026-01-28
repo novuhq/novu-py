@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .phoneendpointdto import PhoneEndpointDto, PhoneEndpointDtoTypedDict
 from enum import Enum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -24,6 +25,22 @@ class CreatePhoneEndpointDtoContext2(BaseModel):
 
     data: Optional[Dict[str, Any]] = None
     r"""Optional additional context data"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 CreatePhoneEndpointDtoContextTypedDict = TypeAliasType(
@@ -83,3 +100,19 @@ class CreatePhoneEndpointDto(BaseModel):
         Optional[str], pydantic.Field(alias="connectionIdentifier")
     ] = None
     r"""The identifier of the channel connection to use for this channel endpoint."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["identifier", "context", "connectionIdentifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

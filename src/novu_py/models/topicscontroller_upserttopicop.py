@@ -6,7 +6,7 @@ from .createupdatetopicrequestdto import (
     CreateUpdateTopicRequestDtoTypedDict,
 )
 from .topicresponsedto import TopicResponseDto, TopicResponseDtoTypedDict
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 from novu_py.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -14,6 +14,7 @@ from novu_py.utils import (
     RequestMetadata,
 )
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -45,6 +46,22 @@ class TopicsControllerUpsertTopicRequest(BaseModel):
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""A header for idempotency purposes"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["failIfExists", "idempotency-key"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TopicsControllerUpsertTopicResponseTypedDict(TypedDict):

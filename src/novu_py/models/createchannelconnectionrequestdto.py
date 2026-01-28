@@ -3,13 +3,14 @@
 from __future__ import annotations
 from .authdto import AuthDto, AuthDtoTypedDict
 from .workspacedto import WorkspaceDto, WorkspaceDtoTypedDict
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class TwoTypedDict(TypedDict):
+class CreateChannelConnectionRequestDtoContext2TypedDict(TypedDict):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -17,7 +18,7 @@ class TwoTypedDict(TypedDict):
     r"""Optional additional context data"""
 
 
-class Two(BaseModel):
+class CreateChannelConnectionRequestDtoContext2(BaseModel):
     r"""Rich context object with id and optional data"""
 
     id: str
@@ -25,11 +26,33 @@ class Two(BaseModel):
     data: Optional[Dict[str, Any]] = None
     r"""Optional additional context data"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
 
-ContextTypedDict = TypeAliasType("ContextTypedDict", Union[TwoTypedDict, str])
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
-Context = TypeAliasType("Context", Union[Two, str])
+CreateChannelConnectionRequestDtoContextTypedDict = TypeAliasType(
+    "CreateChannelConnectionRequestDtoContextTypedDict",
+    Union[CreateChannelConnectionRequestDtoContext2TypedDict, str],
+)
+
+
+CreateChannelConnectionRequestDtoContext = TypeAliasType(
+    "CreateChannelConnectionRequestDtoContext",
+    Union[CreateChannelConnectionRequestDtoContext2, str],
+)
 
 
 class CreateChannelConnectionRequestDtoTypedDict(TypedDict):
@@ -41,7 +64,7 @@ class CreateChannelConnectionRequestDtoTypedDict(TypedDict):
     r"""The unique identifier for the channel connection. If not provided, one will be generated automatically."""
     subscriber_id: NotRequired[str]
     r"""The subscriber ID to link the channel connection to"""
-    context: NotRequired[Dict[str, ContextTypedDict]]
+    context: NotRequired[Dict[str, CreateChannelConnectionRequestDtoContextTypedDict]]
 
 
 class CreateChannelConnectionRequestDto(BaseModel):
@@ -60,4 +83,20 @@ class CreateChannelConnectionRequestDto(BaseModel):
     subscriber_id: Annotated[Optional[str], pydantic.Field(alias="subscriberId")] = None
     r"""The subscriber ID to link the channel connection to"""
 
-    context: Optional[Dict[str, Context]] = None
+    context: Optional[Dict[str, CreateChannelConnectionRequestDtoContext]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["identifier", "subscriberId", "context"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

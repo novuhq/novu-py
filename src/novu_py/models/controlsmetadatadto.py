@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .uischema import UISchema, UISchemaTypedDict
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -23,3 +24,19 @@ class ControlsMetadataDto(BaseModel):
 
     ui_schema: Annotated[Optional[UISchema], pydantic.Field(alias="uiSchema")] = None
     r"""UI Schema for rendering"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["dataSchema", "uiSchema"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

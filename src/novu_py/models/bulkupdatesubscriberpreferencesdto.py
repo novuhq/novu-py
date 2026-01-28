@@ -5,16 +5,79 @@ from .bulkupdatesubscriberpreferenceitemdto import (
     BulkUpdateSubscriberPreferenceItemDto,
     BulkUpdateSubscriberPreferenceItemDtoTypedDict,
 )
-from novu_py.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from novu_py.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import Any, Dict, List, Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+class Context2TypedDict(TypedDict):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+    data: NotRequired[Dict[str, Any]]
+    r"""Optional additional context data"""
+
+
+class Context2(BaseModel):
+    r"""Rich context object with id and optional data"""
+
+    id: str
+
+    data: Optional[Dict[str, Any]] = None
+    r"""Optional additional context data"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+BulkUpdateSubscriberPreferencesDtoContextTypedDict = TypeAliasType(
+    "BulkUpdateSubscriberPreferencesDtoContextTypedDict", Union[Context2TypedDict, str]
+)
+
+
+BulkUpdateSubscriberPreferencesDtoContext = TypeAliasType(
+    "BulkUpdateSubscriberPreferencesDtoContext", Union[Context2, str]
+)
 
 
 class BulkUpdateSubscriberPreferencesDtoTypedDict(TypedDict):
     preferences: List[BulkUpdateSubscriberPreferenceItemDtoTypedDict]
     r"""Array of workflow preferences to update (maximum 100 items)"""
+    context: NotRequired[Dict[str, BulkUpdateSubscriberPreferencesDtoContextTypedDict]]
 
 
 class BulkUpdateSubscriberPreferencesDto(BaseModel):
     preferences: List[BulkUpdateSubscriberPreferenceItemDto]
     r"""Array of workflow preferences to update (maximum 100 items)"""
+
+    context: Optional[Dict[str, BulkUpdateSubscriberPreferencesDtoContext]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["context"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

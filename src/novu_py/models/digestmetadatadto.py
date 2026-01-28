@@ -5,8 +5,9 @@ from .digesttimedconfigdto import DigestTimedConfigDto, DigestTimedConfigDtoType
 from .digesttypeenum import DigestTypeEnum
 from .digestunitenum import DigestUnitEnum
 from enum import Enum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -79,3 +80,31 @@ class DigestMetadataDto(BaseModel):
 
     timed: Optional[DigestTimedConfigDto] = None
     r"""Configuration for timed digest"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "digestKey",
+                "amount",
+                "unit",
+                "events",
+                "backoff",
+                "backoffAmount",
+                "backoffUnit",
+                "updateMode",
+                "timed",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

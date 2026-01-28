@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .integrationissueenum import IntegrationIssueEnum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -26,3 +27,19 @@ class StepIntegrationIssue(BaseModel):
 
     variable_name: Annotated[Optional[str], pydantic.Field(alias="variableName")] = None
     r"""Name of the variable related to the issue"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["variableName"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

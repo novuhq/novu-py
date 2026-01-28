@@ -10,7 +10,7 @@ from .workflowresponse import WorkflowResponse, WorkflowResponseTypedDict
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -22,22 +22,6 @@ r"""Content of the message, can be an email block or a string"""
 
 Content = TypeAliasType("Content", Union[List[EmailBlock], str])
 r"""Content of the message, can be an email block or a string"""
-
-
-class MessageResponseDtoPayloadTypedDict(TypedDict):
-    r"""The payload that was used to send the notification trigger"""
-
-
-class MessageResponseDtoPayload(BaseModel):
-    r"""The payload that was used to send the notification trigger"""
-
-
-class MessageResponseDtoOverridesTypedDict(TypedDict):
-    r"""Provider specific overrides used when triggering the notification"""
-
-
-class MessageResponseDtoOverrides(BaseModel):
-    r"""Provider specific overrides used when triggering the notification"""
 
 
 class MessageResponseDtoTypedDict(TypedDict):
@@ -105,9 +89,9 @@ class MessageResponseDtoTypedDict(TypedDict):
     r"""Error ID if the message has an error"""
     error_text: NotRequired[str]
     r"""Error text if the message has an error"""
-    payload: NotRequired[MessageResponseDtoPayloadTypedDict]
+    payload: NotRequired[Dict[str, Any]]
     r"""The payload that was used to send the notification trigger"""
-    overrides: NotRequired[MessageResponseDtoOverridesTypedDict]
+    overrides: NotRequired[Dict[str, Any]]
     r"""Provider specific overrides used when triggering the notification"""
     context_keys: NotRequired[List[str]]
     r"""Context (single or multi) in which the message was sent"""
@@ -226,10 +210,10 @@ class MessageResponseDto(BaseModel):
     error_text: Annotated[Optional[str], pydantic.Field(alias="errorText")] = None
     r"""Error text if the message has an error"""
 
-    payload: Optional[MessageResponseDtoPayload] = None
+    payload: Optional[Dict[str, Any]] = None
     r"""The payload that was used to send the notification trigger"""
 
-    overrides: Optional[MessageResponseDtoOverrides] = None
+    overrides: Optional[Dict[str, Any]] = None
     r"""Provider specific overrides used when triggering the notification"""
 
     context_keys: Annotated[
@@ -239,55 +223,54 @@ class MessageResponseDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "_id",
-            "_templateId",
-            "_messageTemplateId",
-            "subscriber",
-            "template",
-            "templateIdentifier",
-            "deliveredAt",
-            "lastSeenDate",
-            "lastReadDate",
-            "content",
-            "subject",
-            "snoozedUntil",
-            "email",
-            "phone",
-            "directWebhookUrl",
-            "providerId",
-            "deviceTokens",
-            "title",
-            "_feedId",
-            "errorId",
-            "errorText",
-            "payload",
-            "overrides",
-            "contextKeys",
-        ]
-        nullable_fields = ["_templateId", "_messageTemplateId", "content", "_feedId"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "_id",
+                "_templateId",
+                "_messageTemplateId",
+                "subscriber",
+                "template",
+                "templateIdentifier",
+                "deliveredAt",
+                "lastSeenDate",
+                "lastReadDate",
+                "content",
+                "subject",
+                "snoozedUntil",
+                "email",
+                "phone",
+                "directWebhookUrl",
+                "providerId",
+                "deviceTokens",
+                "title",
+                "_feedId",
+                "errorId",
+                "errorText",
+                "payload",
+                "overrides",
+                "contextKeys",
+            ]
+        )
+        nullable_fields = set(
+            ["_templateId", "_messageTemplateId", "content", "_feedId"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

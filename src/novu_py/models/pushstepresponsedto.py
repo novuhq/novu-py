@@ -8,9 +8,9 @@ from .pushcontrolsmetadataresponsedto import (
 from .resourceoriginenum import ResourceOriginEnum
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import ConfigDict
+from pydantic import ConfigDict, model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -50,6 +50,25 @@ class PushStepResponseDtoControlValues(BaseModel):
     @additional_properties.setter
     def additional_properties(self, value):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["skip", "subject", "body"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+        for k, v in serialized.items():
+            m[k] = v
+
+        return m
 
 
 class PushStepResponseDtoTypedDict(TypedDict):
@@ -118,3 +137,19 @@ class PushStepResponseDto(BaseModel):
 
     issues: Optional[StepIssuesDto] = None
     r"""Issues associated with the step"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["controlValues", "issues"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

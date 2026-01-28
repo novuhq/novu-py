@@ -30,6 +30,14 @@ class MessagePayloadValidationExceptionDto4(BaseModel):
     pass
 
 
+class SchemaTypedDict(TypedDict):
+    r"""The JSON schema that was used for validation"""
+
+
+class Schema(BaseModel):
+    r"""The JSON schema that was used for validation"""
+
+
 PayloadValidationExceptionDtoMessageTypedDict = TypeAliasType(
     "PayloadValidationExceptionDtoMessageTypedDict",
     Union[
@@ -54,14 +62,6 @@ PayloadValidationExceptionDtoMessage = TypeAliasType(
     ],
 )
 r"""Value that failed validation"""
-
-
-class SchemaTypedDict(TypedDict):
-    r"""The JSON schema that was used for validation"""
-
-
-class Schema(BaseModel):
-    r"""The JSON schema that was used for validation"""
 
 
 class PayloadValidationExceptionDtoData(BaseModel):

@@ -5,8 +5,9 @@ from .configurationsdto import ConfigurationsDto, ConfigurationsDtoTypedDict
 from .credentialsdto import CredentialsDto, CredentialsDtoTypedDict
 from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict
 from enum import Enum
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -99,3 +100,21 @@ class IntegrationResponseDto(BaseModel):
 
     conditions: Optional[List[StepFilterDto]] = None
     r"""An array of conditions associated with the integration that may influence its behavior or processing logic."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["_id", "configurations", "deletedAt", "deletedBy", "conditions"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

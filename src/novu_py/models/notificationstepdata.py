@@ -11,8 +11,9 @@ from .digesttimedmetadata import DigestTimedMetadata, DigestTimedMetadataTypedDi
 from .messagetemplate import MessageTemplate, MessageTemplateTypedDict
 from .replycallback import ReplyCallback, ReplyCallbackTypedDict
 from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict
-from novu_py.types import BaseModel
+from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -103,3 +104,33 @@ class NotificationStepData(BaseModel):
         Optional[ReplyCallback], pydantic.Field(alias="replyCallback")
     ] = None
     r"""Callback information for replies, including whether it is active and the callback URL."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "_id",
+                "uuid",
+                "name",
+                "_templateId",
+                "active",
+                "shouldStopOnFail",
+                "template",
+                "filters",
+                "_parentId",
+                "metadata",
+                "replyCallback",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
