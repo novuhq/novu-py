@@ -5,15 +5,15 @@ management:
   docVersion: 3.12.0
   speakeasyVersion: 1.700.2
   generationVersion: 2.801.2
-  releaseVersion: 3.13.0
-  configChecksum: 819de72c6523924d6ab66a1adb228287
+  releaseVersion: 3.13.1
+  configChecksum: fae5c952fc1afc9d1bd5767600288e0b
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
 persistentEdits:
-  generation_id: e6b415a5-d53a-4fd0-a1bc-0fa011aaec52
-  pristine_commit_hash: 197ca5983426317957b02f6219e7f58abfffde03
-  pristine_tree_hash: f8a759fc0f1fed6a54f305bb9560065369230bef
+  generation_id: 07de990b-d32f-457e-8b69-c906b0ad2889
+  pristine_commit_hash: 90e80a66afe2e963e2446d79e254dd7bea9f7ae3
+  pristine_tree_hash: 5fa5280cf900b886382e469a98ee8d81655a174b
 features:
   python:
     additionalDependencies: 1.0.0
@@ -2860,8 +2860,8 @@ trackedFiles:
     pristine_git_object: cbbf681a1f7a4d86cfa0fcc28e13438e5bbc8e12
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:902679b395c9528dcc31d76d6c373007149adcb3
-    pristine_git_object: 9897ae3d56f3238de6238fea78f0766ce70a46f6
+    last_write_checksum: sha1:38b6a0d9c31ad7048443fbb58a2f396b9bf66083
+    pristine_git_object: 9801f2b9b2035ca8b04b602169bd090ed5afff90
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77610d735cce1bc0f71f13a746bf06e463e2ce47
@@ -2888,8 +2888,8 @@ trackedFiles:
     pristine_git_object: 955703fa58801c45f9cc8e62f4dfef8228cbf625
   src/novu_py/_version.py:
     id: 8e69485642eb
-    last_write_checksum: sha1:db4f80ca85211ea27b04b103cb37c0c5a17b1660
-    pristine_git_object: 46854c1d12dcb2be4aa69a9222177b06b1c75fd3
+    last_write_checksum: sha1:8529965f8cc9f9916d5a46807a2b56528f9ab8d1
+    pristine_git_object: fb959f31d7b16822784257d5cb01c901ba565e87
   src/novu_py/activity.py:
     id: 7d001a1721a3
     last_write_checksum: sha1:a95d6e0bd0409a1dfd61fcf55d6402643888e0e6
