@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: dd06499cd48925f78a4230d5baa0517d
-  docVersion: 3.12.0
-  speakeasyVersion: 1.700.2
-  generationVersion: 2.801.2
-  releaseVersion: 3.13.0
-  configChecksum: 819de72c6523924d6ab66a1adb228287
+  docChecksum: c55cd3ee83c38c8b0f8739984d9c39f5
+  docVersion: 3.13.0
+  speakeasyVersion: 1.709.0
+  generationVersion: 2.811.4
+  releaseVersion: 4.0.0
+  configChecksum: 8357faa1b014b42668f639b2be79b89e
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
 persistentEdits:
-  generation_id: e6b415a5-d53a-4fd0-a1bc-0fa011aaec52
-  pristine_commit_hash: 197ca5983426317957b02f6219e7f58abfffde03
-  pristine_tree_hash: f8a759fc0f1fed6a54f305bb9560065369230bef
+  generation_id: 36d5ca72-aa97-4865-bc17-97c926155de2
+  pristine_commit_hash: 4ab64803de08f2a3d09a63a01a1b143543d6788e
+  pristine_tree_hash: 216b7019439666b706aaa09d0be8b3c26d06c55d
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
-    constsAndDefaults: 1.0.5
-    core: 5.23.18
+    constsAndDefaults: 1.0.6
+    core: 6.0.4
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -27,7 +27,7 @@ features:
     envVarSecurityUsage: 0.3.2
     examples: 3.0.2
     flattening: 3.1.1
-    globalSecurity: 3.0.4
+    globalSecurity: 3.0.5
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.2.0
@@ -36,7 +36,7 @@ features:
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.2
-    responseFormat: 1.0.1
+    responseFormat: 1.1.0
     retries: 3.0.3
     sdkHooks: 1.2.1
     unions: 3.1.2
@@ -2856,12 +2856,12 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pylintrc:
     id: 7ce8b9f946e6
-    last_write_checksum: sha1:dbf1956b6f3d38d4bca7baa2e79d18bf9b420b2d
-    pristine_git_object: cbbf681a1f7a4d86cfa0fcc28e13438e5bbc8e12
+    last_write_checksum: sha1:8f92393d038e49311d7084324ed162ab5a138f62
+    pristine_git_object: a79f5cc58e1c567fe5808211cb626e752430c9ff
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:902679b395c9528dcc31d76d6c373007149adcb3
-    pristine_git_object: 9897ae3d56f3238de6238fea78f0766ce70a46f6
+    last_write_checksum: sha1:eab36cf19c1bc51119b87ff916bfa013ba8072f0
+    pristine_git_object: ffe5547167e37f14f2feee22cce91389caf52f4f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77610d735cce1bc0f71f13a746bf06e463e2ce47
@@ -2888,8 +2888,8 @@ trackedFiles:
     pristine_git_object: 955703fa58801c45f9cc8e62f4dfef8228cbf625
   src/novu_py/_version.py:
     id: 8e69485642eb
-    last_write_checksum: sha1:db4f80ca85211ea27b04b103cb37c0c5a17b1660
-    pristine_git_object: 46854c1d12dcb2be4aa69a9222177b06b1c75fd3
+    last_write_checksum: sha1:519ee824fd2161f69d700e42376ecbba2a7c628d
+    pristine_git_object: 54bb699caba37606c02f04ea336e89b5c9e143a8
   src/novu_py/activity.py:
     id: 7d001a1721a3
     last_write_checksum: sha1:a95d6e0bd0409a1dfd61fcf55d6402643888e0e6
@@ -4512,8 +4512,8 @@ trackedFiles:
     pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
   src/novu_py/utils/__init__.py:
     id: b38ba7e9d970
-    last_write_checksum: sha1:ffaf69e6877a274b08066215f5a31a1b344f5402
-    pristine_git_object: f4525b2057c3d54fb3b9eff6248fd172478ce94c
+    last_write_checksum: sha1:141be7a6debce43d0acfb482e4b3dab85a894c4a
+    pristine_git_object: 23ac44834d842f128e6b5625ebc19d2b79f87cea
   src/novu_py/utils/annotations.py:
     id: ef8e04eceec7
     last_write_checksum: sha1:a4824ad65f730303e4e1e3ec1febf87b4eb46dbc
@@ -4528,8 +4528,8 @@ trackedFiles:
     pristine_git_object: 3324e1bc2668c54c4d5f5a1a845675319757a828
   src/novu_py/utils/eventstreaming.py:
     id: 77d0b255afff
-    last_write_checksum: sha1:bababae5d54b7efc360db701daa49e18a92c2f3b
-    pristine_git_object: 0969899bfc491e5e408d05643525f347ea95e4fc
+    last_write_checksum: sha1:ffa870a25a7e4e2015bfd7a467ccd3aa1de97f0e
+    pristine_git_object: f2052fc22d9fd6c663ba3dce019fe234ca37108b
   src/novu_py/utils/forms.py:
     id: f9d5ceaf35e1
     last_write_checksum: sha1:15fa7e9ab1611e062a9984cf06cb20969713d295
@@ -4560,8 +4560,8 @@ trackedFiles:
     pristine_git_object: 88a91b10cd2076b4a2c6cff2ac6bfaa5e3c5ad13
   src/novu_py/utils/security.py:
     id: ace39c857907
-    last_write_checksum: sha1:f8ac1c89e1690566a1f949eeb2dbc8303aa375b4
-    pristine_git_object: 959f145877e03635f61e76636b135f877fd963de
+    last_write_checksum: sha1:f94de102e05521240cd13bca37e7407b5a5c8084
+    pristine_git_object: 5356115d5f215824a709b0187fef9fb6d6cb91cd
   src/novu_py/utils/serializers.py:
     id: ff2751084041
     last_write_checksum: sha1:ce1d8d7f500a9ccba0aeca5057cee9c271f4dfd7
