@@ -20,3 +20,9 @@ class ImportMasterJSONRequestDto(BaseModel):
 
     master_json: Annotated[Dict[str, Any], pydantic.Field(alias="masterJson")]
     r"""Master JSON object containing all translations organized by workflow identifier"""
+
+
+try:
+    ImportMasterJSONRequestDto.model_rebuild()
+except NameError:
+    pass

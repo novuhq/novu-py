@@ -14,3 +14,9 @@ class SyncWorkflowDtoTypedDict(TypedDict):
 class SyncWorkflowDto(BaseModel):
     target_environment_id: Annotated[str, pydantic.Field(alias="targetEnvironmentId")]
     r"""Target environment identifier to sync the workflow to"""
+
+
+try:
+    SyncWorkflowDto.model_rebuild()
+except NameError:
+    pass

@@ -93,3 +93,9 @@ class StepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    StepResponseDto.model_rebuild()
+except NameError:
+    pass

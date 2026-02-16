@@ -46,3 +46,9 @@ class UpdateSubscriberChannelRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateSubscriberChannelRequestDto.model_rebuild()
+except NameError:
+    pass

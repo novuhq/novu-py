@@ -150,3 +150,9 @@ class SubscriberResponseDtoOptional(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SubscriberResponseDtoOptional.model_rebuild()
+except NameError:
+    pass

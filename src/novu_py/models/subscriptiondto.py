@@ -142,3 +142,13 @@ class SubscriptionDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SubscriptionDtoSubscriber.model_rebuild()
+except NameError:
+    pass
+try:
+    SubscriptionDto.model_rebuild()
+except NameError:
+    pass

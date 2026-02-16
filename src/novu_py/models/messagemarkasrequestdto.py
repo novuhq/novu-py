@@ -30,3 +30,9 @@ class MessageMarkAsRequestDto(BaseModel):
     message_id: Annotated[MessageID, pydantic.Field(alias="messageId")]
 
     mark_as: Annotated[MessageMarkAsRequestDtoMarkAs, pydantic.Field(alias="markAs")]
+
+
+try:
+    MessageMarkAsRequestDto.model_rebuild()
+except NameError:
+    pass

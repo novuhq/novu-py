@@ -46,3 +46,9 @@ class ThrottleControlsMetadataResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ThrottleControlsMetadataResponseDto.model_rebuild()
+except NameError:
+    pass

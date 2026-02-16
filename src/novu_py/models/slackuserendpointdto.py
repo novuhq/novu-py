@@ -14,3 +14,9 @@ class SlackUserEndpointDtoTypedDict(TypedDict):
 class SlackUserEndpointDto(BaseModel):
     user_id: Annotated[str, pydantic.Field(alias="userId")]
     r"""Slack user ID"""
+
+
+try:
+    SlackUserEndpointDto.model_rebuild()
+except NameError:
+    pass

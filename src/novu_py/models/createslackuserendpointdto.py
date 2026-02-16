@@ -116,3 +116,9 @@ class CreateSlackUserEndpointDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateSlackUserEndpointDto.model_rebuild()
+except NameError:
+    pass

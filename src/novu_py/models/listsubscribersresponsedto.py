@@ -51,3 +51,9 @@ class ListSubscribersResponseDto(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    ListSubscribersResponseDto.model_rebuild()
+except NameError:
+    pass

@@ -182,3 +182,9 @@ class DelayStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DelayStepResponseDto.model_rebuild()
+except NameError:
+    pass

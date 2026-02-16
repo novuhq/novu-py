@@ -70,3 +70,9 @@ class CustomStepUpsertDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CustomStepUpsertDto.model_rebuild()
+except NameError:
+    pass

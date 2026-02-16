@@ -59,3 +59,9 @@ class MarkAllMessageAsRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    MarkAllMessageAsRequestDto.model_rebuild()
+except NameError:
+    pass

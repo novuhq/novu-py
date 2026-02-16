@@ -14,3 +14,9 @@ class PhoneEndpointDtoTypedDict(TypedDict):
 class PhoneEndpointDto(BaseModel):
     phone_number: Annotated[str, pydantic.Field(alias="phoneNumber")]
     r"""Phone number in E.164 format"""
+
+
+try:
+    PhoneEndpointDto.model_rebuild()
+except NameError:
+    pass

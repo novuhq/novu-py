@@ -147,3 +147,9 @@ class SmsStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SmsStepResponseDto.model_rebuild()
+except NameError:
+    pass

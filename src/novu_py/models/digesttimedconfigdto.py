@@ -102,3 +102,9 @@ class DigestTimedConfigDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DigestTimedConfigDto.model_rebuild()
+except NameError:
+    pass

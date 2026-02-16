@@ -46,3 +46,9 @@ class EmailControlsMetadataResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    EmailControlsMetadataResponseDto.model_rebuild()
+except NameError:
+    pass

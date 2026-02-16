@@ -46,3 +46,9 @@ class PushControlsMetadataResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PushControlsMetadataResponseDto.model_rebuild()
+except NameError:
+    pass

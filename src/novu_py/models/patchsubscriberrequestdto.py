@@ -102,3 +102,9 @@ class PatchSubscriberRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PatchSubscriberRequestDto.model_rebuild()
+except NameError:
+    pass

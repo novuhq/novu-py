@@ -78,3 +78,9 @@ class UpdateIntegrationRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateIntegrationRequestDto.model_rebuild()
+except NameError:
+    pass

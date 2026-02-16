@@ -14,3 +14,9 @@ class UpdatedSubscriberDtoTypedDict(TypedDict):
 class UpdatedSubscriberDto(BaseModel):
     subscriber_id: Annotated[str, pydantic.Field(alias="subscriberId")]
     r"""The ID of the subscriber that was updated."""
+
+
+try:
+    UpdatedSubscriberDto.model_rebuild()
+except NameError:
+    pass

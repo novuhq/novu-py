@@ -48,3 +48,9 @@ class StepsOverrides(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    StepsOverrides.model_rebuild()
+except NameError:
+    pass

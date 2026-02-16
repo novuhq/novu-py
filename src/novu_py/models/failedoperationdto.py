@@ -37,3 +37,9 @@ class FailedOperationDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FailedOperationDto.model_rebuild()
+except NameError:
+    pass

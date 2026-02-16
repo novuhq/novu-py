@@ -43,3 +43,9 @@ class StepContentIssueDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    StepContentIssueDto.model_rebuild()
+except NameError:
+    pass

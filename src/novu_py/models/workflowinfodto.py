@@ -19,3 +19,9 @@ class WorkflowInfoDto(BaseModel):
 
     workflow_id: Annotated[str, pydantic.Field(alias="workflowId")]
     r"""The unique identifier of the workflow"""
+
+
+try:
+    WorkflowInfoDto.model_rebuild()
+except NameError:
+    pass

@@ -128,3 +128,9 @@ class WorkflowResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WorkflowResponse.model_rebuild()
+except NameError:
+    pass

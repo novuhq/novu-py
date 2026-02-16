@@ -27,3 +27,9 @@ class EmailControlsDto(BaseModel):
 
     editor_type: Annotated[EditorType, pydantic.Field(alias="editorType")]
     r"""Editor type of the layout."""
+
+
+try:
+    EmailControlsDto.model_rebuild()
+except NameError:
+    pass

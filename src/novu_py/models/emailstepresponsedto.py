@@ -193,3 +193,13 @@ class EmailStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    EmailStepResponseDtoControlValues.model_rebuild()
+except NameError:
+    pass
+try:
+    EmailStepResponseDto.model_rebuild()
+except NameError:
+    pass

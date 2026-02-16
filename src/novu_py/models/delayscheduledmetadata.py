@@ -20,3 +20,9 @@ class DelayScheduledMetadata(BaseModel):
     type: DelayScheduledMetadataType
 
     delay_path: Annotated[str, pydantic.Field(alias="delayPath")]
+
+
+try:
+    DelayScheduledMetadata.model_rebuild()
+except NameError:
+    pass

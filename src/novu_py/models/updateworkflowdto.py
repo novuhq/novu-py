@@ -155,3 +155,9 @@ class UpdateWorkflowDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateWorkflowDto.model_rebuild()
+except NameError:
+    pass

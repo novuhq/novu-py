@@ -80,3 +80,9 @@ class ThrottleControlDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ThrottleControlDto.model_rebuild()
+except NameError:
+    pass
