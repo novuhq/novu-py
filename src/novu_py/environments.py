@@ -24,7 +24,7 @@ class Environments(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EnvironmentsControllerGetEnvironmentTagsResponse:
-        r"""Get environment tags
+        r"""List environment tags
 
         Retrieve all unique tags used in workflows within the specified environment. These tags can be used for filtering workflows.
 
@@ -161,7 +161,7 @@ class Environments(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.EnvironmentsControllerGetEnvironmentTagsResponse:
-        r"""Get environment tags
+        r"""List environment tags
 
         Retrieve all unique tags used in workflows within the specified environment. These tags can be used for filtering workflows.
 

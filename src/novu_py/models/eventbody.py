@@ -83,3 +83,9 @@ class EventBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    EventBody.model_rebuild()
+except NameError:
+    pass

@@ -89,3 +89,9 @@ class DigestRegularMetadata(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DigestRegularMetadata.model_rebuild()
+except NameError:
+    pass

@@ -82,3 +82,9 @@ class EmailControlDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    EmailControlDto.model_rebuild()
+except NameError:
+    pass

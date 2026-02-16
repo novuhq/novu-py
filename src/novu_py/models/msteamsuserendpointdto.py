@@ -14,3 +14,9 @@ class MsTeamsUserEndpointDtoTypedDict(TypedDict):
 class MsTeamsUserEndpointDto(BaseModel):
     user_id: Annotated[str, pydantic.Field(alias="userId")]
     r"""MS Teams user ID"""
+
+
+try:
+    MsTeamsUserEndpointDto.model_rebuild()
+except NameError:
+    pass

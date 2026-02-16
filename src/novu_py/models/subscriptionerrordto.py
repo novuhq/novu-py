@@ -24,3 +24,9 @@ class SubscriptionErrorDto(BaseModel):
 
     message: str
     r"""The error message"""
+
+
+try:
+    SubscriptionErrorDto.model_rebuild()
+except NameError:
+    pass

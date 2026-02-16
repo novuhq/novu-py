@@ -125,3 +125,9 @@ class SubscriptionPreferenceDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SubscriptionPreferenceDto.model_rebuild()
+except NameError:
+    pass

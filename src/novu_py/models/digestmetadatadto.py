@@ -108,3 +108,9 @@ class DigestMetadataDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DigestMetadataDto.model_rebuild()
+except NameError:
+    pass

@@ -24,3 +24,9 @@ class ListWorkflowResponse(BaseModel):
 
     total_count: Annotated[float, pydantic.Field(alias="totalCount")]
     r"""Total number of workflows"""
+
+
+try:
+    ListWorkflowResponse.model_rebuild()
+except NameError:
+    pass

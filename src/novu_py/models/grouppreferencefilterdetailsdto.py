@@ -39,3 +39,9 @@ class GroupPreferenceFilterDetailsDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    GroupPreferenceFilterDetailsDto.model_rebuild()
+except NameError:
+    pass

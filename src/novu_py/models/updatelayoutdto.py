@@ -86,3 +86,9 @@ class UpdateLayoutDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateLayoutDto.model_rebuild()
+except NameError:
+    pass

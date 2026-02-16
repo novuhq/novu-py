@@ -70,3 +70,9 @@ class DigestStepUpsertDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DigestStepUpsertDto.model_rebuild()
+except NameError:
+    pass

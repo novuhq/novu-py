@@ -45,3 +45,9 @@ class LayoutPreviewRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    LayoutPreviewRequestDto.model_rebuild()
+except NameError:
+    pass

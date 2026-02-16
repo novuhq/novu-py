@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "novu-py"
-__version__: str = "3.13.0"
-__openapi_doc_version__: str = "3.12.0"
-__gen_version__: str = "2.801.2"
-__user_agent__: str = "speakeasy-sdk/python 3.13.0 2.801.2 3.12.0 novu-py"
+__version__: str = "4.0.0"
+__openapi_doc_version__: str = "3.13.0"
+__gen_version__: str = "2.824.1"
+__user_agent__: str = "speakeasy-sdk/python 4.0.0 2.824.1 3.13.0 novu-py"
 
 try:
     if __package__ is not None:

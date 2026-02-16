@@ -19,3 +19,9 @@ class ActivityTopicDto(BaseModel):
 
     topic_key: Annotated[str, pydantic.Field(alias="topicKey")]
     r"""Topic Key of the notification"""
+
+
+try:
+    ActivityTopicDto.model_rebuild()
+except NameError:
+    pass

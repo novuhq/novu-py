@@ -239,3 +239,9 @@ class NotificationFeedItemDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    NotificationFeedItemDto.model_rebuild()
+except NameError:
+    pass

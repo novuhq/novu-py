@@ -69,3 +69,9 @@ class SubscriberDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SubscriberDto.model_rebuild()
+except NameError:
+    pass

@@ -24,3 +24,9 @@ class MetaDto(BaseModel):
 
     failed: float
     r"""The count of failed subscription attempts"""
+
+
+try:
+    MetaDto.model_rebuild()
+except NameError:
+    pass

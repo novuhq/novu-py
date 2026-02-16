@@ -74,3 +74,9 @@ class TranslationGroupDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TranslationGroupDto.model_rebuild()
+except NameError:
+    pass

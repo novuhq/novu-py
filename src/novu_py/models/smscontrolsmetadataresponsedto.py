@@ -46,3 +46,9 @@ class SmsControlsMetadataResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SmsControlsMetadataResponseDto.model_rebuild()
+except NameError:
+    pass

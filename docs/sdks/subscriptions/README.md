@@ -7,7 +7,7 @@
 * [list](#list) - List topic subscriptions
 * [create](#create) - Create topic subscriptions
 * [delete](#delete) - Delete topic subscriptions
-* [get_subscription](#get_subscription) - Get a topic subscription
+* [get_subscription](#get_subscription) - Retrieve a topic subscription
 * [update](#update) - Update a topic subscription
 
 ## list
@@ -195,7 +195,7 @@ with Novu(
 
 ## get_subscription
 
-Get a subscription by its unique identifier for a topic.
+Retrieve a subscription by its unique identifier for a topic.
 
 ### Example Usage
 

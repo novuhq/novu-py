@@ -52,3 +52,9 @@ class SubscriberFeedResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SubscriberFeedResponseDto.model_rebuild()
+except NameError:
+    pass

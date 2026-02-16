@@ -168,3 +168,13 @@ class LayoutResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdatedBy.model_rebuild()
+except NameError:
+    pass
+try:
+    LayoutResponseDto.model_rebuild()
+except NameError:
+    pass

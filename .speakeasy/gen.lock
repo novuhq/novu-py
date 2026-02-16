@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: dd06499cd48925f78a4230d5baa0517d
-  docVersion: 3.12.0
-  speakeasyVersion: 1.700.2
-  generationVersion: 2.801.2
-  releaseVersion: 3.13.0
-  configChecksum: 819de72c6523924d6ab66a1adb228287
+  docChecksum: 0fbd931a4798674968229148ebd7b1ca
+  docVersion: 3.13.0
+  speakeasyVersion: 1.718.0
+  generationVersion: 2.824.1
+  releaseVersion: 4.0.0
+  configChecksum: d58cbc2029181f061a52d5f446369750
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
 persistentEdits:
-  generation_id: e6b415a5-d53a-4fd0-a1bc-0fa011aaec52
-  pristine_commit_hash: 197ca5983426317957b02f6219e7f58abfffde03
-  pristine_tree_hash: f8a759fc0f1fed6a54f305bb9560065369230bef
+  generation_id: d8868822-0987-4a31-a1c7-8235cb4a2293
+  pristine_commit_hash: 3a5e17840235bae4bc3aab1c595f3d42d3823014
+  pristine_tree_hash: 721154afa7cad9ed00c2f500938e3f81f0670be5
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
-    constsAndDefaults: 1.0.5
-    core: 5.23.18
+    constsAndDefaults: 1.0.6
+    core: 6.0.5
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -27,7 +27,7 @@ features:
     envVarSecurityUsage: 0.3.2
     examples: 3.0.2
     flattening: 3.1.1
-    globalSecurity: 3.0.4
+    globalSecurity: 3.0.5
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.2.0
@@ -36,10 +36,10 @@ features:
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.2
-    responseFormat: 1.0.1
+    responseFormat: 1.1.0
     retries: 3.0.3
     sdkHooks: 1.2.1
-    unions: 3.1.2
+    unions: 3.1.3
     uploadStreams: 1.0.0
 trackedFiles:
   .devcontainer/README.md:
@@ -2768,8 +2768,8 @@ trackedFiles:
     pristine_git_object: fea49f8cc137a6ef94b5bbd4363078d23169f1f0
   docs/sdks/environments/README.md:
     id: d15fc95481b6
-    last_write_checksum: sha1:72dfe1b2b61ef00e1ad73b02e4d6e46582c4c7eb
-    pristine_git_object: 2fa73250529ef49f9bdb6559410e82b659119d33
+    last_write_checksum: sha1:28f981f9dd836a70dc33f11ad0d5a82be294e122
+    pristine_git_object: bff5e4b2338057a015a0244cd663fa224c09d686
   docs/sdks/groups/README.md:
     id: 3336939a71e4
     last_write_checksum: sha1:db08d0459be9a59f61c69af1ca61938ab4bd3c56
@@ -2832,8 +2832,8 @@ trackedFiles:
     pristine_git_object: c7c2c06d680a29e8cf759addcc991c0601ac307d
   docs/sdks/subscriptions/README.md:
     id: 298b9ab3c3e0
-    last_write_checksum: sha1:3d1a7cac7627105ba4bd6e9991c00e348006a30b
-    pristine_git_object: 94a9ac888414e79c39b2e9a3e09a33c2c47d651d
+    last_write_checksum: sha1:3f5e5cc0f66eb4d6392ebf23c9f3dc4c2e44275d
+    pristine_git_object: fd9c73f79f7f0a59cd1d12f81aed8e7a73058922
   docs/sdks/topics/README.md:
     id: db4aff1adac3
     last_write_checksum: sha1:6e6ca0c252320c2da5bb2445cc5542e6e2a1ac19
@@ -2856,12 +2856,12 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pylintrc:
     id: 7ce8b9f946e6
-    last_write_checksum: sha1:dbf1956b6f3d38d4bca7baa2e79d18bf9b420b2d
-    pristine_git_object: cbbf681a1f7a4d86cfa0fcc28e13438e5bbc8e12
+    last_write_checksum: sha1:8f92393d038e49311d7084324ed162ab5a138f62
+    pristine_git_object: a79f5cc58e1c567fe5808211cb626e752430c9ff
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:902679b395c9528dcc31d76d6c373007149adcb3
-    pristine_git_object: 9897ae3d56f3238de6238fea78f0766ce70a46f6
+    last_write_checksum: sha1:eab36cf19c1bc51119b87ff916bfa013ba8072f0
+    pristine_git_object: ffe5547167e37f14f2feee22cce91389caf52f4f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77610d735cce1bc0f71f13a746bf06e463e2ce47
@@ -2888,8 +2888,8 @@ trackedFiles:
     pristine_git_object: 955703fa58801c45f9cc8e62f4dfef8228cbf625
   src/novu_py/_version.py:
     id: 8e69485642eb
-    last_write_checksum: sha1:db4f80ca85211ea27b04b103cb37c0c5a17b1660
-    pristine_git_object: 46854c1d12dcb2be4aa69a9222177b06b1c75fd3
+    last_write_checksum: sha1:b2d3f3b9258042fa46b9ab3193bf87904740e19c
+    pristine_git_object: 2bdd19910a35fd4fdcc33487d8c203236bd98095
   src/novu_py/activity.py:
     id: 7d001a1721a3
     last_write_checksum: sha1:a95d6e0bd0409a1dfd61fcf55d6402643888e0e6
@@ -2916,8 +2916,8 @@ trackedFiles:
     pristine_git_object: 8ffb5e7521d69673d666cf48eb34b0c0bc09e3dd
   src/novu_py/environments.py:
     id: fb9123e0ce99
-    last_write_checksum: sha1:80352d19cf977b1cef838b2e3cc5b6d570a94419
-    pristine_git_object: dc70521e1fee437d652e7fd0e65638a14c8fb55e
+    last_write_checksum: sha1:f5c2410cf142b8711d5bcecdef2aa196cdff995b
+    pristine_git_object: aabcef33f09f240bd562706c22ab65bd4915c7af
   src/novu_py/groups.py:
     id: dcae2dc602bc
     last_write_checksum: sha1:460171f5f58a25897d778027d7dffbb6c8d34959
@@ -2952,36 +2952,36 @@ trackedFiles:
     pristine_git_object: b2ebc5ac1b03a65417f411e236d9b3fb2c3cd177
   src/novu_py/models/activitiesresponsedto.py:
     id: cf299fb9b2e3
-    last_write_checksum: sha1:bd983181492d4d2b56a7cc903a04a08b37e8e5e3
-    pristine_git_object: 7eeb7e499c760321fbf817149d470d175187287d
+    last_write_checksum: sha1:d6f4319129d07bcdeeaf538f72e12ecd1f90a5fd
+    pristine_git_object: 4eae25a3d21c2922df26fd409d7a7adcca2b5ed2
   src/novu_py/models/activitynotificationexecutiondetailresponsedto.py:
     id: b03cdf951a6e
-    last_write_checksum: sha1:f8b961acdf9f9747d61214afcb0141df523c0dca
-    pristine_git_object: 707b4f42c5d7f770edff23013c1826104c7c36e2
+    last_write_checksum: sha1:906b5388dd5e4bf4ab77ef484341ecddb76e43ef
+    pristine_git_object: 15c3c9466fea7d3b26aac376a06c8551924ac415
   src/novu_py/models/activitynotificationjobresponsedto.py:
     id: 1cc1bd787a14
-    last_write_checksum: sha1:4f3ba1944fa99d9bcc8a3f0b11967255110e67a1
-    pristine_git_object: 04adb341f730de6e64c3907742ace1ab29f79c2d
+    last_write_checksum: sha1:d845c67502755dd4dbfaaff9362d0e31555389ce
+    pristine_git_object: 0d63cf3cff001c3101761698d08a9aca62f1469a
   src/novu_py/models/activitynotificationresponsedto.py:
     id: f7e6d67fbe40
-    last_write_checksum: sha1:6b530f804218de8435854fe6f8289c88a5f5bd92
-    pristine_git_object: 920dcbfb50b8130eb09584beeecc2f8e0ee15bb0
+    last_write_checksum: sha1:8016d766c880d7d3e68d40933e3517bc5e75170a
+    pristine_git_object: 8f0749f493cbf9a2717306e10e5afd1633a675f1
   src/novu_py/models/activitynotificationstepresponsedto.py:
     id: 3befe896c925
-    last_write_checksum: sha1:33e58fc4abe82e6e25df9733f539bb518a81cd99
-    pristine_git_object: 1709f582d179187cd904529939bd9a9d4413c108
+    last_write_checksum: sha1:58a11c989e842e9ddafc48934a6cd113e7c07087
+    pristine_git_object: 5651844baae3c50668147d50cfe1db08280700c1
   src/novu_py/models/activitynotificationsubscriberresponsedto.py:
     id: 483b92de7dec
-    last_write_checksum: sha1:24e81f73a801ec234368f3652b0d53e23b14700a
-    pristine_git_object: b5b9c7761270b94eca58fc4b3f5002b4efd33518
+    last_write_checksum: sha1:27aadd083455d8a0178c669e53c928fb56405cb2
+    pristine_git_object: 81da3320d98ad0452d33090171553a1a187c427c
   src/novu_py/models/activitynotificationtemplateresponsedto.py:
     id: ad2217ddab08
-    last_write_checksum: sha1:e199e5a23237295d04b8648da33a9f9ad68352a1
-    pristine_git_object: 95108acac532a345763e353b0ae9478b607b9ad5
+    last_write_checksum: sha1:8c396f281d1fa900b653a82ebb611a205603b8b0
+    pristine_git_object: bb3f17b3475e5e60c5e24500260027e3b73bd920
   src/novu_py/models/activitytopicdto.py:
     id: 26c6c96d2caa
-    last_write_checksum: sha1:4963626be439deb33c0825ab4131b5289112a8a8
-    pristine_git_object: 53ac4233ecfcfa3db1ec1c42aac674cad90f0b88
+    last_write_checksum: sha1:b96c5a970c77668d5e1f0c8e6b3d2fc2ef57ae3e
+    pristine_git_object: c2e3cb12ad55689473a3ecd26b5a5f61e826ebf2
   src/novu_py/models/actorfeeditemdto.py:
     id: cb27651857ae
     last_write_checksum: sha1:e3468e95515e40e3a264f5b933c79ee9cfa25740
@@ -2996,12 +2996,12 @@ trackedFiles:
     pristine_git_object: ebf486bbba41ae9ff026058b3dbafb2df7c81ec3
   src/novu_py/models/apikeydto.py:
     id: 53740f676018
-    last_write_checksum: sha1:ef27e8963d588af75a635cdda6701b7c6059d6a0
-    pristine_git_object: 24860dbb7ae00bb08d978eb01321a9d502786505
+    last_write_checksum: sha1:38ca70dcb6ad500b6339c5d6f813504f9d43fa51
+    pristine_git_object: 208dfce9e6993529d0e8524acdecec5bdf854bd3
   src/novu_py/models/authdto.py:
     id: 20065141e4aa
-    last_write_checksum: sha1:bb51656363a5c1c2e4cdaf59510767ef586250ad
-    pristine_git_object: 36cfc75050c247ad5f950ea5f788bfa2d0274929
+    last_write_checksum: sha1:6cfa4a98b8d9b7745f97546fa9044fced2c930f2
+    pristine_git_object: 0c275ab5e2e51277e0ec765b30cb1a1c6c6b6942
   src/novu_py/models/autoconfigureintegrationresponsedto.py:
     id: 84ac5052db00
     last_write_checksum: sha1:03129888416c4785851f7bb97d3286d21b7645cb
@@ -3028,8 +3028,8 @@ trackedFiles:
     pristine_git_object: 7307919e6d4aa0399c4b34aa49773f49158b95f5
   src/novu_py/models/bulkupdatesubscriberpreferenceitemdto.py:
     id: 9f49c01a71fe
-    last_write_checksum: sha1:326f6972109619a9a36956df980cad955ec86806
-    pristine_git_object: 1927f5a3eddb95a6ee2e5d522c6150428e3f0baf
+    last_write_checksum: sha1:10950a4e9f1a657d0ac3f9f7f1be719f969c231d
+    pristine_git_object: f6d166d5414287c55dbcb40bdcc6bbc3d4bde600
   src/novu_py/models/bulkupdatesubscriberpreferencesdto.py:
     id: 0b95e18ebc3b
     last_write_checksum: sha1:0a5bf126cbf7af529e839e3a411bc7ebeba6bac9
@@ -3060,12 +3060,12 @@ trackedFiles:
     pristine_git_object: c0a8f59115fc0fef9e72002ff2c72d2f85d241ea
   src/novu_py/models/channelcredentials.py:
     id: ca6e0edf9875
-    last_write_checksum: sha1:834ad7f8f0d339544c55cf7cad793bd1d18972a7
-    pristine_git_object: 6b62b18c1662892e94ffaef3eb1880194d56a94c
+    last_write_checksum: sha1:d9fd6347f7613efdc2ccb1e63aa514dee121cef2
+    pristine_git_object: 4b90d1b712192d4341e887e10028f0a417a76b31
   src/novu_py/models/channelcredentialsdto.py:
     id: fe7625378ca8
-    last_write_checksum: sha1:d74ae37867988401bcbdfe7750b04bd8049a6a6e
-    pristine_git_object: 8837f92fe98b2aa4dbc034c46dc7d47efa352660
+    last_write_checksum: sha1:24646c74dea3dcb3167771cb9cab1ec219d9b0ae
+    pristine_git_object: 6db82cc8ff8087262e7d1764fbe4f12e9b38424e
   src/novu_py/models/channelctatypeenum.py:
     id: 81c5b4e09496
     last_write_checksum: sha1:7ad258c204ebea047040d814f3e75160bf143e42
@@ -3096,8 +3096,8 @@ trackedFiles:
     pristine_git_object: 8f8891b2d572df3ae77835d834bc0c2021b21db7
   src/novu_py/models/channelsettingsdto.py:
     id: 91d07a3fbac3
-    last_write_checksum: sha1:cfeae6d7fd3680d9bb2a1e7c30a6b941f2528796
-    pristine_git_object: 8bd011ca273476b27dca079a88b69f97c7797b36
+    last_write_checksum: sha1:5f48097acf4218c5047b4e30c7723f6d1987980c
+    pristine_git_object: 34de922d639e663b16c2ca44530da31a82b490fa
   src/novu_py/models/channeltypeenum.py:
     id: 78191992a47f
     last_write_checksum: sha1:93b799f85a87f0611f65b76ef99b410fd4bcf20a
@@ -3108,24 +3108,24 @@ trackedFiles:
     pristine_git_object: 534905d6547971fa9de89e639b083884ece8c6a3
   src/novu_py/models/chatcontrolsmetadataresponsedto.py:
     id: 457bbb377c83
-    last_write_checksum: sha1:6e3deddc522d56961d2017545e5947780a1c72e6
-    pristine_git_object: bd7f6c94979226eaab6fda5d18eb97e38ef3e40a
+    last_write_checksum: sha1:a756e8ee50a4df5bf0f139cd92c84f1a3ef2bc44
+    pristine_git_object: 7ac646a31d278b47c845c166af8c30f839f924d4
   src/novu_py/models/chatorpushproviderenum.py:
     id: 515e5ccf5624
     last_write_checksum: sha1:ceb1f7d1f05e67e2df184593f41f6ca86701b65c
     pristine_git_object: 38eb79bff8378557182c50febb51c4019252e4f0
   src/novu_py/models/chatstepresponsedto.py:
     id: 24c71f0b005e
-    last_write_checksum: sha1:ffb013e5fb29231268550986d8f1eed195a6e3b4
-    pristine_git_object: ca7fe7ef74fd9f621513ca6d89ac0980d5758a00
+    last_write_checksum: sha1:90410d0b05f453facf18c667d9cc46707bc56d35
+    pristine_git_object: 29e0b024e124c7971c1bc63eee70fa8f84c47bfc
   src/novu_py/models/chatstepupsertdto.py:
     id: d855568cf784
-    last_write_checksum: sha1:e3c3bc9d507c5e82d084c867e0107884509b96ca
-    pristine_git_object: e6e8d613d49338e720ca7e51489abefce5537c5f
+    last_write_checksum: sha1:6e23288a731d4bb6d8f39f6e42d069ded371fd56
+    pristine_git_object: a64f07657eb3a9397342425e2c6def4d41836883
   src/novu_py/models/configurationsdto.py:
     id: e5cbae9c9c6a
-    last_write_checksum: sha1:a6d2de60bcc9d61db6f25891d49bb93d8cdd687b
-    pristine_git_object: c67ccf5557adff1b54d128baf5e096031bb80a08
+    last_write_checksum: sha1:12b45ccb3cadbeddb42eaa7362e7ab33669e71e2
+    pristine_git_object: 857ee6825c87937902ebc687b33255edf9debb04
   src/novu_py/models/constraintvalidation.py:
     id: 64c908f6787b
     last_write_checksum: sha1:15e23d8c69c6c05512629e736c3ca1474fdb3158
@@ -3156,124 +3156,124 @@ trackedFiles:
     pristine_git_object: 280c0d379c57b1ce2d09575a5b5bfc5625601bde
   src/novu_py/models/controlsmetadatadto.py:
     id: 3601563c32d1
-    last_write_checksum: sha1:e10e7ae96db1a2622dc242f371d6a9ed0de1ecbb
-    pristine_git_object: 748f7747e03435e299d10e6e19978445a46ab4e1
+    last_write_checksum: sha1:e4db40e1504461429c966e69d524f89d32105bee
+    pristine_git_object: 2a73d1799968f0dc9884c305189333908b98b122
   src/novu_py/models/createchannelconnectionrequestdto.py:
     id: 4531ad9be024
-    last_write_checksum: sha1:f601047282c66e78a61bd32bad7b7cf0e537e696
-    pristine_git_object: aaf696d13aa7bce0ee12089b62d4df1589e10ee0
+    last_write_checksum: sha1:9cd74b0e40434c019b599574fb4a4b55154ff452
+    pristine_git_object: 13981bf7d84c9a66faaa58a111396546f85aaeac
   src/novu_py/models/createcontextrequestdto.py:
     id: ecf87aa4945d
     last_write_checksum: sha1:3078aa5a6aee478e2f4cfa02f49162dd262fe6fa
     pristine_git_object: 587f0ff2f187fe416e378cf914d057632030e890
   src/novu_py/models/createdsubscriberdto.py:
     id: 3c71ad81338f
-    last_write_checksum: sha1:4076ce3b8cc7d4eb25e15d7d631bd6f824b014b2
-    pristine_git_object: e7100ca2dd91b839b651375ad70004e3367d48b8
+    last_write_checksum: sha1:0c1fdcd09f6c8fde03f84c9dfe0fbc65d2e665cd
+    pristine_git_object: 0cfefe9be83f6bcaee6f6b85a75defe74e1d8ffe
   src/novu_py/models/createenvironmentrequestdto.py:
     id: 81f0c59609d6
-    last_write_checksum: sha1:00e54fb3b5b8468cfb9d6d387e6d30fa664eb7db
-    pristine_git_object: 6104176866a1d01fbb0d6cd2742eeab60c1834b1
+    last_write_checksum: sha1:591492e0124dd82b8aa931279cf660d33e66ef1b
+    pristine_git_object: a28574141ced6f0cdd126e3707d871999ae1fb4a
   src/novu_py/models/createintegrationrequestdto.py:
     id: d67fa0fd1791
-    last_write_checksum: sha1:f1cf8d8f81a2c259f19c27db2812e55c17668e80
-    pristine_git_object: 200ab0d7e335fbb69a91d6729457db36abaf46c2
+    last_write_checksum: sha1:db9df65c739caf68774c2b878854781a737e2398
+    pristine_git_object: 7d97bce12f147e3fc7bbeb7e93bfefbc63212115
   src/novu_py/models/createlayoutdto.py:
     id: 07dc84a116ad
-    last_write_checksum: sha1:1e0d9ee522a4a26be0486e98707173b76fe96eb9
-    pristine_git_object: 59da61fb978380d17e315206903ce132479efefc
+    last_write_checksum: sha1:14ba6d0184c4e38b521ef59f93ae477284d5d516
+    pristine_git_object: d5c22ed630d8fafed57e10d4c946495cd03c595d
   src/novu_py/models/createmsteamschannelendpointdto.py:
     id: 82d78e952ace
-    last_write_checksum: sha1:5f013d5607859ca720912789f3d0f1af6195111a
-    pristine_git_object: a7faaac9329251f25ec492328f3ffd6f1733745f
+    last_write_checksum: sha1:5cea2869fd7d135bcdbaf5fd91c50625d8c8da01
+    pristine_git_object: f3a6de6dbe42f762bea634c73dc82ef2aa895e9e
   src/novu_py/models/createmsteamsuserendpointdto.py:
     id: bc8d88d7c9e2
-    last_write_checksum: sha1:8fb4f46a1c7fd72e993e2ba6ab2960c1717c6530
-    pristine_git_object: 3d6ae034ba5524768769be897d9bb86381c29cb9
+    last_write_checksum: sha1:8a25257c83a2f2a56272cd17b3c9cd20f17f1140
+    pristine_git_object: c71ff0a6f6937e0464ad73e0cacb570261f94515
   src/novu_py/models/createphoneendpointdto.py:
     id: 3d054f7cfdbb
-    last_write_checksum: sha1:71e8eac1e3ba7f9b972866c78a20dd0351a32222
-    pristine_git_object: 26ebb5d9a05407384038fb21a07e873bc1d88df2
+    last_write_checksum: sha1:5a349621bfd557cf5bf4479a6b988ed9607debce
+    pristine_git_object: 78a38e5d06eaa5bdaf24969a675dbe11797b89f4
   src/novu_py/models/createslackchannelendpointdto.py:
     id: 83633b1a814d
-    last_write_checksum: sha1:3768a68595377a81892a169c7164a7dfe7637e81
-    pristine_git_object: 7a4899a62dc34d8bce1b68ac556092200c3164b0
+    last_write_checksum: sha1:c3e09efa3e623a92a39052c49acbcc8ec1832865
+    pristine_git_object: fb2af3104386278e1fe31c39c26b9ded66802ad4
   src/novu_py/models/createslackuserendpointdto.py:
     id: 00a38bddfd3a
-    last_write_checksum: sha1:332478c2a32a4380133a6c2122657c818ec7e0f7
-    pristine_git_object: c39a3a7f6aa6db36d285f50ec8080bef5f157639
+    last_write_checksum: sha1:0af36afa088aa6b12693f90738c53b8d435ad233
+    pristine_git_object: ef018f96e01d2ea982c3c6f63dc3ec36fe497ca8
   src/novu_py/models/createsubscriberrequestdto.py:
     id: 25ca13e122ed
-    last_write_checksum: sha1:019a09b8fd64af0c939baa01835ca011a31f0b84
-    pristine_git_object: e9f2cbda222fb620adfde05e001719ed9f2fce3b
+    last_write_checksum: sha1:dcc026ac4ad686055405c6f423a96328ec736d9b
+    pristine_git_object: 2d11d4be314b1054e009f2a3d402c492715a62e0
   src/novu_py/models/createsubscriptionsresponsedto.py:
     id: c44f33d6efeb
     last_write_checksum: sha1:3aeb63bc43beb40eb68bd9b189d24d2dfb6467ef
     pristine_git_object: 849470605dffb24b864ddba5abeedd5a473102a6
   src/novu_py/models/createtopicsubscriptionsrequestdto.py:
     id: 6e28f02949f8
-    last_write_checksum: sha1:c7777f443b5af8eae5af8ddd3dba5c1ba271697f
-    pristine_git_object: fb8c95d5a678dcbf49914b4a6708cc594f822e09
+    last_write_checksum: sha1:eb59b40310cb694bb6dd3bd1b6a2d99097d74455
+    pristine_git_object: 17ccf05770ee4be49e956beaca181870b1bbbf50
   src/novu_py/models/createtranslationrequestdto.py:
     id: 41ae64db38bd
-    last_write_checksum: sha1:b43675d4e1f2c1d8f1fe3e524a90bf04ee463a33
-    pristine_git_object: 4d5bccd3ecedf0c207c8ed732043cfa1d24911ef
+    last_write_checksum: sha1:0df2f47bc8b0915dc0c782708b1370c2657afbbe
+    pristine_git_object: 2c17f512c77b3fe796e56098bb164db4778d0e4c
   src/novu_py/models/createupdatetopicrequestdto.py:
     id: f9a376faa396
     last_write_checksum: sha1:27bdb7d7a56e3efecadb34ce9e37d1ab3c50ffc9
     pristine_git_object: 4ad7be1a9baf40fca7e44ad4adf0a7bc182da069
   src/novu_py/models/createwebhookendpointdto.py:
     id: e945b1f947ab
-    last_write_checksum: sha1:1bb0825c416519ccd3ba9fd9969419c5b8e84595
-    pristine_git_object: 95e33e454e8856472994a15a15007bb709139060
+    last_write_checksum: sha1:0f07eb30a7e3e13f6009197ad4d37bc5367e69cf
+    pristine_git_object: ffcf29b8f7a951ccc07c16fc66333d30fe4329b5
   src/novu_py/models/createworkflowdto.py:
     id: 349f73660add
-    last_write_checksum: sha1:be293a22ee6e76a4e52c4017c1c04c7b689206b3
-    pristine_git_object: 8743f9f1ef1afe1805c158afc84bfb46a62dd407
+    last_write_checksum: sha1:1d3f439c1ca3c8e646cd6e9197fec6b29bfdeff6
+    pristine_git_object: 76f1c730f23aa3505d3175b7a49d9df922d8b70a
   src/novu_py/models/credentialsdto.py:
     id: c3c08bd9afea
-    last_write_checksum: sha1:559674b73c1b33af91c1e8d1cd57cdeb9c350973
-    pristine_git_object: bb94513c2f2cd43aba805f79c97543de6f21cdb6
+    last_write_checksum: sha1:c715b7f63f3f973da1b6311ec952f87340814156
+    pristine_git_object: ec11efd96a534e4988d8d0135839d52d9b5a0a2f
   src/novu_py/models/customcontroldto.py:
     id: ef9e44bf6c23
     last_write_checksum: sha1:5a3275f2d9438fa53a85b93d52b5793db8ffecbf
     pristine_git_object: 91757d3f91287809f5a5509ee92bd106a0b22213
   src/novu_py/models/customcontrolsmetadataresponsedto.py:
     id: 0322ea6449d2
-    last_write_checksum: sha1:0def108a542b4ed6764d69a0fb54db4abe60d584
-    pristine_git_object: 913e11de2ad1303593d0af61c3e87f058c3b0b8f
+    last_write_checksum: sha1:36eb98cc9c0165ec7c583f14437b52db02f898b2
+    pristine_git_object: 2586eef5172ccb400c987890558bd687370dfdce
   src/novu_py/models/customstepresponsedto.py:
     id: 8ba8c3537b6b
-    last_write_checksum: sha1:db98081b7b59aed60a3417c15c15600b57987d9b
-    pristine_git_object: 9f48f0c92e1f32b9d8b54ebb0b518fd42f9163a9
+    last_write_checksum: sha1:a6f003a2a0da8f67e0b6bd0fa97dc7557a256432
+    pristine_git_object: 944603bfb11e1c55f62debb3b8232ce2d05c71c7
   src/novu_py/models/customstepupsertdto.py:
     id: 908dff80ffe9
-    last_write_checksum: sha1:717ecf5813809d5b7c72b91785e7ee48f61a7285
-    pristine_git_object: fc2cd8a296b08cf5e5bad987255f92e90e7e54f3
+    last_write_checksum: sha1:8c44be1ff40c39d00e70ac5d38c4ba91e6d6f846
+    pristine_git_object: dcc0e5640046429231ba07b1443d6f40406b7069
   src/novu_py/models/delaycontroldto.py:
     id: a81ea17ebb45
     last_write_checksum: sha1:c9f1e66df78774719ea9d7e52c07880349270ae2
     pristine_git_object: 474cb2261560b4e64cac385950d53b18e6998747
   src/novu_py/models/delaycontrolsmetadataresponsedto.py:
     id: ae9afa406e53
-    last_write_checksum: sha1:31bc9e7e74a741adeed284e46f970e1f9545a99d
-    pristine_git_object: b99865078a46f67c04bd8c6fabd22115219a5504
+    last_write_checksum: sha1:ce2f5227a8976bff2ffddeb9db7534e14ee0890f
+    pristine_git_object: 20a09c05a23dc7b9e6e21b12f385ef4d68adf905
   src/novu_py/models/delayregularmetadata.py:
     id: dc8c0d3661e4
     last_write_checksum: sha1:a3d29d6d9718135cd0e340bb72e6724697425b6f
     pristine_git_object: c55a32d35b68bae9ce51a6483d2a544065efca1b
   src/novu_py/models/delayscheduledmetadata.py:
     id: cb3269c1efd9
-    last_write_checksum: sha1:dfced7b149c1683fbaf52b1949cb4a71a80a578e
-    pristine_git_object: 7616a72a846778a5b8b948866b1fa3a72789e895
+    last_write_checksum: sha1:6a6d16d3b2aa0d5b1e998ebcac46885685a862a1
+    pristine_git_object: 504d95aa4ca1fd80678c98a9370f04ccd8c97307
   src/novu_py/models/delaystepresponsedto.py:
     id: 19384a344991
-    last_write_checksum: sha1:af6f12030e747300671b1d98ea76dd900dfe385f
-    pristine_git_object: f81555935cdfb90a00cc09c9d703774f91bdd5ba
+    last_write_checksum: sha1:e8037b5d6b48d7f3877962b940c85c437ae2b031
+    pristine_git_object: 645724552df027040f755fe00425e603b7578f1a
   src/novu_py/models/delaystepupsertdto.py:
     id: 0d43ad0885b3
-    last_write_checksum: sha1:fd7b7d3924fcf3ff2757edeaae59cc326cfe8e1c
-    pristine_git_object: 3ebca979ad5be9735a2a9d3b17d7843c6765fee6
+    last_write_checksum: sha1:a73250a5813e898c840bf528d62f1fa7588d2a15
+    pristine_git_object: fd35189a0cc911ce5cb22128726c780860772d73
   src/novu_py/models/deletemessageresponsedto.py:
     id: 33e2d910fa36
     last_write_checksum: sha1:e18270e0630a76f5a66954d875623ec1d8d849fc
@@ -3284,48 +3284,48 @@ trackedFiles:
     pristine_git_object: 761e4175c15ccf49f5d52933acd8b0551b085f94
   src/novu_py/models/deletetopicsubscriberidentifierdto.py:
     id: 636dfbf7052f
-    last_write_checksum: sha1:fd22c2363b12f64858fb21c2631501c498e7ca1a
-    pristine_git_object: 42dcfd704e5e00df7fb5ebcc1e257b655c54b4d8
+    last_write_checksum: sha1:63b7683ec80bb15fafe378bbdfbca3858c31b837
+    pristine_git_object: 89452e0cf68e4aa7babf03c5acba69e9a98b0684
   src/novu_py/models/deletetopicsubscriptionsrequestdto.py:
     id: 128104496f2b
-    last_write_checksum: sha1:d34f846e91224524bb876836084da6157f92334c
-    pristine_git_object: 3a5191768d52baadf110c783088557babefb8bc1
+    last_write_checksum: sha1:956f94f1220f2498962feb0a3fccfa6a929acc86
+    pristine_git_object: 1d9c1fa97cd4dcb9a51182056b4af8cf0c7d1a52
   src/novu_py/models/deletetopicsubscriptionsresponsedto.py:
     id: f39f1dacaa85
     last_write_checksum: sha1:9f2ff984e8980e0d302f92d185ab549ada12626e
     pristine_git_object: 36ab746a8d6682309cdbd1c020d45f7e0c30ea8e
   src/novu_py/models/digestcontroldto.py:
     id: a2f9f84e50d1
-    last_write_checksum: sha1:f16462ff6bc073b1f99ef0d5ba74b228736b1477
-    pristine_git_object: b5a041bc8e83a79dc00c872f68475397c44aea48
+    last_write_checksum: sha1:b4b73b341bdef480b85f61ba31b5eec086ac5cd3
+    pristine_git_object: aacf89185ed952179e91cc25e8f70ed90b09694a
   src/novu_py/models/digestcontrolsmetadataresponsedto.py:
     id: 179d891d5192
-    last_write_checksum: sha1:c8e9beb9c6567a0a9d849e5d3685f5230bfe63e3
-    pristine_git_object: 5ffd68cb389e3c201a638dc298f96d83af37dfa9
+    last_write_checksum: sha1:4fff3fe9f3c80b1fd7b04a24869405a74102b923
+    pristine_git_object: fd04afd7cfb8163095d5fe43f6b8fa3de9baad75
   src/novu_py/models/digestmetadatadto.py:
     id: a3430bf0c12d
-    last_write_checksum: sha1:c7ba02379063f59307cdb502909a920702baa9ff
-    pristine_git_object: ac6e4b3eb0c2bc01912738d5471c369323f2d91c
+    last_write_checksum: sha1:40f29cd5323452fa8cd2e9a3e7285dd1c8db44fe
+    pristine_git_object: 1f70210ef7b1ded204d220bfd275e5ba44bcde5a
   src/novu_py/models/digestregularmetadata.py:
     id: 7c4ee77db14a
-    last_write_checksum: sha1:671eab2537f8b559b5dc1908077efb3e1ac54139
-    pristine_git_object: 66ed68a0ac1b86312f1b168df27f61bd3d856b95
+    last_write_checksum: sha1:04a506422d867b03f32143735a28728624f3d35e
+    pristine_git_object: b9fe1e2fc28957ca6ffb85bc5daf844e3501c079
   src/novu_py/models/digeststepresponsedto.py:
     id: 05ea3410e2a4
-    last_write_checksum: sha1:327260235bea3bd9b2cfb18a0f61005e021b1f5a
-    pristine_git_object: 5867892f8a1c09ea5a10dba6c2b413e3fc347a40
+    last_write_checksum: sha1:b1fdccecc7e1e3daa916232c604503ec65f0d563
+    pristine_git_object: bee0b167ecc4ae8ed85e4c3779ee883eb1067943
   src/novu_py/models/digeststepupsertdto.py:
     id: 18c8a6261f74
-    last_write_checksum: sha1:3edfd3099957a0e501e803ee5f2a6836a6f4dace
-    pristine_git_object: 775a402296f426a1e162e888589b1fcfe4806756
+    last_write_checksum: sha1:3d29de4b3fd6efc874e1430b28175944c12336d4
+    pristine_git_object: ba6a6ebf7c982fc11d1a2ee950bced4c0e4e04eb
   src/novu_py/models/digesttimedconfigdto.py:
     id: 7ee25903a9f7
-    last_write_checksum: sha1:ae1294f6bb08fd6bd47a5e030dd31cc211120fec
-    pristine_git_object: 8bbae58509607b1b7baef237fd0c9853e54af66c
+    last_write_checksum: sha1:249b5f732b314019690e8b870a24f13df7f3b448
+    pristine_git_object: 91b1a1bce947c74795538a1c31eea7dca10634c7
   src/novu_py/models/digesttimedmetadata.py:
     id: 679d4163e3a8
-    last_write_checksum: sha1:ac28dc0bf6d79c052ead932608b6fb074cc4e17c
-    pristine_git_object: 737b1d7a119de74fa801f2cd455c8acaf04f88a2
+    last_write_checksum: sha1:799afe87a3bdb59a91f342e1947a829b0cce3bf7
+    pristine_git_object: e16eb5a271e7d598da5cede2339cc1c385e87c88
   src/novu_py/models/digesttypeenum.py:
     id: a229ea838e95
     last_write_checksum: sha1:721693e63e834cb1558f18b87eff2fa5065133d6
@@ -3340,52 +3340,52 @@ trackedFiles:
     pristine_git_object: f14f30aafc8d672fb6df2c651367d9358fb66094
   src/novu_py/models/duplicatelayoutdto.py:
     id: 9ec2da2dd76a
-    last_write_checksum: sha1:8fd6ab49d64cf03c6477a736cba0730fe33c6dff
-    pristine_git_object: fb881861ce09c73c19e0f5e3da6897d7d57360bb
+    last_write_checksum: sha1:3a45efe7c1bce45f24525976e0f7288f74b5e6cd
+    pristine_git_object: 89f33e50743b22421bf5170c0ca060931aee886a
   src/novu_py/models/emailblock.py:
     id: 26325bfe4081
     last_write_checksum: sha1:8184bcc53f82c4fb3354ce2ed029404b90b48ae5
     pristine_git_object: 4b9950452b2d2479e0cbfdb5969ed9af607724fd
   src/novu_py/models/emailblockstyles.py:
     id: 288552dc006a
-    last_write_checksum: sha1:f6f91c6bbabbf539ffe1e572bd76cc4980be7bb7
-    pristine_git_object: 0ca9448bc1be62881097ddeba0d667db98bc990e
+    last_write_checksum: sha1:61bc1e0050a7d22d25f30c2acbb83e55163f2a7a
+    pristine_git_object: 077ef384afc83b96afb20e84d3c32e370fc84c06
   src/novu_py/models/emailblocktypeenum.py:
     id: 86511485f215
     last_write_checksum: sha1:ac15a89b6cb3bc28ec2e56a8a01a9b3b09ad0a42
     pristine_git_object: d77a549b6971075934efddd61114b7407cc4cd45
   src/novu_py/models/emailchanneloverrides.py:
     id: 935b3f61993a
-    last_write_checksum: sha1:91a552959b5333700065b9a97b5e4a47c86469a6
-    pristine_git_object: a9c33bf786278b6a7f4318f3dddfaedeab31a11a
+    last_write_checksum: sha1:966a8ae9d4188714b7f22c36f623df3781bd3715
+    pristine_git_object: ce7f04af404b0e6a1bf072abcb2548862a95d1b7
   src/novu_py/models/emailcontroldto.py:
     id: 29a47b99dbda
-    last_write_checksum: sha1:02e5db21bca28fb29634239a0d1cf587bb01d37f
-    pristine_git_object: 22918261801522eebedc4613c326f9b7915393b7
+    last_write_checksum: sha1:623a920e16a989ac15be5a2d800c2f8953a416c9
+    pristine_git_object: ddec296d972b67b10525cc754e5e9d5ea8a34fba
   src/novu_py/models/emailcontrolsdto.py:
     id: 0c4ddd5a36d7
-    last_write_checksum: sha1:714d04c7b8fc425bdb1a367422fb10ddfce66ef1
-    pristine_git_object: 1ac19ef22aa142d703525fa6e8155c28a918d365
+    last_write_checksum: sha1:893919e5e80fb83ac3dec2c03d8d071bb78818a1
+    pristine_git_object: e071dcf33b749d8a25d2cd7fd9aeee9dba3697c5
   src/novu_py/models/emailcontrolsmetadataresponsedto.py:
     id: f1f9947e2ed1
-    last_write_checksum: sha1:6debd993190fd008b21b39f4648e62eac735182c
-    pristine_git_object: 791c66b985875cce5ec48b3a1f46e971a0d82168
+    last_write_checksum: sha1:2bc10d92c7eb6d6aeac5696309d20c7af24f0312
+    pristine_git_object: 7f2a137953206c4cb65f6ee87aab767e24c089d1
   src/novu_py/models/emaillayoutrenderoutput.py:
     id: fc76bd6a4d57
     last_write_checksum: sha1:e08c7431034d9b6f929d6b9a828d0dab3542e14a
     pristine_git_object: 8203a619ad8be1e1d7213cdb85fdb6ed8f6a2002
   src/novu_py/models/emailstepresponsedto.py:
     id: 93414282e608
-    last_write_checksum: sha1:2295c868131dc140b784c877e0fa123f41367b8d
-    pristine_git_object: 90d138562e55b0440f92741e2a82f351bd0d3871
+    last_write_checksum: sha1:70a965efe3d3d4ac4711ea9e10008dc0c3d2c592
+    pristine_git_object: bbdf6c6b2e258c9fd196ad7fa059644cf244fe76
   src/novu_py/models/emailstepupsertdto.py:
     id: 80a5c02f7fad
-    last_write_checksum: sha1:21aef174b08dca5d77f4c2343d72ba1ee2ad5452
-    pristine_git_object: 12d331dca9966893df8ed82b2a109fea54e39ac6
+    last_write_checksum: sha1:4f15fdaf6be6f0fb440d8218513f08cc3c1af5fb
+    pristine_git_object: c8a2d45a539a7cac59a52969b1982445eef9ca58
   src/novu_py/models/environmentresponsedto.py:
     id: a5ef24c91db7
-    last_write_checksum: sha1:e3a462de98c85766f39f32ed503dbf461f6c663b
-    pristine_git_object: 4400788f531fb9f8182e5a660476c10010f195f1
+    last_write_checksum: sha1:5c89c64957e8b03d5a3d16686e81e86ee638d254
+    pristine_git_object: 09a5687c09a64b7de95b68c1152ef9efe3e83e1d
   src/novu_py/models/environmentscontroller_getenvironmenttagsop.py:
     id: 120ffcb3ae03
     last_write_checksum: sha1:c8125e64309347e873e6139266cb7b655ed93b99
@@ -3412,8 +3412,8 @@ trackedFiles:
     pristine_git_object: f46a5503152c274c1ac0db68eb546771037a3a35
   src/novu_py/models/eventbody.py:
     id: 603ed18e2ed9
-    last_write_checksum: sha1:75e77524da0e8f67cdb9836484744788f3e56366
-    pristine_git_object: 69a1353f9cb44181a405f46a6f8eb21402449ab7
+    last_write_checksum: sha1:3de56d727ce6abd653442b0cb3f59efb8c0a7ad0
+    pristine_git_object: e8c7d3f86158534c44a4a2195bd70a16cff36636
   src/novu_py/models/eventscontroller_broadcasteventtoallop.py:
     id: c72fb3730b17
     last_write_checksum: sha1:1982161d2b0bfc8591c9f6971cdf4df0fd8b5a95
@@ -3440,40 +3440,40 @@ trackedFiles:
     pristine_git_object: cd0d9918546eac94137dd0486b7817f15f67dbaa
   src/novu_py/models/failedoperationdto.py:
     id: b0f4d7f0d626
-    last_write_checksum: sha1:607dfbfa6257d05bf0fb91d7b7c2da42a695c634
-    pristine_git_object: 864a1c90d52c4bb5907ca693b5b2550478761e42
+    last_write_checksum: sha1:efe9feee852b22ee7f399f08c30b008383252678
+    pristine_git_object: e4336739a49300308db3b70e488a2fc69a61937e
   src/novu_py/models/feedresponsedto.py:
     id: 435379f08669
-    last_write_checksum: sha1:5d8e6ab1033b129c06e9b9ecc092e56e89be868f
-    pristine_git_object: a694e1e347bfc5ed4e943f57ef1f48c7fd729f85
+    last_write_checksum: sha1:b93f60475652f8912f89ff94ec185208cc73cd3b
+    pristine_git_object: 8cf644752ca5811535bc134dd89c6c8a27ccf970
   src/novu_py/models/fieldfilterpartdto.py:
     id: a1b091431f25
     last_write_checksum: sha1:00ad461ffde81dbb22c742e3452bf66fd180e8ce
     pristine_git_object: 163619c4151a3b8e17166d9d1ed558fbbdc2126e
   src/novu_py/models/generatechatoauthurlrequestdto.py:
     id: ebcdb0a8b971
-    last_write_checksum: sha1:91533276aed0d6e1fb030cae238c8f20483b62a9
-    pristine_git_object: 81b83f29648115dac084d73b2c6a3b434e0261c2
+    last_write_checksum: sha1:4d98004e2f9a3924647648e91e7b0ba4ced59bbe
+    pristine_git_object: f098b36f7db776da542412d1ee773a1656254a53
   src/novu_py/models/generatechatoauthurlresponsedto.py:
     id: 91967b3550d9
     last_write_checksum: sha1:8bc2416b0c51cb5c843a464ebabdb57938dcc2d1
     pristine_git_object: ded69cc0d141479d3d5998b2a4999e7248e8cd45
   src/novu_py/models/generatelayoutpreviewresponsedto.py:
     id: fb1d1cd95090
-    last_write_checksum: sha1:609879ffb3a3b9613c63f8d030ec3aa22c9d8782
-    pristine_git_object: b269af626cf513087c20e3072963b932a1a9e334
+    last_write_checksum: sha1:1c3a5cd0eaf0f8a960f1d8477e3b5f3ebef5a2d7
+    pristine_git_object: b014a8cacfe70252f0f8423b98845cc6aee02956
   src/novu_py/models/getchannelconnectionresponsedto.py:
     id: 8fbf7ffa93f5
-    last_write_checksum: sha1:05fc3150d50a2f9d4eafdff3e88baea6bbd08632
-    pristine_git_object: 7e1bc9f93f0190c1dc97b0702dbe5966d3eefe24
+    last_write_checksum: sha1:03352bbebcb35e253e8b53ded389d5ad975457f7
+    pristine_git_object: 4fc051633e3b4940f4838cad3e59c8ed684fb81e
   src/novu_py/models/getchannelendpointresponsedto.py:
     id: 7ecd48cbc543
-    last_write_checksum: sha1:bc984a6ab582dbcd0e9f1e8daad8f5d68546f76b
-    pristine_git_object: 1a9eaf7f9a39ac5652b66c66c6138dd5d361200d
+    last_write_checksum: sha1:2b7799541e4f8b46dee235a867315be0ced63bd3
+    pristine_git_object: 50fcde7a37f666829ce40e4886c1d3ba04a396f4
   src/novu_py/models/getcontextresponsedto.py:
     id: 14a214a6e106
-    last_write_checksum: sha1:09a7aef77bb9a46fdfcf117eb1a7141cf1e3504a
-    pristine_git_object: 041548cd3f99326e4d1cab045f81f42da6e5e3c8
+    last_write_checksum: sha1:f793e38d07a343c7915a9218c0cf974b8e2c87e4
+    pristine_git_object: 38870355e08361e0b7a42f28bece66677419ba55
   src/novu_py/models/getenvironmenttagsdto.py:
     id: 9503f4f4597b
     last_write_checksum: sha1:85dc9f687290556152a7aa4621fc2a4060e2d6c7
@@ -3492,44 +3492,44 @@ trackedFiles:
     pristine_git_object: 438a921b8425bc0972be328a27f48126ffb5877a
   src/novu_py/models/getsubscriberpreferencesdto.py:
     id: e8e70e5001d0
-    last_write_checksum: sha1:7ddc8523a5d91e6f474e439d03ce72567445c522
-    pristine_git_object: c5fc4ead00731cfab9af6d266d23369ecec9b1fd
+    last_write_checksum: sha1:71cbca1294b25836a7931aed49551d3e5aa16cdd
+    pristine_git_object: 93ac8cca4f47e7631651b1edad982330d5b1944d
   src/novu_py/models/grouppreferencefilterdetailsdto.py:
     id: b7325149ae71
-    last_write_checksum: sha1:52de73fb4e866fd11de8eead112206082ff6baf5
-    pristine_git_object: 99e83549dfac5cc7ca82882ab36c97ea43d8f4fd
+    last_write_checksum: sha1:48f54cd989b276989a73c81f6ffca77e5baff1ec
+    pristine_git_object: 46e3a73d8fe8d0390410df16eb40093aebd0a534
   src/novu_py/models/grouppreferencefilterdto.py:
     id: 7ccbfc032feb
-    last_write_checksum: sha1:17a6d109d78cde242e1d6bb31e554bc5b82473da
-    pristine_git_object: 096f8ddd87907b2d40ab2b01353c32098cc6aa3f
+    last_write_checksum: sha1:ebffe7ba6b762fb718193b302c8498f3506a0ad1
+    pristine_git_object: d87adc74c278d6f7e4ae9af7d6a7dfb362b4e3e4
   src/novu_py/models/importmasterjsonrequestdto.py:
     id: 14268fcde167
-    last_write_checksum: sha1:0860415019f9016e2dcfb2f3f8a641ba42187a3f
-    pristine_git_object: c4d7c72459b7f026c369a1aca6a54a1351bd5c30
+    last_write_checksum: sha1:9d9f0cee5e139db37b4cce8c3a3b0f3183e4d224
+    pristine_git_object: b9665fb37914cda90a589e5f91c526a06bdc5b0c
   src/novu_py/models/importmasterjsonresponsedto.py:
     id: 923ba0f8daf7
     last_write_checksum: sha1:b291deb38db146648bb680bb2c7dbc6dc5969eac
     pristine_git_object: f59dd281158b803553c22328af81260da906b97b
   src/novu_py/models/inappcontroldto.py:
     id: d270c9fe15e0
-    last_write_checksum: sha1:e36ee15c8ff681bb44aac8809e096e1de06124ab
-    pristine_git_object: a03efe6f7b233f2a00cad0a1577e761aee01f13b
+    last_write_checksum: sha1:0c8f8f05f5dc8ede18eed35045825fa95a06d469
+    pristine_git_object: 14ecebb83d59b4a55254699b9e9781e1b02803cf
   src/novu_py/models/inappcontrolsmetadataresponsedto.py:
     id: c6b7c7066a7e
-    last_write_checksum: sha1:c48ef145f42db2c51f6a68239688068da4c01e4a
-    pristine_git_object: 89e39130012d4a435ec1019bbad99dbba5fd69e5
+    last_write_checksum: sha1:70dcac4f9ff8ce1d32957b7ba8ccd840acbda830
+    pristine_git_object: f4c3d9318e0d6507ec6998381072b3f8bf6727be
   src/novu_py/models/inappstepresponsedto.py:
     id: 047c98bd14b3
-    last_write_checksum: sha1:797b5afac350cb2b80ab523b58d6fbf1fc9dc01f
-    pristine_git_object: 278941f28bf7ad8e8860ef5bb0ba7fa0cf7eb5d8
+    last_write_checksum: sha1:5de0b3271ff6cf8c3320c01304b273cf8383f48c
+    pristine_git_object: e5d30e4d2288bef4c6f1ce50ccabd8d9bcb1f29d
   src/novu_py/models/inappstepupsertdto.py:
     id: 1517f04a9275
-    last_write_checksum: sha1:9516e8ad1d08a9b6b0e1e96e5e6d672aa8291f95
-    pristine_git_object: 0c1eca25183c4d83e832ad22e154d174cf0182eb
+    last_write_checksum: sha1:46fcc52fa305bbf1128e0f6ac0c7cd75feff4635
+    pristine_git_object: f5f3a165346b7d58e3134b836f38981def2952ad
   src/novu_py/models/inboundparsedomaindto.py:
     id: befe8237fd34
-    last_write_checksum: sha1:f8a34ec2e37e06190f041179ef97c1a3bea48bb9
-    pristine_git_object: 0e071386fed99d1fe38a32ade8ac2641ae708db4
+    last_write_checksum: sha1:661b00ea63ca029fc23e4413b6b7b02fb792460f
+    pristine_git_object: 03d15092b6f2f7924d3400ab1bf5d3910b4b2208
   src/novu_py/models/inboundwebhookscontroller_handlewebhookop.py:
     id: 23e11093c613
     last_write_checksum: sha1:960abfa75d05d7c760a9d4ed08c20899088b658d
@@ -3540,8 +3540,8 @@ trackedFiles:
     pristine_git_object: 35313bea34c3b5aed0923a894e0335a82b7bb0f2
   src/novu_py/models/integrationresponsedto.py:
     id: 67cc4414e8c9
-    last_write_checksum: sha1:0e5159bc3298bfffb325ef10535964c1ddac298b
-    pristine_git_object: c1ff664b1a536c0b15f364a32cdba52cf031df5b
+    last_write_checksum: sha1:030501f99e9bf00d233a27e0f9d922e5da287545
+    pristine_git_object: ca6352de1bc6a91fefe5db088567d7291e827dcb
   src/novu_py/models/integrationscontroller_autoconfigureintegrationop.py:
     id: 91687c7e2d5d
     last_write_checksum: sha1:fa443e1475bb752c39f615060ff24cd06a3842ef
@@ -3576,8 +3576,8 @@ trackedFiles:
     pristine_git_object: b8417e80f9bf7066dec3172cc40eed3bd623173f
   src/novu_py/models/layoutcontrolsdto.py:
     id: c8637f78fc71
-    last_write_checksum: sha1:c84a08e42e5cc0aa8fa956f29f7121e8759e22e7
-    pristine_git_object: c64cbd424fa6e5f501497529db4036e9024c66a8
+    last_write_checksum: sha1:7ecc071f1238d4c037e2479ba8927db9d806202f
+    pristine_git_object: 43626a568a4bd1462617442a708796d570e4f11a
   src/novu_py/models/layoutcontrolvaluesdto.py:
     id: ac64310de3fb
     last_write_checksum: sha1:0a82436944dae2eb4e542cc9550d4cb610423038
@@ -3592,12 +3592,12 @@ trackedFiles:
     pristine_git_object: 3be2e5362c65a066cbe4531972b967a810c73e57
   src/novu_py/models/layoutpreviewrequestdto.py:
     id: f416fcbf93ca
-    last_write_checksum: sha1:d8b77b6a70794614132baa33577ae0538e7c2fb1
-    pristine_git_object: 0de0750757ec547eec431bba02115630a5a4cd90
+    last_write_checksum: sha1:bec4f7a7b2e59814fee10f852f6d91cbeed17a77
+    pristine_git_object: b92d7beb5bc45e4e4a339b1f5ca0ec44084de10a
   src/novu_py/models/layoutresponsedto.py:
     id: 0654f6e18db4
-    last_write_checksum: sha1:0cf005d0ab921ac913a2513e956cf1f1b3f5525e
-    pristine_git_object: 0cb6a8f76514ab677d93e132043af7d5fe5d7059
+    last_write_checksum: sha1:a306013dcb0cc428def7414c2ce81b64511bf1bd
+    pristine_git_object: 0be725a32b610cf3426887a990d1fd93d0dc1f9f
   src/novu_py/models/layoutresponsedtosortfield.py:
     id: ff2979405b2a
     last_write_checksum: sha1:a2a0cdeed26689fb5c3b80d93f23ab6e0b363cbc
@@ -3636,44 +3636,44 @@ trackedFiles:
     pristine_git_object: 3419197b441b51ab26404963d6cadf5866728e2a
   src/novu_py/models/listchannelconnectionsresponsedto.py:
     id: c71b16f0c754
-    last_write_checksum: sha1:47f37308e31194f71696f4c4baf00032f0f45070
-    pristine_git_object: 42e71521c21ca950e3013fe34c2ad02a28fc7d00
+    last_write_checksum: sha1:e3a184aeb4fb70ce8b7906d59dbc5ad9969bf4c1
+    pristine_git_object: d59771ef1cda146f7c3dcb4b9eb876bc5907b905
   src/novu_py/models/listchannelendpointsresponsedto.py:
     id: 1145c2bd8eaa
-    last_write_checksum: sha1:890bc228821a5912e8f53b0b5e74cbf140fd87b5
-    pristine_git_object: c87993365bd9f628c2b44f72afae55193473d1e1
+    last_write_checksum: sha1:2f3fd46de4127687a55eab4eb8150bc95e6e8b3d
+    pristine_git_object: a0b765ed047222963a04629334213854c3b44dbe
   src/novu_py/models/listcontextsresponsedto.py:
     id: d736e5de99f1
-    last_write_checksum: sha1:403502501a5d2b604f88db7f69ce5075abfb4225
-    pristine_git_object: 41152ab448428eba0e3fd3e0547b0f7ccfdd97fb
+    last_write_checksum: sha1:710133bd9326f61b3df15af5dbcea12cf565d85d
+    pristine_git_object: 70920734b99010846337e0b80c271cb1016dcb3c
   src/novu_py/models/listlayoutresponsedto.py:
     id: 7c96845facd5
-    last_write_checksum: sha1:891c9c9137501c22f8b271186a0972b5b7cae42a
-    pristine_git_object: ca9c9aa6c71587ed6e5bc718dedd0cdcfe36a8fd
+    last_write_checksum: sha1:9327076f1883872c0cda3cae3400a3c0cc2a6cec
+    pristine_git_object: 090add600ba2b72b8a079cc6ff8d5e4bc332c4cf
   src/novu_py/models/listsubscribersresponsedto.py:
     id: b1dd6c35f1a2
-    last_write_checksum: sha1:6df1d5ca94457fe42c72a80d637e5e79f4fb0a90
-    pristine_git_object: d86878cf70423c0a8d0f597b05f45faed0935c94
+    last_write_checksum: sha1:f9b1ba256fe419ee52059e523f1db5cfecb237a9
+    pristine_git_object: f2b32dd43fec72b5279fa9e8607dad29b370616a
   src/novu_py/models/listtopicsresponsedto.py:
     id: 13685b3bea5a
-    last_write_checksum: sha1:8be270398cf776bcc43d48a04ec06663f85fde69
-    pristine_git_object: a63b12e863dcda8d50f8c0305f8b4f762628fbd9
+    last_write_checksum: sha1:b621d7277b2b82e21806c1139a059942fc260604
+    pristine_git_object: 123d292981fc3952b7e5fed256595379928d1259
   src/novu_py/models/listtopicsubscriptionsresponsedto.py:
     id: 176cf2072862
-    last_write_checksum: sha1:cb47715139c10222456f4d8435a6acc16c0081da
-    pristine_git_object: 770d2914f87474517f8273f053a1764f816e472d
+    last_write_checksum: sha1:3b6a59a28f1bfa93189a745624c9a2f6817ffcb3
+    pristine_git_object: 1d4daded22549fa90f9984ab817b7d8b2d803d00
   src/novu_py/models/listworkflowresponse.py:
     id: fd1c7ef4a09e
-    last_write_checksum: sha1:f73f8e06a06400d75b485b3ff7eeea30528b8815
-    pristine_git_object: 64fe05bc7d8600587d3a05eda055e7b7f9a89350
+    last_write_checksum: sha1:928845568724f9cbfd644a7b866cc32a5ec216c7
+    pristine_git_object: ae4a538edb885b7554552474434dd8e00e7124c2
   src/novu_py/models/lookbackwindowdto.py:
     id: 23637051f58c
     last_write_checksum: sha1:a233c6a853ca7724300f232c8ca1d3cbadb5fc18
     pristine_git_object: 3ae698a1c915fa22c0458598e490c6d22ec30372
   src/novu_py/models/markallmessageasrequestdto.py:
     id: 5d2179ffea6c
-    last_write_checksum: sha1:9b7585209f559d408deba40ba7bd7f2c56f26a67
-    pristine_git_object: 4d0f765d7b806b6430dd97979be91988564aa3ba
+    last_write_checksum: sha1:6847782142d1d1bded239a16aee2c0e891fdb909
+    pristine_git_object: c66237892b80868e44dbe7dc2adb8d81cddbc73c
   src/novu_py/models/markmessageactionasseendto.py:
     id: 1bcf85a9585f
     last_write_checksum: sha1:1ee99022aa2d8e9558939315600741a6c03e1fbf
@@ -3692,8 +3692,8 @@ trackedFiles:
     pristine_git_object: 467d22bad1ac2ad43bde889c31102db83260ab47
   src/novu_py/models/messagebutton.py:
     id: a945d280840f
-    last_write_checksum: sha1:e2c4fdcd138d4bc9234b3ecdcc348d819b2f188a
-    pristine_git_object: 2ed2a62800d9bdca294078eb337a12b5a2f2c180
+    last_write_checksum: sha1:a886f0ca6845bc9b6f7f1bb66ef8de254dce29c4
+    pristine_git_object: 09268da4162bee240dcab898af5f472c1efb00d5
   src/novu_py/models/messagecta.py:
     id: fb1b31d9bfd4
     last_write_checksum: sha1:6b890eb7f53e97b79594c0792a51ef9f21abae01
@@ -3704,12 +3704,12 @@ trackedFiles:
     pristine_git_object: bf1aadb290bc57be0e8755a79d4ba3b3052d3a3e
   src/novu_py/models/messagemarkasrequestdto.py:
     id: 0b3fbceb7db1
-    last_write_checksum: sha1:cc3ac5d5b75deb894c362f2aaa99f1ef13818964
-    pristine_git_object: 55d5a36f4d5218fd683d4deb40bda77d414e68b1
+    last_write_checksum: sha1:ed24e38f92f5b396e45746604e5472968703c70e
+    pristine_git_object: 5e6d16ba34e8ad3ccfff117771077f7a52aee8d7
   src/novu_py/models/messageresponsedto.py:
     id: f5b1ba8e7496
-    last_write_checksum: sha1:2a97f251549ca5c22a6a4fc4d3a8529b07cece96
-    pristine_git_object: 218f9f26121bc32801f7cf70ee49e18f2aa12100
+    last_write_checksum: sha1:2d55f9c424d2ae7f70fb082cc03872189ac8c19c
+    pristine_git_object: 46a0b7cbdd4f14d9c4955d1d4b55f08c69784bb7
   src/novu_py/models/messagescontroller_deletemessageop.py:
     id: 1bea74ca8486
     last_write_checksum: sha1:da8eed3cd91a0abadc7caa350ee4404f5090e188
@@ -3724,8 +3724,8 @@ trackedFiles:
     pristine_git_object: e6421dc43af1e00a8fbfce999a12c58519e4e112
   src/novu_py/models/messagesresponsedto.py:
     id: ce4f70ff4d49
-    last_write_checksum: sha1:136231a9fb1cc1f7df68201e01d9b5dbfa7414fe
-    pristine_git_object: 45d16eacaee84f3734f6b2facf11adea2ecb375b
+    last_write_checksum: sha1:6af6f3f86fb58382ed81feb66aac3cad9e59fd86
+    pristine_git_object: 5c9996e13ed299607a12afde62bce1f9b2847d58
   src/novu_py/models/messagestatusenum.py:
     id: d062f91191d3
     last_write_checksum: sha1:15959eda8aabeb089a714977186a746a72bc727b
@@ -3740,32 +3740,32 @@ trackedFiles:
     pristine_git_object: 649929b62c591fdb024087f7e5f876d5623470f9
   src/novu_py/models/metadto.py:
     id: f945d63577be
-    last_write_checksum: sha1:e6f1162dca980577df67392e4af5bd8824fc4bc0
-    pristine_git_object: 5e5b695fd7e4fa367c005fcdd11ea0f405846aaf
+    last_write_checksum: sha1:cc1cf7832dec16fe5ad897c259c7d46b8a62404b
+    pristine_git_object: cb865f9d4c903c2e02ef0d0bdc92fb835086e28a
   src/novu_py/models/monthlytypeenum.py:
     id: e6d7d55176ba
     last_write_checksum: sha1:1057803dbc8a9590a6e5befac6767ce60c39a17a
     pristine_git_object: cbd9d0d0b1e1d2ac6ca6b686224a4d7f4afbb21e
   src/novu_py/models/msteamschannelendpointdto.py:
     id: de34d1cc9d20
-    last_write_checksum: sha1:5f64d8541d2df2a72ebe527ff3def4833f295506
-    pristine_git_object: af46a36314e45bc638e14d061b89fbee3a2c9fe2
+    last_write_checksum: sha1:5de8b756ea8504a99dae0bde6abc02d59ba5f13b
+    pristine_git_object: eea429078134c65ccfac2c5eb50102974b807270
   src/novu_py/models/msteamsuserendpointdto.py:
     id: efe1421dcd66
-    last_write_checksum: sha1:8e256359e215ffaab8e18b91c9bd43c59a74e999
-    pristine_git_object: 16d73ad49715349a7bbd97ebfe42dd2a4551ea5b
+    last_write_checksum: sha1:895f4f8d3e92a016a7dc92df860d1460108e4470
+    pristine_git_object: 0c81baedf2a7bfbb08aa76abb8b2ed8dab9ae9e2
   src/novu_py/models/no_response_error.py:
     id: 1c60a6426fcf
     last_write_checksum: sha1:7f326424a7d5ae1bcd5c89a0d6b3dbda9138942f
     pristine_git_object: 1deab64bc43e1e65bf3c412d326a4032ce342366
   src/novu_py/models/notificationfeeditemdto.py:
     id: ae6d3bf5e670
-    last_write_checksum: sha1:bdc5b1ca60183fbebec05a4d5f4d510d8b3e6e66
-    pristine_git_object: 78b54fb9d2f1bafab29ac3ff105cb4a05f4bef5f
+    last_write_checksum: sha1:2a02bf4b93aaacca4c2e2e9930111ea8863082c0
+    pristine_git_object: 7251d8f70b56208e1efaa9f9b247cde92d5de901
   src/novu_py/models/notificationgroup.py:
     id: 54b4e9e3e632
-    last_write_checksum: sha1:5adb9bdb53a1d7d3d06a1375bf6737bc8d1911c5
-    pristine_git_object: 9cfa7c2eb5f01ee389953bc3f606041a3da3cb58
+    last_write_checksum: sha1:92396b8cf5256893548b67094dc241c09b405a4a
+    pristine_git_object: c4beedb807bc3fedd37a6721d4cf1b2ae294283a
   src/novu_py/models/notificationscontroller_getnotificationop.py:
     id: f624081a8e8a
     last_write_checksum: sha1:11a98f638bce67879d1dfaef5dbdddb102469010
@@ -3776,20 +3776,20 @@ trackedFiles:
     pristine_git_object: a062bf26023cda15f50c989d55369919c40df90c
   src/novu_py/models/notificationstepdata.py:
     id: 7b9c38216689
-    last_write_checksum: sha1:1700c3df82c5d05be621cd23d1bf0dfd5afbf5c1
-    pristine_git_object: 52ff35e1299e367f3ee834c636a553be85185d7d
+    last_write_checksum: sha1:3a0887aeda36de68b824f6d4f88241810d14beb7
+    pristine_git_object: b1e5a05746645e4c2f50b9d91a36b47f23399198
   src/novu_py/models/notificationstepdto.py:
     id: 17b905373002
-    last_write_checksum: sha1:5aed786068623ef4027cf490f1bacc56766a538f
-    pristine_git_object: d5e9e12db2b0bfc805c485642c5ad35aa4386657
+    last_write_checksum: sha1:0368d2a43c1e237b3f4e2244fa93d48625a5a856
+    pristine_git_object: 09506d16cb42d6b7dfbd2c0a9959f42d4b5d4729
   src/novu_py/models/notificationtrigger.py:
     id: 65f79737cbc9
-    last_write_checksum: sha1:2cfcdbe13e9973f861098e54ce2a7b1547c35310
-    pristine_git_object: 50c1a7b9f0dc3ccaba545143fc5203f7d1d26840
+    last_write_checksum: sha1:6230d4cc0c1279a1edc66190a9bcd243c42ccd5d
+    pristine_git_object: 6fbdaef2ea3dd6d468eca894a45ced89f135b24e
   src/novu_py/models/notificationtriggerdto.py:
     id: 08616a331e9f
-    last_write_checksum: sha1:0f2d6eb7eedba5f9a077928cd3c476ba63d87b35
-    pristine_git_object: 7a1bae10cb6247807cfbc11d23ea71daa3643647
+    last_write_checksum: sha1:491f8308ed04487996eb5da295cd475eeb3edb08
+    pristine_git_object: f878f24d0f86ccdf4b5dc05ca74fc96c88b2343f
   src/novu_py/models/notificationtriggervariable.py:
     id: 1184905df445
     last_write_checksum: sha1:655d8c806369e2617b9794296109d7b2514c23c1
@@ -3812,28 +3812,28 @@ trackedFiles:
     pristine_git_object: 3342bd069ac6f37c010bd9c8d779983f0f2d148f
   src/novu_py/models/patchsubscriberpreferencesdto.py:
     id: e996a1d81c09
-    last_write_checksum: sha1:34513afe03484b3ba9fa5c9e8a4021c7d1d5fea1
-    pristine_git_object: f2ca372db435025403634d3f3d52fb0d07aaaf33
+    last_write_checksum: sha1:6defcb060a879880e7a4588b1d08e20012e84783
+    pristine_git_object: 9ad9948012219d0d209715915d5ba1e319a3a74c
   src/novu_py/models/patchsubscriberrequestdto.py:
     id: 2a64adbfc7b5
-    last_write_checksum: sha1:5a2d5beaa447f63b4485e4746955d1c291f2371d
-    pristine_git_object: b076212f0c15144b1bf3c867abe5f90c92796085
+    last_write_checksum: sha1:b12aebc715ed81e1349604dd1fe29438d1b414f4
+    pristine_git_object: a41127d31dade9cef8fe3d7aa4f24db61d0fe273
   src/novu_py/models/patchworkflowdto.py:
     id: 0818cdaa9c2e
-    last_write_checksum: sha1:bda01c12c8c7fdee60259e7d45f2b2f8de32d5c8
-    pristine_git_object: 5d1b4fb542fbd8fd06f28dcce80ae9a1a197ecd7
+    last_write_checksum: sha1:1c876f603a67f441f70d03a4899cf6f64aab89af
+    pristine_git_object: 9ef711309e4a98bfce8a363f362fe260d649439d
   src/novu_py/models/payloadvalidationerrordto.py:
     id: 45a28fd0cf30
-    last_write_checksum: sha1:4953cace05f20fb6d1c1f8d337e01571838197ba
-    pristine_git_object: d0958339f8d471b9bf04a3184892e3056a878668
+    last_write_checksum: sha1:50c31b3bf216364d0cad6e9a83195490b891a548
+    pristine_git_object: 4cffa2edc52513b9e125385d214fa78ef920ee9c
   src/novu_py/models/payloadvalidationexceptiondto.py:
     id: 51157202e559
     last_write_checksum: sha1:aac9b40513a7ef83dafeeb90d370ddd37ca34ff1
     pristine_git_object: 1aa9d344f42aebd23f65b8bbd04f18a3c4303e57
   src/novu_py/models/phoneendpointdto.py:
     id: 09cfeffe89e7
-    last_write_checksum: sha1:943e0e59261fa95edb539299bb1dd988fc1e6c98
-    pristine_git_object: 280160af0bd7fd1855ae51e91858bd58efea5658
+    last_write_checksum: sha1:bbd0083427b1f2e3d4f1cc2cbfc3478a7eaa1a4f
+    pristine_git_object: c3dcaaa7896a3e9e68be6686deb4fd9c1d996968
   src/novu_py/models/preferencelevelenum.py:
     id: ddd5f78ad120
     last_write_checksum: sha1:fd49cf3813e078e7c2da37bfa6bb6924a39b19bc
@@ -3856,16 +3856,16 @@ trackedFiles:
     pristine_git_object: ca180884a13447873740d4217556b131299bfd28
   src/novu_py/models/pushcontrolsmetadataresponsedto.py:
     id: cb6d5d8feccc
-    last_write_checksum: sha1:12939bcc644de0c2f5d616f99aabfda478810e32
-    pristine_git_object: 33f923c995ffbc8c1a6378e9bbfd81286a91851d
+    last_write_checksum: sha1:0bdd230da380647746d51315b9a948dcb713ca75
+    pristine_git_object: 7684ff8415b34438eeea294b7fa4da0434d02c12
   src/novu_py/models/pushstepresponsedto.py:
     id: 9b870d2425d4
-    last_write_checksum: sha1:b0c99fa5b45b03ad5de343ba8a44ff61e8e2b2de
-    pristine_git_object: c0a76b955ef0595bfcdc1458b8f1f918b5e5df49
+    last_write_checksum: sha1:27085514ee16332307c4e9de2f9de4f540d171b6
+    pristine_git_object: 81169a304879a5a44b68706b746c56829365a71d
   src/novu_py/models/pushstepupsertdto.py:
     id: 8545d741d226
-    last_write_checksum: sha1:ef90fe7914b14c994f7755b5344aa6449f8da30e
-    pristine_git_object: bb66ff8376e9a29ed183ada8a7bc409f4be5dc7f
+    last_write_checksum: sha1:eccf06ed85594ec2e0ae99cd6f32b4f1c224eb19
+    pristine_git_object: 593c8fa58c665d639968db79fa55279b47a9bac0
   src/novu_py/models/redirectdto.py:
     id: 17d444d22d0d
     last_write_checksum: sha1:2a8f2c70d2f9387528b994e3a8a8b22a419b06f9
@@ -3892,12 +3892,12 @@ trackedFiles:
     pristine_git_object: 2239a9d7c994ba572bce72e1768c00fdfc8fd7ad
   src/novu_py/models/runtimeissuedto.py:
     id: ba405645ee30
-    last_write_checksum: sha1:5234d790df2d4eb23fbc00bf433bd706bebed80f
-    pristine_git_object: 5b9c198d00b34191603332cdf7836818f2cb6c13
+    last_write_checksum: sha1:99227c8a018b53bb87f47dcbebb3340dfb8920ed
+    pristine_git_object: a2e09fb43d32e8a0aab789ffe4ac189ee745306a
   src/novu_py/models/scheduledto.py:
     id: ea7cf7d9882d
-    last_write_checksum: sha1:5f209cff0da47ef0965d63ce4b9563c57b42435c
-    pristine_git_object: 172320ad04307038a51d0af09342431b7d2fb9c6
+    last_write_checksum: sha1:f0bdd8b2c9bcd0673a411fd616ddff5169cea3d7
+    pristine_git_object: 0965b980c6220ffba97384a8509c6c48d6655482
   src/novu_py/models/security.py:
     id: 2a29320f08eb
     last_write_checksum: sha1:479494842ef14c8bc99681cb51752c99efff504e
@@ -3908,40 +3908,40 @@ trackedFiles:
     pristine_git_object: 65d9a91f19ddebcce051704e9690bfd97d29e452
   src/novu_py/models/slackchannelendpointdto.py:
     id: 57fc4b5c0ffe
-    last_write_checksum: sha1:e06d63b1e659cf2f68df1c314e6a61cb5934daeb
-    pristine_git_object: 98e350f8d19c4ed5abd848f43185b1e27436ac65
+    last_write_checksum: sha1:092e83ee24ad137e7aa50e880c0c0621d32c6d9f
+    pristine_git_object: 032b40eeeeebc55c8a09d8b62560e17540eb884d
   src/novu_py/models/slackuserendpointdto.py:
     id: 32a5c23c00d3
-    last_write_checksum: sha1:c2c5d69c52ae1392fd501736640ea19ca7a8f23c
-    pristine_git_object: 656fb7e07da025d9765494f805f32b690c462c3f
+    last_write_checksum: sha1:2447fcbd151ae6686091cadffdbe492e75dbdbcc
+    pristine_git_object: d43d949e503dabb98147890f18d1a7beed5f86e5
   src/novu_py/models/smscontroldto.py:
     id: 01a5d6d81750
     last_write_checksum: sha1:d03499ebda75114d0933bb5d8aa706c6831fa069
     pristine_git_object: 2d01dfa48515925fcdd5832d78520fe9cb1ac1e3
   src/novu_py/models/smscontrolsmetadataresponsedto.py:
     id: b5c5698c072c
-    last_write_checksum: sha1:a632d0a00af6b9770419b2e7f43cf2c3c9890ad4
-    pristine_git_object: 4202a5cfdcbd104e7df4526a843f713186cc36c0
+    last_write_checksum: sha1:b1f37a1e6aca644bd8b98c85183576c6df94611a
+    pristine_git_object: 17627af7da92dfa3016ea9ac4ac7bba82c25a40f
   src/novu_py/models/smsstepresponsedto.py:
     id: 52ddc483a852
-    last_write_checksum: sha1:e29ffaf00182e2faf871bc32c597267921ae1c80
-    pristine_git_object: 571f03ba60361e9d7f73e79be6b8a630e7fc1dc8
+    last_write_checksum: sha1:b1e196f9016a0c5ae5ec0a7d591bf7043212051a
+    pristine_git_object: 0755f4969df9735b06f6399aa5dbc8914caf43ed
   src/novu_py/models/smsstepupsertdto.py:
     id: 6365cbe97aa7
-    last_write_checksum: sha1:13b27a96e54480274e074ad5765ab8a1d8e7782d
-    pristine_git_object: b7c2d2221f64b31c8d856877975f78c68b842d8e
+    last_write_checksum: sha1:d32ab1324d606d83e39a3734a6b607f94a1bff90
+    pristine_git_object: 1d4f816400ceaa9f0b6e0d882b047c5c85e2ddc8
   src/novu_py/models/stepcontentissuedto.py:
     id: 6b3e288b48c3
-    last_write_checksum: sha1:6c6712bebfb2199dc460c808e08dda25886eca09
-    pristine_git_object: 61e811a13fd2d66b2d5144ce2ac708f38ba78c8e
+    last_write_checksum: sha1:90190bb64903d0337f96944e79b9c1e39925d62a
+    pristine_git_object: 67683fffe4e5172b2864c883cfd5875f2cb620a0
   src/novu_py/models/stepfilterdto.py:
     id: 17d4569776d9
-    last_write_checksum: sha1:25ee38fa746c136f0c462f6b5364da7139f722ba
-    pristine_git_object: 259589e3a69d0da9e9103808925936cbb72d8e36
+    last_write_checksum: sha1:df9d4fd073a84b7692cf43cf74891bd687e86151
+    pristine_git_object: 0939883fb5163c54f3d706cc4bc269bc2ee079d6
   src/novu_py/models/stepintegrationissue.py:
     id: 88f2667b2574
-    last_write_checksum: sha1:9e625c0bec416a4ffac4353ae45233289bf26fb8
-    pristine_git_object: 524589ab21e4d259a43c01aeae030fd1b9bd8964
+    last_write_checksum: sha1:0f6bd139d4e84552db93a7c84301d615ec113088
+    pristine_git_object: d43852f233fb704d4ce187ac0e0fc4cf866dfd38
   src/novu_py/models/stepissuesdto.py:
     id: 09b285604849
     last_write_checksum: sha1:a4d18e62f904372e14fe7ec43b42b3d98c997799
@@ -3952,36 +3952,36 @@ trackedFiles:
     pristine_git_object: 9096e7a445856ad238e81f379ebc3e74372606e2
   src/novu_py/models/stepresponsedto.py:
     id: e7a20032bd1c
-    last_write_checksum: sha1:1dabe57ba3aa2a6690be58c49c88cbe1a1a6436d
-    pristine_git_object: a917cc271e11fb8fc25aefefaac66fc69cfa6cfa
+    last_write_checksum: sha1:f2d9b1cf2dcab69bfc561d14bcbf02ead5a4c0ff
+    pristine_git_object: 20b02a30710bdbb07deef76c3f1997c111c03493
   src/novu_py/models/stepsoverrides.py:
     id: 944fe2ed2502
-    last_write_checksum: sha1:adac6a9805442f812247773d4c3bf226f21231f4
-    pristine_git_object: 3d6d5d305c736d51333a813984842390e3094efd
+    last_write_checksum: sha1:4c75685784b896b91a7cd6e8c080b043e5bb2173
+    pristine_git_object: 62215cfb59145f73a2b6e3f691297af1d5981a9c
   src/novu_py/models/steptypeenum.py:
     id: 097efe96197f
     last_write_checksum: sha1:fcb973ad76113c4d934b9933f65ad4637ccc6c11
     pristine_git_object: 05ba9063021a85dd225a6b02d752df37489f75cd
   src/novu_py/models/subscriberchanneldto.py:
     id: bc0829ef7ca2
-    last_write_checksum: sha1:02c62e21baeefd30ba6f832f8c7477c918280de1
-    pristine_git_object: 9d22f1cc4677fbcdb1dbda47cf5e156589198f99
+    last_write_checksum: sha1:618dcaaf8adb6aa28267d3c51f03985fcdb2aae6
+    pristine_git_object: e9a6de701dae76bbd9187aa8d362630d6792b858
   src/novu_py/models/subscriberdto.py:
     id: 9ccff7aa6747
-    last_write_checksum: sha1:5571f5457e3bce721ba37d9378413d1d19181f33
-    pristine_git_object: 11a5c155421a5f83e955d279d266474faa7af528
+    last_write_checksum: sha1:a8f61950464b102c0698216c7fc1757f06590af1
+    pristine_git_object: f7646604bc56dcef44ef2e5963afc42453b1c93c
   src/novu_py/models/subscriberfeedresponsedto.py:
     id: 2dae6dc3e0eb
-    last_write_checksum: sha1:663cd3ce5bdb41aac86fbabc398fe532d3de2cec
-    pristine_git_object: e781e1e28db05c2e151015c196d3239ff7ba5d50
+    last_write_checksum: sha1:d4d4d03b9269ef5ab28de298f7998d251b063785
+    pristine_git_object: 948b50919cd15b9ed1c20d2607b527b609fe0867
   src/novu_py/models/subscriberglobalpreferencedto.py:
     id: 07e8662a9860
     last_write_checksum: sha1:9748ec3c23037b757df219d295c47b232c62a01f
     pristine_git_object: 0ef35023c7a145b1479a0b7da3657433b314e612
   src/novu_py/models/subscriberpayloaddto.py:
     id: e125c40bbaaa
-    last_write_checksum: sha1:22134fc71cc4ed2eba19961748563fac62692be2
-    pristine_git_object: 8c544c4d62fcab2be80eb71ba27752405fc7c348
+    last_write_checksum: sha1:36a5bfd5d7e69ca9e0d76918d98c0ba3e5dcadd6
+    pristine_git_object: 67c200f0c99e9d60823133d9a1dfcb9908715f07
   src/novu_py/models/subscriberpreferencechannels.py:
     id: 8a7a6b0a76aa
     last_write_checksum: sha1:4e99274fcc7d4623813e8861faf9519419fd52e6
@@ -3992,20 +3992,20 @@ trackedFiles:
     pristine_git_object: f59ca2fb7ada5cf2b6bba65adffac80e49a6ab48
   src/novu_py/models/subscriberpreferencesworkflowinfodto.py:
     id: 58aabc4535dc
-    last_write_checksum: sha1:e75026beefe9563c3f5c9cd8fcf6d8a207142546
-    pristine_git_object: bbeeb89d4c25cf3cb3fa76ca4c3b1b5f34ffc597
+    last_write_checksum: sha1:32303711d5b9cfef7d4cd290bfeba622e53035f2
+    pristine_git_object: eb26996eebd7101c597224319de3923a4ee92073
   src/novu_py/models/subscriberresponsedto.py:
     id: ef4e235c8ce3
-    last_write_checksum: sha1:fce45e1b16e39d7f8422c503f6a34e27af3c52a1
-    pristine_git_object: ae2e3d125f7eaf8d261dc10fc2f9b9356a73dfbc
+    last_write_checksum: sha1:ac365a7a27ccb55092ed1f7edc6f7c033bdda69b
+    pristine_git_object: b3e645d37700f357afad536fd1c6daa795ce56c2
   src/novu_py/models/subscriberresponsedto_error.py:
     id: 9bdc1c4435d0
     last_write_checksum: sha1:a5e92dbf3c6c789c1372deb18d4f0a98a1ecca91
     pristine_git_object: c5b50f6f3b17305bc33c2e5679069ba43d278e59
   src/novu_py/models/subscriberresponsedtooptional.py:
     id: 18890f8b468f
-    last_write_checksum: sha1:ad9602940488f566a765e450d07a4e6de7b51445
-    pristine_git_object: aeeea8416b547754bc5d71db23fbf0df8e55f486
+    last_write_checksum: sha1:7642263d6351ae0f97a018b6e0dd1f784b32c921
+    pristine_git_object: dfa1fc5e33faa8f4cd2960d8b6da9066c36c4993
   src/novu_py/models/subscriberscontroller_bulkupdatesubscriberpreferencesop.py:
     id: 371fc5ce5d51
     last_write_checksum: sha1:7d2ecd47ca1e000759290148340b8374cb32118e
@@ -4084,36 +4084,36 @@ trackedFiles:
     pristine_git_object: 292e4d08172617ea2abe7790bd9cb22ecf7255da
   src/novu_py/models/subscriberworkflowpreferencedto.py:
     id: bb0491a0719a
-    last_write_checksum: sha1:dc76df76f52425acfdedc9f25c7a97d8fd43b2b4
-    pristine_git_object: 72566ebbd4479d90b88c28f58d52b067940bb4eb
+    last_write_checksum: sha1:530b4748a1d592a7c361a25295d83363c1013d6c
+    pristine_git_object: bee739cf8842b8822f2e3b98eebe232146c1cb07
   src/novu_py/models/subscriptiondetailsresponsedto.py:
     id: 67d82d3a0eef
-    last_write_checksum: sha1:312d47f37df76b65aa8794dae2f7f53753fdb96f
-    pristine_git_object: e20eb378f1ef7f02c90c71aad657b75ee4c458b9
+    last_write_checksum: sha1:b9fbd7f29ba5e4a1ee0b496d615d6b134460935a
+    pristine_git_object: 995b80320bfb9db2b88fce8cea9706667b6bb01a
   src/novu_py/models/subscriptiondto.py:
     id: 30d8e4ee09ce
-    last_write_checksum: sha1:15f9cd17db4d17d3db2c0e42d5b12779c5e26377
-    pristine_git_object: 94b180177a574b0173a0b67f85362c519c5f89a9
+    last_write_checksum: sha1:0719af0ca149d4347fea0cf296230ee0f1b44db9
+    pristine_git_object: d4d0da416a3ae6fb3de9337fd9f8adac6577c20c
   src/novu_py/models/subscriptionerrordto.py:
     id: 92e7628ca701
-    last_write_checksum: sha1:3f0bdb1d568db08f7d0d69f8bd3a69de0a78b5f6
-    pristine_git_object: 5e51483d82e41289c91e37d19e3caca636a671c5
+    last_write_checksum: sha1:13b29b928d28bc839762b73162905c9bab273a25
+    pristine_git_object: 0e0945daad699559a6697a4f09df1b802753460c
   src/novu_py/models/subscriptionpreferencedto.py:
     id: d102b9ef685d
-    last_write_checksum: sha1:46e26a2d23bd6bff0f76487d0ab77f4d226cd40b
-    pristine_git_object: d93a0b207947bad56b5ca1891f65b3900b3b8404
+    last_write_checksum: sha1:ec61930463434abe90ef0b3c0556f397872c0065
+    pristine_git_object: a052378230b01ee5024f0ec16cf4b6ebd6b61cf9
   src/novu_py/models/subscriptionresponsedto.py:
     id: b557972bc018
-    last_write_checksum: sha1:9667e402212257a5419e1737dd6e233139fad113
-    pristine_git_object: 5f6eb674316d5ae343cf9ae77c08a3ccba6a5d13
+    last_write_checksum: sha1:a49600287e23ce37590d8182762345faa83fed22
+    pristine_git_object: a22f0d3ffc0cca9dc5b213f8d934ddc4053eb45d
   src/novu_py/models/subscriptionsdeleteerrordto.py:
     id: 812941745e4b
-    last_write_checksum: sha1:27aefc506fd1b8b200740e0f240091e8f2eb5a33
-    pristine_git_object: ba81238ff81737343eb209730fe70d07de726fe4
+    last_write_checksum: sha1:e652ce304bc73cab82ed6a26328a8c95597e85e9
+    pristine_git_object: d7765004cb1c7b0cc98b878bf96cb92c3a6e1818
   src/novu_py/models/syncworkflowdto.py:
     id: 6754488e0c67
-    last_write_checksum: sha1:761e153a0d6a01886a15a857d04b9d9f65dab521
-    pristine_git_object: c9ced82e30cf3e547bb9f802450a27a9472cd73b
+    last_write_checksum: sha1:82bb975c36ebba05ec6878ea8b254d34c01c1d6e
+    pristine_git_object: d2ce655d608e1cac492f8abe890a6888e8702f84
   src/novu_py/models/tenantpayloaddto.py:
     id: e5454382ee7e
     last_write_checksum: sha1:2a04deadab07492b4fcfaf20c76fb8a4bd8b659f
@@ -4124,40 +4124,40 @@ trackedFiles:
     pristine_git_object: c3c0afe6cf2bab69474b1dcb0b75cd4f05c7a859
   src/novu_py/models/throttlecontroldto.py:
     id: cb2291ccb65a
-    last_write_checksum: sha1:4211d9f1de64db4e0b5ad867a39a73cad0312fa7
-    pristine_git_object: ab5d4bb288cc556df9ce707e975de4f5361be1af
+    last_write_checksum: sha1:796254789e1858ef02eada51779f99433b42ee3b
+    pristine_git_object: d9439715fec0e0ab4874e286aa2c42167c914c69
   src/novu_py/models/throttlecontrolsmetadataresponsedto.py:
     id: 341ed0409c7c
-    last_write_checksum: sha1:0a506012fbf06339bce1624e4dea536a94821cee
-    pristine_git_object: d698d18eca829bf368d23cb8b2cdc3d7a8259bec
+    last_write_checksum: sha1:2d69edbb3a7256a38eeadd2a54262ee31b5672ce
+    pristine_git_object: bc5620941091918a48bc5a6c70a474cf6a6f3ce2
   src/novu_py/models/throttlestepresponsedto.py:
     id: fed4e05426ee
-    last_write_checksum: sha1:558bfad92d934d12f8552c829194063a23d903ef
-    pristine_git_object: 0b7bc18e38ce72e1c7cfd7dee3598f7a1044a46d
+    last_write_checksum: sha1:722a975374fda146cbd72aa2c36988d7ed23056e
+    pristine_git_object: f5b396e78ec31d955c7453a8061d392fc64c6163
   src/novu_py/models/throttlestepupsertdto.py:
     id: e2d488e9ce90
-    last_write_checksum: sha1:0690d12592c725dd2fbccd2697c224c362d6c9b0
-    pristine_git_object: 34c40a8e2783e3b5d5011a80d8e0951afc99a360
+    last_write_checksum: sha1:79febfeca5dba017051944cd2739e5b72caa0b1c
+    pristine_git_object: 3490da50d0b2e8c1f9663435b21c5f83575e8361
   src/novu_py/models/timedconfig.py:
     id: 9a092bdc5185
-    last_write_checksum: sha1:f473a85163bd4800201ab14b9bf40103faa52373
-    pristine_git_object: 1042f69c5a32eeaf7c0348fe9807feb468e8a67c
+    last_write_checksum: sha1:04bc54b57b19153308ff7bd7db7077648d1d6c45
+    pristine_git_object: d3e7ba9c9ef3fe6f46a67cad2567346338e61f89
   src/novu_py/models/timerangedto.py:
     id: ce2756b95976
     last_write_checksum: sha1:e5887e8bb54448ceb0445deca9a279c6f6140c2a
     pristine_git_object: 9adfb74f24dd40ff851d640c0be57bec8e3d05e2
   src/novu_py/models/topicdto.py:
     id: 64cb2689fcce
-    last_write_checksum: sha1:73b96fdf345bd80a29b633e065c489d7d186fce6
-    pristine_git_object: 024af23aa5aeaf1a2df00961261162200e744b51
+    last_write_checksum: sha1:d60b6e5ec1619e97ee968756190d1252ff13d8a3
+    pristine_git_object: 8a2a6c586db81d6f71d9623e6743c9940f56af7b
   src/novu_py/models/topicpayloaddto.py:
     id: 5b903fd17910
-    last_write_checksum: sha1:2c75eb55aea72dd96adc5e536492a3f837a4fef6
-    pristine_git_object: 7ecb4eba680d88d89abc4481cb512f9063e1f7db
+    last_write_checksum: sha1:b21f4495595a5af5acea89b475a9b0b69292d439
+    pristine_git_object: 2f2ffb064fd09d714cc36b79eb25c1c214c6b752
   src/novu_py/models/topicresponsedto.py:
     id: ad969a3c7c0c
-    last_write_checksum: sha1:779347620fb162aea857ca91ab2c67c080cce72d
-    pristine_git_object: 3e6f16126c8b317b949461411a924867231d3653
+    last_write_checksum: sha1:9d0129811b0cd5b6850be5c5bc10736d211f2afb
+    pristine_git_object: d42f95f16f2b12efe370f3841e2444dc31def7a9
   src/novu_py/models/topicresponsedto_error.py:
     id: 1d5909d51ecd
     last_write_checksum: sha1:7990c258cf1ca5b6a3435235b36a10adbe1d2537
@@ -4204,16 +4204,16 @@ trackedFiles:
     pristine_git_object: 0a9087ef185f858b770b77ee45d09b053ff66fc4
   src/novu_py/models/topicsubscriberdto.py:
     id: b3940e199b45
-    last_write_checksum: sha1:96b3464c3e7bda386ddaf622b6d530f56b06d599
-    pristine_git_object: 7c9ce9143227edfa77ef446599be62f66cece587
+    last_write_checksum: sha1:94a447e241e8eaf6b8b74895df9e92c0a505a416
+    pristine_git_object: 6a3487159c5cc97a02c2710bc1063be15987e093
   src/novu_py/models/topicsubscriberidentifierdto.py:
     id: 1c384c09e9b4
-    last_write_checksum: sha1:7c95f73676654e812f497094388d7aa3d77dce54
-    pristine_git_object: 04ca754423c0f75524d6b37f78d56ec75614523e
+    last_write_checksum: sha1:826b78a9804a85093477feb954ae67e480df0efd
+    pristine_git_object: 889c22786226b68949dc529c4e21762be9f0414c
   src/novu_py/models/topicsubscriptionresponsedto.py:
     id: 2baa1c6a629a
-    last_write_checksum: sha1:c33b6649d6e116f57ba4ed30b767525010872460
-    pristine_git_object: cec5dd3cab1b4aca704322f71877e19bea8bb8e3
+    last_write_checksum: sha1:0599e08ada2902a909cfe582a4924cada6ba4e0d
+    pristine_git_object: a0f51a83df39932ccb22041d04f0e7aa526e6412
   src/novu_py/models/topicsv1controller_gettopicsubscriberop.py:
     id: 3d83b43724e0
     last_write_checksum: sha1:7116cfad9269e5e870f6a7463611c82266ed61c8
@@ -4256,24 +4256,24 @@ trackedFiles:
     pristine_git_object: 598477794fd55a1248fbb5c29c59d82f2352f0ee
   src/novu_py/models/translationgroupdto.py:
     id: 2e7b335393e4
-    last_write_checksum: sha1:fe07142df2fc2021b05d7542bc71d25966062e55
-    pristine_git_object: 462e40b743b9180265369e2782eb6b38903d9dd7
+    last_write_checksum: sha1:82f093c705606510ddfe82028d185f7ef857a2c3
+    pristine_git_object: 691aa9e7fc817b31492afc310ba1e0f6b8ad5e54
   src/novu_py/models/translationresponsedto.py:
     id: 8a87c62068f4
-    last_write_checksum: sha1:e283f1b58a52b90e113f7e6e62d534c75e8ceacf
-    pristine_git_object: cc3b60ca59956f8a13bb23195695f3fa434bc97b
+    last_write_checksum: sha1:d6cf845580f85498045a76ad34d2ca888388d45f
+    pristine_git_object: 595f085c1c30d4c5ba955c8df07e62c7f17e2125
   src/novu_py/models/triggereventrequestdto.py:
     id: bb6537668ce2
-    last_write_checksum: sha1:2b0b0cf282251756ff61389642391ff5c98792f2
-    pristine_git_object: 6446c9ef27ef1c3aa49c99dca4e1d971f6adacb2
+    last_write_checksum: sha1:5cf0c5ca7b36244b7c44cd74625a1d2cfcd6f84c
+    pristine_git_object: d25353e61e3d5371d9bddfb384e0d52bf34d7d00
   src/novu_py/models/triggereventresponsedto.py:
     id: 465bbb51474e
-    last_write_checksum: sha1:fe3956541c9660d053c99beefd411d036586c523
-    pristine_git_object: b8bcd88f64e51647d4cbbaf653e06f73fbcc3252
+    last_write_checksum: sha1:5b90914875ff898c5981da77612f7c992360b3ed
+    pristine_git_object: 610160335d5d6f2a6f67cf0371f700ba7c9657a4
   src/novu_py/models/triggereventtoallrequestdto.py:
     id: 9270d95f5d98
-    last_write_checksum: sha1:e217b7368c73515719823acec8ea772f12af8ddd
-    pristine_git_object: e126b3504c7e6351a7fa8b1b32bd2896e270ee27
+    last_write_checksum: sha1:b14ca5463ee17853f89c8f8e7585a8ec70137571
+    pristine_git_object: a01df16b5be9209fbb0a95454cd2b08383c92746
   src/novu_py/models/triggerrecipientstypeenum.py:
     id: e38938b19a86
     last_write_checksum: sha1:f20f4a861848737f509a9f333cfd4808a835d4d1
@@ -4312,28 +4312,28 @@ trackedFiles:
     pristine_git_object: 7c4de530dd014a6bbf92c50a9cf5503782267005
   src/novu_py/models/updatedsubscriberdto.py:
     id: 28748fad6c1d
-    last_write_checksum: sha1:d113e19e3e6af181c1880a1d5d9d8fa14d52520c
-    pristine_git_object: b2167f20a5b2065b5d65c48b768c574372e0556a
+    last_write_checksum: sha1:f7c4ad1c772a39acc7d2aa9378340262e3d1bb47
+    pristine_git_object: dd19aee0668d3766714219b4eafde81e17bf1ba7
   src/novu_py/models/updateenvironmentrequestdto.py:
     id: 9a15ee47ceb9
-    last_write_checksum: sha1:9a303112dfc9a60d61cef1009d7d28c8a13f26ac
-    pristine_git_object: 364ae54fc5f23546f25454ab19c6f25b50906543
+    last_write_checksum: sha1:51b9537ed93e4bb311f0e1a9903913cf5cd085d5
+    pristine_git_object: 097b3cb5527f9dbe9ffc8c4d7b9efdacabb0ead0
   src/novu_py/models/updateintegrationrequestdto.py:
     id: 28d67da00b03
-    last_write_checksum: sha1:6c463249e8da98f911f83e5c59e016e414769085
-    pristine_git_object: 95ff8a1940a51ad1389b982df7c571c425f6edd4
+    last_write_checksum: sha1:7ad5bfc24dc0292f7142eb36e0a1c8ac55fd6a4e
+    pristine_git_object: 8c31556e1fc4a1c4e7dfdf36ecaf664e5a78dec1
   src/novu_py/models/updatelayoutdto.py:
     id: 737433d40225
-    last_write_checksum: sha1:a3ec2ed2e4fa82312e2e094195d4fcdc4bbcdbea
-    pristine_git_object: 568745a32189c45d9ba8b9e634c363b5a6d70094
+    last_write_checksum: sha1:b31d436ab8b0e46dd8bbdcee2670727a4f21d8cf
+    pristine_git_object: 46c2e5b8a2729d66be07815bc141a8bdce21cf79
   src/novu_py/models/updatesubscriberchannelrequestdto.py:
     id: d77d402e10a6
-    last_write_checksum: sha1:da8a269c92d82505e9a3c4de54f97a90e83e7853
-    pristine_git_object: 5a4e8011a070cd58515faed1896b511e1b6fb878
+    last_write_checksum: sha1:64b44dcbaba5f1e564a8eecf7f7af3a326d4e4a2
+    pristine_git_object: f266249d9c4112682e3b8441d23ee0b3243dca27
   src/novu_py/models/updatesubscriberonlineflagrequestdto.py:
     id: 56d24547cd03
-    last_write_checksum: sha1:f66c64fd803253e2fdf07676bbcd8be94cf9830c
-    pristine_git_object: f3d57971f5a8287878307fc8c12766a48a0fd910
+    last_write_checksum: sha1:cf978eb299a6220f3bacae853ceb64b946121b98
+    pristine_git_object: 11f355ff0d7294abc1e85b1224fe8235534ceaee
   src/novu_py/models/updatetopicrequestdto.py:
     id: a0060ecec0d5
     last_write_checksum: sha1:d319b531109cc1842137d82c5b8a73e231b78698
@@ -4344,12 +4344,12 @@ trackedFiles:
     pristine_git_object: 0686c0e39576996cf2510e600e90a0600936e730
   src/novu_py/models/updateworkflowdto.py:
     id: 9a56f2e5313e
-    last_write_checksum: sha1:ad8028bf64cc97e8613cc384276c34c8f7c71d3a
-    pristine_git_object: 3e542d5ef81d2a4c5e760464ef8c4fef5fec8908
+    last_write_checksum: sha1:e8ae428595f6c4f67892d3d0f74d0020fd4d238b
+    pristine_git_object: a1251f03b042497374bbdea28a0c81185fa19dfa
   src/novu_py/models/uploadtranslationsresponsedto.py:
     id: fa37ebec9259
-    last_write_checksum: sha1:c4572f3877439667b7af9669d5132a11372bff2f
-    pristine_git_object: 2131aac589f4872108b4b237a567ba1634fe22ce
+    last_write_checksum: sha1:f2032c5ab9e92ebfda1e0d9669b383a6335d9d7b
+    pristine_git_object: 9c35176e7f7367d751341934ae70c2cf9e676c36
   src/novu_py/models/validationerrordto.py:
     id: 63da40b40a46
     last_write_checksum: sha1:fe0a967076e4b35b78a8cc52091b403485820b90
@@ -4400,20 +4400,20 @@ trackedFiles:
     pristine_git_object: 1ec4035ad3a676b8669593c97400b5eef27cd082
   src/novu_py/models/workflowinfodto.py:
     id: deccca507681
-    last_write_checksum: sha1:8d5f8bcfcf2fd3f63dbe0cc3d8f7401bc814cff3
-    pristine_git_object: b9a422e7a20761f1da16d8df4b8e17542d65fa5f
+    last_write_checksum: sha1:899444443da7967b3ee28af37f5f9c4b8de53994
+    pristine_git_object: ff9dd5588d02054d4e3d0dc0f752da317558aac7
   src/novu_py/models/workflowlistresponsedto.py:
     id: a8315b94711a
-    last_write_checksum: sha1:f862a690d9a90718d034951e356588fb23bc5a29
-    pristine_git_object: a52f2c6efd3898d51d6c31bc491a1d3f27f01a9c
+    last_write_checksum: sha1:05503f54f951b475ac4e2c1f99d27c7f94b8b493
+    pristine_git_object: a6c5326abe29750c7912d6773a9d39c30ff1b6ea
   src/novu_py/models/workflowpreferencedto.py:
     id: 2454da3f8384
-    last_write_checksum: sha1:8cf3367a3872796eaf26c8b4e583922eacea4680
-    pristine_git_object: 3277100cf287c0ca12f2ac61b992a2b3c3219090
+    last_write_checksum: sha1:ad60354970dff1056b2b68e8980ea54d0a7436fc
+    pristine_git_object: 7c9f6376e69e2e7bf8c802daacdf418c3cfaf717
   src/novu_py/models/workflowpreferencerequestdto.py:
     id: 39e04848bd87
-    last_write_checksum: sha1:ca31f6307c2b03950cc28e7ce0997dd4c7f99ec3
-    pristine_git_object: aada8000be8d915c4c571d14eeabb1c98605ad5b
+    last_write_checksum: sha1:910ad65e04d00481ffb68a7d6858cfb42e61ed4b
+    pristine_git_object: 5c13b355b5668a202d2b35f30990dc789fc57a5f
   src/novu_py/models/workflowpreferencesdto.py:
     id: 39a5d926dfb0
     last_write_checksum: sha1:8c482659cd3321f6cde9595f41cb5498b63a9166
@@ -4424,12 +4424,12 @@ trackedFiles:
     pristine_git_object: 3c828cc28e5bff74c0322d051296005630494c5a
   src/novu_py/models/workflowresponse.py:
     id: 919ea233b69b
-    last_write_checksum: sha1:90c166b3ee0780f6b9525c080c6d31acb0c68fc9
-    pristine_git_object: 0c99a54492547aa90dc996f5dc551a29e1ffe728
+    last_write_checksum: sha1:35e3bea28ded860d370a84c6dc58419e2d3ce525
+    pristine_git_object: 0396eaae87818034137e47621411f5b58efc0ea7
   src/novu_py/models/workflowresponsedto.py:
     id: 0a687db17c3f
-    last_write_checksum: sha1:8b4eb7df7ef423599585b93a41a8dcbb5843e41b
-    pristine_git_object: 15c21448d64d299a08074c2389a3b50c8c2dec81
+    last_write_checksum: sha1:fcba6009336864b226675cbda6bff403f0c805b2
+    pristine_git_object: 99731afda6e561674bfafe2299b5d21c5806ca5d
   src/novu_py/models/workflowresponsedtosortfield.py:
     id: 8dfad2d3c30c
     last_write_checksum: sha1:10081334fd44b3eaffeb14e1eebc7ca398cfc067
@@ -4492,8 +4492,8 @@ trackedFiles:
     pristine_git_object: 4bb8219f3c34fc5de38aee887b5e5fc544cabaa7
   src/novu_py/subscriptions.py:
     id: 582a93baffa3
-    last_write_checksum: sha1:567f2551f75696f3da70b8faf45d3ca2df3924cc
-    pristine_git_object: a11d7f29101aaa834748196989120b4116a54375
+    last_write_checksum: sha1:66bc0ad5fb6302f2cdd3409eb41b3a90a277e666
+    pristine_git_object: 105f795e4e7db6776738475dccdc97d52859d3e9
   src/novu_py/topics.py:
     id: 21805ff80609
     last_write_checksum: sha1:09958fa87f4862f0cc4a4d5b17637a7ab20025e4
@@ -4512,8 +4512,8 @@ trackedFiles:
     pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
   src/novu_py/utils/__init__.py:
     id: b38ba7e9d970
-    last_write_checksum: sha1:ffaf69e6877a274b08066215f5a31a1b344f5402
-    pristine_git_object: f4525b2057c3d54fb3b9eff6248fd172478ce94c
+    last_write_checksum: sha1:141be7a6debce43d0acfb482e4b3dab85a894c4a
+    pristine_git_object: 23ac44834d842f128e6b5625ebc19d2b79f87cea
   src/novu_py/utils/annotations.py:
     id: ef8e04eceec7
     last_write_checksum: sha1:a4824ad65f730303e4e1e3ec1febf87b4eb46dbc
@@ -4528,8 +4528,8 @@ trackedFiles:
     pristine_git_object: 3324e1bc2668c54c4d5f5a1a845675319757a828
   src/novu_py/utils/eventstreaming.py:
     id: 77d0b255afff
-    last_write_checksum: sha1:bababae5d54b7efc360db701daa49e18a92c2f3b
-    pristine_git_object: 0969899bfc491e5e408d05643525f347ea95e4fc
+    last_write_checksum: sha1:ffa870a25a7e4e2015bfd7a467ccd3aa1de97f0e
+    pristine_git_object: f2052fc22d9fd6c663ba3dce019fe234ca37108b
   src/novu_py/utils/forms.py:
     id: f9d5ceaf35e1
     last_write_checksum: sha1:15fa7e9ab1611e062a9984cf06cb20969713d295
@@ -4560,8 +4560,8 @@ trackedFiles:
     pristine_git_object: 88a91b10cd2076b4a2c6cff2ac6bfaa5e3c5ad13
   src/novu_py/utils/security.py:
     id: ace39c857907
-    last_write_checksum: sha1:f8ac1c89e1690566a1f949eeb2dbc8303aa375b4
-    pristine_git_object: 959f145877e03635f61e76636b135f877fd963de
+    last_write_checksum: sha1:f94de102e05521240cd13bca37e7407b5a5c8084
+    pristine_git_object: 5356115d5f215824a709b0187fef9fb6d6cb91cd
   src/novu_py/utils/serializers.py:
     id: ff2751084041
     last_write_checksum: sha1:ce1d8d7f500a9ccba0aeca5057cee9c271f4dfd7

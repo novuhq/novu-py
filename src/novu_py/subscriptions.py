@@ -915,9 +915,9 @@ class Subscriptions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerGetTopicSubscriptionResponse:
-        r"""Get a topic subscription
+        r"""Retrieve a topic subscription
 
-        Get a subscription by its unique identifier for a topic.
+        Retrieve a subscription by its unique identifier for a topic.
 
         :param topic_key: The key identifier of the topic
         :param identifier: The unique identifier of the subscription
@@ -1055,9 +1055,9 @@ class Subscriptions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TopicsControllerGetTopicSubscriptionResponse:
-        r"""Get a topic subscription
+        r"""Retrieve a topic subscription
 
-        Get a subscription by its unique identifier for a topic.
+        Retrieve a subscription by its unique identifier for a topic.
 
         :param topic_key: The key identifier of the topic
         :param identifier: The unique identifier of the subscription

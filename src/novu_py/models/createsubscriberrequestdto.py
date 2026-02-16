@@ -107,3 +107,9 @@ class CreateSubscriberRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateSubscriberRequestDto.model_rebuild()
+except NameError:
+    pass

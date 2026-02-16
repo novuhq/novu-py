@@ -37,3 +37,9 @@ class WorkflowPreferenceDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WorkflowPreferenceDto.model_rebuild()
+except NameError:
+    pass

@@ -32,3 +32,9 @@ class InBoundParseDomainDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    InBoundParseDomainDto.model_rebuild()
+except NameError:
+    pass

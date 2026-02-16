@@ -69,3 +69,9 @@ class EmailStepUpsertDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    EmailStepUpsertDto.model_rebuild()
+except NameError:
+    pass

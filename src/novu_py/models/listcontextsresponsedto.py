@@ -51,3 +51,9 @@ class ListContextsResponseDto(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    ListContextsResponseDto.model_rebuild()
+except NameError:
+    pass

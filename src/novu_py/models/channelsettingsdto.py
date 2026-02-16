@@ -51,3 +51,9 @@ class ChannelSettingsDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ChannelSettingsDto.model_rebuild()
+except NameError:
+    pass

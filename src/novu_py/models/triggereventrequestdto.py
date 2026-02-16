@@ -328,3 +328,13 @@ class TriggerEventRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Overrides.model_rebuild()
+except NameError:
+    pass
+try:
+    TriggerEventRequestDto.model_rebuild()
+except NameError:
+    pass
