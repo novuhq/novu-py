@@ -40,3 +40,9 @@ class ControlsMetadataDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ControlsMetadataDto.model_rebuild()
+except NameError:
+    pass

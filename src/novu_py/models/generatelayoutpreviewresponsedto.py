@@ -103,3 +103,9 @@ class GenerateLayoutPreviewResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    GenerateLayoutPreviewResponseDto.model_rebuild()
+except NameError:
+    pass

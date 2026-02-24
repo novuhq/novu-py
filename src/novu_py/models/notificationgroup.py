@@ -42,3 +42,9 @@ class NotificationGroup(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    NotificationGroup.model_rebuild()
+except NameError:
+    pass

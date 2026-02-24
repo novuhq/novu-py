@@ -34,3 +34,9 @@ class ActivitiesResponseDto(BaseModel):
 
     page: float
     r"""Current page of the activities"""
+
+
+try:
+    ActivitiesResponseDto.model_rebuild()
+except NameError:
+    pass

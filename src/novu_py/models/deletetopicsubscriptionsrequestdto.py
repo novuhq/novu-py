@@ -63,3 +63,9 @@ class DeleteTopicSubscriptionsRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DeleteTopicSubscriptionsRequestDto.model_rebuild()
+except NameError:
+    pass

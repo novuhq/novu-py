@@ -123,3 +123,9 @@ class ActivityNotificationJobResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ActivityNotificationJobResponseDto.model_rebuild()
+except NameError:
+    pass

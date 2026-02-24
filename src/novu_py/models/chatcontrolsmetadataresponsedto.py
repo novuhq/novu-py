@@ -46,3 +46,9 @@ class ChatControlsMetadataResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ChatControlsMetadataResponseDto.model_rebuild()
+except NameError:
+    pass

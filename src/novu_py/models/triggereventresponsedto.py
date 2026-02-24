@@ -73,3 +73,9 @@ class TriggerEventResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TriggerEventResponseDto.model_rebuild()
+except NameError:
+    pass

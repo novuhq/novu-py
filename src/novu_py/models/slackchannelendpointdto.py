@@ -14,3 +14,9 @@ class SlackChannelEndpointDtoTypedDict(TypedDict):
 class SlackChannelEndpointDto(BaseModel):
     channel_id: Annotated[str, pydantic.Field(alias="channelId")]
     r"""Slack channel ID"""
+
+
+try:
+    SlackChannelEndpointDto.model_rebuild()
+except NameError:
+    pass

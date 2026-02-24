@@ -49,3 +49,9 @@ class LayoutControlsDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    LayoutControlsDto.model_rebuild()
+except NameError:
+    pass

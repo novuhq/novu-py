@@ -124,7 +124,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "novu-py",
 # ]
@@ -526,7 +526,7 @@ asyncio.run(main())
 
 ### [Environments](docs/sdks/environments/README.md)
 
-* [get_tags](docs/sdks/environments/README.md#get_tags) - Get environment tags
+* [get_tags](docs/sdks/environments/README.md#get_tags) - List environment tags
 * [create](docs/sdks/environments/README.md#create) - Create an environment
 * [list](docs/sdks/environments/README.md#list) - List all environments
 * [update](docs/sdks/environments/README.md#update) - Update an environment
@@ -622,7 +622,7 @@ asyncio.run(main())
 * [list](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
-* [get_subscription](docs/sdks/subscriptions/README.md#get_subscription) - Get a topic subscription
+* [get_subscription](docs/sdks/subscriptions/README.md#get_subscription) - Retrieve a topic subscription
 * [update](docs/sdks/subscriptions/README.md#update) - Update a topic subscription
 
 ### [Translations](docs/sdks/translations/README.md)

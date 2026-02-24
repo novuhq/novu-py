@@ -69,3 +69,9 @@ class SmsStepUpsertDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SmsStepUpsertDto.model_rebuild()
+except NameError:
+    pass

@@ -143,3 +143,9 @@ class CustomStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CustomStepResponseDto.model_rebuild()
+except NameError:
+    pass

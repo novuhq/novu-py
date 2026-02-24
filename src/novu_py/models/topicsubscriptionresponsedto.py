@@ -61,3 +61,9 @@ class TopicSubscriptionResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TopicSubscriptionResponseDto.model_rebuild()
+except NameError:
+    pass

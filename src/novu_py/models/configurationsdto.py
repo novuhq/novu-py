@@ -37,3 +37,9 @@ class ConfigurationsDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ConfigurationsDto.model_rebuild()
+except NameError:
+    pass

@@ -150,3 +150,9 @@ class ActivityNotificationStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ActivityNotificationStepResponseDto.model_rebuild()
+except NameError:
+    pass

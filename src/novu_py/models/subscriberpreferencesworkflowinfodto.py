@@ -47,3 +47,9 @@ class SubscriberPreferencesWorkflowInfoDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SubscriberPreferencesWorkflowInfoDto.model_rebuild()
+except NameError:
+    pass

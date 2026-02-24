@@ -42,3 +42,9 @@ class CreateEnvironmentRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateEnvironmentRequestDto.model_rebuild()
+except NameError:
+    pass

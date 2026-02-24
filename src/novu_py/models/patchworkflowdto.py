@@ -87,3 +87,9 @@ class PatchWorkflowDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PatchWorkflowDto.model_rebuild()
+except NameError:
+    pass

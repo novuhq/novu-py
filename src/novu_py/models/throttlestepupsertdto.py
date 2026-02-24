@@ -70,3 +70,9 @@ class ThrottleStepUpsertDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ThrottleStepUpsertDto.model_rebuild()
+except NameError:
+    pass

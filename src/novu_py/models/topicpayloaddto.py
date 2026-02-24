@@ -39,3 +39,9 @@ class TopicPayloadDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TopicPayloadDto.model_rebuild()
+except NameError:
+    pass

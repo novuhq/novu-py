@@ -23,3 +23,9 @@ class BulkUpdateSubscriberPreferenceItemDto(BaseModel):
 
     workflow_id: Annotated[str, pydantic.Field(alias="workflowId")]
     r"""Workflow internal _id, identifier or slug"""
+
+
+try:
+    BulkUpdateSubscriberPreferenceItemDto.model_rebuild()
+except NameError:
+    pass

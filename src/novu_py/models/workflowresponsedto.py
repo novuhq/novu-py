@@ -365,3 +365,17 @@ class WorkflowResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WorkflowResponseDtoUpdatedBy.model_rebuild()
+except NameError:
+    pass
+try:
+    LastPublishedBy.model_rebuild()
+except NameError:
+    pass
+try:
+    WorkflowResponseDto.model_rebuild()
+except NameError:
+    pass

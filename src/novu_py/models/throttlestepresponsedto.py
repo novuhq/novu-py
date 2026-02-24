@@ -191,3 +191,13 @@ class ThrottleStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ThrottleStepResponseDtoControlValues.model_rebuild()
+except NameError:
+    pass
+try:
+    ThrottleStepResponseDto.model_rebuild()
+except NameError:
+    pass

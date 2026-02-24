@@ -46,3 +46,9 @@ class CustomControlsMetadataResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CustomControlsMetadataResponseDto.model_rebuild()
+except NameError:
+    pass

@@ -139,3 +139,9 @@ class CreateTopicSubscriptionsRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTopicSubscriptionsRequestDto.model_rebuild()
+except NameError:
+    pass

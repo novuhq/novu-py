@@ -51,3 +51,9 @@ class ListTopicsResponseDto(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    ListTopicsResponseDto.model_rebuild()
+except NameError:
+    pass

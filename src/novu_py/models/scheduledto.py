@@ -355,3 +355,37 @@ class ScheduleDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Monday.model_rebuild()
+except NameError:
+    pass
+try:
+    Tuesday.model_rebuild()
+except NameError:
+    pass
+try:
+    Wednesday.model_rebuild()
+except NameError:
+    pass
+try:
+    Thursday.model_rebuild()
+except NameError:
+    pass
+try:
+    Friday.model_rebuild()
+except NameError:
+    pass
+try:
+    Saturday.model_rebuild()
+except NameError:
+    pass
+try:
+    Sunday.model_rebuild()
+except NameError:
+    pass
+try:
+    ScheduleDto.model_rebuild()
+except NameError:
+    pass

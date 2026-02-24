@@ -87,3 +87,9 @@ class EnvironmentResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    EnvironmentResponseDto.model_rebuild()
+except NameError:
+    pass

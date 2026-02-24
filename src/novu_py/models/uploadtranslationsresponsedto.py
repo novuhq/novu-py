@@ -30,3 +30,9 @@ class UploadTranslationsResponseDto(BaseModel):
 
     errors: List[str]
     r"""List of error messages for failed uploads"""
+
+
+try:
+    UploadTranslationsResponseDto.model_rebuild()
+except NameError:
+    pass

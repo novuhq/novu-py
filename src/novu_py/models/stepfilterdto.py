@@ -30,3 +30,9 @@ class StepFilterDto(BaseModel):
     value: StepFilterDtoValue
 
     children: List[FieldFilterPartDto]
+
+
+try:
+    StepFilterDto.model_rebuild()
+except NameError:
+    pass

@@ -197,3 +197,13 @@ class DigestStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DigestStepResponseDtoControlValues.model_rebuild()
+except NameError:
+    pass
+try:
+    DigestStepResponseDto.model_rebuild()
+except NameError:
+    pass

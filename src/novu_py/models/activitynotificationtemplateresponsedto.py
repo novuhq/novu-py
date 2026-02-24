@@ -52,3 +52,9 @@ class ActivityNotificationTemplateResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ActivityNotificationTemplateResponseDto.model_rebuild()
+except NameError:
+    pass

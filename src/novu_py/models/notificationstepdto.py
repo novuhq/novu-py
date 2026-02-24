@@ -139,3 +139,9 @@ class NotificationStepDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    NotificationStepDto.model_rebuild()
+except NameError:
+    pass

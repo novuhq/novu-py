@@ -153,3 +153,9 @@ class PushStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PushStepResponseDto.model_rebuild()
+except NameError:
+    pass

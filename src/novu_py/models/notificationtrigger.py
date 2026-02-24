@@ -51,3 +51,9 @@ class NotificationTrigger(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    NotificationTrigger.model_rebuild()
+except NameError:
+    pass

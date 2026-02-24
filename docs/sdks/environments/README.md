@@ -7,7 +7,7 @@ Environments allow you to manage different stages of your application developmen
 
 ### Available Operations
 
-* [get_tags](#get_tags) - Get environment tags
+* [get_tags](#get_tags) - List environment tags
 * [create](#create) - Create an environment
 * [list](#list) - List all environments
 * [update](#update) - Update an environment

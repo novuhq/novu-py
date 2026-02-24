@@ -39,3 +39,9 @@ class TopicSubscriberDto(BaseModel):
 
     external_subscriber_id: Annotated[str, pydantic.Field(alias="externalSubscriberId")]
     r"""External identifier for the subscriber"""
+
+
+try:
+    TopicSubscriberDto.model_rebuild()
+except NameError:
+    pass
