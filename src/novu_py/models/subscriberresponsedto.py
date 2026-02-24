@@ -180,3 +180,9 @@ class SubscriberResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SubscriberResponseDto.model_rebuild()
+except NameError:
+    pass

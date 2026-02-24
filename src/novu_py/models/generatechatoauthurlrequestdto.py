@@ -101,3 +101,9 @@ class GenerateChatOauthURLRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    GenerateChatOauthURLRequestDto.model_rebuild()
+except NameError:
+    pass

@@ -38,3 +38,9 @@ class CreateTranslationRequestDto(BaseModel):
 
     content: Dict[str, Any]
     r"""Translation content as JSON object"""
+
+
+try:
+    CreateTranslationRequestDto.model_rebuild()
+except NameError:
+    pass

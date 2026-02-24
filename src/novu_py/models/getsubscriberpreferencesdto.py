@@ -28,3 +28,9 @@ class GetSubscriberPreferencesDto(BaseModel):
 
     workflows: List[SubscriberWorkflowPreferenceDto]
     r"""Workflow-specific preference settings"""
+
+
+try:
+    GetSubscriberPreferencesDto.model_rebuild()
+except NameError:
+    pass

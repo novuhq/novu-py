@@ -50,3 +50,9 @@ class TranslationResponseDto(BaseModel):
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
     r"""Last update timestamp"""
+
+
+try:
+    TranslationResponseDto.model_rebuild()
+except NameError:
+    pass

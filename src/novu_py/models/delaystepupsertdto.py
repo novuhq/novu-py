@@ -69,3 +69,9 @@ class DelayStepUpsertDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DelayStepUpsertDto.model_rebuild()
+except NameError:
+    pass

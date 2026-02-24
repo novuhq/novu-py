@@ -46,3 +46,9 @@ class DigestControlsMetadataResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DigestControlsMetadataResponseDto.model_rebuild()
+except NameError:
+    pass

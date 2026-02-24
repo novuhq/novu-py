@@ -118,3 +118,9 @@ class IntegrationResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    IntegrationResponseDto.model_rebuild()
+except NameError:
+    pass

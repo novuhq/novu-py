@@ -12,3 +12,9 @@ class AuthDtoTypedDict(TypedDict):
 
 class AuthDto(BaseModel):
     access_token: Annotated[str, pydantic.Field(alias="accessToken")]
+
+
+try:
+    AuthDto.model_rebuild()
+except NameError:
+    pass

@@ -56,3 +56,9 @@ class FeedResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FeedResponseDto.model_rebuild()
+except NameError:
+    pass

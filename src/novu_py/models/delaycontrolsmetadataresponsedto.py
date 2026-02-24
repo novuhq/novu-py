@@ -46,3 +46,9 @@ class DelayControlsMetadataResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DelayControlsMetadataResponseDto.model_rebuild()
+except NameError:
+    pass

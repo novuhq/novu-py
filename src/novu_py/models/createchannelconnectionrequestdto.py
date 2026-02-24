@@ -100,3 +100,9 @@ class CreateChannelConnectionRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateChannelConnectionRequestDto.model_rebuild()
+except NameError:
+    pass

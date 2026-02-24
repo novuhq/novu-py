@@ -134,3 +134,9 @@ class NotificationStepData(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    NotificationStepData.model_rebuild()
+except NameError:
+    pass

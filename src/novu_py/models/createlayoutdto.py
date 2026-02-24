@@ -52,3 +52,9 @@ class CreateLayoutDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateLayoutDto.model_rebuild()
+except NameError:
+    pass

@@ -35,3 +35,9 @@ class GetContextResponseDto(BaseModel):
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
     r"""Last update timestamp"""
+
+
+try:
+    GetContextResponseDto.model_rebuild()
+except NameError:
+    pass

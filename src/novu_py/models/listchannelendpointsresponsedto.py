@@ -54,3 +54,9 @@ class ListChannelEndpointsResponseDto(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    ListChannelEndpointsResponseDto.model_rebuild()
+except NameError:
+    pass

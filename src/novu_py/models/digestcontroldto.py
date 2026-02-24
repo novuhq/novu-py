@@ -86,3 +86,9 @@ class DigestControlDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DigestControlDto.model_rebuild()
+except NameError:
+    pass

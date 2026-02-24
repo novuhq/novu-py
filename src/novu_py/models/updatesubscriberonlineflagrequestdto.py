@@ -12,3 +12,9 @@ class UpdateSubscriberOnlineFlagRequestDtoTypedDict(TypedDict):
 
 class UpdateSubscriberOnlineFlagRequestDto(BaseModel):
     is_online: Annotated[bool, pydantic.Field(alias="isOnline")]
+
+
+try:
+    UpdateSubscriberOnlineFlagRequestDto.model_rebuild()
+except NameError:
+    pass

@@ -21,3 +21,9 @@ class ListLayoutResponseDto(BaseModel):
 
     total_count: Annotated[float, pydantic.Field(alias="totalCount")]
     r"""Total number of layouts"""
+
+
+try:
+    ListLayoutResponseDto.model_rebuild()
+except NameError:
+    pass

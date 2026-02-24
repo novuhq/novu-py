@@ -57,3 +57,9 @@ class DigestTimedMetadata(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DigestTimedMetadata.model_rebuild()
+except NameError:
+    pass

@@ -274,3 +274,9 @@ class MessageResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    MessageResponseDto.model_rebuild()
+except NameError:
+    pass

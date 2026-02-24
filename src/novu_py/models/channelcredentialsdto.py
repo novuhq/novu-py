@@ -39,3 +39,9 @@ class ChannelCredentialsDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ChannelCredentialsDto.model_rebuild()
+except NameError:
+    pass

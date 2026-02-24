@@ -114,3 +114,9 @@ class SubscriberPayloadDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SubscriberPayloadDto.model_rebuild()
+except NameError:
+    pass

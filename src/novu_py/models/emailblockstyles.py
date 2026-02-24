@@ -15,3 +15,9 @@ class EmailBlockStylesTypedDict(TypedDict):
 class EmailBlockStyles(BaseModel):
     text_align: Annotated[TextAlignEnum, pydantic.Field(alias="textAlign")]
     r"""Text alignment for the email block"""
+
+
+try:
+    EmailBlockStyles.model_rebuild()
+except NameError:
+    pass

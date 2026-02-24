@@ -69,3 +69,9 @@ class PushStepUpsertDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PushStepUpsertDto.model_rebuild()
+except NameError:
+    pass

@@ -98,3 +98,9 @@ class TimedConfig(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TimedConfig.model_rebuild()
+except NameError:
+    pass

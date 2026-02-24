@@ -19,3 +19,9 @@ class MsTeamsChannelEndpointDto(BaseModel):
 
     channel_id: Annotated[str, pydantic.Field(alias="channelId")]
     r"""MS Teams channel ID"""
+
+
+try:
+    MsTeamsChannelEndpointDto.model_rebuild()
+except NameError:
+    pass

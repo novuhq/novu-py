@@ -89,3 +89,9 @@ class PatchSubscriberPreferencesDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PatchSubscriberPreferencesDto.model_rebuild()
+except NameError:
+    pass

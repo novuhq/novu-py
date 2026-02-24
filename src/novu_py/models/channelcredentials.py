@@ -80,3 +80,9 @@ class ChannelCredentials(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ChannelCredentials.model_rebuild()
+except NameError:
+    pass

@@ -69,3 +69,9 @@ class ChatStepUpsertDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ChatStepUpsertDto.model_rebuild()
+except NameError:
+    pass

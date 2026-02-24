@@ -45,3 +45,9 @@ class MessageButton(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    MessageButton.model_rebuild()
+except NameError:
+    pass

@@ -42,3 +42,9 @@ class TopicDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TopicDto.model_rebuild()
+except NameError:
+    pass

@@ -148,3 +148,9 @@ class ChatStepResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ChatStepResponseDto.model_rebuild()
+except NameError:
+    pass
