@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .uicomponentenum import UIComponentEnum
+from novu_py import models
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
@@ -47,6 +48,15 @@ class UISchemaProperty(BaseModel):
 
     properties: Optional[Dict[str, UISchemaProperty]] = None
     r"""Properties of the UI Schema"""
+
+    @field_serializer("component")
+    def serialize_component(self, value):
+        if isinstance(value, str):
+            try:
+                return models.UIComponentEnum(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

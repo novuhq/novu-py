@@ -14,7 +14,7 @@ from typing import Mapping, Optional, Union
 
 class Translations(BaseSDK):
     r"""Used to localize your notifications to different languages.
-    https://docs.novu.co/platform/workflow/translations
+    https://docs.novu.co/platform/workflow/advanced-features/translations
     """
 
     groups: Groups

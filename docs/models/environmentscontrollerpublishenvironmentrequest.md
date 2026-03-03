@@ -1,0 +1,10 @@
+# EnvironmentsControllerPublishEnvironmentRequest
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `target_environment_id`                                                          | *str*                                                                            | :heavy_check_mark:                                                               | Target environment ID (MongoDB ObjectId) to publish resources to                 | 6615943e7ace93b0540ae377                                                         |
+| `idempotency_key`                                                                | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | A header for idempotency purposes                                                |                                                                                  |
+| `publish_environment_request_dto`                                                | [models.PublishEnvironmentRequestDto](../models/publishenvironmentrequestdto.md) | :heavy_check_mark:                                                               | Publish request configuration                                                    |                                                                                  |

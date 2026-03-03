@@ -527,6 +527,8 @@ asyncio.run(main())
 ### [Environments](docs/sdks/environments/README.md)
 
 * [get_tags](docs/sdks/environments/README.md#get_tags) - List environment tags
+* [diff](docs/sdks/environments/README.md#diff) - Compare resources between environments
+* [publish](docs/sdks/environments/README.md#publish) - Publish resources to target environment
 * [create](docs/sdks/environments/README.md#create) - Create an environment
 * [list](docs/sdks/environments/README.md#list) - List all environments
 * [update](docs/sdks/environments/README.md#update) - Update an environment
@@ -843,9 +845,9 @@ with Novu(
 
 
 **Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
-* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 93 methods.*
-* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 93 methods.*
-* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 93 methods.*
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 95 methods.*
+* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 95 methods.*
+* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 95 methods.*
 * [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
