@@ -67,7 +67,7 @@ class Novu(BaseSDK):
     """
     translations: "Translations"
     r"""Used to localize your notifications to different languages.
-    https://docs.novu.co/platform/workflow/translations
+    https://docs.novu.co/platform/workflow/advanced-features/translations
     """
     workflows: "Workflows"
     r"""All notifications are sent via a workflow. Each workflow acts as a container for the logic and blueprint that are associated with a type of notification in your system.
@@ -104,8 +104,8 @@ class Novu(BaseSDK):
         self,
         secret_key: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         server_idx: Optional[int] = None,
-        server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
+        server_url: Optional[str] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,

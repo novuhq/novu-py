@@ -418,6 +418,17 @@ if TYPE_CHECKING:
         DeleteTopicSubscriptionsResponseDto,
         DeleteTopicSubscriptionsResponseDtoTypedDict,
     )
+    from .dependencyreasonenum import DependencyReasonEnum
+    from .diffactionenum import DiffActionEnum
+    from .diffenvironmentrequestdto import (
+        DiffEnvironmentRequestDto,
+        DiffEnvironmentRequestDtoTypedDict,
+    )
+    from .diffenvironmentresponsedto import (
+        DiffEnvironmentResponseDto,
+        DiffEnvironmentResponseDtoTypedDict,
+    )
+    from .diffsummarydto import DiffSummaryDto, DiffSummaryDtoTypedDict
     from .digestcontroldto import (
         DigestControlDto,
         DigestControlDtoType,
@@ -480,6 +491,7 @@ if TYPE_CHECKING:
         EmailControlDto,
         EmailControlDtoEditorType,
         EmailControlDtoTypedDict,
+        RendererType,
     )
     from .emailcontrolsdto import (
         EditorType,
@@ -499,6 +511,7 @@ if TYPE_CHECKING:
         EmailStepResponseDtoControlValues,
         EmailStepResponseDtoControlValuesTypedDict,
         EmailStepResponseDtoEditorType,
+        EmailStepResponseDtoRendererType,
         EmailStepResponseDtoTypedDict,
     )
     from .emailstepupsertdto import (
@@ -507,16 +520,32 @@ if TYPE_CHECKING:
         EmailStepUpsertDtoControlValuesTypedDict,
         EmailStepUpsertDtoTypedDict,
     )
+    from .environmentdiffsummarydto import (
+        EnvironmentDiffSummaryDto,
+        EnvironmentDiffSummaryDtoTypedDict,
+    )
     from .environmentresponsedto import (
         EnvironmentResponseDto,
         EnvironmentResponseDtoType,
         EnvironmentResponseDtoTypedDict,
+    )
+    from .environmentscontroller_diffenvironmentop import (
+        EnvironmentsControllerDiffEnvironmentRequest,
+        EnvironmentsControllerDiffEnvironmentRequestTypedDict,
+        EnvironmentsControllerDiffEnvironmentResponse,
+        EnvironmentsControllerDiffEnvironmentResponseTypedDict,
     )
     from .environmentscontroller_getenvironmenttagsop import (
         EnvironmentsControllerGetEnvironmentTagsRequest,
         EnvironmentsControllerGetEnvironmentTagsRequestTypedDict,
         EnvironmentsControllerGetEnvironmentTagsResponse,
         EnvironmentsControllerGetEnvironmentTagsResponseTypedDict,
+    )
+    from .environmentscontroller_publishenvironmentop import (
+        EnvironmentsControllerPublishEnvironmentRequest,
+        EnvironmentsControllerPublishEnvironmentRequestTypedDict,
+        EnvironmentsControllerPublishEnvironmentResponse,
+        EnvironmentsControllerPublishEnvironmentResponseTypedDict,
     )
     from .environmentscontrollerv1_createenvironmentop import (
         EnvironmentsControllerV1CreateEnvironmentRequest,
@@ -578,6 +607,7 @@ if TYPE_CHECKING:
     from .executiondetailssourceenum import ExecutionDetailsSourceEnum
     from .executiondetailsstatusenum import ExecutionDetailsStatusEnum
     from .failedoperationdto import FailedOperationDto, FailedOperationDtoTypedDict
+    from .failedworkflowdto import FailedWorkflowDto, FailedWorkflowDtoTypedDict
     from .feedresponsedto import FeedResponseDto, FeedResponseDtoTypedDict
     from .fieldfilterpartdto import (
         FieldFilterPartDto,
@@ -1020,6 +1050,15 @@ if TYPE_CHECKING:
         UserWorkflowPreferencesDtoTypedDict,
     )
     from .providersidenum import ProvidersIDEnum
+    from .publishenvironmentrequestdto import (
+        PublishEnvironmentRequestDto,
+        PublishEnvironmentRequestDtoTypedDict,
+    )
+    from .publishenvironmentresponsedto import (
+        PublishEnvironmentResponseDto,
+        PublishEnvironmentResponseDtoTypedDict,
+    )
+    from .publishsummarydto import PublishSummaryDto, PublishSummaryDtoTypedDict
     from .pushcontroldto import PushControlDto, PushControlDtoTypedDict
     from .pushcontrolsmetadataresponsedto import (
         PushControlsMetadataResponseDto,
@@ -1043,7 +1082,41 @@ if TYPE_CHECKING:
         RemoveSubscriberResponseDtoTypedDict,
     )
     from .replycallback import ReplyCallback, ReplyCallbackTypedDict
+    from .resourcedependencydto import (
+        ResourceDependencyDto,
+        ResourceDependencyDtoTypedDict,
+    )
+    from .resourcediffdto import (
+        Diffs,
+        DiffsTypedDict,
+        ResourceDiffDto,
+        ResourceDiffDtoSourceResource,
+        ResourceDiffDtoSourceResourceTypedDict,
+        ResourceDiffDtoTargetResource,
+        ResourceDiffDtoTargetResourceTypedDict,
+        ResourceDiffDtoTargetResourceUpdatedBy,
+        ResourceDiffDtoTargetResourceUpdatedByTypedDict,
+        ResourceDiffDtoTypedDict,
+        ResourceDiffDtoUpdatedBy,
+        ResourceDiffDtoUpdatedByTypedDict,
+    )
+    from .resourcediffresultdto import (
+        ResourceDiffResultDto,
+        ResourceDiffResultDtoSourceResourceUpdatedBy,
+        ResourceDiffResultDtoSourceResourceUpdatedByTypedDict,
+        ResourceDiffResultDtoTypedDict,
+        ResourceDiffResultDtoUpdatedBy,
+        ResourceDiffResultDtoUpdatedByTypedDict,
+        SourceResource,
+        SourceResourceTypedDict,
+        TargetResource,
+        TargetResourceTypedDict,
+    )
     from .resourceoriginenum import ResourceOriginEnum
+    from .resourcetopublishdto import (
+        ResourceToPublishDto,
+        ResourceToPublishDtoTypedDict,
+    )
     from .resourcetypeenum import ResourceTypeEnum
     from .responsevalidationerror import ResponseValidationError
     from .runtimeissuedto import IssueType, RuntimeIssueDto, RuntimeIssueDtoTypedDict
@@ -1069,6 +1142,7 @@ if TYPE_CHECKING:
     )
     from .security import Security, SecurityTypedDict
     from .severitylevelenum import SeverityLevelEnum
+    from .skippedworkflowdto import SkippedWorkflowDto, SkippedWorkflowDtoTypedDict
     from .slackchannelendpointdto import (
         SlackChannelEndpointDto,
         SlackChannelEndpointDtoTypedDict,
@@ -1300,6 +1374,9 @@ if TYPE_CHECKING:
         SubscriptionsDeleteErrorDto,
         SubscriptionsDeleteErrorDtoTypedDict,
     )
+    from .syncactionenum import SyncActionEnum
+    from .syncedworkflowdto import SyncedWorkflowDto, SyncedWorkflowDtoTypedDict
+    from .syncresultdto import SyncResultDto, SyncResultDtoTypedDict
     from .syncworkflowdto import SyncWorkflowDto, SyncWorkflowDtoTypedDict
     from .tenantpayloaddto import (
         Data,
@@ -2004,6 +2081,16 @@ __all__ = [
     "DeleteTopicSubscriptionsRequestDtoTypedDict",
     "DeleteTopicSubscriptionsResponseDto",
     "DeleteTopicSubscriptionsResponseDtoTypedDict",
+    "DependencyReasonEnum",
+    "DiffActionEnum",
+    "DiffEnvironmentRequestDto",
+    "DiffEnvironmentRequestDtoTypedDict",
+    "DiffEnvironmentResponseDto",
+    "DiffEnvironmentResponseDtoTypedDict",
+    "DiffSummaryDto",
+    "DiffSummaryDtoTypedDict",
+    "Diffs",
+    "DiffsTypedDict",
     "DigestControlDto",
     "DigestControlDtoType",
     "DigestControlDtoTypedDict",
@@ -2060,6 +2147,7 @@ __all__ = [
     "EmailStepResponseDtoControlValues",
     "EmailStepResponseDtoControlValuesTypedDict",
     "EmailStepResponseDtoEditorType",
+    "EmailStepResponseDtoRendererType",
     "EmailStepResponseDtoTypedDict",
     "EmailStepUpsertDto",
     "EmailStepUpsertDtoControlValues",
@@ -2067,13 +2155,23 @@ __all__ = [
     "EmailStepUpsertDtoTypedDict",
     "Endpoint",
     "EndpointTypedDict",
+    "EnvironmentDiffSummaryDto",
+    "EnvironmentDiffSummaryDtoTypedDict",
     "EnvironmentResponseDto",
     "EnvironmentResponseDtoType",
     "EnvironmentResponseDtoTypedDict",
+    "EnvironmentsControllerDiffEnvironmentRequest",
+    "EnvironmentsControllerDiffEnvironmentRequestTypedDict",
+    "EnvironmentsControllerDiffEnvironmentResponse",
+    "EnvironmentsControllerDiffEnvironmentResponseTypedDict",
     "EnvironmentsControllerGetEnvironmentTagsRequest",
     "EnvironmentsControllerGetEnvironmentTagsRequestTypedDict",
     "EnvironmentsControllerGetEnvironmentTagsResponse",
     "EnvironmentsControllerGetEnvironmentTagsResponseTypedDict",
+    "EnvironmentsControllerPublishEnvironmentRequest",
+    "EnvironmentsControllerPublishEnvironmentRequestTypedDict",
+    "EnvironmentsControllerPublishEnvironmentResponse",
+    "EnvironmentsControllerPublishEnvironmentResponseTypedDict",
     "EnvironmentsControllerV1CreateEnvironmentRequest",
     "EnvironmentsControllerV1CreateEnvironmentRequestTypedDict",
     "EnvironmentsControllerV1CreateEnvironmentResponse",
@@ -2114,6 +2212,8 @@ __all__ = [
     "ExecutionDetailsStatusEnum",
     "FailedOperationDto",
     "FailedOperationDtoTypedDict",
+    "FailedWorkflowDto",
+    "FailedWorkflowDtoTypedDict",
     "FeedIdentifier",
     "FeedIdentifierTypedDict",
     "FeedResponseDto",
@@ -2437,6 +2537,12 @@ __all__ = [
     "PreferencesRequestDtoWorkflowTypedDict",
     "ProviderID",
     "ProvidersIDEnum",
+    "PublishEnvironmentRequestDto",
+    "PublishEnvironmentRequestDtoTypedDict",
+    "PublishEnvironmentResponseDto",
+    "PublishEnvironmentResponseDtoTypedDict",
+    "PublishSummaryDto",
+    "PublishSummaryDtoTypedDict",
     "PushControlDto",
     "PushControlDtoTypedDict",
     "PushControlsMetadataResponseDto",
@@ -2455,9 +2561,30 @@ __all__ = [
     "RedirectDtoTypedDict",
     "RemoveSubscriberResponseDto",
     "RemoveSubscriberResponseDtoTypedDict",
+    "RendererType",
     "ReplyCallback",
     "ReplyCallbackTypedDict",
+    "ResourceDependencyDto",
+    "ResourceDependencyDtoTypedDict",
+    "ResourceDiffDto",
+    "ResourceDiffDtoSourceResource",
+    "ResourceDiffDtoSourceResourceTypedDict",
+    "ResourceDiffDtoTargetResource",
+    "ResourceDiffDtoTargetResourceTypedDict",
+    "ResourceDiffDtoTargetResourceUpdatedBy",
+    "ResourceDiffDtoTargetResourceUpdatedByTypedDict",
+    "ResourceDiffDtoTypedDict",
+    "ResourceDiffDtoUpdatedBy",
+    "ResourceDiffDtoUpdatedByTypedDict",
+    "ResourceDiffResultDto",
+    "ResourceDiffResultDtoSourceResourceUpdatedBy",
+    "ResourceDiffResultDtoSourceResourceUpdatedByTypedDict",
+    "ResourceDiffResultDtoTypedDict",
+    "ResourceDiffResultDtoUpdatedBy",
+    "ResourceDiffResultDtoUpdatedByTypedDict",
     "ResourceOriginEnum",
+    "ResourceToPublishDto",
+    "ResourceToPublishDtoTypedDict",
     "ResourceType",
     "ResourceTypeEnum",
     "ResponseValidationError",
@@ -2475,6 +2602,8 @@ __all__ = [
     "Security",
     "SecurityTypedDict",
     "SeverityLevelEnum",
+    "SkippedWorkflowDto",
+    "SkippedWorkflowDtoTypedDict",
     "SlackChannelEndpointDto",
     "SlackChannelEndpointDtoTypedDict",
     "SlackUserEndpointDto",
@@ -2491,6 +2620,8 @@ __all__ = [
     "SmsStepUpsertDtoControlValues",
     "SmsStepUpsertDtoControlValuesTypedDict",
     "SmsStepUpsertDtoTypedDict",
+    "SourceResource",
+    "SourceResourceTypedDict",
     "Status",
     "StepContentIssueDto",
     "StepContentIssueDtoTypedDict",
@@ -2636,11 +2767,18 @@ __all__ = [
     "SubscriptionsModelTypedDict",
     "Sunday",
     "SundayTypedDict",
+    "SyncActionEnum",
+    "SyncResultDto",
+    "SyncResultDtoTypedDict",
     "SyncWorkflowDto",
     "SyncWorkflowDtoTypedDict",
+    "SyncedWorkflowDto",
+    "SyncedWorkflowDtoTypedDict",
     "TLSOptions",
     "TLSOptionsTypedDict",
     "Target",
+    "TargetResource",
+    "TargetResourceTypedDict",
     "Tenant",
     "TenantPayloadDto",
     "TenantPayloadDtoTypedDict",
@@ -3234,6 +3372,14 @@ _dynamic_imports: dict[str, str] = {
     "DeleteTopicSubscriptionsRequestDtoTypedDict": ".deletetopicsubscriptionsrequestdto",
     "DeleteTopicSubscriptionsResponseDto": ".deletetopicsubscriptionsresponsedto",
     "DeleteTopicSubscriptionsResponseDtoTypedDict": ".deletetopicsubscriptionsresponsedto",
+    "DependencyReasonEnum": ".dependencyreasonenum",
+    "DiffActionEnum": ".diffactionenum",
+    "DiffEnvironmentRequestDto": ".diffenvironmentrequestdto",
+    "DiffEnvironmentRequestDtoTypedDict": ".diffenvironmentrequestdto",
+    "DiffEnvironmentResponseDto": ".diffenvironmentresponsedto",
+    "DiffEnvironmentResponseDtoTypedDict": ".diffenvironmentresponsedto",
+    "DiffSummaryDto": ".diffsummarydto",
+    "DiffSummaryDtoTypedDict": ".diffsummarydto",
     "DigestControlDto": ".digestcontroldto",
     "DigestControlDtoType": ".digestcontroldto",
     "DigestControlDtoTypedDict": ".digestcontroldto",
@@ -3280,6 +3426,7 @@ _dynamic_imports: dict[str, str] = {
     "EmailControlDto": ".emailcontroldto",
     "EmailControlDtoEditorType": ".emailcontroldto",
     "EmailControlDtoTypedDict": ".emailcontroldto",
+    "RendererType": ".emailcontroldto",
     "EditorType": ".emailcontrolsdto",
     "EmailControlsDto": ".emailcontrolsdto",
     "EmailControlsDtoTypedDict": ".emailcontrolsdto",
@@ -3291,18 +3438,29 @@ _dynamic_imports: dict[str, str] = {
     "EmailStepResponseDtoControlValues": ".emailstepresponsedto",
     "EmailStepResponseDtoControlValuesTypedDict": ".emailstepresponsedto",
     "EmailStepResponseDtoEditorType": ".emailstepresponsedto",
+    "EmailStepResponseDtoRendererType": ".emailstepresponsedto",
     "EmailStepResponseDtoTypedDict": ".emailstepresponsedto",
     "EmailStepUpsertDto": ".emailstepupsertdto",
     "EmailStepUpsertDtoControlValues": ".emailstepupsertdto",
     "EmailStepUpsertDtoControlValuesTypedDict": ".emailstepupsertdto",
     "EmailStepUpsertDtoTypedDict": ".emailstepupsertdto",
+    "EnvironmentDiffSummaryDto": ".environmentdiffsummarydto",
+    "EnvironmentDiffSummaryDtoTypedDict": ".environmentdiffsummarydto",
     "EnvironmentResponseDto": ".environmentresponsedto",
     "EnvironmentResponseDtoType": ".environmentresponsedto",
     "EnvironmentResponseDtoTypedDict": ".environmentresponsedto",
+    "EnvironmentsControllerDiffEnvironmentRequest": ".environmentscontroller_diffenvironmentop",
+    "EnvironmentsControllerDiffEnvironmentRequestTypedDict": ".environmentscontroller_diffenvironmentop",
+    "EnvironmentsControllerDiffEnvironmentResponse": ".environmentscontroller_diffenvironmentop",
+    "EnvironmentsControllerDiffEnvironmentResponseTypedDict": ".environmentscontroller_diffenvironmentop",
     "EnvironmentsControllerGetEnvironmentTagsRequest": ".environmentscontroller_getenvironmenttagsop",
     "EnvironmentsControllerGetEnvironmentTagsRequestTypedDict": ".environmentscontroller_getenvironmenttagsop",
     "EnvironmentsControllerGetEnvironmentTagsResponse": ".environmentscontroller_getenvironmenttagsop",
     "EnvironmentsControllerGetEnvironmentTagsResponseTypedDict": ".environmentscontroller_getenvironmenttagsop",
+    "EnvironmentsControllerPublishEnvironmentRequest": ".environmentscontroller_publishenvironmentop",
+    "EnvironmentsControllerPublishEnvironmentRequestTypedDict": ".environmentscontroller_publishenvironmentop",
+    "EnvironmentsControllerPublishEnvironmentResponse": ".environmentscontroller_publishenvironmentop",
+    "EnvironmentsControllerPublishEnvironmentResponseTypedDict": ".environmentscontroller_publishenvironmentop",
     "EnvironmentsControllerV1CreateEnvironmentRequest": ".environmentscontrollerv1_createenvironmentop",
     "EnvironmentsControllerV1CreateEnvironmentRequestTypedDict": ".environmentscontrollerv1_createenvironmentop",
     "EnvironmentsControllerV1CreateEnvironmentResponse": ".environmentscontrollerv1_createenvironmentop",
@@ -3348,6 +3506,8 @@ _dynamic_imports: dict[str, str] = {
     "ExecutionDetailsStatusEnum": ".executiondetailsstatusenum",
     "FailedOperationDto": ".failedoperationdto",
     "FailedOperationDtoTypedDict": ".failedoperationdto",
+    "FailedWorkflowDto": ".failedworkflowdto",
+    "FailedWorkflowDtoTypedDict": ".failedworkflowdto",
     "FeedResponseDto": ".feedresponsedto",
     "FeedResponseDtoTypedDict": ".feedresponsedto",
     "FieldFilterPartDto": ".fieldfilterpartdto",
@@ -3657,6 +3817,12 @@ _dynamic_imports: dict[str, str] = {
     "UserWorkflowPreferencesDto": ".preferencesrequestdto",
     "UserWorkflowPreferencesDtoTypedDict": ".preferencesrequestdto",
     "ProvidersIDEnum": ".providersidenum",
+    "PublishEnvironmentRequestDto": ".publishenvironmentrequestdto",
+    "PublishEnvironmentRequestDtoTypedDict": ".publishenvironmentrequestdto",
+    "PublishEnvironmentResponseDto": ".publishenvironmentresponsedto",
+    "PublishEnvironmentResponseDtoTypedDict": ".publishenvironmentresponsedto",
+    "PublishSummaryDto": ".publishsummarydto",
+    "PublishSummaryDtoTypedDict": ".publishsummarydto",
     "PushControlDto": ".pushcontroldto",
     "PushControlDtoTypedDict": ".pushcontroldto",
     "PushControlsMetadataResponseDto": ".pushcontrolsmetadataresponsedto",
@@ -3676,7 +3842,33 @@ _dynamic_imports: dict[str, str] = {
     "RemoveSubscriberResponseDtoTypedDict": ".removesubscriberresponsedto",
     "ReplyCallback": ".replycallback",
     "ReplyCallbackTypedDict": ".replycallback",
+    "ResourceDependencyDto": ".resourcedependencydto",
+    "ResourceDependencyDtoTypedDict": ".resourcedependencydto",
+    "Diffs": ".resourcediffdto",
+    "DiffsTypedDict": ".resourcediffdto",
+    "ResourceDiffDto": ".resourcediffdto",
+    "ResourceDiffDtoSourceResource": ".resourcediffdto",
+    "ResourceDiffDtoSourceResourceTypedDict": ".resourcediffdto",
+    "ResourceDiffDtoTargetResource": ".resourcediffdto",
+    "ResourceDiffDtoTargetResourceTypedDict": ".resourcediffdto",
+    "ResourceDiffDtoTargetResourceUpdatedBy": ".resourcediffdto",
+    "ResourceDiffDtoTargetResourceUpdatedByTypedDict": ".resourcediffdto",
+    "ResourceDiffDtoTypedDict": ".resourcediffdto",
+    "ResourceDiffDtoUpdatedBy": ".resourcediffdto",
+    "ResourceDiffDtoUpdatedByTypedDict": ".resourcediffdto",
+    "ResourceDiffResultDto": ".resourcediffresultdto",
+    "ResourceDiffResultDtoSourceResourceUpdatedBy": ".resourcediffresultdto",
+    "ResourceDiffResultDtoSourceResourceUpdatedByTypedDict": ".resourcediffresultdto",
+    "ResourceDiffResultDtoTypedDict": ".resourcediffresultdto",
+    "ResourceDiffResultDtoUpdatedBy": ".resourcediffresultdto",
+    "ResourceDiffResultDtoUpdatedByTypedDict": ".resourcediffresultdto",
+    "SourceResource": ".resourcediffresultdto",
+    "SourceResourceTypedDict": ".resourcediffresultdto",
+    "TargetResource": ".resourcediffresultdto",
+    "TargetResourceTypedDict": ".resourcediffresultdto",
     "ResourceOriginEnum": ".resourceoriginenum",
+    "ResourceToPublishDto": ".resourcetopublishdto",
+    "ResourceToPublishDtoTypedDict": ".resourcetopublishdto",
     "ResourceTypeEnum": ".resourcetypeenum",
     "ResponseValidationError": ".responsevalidationerror",
     "IssueType": ".runtimeissuedto",
@@ -3703,6 +3895,8 @@ _dynamic_imports: dict[str, str] = {
     "Security": ".security",
     "SecurityTypedDict": ".security",
     "SeverityLevelEnum": ".severitylevelenum",
+    "SkippedWorkflowDto": ".skippedworkflowdto",
+    "SkippedWorkflowDtoTypedDict": ".skippedworkflowdto",
     "SlackChannelEndpointDto": ".slackchannelendpointdto",
     "SlackChannelEndpointDtoTypedDict": ".slackchannelendpointdto",
     "SlackUserEndpointDto": ".slackuserendpointdto",
@@ -3859,6 +4053,11 @@ _dynamic_imports: dict[str, str] = {
     "SubscriptionResponseDtoTypedDict": ".subscriptionresponsedto",
     "SubscriptionsDeleteErrorDto": ".subscriptionsdeleteerrordto",
     "SubscriptionsDeleteErrorDtoTypedDict": ".subscriptionsdeleteerrordto",
+    "SyncActionEnum": ".syncactionenum",
+    "SyncedWorkflowDto": ".syncedworkflowdto",
+    "SyncedWorkflowDtoTypedDict": ".syncedworkflowdto",
+    "SyncResultDto": ".syncresultdto",
+    "SyncResultDtoTypedDict": ".syncresultdto",
     "SyncWorkflowDto": ".syncworkflowdto",
     "SyncWorkflowDtoTypedDict": ".syncworkflowdto",
     "Data": ".tenantpayloaddto",

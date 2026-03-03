@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 from enum import Enum
+from novu_py import utils
 
 
-class UIComponentEnum(str, Enum):
+class UIComponentEnum(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Component type for the UI Schema Property"""
 
     EMAIL_EDITOR_SELECT = "EMAIL_EDITOR_SELECT"
     LAYOUT_SELECT = "LAYOUT_SELECT"
+    EMAIL_RENDERER_SELECT = "EMAIL_RENDERER_SELECT"
     BLOCK_EDITOR = "BLOCK_EDITOR"
     EMAIL_BODY = "EMAIL_BODY"
     TEXT_FULL_LINE = "TEXT_FULL_LINE"

@@ -1,0 +1,10 @@
+# EnvironmentsControllerDiffEnvironmentRequest
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `target_environment_id`                                                    | *str*                                                                      | :heavy_check_mark:                                                         | Target environment ID (MongoDB ObjectId) to compare against                | 6615943e7ace93b0540ae377                                                   |
+| `idempotency_key`                                                          | *Optional[str]*                                                            | :heavy_minus_sign:                                                         | A header for idempotency purposes                                          |                                                                            |
+| `diff_environment_request_dto`                                             | [models.DiffEnvironmentRequestDto](../models/diffenvironmentrequestdto.md) | :heavy_check_mark:                                                         | Diff request configuration                                                 |                                                                            |

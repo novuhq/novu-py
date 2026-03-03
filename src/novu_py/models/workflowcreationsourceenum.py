@@ -17,3 +17,4 @@ class WorkflowCreationSourceEnum(str, Enum):
     ONBOARDING_GET_STARTED = "onboarding_get_started"
     BRIDGE = "bridge"
     DASHBOARD = "dashboard"
+    AI = "ai"
