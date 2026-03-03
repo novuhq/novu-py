@@ -288,6 +288,612 @@ class Environments(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    def diff(
+        self,
+        *,
+        target_environment_id: str,
+        diff_environment_request_dto: Union[
+            models.DiffEnvironmentRequestDto, models.DiffEnvironmentRequestDtoTypedDict
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvironmentsControllerDiffEnvironmentResponse:
+        r"""Compare resources between environments
+
+        Compares workflows and other resources between the source and target environments, returning detailed diff information including additions, modifications, and deletions.
+
+        :param target_environment_id: Target environment ID (MongoDB ObjectId) to compare against
+        :param diff_environment_request_dto: Diff request configuration
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvironmentsControllerDiffEnvironmentRequest(
+            target_environment_id=target_environment_id,
+            idempotency_key=idempotency_key,
+            diff_environment_request_dto=utils.get_pydantic_model(
+                diff_environment_request_dto, models.DiffEnvironmentRequestDto
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/environments/{targetEnvironmentId}/diff",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.diff_environment_request_dto,
+                False,
+                False,
+                "json",
+                models.DiffEnvironmentRequestDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="EnvironmentsController_diffEnvironment",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EnvironmentsControllerDiffEnvironmentResponse(
+                result=unmarshal_json_response(
+                    models.DiffEnvironmentResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def diff_async(
+        self,
+        *,
+        target_environment_id: str,
+        diff_environment_request_dto: Union[
+            models.DiffEnvironmentRequestDto, models.DiffEnvironmentRequestDtoTypedDict
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvironmentsControllerDiffEnvironmentResponse:
+        r"""Compare resources between environments
+
+        Compares workflows and other resources between the source and target environments, returning detailed diff information including additions, modifications, and deletions.
+
+        :param target_environment_id: Target environment ID (MongoDB ObjectId) to compare against
+        :param diff_environment_request_dto: Diff request configuration
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvironmentsControllerDiffEnvironmentRequest(
+            target_environment_id=target_environment_id,
+            idempotency_key=idempotency_key,
+            diff_environment_request_dto=utils.get_pydantic_model(
+                diff_environment_request_dto, models.DiffEnvironmentRequestDto
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/environments/{targetEnvironmentId}/diff",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.diff_environment_request_dto,
+                False,
+                False,
+                "json",
+                models.DiffEnvironmentRequestDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="EnvironmentsController_diffEnvironment",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EnvironmentsControllerDiffEnvironmentResponse(
+                result=unmarshal_json_response(
+                    models.DiffEnvironmentResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def publish(
+        self,
+        *,
+        target_environment_id: str,
+        publish_environment_request_dto: Union[
+            models.PublishEnvironmentRequestDto,
+            models.PublishEnvironmentRequestDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvironmentsControllerPublishEnvironmentResponse:
+        r"""Publish resources to target environment
+
+        Publishes all workflows and resources from the source environment to the target environment. Optionally specify specific resources to publish or use dryRun mode to preview changes.
+
+        :param target_environment_id: Target environment ID (MongoDB ObjectId) to publish resources to
+        :param publish_environment_request_dto: Publish request configuration
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvironmentsControllerPublishEnvironmentRequest(
+            target_environment_id=target_environment_id,
+            idempotency_key=idempotency_key,
+            publish_environment_request_dto=utils.get_pydantic_model(
+                publish_environment_request_dto, models.PublishEnvironmentRequestDto
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/environments/{targetEnvironmentId}/publish",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.publish_environment_request_dto,
+                False,
+                False,
+                "json",
+                models.PublishEnvironmentRequestDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="EnvironmentsController_publishEnvironment",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EnvironmentsControllerPublishEnvironmentResponse(
+                result=unmarshal_json_response(
+                    models.PublishEnvironmentResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def publish_async(
+        self,
+        *,
+        target_environment_id: str,
+        publish_environment_request_dto: Union[
+            models.PublishEnvironmentRequestDto,
+            models.PublishEnvironmentRequestDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvironmentsControllerPublishEnvironmentResponse:
+        r"""Publish resources to target environment
+
+        Publishes all workflows and resources from the source environment to the target environment. Optionally specify specific resources to publish or use dryRun mode to preview changes.
+
+        :param target_environment_id: Target environment ID (MongoDB ObjectId) to publish resources to
+        :param publish_environment_request_dto: Publish request configuration
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvironmentsControllerPublishEnvironmentRequest(
+            target_environment_id=target_environment_id,
+            idempotency_key=idempotency_key,
+            publish_environment_request_dto=utils.get_pydantic_model(
+                publish_environment_request_dto, models.PublishEnvironmentRequestDto
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/environments/{targetEnvironmentId}/publish",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.publish_environment_request_dto,
+                False,
+                False,
+                "json",
+                models.PublishEnvironmentRequestDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="EnvironmentsController_publishEnvironment",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EnvironmentsControllerPublishEnvironmentResponse(
+                result=unmarshal_json_response(
+                    models.PublishEnvironmentResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
     def create(
         self,
         *,

@@ -1,0 +1,13 @@
+# ResourceDiffResultDto
+
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `resource_type`                                                          | [models.ResourceTypeEnum](../models/resourcetypeenum.md)                 | :heavy_check_mark:                                                       | Type of the layout                                                       |
+| `source_resource`                                                        | [OptionalNullable[models.SourceResource]](../models/sourceresource.md)   | :heavy_minus_sign:                                                       | Source resource information                                              |
+| `target_resource`                                                        | [OptionalNullable[models.TargetResource]](../models/targetresource.md)   | :heavy_minus_sign:                                                       | Target resource information                                              |
+| `changes`                                                                | List[[models.ResourceDiffDto](../models/resourcediffdto.md)]             | :heavy_check_mark:                                                       | List of specific changes for this resource                               |
+| `summary`                                                                | [models.DiffSummaryDto](../models/diffsummarydto.md)                     | :heavy_check_mark:                                                       | Summary of changes for this resource                                     |
+| `dependencies`                                                           | List[[models.ResourceDependencyDto](../models/resourcedependencydto.md)] | :heavy_minus_sign:                                                       | Dependencies that affect this resource                                   |
