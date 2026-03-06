@@ -1,5 +1,13 @@
 # Operator
 
+## Example Usage
+
+```python
+from novu_py.models import Operator
+
+value = Operator.LARGER
+```
+
 
 ## Values
 

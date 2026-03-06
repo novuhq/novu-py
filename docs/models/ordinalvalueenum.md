@@ -2,6 +2,14 @@
 
 Value of the ordinal
 
+## Example Usage
+
+```python
+from novu_py.models import OrdinalValueEnum
+
+value = OrdinalValueEnum.DAY
+```
+
 
 ## Values
 

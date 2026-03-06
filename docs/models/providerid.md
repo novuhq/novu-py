@@ -2,6 +2,14 @@
 
 The provider identifier (e.g., sendgrid, twilio, slack, etc.).
 
+## Example Usage
+
+```python
+from novu_py.models import ProviderID
+
+value = ProviderID.EMAILJS
+```
+
 
 ## Values
 

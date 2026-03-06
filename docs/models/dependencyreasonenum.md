@@ -2,6 +2,14 @@
 
 Reason for the dependency
 
+## Example Usage
+
+```python
+from novu_py.models import DependencyReasonEnum
+
+value = DependencyReasonEnum.LAYOUT_REQUIRED_FOR_WORKFLOW
+```
+
 
 ## Values
 

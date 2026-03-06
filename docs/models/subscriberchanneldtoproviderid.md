@@ -2,6 +2,14 @@
 
 The ID of the chat or push provider.
 
+## Example Usage
+
+```python
+from novu_py.models import SubscriberChannelDtoProviderID
+
+value = SubscriberChannelDtoProviderID.SLACK
+```
+
 
 ## Values
 

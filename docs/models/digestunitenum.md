@@ -2,6 +2,14 @@
 
 Regular digest: Unit for backoff
 
+## Example Usage
+
+```python
+from novu_py.models import DigestUnitEnum
+
+value = DigestUnitEnum.SECONDS
+```
+
 
 ## Values
 

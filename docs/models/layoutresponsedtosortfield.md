@@ -1,5 +1,13 @@
 # LayoutResponseDtoSortField
 
+## Example Usage
+
+```python
+from novu_py.models import LayoutResponseDtoSortField
+
+value = LayoutResponseDtoSortField.CREATED_AT
+```
+
 
 ## Values
 

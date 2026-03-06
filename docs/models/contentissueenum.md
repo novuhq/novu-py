@@ -2,6 +2,14 @@
 
 Type of step content issue
 
+## Example Usage
+
+```python
+from novu_py.models import ContentIssueEnum
+
+value = ContentIssueEnum.ILLEGAL_VARIABLE_IN_CONTROL_VALUE
+```
+
 
 ## Values
 

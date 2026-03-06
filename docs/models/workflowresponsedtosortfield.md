@@ -1,5 +1,13 @@
 # WorkflowResponseDtoSortField
 
+## Example Usage
+
+```python
+from novu_py.models import WorkflowResponseDtoSortField
+
+value = WorkflowResponseDtoSortField.CREATED_AT
+```
+
 
 ## Values
 

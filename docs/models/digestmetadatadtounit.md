@@ -2,6 +2,14 @@
 
 Unit of the digest
 
+## Example Usage
+
+```python
+from novu_py.models import DigestMetadataDtoUnit
+
+value = DigestMetadataDtoUnit.SECONDS
+```
+
 
 ## Values
 

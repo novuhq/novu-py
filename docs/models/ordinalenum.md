@@ -2,6 +2,14 @@
 
 Ordinal position for the digest
 
+## Example Usage
+
+```python
+from novu_py.models import OrdinalEnum
+
+value = OrdinalEnum.ONE
+```
+
 
 ## Values
 

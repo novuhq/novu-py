@@ -2,6 +2,14 @@
 
 Unit of time for the look-back window.
 
+## Example Usage
+
+```python
+from novu_py.models import LookBackWindowDtoUnit
+
+value = LookBackWindowDtoUnit.SECONDS
+```
+
 
 ## Values
 
