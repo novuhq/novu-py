@@ -1,5 +1,13 @@
 # IssueType
 
+## Example Usage
+
+```python
+from novu_py.models import IssueType
+
+value = IssueType.MISSING_VALUE
+```
+
 
 ## Values
 

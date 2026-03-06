@@ -2,6 +2,16 @@
 
 Component type for the UI Schema Property
 
+## Example Usage
+
+```python
+from novu_py.models import UIComponentEnum
+
+value = UIComponentEnum.EMAIL_EDITOR_SELECT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+```
+
 
 ## Values
 

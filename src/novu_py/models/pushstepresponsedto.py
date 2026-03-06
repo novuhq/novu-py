@@ -59,8 +59,8 @@ class PushStepResponseDtoControlValues(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -96,6 +96,8 @@ class PushStepResponseDtoTypedDict(TypedDict):
     r"""Control values for the push step"""
     issues: NotRequired[StepIssuesDtoTypedDict]
     r"""Issues associated with the step"""
+    step_resolver_hash: NotRequired[str]
+    r"""Hash identifying the deployed Cloudflare Worker for this step"""
 
 
 class PushStepResponseDto(BaseModel):
@@ -138,15 +140,20 @@ class PushStepResponseDto(BaseModel):
     issues: Optional[StepIssuesDto] = None
     r"""Issues associated with the step"""
 
+    step_resolver_hash: Annotated[
+        Optional[str], pydantic.Field(alias="stepResolverHash")
+    ] = None
+    r"""Hash identifying the deployed Cloudflare Worker for this step"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["controlValues", "issues"])
+        optional_fields = set(["controlValues", "issues", "stepResolverHash"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

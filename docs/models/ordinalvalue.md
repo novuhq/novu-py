@@ -1,5 +1,13 @@
 # OrdinalValue
 
+## Example Usage
+
+```python
+from novu_py.models import OrdinalValue
+
+value = OrdinalValue.DAY
+```
+
 
 ## Values
 

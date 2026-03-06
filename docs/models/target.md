@@ -2,6 +2,14 @@
 
 Target window for the redirection.
 
+## Example Usage
+
+```python
+from novu_py.models import Target
+
+value = Target.SELF
+```
+
 
 ## Values
 

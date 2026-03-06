@@ -2,6 +2,14 @@
 
 The channel of the message to be deleted
 
+## Example Usage
+
+```python
+from novu_py.models import MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel
+
+value = MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel.IN_APP
+```
+
 
 ## Values
 

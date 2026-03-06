@@ -1,5 +1,13 @@
 # DigestRegularMetadataType
 
+## Example Usage
+
+```python
+from novu_py.models import DigestRegularMetadataType
+
+value = DigestRegularMetadataType.REGULAR
+```
+
 
 ## Values
 

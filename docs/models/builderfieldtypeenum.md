@@ -1,5 +1,13 @@
 # BuilderFieldTypeEnum
 
+## Example Usage
+
+```python
+from novu_py.models import BuilderFieldTypeEnum
+
+value = BuilderFieldTypeEnum.BOOLEAN
+```
+
 
 ## Values
 

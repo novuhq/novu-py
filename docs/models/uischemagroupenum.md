@@ -2,6 +2,14 @@
 
 Group of the UI Schema
 
+## Example Usage
+
+```python
+from novu_py.models import UISchemaGroupEnum
+
+value = UISchemaGroupEnum.IN_APP
+```
+
 
 ## Values
 

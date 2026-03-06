@@ -2,6 +2,14 @@
 
 Type of channel endpoint
 
+## Example Usage
+
+```python
+from novu_py.models import GetChannelEndpointResponseDtoType
+
+value = GetChannelEndpointResponseDtoType.SLACK_CHANNEL
+```
+
 
 ## Values
 

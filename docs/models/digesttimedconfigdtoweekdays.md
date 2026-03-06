@@ -1,5 +1,13 @@
 # DigestTimedConfigDtoWeekDays
 
+## Example Usage
+
+```python
+from novu_py.models import DigestTimedConfigDtoWeekDays
+
+value = DigestTimedConfigDtoWeekDays.MONDAY
+```
+
 
 ## Values
 

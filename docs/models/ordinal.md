@@ -1,5 +1,13 @@
 # Ordinal
 
+## Example Usage
+
+```python
+from novu_py.models import Ordinal
+
+value = Ordinal.ONE
+```
+
 
 ## Values
 

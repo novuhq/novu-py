@@ -2,6 +2,14 @@
 
 Sync action performed
 
+## Example Usage
+
+```python
+from novu_py.models import SyncActionEnum
+
+value = SyncActionEnum.CREATED
+```
+
 
 ## Values
 

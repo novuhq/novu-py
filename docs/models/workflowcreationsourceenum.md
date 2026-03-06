@@ -2,6 +2,14 @@
 
 Source of workflow creation
 
+## Example Usage
+
+```python
+from novu_py.models import WorkflowCreationSourceEnum
+
+value = WorkflowCreationSourceEnum.TEMPLATE_STORE
+```
+
 
 ## Values
 

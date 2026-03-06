@@ -2,6 +2,14 @@
 
 Type of the step
 
+## Example Usage
+
+```python
+from novu_py.models import StepTypeEnum
+
+value = StepTypeEnum.IN_APP
+```
+
 
 ## Values
 

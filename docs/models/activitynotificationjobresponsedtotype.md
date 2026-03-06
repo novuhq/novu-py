@@ -2,6 +2,14 @@
 
 Type of the job
 
+## Example Usage
+
+```python
+from novu_py.models import ActivityNotificationJobResponseDtoType
+
+value = ActivityNotificationJobResponseDtoType.IN_APP
+```
+
 
 ## Values
 

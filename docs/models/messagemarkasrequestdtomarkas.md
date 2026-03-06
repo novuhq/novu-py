@@ -1,5 +1,13 @@
 # MessageMarkAsRequestDtoMarkAs
 
+## Example Usage
+
+```python
+from novu_py.models import MessageMarkAsRequestDtoMarkAs
+
+value = MessageMarkAsRequestDtoMarkAs.READ
+```
+
 
 ## Values
 

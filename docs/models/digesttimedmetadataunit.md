@@ -1,5 +1,13 @@
 # DigestTimedMetadataUnit
 
+## Example Usage
+
+```python
+from novu_py.models import DigestTimedMetadataUnit
+
+value = DigestTimedMetadataUnit.SECONDS
+```
+
 
 ## Values
 

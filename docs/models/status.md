@@ -2,6 +2,14 @@
 
 Status of the event
 
+## Example Usage
+
+```python
+from novu_py.models import Status
+
+value = Status.OPENED
+```
+
 
 ## Values
 
