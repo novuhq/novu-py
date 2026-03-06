@@ -2,6 +2,14 @@
 
 Status of the execution detail
 
+## Example Usage
+
+```python
+from novu_py.models import ExecutionDetailsStatusEnum
+
+value = ExecutionDetailsStatusEnum.SUCCESS
+```
+
 
 ## Values
 

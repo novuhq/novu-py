@@ -2,6 +2,14 @@
 
 Type of integration issue
 
+## Example Usage
+
+```python
+from novu_py.models import IntegrationIssueEnum
+
+value = IntegrationIssueEnum.MISSING_INTEGRATION
+```
+
 
 ## Values
 

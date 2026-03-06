@@ -2,6 +2,14 @@
 
 Origin of the layout
 
+## Example Usage
+
+```python
+from novu_py.models import ResourceOriginEnum
+
+value = ResourceOriginEnum.NOVU_CLOUD
+```
+
 
 ## Values
 

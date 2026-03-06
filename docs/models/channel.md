@@ -2,6 +2,14 @@
 
 The channel type (email, sms, push, chat, etc.).
 
+## Example Usage
+
+```python
+from novu_py.models import Channel
+
+value = Channel.IN_APP
+```
+
 
 ## Values
 

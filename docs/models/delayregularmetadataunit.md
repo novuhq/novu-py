@@ -1,5 +1,13 @@
 # DelayRegularMetadataUnit
 
+## Example Usage
+
+```python
+from novu_py.models import DelayRegularMetadataUnit
+
+value = DelayRegularMetadataUnit.SECONDS
+```
+
 
 ## Values
 

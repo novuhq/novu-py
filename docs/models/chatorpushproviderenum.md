@@ -2,6 +2,14 @@
 
 The provider identifier for the credentials
 
+## Example Usage
+
+```python
+from novu_py.models import ChatOrPushProviderEnum
+
+value = ChatOrPushProviderEnum.SLACK
+```
+
 
 ## Values
 

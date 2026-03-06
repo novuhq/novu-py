@@ -2,6 +2,14 @@
 
 Provider ID of the job
 
+## Example Usage
+
+```python
+from novu_py.models import ProvidersIDEnum
+
+value = ProvidersIDEnum.EMAILJS
+```
+
 
 ## Values
 

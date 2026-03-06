@@ -2,6 +2,14 @@
 
 The unit of time for the digest interval (for REGULAR type).
 
+## Example Usage
+
+```python
+from novu_py.models import DigestStepResponseDtoUnit
+
+value = DigestStepResponseDtoUnit.SECONDS
+```
+
 
 ## Values
 

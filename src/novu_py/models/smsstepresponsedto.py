@@ -91,6 +91,8 @@ class SmsStepResponseDtoTypedDict(TypedDict):
     r"""Control values for the SMS step"""
     issues: NotRequired[StepIssuesDtoTypedDict]
     r"""Issues associated with the step"""
+    step_resolver_hash: NotRequired[str]
+    r"""Hash identifying the deployed Cloudflare Worker for this step"""
 
 
 class SmsStepResponseDto(BaseModel):
@@ -132,9 +134,14 @@ class SmsStepResponseDto(BaseModel):
     issues: Optional[StepIssuesDto] = None
     r"""Issues associated with the step"""
 
+    step_resolver_hash: Annotated[
+        Optional[str], pydantic.Field(alias="stepResolverHash")
+    ] = None
+    r"""Hash identifying the deployed Cloudflare Worker for this step"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["controlValues", "issues"])
+        optional_fields = set(["controlValues", "issues", "stepResolverHash"])
         serialized = handler(self)
         m = {}
 

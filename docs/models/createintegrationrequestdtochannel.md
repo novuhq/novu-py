@@ -2,6 +2,14 @@
 
 The channel type for the integration
 
+## Example Usage
+
+```python
+from novu_py.models import CreateIntegrationRequestDtoChannel
+
+value = CreateIntegrationRequestDtoChannel.IN_APP
+```
+
 
 ## Values
 

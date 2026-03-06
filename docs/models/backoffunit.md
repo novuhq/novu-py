@@ -1,5 +1,13 @@
 # BackoffUnit
 
+## Example Usage
+
+```python
+from novu_py.models import BackoffUnit
+
+value = BackoffUnit.SECONDS
+```
+
 
 ## Values
 

@@ -2,6 +2,14 @@
 
 The channel type for the integration, which defines how the integration communicates (e.g., email, SMS).
 
+## Example Usage
+
+```python
+from novu_py.models import IntegrationResponseDtoChannel
+
+value = IntegrationResponseDtoChannel.IN_APP
+```
+
 
 ## Values
 

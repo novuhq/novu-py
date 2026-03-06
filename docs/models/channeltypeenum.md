@@ -2,6 +2,14 @@
 
 Channel type through which the message is sent
 
+## Example Usage
+
+```python
+from novu_py.models import ChannelTypeEnum
+
+value = ChannelTypeEnum.IN_APP
+```
+
 
 ## Values
 

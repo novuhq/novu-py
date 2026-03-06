@@ -1,5 +1,13 @@
 # WeekDays
 
+## Example Usage
+
+```python
+from novu_py.models import WeekDays
+
+value = WeekDays.MONDAY
+```
+
 
 ## Values
 

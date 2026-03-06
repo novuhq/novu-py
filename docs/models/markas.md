@@ -2,6 +2,14 @@
 
 Mark all subscriber messages as read, unread, seen or unseen
 
+## Example Usage
+
+```python
+from novu_py.models import MarkAs
+
+value = MarkAs.READ
+```
+
 
 ## Values
 

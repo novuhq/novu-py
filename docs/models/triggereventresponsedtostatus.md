@@ -2,6 +2,14 @@
 
 Status of the trigger
 
+## Example Usage
+
+```python
+from novu_py.models import TriggerEventResponseDtoStatus
+
+value = TriggerEventResponseDtoStatus.ERROR
+```
+
 
 ## Values
 

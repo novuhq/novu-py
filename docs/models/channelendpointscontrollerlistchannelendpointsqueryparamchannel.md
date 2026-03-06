@@ -2,6 +2,14 @@
 
 Channel type to filter results.
 
+## Example Usage
+
+```python
+from novu_py.models import ChannelEndpointsControllerListChannelEndpointsQueryParamChannel
+
+value = ChannelEndpointsControllerListChannelEndpointsQueryParamChannel.IN_APP
+```
+
 
 ## Values
 
