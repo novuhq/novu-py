@@ -3,17 +3,17 @@ id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
   docChecksum: 13690323f7d9fec1680d9bb240f7d05c
   docVersion: 3.14.0
-  speakeasyVersion: 1.745.1
-  generationVersion: 2.850.7
-  releaseVersion: 3.14.2
-  configChecksum: bed0092958a5a4518f96c132ea65539d
+  speakeasyVersion: 1.749.0
+  generationVersion: 2.855.2
+  releaseVersion: 3.14.3
+  configChecksum: 7749a6387e95df70198b8624cba2b719
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
 persistentEdits:
-  generation_id: 5b8bffaf-f400-46af-98c8-7e699be0b549
-  pristine_commit_hash: 5fe0a1ff6692b048fc601b2e95d43b2ce8304cb1
-  pristine_tree_hash: d0d384aad8260144226ebadaaf5ea0bad0fdd8bf
+  generation_id: fe41d8fd-a901-48e6-ac91-1a4b318777be
+  pristine_commit_hash: 464fb2153ea785d18aa4b552a3f3ee62633812bd
+  pristine_tree_hash: 6b7c6f6185b9c548d6aabc723bed88a61cbc1ee7
 features:
   python:
     additionalDependencies: 1.0.0
@@ -23,7 +23,7 @@ features:
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
-    enumUnions: 0.1.0
+    enumUnions: 0.1.1
     envVarSecurityUsage: 0.3.2
     examples: 3.0.3
     flattening: 3.1.1
@@ -2993,8 +2993,8 @@ trackedFiles:
     pristine_git_object: 908af8edc87d966acce46d4cbd2b7f925cfc64e3
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:773630aa6ad74575e59fa346b256dc1bef639e91
-    pristine_git_object: 44541546c33e125724914f03d78693cab62e45ab
+    last_write_checksum: sha1:16281fa4b3f2f6e03e3eb369d8f50525c7b3355e
+    pristine_git_object: 498a92b27d799cb829fbcbd2132fc49f5f6fefcd
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77610d735cce1bc0f71f13a746bf06e463e2ce47
@@ -3021,8 +3021,8 @@ trackedFiles:
     pristine_git_object: 955703fa58801c45f9cc8e62f4dfef8228cbf625
   src/novu_py/_version.py:
     id: 8e69485642eb
-    last_write_checksum: sha1:260cb2485f2c0781e1b6fc925bef46fab4a7185b
-    pristine_git_object: 7e60ff286d53d8962071b2ddddefce848063c140
+    last_write_checksum: sha1:920c17ee9770748cd7f405966f0a2a01e11f509b
+    pristine_git_object: ea76ca898b01e9b17167683b96811aaa39f666fe
   src/novu_py/activity.py:
     id: 7d001a1721a3
     last_write_checksum: sha1:a95d6e0bd0409a1dfd61fcf55d6402643888e0e6
@@ -6353,14 +6353,6 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes:
-  * `novu.workflows.create()`:  `response.steps[]` **Changed**
-  * `novu.workflows.update()`:  `response.steps[]` **Changed**
-  * `novu.workflows.get()`:  `response.steps[]` **Changed**
-  * `novu.workflows.patch()`:  `response.steps[]` **Changed**
-  * `novu.workflows.sync()`:  `response.steps[]` **Changed**
-  * `novu.workflows.steps.retrieve()`:  `response.step_resolver_hash` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
