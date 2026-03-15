@@ -1,29 +1,29 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: 13690323f7d9fec1680d9bb240f7d05c
+  docChecksum: 8ce805970a528398f02883ae9fa0724a
   docVersion: 3.14.0
-  speakeasyVersion: 1.745.1
-  generationVersion: 2.850.7
-  releaseVersion: 3.14.2
-  configChecksum: bed0092958a5a4518f96c132ea65539d
+  speakeasyVersion: 1.755.0
+  generationVersion: 2.865.2
+  releaseVersion: 3.14.3
+  configChecksum: 7749a6387e95df70198b8624cba2b719
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
 persistentEdits:
-  generation_id: 5b8bffaf-f400-46af-98c8-7e699be0b549
-  pristine_commit_hash: 5fe0a1ff6692b048fc601b2e95d43b2ce8304cb1
-  pristine_tree_hash: d0d384aad8260144226ebadaaf5ea0bad0fdd8bf
+  generation_id: 2eaa5f18-a891-4e55-814f-0ea8a9e14581
+  pristine_commit_hash: 498d0836180950bc2bf61fbe6ca4ff0c43f3c6c7
+  pristine_tree_hash: 11de92e6567ad715f842426f046d68af27fc86c4
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.7
-    core: 6.0.16
+    core: 6.0.18
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
-    enumUnions: 0.1.0
+    enumUnions: 0.1.1
     envVarSecurityUsage: 0.3.2
     examples: 3.0.3
     flattening: 3.1.1
@@ -305,8 +305,8 @@ trackedFiles:
     pristine_git_object: 56fb2cd26b9c13ec0f493bb066874fe6a15e97b7
   docs/models/channelsettingsdto.md:
     id: e660c4fc8122
-    last_write_checksum: sha1:0ba9db1429bb5e0e25dbeacadcdd5fc09898c146
-    pristine_git_object: 8e577904482b1a266b542856cb9d1aea742dcf04
+    last_write_checksum: sha1:7e4d37fe97a377a90547c2a49825dc6bbff7e107
+    pristine_git_object: 437eab4798ac626d4e29b4e6bf32261467311fb6
   docs/models/channeltypeenum.md:
     id: 2eb0f3e486f7
     last_write_checksum: sha1:a9af519ff097ef82930923c6b9b5d199e9bae8ba
@@ -417,8 +417,8 @@ trackedFiles:
     pristine_git_object: f36a7ea4d73f739154b57a8e7f555d6ffd14ea7c
   docs/models/controlvalues.md:
     id: d8ee5befbd62
-    last_write_checksum: sha1:0feb2a461d0dd29d69947b76e92ccf9b86001231
-    pristine_git_object: 12572bdbbb3b9c978de06da5200fa1f3703a6e7b
+    last_write_checksum: sha1:a129bcba91b13823ec6ad7ce7516022b534f08c6
+    pristine_git_object: 992ae51beb56c5d18d7acf8d01358bce6a645ef5
   docs/models/controlvariables.md:
     id: 3bb28bfb5657
     last_write_checksum: sha1:3add6f9f5465555bd98b4925afadea58796c6c98
@@ -1149,12 +1149,8 @@ trackedFiles:
     pristine_git_object: 76bfc4f007fde580f0d3335201857f051c402357
   docs/models/inappstepupsertdto.md:
     id: 108968abed4b
-    last_write_checksum: sha1:5f44d630c8b999c19ddccc464a16e296d56e4da0
-    pristine_git_object: 13e3eccf9dd76febf19071482f299bcb2134c8be
-  docs/models/inappstepupsertdtocontrolvalues.md:
-    id: faf58e81cf93
-    last_write_checksum: sha1:de7e31b0f0295a42618f329c3518e20026579f98
-    pristine_git_object: 84cfebd8cf4e217469d3a578e1ec608ce2860856
+    last_write_checksum: sha1:2cf6c01cef2e0a146551b785c329467daa3da874
+    pristine_git_object: 8b39140142df0d1d02af8abb06fc7d9a63f1ce40
   docs/models/inboundparsedomaindto.md:
     id: e445895397f7
     last_write_checksum: sha1:39e06ba0d9750dc94386267fd5e20818cd38dc34
@@ -1173,8 +1169,8 @@ trackedFiles:
     pristine_git_object: f2bfe103009f2684788f6fd351f31d45e99080dc
   docs/models/integrationresponsedto.md:
     id: aa9c66484b74
-    last_write_checksum: sha1:d9da404638f580ddd94bf042590d048983db8ba0
-    pristine_git_object: d09b60008b8627b95e6824206faf8f18c9dd73ab
+    last_write_checksum: sha1:d48730da30611e34aeef0cd62e00b96e3433a86d
+    pristine_git_object: 63beb070e4f66a6365496a68ec18deb65cf6c612
   docs/models/integrationresponsedtochannel.md:
     id: d4d333f104a1
     last_write_checksum: sha1:318a2cb48683090cbfef28ae3c9c8f8d311b1433
@@ -1247,10 +1243,6 @@ trackedFiles:
     id: 133a55f35a93
     last_write_checksum: sha1:923b707ed29ee23268c0fef17bdc859f04e798b5
     pristine_git_object: 3cb6b57528f5eead6b9d68fc92af8b6881ff0aa6
-  docs/models/issuetype.md:
-    id: 3ef3636671c0
-    last_write_checksum: sha1:ad63207fffd69ec4d45175fcd889dc1f97f66ecb
-    pristine_git_object: 4eb730b643c1758aea9b0af73ae7d4cd398d02ac
   docs/models/jobdata.md:
     id: d7b06d762e90
     last_write_checksum: sha1:12148956a9396e461654253e1ccf59d8e6c1e232
@@ -1265,8 +1257,8 @@ trackedFiles:
     pristine_git_object: 91073e47a7886dcb4143f022da19f04cd78f2625
   docs/models/layoutcontrolvaluesdto.md:
     id: 0fac91a9be31
-    last_write_checksum: sha1:b778f68881556c144327c50bfe9a08ed28b40a21
-    pristine_git_object: 3e0413738f0ce5c77779d752a10b82d0de09fcf1
+    last_write_checksum: sha1:087ebd3937eecc0e088460db3c6010fb981971f5
+    pristine_git_object: a0637c473f81b4d8a96efab7c630656d30607b52
   docs/models/layoutcreationsourceenum.md:
     id: 25d708e34053
     last_write_checksum: sha1:0edbbee9c4ce06040310389778d4b537b37f9b0a
@@ -1853,8 +1845,8 @@ trackedFiles:
     pristine_git_object: f859de65974191cfb8bf552d33ecf3d16248a0ce
   docs/models/runtimeissuedto.md:
     id: 5a892390166e
-    last_write_checksum: sha1:60ff352fc66765b770ef96d1b802c9f8e70a2611
-    pristine_git_object: dd3366471260f0c32d4fb03c7af0de96fc8ba15a
+    last_write_checksum: sha1:98cb96fde0416c3d41fd082403aeb7551bc1b75a
+    pristine_git_object: ad21f87d9312c4010d5bdc2309819a4c8bc3dc5b
   docs/models/saturday.md:
     id: 9e8fab75784d
     last_write_checksum: sha1:822a6d32f88a5718310ce5846da4c9cef315e57f
@@ -2001,16 +1993,16 @@ trackedFiles:
     pristine_git_object: a2be620f258f77e934af0ead9da253b79f89cc9d
   docs/models/subscriberresponsedto.md:
     id: c2e54f527bba
-    last_write_checksum: sha1:30c9e578e66db80f6ecee296ed3461b0d57cc991
-    pristine_git_object: 438fb23535a37b4e104fa03c133b59c5a7a11f83
+    last_write_checksum: sha1:c2d27f6759df55698131b85d03673cdb2618554f
+    pristine_git_object: 228b3287f3421d18e8ff4763c8464607066b56af
   docs/models/subscriberresponsedtoerror.md:
     id: 4c6d838d8c32
-    last_write_checksum: sha1:331bbe89f2e2d31f026378db37715f4f9da018a4
-    pristine_git_object: e8e28e037fe54cbeb49a83894abca6d0db896a32
+    last_write_checksum: sha1:0873165c1e96c722d48efb7d2c182c3bb373c84b
+    pristine_git_object: cc415963a7480348774f02e5c489cc24b9b8fb97
   docs/models/subscriberresponsedtooptional.md:
     id: bbebce851d15
-    last_write_checksum: sha1:d5d3c8d371b19e3abc37633b850ec71a674c72a7
-    pristine_git_object: 56c02b7976b3dc3a1998dbdd16f7b2b80e04210b
+    last_write_checksum: sha1:973d8ae51a05a3589f03ea203cb7798b01041ca9
+    pristine_git_object: e71d260d5fff5a5e4fbc71417f177d4e25933c1c
   docs/models/subscriberscontrollerbulkupdatesubscriberpreferencesrequest.md:
     id: e745edb1ef84
     last_write_checksum: sha1:e62d69405b4ec2a7fa2f5577ebdf142cabe6c360
@@ -2641,12 +2633,12 @@ trackedFiles:
     pristine_git_object: 2db02a155b7b37e19721d26eda564434bf476dbd
   docs/models/updatelayoutdto.md:
     id: 001fdc048641
-    last_write_checksum: sha1:ac4e8661e003f685ed0901fc866b60447e86ef71
-    pristine_git_object: c5f237f4f34bb5d8206300d542ac616b8d3e25cb
+    last_write_checksum: sha1:0e66879ceb9e09a5f05cfb9f7e23a1f3c123a809
+    pristine_git_object: 9f4d2f0766ef150d5ce7e17f14bbfc0bc9b8b330
   docs/models/updatesubscriberchannelrequestdto.md:
     id: 17dfc5e9ab6a
-    last_write_checksum: sha1:b8a395dc86217ff10cb395f94ac265f2f4502099
-    pristine_git_object: 44f2fbee67e381cd96024ddbed4c1ccdd9c17cc2
+    last_write_checksum: sha1:9d67dedd70557af386c73edfbae0e544a88249dc
+    pristine_git_object: f948a946a20eb45892f23740c0a57be03c6632b6
   docs/models/updatesubscriberonlineflagrequestdto.md:
     id: d6c0cf31ddf9
     last_write_checksum: sha1:86a8d3c88fadebce0856e18d264db9ccf3ce2c4b
@@ -2897,8 +2889,8 @@ trackedFiles:
     pristine_git_object: 5cff547c7dddd3c5edfb95e35529743251bb9eab
   docs/sdks/credentials/README.md:
     id: fb7e49751327
-    last_write_checksum: sha1:bcad2b7eefbb522e31b3f7a5882bf142a4145921
-    pristine_git_object: fea49f8cc137a6ef94b5bbd4363078d23169f1f0
+    last_write_checksum: sha1:77e4904dbac542680ef00c45ae6a43d795f215a4
+    pristine_git_object: 9d29d7d6f88058463e122dce5ffbd4f250327a05
   docs/sdks/environments/README.md:
     id: d15fc95481b6
     last_write_checksum: sha1:7413c01522a2e904732b038cf2a739a7c45bb163
@@ -2913,8 +2905,8 @@ trackedFiles:
     pristine_git_object: 96194559d89a2831ac8f31f767c4603949c2ec64
   docs/sdks/layouts/README.md:
     id: 9cae4f89dc39
-    last_write_checksum: sha1:590da6af759d60fd2f53e1262bdd38f2d34bcaa0
-    pristine_git_object: 1d4deadb1abdfafb630cefeb4129a240d0ece2f1
+    last_write_checksum: sha1:d9a412aad01b1164467da690b9bb158637bd75cd
+    pristine_git_object: b7f283852dfc8f58a725ed0039db44d32cd9bebb
   docs/sdks/master/README.md:
     id: 231dfd929df7
     last_write_checksum: sha1:5e5e44eab60305c3dcf605328ac644fb417705b2
@@ -2993,8 +2985,8 @@ trackedFiles:
     pristine_git_object: 908af8edc87d966acce46d4cbd2b7f925cfc64e3
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:773630aa6ad74575e59fa346b256dc1bef639e91
-    pristine_git_object: 44541546c33e125724914f03d78693cab62e45ab
+    last_write_checksum: sha1:16281fa4b3f2f6e03e3eb369d8f50525c7b3355e
+    pristine_git_object: 498a92b27d799cb829fbcbd2132fc49f5f6fefcd
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77610d735cce1bc0f71f13a746bf06e463e2ce47
@@ -3021,8 +3013,8 @@ trackedFiles:
     pristine_git_object: 955703fa58801c45f9cc8e62f4dfef8228cbf625
   src/novu_py/_version.py:
     id: 8e69485642eb
-    last_write_checksum: sha1:260cb2485f2c0781e1b6fc925bef46fab4a7185b
-    pristine_git_object: 7e60ff286d53d8962071b2ddddefce848063c140
+    last_write_checksum: sha1:28e826416ee30ad7cc5cb57aa48674b9ea1f64cc
+    pristine_git_object: d6c6d2557b6ec8fda600fbcf13d7686d2905c1d0
   src/novu_py/activity.py:
     id: 7d001a1721a3
     last_write_checksum: sha1:a95d6e0bd0409a1dfd61fcf55d6402643888e0e6
@@ -3077,8 +3069,8 @@ trackedFiles:
     pristine_git_object: 7014e97444814f43aa3c59b9731c88bfaf511df6
   src/novu_py/models/__init__.py:
     id: 08e336e51536
-    last_write_checksum: sha1:4b69541f5a49a4ea69c56a3b5cf69185da7159a1
-    pristine_git_object: 5c947ec9e074c7c47654253c44d14147c0730cfe
+    last_write_checksum: sha1:f1d762bfdae0e613ea7e5e3a83390a9959d2217c
+    pristine_git_object: ad20dc71aef90ca065d2ccc88484c4fd550dac1d
   src/novu_py/models/actiondto.py:
     id: 1d3499193d8c
     last_write_checksum: sha1:787de11e6a1d379959aa69b9d1c5994837de3c50
@@ -3229,8 +3221,8 @@ trackedFiles:
     pristine_git_object: c5a64e60efa9d1f32aafbd38ae56b0c5e852777b
   src/novu_py/models/channelsettingsdto.py:
     id: 91d07a3fbac3
-    last_write_checksum: sha1:8236d04057be96762a59d489d3f9b37d2e41a93d
-    pristine_git_object: 4e9272fefc2c927830eddd58e056f5fe5108feb0
+    last_write_checksum: sha1:ea8d1101d4b38eb3389f3ce51b45cb4f9321835f
+    pristine_git_object: c9bf61ba30c952766fdf8f35ca1ab386905a0f17
   src/novu_py/models/channeltypeenum.py:
     id: 78191992a47f
     last_write_checksum: sha1:93b799f85a87f0611f65b76ef99b410fd4bcf20a
@@ -3693,8 +3685,8 @@ trackedFiles:
     pristine_git_object: c1f89ab5b765e2e6523642d505bd4e5a001f72d8
   src/novu_py/models/inappstepupsertdto.py:
     id: 1517f04a9275
-    last_write_checksum: sha1:e72f37b397afecf074198e41adac22a6a6baf2e7
-    pristine_git_object: df1a2c3631ea2824f0d2d06f91a674bdaf287cab
+    last_write_checksum: sha1:ae3f512db9311e46c94f558c35ef85f50be41601
+    pristine_git_object: 02e331a04fda803915b06c6c32e5883cfa4cdb0a
   src/novu_py/models/inboundparsedomaindto.py:
     id: befe8237fd34
     last_write_checksum: sha1:bf06686fa9f0722debd31361fee027d95e38d36e
@@ -3709,8 +3701,8 @@ trackedFiles:
     pristine_git_object: 35313bea34c3b5aed0923a894e0335a82b7bb0f2
   src/novu_py/models/integrationresponsedto.py:
     id: 67cc4414e8c9
-    last_write_checksum: sha1:a49a27c63de90a80f2a234b7f7e78da510fe5ff6
-    pristine_git_object: 81f47757998772e65f7ba6ec3beb38a71fde44b3
+    last_write_checksum: sha1:cc171d21be6bc85950e39af79706cedb4f4edf93
+    pristine_git_object: 2a526b3967d593c123ccbec2a947916c6f2196b5
   src/novu_py/models/integrationscontroller_autoconfigureintegrationop.py:
     id: 91687c7e2d5d
     last_write_checksum: sha1:a341e2f767fd17a718e10b6e8d95f4bcf828d8f2
@@ -3749,8 +3741,8 @@ trackedFiles:
     pristine_git_object: 0aacbfeb789dfed1969a5548d95c4788fa1e98ed
   src/novu_py/models/layoutcontrolvaluesdto.py:
     id: ac64310de3fb
-    last_write_checksum: sha1:869276693c64d251a685ab8d6d0a0c53a81e7b22
-    pristine_git_object: 0f84e6f800159a3b6e1197bcf890ba98822913fc
+    last_write_checksum: sha1:c122ccac990e4b654388cf5367951ee88be87ac3
+    pristine_git_object: 441b35fe11b5403b32043b511375f60996112446
   src/novu_py/models/layoutcreationsourceenum.py:
     id: e951c7be3ba6
     last_write_checksum: sha1:d074d030b30361d7358d5be89fbd256f61234cde
@@ -4089,8 +4081,8 @@ trackedFiles:
     pristine_git_object: 2239a9d7c994ba572bce72e1768c00fdfc8fd7ad
   src/novu_py/models/runtimeissuedto.py:
     id: ba405645ee30
-    last_write_checksum: sha1:431a0f212b7e14ef646ab9849684a91774d0f395
-    pristine_git_object: 22e4328e53bdb885ed7160267818190c66f6e8a9
+    last_write_checksum: sha1:4f537f71029897bdebf47d56cdc0a9019aaf0852
+    pristine_git_object: d9ca48d82f1e1bddc6ea25bc4bfa7c594a8bfaf9
   src/novu_py/models/scheduledto.py:
     id: ea7cf7d9882d
     last_write_checksum: sha1:1f3d983ddf6a372f0dd2fee99100a69709f2c334
@@ -4197,16 +4189,16 @@ trackedFiles:
     pristine_git_object: 4c635c7fdc1a16f905c2938104b24c89203d345f
   src/novu_py/models/subscriberresponsedto.py:
     id: ef4e235c8ce3
-    last_write_checksum: sha1:6479934f9cf02f8a79a10615a1e8df41c0d706db
-    pristine_git_object: 3e4f689dd252ea189bf2b02f689986d8e34c82cb
+    last_write_checksum: sha1:44f6b44b0b0d268bff58245a90f4dee9fd9c8d3c
+    pristine_git_object: 1f8892f2e371fb2f50a5f541eb4f59454e9902d7
   src/novu_py/models/subscriberresponsedto_error.py:
     id: 9bdc1c4435d0
-    last_write_checksum: sha1:a5e92dbf3c6c789c1372deb18d4f0a98a1ecca91
-    pristine_git_object: c5b50f6f3b17305bc33c2e5679069ba43d278e59
+    last_write_checksum: sha1:f7687b55fca642ff37ccc689c258b53deb2e7eb0
+    pristine_git_object: 6f1ce9a6fa439b6ca7f75d39b661f48533044fec
   src/novu_py/models/subscriberresponsedtooptional.py:
     id: 18890f8b468f
-    last_write_checksum: sha1:87c35fdb1f91b4527149fc24a31147f3bc6d087b
-    pristine_git_object: 846a9460b75ed09211fab0db17725726e054de4c
+    last_write_checksum: sha1:961ae8c2ff46539e29a6a4f1249cd9ce76077227
+    pristine_git_object: ef6251fc6596db8930c216998d154cc6e88f0941
   src/novu_py/models/subscriberscontroller_bulkupdatesubscriberpreferencesop.py:
     id: 371fc5ce5d51
     last_write_checksum: sha1:dd897b13961ae444ae27ad37249148a05c49c6c2
@@ -4537,12 +4529,12 @@ trackedFiles:
     pristine_git_object: 6d2646415c061a840983b2de1ebdcd6ee3f197de
   src/novu_py/models/updatelayoutdto.py:
     id: 737433d40225
-    last_write_checksum: sha1:d8d6c73d3584c336e96df376a4cbc8236699c7e1
-    pristine_git_object: 72521660693fac748c6b5a96a6484e8591764a18
+    last_write_checksum: sha1:2000263301505d1fb9fbda5d94f43be057aeecab
+    pristine_git_object: 27ef2d5ab2d7b0c2f59df2b9e2d53bba0820fac3
   src/novu_py/models/updatesubscriberchannelrequestdto.py:
     id: d77d402e10a6
-    last_write_checksum: sha1:dc815ce974dc74c3cdb00cafc2c1722d82e5ecc6
-    pristine_git_object: bc69da8005aefb512c6c0b5f42ff587ef7be90dd
+    last_write_checksum: sha1:1e61729038490b4f8f3875f69601a5462d92fb12
+    pristine_git_object: f5ea688ee77d66ecf9d488e456662176fcdfb942
   src/novu_py/models/updatesubscriberonlineflagrequestdto.py:
     id: 56d24547cd03
     last_write_checksum: sha1:cf978eb299a6220f3bacae853ceb64b946121b98
@@ -4745,8 +4737,8 @@ trackedFiles:
     pristine_git_object: 3324e1bc2668c54c4d5f5a1a845675319757a828
   src/novu_py/utils/eventstreaming.py:
     id: 77d0b255afff
-    last_write_checksum: sha1:ffa870a25a7e4e2015bfd7a467ccd3aa1de97f0e
-    pristine_git_object: f2052fc22d9fd6c663ba3dce019fe234ca37108b
+    last_write_checksum: sha1:620d78a8b4e3b854e08d136e02e40a01a786bd70
+    pristine_git_object: 3bdcd6d3d4fc772cb7f5fca8685dcdc8c85e13e8
   src/novu_py/utils/forms.py:
     id: f9d5ceaf35e1
     last_write_checksum: sha1:15fa7e9ab1611e062a9984cf06cb20969713d295
@@ -4874,7 +4866,7 @@ examples:
           limit: 10
       responses:
         "200":
-          application/json: {"data": [{"channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1723832108589", "updatedAt": "1735636837621"}, {"channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1723832108589", "updatedAt": "1735636837621"}, {"channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1723832108589", "updatedAt": "1735636837621"}], "next": "<value>", "previous": null, "totalCount": 9050.11, "totalCountCapped": false}
+          application/json: {"data": [{"firstName": "Maegan", "lastName": "Muller", "channels": [{"providerId": "pusher-beams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": true, "lastOnlineAt": null, "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1723832108589", "updatedAt": "1735636837621"}, {"firstName": null, "lastName": "Satterfield", "channels": [{"providerId": "pusher-beams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": true, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1723832108589", "updatedAt": "1735636837621"}, {"firstName": "Nolan", "lastName": "Nicolas", "channels": [{"providerId": "pusher-beams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": true, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1723832108589", "updatedAt": "1735636837621"}], "next": "<value>", "previous": null, "totalCount": 9050.11, "totalCountCapped": false}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -4889,7 +4881,7 @@ examples:
         application/json: {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}
       responses:
         "201":
-          application/json: {"channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1714470810745", "updatedAt": "1735674320193"}
+          application/json: {"firstName": "Eli", "lastName": "Senger", "channels": [{"providerId": "zulip", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": true, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1714470810745", "updatedAt": "1735674320193"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -4899,7 +4891,7 @@ examples:
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "409":
-          application/json: {"channels": [{"providerId": "novu-slack", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1714911393177", "updatedAt": "1735631466004"}
+          application/json: {"firstName": "Terence", "lastName": "Schulist", "channels": [{"providerId": "novu-slack", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1714911393177", "updatedAt": "1735631466004"}
   SubscribersController_getSubscriber:
     speakeasy-default-subscribers-controller-get-subscriber:
       parameters:
@@ -4907,7 +4899,7 @@ examples:
           subscriberId: "<id>"
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "slack", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1727316522922", "updatedAt": "1735624846579"}
+          application/json: {"firstName": "Ali", "lastName": null, "channels": [{"providerId": "slack", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": true, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1727316522922", "updatedAt": "1735624846579"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -4925,7 +4917,7 @@ examples:
         application/json: {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York"}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1732490680659", "updatedAt": "1735674157313"}
+          application/json: {"firstName": "Lenore", "lastName": "Schuster", "channels": [{"providerId": "fcm", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "fcm", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1732490680659", "updatedAt": "1735674157313"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5027,10 +5019,10 @@ examples:
         path:
           subscriberId: "<id>"
       requestBody:
-        application/json: {"providerId": "slack", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
+        application/json: {"providerId": "slack", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1720451246282", "updatedAt": "1735627699916"}
+          application/json: {"firstName": null, "lastName": "Willms", "channels": [{"providerId": "zulip", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": true, "lastOnlineAt": null, "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1720451246282", "updatedAt": "1735627699916"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5045,10 +5037,10 @@ examples:
         path:
           subscriberId: "<id>"
       requestBody:
-        application/json: {"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
+        application/json: {"providerId": "one-signal", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "msteams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "msteams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "msteams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1733544020906", "updatedAt": "1735604004137"}
+          application/json: {"firstName": "Rylan", "lastName": "Waters", "channels": [{"providerId": "msteams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "msteams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "msteams", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": null, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1733544020906", "updatedAt": "1735604004137"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5083,7 +5075,7 @@ examples:
         application/json: {"status": "pending"}
       responses:
         "201":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1718333764322", "updatedAt": "1735651735471"}, "template": {"name": "<value>", "description": "loaf than of familiarize puppet transom worth", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": [], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1712367103281", "transactionId": "<id>", "channel": "in_app", "read": false, "seen": false, "cta": {}, "status": "sent", "contextKeys": ["tenant:org-123", "region:us-east-1"]}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"firstName": "Kody", "lastName": "Kirlin", "channels": [{"providerId": "getstream", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "getstream", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1718333764322", "updatedAt": "1735651735471"}, "template": {"name": "<value>", "description": "loaf than of familiarize puppet transom worth", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": [], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1712367103281", "transactionId": "<id>", "channel": "in_app", "read": false, "seen": false, "cta": {}, "status": "sent", "contextKeys": ["tenant:org-123", "region:us-east-1"]}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5119,7 +5111,7 @@ examples:
         application/json: {"messageId": [], "markAs": "seen"}
       responses:
         "201":
-          application/json: [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1725589939815", "updatedAt": "1735615487347"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1710273627479", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1725589939815", "updatedAt": "1735615487347"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1710273627479", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1725589939815", "updatedAt": "1735615487347"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1710273627479", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}]
+          application/json: [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"firstName": "Autumn", "lastName": "Yost", "channels": [{"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1725589939815", "updatedAt": "1735615487347"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1710273627479", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"firstName": "Cecile", "lastName": "Rutherford", "channels": [{"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": true, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1725589939815", "updatedAt": "1735615487347"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1710273627479", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"firstName": null, "lastName": "Conroy", "channels": [{"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1725589939815", "updatedAt": "1735615487347"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1710273627479", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5194,7 +5186,7 @@ examples:
         application/json: {"isOnline": false}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "whatsapp-business", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "whatsapp-business", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1734987954011", "updatedAt": "1735680893525"}
+          application/json: {"firstName": "Larry", "lastName": "Wolff", "channels": [{"providerId": "whatsapp-business", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "whatsapp-business", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": true, "lastOnlineAt": null, "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1734987954011", "updatedAt": "1735680893525"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5362,7 +5354,7 @@ examples:
     speakeasy-default-integrations-controller-list-integrations:
       responses:
         "200":
-          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": true, "deleted": false, "primary": false}]
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "configurations": {}, "active": true, "deleted": false, "primary": false}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5377,7 +5369,7 @@ examples:
         application/json: {"providerId": "<id>", "channel": "email"}
       responses:
         "201":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": false, "deleted": false, "primary": true}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "configurations": {}, "active": false, "deleted": false, "primary": true}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5395,7 +5387,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": false, "primary": true}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "configurations": {}, "active": false, "deleted": false, "primary": true}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5411,7 +5403,7 @@ examples:
           integrationId: "<id>"
       responses:
         "200":
-          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "active": true, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "active": true, "deleted": false, "primary": false}]
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "configurations": {}, "active": true, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "configurations": {}, "active": true, "deleted": false, "primary": false}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5427,7 +5419,7 @@ examples:
           integrationId: "<id>"
       responses:
         "200":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "in_app", "credentials": {}, "active": false, "deleted": false, "primary": false}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "in_app", "credentials": {}, "configurations": {}, "active": false, "deleted": false, "primary": false}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5440,7 +5432,7 @@ examples:
     speakeasy-default-integrations-controller-get-active-integrations:
       responses:
         "200":
-          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": false, "primary": false}]
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "configurations": {}, "active": false, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "configurations": {}, "active": false, "deleted": false, "primary": false}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5458,7 +5450,7 @@ examples:
           contextKeys: ["tenant:org-123", "region:us-east-1"]
       responses:
         "200":
-          application/json: {"hasMore": true, "data": [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}], "pageSize": 3755.69, "page": 3670.04}
+          application/json: {"hasMore": true, "data": [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"firstName": "Reymundo", "lastName": "Beatty", "channels": [{"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": null, "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"firstName": "Porter", "lastName": "Bogan", "channels": [{"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"firstName": "Magdalen", "lastName": "Schuppe", "channels": [{"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>", "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}], "pageSize": 3755.69, "page": 3670.04}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5868,7 +5860,7 @@ examples:
         application/json: {"layoutId": "<id>", "name": "<value>", "isTranslationEnabled": false, "__source": "dashboard"}
       responses:
         "201":
-          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": false, "updatedAt": "1735674274664", "createdAt": "1724722350004", "origin": "external", "type": "BRIDGE", "controls": {"values": {}}}
+          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": false, "updatedAt": "1735674274664", "createdAt": "1724722350004", "origin": "external", "type": "BRIDGE", "controls": {"values": {"email": {"body": "<value>", "editorType": "html"}}}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5885,7 +5877,7 @@ examples:
           offset: 0
       responses:
         "200":
-          application/json: {"layouts": [{"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": false, "isTranslationEnabled": true, "updatedAt": "1735681034060", "createdAt": "1725690003700", "origin": "novu-cloud-v1", "type": "BRIDGE", "controls": {"values": {}}}], "totalCount": 2739.33}
+          application/json: {"layouts": [{"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": false, "isTranslationEnabled": true, "updatedAt": "1735681034060", "createdAt": "1725690003700", "origin": "novu-cloud-v1", "type": "BRIDGE", "controls": {"values": {"email": {"body": "<value>", "editorType": "block"}}}}], "totalCount": 2739.33}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5900,10 +5892,10 @@ examples:
         path:
           layoutId: "<id>"
       requestBody:
-        application/json: {"name": "<value>", "isTranslationEnabled": false}
+        application/json: {"name": "<value>", "isTranslationEnabled": false, "controlValues": {"email": {"body": "<value>", "editorType": "html"}}}
       responses:
         "200":
-          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": true, "updatedAt": "1735626712855", "createdAt": "1721640680654", "origin": "external", "type": "ECHO", "controls": {"values": {}}}
+          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": true, "updatedAt": "1735626712855", "createdAt": "1721640680654", "origin": "external", "type": "ECHO", "controls": {"values": {"email": {"body": "<value>", "editorType": "html"}}}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5919,7 +5911,7 @@ examples:
           layoutId: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": false, "isTranslationEnabled": false, "updatedAt": "1735667479798", "createdAt": "1732982999986", "origin": "novu-cloud-v1", "type": "BRIDGE", "controls": {"values": {}}}
+          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": false, "isTranslationEnabled": false, "updatedAt": "1735667479798", "createdAt": "1732982999986", "origin": "novu-cloud-v1", "type": "BRIDGE", "controls": {"values": {"email": {"body": "<value>", "editorType": "block"}}}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5951,7 +5943,7 @@ examples:
         application/json: {"name": "<value>", "isTranslationEnabled": false}
       responses:
         "201":
-          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": true, "updatedAt": "1735605867320", "createdAt": "1709332117452", "origin": "external", "type": "BRIDGE", "controls": {"values": {}}}
+          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": true, "updatedAt": "1735605867320", "createdAt": "1709332117452", "origin": "external", "type": "BRIDGE", "controls": {"values": {"email": {"body": "<value>", "editorType": "html"}}}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -5966,10 +5958,10 @@ examples:
         path:
           layoutId: "<id>"
       requestBody:
-        application/json: {"previewPayload": {"subscriber": {"channels": [{"providerId": "mattermost", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}]}}}
+        application/json: {"previewPayload": {"subscriber": {"firstName": "Marion", "lastName": "Kirlin", "channels": [{"providerId": "mattermost", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>"}}}
       responses:
         "201":
-          application/json: {"previewPayloadExample": {"subscriber": {"channels": [{"providerId": "mattermost", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}]}}, "result": {}}
+          application/json: {"previewPayloadExample": {"subscriber": {"firstName": "Marion", "lastName": "Kirlin", "channels": [{"providerId": "mattermost", "integrationIdentifier": "<value>", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "isOnline": false, "lastOnlineAt": "<value>"}}, "result": {}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -6353,14 +6345,7 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes:
-  * `novu.workflows.create()`:  `response.steps[]` **Changed**
-  * `novu.workflows.update()`:  `response.steps[]` **Changed**
-  * `novu.workflows.get()`:  `response.steps[]` **Changed**
-  * `novu.workflows.patch()`:  `response.steps[]` **Changed**
-  * `novu.workflows.sync()`:  `response.steps[]` **Changed**
-  * `novu.workflows.steps.retrieve()`:  `response.step_resolver_hash` **Added**
+releaseNotes: "## Python SDK Changes:\n* `novu.subscribers.credentials.update()`: \n  *  `request.update_subscriber_channel_request_dto.integration_identifier` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n* `novu.workflows.sync()`:  `response.issues.Map<RuntimeIssueDto>` **Changed** (Breaking ⚠️)\n* `novu.layouts.update()`: \n  *  `request.update_layout_dto.control_values` **Changed** (Breaking ⚠️)\n  *  `response.controls.values.email` **Changed**\n* `novu.workflows.patch()`:  `response.issues.Map<RuntimeIssueDto>` **Changed** (Breaking ⚠️)\n* `novu.workflows.get()`:  `response.issues.Map<RuntimeIssueDto>` **Changed** (Breaking ⚠️)\n* `novu.layouts.generate_preview()`: \n  *  `request.layout_preview_request_dto.preview_payload.subscriber` **Changed** (Breaking ⚠️)\n  *  `response.preview_payload_example.subscriber` **Changed**\n* `novu.workflows.update()`:  `response.issues.Map<RuntimeIssueDto>` **Changed** (Breaking ⚠️)\n* `novu.workflows.create()`:  `response.issues.Map<RuntimeIssueDto>` **Changed** (Breaking ⚠️)\n* `novu.subscribers.credentials.append()`: \n  *  `request.update_subscriber_channel_request_dto.integration_identifier` **Changed** (Breaking ⚠️)\n  *  `response` **Changed**\n* `novu.subscribers.search()`:  `response.data[]` **Changed**\n* `novu.layouts.retrieve()`:  `response.controls.values.email` **Changed**\n* `novu.subscribers.retrieve()`:  `response` **Changed**\n* `novu.subscribers.messages.update_as_seen()`:  `response.subscriber` **Changed**\n* `novu.subscribers.messages.mark_all_as()`:  `response.[].subscriber` **Changed**\n* `novu.subscribers.properties.update_online_flag()`:  `response` **Changed**\n* `novu.subscribers.create()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `novu.layouts.create()`:  `response.controls.values.email` **Changed**\n* `novu.layouts.duplicate()`:  `response.controls.values.email` **Changed**\n* `novu.subscribers.patch()`:  `response` **Changed**\n* `novu.layouts.list()`:  `response.layouts[].controls.values.email` **Changed**\n* `novu.integrations.list()`:  `response.[].configurations` **Changed**\n* `novu.integrations.create()`:  `response.configurations` **Changed**\n* `novu.integrations.update()`:  `response.configurations` **Changed**\n* `novu.integrations.delete()`:  `response.[].configurations` **Changed**\n* `novu.integrations.set_as_primary()`:  `response.configurations` **Changed**\n* `novu.integrations.list_active()`:  `response.[].configurations` **Changed**\n* `novu.messages.retrieve()`:  `response.data[].subscriber` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

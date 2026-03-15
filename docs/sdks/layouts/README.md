@@ -117,6 +117,7 @@ Updates the details of an existing layout, here **layoutId** is the identifier o
 
 <!-- UsageSnippet language="python" operationID="LayoutsController_update" method="put" path="/v2/layouts/{layoutId}" -->
 ```python
+import novu_py
 from novu_py import Novu
 
 
@@ -126,6 +127,12 @@ with Novu(
 
     res = novu.layouts.update(layout_id="<id>", update_layout_dto={
         "name": "<value>",
+        "control_values": {
+            "email": {
+                "body": "<value>",
+                "editor_type": novu_py.EditorType.HTML,
+            },
+        },
     })
 
     # Handle response
@@ -310,9 +317,12 @@ with Novu(
     res = novu.layouts.generate_preview(layout_id="<id>", layout_preview_request_dto={
         "preview_payload": {
             "subscriber": {
+                "first_name": "Marion",
+                "last_name": "Kirlin",
                 "channels": [
                     {
                         "provider_id": novu_py.ChatOrPushProviderEnum.MATTERMOST,
+                        "integration_identifier": "<value>",
                         "credentials": {
                             "webhook_url": "https://example.com/webhook",
                             "channel": "general",
@@ -330,6 +340,8 @@ with Novu(
                         "integration_id": "<id>",
                     },
                 ],
+                "is_online": False,
+                "last_online_at": "<value>",
             },
         },
     })

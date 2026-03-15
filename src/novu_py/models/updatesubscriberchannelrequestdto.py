@@ -3,49 +3,31 @@
 from __future__ import annotations
 from .channelcredentials import ChannelCredentials, ChannelCredentialsTypedDict
 from .chatorpushproviderenum import ChatOrPushProviderEnum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import BaseModel
 import pydantic
-from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 
 class UpdateSubscriberChannelRequestDtoTypedDict(TypedDict):
     provider_id: ChatOrPushProviderEnum
     r"""The provider identifier for the credentials"""
+    integration_identifier: str
+    r"""The integration identifier"""
     credentials: ChannelCredentialsTypedDict
     r"""Credentials payload for the specified provider"""
-    integration_identifier: NotRequired[str]
-    r"""The integration identifier"""
 
 
 class UpdateSubscriberChannelRequestDto(BaseModel):
     provider_id: Annotated[ChatOrPushProviderEnum, pydantic.Field(alias="providerId")]
     r"""The provider identifier for the credentials"""
 
-    credentials: ChannelCredentials
-    r"""Credentials payload for the specified provider"""
-
     integration_identifier: Annotated[
-        Optional[str], pydantic.Field(alias="integrationIdentifier")
-    ] = None
+        str, pydantic.Field(alias="integrationIdentifier")
+    ]
     r"""The integration identifier"""
 
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["integrationIdentifier"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
+    credentials: ChannelCredentials
+    r"""Credentials payload for the specified provider"""
 
 
 try:

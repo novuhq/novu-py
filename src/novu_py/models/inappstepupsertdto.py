@@ -10,16 +10,13 @@ from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-InAppStepUpsertDtoControlValuesTypedDict = TypeAliasType(
-    "InAppStepUpsertDtoControlValuesTypedDict",
-    Union[InAppControlDtoTypedDict, Dict[str, Any]],
+ControlValuesTypedDict = TypeAliasType(
+    "ControlValuesTypedDict", Union[InAppControlDtoTypedDict, Dict[str, Any]]
 )
 r"""Control values for the In-App step."""
 
 
-InAppStepUpsertDtoControlValues = TypeAliasType(
-    "InAppStepUpsertDtoControlValues", Union[InAppControlDto, Dict[str, Any]]
-)
+ControlValues = TypeAliasType("ControlValues", Union[InAppControlDto, Dict[str, Any]])
 r"""Control values for the In-App step."""
 
 
@@ -32,7 +29,7 @@ class InAppStepUpsertDtoTypedDict(TypedDict):
     r"""Database identifier of the step. Used for updating the step."""
     step_id: NotRequired[str]
     r"""Unique identifier for the step"""
-    control_values: NotRequired[InAppStepUpsertDtoControlValuesTypedDict]
+    control_values: NotRequired[ControlValuesTypedDict]
     r"""Control values for the In-App step."""
 
 
@@ -50,7 +47,7 @@ class InAppStepUpsertDto(BaseModel):
     r"""Unique identifier for the step"""
 
     control_values: Annotated[
-        Optional[InAppStepUpsertDtoControlValues], pydantic.Field(alias="controlValues")
+        Optional[ControlValues], pydantic.Field(alias="controlValues")
     ] = None
     r"""Control values for the In-App step."""
 

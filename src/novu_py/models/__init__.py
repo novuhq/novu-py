@@ -709,9 +709,9 @@ if TYPE_CHECKING:
         InAppStepResponseDtoTypedDict,
     )
     from .inappstepupsertdto import (
+        ControlValues,
+        ControlValuesTypedDict,
         InAppStepUpsertDto,
-        InAppStepUpsertDtoControlValues,
-        InAppStepUpsertDtoControlValuesTypedDict,
         InAppStepUpsertDtoTypedDict,
     )
     from .inboundparsedomaindto import (
@@ -1119,7 +1119,7 @@ if TYPE_CHECKING:
     )
     from .resourcetypeenum import ResourceTypeEnum
     from .responsevalidationerror import ResponseValidationError
-    from .runtimeissuedto import IssueType, RuntimeIssueDto, RuntimeIssueDtoTypedDict
+    from .runtimeissuedto import RuntimeIssueDto, RuntimeIssueDtoTypedDict
     from .scheduledto import (
         Friday,
         FridayTypedDict,
@@ -1642,12 +1642,7 @@ if TYPE_CHECKING:
         UpdateIntegrationRequestDtoConfigurationsTypedDict,
         UpdateIntegrationRequestDtoTypedDict,
     )
-    from .updatelayoutdto import (
-        ControlValues,
-        ControlValuesTypedDict,
-        UpdateLayoutDto,
-        UpdateLayoutDtoTypedDict,
-    )
+    from .updatelayoutdto import UpdateLayoutDto, UpdateLayoutDtoTypedDict
     from .updatesubscriberchannelrequestdto import (
         UpdateSubscriberChannelRequestDto,
         UpdateSubscriberChannelRequestDtoTypedDict,
@@ -2278,8 +2273,6 @@ __all__ = [
     "InAppStepResponseDtoControlValuesTypedDict",
     "InAppStepResponseDtoTypedDict",
     "InAppStepUpsertDto",
-    "InAppStepUpsertDtoControlValues",
-    "InAppStepUpsertDtoControlValuesTypedDict",
     "InAppStepUpsertDtoTypedDict",
     "InBoundParseDomainDto",
     "InBoundParseDomainDtoTypedDict",
@@ -2323,7 +2316,6 @@ __all__ = [
     "IntegrationsControllerUpdateIntegrationByIDRequestTypedDict",
     "IntegrationsControllerUpdateIntegrationByIDResponse",
     "IntegrationsControllerUpdateIntegrationByIDResponseTypedDict",
-    "IssueType",
     "Issues",
     "IssuesTypedDict",
     "JobData",
@@ -3574,9 +3566,9 @@ _dynamic_imports: dict[str, str] = {
     "InAppStepResponseDtoControlValues": ".inappstepresponsedto",
     "InAppStepResponseDtoControlValuesTypedDict": ".inappstepresponsedto",
     "InAppStepResponseDtoTypedDict": ".inappstepresponsedto",
+    "ControlValues": ".inappstepupsertdto",
+    "ControlValuesTypedDict": ".inappstepupsertdto",
     "InAppStepUpsertDto": ".inappstepupsertdto",
-    "InAppStepUpsertDtoControlValues": ".inappstepupsertdto",
-    "InAppStepUpsertDtoControlValuesTypedDict": ".inappstepupsertdto",
     "InAppStepUpsertDtoTypedDict": ".inappstepupsertdto",
     "InBoundParseDomainDto": ".inboundparsedomaindto",
     "InBoundParseDomainDtoTypedDict": ".inboundparsedomaindto",
@@ -3871,7 +3863,6 @@ _dynamic_imports: dict[str, str] = {
     "ResourceToPublishDtoTypedDict": ".resourcetopublishdto",
     "ResourceTypeEnum": ".resourcetypeenum",
     "ResponseValidationError": ".responsevalidationerror",
-    "IssueType": ".runtimeissuedto",
     "RuntimeIssueDto": ".runtimeissuedto",
     "RuntimeIssueDtoTypedDict": ".runtimeissuedto",
     "Friday": ".scheduledto",
@@ -4252,8 +4243,6 @@ _dynamic_imports: dict[str, str] = {
     "UpdateIntegrationRequestDtoConfigurations": ".updateintegrationrequestdto",
     "UpdateIntegrationRequestDtoConfigurationsTypedDict": ".updateintegrationrequestdto",
     "UpdateIntegrationRequestDtoTypedDict": ".updateintegrationrequestdto",
-    "ControlValues": ".updatelayoutdto",
-    "ControlValuesTypedDict": ".updatelayoutdto",
     "UpdateLayoutDto": ".updatelayoutdto",
     "UpdateLayoutDtoTypedDict": ".updatelayoutdto",
     "UpdateSubscriberChannelRequestDto": ".updatesubscriberchannelrequestdto",
