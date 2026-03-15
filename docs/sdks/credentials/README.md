@@ -27,6 +27,7 @@ with Novu(
 
     res = novu.subscribers.credentials.update(subscriber_id="<id>", update_subscriber_channel_request_dto={
         "provider_id": novu_py.ChatOrPushProviderEnum.SLACK,
+        "integration_identifier": "<value>",
         "credentials": {
             "webhook_url": "https://example.com/webhook",
             "channel": "general",
@@ -90,6 +91,7 @@ with Novu(
 
     res = novu.subscribers.credentials.append(subscriber_id="<id>", update_subscriber_channel_request_dto={
         "provider_id": novu_py.ChatOrPushProviderEnum.ONE_SIGNAL,
+        "integration_identifier": "<value>",
         "credentials": {
             "webhook_url": "https://example.com/webhook",
             "channel": "general",
