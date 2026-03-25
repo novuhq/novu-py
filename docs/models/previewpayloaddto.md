@@ -1,0 +1,11 @@
+# PreviewPayloadDto
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `subscriber`                                                                                 | [Optional[models.SubscriberResponseDtoOptional]](../models/subscriberresponsedtooptional.md) | :heavy_minus_sign:                                                                           | Partial subscriber information                                                               |
+| `payload`                                                                                    | Dict[str, *Any*]                                                                             | :heavy_minus_sign:                                                                           | Payload data                                                                                 |
+| `steps`                                                                                      | Dict[str, *Any*]                                                                             | :heavy_minus_sign:                                                                           | Steps data                                                                                   |
+| `context`                                                                                    | Dict[str, [models.PreviewPayloadDtoContext](../models/previewpayloaddtocontext.md)]          | :heavy_minus_sign:                                                                           | N/A                                                                                          |

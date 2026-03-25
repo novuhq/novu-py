@@ -1,10 +1,19 @@
 # ControlValues
 
-Control values for the layout
+Control values for the In-App step.
 
 
-## Fields
+## Supported Types
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `email`                                                            | [Optional[models.EmailControlsDto]](../models/emailcontrolsdto.md) | :heavy_minus_sign:                                                 | Email layout controls                                              |
+### `models.InAppControlDto`
+
+```python
+value: models.InAppControlDto = /* values here */
+```
+
+### `Dict[str, Any]`
+
+```python
+value: Dict[str, Any] = /* values here */
+```
+

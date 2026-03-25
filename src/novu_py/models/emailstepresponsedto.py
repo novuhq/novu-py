@@ -23,13 +23,6 @@ class EmailStepResponseDtoEditorType(str, Enum):
     HTML = "html"
 
 
-class EmailStepResponseDtoRendererType(str, Enum):
-    r"""Type of renderer to use (raw HTML or React Email step resolver)"""
-
-    HTML = "html"
-    REACT_EMAIL = "react-email"
-
-
 class EmailStepResponseDtoControlValuesTypedDict(TypedDict):
     r"""Control values for the email step"""
 
@@ -41,8 +34,6 @@ class EmailStepResponseDtoControlValuesTypedDict(TypedDict):
     r"""Body content of the email, either a valid Maily JSON object, or html string."""
     editor_type: NotRequired[EmailStepResponseDtoEditorType]
     r"""Type of editor to use for the body."""
-    renderer_type: NotRequired[EmailStepResponseDtoRendererType]
-    r"""Type of renderer to use (raw HTML or React Email step resolver)"""
     disable_output_sanitization: NotRequired[bool]
     r"""Disable sanitization of the output."""
     layout_id: NotRequired[Nullable[str]]
@@ -71,11 +62,6 @@ class EmailStepResponseDtoControlValues(BaseModel):
     ] = EmailStepResponseDtoEditorType.BLOCK
     r"""Type of editor to use for the body."""
 
-    renderer_type: Annotated[
-        Optional[EmailStepResponseDtoRendererType], pydantic.Field(alias="rendererType")
-    ] = EmailStepResponseDtoRendererType.HTML
-    r"""Type of renderer to use (raw HTML or React Email step resolver)"""
-
     disable_output_sanitization: Annotated[
         Optional[bool], pydantic.Field(alias="disableOutputSanitization")
     ] = False
@@ -97,14 +83,7 @@ class EmailStepResponseDtoControlValues(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            [
-                "skip",
-                "body",
-                "editorType",
-                "rendererType",
-                "disableOutputSanitization",
-                "layoutId",
-            ]
+            ["skip", "body", "editorType", "disableOutputSanitization", "layoutId"]
         )
         nullable_fields = set(["layoutId"])
         serialized = handler(self)

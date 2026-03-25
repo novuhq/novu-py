@@ -13,7 +13,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class IntegrationResponseDtoChannel(str, Enum):
-    r"""The channel type for the integration, which defines how the integration communicates (e.g., email, SMS)."""
+    r"""The channel type for the integration, which defines how it communicates (e.g., email, SMS)."""
 
     IN_APP = "in_app"
     EMAIL = "email"
@@ -34,9 +34,11 @@ class IntegrationResponseDtoTypedDict(TypedDict):
     provider_id: str
     r"""The identifier for the provider of the integration (e.g., \"mailgun\", \"twilio\")."""
     channel: IntegrationResponseDtoChannel
-    r"""The channel type for the integration, which defines how the integration communicates (e.g., email, SMS)."""
+    r"""The channel type for the integration, which defines how it communicates (e.g., email, SMS)."""
     credentials: CredentialsDtoTypedDict
     r"""The credentials required for the integration to function, including API keys and other sensitive information."""
+    configurations: ConfigurationsDtoTypedDict
+    r"""The configurations required for enabling the additional configurations of the integration."""
     active: bool
     r"""Indicates whether the integration is currently active. An active integration will process events and messages."""
     deleted: bool
@@ -45,8 +47,6 @@ class IntegrationResponseDtoTypedDict(TypedDict):
     r"""Indicates whether this integration is marked as primary. A primary integration is often the default choice for processing."""
     id: NotRequired[str]
     r"""The unique identifier of the integration record in the database. This is automatically generated."""
-    configurations: NotRequired[ConfigurationsDtoTypedDict]
-    r"""The configurations required for enabling the additional configurations of the integration."""
     deleted_at: NotRequired[str]
     r"""The timestamp indicating when the integration was deleted. This is set when the integration is soft deleted."""
     deleted_by: NotRequired[str]
@@ -72,10 +72,13 @@ class IntegrationResponseDto(BaseModel):
     r"""The identifier for the provider of the integration (e.g., \"mailgun\", \"twilio\")."""
 
     channel: IntegrationResponseDtoChannel
-    r"""The channel type for the integration, which defines how the integration communicates (e.g., email, SMS)."""
+    r"""The channel type for the integration, which defines how it communicates (e.g., email, SMS)."""
 
     credentials: CredentialsDto
     r"""The credentials required for the integration to function, including API keys and other sensitive information."""
+
+    configurations: ConfigurationsDto
+    r"""The configurations required for enabling the additional configurations of the integration."""
 
     active: bool
     r"""Indicates whether the integration is currently active. An active integration will process events and messages."""
@@ -89,9 +92,6 @@ class IntegrationResponseDto(BaseModel):
     id: Annotated[Optional[str], pydantic.Field(alias="_id")] = None
     r"""The unique identifier of the integration record in the database. This is automatically generated."""
 
-    configurations: Optional[ConfigurationsDto] = None
-    r"""The configurations required for enabling the additional configurations of the integration."""
-
     deleted_at: Annotated[Optional[str], pydantic.Field(alias="deletedAt")] = None
     r"""The timestamp indicating when the integration was deleted. This is set when the integration is soft deleted."""
 
@@ -103,9 +103,7 @@ class IntegrationResponseDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(
-            ["_id", "configurations", "deletedAt", "deletedBy", "conditions"]
-        )
+        optional_fields = set(["_id", "deletedAt", "deletedBy", "conditions"])
         serialized = handler(self)
         m = {}
 

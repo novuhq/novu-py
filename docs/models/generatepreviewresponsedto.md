@@ -1,0 +1,11 @@
+# GeneratePreviewResponseDto
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `preview_payload_example`                                                                | [models.PreviewPayloadDto](../models/previewpayloaddto.md)                               | :heavy_check_mark:                                                                       | Preview payload example                                                                  |
+| `schema_`                                                                                | Dict[str, *Any*]                                                                         | :heavy_minus_sign:                                                                       | The payload schema that was used to generate the preview payload example                 |
+| `novu_signature`                                                                         | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | Sample novu-signature header value for HTTP request steps                                |
+| `result`                                                                                 | [models.GeneratePreviewResponseDtoResult](../models/generatepreviewresponsedtoresult.md) | :heavy_check_mark:                                                                       | Preview result                                                                           |

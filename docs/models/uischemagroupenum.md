@@ -13,15 +13,16 @@ value = UISchemaGroupEnum.IN_APP
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `IN_APP`   | IN_APP     |
-| `EMAIL`    | EMAIL      |
-| `DIGEST`   | DIGEST     |
-| `DELAY`    | DELAY      |
-| `THROTTLE` | THROTTLE   |
-| `SMS`      | SMS        |
-| `CHAT`     | CHAT       |
-| `PUSH`     | PUSH       |
-| `SKIP`     | SKIP       |
-| `LAYOUT`   | LAYOUT     |
+| Name           | Value          |
+| -------------- | -------------- |
+| `IN_APP`       | IN_APP         |
+| `EMAIL`        | EMAIL          |
+| `DIGEST`       | DIGEST         |
+| `DELAY`        | DELAY          |
+| `THROTTLE`     | THROTTLE       |
+| `SMS`          | SMS            |
+| `CHAT`         | CHAT           |
+| `PUSH`         | PUSH           |
+| `SKIP`         | SKIP           |
+| `LAYOUT`       | LAYOUT         |
+| `HTTP_REQUEST` | HTTP_REQUEST   |

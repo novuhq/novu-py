@@ -1,0 +1,17 @@
+# HTTPRequestStepResponseDtoControlValues
+
+Control values for the HTTP request step
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `method`                                                                           | [models.HTTPMethodEnum](../models/httpmethodenum.md)                               | :heavy_check_mark:                                                                 | HTTP method                                                                        |
+| `url`                                                                              | *str*                                                                              | :heavy_check_mark:                                                                 | Target URL for the HTTP request                                                    |
+| `headers`                                                                          | List[[models.HTTPRequestKeyValuePairDto](../models/httprequestkeyvaluepairdto.md)] | :heavy_minus_sign:                                                                 | Request headers as key-value pairs                                                 |
+| `body`                                                                             | List[[models.HTTPRequestKeyValuePairDto](../models/httprequestkeyvaluepairdto.md)] | :heavy_minus_sign:                                                                 | Request body as key-value pairs                                                    |
+| `response_body_schema`                                                             | Dict[str, *Any*]                                                                   | :heavy_minus_sign:                                                                 | JSON schema to validate response body against                                      |
+| `enforce_schema_validation`                                                        | *Optional[bool]*                                                                   | :heavy_minus_sign:                                                                 | Whether to enforce response body schema validation                                 |
+| `continue_on_failure`                                                              | *Optional[bool]*                                                                   | :heavy_minus_sign:                                                                 | Whether to continue workflow execution on failure                                  |
+| `__pydantic_extra__`                                                               | Dict[str, *Any*]                                                                   | :heavy_minus_sign:                                                                 | N/A                                                                                |

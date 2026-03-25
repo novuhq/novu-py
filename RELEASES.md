@@ -179,3 +179,13 @@ Based on:
 - [python v3.14.2] .
 ### Releases
 - [PyPI v3.14.2] https://pypi.org/project/novu-py/3.14.2 - .
+
+## 2026-03-25 00:32:19
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.759.2 (2.869.23) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v3.14.3] .
+### Releases
+- [PyPI v3.14.3] https://pypi.org/project/novu-py/3.14.3 - .
