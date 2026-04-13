@@ -6,10 +6,4606 @@ from novu_py._hooks import HookContext
 from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from novu_py.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Any, List, Mapping, Optional, Union, cast
 
 
 class NovuNotifications(BaseSDK):
+    def list(
+        self,
+        *,
+        request: Union[
+            models.SubscribersControllerGetSubscriberNotificationsRequest,
+            models.SubscribersControllerGetSubscriberNotificationsRequestTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerGetSubscriberNotificationsResponse:
+        r"""Retrieve subscriber notifications
+
+        Retrieve in-app (inbox) notifications for a subscriber by its unique key identifier **subscriberId**.
+        Supports filtering by tags, read/archived/snoozed/seen state, data attributes, severity, date range, and context keys.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerGetSubscriberNotificationsRequest
+            )
+        request = cast(
+            models.SubscribersControllerGetSubscriberNotificationsRequest, request
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/v2/subscribers/{subscriberId}/notifications",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_getSubscriberNotifications",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerGetSubscriberNotificationsResponse(
+                result=unmarshal_json_response(
+                    models.GetSubscriberNotificationsResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def list_async(
+        self,
+        *,
+        request: Union[
+            models.SubscribersControllerGetSubscriberNotificationsRequest,
+            models.SubscribersControllerGetSubscriberNotificationsRequestTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerGetSubscriberNotificationsResponse:
+        r"""Retrieve subscriber notifications
+
+        Retrieve in-app (inbox) notifications for a subscriber by its unique key identifier **subscriberId**.
+        Supports filtering by tags, read/archived/snoozed/seen state, data attributes, severity, date range, and context keys.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerGetSubscriberNotificationsRequest
+            )
+        request = cast(
+            models.SubscribersControllerGetSubscriberNotificationsRequest, request
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/v2/subscribers/{subscriberId}/notifications",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_getSubscriberNotifications",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerGetSubscriberNotificationsResponse(
+                result=unmarshal_json_response(
+                    models.GetSubscriberNotificationsResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def delete(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerDeleteNotificationResponse:
+        r"""Delete a notification
+
+        Delete a specific in-app (inbox) notification permanently by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerDeleteNotificationRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_deleteNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerDeleteNotificationResponse(headers={})
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def delete_async(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerDeleteNotificationResponse:
+        r"""Delete a notification
+
+        Delete a specific in-app (inbox) notification permanently by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerDeleteNotificationRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_deleteNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerDeleteNotificationResponse(headers={})
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def complete_action(
+        self,
+        *,
+        request: Union[
+            models.SubscribersControllerCompleteNotificationActionRequest,
+            models.SubscribersControllerCompleteNotificationActionRequestTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerCompleteNotificationActionResponse:
+        r"""Complete a notification action
+
+        Mark a single in-app (inbox) notification's action (primary or secondary) as completed by its unique identifier **notificationId** and action type **actionType**.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerCompleteNotificationActionRequest
+            )
+        request = cast(
+            models.SubscribersControllerCompleteNotificationActionRequest, request
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/complete",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_completeNotificationAction",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerCompleteNotificationActionResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def complete_action_async(
+        self,
+        *,
+        request: Union[
+            models.SubscribersControllerCompleteNotificationActionRequest,
+            models.SubscribersControllerCompleteNotificationActionRequestTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerCompleteNotificationActionResponse:
+        r"""Complete a notification action
+
+        Mark a single in-app (inbox) notification's action (primary or secondary) as completed by its unique identifier **notificationId** and action type **actionType**.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerCompleteNotificationActionRequest
+            )
+        request = cast(
+            models.SubscribersControllerCompleteNotificationActionRequest, request
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/complete",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_completeNotificationAction",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerCompleteNotificationActionResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def revert_action(
+        self,
+        *,
+        request: Union[
+            models.SubscribersControllerRevertNotificationActionRequest,
+            models.SubscribersControllerRevertNotificationActionRequestTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerRevertNotificationActionResponse:
+        r"""Revert a notification action
+
+        Revert a single in-app (inbox) notification's action (primary or secondary) to pending state by its unique identifier **notificationId** and action type **actionType**.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerRevertNotificationActionRequest
+            )
+        request = cast(
+            models.SubscribersControllerRevertNotificationActionRequest, request
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/revert",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_revertNotificationAction",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerRevertNotificationActionResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def revert_action_async(
+        self,
+        *,
+        request: Union[
+            models.SubscribersControllerRevertNotificationActionRequest,
+            models.SubscribersControllerRevertNotificationActionRequestTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerRevertNotificationActionResponse:
+        r"""Revert a notification action
+
+        Revert a single in-app (inbox) notification's action (primary or secondary) to pending state by its unique identifier **notificationId** and action type **actionType**.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerRevertNotificationActionRequest
+            )
+        request = cast(
+            models.SubscribersControllerRevertNotificationActionRequest, request
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/revert",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_revertNotificationAction",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerRevertNotificationActionResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def archive(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerArchiveNotificationResponse:
+        r"""Archive a notification
+
+        Archive a specific in-app (inbox) notification by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerArchiveNotificationRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/archive",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_archiveNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerArchiveNotificationResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def archive_async(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerArchiveNotificationResponse:
+        r"""Archive a notification
+
+        Archive a specific in-app (inbox) notification by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerArchiveNotificationRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/archive",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_archiveNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerArchiveNotificationResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def mark_as_read(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerMarkNotificationAsReadResponse:
+        r"""Mark a notification as read
+
+        Mark a specific in-app (inbox) notification as read by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerMarkNotificationAsReadRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/read",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_markNotificationAsRead",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerMarkNotificationAsReadResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def mark_as_read_async(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerMarkNotificationAsReadResponse:
+        r"""Mark a notification as read
+
+        Mark a specific in-app (inbox) notification as read by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerMarkNotificationAsReadRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/read",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_markNotificationAsRead",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerMarkNotificationAsReadResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def snooze(
+        self,
+        *,
+        request: Union[
+            models.SubscribersControllerSnoozeNotificationRequest,
+            models.SubscribersControllerSnoozeNotificationRequestTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerSnoozeNotificationResponse:
+        r"""Snooze a notification
+
+        Snooze a specific in-app (inbox) notification by its unique identifier **notificationId** until a specified time.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerSnoozeNotificationRequest
+            )
+        request = cast(models.SubscribersControllerSnoozeNotificationRequest, request)
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/snooze",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.snooze_subscriber_notification_dto,
+                False,
+                False,
+                "json",
+                models.SnoozeSubscriberNotificationDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_snoozeNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerSnoozeNotificationResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def snooze_async(
+        self,
+        *,
+        request: Union[
+            models.SubscribersControllerSnoozeNotificationRequest,
+            models.SubscribersControllerSnoozeNotificationRequestTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerSnoozeNotificationResponse:
+        r"""Snooze a notification
+
+        Snooze a specific in-app (inbox) notification by its unique identifier **notificationId** until a specified time.
+
+        :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersControllerSnoozeNotificationRequest
+            )
+        request = cast(models.SubscribersControllerSnoozeNotificationRequest, request)
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/snooze",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.snooze_subscriber_notification_dto,
+                False,
+                False,
+                "json",
+                models.SnoozeSubscriberNotificationDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_snoozeNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerSnoozeNotificationResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def unarchive(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerUnarchiveNotificationResponse:
+        r"""Unarchive a notification
+
+        Unarchive a specific in-app (inbox) notification by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerUnarchiveNotificationRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/unarchive",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_unarchiveNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerUnarchiveNotificationResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def unarchive_async(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerUnarchiveNotificationResponse:
+        r"""Unarchive a notification
+
+        Unarchive a specific in-app (inbox) notification by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerUnarchiveNotificationRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/unarchive",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_unarchiveNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerUnarchiveNotificationResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def mark_as_unread(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerMarkNotificationAsUnreadResponse:
+        r"""Mark a notification as unread
+
+        Mark a specific in-app (inbox) notification as unread by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerMarkNotificationAsUnreadRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/unread",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_markNotificationAsUnread",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerMarkNotificationAsUnreadResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def mark_as_unread_async(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerMarkNotificationAsUnreadResponse:
+        r"""Mark a notification as unread
+
+        Mark a specific in-app (inbox) notification as unread by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerMarkNotificationAsUnreadRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/unread",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_markNotificationAsUnread",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerMarkNotificationAsUnreadResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def unsnooze(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerUnsnoozeNotificationResponse:
+        r"""Unsnooze a notification
+
+        Unsnooze a specific in-app (inbox) notification by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerUnsnoozeNotificationRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/unsnooze",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_unsnoozeNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerUnsnoozeNotificationResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def unsnooze_async(
+        self,
+        *,
+        subscriber_id: str,
+        notification_id: str,
+        context_keys: Optional[List[str]] = None,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerUnsnoozeNotificationResponse:
+        r"""Unsnooze a notification
+
+        Unsnooze a specific in-app (inbox) notification by its unique identifier **notificationId**.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param notification_id: The identifier of the notification
+        :param context_keys: Context keys for filtering
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerUnsnoozeNotificationRequest(
+            subscriber_id=subscriber_id,
+            notification_id=notification_id,
+            context_keys=context_keys,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v2/subscribers/{subscriberId}/notifications/{notificationId}/unsnooze",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_unsnoozeNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerUnsnoozeNotificationResponse(
+                result=unmarshal_json_response(models.InboxNotificationDto, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def archive_all(
+        self,
+        *,
+        subscriber_id: str,
+        update_all_subscriber_notifications_dto: Union[
+            models.UpdateAllSubscriberNotificationsDto,
+            models.UpdateAllSubscriberNotificationsDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerArchiveAllNotificationsResponse:
+        r"""Archive all notifications
+
+        Archive all in-app (inbox) notifications matching the specified filters. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param update_all_subscriber_notifications_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerArchiveAllNotificationsRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            update_all_subscriber_notifications_dto=utils.get_pydantic_model(
+                update_all_subscriber_notifications_dto,
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/archive",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_all_subscriber_notifications_dto,
+                False,
+                False,
+                "json",
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_archiveAllNotifications",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerArchiveAllNotificationsResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def archive_all_async(
+        self,
+        *,
+        subscriber_id: str,
+        update_all_subscriber_notifications_dto: Union[
+            models.UpdateAllSubscriberNotificationsDto,
+            models.UpdateAllSubscriberNotificationsDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerArchiveAllNotificationsResponse:
+        r"""Archive all notifications
+
+        Archive all in-app (inbox) notifications matching the specified filters. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param update_all_subscriber_notifications_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerArchiveAllNotificationsRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            update_all_subscriber_notifications_dto=utils.get_pydantic_model(
+                update_all_subscriber_notifications_dto,
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/archive",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_all_subscriber_notifications_dto,
+                False,
+                False,
+                "json",
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_archiveAllNotifications",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerArchiveAllNotificationsResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def count(
+        self,
+        *,
+        subscriber_id: str,
+        filters: str,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerGetSubscriberNotificationsCountResponse:
+        r"""Retrieve subscriber notifications count
+
+        Retrieve count of in-app (inbox) notifications for a subscriber by its unique key identifier **subscriberId**.
+        Supports multiple filters to count in-app (inbox) notifications by different criteria, including context keys.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param filters: Array of filter objects (max 30) to count notifications by different criteria
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerGetSubscriberNotificationsCountRequest(
+            subscriber_id=subscriber_id,
+            filters=filters,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/v2/subscribers/{subscriberId}/notifications/count",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_getSubscriberNotificationsCount",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerGetSubscriberNotificationsCountResponse(
+                result=unmarshal_json_response(
+                    List[models.GetSubscriberNotificationsCountResponseDto], http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def count_async(
+        self,
+        *,
+        subscriber_id: str,
+        filters: str,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerGetSubscriberNotificationsCountResponse:
+        r"""Retrieve subscriber notifications count
+
+        Retrieve count of in-app (inbox) notifications for a subscriber by its unique key identifier **subscriberId**.
+        Supports multiple filters to count in-app (inbox) notifications by different criteria, including context keys.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param filters: Array of filter objects (max 30) to count notifications by different criteria
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerGetSubscriberNotificationsCountRequest(
+            subscriber_id=subscriber_id,
+            filters=filters,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/v2/subscribers/{subscriberId}/notifications/count",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_getSubscriberNotificationsCount",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.SubscribersControllerGetSubscriberNotificationsCountResponse(
+                result=unmarshal_json_response(
+                    List[models.GetSubscriberNotificationsCountResponseDto], http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def delete_all(
+        self,
+        *,
+        subscriber_id: str,
+        update_all_subscriber_notifications_dto: Union[
+            models.UpdateAllSubscriberNotificationsDto,
+            models.UpdateAllSubscriberNotificationsDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerDeleteAllNotificationsResponse:
+        r"""Delete all notifications
+
+        Permanently delete all in-app (inbox) notifications matching the specified filters. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param update_all_subscriber_notifications_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerDeleteAllNotificationsRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            update_all_subscriber_notifications_dto=utils.get_pydantic_model(
+                update_all_subscriber_notifications_dto,
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/delete",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_all_subscriber_notifications_dto,
+                False,
+                False,
+                "json",
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_deleteAllNotifications",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerDeleteAllNotificationsResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def delete_all_async(
+        self,
+        *,
+        subscriber_id: str,
+        update_all_subscriber_notifications_dto: Union[
+            models.UpdateAllSubscriberNotificationsDto,
+            models.UpdateAllSubscriberNotificationsDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerDeleteAllNotificationsResponse:
+        r"""Delete all notifications
+
+        Permanently delete all in-app (inbox) notifications matching the specified filters. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param update_all_subscriber_notifications_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerDeleteAllNotificationsRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            update_all_subscriber_notifications_dto=utils.get_pydantic_model(
+                update_all_subscriber_notifications_dto,
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/delete",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_all_subscriber_notifications_dto,
+                False,
+                False,
+                "json",
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_deleteAllNotifications",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerDeleteAllNotificationsResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def mark_all_as_read(
+        self,
+        *,
+        subscriber_id: str,
+        update_all_subscriber_notifications_dto: Union[
+            models.UpdateAllSubscriberNotificationsDto,
+            models.UpdateAllSubscriberNotificationsDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerMarkAllNotificationsAsReadResponse:
+        r"""Mark all notifications as read
+
+        Mark all in-app (inbox) notifications matching the specified filters as read. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param update_all_subscriber_notifications_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerMarkAllNotificationsAsReadRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            update_all_subscriber_notifications_dto=utils.get_pydantic_model(
+                update_all_subscriber_notifications_dto,
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/read",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_all_subscriber_notifications_dto,
+                False,
+                False,
+                "json",
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_markAllNotificationsAsRead",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerMarkAllNotificationsAsReadResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def mark_all_as_read_async(
+        self,
+        *,
+        subscriber_id: str,
+        update_all_subscriber_notifications_dto: Union[
+            models.UpdateAllSubscriberNotificationsDto,
+            models.UpdateAllSubscriberNotificationsDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerMarkAllNotificationsAsReadResponse:
+        r"""Mark all notifications as read
+
+        Mark all in-app (inbox) notifications matching the specified filters as read. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param update_all_subscriber_notifications_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerMarkAllNotificationsAsReadRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            update_all_subscriber_notifications_dto=utils.get_pydantic_model(
+                update_all_subscriber_notifications_dto,
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/read",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_all_subscriber_notifications_dto,
+                False,
+                False,
+                "json",
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_markAllNotificationsAsRead",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerMarkAllNotificationsAsReadResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def archive_all_read(
+        self,
+        *,
+        subscriber_id: str,
+        update_all_subscriber_notifications_dto: Union[
+            models.UpdateAllSubscriberNotificationsDto,
+            models.UpdateAllSubscriberNotificationsDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerArchiveAllReadNotificationsResponse:
+        r"""Archive all read notifications
+
+        Archive all read in-app (inbox) notifications matching the specified filters. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param update_all_subscriber_notifications_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerArchiveAllReadNotificationsRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            update_all_subscriber_notifications_dto=utils.get_pydantic_model(
+                update_all_subscriber_notifications_dto,
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/read-archive",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_all_subscriber_notifications_dto,
+                False,
+                False,
+                "json",
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_archiveAllReadNotifications",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerArchiveAllReadNotificationsResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def archive_all_read_async(
+        self,
+        *,
+        subscriber_id: str,
+        update_all_subscriber_notifications_dto: Union[
+            models.UpdateAllSubscriberNotificationsDto,
+            models.UpdateAllSubscriberNotificationsDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerArchiveAllReadNotificationsResponse:
+        r"""Archive all read notifications
+
+        Archive all read in-app (inbox) notifications matching the specified filters. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param update_all_subscriber_notifications_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerArchiveAllReadNotificationsRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            update_all_subscriber_notifications_dto=utils.get_pydantic_model(
+                update_all_subscriber_notifications_dto,
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/read-archive",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_all_subscriber_notifications_dto,
+                False,
+                False,
+                "json",
+                models.UpdateAllSubscriberNotificationsDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_archiveAllReadNotifications",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerArchiveAllReadNotificationsResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def mark_as_seen(
+        self,
+        *,
+        subscriber_id: str,
+        mark_subscriber_notifications_as_seen_dto: Union[
+            models.MarkSubscriberNotificationsAsSeenDto,
+            models.MarkSubscriberNotificationsAsSeenDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerMarkNotificationsAsSeenResponse:
+        r"""Mark notifications as seen
+
+        Mark specific and multiple in-app (inbox) notifications as seen. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param mark_subscriber_notifications_as_seen_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerMarkNotificationsAsSeenRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            mark_subscriber_notifications_as_seen_dto=utils.get_pydantic_model(
+                mark_subscriber_notifications_as_seen_dto,
+                models.MarkSubscriberNotificationsAsSeenDto,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/seen",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.mark_subscriber_notifications_as_seen_dto,
+                False,
+                False,
+                "json",
+                models.MarkSubscriberNotificationsAsSeenDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_markNotificationsAsSeen",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerMarkNotificationsAsSeenResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def mark_as_seen_async(
+        self,
+        *,
+        subscriber_id: str,
+        mark_subscriber_notifications_as_seen_dto: Union[
+            models.MarkSubscriberNotificationsAsSeenDto,
+            models.MarkSubscriberNotificationsAsSeenDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SubscribersControllerMarkNotificationsAsSeenResponse:
+        r"""Mark notifications as seen
+
+        Mark specific and multiple in-app (inbox) notifications as seen. Supports context-based filtering.
+
+        :param subscriber_id: The identifier of the subscriber
+        :param mark_subscriber_notifications_as_seen_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.SubscribersControllerMarkNotificationsAsSeenRequest(
+            subscriber_id=subscriber_id,
+            idempotency_key=idempotency_key,
+            mark_subscriber_notifications_as_seen_dto=utils.get_pydantic_model(
+                mark_subscriber_notifications_as_seen_dto,
+                models.MarkSubscriberNotificationsAsSeenDto,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v2/subscribers/{subscriberId}/notifications/seen",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.mark_subscriber_notifications_as_seen_dto,
+                False,
+                False,
+                "json",
+                models.MarkSubscriberNotificationsAsSeenDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="SubscribersController_markNotificationsAsSeen",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "405",
+                "409",
+                "413",
+                "414",
+                "415",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "503",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return models.SubscribersControllerMarkNotificationsAsSeenResponse(
+                headers={}
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
     def feed(
         self,
         *,

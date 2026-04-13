@@ -31,6 +31,7 @@ if TYPE_CHECKING:
     from novu_py.channel_connections import ChannelConnections
     from novu_py.channel_endpoints import ChannelEndpoints
     from novu_py.contexts import Contexts
+    from novu_py.environment_variables import EnvironmentVariables
     from novu_py.environments import Environments
     from novu_py.integrations import Integrations
     from novu_py.layouts import Layouts
@@ -75,6 +76,7 @@ class Novu(BaseSDK):
     """
     channel_connections: "ChannelConnections"
     channel_endpoints: "ChannelEndpoints"
+    environment_variables: "EnvironmentVariables"
     integrations: "Integrations"
     r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
     https://docs.novu.co/platform/integrations/overview
@@ -95,6 +97,10 @@ class Novu(BaseSDK):
         "workflows": ("novu_py.workflows", "Workflows"),
         "channel_connections": ("novu_py.channel_connections", "ChannelConnections"),
         "channel_endpoints": ("novu_py.channel_endpoints", "ChannelEndpoints"),
+        "environment_variables": (
+            "novu_py.environment_variables",
+            "EnvironmentVariables",
+        ),
         "integrations": ("novu_py.integrations", "Integrations"),
         "messages": ("novu_py.messages", "Messages"),
         "notifications": ("novu_py.notifications", "Notifications"),

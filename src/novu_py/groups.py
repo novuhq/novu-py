@@ -25,6 +25,8 @@ class Groups(BaseSDK):
 
         Delete an entire translation group and all its translations
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param resource_type: Resource type
         :param resource_id: Resource ID
         :param idempotency_key: A header for idempotency purposes
@@ -63,6 +65,7 @@ class Groups(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -119,6 +122,8 @@ class Groups(BaseSDK):
 
         Delete an entire translation group and all its translations
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param resource_type: Resource type
         :param resource_id: Resource ID
         :param idempotency_key: A header for idempotency purposes
@@ -157,6 +162,7 @@ class Groups(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -213,6 +219,8 @@ class Groups(BaseSDK):
 
         Retrieves a single translation group by resource type (workflow, layout) and resource ID (workflowId, layoutId)
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param resource_type: Resource type
         :param resource_id: Resource ID
         :param idempotency_key: A header for idempotency purposes
@@ -251,6 +259,7 @@ class Groups(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -307,6 +316,8 @@ class Groups(BaseSDK):
 
         Retrieves a single translation group by resource type (workflow, layout) and resource ID (workflowId, layoutId)
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param resource_type: Resource type
         :param resource_id: Resource ID
         :param idempotency_key: A header for idempotency purposes
@@ -345,6 +356,7 @@ class Groups(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 

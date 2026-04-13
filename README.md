@@ -498,7 +498,7 @@ asyncio.run(main())
 
 ### [Activity](docs/sdks/activity/README.md)
 
-* [track](docs/sdks/activity/README.md#track) - Track activity and engagement events
+* [track](docs/sdks/activity/README.md#track) - Track provider activity and engagement events
 
 ### [ChannelConnections](docs/sdks/channelconnections/README.md)
 
@@ -523,6 +523,15 @@ asyncio.run(main())
 * [update](docs/sdks/contexts/README.md#update) - Update a context
 * [retrieve](docs/sdks/contexts/README.md#retrieve) - Retrieve a context
 * [delete](docs/sdks/contexts/README.md#delete) - Delete a context
+
+### [EnvironmentVariables](docs/sdks/environmentvariables/README.md)
+
+* [list](docs/sdks/environmentvariables/README.md#list) - List all variables
+* [create](docs/sdks/environmentvariables/README.md#create) - Create a variable
+* [retrieve](docs/sdks/environmentvariables/README.md#retrieve) - Get environment variable
+* [update](docs/sdks/environmentvariables/README.md#update) - Update a variable
+* [delete](docs/sdks/environmentvariables/README.md#delete) - Delete environment variable
+* [usage](docs/sdks/environmentvariables/README.md#usage) - Retrieve a variable usage
 
 ### [Environments](docs/sdks/environments/README.md)
 
@@ -590,6 +599,22 @@ asyncio.run(main())
 
 #### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
 
+* [list](docs/sdks/novunotifications/README.md#list) - Retrieve subscriber notifications
+* [delete](docs/sdks/novunotifications/README.md#delete) - Delete a notification
+* [complete_action](docs/sdks/novunotifications/README.md#complete_action) - Complete a notification action
+* [revert_action](docs/sdks/novunotifications/README.md#revert_action) - Revert a notification action
+* [archive](docs/sdks/novunotifications/README.md#archive) - Archive a notification
+* [mark_as_read](docs/sdks/novunotifications/README.md#mark_as_read) - Mark a notification as read
+* [snooze](docs/sdks/novunotifications/README.md#snooze) - Snooze a notification
+* [unarchive](docs/sdks/novunotifications/README.md#unarchive) - Unarchive a notification
+* [mark_as_unread](docs/sdks/novunotifications/README.md#mark_as_unread) - Mark a notification as unread
+* [unsnooze](docs/sdks/novunotifications/README.md#unsnooze) - Unsnooze a notification
+* [archive_all](docs/sdks/novunotifications/README.md#archive_all) - Archive all notifications
+* [count](docs/sdks/novunotifications/README.md#count) - Retrieve subscriber notifications count
+* [delete_all](docs/sdks/novunotifications/README.md#delete_all) - Delete all notifications
+* [mark_all_as_read](docs/sdks/novunotifications/README.md#mark_all_as_read) - Mark all notifications as read
+* [archive_all_read](docs/sdks/novunotifications/README.md#archive_all_read) - Archive all read notifications
+* [mark_as_seen](docs/sdks/novunotifications/README.md#mark_as_seen) - Mark notifications as seen
 * [feed](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications
 * [unseen_count](docs/sdks/novunotifications/README.md#unseen_count) - Retrieve unseen notifications count
 
@@ -657,6 +682,7 @@ asyncio.run(main())
 
 #### [Workflows.Steps](docs/sdks/steps/README.md)
 
+* [generate_preview](docs/sdks/steps/README.md#generate_preview) - Generate a step preview
 * [retrieve](docs/sdks/steps/README.md#retrieve) - Retrieve workflow step
 
 </details>
@@ -845,9 +871,9 @@ with Novu(
 
 
 **Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
-* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 95 methods.*
-* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 95 methods.*
-* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 95 methods.*
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 118 methods.*
+* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 118 methods.*
+* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 118 methods.*
 * [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

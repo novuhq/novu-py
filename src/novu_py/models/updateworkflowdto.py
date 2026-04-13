@@ -6,6 +6,10 @@ from .customstepupsertdto import CustomStepUpsertDto, CustomStepUpsertDtoTypedDi
 from .delaystepupsertdto import DelayStepUpsertDto, DelayStepUpsertDtoTypedDict
 from .digeststepupsertdto import DigestStepUpsertDto, DigestStepUpsertDtoTypedDict
 from .emailstepupsertdto import EmailStepUpsertDto, EmailStepUpsertDtoTypedDict
+from .httprequeststepupsertdto import (
+    HTTPRequestStepUpsertDto,
+    HTTPRequestStepUpsertDtoTypedDict,
+)
 from .inappstepupsertdto import InAppStepUpsertDto, InAppStepUpsertDtoTypedDict
 from .preferencesrequestdto import PreferencesRequestDto, PreferencesRequestDtoTypedDict
 from .pushstepupsertdto import PushStepUpsertDto, PushStepUpsertDtoTypedDict
@@ -31,6 +35,7 @@ UpdateWorkflowDtoStepsTypedDict = TypeAliasType(
         DelayStepUpsertDtoTypedDict,
         DigestStepUpsertDtoTypedDict,
         CustomStepUpsertDtoTypedDict,
+        HTTPRequestStepUpsertDtoTypedDict,
     ],
 )
 
@@ -45,6 +50,7 @@ UpdateWorkflowDtoSteps = Annotated[
         Annotated[DelayStepUpsertDto, Tag("delay")],
         Annotated[DigestStepUpsertDto, Tag("digest")],
         Annotated[CustomStepUpsertDto, Tag("custom")],
+        Annotated[HTTPRequestStepUpsertDto, Tag("http_request")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

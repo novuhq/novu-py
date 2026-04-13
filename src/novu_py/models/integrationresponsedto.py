@@ -13,7 +13,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class IntegrationResponseDtoChannel(str, Enum):
-    r"""The channel type for the integration, which defines how the integration communicates (e.g., email, SMS)."""
+    r"""The channel type for the integration, which defines how it communicates (e.g., email, SMS)."""
 
     IN_APP = "in_app"
     EMAIL = "email"
@@ -34,7 +34,7 @@ class IntegrationResponseDtoTypedDict(TypedDict):
     provider_id: str
     r"""The identifier for the provider of the integration (e.g., \"mailgun\", \"twilio\")."""
     channel: IntegrationResponseDtoChannel
-    r"""The channel type for the integration, which defines how the integration communicates (e.g., email, SMS)."""
+    r"""The channel type for the integration, which defines how it communicates (e.g., email, SMS)."""
     credentials: CredentialsDtoTypedDict
     r"""The credentials required for the integration to function, including API keys and other sensitive information."""
     active: bool
@@ -72,7 +72,7 @@ class IntegrationResponseDto(BaseModel):
     r"""The identifier for the provider of the integration (e.g., \"mailgun\", \"twilio\")."""
 
     channel: IntegrationResponseDtoChannel
-    r"""The channel type for the integration, which defines how the integration communicates (e.g., email, SMS)."""
+    r"""The channel type for the integration, which defines how it communicates (e.g., email, SMS)."""
 
     credentials: CredentialsDto
     r"""The credentials required for the integration to function, including API keys and other sensitive information."""

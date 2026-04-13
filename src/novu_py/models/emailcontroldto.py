@@ -16,13 +16,6 @@ class EmailControlDtoEditorType(str, Enum):
     HTML = "html"
 
 
-class RendererType(str, Enum):
-    r"""Type of renderer to use (raw HTML or React Email step resolver)"""
-
-    HTML = "html"
-    REACT_EMAIL = "react-email"
-
-
 class EmailControlDtoTypedDict(TypedDict):
     subject: str
     r"""Subject of the email."""
@@ -32,8 +25,6 @@ class EmailControlDtoTypedDict(TypedDict):
     r"""Body content of the email, either a valid Maily JSON object, or html string."""
     editor_type: NotRequired[EmailControlDtoEditorType]
     r"""Type of editor to use for the body."""
-    renderer_type: NotRequired[RendererType]
-    r"""Type of renderer to use (raw HTML or React Email step resolver)"""
     disable_output_sanitization: NotRequired[bool]
     r"""Disable sanitization of the output."""
     layout_id: NotRequired[Nullable[str]]
@@ -55,11 +46,6 @@ class EmailControlDto(BaseModel):
     ] = EmailControlDtoEditorType.BLOCK
     r"""Type of editor to use for the body."""
 
-    renderer_type: Annotated[
-        Optional[RendererType], pydantic.Field(alias="rendererType")
-    ] = RendererType.HTML
-    r"""Type of renderer to use (raw HTML or React Email step resolver)"""
-
     disable_output_sanitization: Annotated[
         Optional[bool], pydantic.Field(alias="disableOutputSanitization")
     ] = False
@@ -73,14 +59,7 @@ class EmailControlDto(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            [
-                "skip",
-                "body",
-                "editorType",
-                "rendererType",
-                "disableOutputSanitization",
-                "layoutId",
-            ]
+            ["skip", "body", "editorType", "disableOutputSanitization", "layoutId"]
         )
         nullable_fields = set(["layoutId"])
         serialized = handler(self)

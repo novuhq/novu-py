@@ -27,7 +27,7 @@ class Preferences(BaseSDK):
         Retrieve subscriber channel preferences by its unique key identifier **subscriberId**.
         This API returns all five channels preferences for all workflows and global preferences.
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param criticality:
         :param context_keys: Context keys for filtering preferences (e.g., [\"tenant:acme\"])
         :param idempotency_key: A header for idempotency purposes
@@ -171,7 +171,7 @@ class Preferences(BaseSDK):
         Retrieve subscriber channel preferences by its unique key identifier **subscriberId**.
         This API returns all five channels preferences for all workflows and global preferences.
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param criticality:
         :param context_keys: Context keys for filtering preferences (e.g., [\"tenant:acme\"])
         :param idempotency_key: A header for idempotency purposes
@@ -318,7 +318,7 @@ class Preferences(BaseSDK):
         **workflowId** is optional field, if provided, this API will update that workflow preference,
         otherwise it will update global preferences
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param patch_subscriber_preferences_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -472,7 +472,7 @@ class Preferences(BaseSDK):
         **workflowId** is optional field, if provided, this API will update that workflow preference,
         otherwise it will update global preferences
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param patch_subscriber_preferences_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -625,7 +625,7 @@ class Preferences(BaseSDK):
         Bulk update subscriber preferences by its unique key identifier **subscriberId**.
         This API allows updating multiple workflow preferences in a single request.
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param bulk_update_subscriber_preferences_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -779,7 +779,7 @@ class Preferences(BaseSDK):
         Bulk update subscriber preferences by its unique key identifier **subscriberId**.
         This API allows updating multiple workflow preferences in a single request.
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param bulk_update_subscriber_preferences_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method

@@ -38,6 +38,8 @@ class TriggerEventResponseDtoTypedDict(TypedDict):
     r"""In case of an error, this field will contain the error message(s)"""
     transaction_id: NotRequired[str]
     r"""The returned transaction ID of the trigger"""
+    activity_feed_link: NotRequired[str]
+    r"""Link to the activity feed for this trigger event"""
     job_data: NotRequired[JobDataTypedDict]
 
 
@@ -56,11 +58,16 @@ class TriggerEventResponseDto(BaseModel):
     )
     r"""The returned transaction ID of the trigger"""
 
+    activity_feed_link: Annotated[
+        Optional[str], pydantic.Field(alias="activityFeedLink")
+    ] = None
+    r"""Link to the activity feed for this trigger event"""
+
     job_data: Annotated[Optional[JobData], pydantic.Field(alias="jobData")] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["error", "transactionId", "jobData"])
+        optional_fields = set(["error", "transactionId", "activityFeedLink", "jobData"])
         serialized = handler(self)
         m = {}
 

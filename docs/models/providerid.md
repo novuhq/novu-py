@@ -72,6 +72,7 @@ value = ProviderID.EMAILJS
 | `IMEDIA`            | imedia              |
 | `SINCH`             | sinch               |
 | `ISENDPRO_SMS`      | isendpro-sms        |
+| `CM_TELECOM`        | cm-telecom          |
 | `FCM`               | fcm                 |
 | `APNS`              | apns                |
 | `EXPO`              | expo                |

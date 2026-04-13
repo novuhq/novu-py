@@ -1,0 +1,10 @@
+# SubscribersControllerMarkNotificationsAsSeenRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `subscriber_id`                                                                                  | *str*                                                                                            | :heavy_check_mark:                                                                               | The identifier of the subscriber                                                                 |
+| `idempotency_key`                                                                                | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | A header for idempotency purposes                                                                |
+| `mark_subscriber_notifications_as_seen_dto`                                                      | [models.MarkSubscriberNotificationsAsSeenDto](../models/marksubscribernotificationsasseendto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

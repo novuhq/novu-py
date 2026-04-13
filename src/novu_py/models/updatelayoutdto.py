@@ -10,14 +10,14 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ControlValuesTypedDict(TypedDict):
-    r"""Control values for the layout"""
+    r"""Control values for the layout. Omit to leave unchanged, or set to null to clear stored control values."""
 
     email: NotRequired[EmailControlsDtoTypedDict]
     r"""Email layout controls"""
 
 
 class ControlValues(BaseModel):
-    r"""Control values for the layout"""
+    r"""Control values for the layout. Omit to leave unchanged, or set to null to clear stored control values."""
 
     email: Optional[EmailControlsDto] = None
     r"""Email layout controls"""
@@ -45,7 +45,7 @@ class UpdateLayoutDtoTypedDict(TypedDict):
     is_translation_enabled: NotRequired[bool]
     r"""Enable or disable translations for this layout"""
     control_values: NotRequired[Nullable[ControlValuesTypedDict]]
-    r"""Control values for the layout"""
+    r"""Control values for the layout. Omit to leave unchanged, or set to null to clear stored control values."""
 
 
 class UpdateLayoutDto(BaseModel):
@@ -60,7 +60,7 @@ class UpdateLayoutDto(BaseModel):
     control_values: Annotated[
         OptionalNullable[ControlValues], pydantic.Field(alias="controlValues")
     ] = UNSET
-    r"""Control values for the layout"""
+    r"""Control values for the layout. Omit to leave unchanged, or set to null to clear stored control values."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

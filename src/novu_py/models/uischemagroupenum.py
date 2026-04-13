@@ -17,3 +17,4 @@ class UISchemaGroupEnum(str, Enum):
     PUSH = "PUSH"
     SKIP = "SKIP"
     LAYOUT = "LAYOUT"
+    HTTP_REQUEST = "HTTP_REQUEST"

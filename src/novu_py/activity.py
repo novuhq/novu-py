@@ -22,7 +22,7 @@ class Activity(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> List[models.WebhookResultDto]:
-        r"""Track activity and engagement events
+        r"""Track provider activity and engagement events
 
         Track activity and engagement events for a specific delivery provider
 
@@ -122,7 +122,7 @@ class Activity(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> List[models.WebhookResultDto]:
-        r"""Track activity and engagement events
+        r"""Track provider activity and engagement events
 
         Track activity and engagement events for a specific delivery provider
 

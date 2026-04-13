@@ -1,0 +1,9 @@
+# EnvironmentVariablesControllerCreateEnvironmentVariableRequest
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `idempotency_key`                                                                              | *Optional[str]*                                                                                | :heavy_minus_sign:                                                                             | A header for idempotency purposes                                                              |
+| `create_environment_variable_request_dto`                                                      | [models.CreateEnvironmentVariableRequestDto](../models/createenvironmentvariablerequestdto.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
