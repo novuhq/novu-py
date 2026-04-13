@@ -27,6 +27,7 @@ class Criticality(str, Enum):
 
 class SubscribersControllerGetSubscriberPreferencesRequestTypedDict(TypedDict):
     subscriber_id: str
+    r"""The identifier of the subscriber"""
     criticality: NotRequired[Criticality]
     context_keys: NotRequired[List[str]]
     r"""Context keys for filtering preferences (e.g., [\"tenant:acme\"])"""
@@ -40,6 +41,7 @@ class SubscribersControllerGetSubscriberPreferencesRequest(BaseModel):
         pydantic.Field(alias="subscriberId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The identifier of the subscriber"""
 
     criticality: Annotated[
         Optional[Criticality],

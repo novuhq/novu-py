@@ -48,6 +48,8 @@ class Translations(BaseSDK):
 
         Create a translation for a specific workflow and locale, if the translation already exists, it will be updated
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param create_translation_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -93,6 +95,7 @@ class Translations(BaseSDK):
                 models.CreateTranslationRequestDto,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -151,6 +154,8 @@ class Translations(BaseSDK):
 
         Create a translation for a specific workflow and locale, if the translation already exists, it will be updated
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param create_translation_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -196,6 +201,7 @@ class Translations(BaseSDK):
                 models.CreateTranslationRequestDto,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -253,6 +259,8 @@ class Translations(BaseSDK):
 
         Retrieve a specific translation by resource type, resource ID and locale
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param resource_type: Resource type
         :param resource_id: Resource ID
         :param locale: Locale code
@@ -293,6 +301,7 @@ class Translations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -350,6 +359,8 @@ class Translations(BaseSDK):
 
         Retrieve a specific translation by resource type, resource ID and locale
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param resource_type: Resource type
         :param resource_id: Resource ID
         :param locale: Locale code
@@ -390,6 +401,7 @@ class Translations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -447,6 +459,8 @@ class Translations(BaseSDK):
 
         Delete a specific translation by resource type, resource ID and locale
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param resource_type: Resource type
         :param resource_id: Resource ID
         :param locale: Locale code
@@ -487,6 +501,7 @@ class Translations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -544,6 +559,8 @@ class Translations(BaseSDK):
 
         Delete a specific translation by resource type, resource ID and locale
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param resource_type: Resource type
         :param resource_id: Resource ID
         :param locale: Locale code
@@ -584,6 +601,7 @@ class Translations(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -642,6 +660,8 @@ class Translations(BaseSDK):
 
         Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json. Supports both \"files\" and \"files[]\" field names for backwards compatibility.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param request_body:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -688,6 +708,7 @@ class Translations(BaseSDK):
                 models.TranslationControllerUploadTranslationFilesRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -748,6 +769,8 @@ class Translations(BaseSDK):
 
         Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json. Supports both \"files\" and \"files[]\" field names for backwards compatibility.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param request_body:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -794,6 +817,7 @@ class Translations(BaseSDK):
                 models.TranslationControllerUploadTranslationFilesRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 

@@ -6,6 +6,10 @@ from .customstepresponsedto import CustomStepResponseDto, CustomStepResponseDtoT
 from .delaystepresponsedto import DelayStepResponseDto, DelayStepResponseDtoTypedDict
 from .digeststepresponsedto import DigestStepResponseDto, DigestStepResponseDtoTypedDict
 from .emailstepresponsedto import EmailStepResponseDto, EmailStepResponseDtoTypedDict
+from .httprequeststepresponsedto import (
+    HTTPRequestStepResponseDto,
+    HTTPRequestStepResponseDtoTypedDict,
+)
 from .inappstepresponsedto import InAppStepResponseDto, InAppStepResponseDtoTypedDict
 from .pushstepresponsedto import PushStepResponseDto, PushStepResponseDtoTypedDict
 from .resourceoriginenum import ResourceOriginEnum
@@ -161,6 +165,7 @@ WorkflowResponseDtoStepsTypedDict = TypeAliasType(
         DigestStepResponseDtoTypedDict,
         CustomStepResponseDtoTypedDict,
         ThrottleStepResponseDtoTypedDict,
+        HTTPRequestStepResponseDtoTypedDict,
     ],
 )
 
@@ -176,6 +181,7 @@ WorkflowResponseDtoSteps = Annotated[
         Annotated[DigestStepResponseDto, Tag("digest")],
         Annotated[CustomStepResponseDto, Tag("custom")],
         Annotated[ThrottleStepResponseDto, Tag("throttle")],
+        Annotated[HTTPRequestStepResponseDto, Tag("http_request")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

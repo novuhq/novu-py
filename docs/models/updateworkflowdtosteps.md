@@ -51,3 +51,9 @@ value: models.DigestStepUpsertDto = /* values here */
 value: models.CustomStepUpsertDto = /* values here */
 ```
 
+### `models.HTTPRequestStepUpsertDto`
+
+```python
+value: models.HTTPRequestStepUpsertDto = /* values here */
+```
+

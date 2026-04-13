@@ -57,3 +57,9 @@ value: models.CustomStepResponseDto = /* values here */
 value: models.ThrottleStepResponseDto = /* values here */
 ```
 
+### `models.HTTPRequestStepResponseDto`
+
+```python
+value: models.HTTPRequestStepResponseDto = /* values here */
+```
+

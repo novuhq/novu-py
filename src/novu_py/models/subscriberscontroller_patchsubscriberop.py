@@ -21,6 +21,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class SubscribersControllerPatchSubscriberRequestTypedDict(TypedDict):
     subscriber_id: str
+    r"""The identifier of the subscriber"""
     patch_subscriber_request_dto: PatchSubscriberRequestDtoTypedDict
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
@@ -32,6 +33,7 @@ class SubscribersControllerPatchSubscriberRequest(BaseModel):
         pydantic.Field(alias="subscriberId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The identifier of the subscriber"""
 
     patch_subscriber_request_dto: Annotated[
         PatchSubscriberRequestDto,

@@ -24,6 +24,8 @@ class Master(BaseSDK):
 
         Retrieve all translations for a locale in master JSON format organized by resourceId (workflowId)
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param locale: Locale to export. If not provided, exports organization default locale
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -60,6 +62,7 @@ class Master(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -115,6 +118,8 @@ class Master(BaseSDK):
 
         Retrieve all translations for a locale in master JSON format organized by resourceId (workflowId)
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param locale: Locale to export. If not provided, exports organization default locale
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -151,6 +156,7 @@ class Master(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -209,6 +215,8 @@ class Master(BaseSDK):
 
         Import translations for multiple workflows from master JSON format for a specific locale
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param import_master_json_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -254,6 +262,7 @@ class Master(BaseSDK):
                 models.ImportMasterJSONRequestDto,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -312,6 +321,8 @@ class Master(BaseSDK):
 
         Import translations for multiple workflows from master JSON format for a specific locale
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param import_master_json_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -357,6 +368,7 @@ class Master(BaseSDK):
                 models.ImportMasterJSONRequestDto,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -415,6 +427,8 @@ class Master(BaseSDK):
 
         Upload a master JSON file containing translations for multiple workflows. Locale is automatically detected from filename (e.g., en_US.json)
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param request_body:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -461,6 +475,7 @@ class Master(BaseSDK):
                 models.TranslationControllerUploadMasterJSONEndpointRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -519,6 +534,8 @@ class Master(BaseSDK):
 
         Upload a master JSON file containing translations for multiple workflows. Locale is automatically detected from filename (e.g., en_US.json)
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param request_body:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -565,6 +582,7 @@ class Master(BaseSDK):
                 models.TranslationControllerUploadMasterJSONEndpointRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 

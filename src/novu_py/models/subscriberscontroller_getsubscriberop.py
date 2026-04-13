@@ -12,6 +12,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class SubscribersControllerGetSubscriberRequestTypedDict(TypedDict):
     subscriber_id: str
+    r"""The identifier of the subscriber"""
     idempotency_key: NotRequired[str]
     r"""A header for idempotency purposes"""
 
@@ -22,6 +23,7 @@ class SubscribersControllerGetSubscriberRequest(BaseModel):
         pydantic.Field(alias="subscriberId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The identifier of the subscriber"""
 
     idempotency_key: Annotated[
         Optional[str],

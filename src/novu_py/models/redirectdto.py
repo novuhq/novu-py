@@ -9,7 +9,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class Target(str, Enum):
-    r"""Target window for the redirection."""
+    r"""Target attribute for the redirect link"""
 
     SELF = "_self"
     BLANK = "_blank"
@@ -19,22 +19,22 @@ class Target(str, Enum):
 
 
 class RedirectDtoTypedDict(TypedDict):
-    url: NotRequired[str]
-    r"""URL for redirection. Must be a valid URL or start with / or {{ variable }}."""
+    url: str
+    r"""URL to redirect to"""
     target: NotRequired[Target]
-    r"""Target window for the redirection."""
+    r"""Target attribute for the redirect link"""
 
 
 class RedirectDto(BaseModel):
-    url: Optional[str] = None
-    r"""URL for redirection. Must be a valid URL or start with / or {{ variable }}."""
+    url: str
+    r"""URL to redirect to"""
 
-    target: Optional[Target] = Target.SELF
-    r"""Target window for the redirection."""
+    target: Optional[Target] = None
+    r"""Target attribute for the redirect link"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["url", "target"])
+        optional_fields = set(["target"])
         serialized = handler(self)
         m = {}
 

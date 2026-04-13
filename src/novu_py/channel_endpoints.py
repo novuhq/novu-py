@@ -26,6 +26,8 @@ class ChannelEndpoints(BaseSDK):
 
         List all channel endpoints for a resource based on query filters.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -64,6 +66,7 @@ class ChannelEndpoints(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -167,6 +170,8 @@ class ChannelEndpoints(BaseSDK):
 
         List all channel endpoints for a resource based on query filters.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -205,6 +210,7 @@ class ChannelEndpoints(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -309,6 +315,8 @@ class ChannelEndpoints(BaseSDK):
 
         Create a new channel endpoint for a resource.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param request_body: Channel endpoint creation request. The structure varies based on the type field.
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -355,6 +363,7 @@ class ChannelEndpoints(BaseSDK):
                 models.ChannelEndpointsControllerCreateChannelEndpointRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -459,6 +468,8 @@ class ChannelEndpoints(BaseSDK):
 
         Create a new channel endpoint for a resource.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param request_body: Channel endpoint creation request. The structure varies based on the type field.
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -505,6 +516,7 @@ class ChannelEndpoints(BaseSDK):
                 models.ChannelEndpointsControllerCreateChannelEndpointRequestBody,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -606,6 +618,8 @@ class ChannelEndpoints(BaseSDK):
 
         Retrieve a specific channel endpoint by its unique identifier.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param identifier: The unique identifier of the channel endpoint
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -642,6 +656,7 @@ class ChannelEndpoints(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -743,6 +758,8 @@ class ChannelEndpoints(BaseSDK):
 
         Retrieve a specific channel endpoint by its unique identifier.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param identifier: The unique identifier of the channel endpoint
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -779,6 +796,7 @@ class ChannelEndpoints(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -884,6 +902,8 @@ class ChannelEndpoints(BaseSDK):
 
         Update an existing channel endpoint by its unique identifier.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param identifier: The unique identifier of the channel endpoint
         :param update_channel_endpoint_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -932,6 +952,7 @@ class ChannelEndpoints(BaseSDK):
                 models.UpdateChannelEndpointRequestDto,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1037,6 +1058,8 @@ class ChannelEndpoints(BaseSDK):
 
         Update an existing channel endpoint by its unique identifier.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param identifier: The unique identifier of the channel endpoint
         :param update_channel_endpoint_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -1085,6 +1108,7 @@ class ChannelEndpoints(BaseSDK):
                 models.UpdateChannelEndpointRequestDto,
             ),
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1186,6 +1210,8 @@ class ChannelEndpoints(BaseSDK):
 
         Delete a specific channel endpoint by its unique identifier.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param identifier: The unique identifier of the channel endpoint
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -1222,6 +1248,7 @@ class ChannelEndpoints(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1320,6 +1347,8 @@ class ChannelEndpoints(BaseSDK):
 
         Delete a specific channel endpoint by its unique identifier.
 
+        If set, this operation will use either `secret_key` or `secret_key` from the global security.
+
         :param identifier: The unique identifier of the channel endpoint
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -1356,6 +1385,7 @@ class ChannelEndpoints(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["secret_key", "secret_key"],
             timeout_ms=timeout_ms,
         )
 

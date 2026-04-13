@@ -21,11 +21,11 @@ class Subscribers(BaseSDK):
     https://docs.novu.co/subscribers/subscribers
     """
 
+    notifications: NovuNotifications
     preferences: Preferences
     topics: NovuTopics
     credentials: Credentials
     messages: NovuMessages
-    notifications: NovuNotifications
     properties: Properties
 
     def __init__(
@@ -36,6 +36,9 @@ class Subscribers(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
+        self.notifications = NovuNotifications(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
         self.preferences = Preferences(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
@@ -44,9 +47,6 @@ class Subscribers(BaseSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.messages = NovuMessages(self.sdk_configuration, parent_ref=self.parent_ref)
-        self.notifications = NovuNotifications(
-            self.sdk_configuration, parent_ref=self.parent_ref
-        )
         self.properties = Properties(self.sdk_configuration, parent_ref=self.parent_ref)
 
     def search(
@@ -656,7 +656,7 @@ class Subscribers(BaseSDK):
         Retrieve a subscriber by its unique key identifier **subscriberId**.
         **subscriberId** field is required.
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -792,7 +792,7 @@ class Subscribers(BaseSDK):
         Retrieve a subscriber by its unique key identifier **subscriberId**.
         **subscriberId** field is required.
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -931,7 +931,7 @@ class Subscribers(BaseSDK):
         Update a subscriber by its unique key identifier **subscriberId**.
         **subscriberId** is a required field, rest other fields are optional
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param patch_subscriber_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -1081,7 +1081,7 @@ class Subscribers(BaseSDK):
         Update a subscriber by its unique key identifier **subscriberId**.
         **subscriberId** is a required field, rest other fields are optional
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param patch_subscriber_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -1228,7 +1228,7 @@ class Subscribers(BaseSDK):
         Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions.
         **subscriberId** is a required field.
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1366,7 +1366,7 @@ class Subscribers(BaseSDK):
         Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions.
         **subscriberId** is a required field.
 
-        :param subscriber_id:
+        :param subscriber_id: The identifier of the subscriber
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

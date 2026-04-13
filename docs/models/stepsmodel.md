@@ -57,3 +57,9 @@ value: models.ThrottleStepUpsertDto = /* values here */
 value: models.CustomStepUpsertDto = /* values here */
 ```
 
+### `models.HTTPRequestStepUpsertDto`
+
+```python
+value: models.HTTPRequestStepUpsertDto = /* values here */
+```
+
