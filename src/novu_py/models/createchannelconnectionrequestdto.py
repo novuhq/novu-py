@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .authdto import AuthDto, AuthDtoTypedDict
 from .workspacedto import WorkspaceDto, WorkspaceDtoTypedDict
+from enum import Enum
 from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -55,6 +56,13 @@ CreateChannelConnectionRequestDtoContext = TypeAliasType(
 )
 
 
+class ConnectionMode(str, Enum):
+    r"""Connection mode that determines how the channel connection is scoped. Use \"subscriber\" (default) to associate the connection with a specific subscriber. Use \"shared\" to associate the connection with a context instead of a subscriber — subscriberId will not be stored on the connection."""
+
+    SUBSCRIBER = "subscriber"
+    SHARED = "shared"
+
+
 class CreateChannelConnectionRequestDtoTypedDict(TypedDict):
     integration_identifier: str
     r"""The identifier of the integration to use for this channel connection."""
@@ -65,6 +73,8 @@ class CreateChannelConnectionRequestDtoTypedDict(TypedDict):
     subscriber_id: NotRequired[str]
     r"""The subscriber ID to link the channel connection to"""
     context: NotRequired[Dict[str, CreateChannelConnectionRequestDtoContextTypedDict]]
+    connection_mode: NotRequired[ConnectionMode]
+    r"""Connection mode that determines how the channel connection is scoped. Use \"subscriber\" (default) to associate the connection with a specific subscriber. Use \"shared\" to associate the connection with a context instead of a subscriber — subscriberId will not be stored on the connection."""
 
 
 class CreateChannelConnectionRequestDto(BaseModel):
@@ -85,9 +95,16 @@ class CreateChannelConnectionRequestDto(BaseModel):
 
     context: Optional[Dict[str, CreateChannelConnectionRequestDtoContext]] = None
 
+    connection_mode: Annotated[
+        Optional[ConnectionMode], pydantic.Field(alias="connectionMode")
+    ] = None
+    r"""Connection mode that determines how the channel connection is scoped. Use \"subscriber\" (default) to associate the connection with a specific subscriber. Use \"shared\" to associate the connection with a context instead of a subscriber — subscriberId will not be stored on the connection."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["identifier", "subscriberId", "context"])
+        optional_fields = set(
+            ["identifier", "subscriberId", "context", "connectionMode"]
+        )
         serialized = handler(self)
         m = {}
 

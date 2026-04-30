@@ -51,3 +51,5 @@
 | `sender_id`                                            | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |
 | `tenant_id`                                            | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |
 | `app_io_base_url`                                      | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |
+| `signing_secret`                                       | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |
+| `outbound_integration_id`                              | *Optional[str]*                                        | :heavy_minus_sign:                                     | N/A                                                    |

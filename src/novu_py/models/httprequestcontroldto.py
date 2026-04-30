@@ -9,8 +9,18 @@ from .httprequestkeyvaluepairdto import (
 from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Any, Dict, List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Any, Dict, List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+BodyTypedDict = TypeAliasType(
+    "BodyTypedDict", Union[str, List[HTTPRequestKeyValuePairDtoTypedDict]]
+)
+r"""Request body as a raw JSON string. Key-value arrays are supported for legacy workflows."""
+
+
+Body = TypeAliasType("Body", Union[str, List[HTTPRequestKeyValuePairDto]])
+r"""Request body as a raw JSON string. Key-value arrays are supported for legacy workflows."""
 
 
 class HTTPRequestControlDtoTypedDict(TypedDict):
@@ -20,8 +30,8 @@ class HTTPRequestControlDtoTypedDict(TypedDict):
     r"""Target URL for the HTTP request"""
     headers: NotRequired[List[HTTPRequestKeyValuePairDtoTypedDict]]
     r"""Request headers as key-value pairs"""
-    body: NotRequired[List[HTTPRequestKeyValuePairDtoTypedDict]]
-    r"""Request body as key-value pairs"""
+    body: NotRequired[BodyTypedDict]
+    r"""Request body as a raw JSON string. Key-value arrays are supported for legacy workflows."""
     response_body_schema: NotRequired[Dict[str, Any]]
     r"""JSON schema to validate response body against"""
     enforce_schema_validation: NotRequired[bool]
@@ -40,8 +50,8 @@ class HTTPRequestControlDto(BaseModel):
     headers: Optional[List[HTTPRequestKeyValuePairDto]] = None
     r"""Request headers as key-value pairs"""
 
-    body: Optional[List[HTTPRequestKeyValuePairDto]] = None
-    r"""Request body as key-value pairs"""
+    body: Optional[Body] = None
+    r"""Request body as a raw JSON string. Key-value arrays are supported for legacy workflows."""
 
     response_body_schema: Annotated[
         Optional[Dict[str, Any]], pydantic.Field(alias="responseBodySchema")

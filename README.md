@@ -524,6 +524,30 @@ asyncio.run(main())
 * [retrieve](docs/sdks/contexts/README.md#retrieve) - Retrieve a context
 * [delete](docs/sdks/contexts/README.md#delete) - Delete a context
 
+### [Domains](docs/sdks/domains/README.md)
+
+* [list](docs/sdks/domains/README.md#list) - List domains for an environment
+* [create](docs/sdks/domains/README.md#create) - Create a domain
+* [retrieve](docs/sdks/domains/README.md#retrieve) - Retrieve a domain by name
+* [update](docs/sdks/domains/README.md#update) - Update a domain
+* [delete](docs/sdks/domains/README.md#delete) - Delete a domain
+* [diagnose](docs/sdks/domains/README.md#diagnose) - Diagnose inbound DNS for a domain
+* [verify](docs/sdks/domains/README.md#verify) - Verify a domain
+
+#### [Domains.AutoConfigure](docs/sdks/autoconfigure/README.md)
+
+* [retrieve](docs/sdks/autoconfigure/README.md#retrieve) - Retrieve auto-configuration availability
+* [start](docs/sdks/autoconfigure/README.md#start) - Start DNS auto-configuration
+
+#### [Domains.Routes](docs/sdks/routes/README.md)
+
+* [list](docs/sdks/routes/README.md#list) - List routes for a domain
+* [create](docs/sdks/routes/README.md#create) - Create a route
+* [retrieve](docs/sdks/routes/README.md#retrieve) - Retrieve a route by address
+* [update](docs/sdks/routes/README.md#update) - Update a route
+* [delete](docs/sdks/routes/README.md#delete) - Delete a route
+* [test](docs/sdks/routes/README.md#test) - Test an inbound route
+
 ### [EnvironmentVariables](docs/sdks/environmentvariables/README.md)
 
 * [list](docs/sdks/environmentvariables/README.md#list) - List all variables
@@ -552,7 +576,9 @@ asyncio.run(main())
 * [integrations_controller_auto_configure_integration](docs/sdks/integrations/README.md#integrations_controller_auto_configure_integration) - Auto-configure an integration for inbound webhooks
 * [set_as_primary](docs/sdks/integrations/README.md#set_as_primary) - Update integration as primary
 * [list_active](docs/sdks/integrations/README.md#list_active) - List active integrations
-* [generate_chat_o_auth_url](docs/sdks/integrations/README.md#generate_chat_o_auth_url) - Generate chat OAuth URL
+* [generate_connect_o_auth_url](docs/sdks/integrations/README.md#generate_connect_o_auth_url) - Generate OAuth URL for a workspace/tenant connection
+* [generate_link_user_o_auth_url](docs/sdks/integrations/README.md#generate_link_user_o_auth_url) - Generate OAuth URL to link a subscriber user identity
+* [~~generate_chat_o_auth_url~~](docs/sdks/integrations/README.md#generate_chat_o_auth_url) - Generate chat OAuth URL :warning: **Deprecated**
 
 ### [Layouts](docs/sdks/layouts/README.md)
 
@@ -871,9 +897,9 @@ with Novu(
 
 
 **Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
-* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 118 methods.*
-* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 118 methods.*
-* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 118 methods.*
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 135 methods.*
+* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 135 methods.*
+* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 135 methods.*
 * [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

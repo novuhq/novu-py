@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: 7cd170d226a8ceeb4132c419b5e34dd0
+  docChecksum: ad19df5e1ff078787e416a22e9192620
   docVersion: 3.15.0
-  speakeasyVersion: 1.761.3
-  generationVersion: 2.879.11
-  releaseVersion: 3.15.0
-  configChecksum: 42234a3b956a474b3f6f7dca5f50b646
+  speakeasyVersion: 1.761.9
+  generationVersion: 2.881.4
+  releaseVersion: 3.15.1
+  configChecksum: 0e98a23995872f1faa35624149249792
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
 persistentEdits:
-  generation_id: ff0f3de0-9990-498e-a0fd-a4b5e9c2adc6
-  pristine_commit_hash: fc045595ed192bbb489172f0f1bbcbac1768adf3
-  pristine_tree_hash: a9775684e36e3ddbfd5d01aa4eb283f5ca32c60d
+  generation_id: c80a4e6f-346b-451c-ac1c-ceffc3ab62e5
+  pristine_commit_hash: 7afa402d5b2e81b14fef22c7219dd405e6f6acd7
+  pristine_tree_hash: 4ddd9d487f07a1264cd80011f9a9c82d928b0e9f
 features:
   python:
     additionalDependencies: 1.0.0
@@ -38,7 +38,7 @@ features:
     nullables: 1.0.2
     openEnums: 1.0.4
     responseFormat: 1.1.0
-    retries: 3.0.4
+    retries: 3.0.5
     sdkHooks: 1.2.1
     unions: 3.1.4
     uploadStreams: 1.0.0
@@ -131,6 +131,10 @@ trackedFiles:
     id: 5c07e8432fb2
     last_write_checksum: sha1:47ad68e1a440a0e6554637b570bba3af3906d280
     pristine_git_object: 74f7fb414cb3ec5bb017b2f3f04622181919533f
+  docs/models/agentreply.md:
+    id: fcf9844b7afd
+    last_write_checksum: sha1:117ba7f10d78404349891d3bbe21dba82ba17884
+    pristine_git_object: 1baf90d6fabb6b88a8c52a23f1e6017585860358
   docs/models/all.md:
     id: 3a3b4bc942ad
     last_write_checksum: sha1:44abe5406ca92296f0373d8673e230399412e4aa
@@ -151,6 +155,10 @@ trackedFiles:
     id: ec5f2fa7e68a
     last_write_checksum: sha1:4ffd299df746e99275066eafcd7d54e9466f0a1f
     pristine_git_object: 29f31f21801ba92b7a9fa2a5bfce9319f053eb83
+  docs/models/body.md:
+    id: 3612a7201bb5
+    last_write_checksum: sha1:161fa289f847427aa144f57f35a6cfe556f1c022
+    pristine_git_object: d971437ebf1dedca4db66a8203fe53b1b0af091f
   docs/models/bridgeconfigurationdto.md:
     id: 0fce89c8a3c0
     last_write_checksum: sha1:20d4d3a44f679e8581aa50d56af62c576b51bb3b
@@ -347,6 +355,10 @@ trackedFiles:
     id: e4b6a1260cd5
     last_write_checksum: sha1:541354c8ff00733125bfc6054f37aa5af92e1a6d
     pristine_git_object: 4f7e0b44ae231e39a09ddde6740662f4a9c725ff
+  docs/models/code.md:
+    id: 2fcb3964c9c0
+    last_write_checksum: sha1:f14fe382e9c687077e352ef482401e32561b09f8
+    pristine_git_object: 48b9732c6aba9fccdf208dc04334bc1f506387fa
   docs/models/condition.md:
     id: b8def926cb9f
     last_write_checksum: sha1:2726e0b8018d7d30eaf53b37cc44d32b998bc3ec
@@ -359,6 +371,10 @@ trackedFiles:
     id: 6975c316772b
     last_write_checksum: sha1:30e507f72844c970524b4f45c9dd3f3c50bb3fe7
     pristine_git_object: ecbdce97e4932d9c545fbd2ff2c0503abe2044e7
+  docs/models/connectionmode.md:
+    id: d4845cb1ab92
+    last_write_checksum: sha1:e4ecea3c4571d4b8c82bf4b3fb0238ec9839f0bd
+    pristine_git_object: 15c3b2b6aa3d34928e2eee6229f4582f2ecb0f40
   docs/models/constraintvalidation.md:
     id: e96a2d97b946
     last_write_checksum: sha1:904fe0b575b3670c3cc076147e97a54aea5c1993
@@ -433,8 +449,8 @@ trackedFiles:
     pristine_git_object: 7d2c614661ade33dfa67338eba5c3b89771ea876
   docs/models/createchannelconnectionrequestdto.md:
     id: a1aa43b9d37e
-    last_write_checksum: sha1:edb9bdd49c1a9212c92b1ab9ccac2f1f58b775ba
-    pristine_git_object: ab504f0ff6aa57c9a1c4d9a86d3528a45ab7fac6
+    last_write_checksum: sha1:a89058c2e78c377b9d2a955fc02bc93fbc2a7440
+    pristine_git_object: d0fa3ee7e2330ee824a3374ed6c083db25ad0f73
   docs/models/createchannelconnectionrequestdtocontext.md:
     id: 40e067065a82
     last_write_checksum: sha1:b25f518969a71fcc55b937e29a8c00351a437670
@@ -447,6 +463,14 @@ trackedFiles:
     id: f4eacc5234f9
     last_write_checksum: sha1:7ccf9360412a86fa7215ad97954070866f68f9c9
     pristine_git_object: 803bede0d19211206be9e9a6531d135aad34c5bf
+  docs/models/createdomainconnectapplyurldto.md:
+    id: a0bd8644cba8
+    last_write_checksum: sha1:bd0042e9a394f2919500de733bc353661e1551b3
+    pristine_git_object: 41eb911d8afb3ba6ec0f8fbd0563131a3c2a988a
+  docs/models/createdomaindto.md:
+    id: e17e67c86f15
+    last_write_checksum: sha1:a2cbd3ed789fb506b9bf788a308034eb27ef753c
+    pristine_git_object: 899df8668141959bbc158058a025888d876bd8fc
   docs/models/createdsubscriberdto.md:
     id: 44a7e51ce715
     last_write_checksum: sha1:b7f79acbcd4b5987c96a7ab17098f64820f18479
@@ -605,8 +629,8 @@ trackedFiles:
     pristine_git_object: cd3f8f8acab21bbcc5d6ac2a3374dd551c9295cc
   docs/models/credentialsdto.md:
     id: 19f358ae6c7e
-    last_write_checksum: sha1:7f7fa893a5f415adc459e529af529e55529f27de
-    pristine_git_object: bc123b687330c7009be8536a10a8ca76e121794c
+    last_write_checksum: sha1:bbcb982a7b39b3d08d37638a6a9d2fd4ec24a397
+    pristine_git_object: f5be85566e7c9b9fd8456aa16b12d0825d502c8e
   docs/models/criticality.md:
     id: d2650f6cbd02
     last_write_checksum: sha1:7f9978498aa0a42eb83c085ac8c35e2cb80194b2
@@ -723,6 +747,10 @@ trackedFiles:
     id: 7d52d40c5656
     last_write_checksum: sha1:593103ae1488cb6739c7fb018b9707e6a42e3588
     pristine_git_object: 721c1887ddd7a916ac58d06c568a598e46f91d7a
+  docs/models/diagnosedomainresponsedto.md:
+    id: 0ec58346c946
+    last_write_checksum: sha1:2762b488080ccd66db5e56f0ba4aceeb94845eb5
+    pristine_git_object: 9083a343f97317df263f2a884a871ed21545f5e9
   docs/models/diffactionenum.md:
     id: 96abe3fe272a
     last_write_checksum: sha1:b2f8d98e0b82c192bac6e4d14e27935591bc410f
@@ -839,10 +867,190 @@ trackedFiles:
     id: da7f88ee565e
     last_write_checksum: sha1:cbc2797035bce53512f6cad13d44a02e08e76111
     pristine_git_object: 0bcc96ac6e524f69c9305bbbabf8d5dca993ce7e
+  docs/models/domainconnectapplyurlresponsedto.md:
+    id: a9959f238aae
+    last_write_checksum: sha1:164a4b07dfef734228b0c410c79e910e8b1ffcd7
+    pristine_git_object: f821ab2a44394e9b17fe3937e444d69b5a88ac9a
+  docs/models/domainconnectstatusresponsedto.md:
+    id: b8dba15dd21c
+    last_write_checksum: sha1:f32c5d4f4a1790cb18502a2c662a8b87622bd4d6
+    pristine_git_object: e23e641fc082624e099e6f0ed0af162f2d74723d
+  docs/models/domaindiagnosticcheckdto.md:
+    id: 95405100f8c8
+    last_write_checksum: sha1:65c6e89a902a83385fc7490e58d223a2a170bf1c
+    pristine_git_object: f3c03f440b55498c03b24743fe0daa00ad695ce1
+  docs/models/domaindiagnosticcheckdtostatus.md:
+    id: 2d73b416c01a
+    last_write_checksum: sha1:908700be08c9b82e64b92b5e31a6d606e0ab3419
+    pristine_git_object: 7372f493a6863dbe189e1255d510e271bd39a2c2
+  docs/models/domaindiagnosticissuedto.md:
+    id: b030be44426f
+    last_write_checksum: sha1:9a4e89c54f595148549fba576cc99a1aaa8e83cc
+    pristine_git_object: 4dc6d9cba18f9f39d34d28bfd2fb9096e03e553c
+  docs/models/domaindiagnosticissuedtocode.md:
+    id: e4f86cc1bd8e
+    last_write_checksum: sha1:e0aa266c6207694c527aa40158fb3963d4d31b85
+    pristine_git_object: d9a57ab6b4745b133303934efb0f5c4613b356f0
+  docs/models/domainresponsedto.md:
+    id: f8824a5a39af
+    last_write_checksum: sha1:c717bf983a63516238f955711cfa4445eef786b6
+    pristine_git_object: a06ee3f84ca6dac5a6883519c26989ecb99d999a
+  docs/models/domainresponsedtostatus.md:
+    id: 1f21f644e050
+    last_write_checksum: sha1:de9f71dfd5d42d4f238a652b4ab02829be581668
+    pristine_git_object: 52c999ac1028205d2374e3d5baaef2d3d9b4dd66
+  docs/models/domainroutedto.md:
+    id: 5f955860e6f7
+    last_write_checksum: sha1:d87a9e7f8bb308ddc639416d1c40003d09eb010b
+    pristine_git_object: 5b18dfccca6dd7de66caede156ffaa06429bcf6a
+  docs/models/domainroutedtotype.md:
+    id: 2ba41e67d5b7
+    last_write_checksum: sha1:8825927777ac30c235e1b7481ab6c63a3878b68c
+    pristine_git_object: e183b49c2971f46e0368ecee5a8cf04f561d904d
+  docs/models/domainrouteresponsedto.md:
+    id: 572db073c19e
+    last_write_checksum: sha1:d19e77828f6a720c91f9e48a877592ab774a7c0a
+    pristine_git_object: 6b4fcaf91aaf6f3d6e9458f37becfcb5b68a9a0c
+  docs/models/domainrouteresponsedtotype.md:
+    id: 4b5e03426f8b
+    last_write_checksum: sha1:9dc99fb75a19e9930c010467eda3ad0dae413fff
+    pristine_git_object: a087d7ccb8cb824e8b8df92b98df9b1ecd7f911e
+  docs/models/domainscontrollercreatedomainrequest.md:
+    id: 236c1c14a75d
+    last_write_checksum: sha1:bf746890928bbf662f539bd75609534e927d50cc
+    pristine_git_object: 535c2de45bffdd69b98eb369594d6caff0ae2e01
+  docs/models/domainscontrollercreatedomainresponse.md:
+    id: 3d53d3997337
+    last_write_checksum: sha1:4e81c49d71f252a792c0bc06ef1cad4a29d83239
+    pristine_git_object: acec20e9dc910da2c4217a276919222c5b6c37cd
+  docs/models/domainscontrollercreatedomainrouterequest.md:
+    id: 2f4f15ccf33c
+    last_write_checksum: sha1:dcabd93151028de3f5bc936c7f713c30a346b3e6
+    pristine_git_object: f5c3ba8862a74dc535505297d530f0bc4d97118a
+  docs/models/domainscontrollercreatedomainrouteresponse.md:
+    id: 823413bd4f09
+    last_write_checksum: sha1:3e481538a86f10f2a16d790cd0d89690db676bfa
+    pristine_git_object: d803eb26f52ebba30dfab5d168260dad1be81777
+  docs/models/domainscontrollerdeletedomainrequest.md:
+    id: c2c58524f372
+    last_write_checksum: sha1:4d6418df63e680befa004976e27a100deecff74a
+    pristine_git_object: 230d1ab26a4f9150672fc3ec6de1c9bf18f6b974
+  docs/models/domainscontrollerdeletedomainresponse.md:
+    id: aa6fa8b6dce5
+    last_write_checksum: sha1:39e9f1be015a4cfe644fca186b3d0700b3594a47
+    pristine_git_object: 13f7c051a09e2d50795504ec9f785eebefc933b4
+  docs/models/domainscontrollerdeletedomainrouterequest.md:
+    id: 7e281e23de3b
+    last_write_checksum: sha1:5ddb4b1437435f3c09bfb1401520ab5ebd77c4ea
+    pristine_git_object: 41827cdd44e752ab28ce3e2725e3edfef2ab12dd
+  docs/models/domainscontrollerdeletedomainrouteresponse.md:
+    id: 05746963ac1b
+    last_write_checksum: sha1:d6c3afa4549886c9641f840f3ed42cb14c42cfb0
+    pristine_git_object: 0a7beff607e8ac13e650cf58ec9d2298f49bee4b
+  docs/models/domainscontrollerdiagnosedomainrequest.md:
+    id: a4f832975b18
+    last_write_checksum: sha1:b6833cbe68edf2c485fc801f1437af8f11f291f6
+    pristine_git_object: d7c632057af3f082c203f99f11dcfb20a755c68f
+  docs/models/domainscontrollerdiagnosedomainresponse.md:
+    id: fbc9e45d1d73
+    last_write_checksum: sha1:401cec73665c14f0d939f3319b5bd4949123cb10
+    pristine_git_object: f6c70ac75e417ae3b29aaf087347e1044f16c5f3
+  docs/models/domainscontrollergetdomainautoconfigurerequest.md:
+    id: d86770aed825
+    last_write_checksum: sha1:e8c2e89663d7fb3012c0220319920e6ab79ff304
+    pristine_git_object: bb18dc6b95f3953b85670fde8b80b90e0f5463ca
+  docs/models/domainscontrollergetdomainautoconfigureresponse.md:
+    id: 1d1ba634bf75
+    last_write_checksum: sha1:9ca62d1d5b17bae32411a895a37e19ae06c481c3
+    pristine_git_object: 88f80935da5b08af11e09f1d4046f795075f0f40
+  docs/models/domainscontrollergetdomainrequest.md:
+    id: 8108fcb0e26b
+    last_write_checksum: sha1:f7ec18bb27d6c6e8d1301e4be45387718463d36d
+    pristine_git_object: 28532ac99c938c84396e6475bc8b597dc74def95
+  docs/models/domainscontrollergetdomainresponse.md:
+    id: 730c6e866f56
+    last_write_checksum: sha1:34f8af0b6ecd8ed699da3bb7ac413b0cebd1553b
+    pristine_git_object: b537e55c4808fab8ec47927467b514a74b980bac
+  docs/models/domainscontrollergetdomainrouterequest.md:
+    id: 4351746bec3a
+    last_write_checksum: sha1:7310486ccc760e108bbfe8c1a1e1cfedd0d8b61b
+    pristine_git_object: c70f3dafcbabad36519c623f3ba12df5e45195a7
+  docs/models/domainscontrollergetdomainrouteresponse.md:
+    id: 3e3a717b2577
+    last_write_checksum: sha1:4333cef009ff8da5cf7e28443c9a31b09810afa3
+    pristine_git_object: fccc276242dc435db16d0e579611ca9b555fa6e4
+  docs/models/domainscontrollerlistdomainroutesqueryparamorderdirection.md:
+    id: 000de9c7e9ee
+    last_write_checksum: sha1:0427e66932ce3a0f635119f0cdcb74731d276120
+    pristine_git_object: ff52c1010d59250cf652246d6d7de72ac2480b42
+  docs/models/domainscontrollerlistdomainroutesrequest.md:
+    id: f31ab147136c
+    last_write_checksum: sha1:db26c8801d68f571e857c352701b8c708138396e
+    pristine_git_object: 0a7285a1f61a5b2c997c254d07c9089e4f08cd5f
+  docs/models/domainscontrollerlistdomainroutesresponse.md:
+    id: 23a7d8b9eaeb
+    last_write_checksum: sha1:a096a21cc80dbdfd56b4184bb069a58072bc6316
+    pristine_git_object: 5e25683f6a044c37ea2fcb8b5a1e153e8a0da97c
+  docs/models/domainscontrollerlistdomainsqueryparamorderdirection.md:
+    id: ecabce3dcc7d
+    last_write_checksum: sha1:c6d39d56e1642d67837aea4e57afa8d3eb631926
+    pristine_git_object: ce4f62d69fc154007d5b4b8cca9a222a9f859f4f
+  docs/models/domainscontrollerlistdomainsrequest.md:
+    id: f61f735d4fae
+    last_write_checksum: sha1:475cade7edf0aef54f5ca5ae82e137152c4e93a4
+    pristine_git_object: 6b6e60f773966f67310879617dd9601fccba0df2
+  docs/models/domainscontrollerlistdomainsresponse.md:
+    id: 0b29b3a12ada
+    last_write_checksum: sha1:5131f78b7ca68f8b9cdf13ee882e9f46ee147dfa
+    pristine_git_object: 6bb5398632eaeef30161fd6941fa8d6650c988f5
+  docs/models/domainscontrollerstartdomainautoconfigurerequest.md:
+    id: c987ecd539d8
+    last_write_checksum: sha1:2c87e1184ed47680d12c1932dc9176ac633f5c76
+    pristine_git_object: 9c2579eeb8ff6b87448686bdd533d1cac5d92cff
+  docs/models/domainscontrollerstartdomainautoconfigureresponse.md:
+    id: 8037be6e79ab
+    last_write_checksum: sha1:b82cafc188fcde7774640c49d0b5f636331af054
+    pristine_git_object: a35d53777c8a52dd34adb2355f206a142dafca4b
+  docs/models/domainscontrollertestdomainrouterequest.md:
+    id: 4c4efb0d4480
+    last_write_checksum: sha1:24655a2a1c96c00cc7929ba8f16344b5e355a6fa
+    pristine_git_object: fc234d2860f002b2d6ede857b8b937d3089b4103
+  docs/models/domainscontrollertestdomainrouteresponse.md:
+    id: 9a16e93a37a3
+    last_write_checksum: sha1:1aef3be60c6701cc9091b8ec537d4fdfc4c2cb7b
+    pristine_git_object: 41c2cfcb61c7216a4cbc275069df9dc3e3e5ca80
+  docs/models/domainscontrollerupdatedomainrequest.md:
+    id: e1f509b6c165
+    last_write_checksum: sha1:4dc8bbb31cefadd5dd17cb670e11321b1a973805
+    pristine_git_object: 0f8fdac344cf281c22d976eda69eecb40355a2e4
+  docs/models/domainscontrollerupdatedomainresponse.md:
+    id: 89f572ee4c2d
+    last_write_checksum: sha1:cf87444824e0e3a7f0b0d06e038cfec3d6d5bcef
+    pristine_git_object: 471e869c9c64d435e9d8233e50621fab2a89f435
+  docs/models/domainscontrollerupdatedomainrouterequest.md:
+    id: 887ddb769d5b
+    last_write_checksum: sha1:743a0322c44d4c2b05bc5a800e4676f786c4ff37
+    pristine_git_object: b43c5486c73bc0a1bef7f1bed4de53c65ebb183c
+  docs/models/domainscontrollerupdatedomainrouteresponse.md:
+    id: d216c0fada30
+    last_write_checksum: sha1:668ce94cfcf7774682fccfc765b82db7158c347c
+    pristine_git_object: 8099ffd69cb0ec78ea85eaff0af10ad237cc5317
+  docs/models/domainscontrollerverifydomainrequest.md:
+    id: 4dab351dfb2c
+    last_write_checksum: sha1:cf5626b5e23f208f20bd906cbdaf62b7410bc650
+    pristine_git_object: 722af8156bf7281317ed2a8ceefe38abe2680925
+  docs/models/domainscontrollerverifydomainresponse.md:
+    id: 7a2cce8f4f20
+    last_write_checksum: sha1:5894cc5c1aaeab72b4a67b75d7757f98000a6186
+    pristine_git_object: 28e6fac7a199287eaf373d02fb95f0a1e58c71de
+  docs/models/domainstatus.md:
+    id: 93866d25cdf9
+    last_write_checksum: sha1:846543f56123991428844c15e5b709400715823e
+    pristine_git_object: c445451784b87b677f908d823f06a368bab99061
   docs/models/duplicatelayoutdto.md:
     id: faa8f45eb4fb
-    last_write_checksum: sha1:953ae802805d14393be0fac0abf99c78158044ea
-    pristine_git_object: 17adeec85b34d0d2aefa40c374a530619a5e7a07
+    last_write_checksum: sha1:c13f37b895e3d84a3837f6d54dae13b07ab71c11
+    pristine_git_object: 1ed7599734d8e881b479ca70a0a9a690be672bff
   docs/models/editortype.md:
     id: 0fb9a0b59255
     last_write_checksum: sha1:2bc30059305fd2c6d5ba0fb42a9710c7fc34d1b5
@@ -1099,6 +1307,10 @@ trackedFiles:
     id: c4449c431ca8
     last_write_checksum: sha1:798cd31f65569a867d31f233ca3f90b6c1d52a31
     pristine_git_object: f75194b0f84ece726dc5b2406cef121588d88989
+  docs/models/expecteddnsrecorddto.md:
+    id: 24cf62d4b39a
+    last_write_checksum: sha1:3395ba234987992c9ead03dd1fef0dee24484569
+    pristine_git_object: ae27579bcf1f447cd275c1068d4922e3991fe478
   docs/models/failedoperationdto.md:
     id: a0f20173f6aa
     last_write_checksum: sha1:fefa375d83baa4c2413c0821291311d05ff1b998
@@ -1145,8 +1357,12 @@ trackedFiles:
     pristine_git_object: 0b53266cc2436f41e746ef223b01cd9ba8a56986
   docs/models/generatechatoauthurlrequestdto.md:
     id: daae57305b25
-    last_write_checksum: sha1:2d27c6f04d93137bd699e3a684456f36ba499ded
-    pristine_git_object: faea1efaed813d093e8c6920b1510fb4783d1207
+    last_write_checksum: sha1:30bc349b96f0cb9f50c65f8d0fdb135f89bf3a38
+    pristine_git_object: 530990d2b3b4ee1da39d3ac7610f0b1405309305
+  docs/models/generatechatoauthurlrequestdtoconnectionmode.md:
+    id: b1ddcc512acb
+    last_write_checksum: sha1:ebfa316ca231b24f7fa6638fc5e62b1d0a3b7808
+    pristine_git_object: e170539b0618bdb125fcfb827f851ac2ae36095f
   docs/models/generatechatoauthurlrequestdtocontext.md:
     id: 4da35434c500
     last_write_checksum: sha1:898867b1b54f34feb3cd84df6951a88a2bfc69c8
@@ -1159,10 +1375,38 @@ trackedFiles:
     id: 4da9977c7b73
     last_write_checksum: sha1:ab5b1812f51838b8d8e7a6002acc3a9a9b934c29
     pristine_git_object: 0bb797789848223d0f49f5fe1c22bae6235b30a5
+  docs/models/generateconnectoauthurlrequestdto.md:
+    id: 35aad94100b4
+    last_write_checksum: sha1:c4cae998ec7cc3d955ab5334574a592f3c64e823
+    pristine_git_object: 661f9f3f20147e0953102111bee39791ca1f4e97
+  docs/models/generateconnectoauthurlrequestdtoconnectionmode.md:
+    id: 09d7613089d2
+    last_write_checksum: sha1:30b8e462d4738cc32c1b68143c79b947639e7e2f
+    pristine_git_object: c6bb223f23532687757c2b6d6af2c51565270f15
+  docs/models/generateconnectoauthurlrequestdtocontext.md:
+    id: 22e75b9ade94
+    last_write_checksum: sha1:ecea949531d22435dd57f10ac424ca446db4b8fb
+    pristine_git_object: 493099963f3da29a74c5858abeee7598a4e703da
+  docs/models/generateconnectoauthurlrequestdtocontext2.md:
+    id: fe5e166412bf
+    last_write_checksum: sha1:2153eebd0fa9f8e3ab65a049d390d6e7419a7f52
+    pristine_git_object: 2c8bd3698bfff176831724a9670cce8137501177
   docs/models/generatelayoutpreviewresponsedto.md:
     id: 3730e19a7fe6
     last_write_checksum: sha1:d7f5c1b036ab0c3aa4836df6739eef846109f0ec
     pristine_git_object: 28ecf966deae619191964dd8d97d8030318a0083
+  docs/models/generatelinkuseroauthurlrequestdto.md:
+    id: 91e7c70344cb
+    last_write_checksum: sha1:0c80647f40d87e5194fed9b59f54ec6086e5a168
+    pristine_git_object: aed006f04161f18b4b16b31adbf95a31302f3ee7
+  docs/models/generatelinkuseroauthurlrequestdtocontext.md:
+    id: 41f2ed072d4d
+    last_write_checksum: sha1:79c2bf2de71dd50688b746df1d9fb017373a7e81
+    pristine_git_object: d3a3b6b518c2bfb4e11e8b9c494a0f0ef0b8fb37
+  docs/models/generatelinkuseroauthurlrequestdtocontext2.md:
+    id: 1ca88278cb2c
+    last_write_checksum: sha1:907f9c219ccff21d958242193b2332ff8abf5987
+    pristine_git_object: 8ffbae785f9518d63fc2835f60405a8ee2273df1
   docs/models/generatepreviewrequestdto.md:
     id: 16f6c4e4d20b
     last_write_checksum: sha1:eb002a7d78b41964725267f24e8dcf71ba72ca14
@@ -1221,8 +1465,8 @@ trackedFiles:
     pristine_git_object: 970c0a3440097dc5c73ff8b9124b203b0833d431
   docs/models/getchannelendpointresponsedtoproviderid.md:
     id: f52cc4d686fb
-    last_write_checksum: sha1:6b34061c0a80b3a7e3b8963752fa0d8f7b5d7f4f
-    pristine_git_object: 5cab150dcc3fdc8e1097c628abdfe431ddcf7c95
+    last_write_checksum: sha1:2bda5cec501d57f61110a0f576635f08d445a0dd
+    pristine_git_object: 9e5c224a2546f4f9969155fffec83d0f9eefa023
   docs/models/getchannelendpointresponsedtotype.md:
     id: 476d50607b13
     last_write_checksum: sha1:51d2ada195b151f189a4296556f9a49073db78f8
@@ -1281,8 +1525,8 @@ trackedFiles:
     pristine_git_object: 6f3c68d706cc663b2955166deab4a9992989802a
   docs/models/httprequestcontroldto.md:
     id: 4eb43cbdb4c8
-    last_write_checksum: sha1:bbccf937e6133021bff0b0dd41d889858e740e49
-    pristine_git_object: 69812e73a590bdb73729c0540b2d463126849bbf
+    last_write_checksum: sha1:f06b9dd708ffa881727bbe7483ee0a5925ddd696
+    pristine_git_object: 534faf652f17acba54f12fbb853715d2242e0d30
   docs/models/httprequestcontrolsmetadataresponsedto.md:
     id: 77d99f70023c
     last_write_checksum: sha1:f731e013796e07bb428bfee9a06ebe8c487e4be2
@@ -1295,10 +1539,14 @@ trackedFiles:
     id: cc7553fdb5fa
     last_write_checksum: sha1:708b69238c8c3202049f1c3a78d6be7320c5017a
     pristine_git_object: a2dce77650c6a8da347ee4b0b052e35c315b35ec
+  docs/models/httprequeststepresponsedtobody.md:
+    id: 58342904b4bf
+    last_write_checksum: sha1:e22ec82fd747d0e65909a5e9c28b1996578f202e
+    pristine_git_object: 2d37a3c8d49cd9f994ab7895aa9963ee4878920a
   docs/models/httprequeststepresponsedtocontrolvalues.md:
     id: 7cb8f8f71966
-    last_write_checksum: sha1:56f379984dbe1d9361cfd3676962ad36dfa89557
-    pristine_git_object: 93a6a29b803bb441e4be08c56f09ecac9d0e421d
+    last_write_checksum: sha1:33538c7280d8975fa64c8f6ef1b4397d52d52dcf
+    pristine_git_object: 60141c1d81df8cfe4a1d217fd9ccd786b78725e8
   docs/models/httprequeststepupsertdto.md:
     id: 5e6e0f2816df
     last_write_checksum: sha1:8fa7233d1cced8e26525011acdf338027b2e9e6f
@@ -1395,6 +1643,22 @@ trackedFiles:
     id: a8b7b8045c52
     last_write_checksum: sha1:efc7aa6d3322dda9af56332a96116138bc4dbae7
     pristine_git_object: 99cc502eb7162e6d81c5c986b0499429d531f8cd
+  docs/models/integrationscontrollergenerateconnectoauthurlrequest.md:
+    id: dc2e26033bbe
+    last_write_checksum: sha1:3587c9c7b22ef733f0734bdc752c7301a772b09f
+    pristine_git_object: 67b322d7f2e388d8a84cf802cc9aafcee5e60e1e
+  docs/models/integrationscontrollergenerateconnectoauthurlresponse.md:
+    id: fb2beef6641a
+    last_write_checksum: sha1:e36603302c088bd6a5551a11ca6dfc08fd7ac96f
+    pristine_git_object: 07c761525fd93910f961be013d040940de3745da
+  docs/models/integrationscontrollergeneratelinkuseroauthurlrequest.md:
+    id: b4be68b9ab57
+    last_write_checksum: sha1:202aa5d651bd2dcc239762d7638f58d03e871a48
+    pristine_git_object: d353d0a0d008d84013d1a0cdc61fe6c5bf639871
+  docs/models/integrationscontrollergeneratelinkuseroauthurlresponse.md:
+    id: a459f3022b71
+    last_write_checksum: sha1:769517db449bbbb2bfc38e1df75315a82defa60b
+    pristine_git_object: 09cbdc83b1ec9876d9b103cea9ba61c56fd0648b
   docs/models/integrationscontrollergetactiveintegrationsrequest.md:
     id: 21294a01ecf0
     last_write_checksum: sha1:9a0dfef7d67f4738ab9e37f71354f288db195243
@@ -1559,6 +1823,14 @@ trackedFiles:
     id: 771679da35c8
     last_write_checksum: sha1:d973436ef515b54cf2251d35aeec54b39accc0ec
     pristine_git_object: 38a6e803c97a988d2773008ebc47f2cfce00eb31
+  docs/models/listdomainroutesresponsedto.md:
+    id: eb634caceddc
+    last_write_checksum: sha1:82ca0163c9456d8d7c792ad470681443a745340a
+    pristine_git_object: 238e225d838c7988d655c80968f123b9c9c2a7f0
+  docs/models/listdomainsresponsedto.md:
+    id: 2c548363eac3
+    last_write_checksum: sha1:6079dc7ba4aa2254c15d761d773353aa740b0b33
+    pristine_git_object: 55f7586224b749201eeebba54673b15802dcb6cd
   docs/models/listlayoutresponsedto.md:
     id: 406e73f5c0fe
     last_write_checksum: sha1:fb0e03c04f0071b30ad6c39b291ca04556620b62
@@ -1739,6 +2011,10 @@ trackedFiles:
     id: c37a65b7b0cf
     last_write_checksum: sha1:9117d3a04a5061129b5b94325de871d83d3232cf
     pristine_git_object: cf6acbad1483d9cfa10c49b11976382f8d27a49a
+  docs/models/mode.md:
+    id: 568581cb28bc
+    last_write_checksum: sha1:fbc373230222ae71b9c3f18d49331453bd3c51cc
+    pristine_git_object: 3b2fe5c9a5ebf81a3623484c8cf8ca6454704850
   docs/models/monday.md:
     id: 6c67e32f5d5e
     last_write_checksum: sha1:319a86c7d2e9290be744fbba0d81e76323f1f156
@@ -1961,12 +2237,12 @@ trackedFiles:
     pristine_git_object: b99bc09cb2b6e9fc4509c1ecdc6e0e55361837bd
   docs/models/providerid.md:
     id: 00e92c4b11c9
-    last_write_checksum: sha1:1015857c314c3d8eb780033118e5d3650a0e0945
-    pristine_git_object: bd12e39e2d93be7b27fb34bec747b86c7c58f858
+    last_write_checksum: sha1:b293d06b15adaf36d1179d56f92225eb2b0cf544
+    pristine_git_object: 3ed0171657337f450428c65443b63f0519974a93
   docs/models/providersidenum.md:
     id: a8365bac8637
-    last_write_checksum: sha1:d7c04553c21cade46c3f746fd6c0acba471661f7
-    pristine_git_object: 9b4f56ed516c20e6ba5eadc699e5ae3a81fd6e2b
+    last_write_checksum: sha1:a8d052dfe277bce66aa46e02c0d568a033e7af5f
+    pristine_git_object: 4b37f933d269333b446b040bcd9e618d0a4d0c9d
   docs/models/publishenvironmentrequestdto.md:
     id: "061170546620"
     last_write_checksum: sha1:7a3f47e14595c11ca22b70bc70a5f71e091c9cb5
@@ -2015,6 +2291,14 @@ trackedFiles:
     id: 2e2e0707b03c
     last_write_checksum: sha1:8b06f0afbfb85b6b70816a922c740a29cba13f99
     pristine_git_object: 54da540b1da789307411c7f1ef3a47696f374d8e
+  docs/models/queryparamseverity.md:
+    id: df3a8384aca0
+    last_write_checksum: sha1:ccbb80b401a6a03f78d153aa20724befc2a34bf4
+    pristine_git_object: f32ffd22060a9756ec880326ea67533068497340
+  docs/models/reasoncode.md:
+    id: 3d41bce7a6bf
+    last_write_checksum: sha1:f4dc776f694ee8b3fcaca176fefb99abd0ff1b60
+    pristine_git_object: a1693a620e3a2f1751ff8bb7a407ec636ecd3376
   docs/models/redirectdto.md:
     id: fa819ed89d4f
     last_write_checksum: sha1:2a1bf674f5597113bec482c9e1ae33019643dcc9
@@ -2125,8 +2409,8 @@ trackedFiles:
     pristine_git_object: c993472b3d154e79bc5e8ebf49fded72df0cc23e
   docs/models/severity.md:
     id: 5195c9cf0054
-    last_write_checksum: sha1:621a914639364a1558f60d5bff548c02b0c1d8a2
-    pristine_git_object: da7b7371ff0875911f8e0cdcc94b00637c71b927
+    last_write_checksum: sha1:3fde100594f7276ec22f2f81350a456bdebfcca9
+    pristine_git_object: 8b2bef9da25a3fec6661b73a3a33ffa50c87d499
   docs/models/severitylevelenum.md:
     id: 8a0084d6c4a7
     last_write_checksum: sha1:fb6d1e949a12666c5a3f6b5f64a794f1eff342db
@@ -2353,8 +2637,8 @@ trackedFiles:
     pristine_git_object: 6e5f2f0aee115b73f479c5e5bcd53583bd763d07
   docs/models/subscriberscontrollergetsubscribernotificationsrequest.md:
     id: 78b87d23ef9e
-    last_write_checksum: sha1:85b48b0ca566cc0ecbb74fa518d24a029fb19342
-    pristine_git_object: 5cc0d40d5c42f8bd51afec02d765f50fa4d225ef
+    last_write_checksum: sha1:39fd6e3ab817cd3a707954bce279aa87c2319741
+    pristine_git_object: fb4d3c6a1df7cc0cd8c90407047c1b3664be538a
   docs/models/subscriberscontrollergetsubscribernotificationsresponse.md:
     id: 4933b0cd9bc6
     last_write_checksum: sha1:1e3c69aa2f60df08533a68cbef4b7b24c23293a4
@@ -2647,6 +2931,30 @@ trackedFiles:
     id: b4345c125f21
     last_write_checksum: sha1:1140fe47094854532bb7997aec1ca5e10c89c954
     pristine_git_object: d6caa7a98f3066770f1e7975aea184b86b9a3f7e
+  docs/models/testdomainrouteagentresultdto.md:
+    id: dbc906aac4dc
+    last_write_checksum: sha1:f73ab8ddab9f42a3441b077db9bf4a1167335fd5
+    pristine_git_object: 7d44ab746096a913af6cc6010445cc08d5e4e547
+  docs/models/testdomainroutedto.md:
+    id: 61facc793eb2
+    last_write_checksum: sha1:95c9be22122daffd2297e2724240fe0bf46447ac
+    pristine_git_object: ba9cfdad89ee64ba9374a1c155fac4ae018a9e92
+  docs/models/testdomainroutefromdto.md:
+    id: 82dac891d79d
+    last_write_checksum: sha1:428d195e56624e0a383a6004820a8ae2aabbe2f0
+    pristine_git_object: ae8fed2ba041a1b33f0614c4562d00d777db7804
+  docs/models/testdomainrouteresponsedto.md:
+    id: ae43acd0a6c1
+    last_write_checksum: sha1:9cc17b86404fa227524f2a677081761e7811233a
+    pristine_git_object: ffa05bddf28a59276ee6bfcf86d3ac72e8c477d3
+  docs/models/testdomainrouteresponsedtotype.md:
+    id: d3d1622b3b53
+    last_write_checksum: sha1:196b7ae8f0ae73178ea8f64ce18cdc99129872c5
+    pristine_git_object: 86436972d8fc4c83b3c169d58b6e258d4c4d2966
+  docs/models/testdomainroutewebhookresultdto.md:
+    id: 68b99ccb0219
+    last_write_checksum: sha1:5cdbe383e455e854708ebbdba78c4d4ff1b7fbf6
+    pristine_git_object: 1ee5cf19dfbc97dfaaa1b92715d37abf3dd7ed97
   docs/models/textalignenum.md:
     id: eb1e89da228a
     last_write_checksum: sha1:66254ab6896b7da73b6f307a6c7c96ecafff4841
@@ -3035,6 +3343,18 @@ trackedFiles:
     id: f760cf10d6bc
     last_write_checksum: sha1:7ab6d64b063db4c898a9387dfa1201c3b8384743
     pristine_git_object: 6041de70501c7b391ab7e0420c21599a26a84adb
+  docs/models/updatedomaindto.md:
+    id: 4d3f18a02ecf
+    last_write_checksum: sha1:cf2b82cea9ac4306353e1079361050b28f7fd77e
+    pristine_git_object: 4a64c133e7195bb3bd808e27dab48a31438681cd
+  docs/models/updatedomainroutedto.md:
+    id: 8c8769dfc5f5
+    last_write_checksum: sha1:51451313b94334a382df927fcbc5710bed516a4d
+    pristine_git_object: f037cd7047fbc8bc769ad72b5477278deb464786
+  docs/models/updatedomainroutedtotype.md:
+    id: 1156d4557cff
+    last_write_checksum: sha1:a7103605ae4d628621b0258d3fd983488756bfb9
+    pristine_git_object: 662e486d1b6418804fd3844b627d7e4de06e2b92
   docs/models/updatedsubscriberdto.md:
     id: a2d9fa1c875b
     last_write_checksum: sha1:4a412fe22dfdedafad274e584fb9238c56146a2a
@@ -3311,10 +3631,14 @@ trackedFiles:
     id: f6e8241fca80
     last_write_checksum: sha1:2f3c398bdc14927343a5cc532f5e1f1e836072b8
     pristine_git_object: 7b32c2da30df6133f2de22263b65def1530ce3f0
+  docs/sdks/autoconfigure/README.md:
+    id: 83a76b13f0e3
+    last_write_checksum: sha1:46818dd95de1bb4d445e79be62779785104faba8
+    pristine_git_object: 8209062402abd89ab02ad0b2e7ad95daf5f51df4
   docs/sdks/channelconnections/README.md:
     id: b38f46c2a1f7
-    last_write_checksum: sha1:ddc298a781c66a40520314ddae514e9e091fbe09
-    pristine_git_object: c55fd719fd37f1c3609cd3139057ead020f5a9c1
+    last_write_checksum: sha1:4c8d1f4a5957375ae0765833af6cfd11a647de72
+    pristine_git_object: 485bd5494f533aa648dca74743d62d9db6e762d9
   docs/sdks/channelendpoints/README.md:
     id: 597f23f5fd73
     last_write_checksum: sha1:a6dbee9388249df03f6660621e22797dbe2c4021
@@ -3327,6 +3651,10 @@ trackedFiles:
     id: fb7e49751327
     last_write_checksum: sha1:bcad2b7eefbb522e31b3f7a5882bf142a4145921
     pristine_git_object: fea49f8cc137a6ef94b5bbd4363078d23169f1f0
+  docs/sdks/domains/README.md:
+    id: 06e9beb4063b
+    last_write_checksum: sha1:5e2a5715a803c54410c977870912977b20c827fb
+    pristine_git_object: ae36ae4354cbfc7be545edebab85c9781746779a
   docs/sdks/environments/README.md:
     id: d15fc95481b6
     last_write_checksum: sha1:7413c01522a2e904732b038cf2a739a7c45bb163
@@ -3341,8 +3669,8 @@ trackedFiles:
     pristine_git_object: 9d1bc76592970d559468647824b687bc670eae14
   docs/sdks/integrations/README.md:
     id: 7b29664808c0
-    last_write_checksum: sha1:8a24b31228df8cd700ae4d1fd4e5387659d65e67
-    pristine_git_object: 96194559d89a2831ac8f31f767c4603949c2ec64
+    last_write_checksum: sha1:06b4fd0c32aebf6aa6e221647fc7738ad65ea810
+    pristine_git_object: 14c030d5bf41b6c6a8dbd3d67158d0511e527ed3
   docs/sdks/layouts/README.md:
     id: 9cae4f89dc39
     last_write_checksum: sha1:590da6af759d60fd2f53e1262bdd38f2d34bcaa0
@@ -3387,6 +3715,10 @@ trackedFiles:
     id: ebc164e85af3
     last_write_checksum: sha1:4ee7f5bc123382adb85847e4888ba90ebff0b064
     pristine_git_object: 7453ac728f8e49579f09efe2a419429e50325809
+  docs/sdks/routes/README.md:
+    id: 8eceb878c9af
+    last_write_checksum: sha1:6f93cfb1ba593016457d356c739d697ae87f77c7
+    pristine_git_object: 46c03990352135f6f46289b778fa40842d63d5ce
   docs/sdks/steps/README.md:
     id: 39cb94746ff0
     last_write_checksum: sha1:477988bc8ea610c0de99107939ff76780562c0ab
@@ -3421,12 +3753,12 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pylintrc:
     id: 7ce8b9f946e6
-    last_write_checksum: sha1:a8632f238bae7688e0d2be1b01830019c76f2072
-    pristine_git_object: 908af8edc87d966acce46d4cbd2b7f925cfc64e3
+    last_write_checksum: sha1:0d2e4d5f1abdb3479cc8b6c2e69ea130e32ea604
+    pristine_git_object: 28264e779f844f941839b08281af711b98f4c946
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:2eaf2fd8241ca9d4f6293ba5e7b2ea1715d05365
-    pristine_git_object: 32f0e5a47e3dfdb543bc4ff4e089ff962838348a
+    last_write_checksum: sha1:72120a1d6e0744fcd0ed2cdd820b74176ef07bce
+    pristine_git_object: 2b01f7452c7b8aa8a3946f15c723f7ecd2ad22eb
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77610d735cce1bc0f71f13a746bf06e463e2ce47
@@ -3453,68 +3785,76 @@ trackedFiles:
     pristine_git_object: 955703fa58801c45f9cc8e62f4dfef8228cbf625
   src/novu_py/_version.py:
     id: 8e69485642eb
-    last_write_checksum: sha1:8121103aeae8e54186a847c110df2a7282042cf4
-    pristine_git_object: e229523953703d9bf310385cb94f3ec80713d870
+    last_write_checksum: sha1:1a0be6cadb93f3f935c06f01a1610ce5de9ea55f
+    pristine_git_object: 39c6d3d5378c2c8b8f33ebab84ec1da44c46574c
   src/novu_py/activity.py:
     id: 7d001a1721a3
-    last_write_checksum: sha1:0de7405389598695515d4ca508f51a279a2484c4
-    pristine_git_object: e8249094c09ea3cf0d663731b75adf84adf630e8
+    last_write_checksum: sha1:f5e4cdae6b9313974e81819a0310996d64e5e476
+    pristine_git_object: 6c04c05882cebaa205023446902bb00201117b14
+  src/novu_py/autoconfigure.py:
+    id: 5a84be066edb
+    last_write_checksum: sha1:69128862d5c270ee3c4e12aa1693f284dfaa2424
+    pristine_git_object: 9247e5ff3a54b111bab2301e8e2af6df212344b9
   src/novu_py/basesdk.py:
     id: 925d0f811020
-    last_write_checksum: sha1:cc1db3068365f8befb5487517f39b1bc1d0983de
-    pristine_git_object: a060de5698a7a817b34e1e23bf4fe99bc612e70f
+    last_write_checksum: sha1:caa6c6a2a720b68648850b7ad8a1d98f28160441
+    pristine_git_object: eccc574e8e6b64b89574f4f9fef3318c220cebd1
   src/novu_py/channel_connections.py:
     id: 17496a1f913d
-    last_write_checksum: sha1:038bca101ddd30e2e87402445f9b575c6c424ca1
-    pristine_git_object: 76d6d45f452effb7b8d2054ca5b8b5e44716e2da
+    last_write_checksum: sha1:0a239d438e95459daa3fb586a50d6757fb28bb4f
+    pristine_git_object: b9f188508020171f45d31e40c73fdafbcd0881e0
   src/novu_py/channel_endpoints.py:
     id: 479d85924da4
-    last_write_checksum: sha1:87913ad87410f0e2ce168e246054ab4b5ae8be72
-    pristine_git_object: 15d92c5f10496050d19fd93c1875e6fa5f3ec9c9
+    last_write_checksum: sha1:05a870edb85e948f170905881f3a26e8b4234806
+    pristine_git_object: 33b7a0a5b1b4bfd6afb576c74d37a2e4f3d1f25e
   src/novu_py/contexts.py:
     id: 51cbb9c2444c
-    last_write_checksum: sha1:6fe4dbaac4898636e61a19df3463af66d35ec91d
-    pristine_git_object: b196595c1f7d8f075b12060bf410d14b2322d223
+    last_write_checksum: sha1:5f0fa2eac17c9d6b8e234200335d59d4cabf3bd5
+    pristine_git_object: 24b4b7dd4ac86dcc2ce69a4037ae2e7a33a4d88f
   src/novu_py/credentials.py:
     id: f236f65b3baa
-    last_write_checksum: sha1:cbf893d0778b9dc6a612b3d225f696415974b569
-    pristine_git_object: 8ffb5e7521d69673d666cf48eb34b0c0bc09e3dd
+    last_write_checksum: sha1:af4687c331c12391137a3f6926627b130ce1099d
+    pristine_git_object: 2c45550b6483c897ba1fc8c6bd1cd7109ede305b
+  src/novu_py/domains.py:
+    id: 44f0356e3f15
+    last_write_checksum: sha1:07186f7de869880ce1b63f215bda11aba5267f05
+    pristine_git_object: 1ef50efd34f57f52934afb12d52ae6eab51b96e1
   src/novu_py/environment_variables.py:
     id: 3602c024a145
-    last_write_checksum: sha1:4ac2338b5d8ee6f9520154470ca89facaa3716fb
-    pristine_git_object: f020c96560883bb7d9d0b691e8f9dab710d3c2be
+    last_write_checksum: sha1:693a2b2d537b740041b12a2c43ad06298cf761cc
+    pristine_git_object: 0c1c9aaa5126c4a68228e400f6a94ffb68c89e3a
   src/novu_py/environments.py:
     id: fb9123e0ce99
-    last_write_checksum: sha1:91c2ec7f3fc9734d30d8575b5457df2b6af14bb8
-    pristine_git_object: 592daaca01f85c2edca72cb327e0fc61afacc45c
+    last_write_checksum: sha1:c9446f272b88ab119ef4d1729dacd3212542f21a
+    pristine_git_object: 221e4c77a53f2eac5f06212ba47e63435785e746
   src/novu_py/groups.py:
     id: dcae2dc602bc
-    last_write_checksum: sha1:9f5e5426c0bb648a8f7067ca0090f58f4980bc00
-    pristine_git_object: 452ab76f6a64d0f04d178dfb5a607f6138cdae8e
+    last_write_checksum: sha1:731e4537b0d315b96d5708400da527308a4cd96e
+    pristine_git_object: 60df5234cdc35c386dc379830d79c0a903777589
   src/novu_py/httpclient.py:
     id: 4b6df62ea001
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/novu_py/integrations.py:
     id: 3b7e944c96ee
-    last_write_checksum: sha1:c3c332bcb7937ec013142145ed187708a41d8211
-    pristine_git_object: 295701d957bcb3bcebb77d29f2c8fbfe5ad369a1
+    last_write_checksum: sha1:e1a76a58cef0dcf5a4bb601273dd949568c335d7
+    pristine_git_object: 3ab47def4e92741c2b08c5312be9f4557be92832
   src/novu_py/layouts.py:
     id: 660047f09c6c
-    last_write_checksum: sha1:26760bb5baa52e21a318372fd9842d09fb1eeff1
-    pristine_git_object: b594a75b3a327a04ed7e278f775d5687818df65f
+    last_write_checksum: sha1:9a1d543d17c0715a4049bf1b7b20a44844806554
+    pristine_git_object: a9db0f17d59f2ec14f8063f8c1087a486b176191
   src/novu_py/master.py:
     id: 08300bde8ccf
-    last_write_checksum: sha1:784766a10314205ac13bdd422a5316d9e65dd363
-    pristine_git_object: e665b24211d2ca8428924b47dc1031bf79f78fe6
+    last_write_checksum: sha1:fba643779c2875a69020a55df93f4593f2b11357
+    pristine_git_object: 59a22c83c2c24cedaa8e0d9ed604d9c72fecf08f
   src/novu_py/messages.py:
     id: 3b9c17ccd524
-    last_write_checksum: sha1:04cbff340f8b41a9ee90b7e91c4e3661c05d46f5
-    pristine_git_object: 7014e97444814f43aa3c59b9731c88bfaf511df6
+    last_write_checksum: sha1:576a44845a0f5424a60290101e190bf9306d5a9a
+    pristine_git_object: 5aad07ebd2a8a0b8c78dc9f2804289978a012337
   src/novu_py/models/__init__.py:
     id: 08e336e51536
-    last_write_checksum: sha1:9c95bc5a44fb0a4173c3c3ad50e87222b80bcccd
-    pristine_git_object: bab662deafbcb2001f64493c9ac3d75b2bd3b83f
+    last_write_checksum: sha1:a4acabf84b32729409eb9f896408505ed9f5fb2d
+    pristine_git_object: 31929fe2c8d51cfb4febad3ac2307f287ec6a537
   src/novu_py/models/actiondto.py:
     id: 1d3499193d8c
     last_write_checksum: sha1:787de11e6a1d379959aa69b9d1c5994837de3c50
@@ -3733,12 +4073,20 @@ trackedFiles:
     pristine_git_object: 3e5b6f0784e25d6e8ebca76262f3f40c7ac5c864
   src/novu_py/models/createchannelconnectionrequestdto.py:
     id: 4531ad9be024
-    last_write_checksum: sha1:78ca65679a3232e8d2f2c93f8d0653563c9c4285
-    pristine_git_object: 5a78c066a1158dc1f8fde3af3ad2afbac7ea5ea8
+    last_write_checksum: sha1:9bbb8bb0a8180b9c7dee783079411ef843a73e03
+    pristine_git_object: cebf8b4f6417a79aba86e73456294af93fea72f3
   src/novu_py/models/createcontextrequestdto.py:
     id: ecf87aa4945d
     last_write_checksum: sha1:0130c7d5e24b6d053952fcb7bb86fab1647bf8e8
     pristine_git_object: 1b7fbfcc71e9684f6f9edf2308f9f77ba65dab70
+  src/novu_py/models/createdomainconnectapplyurldto.py:
+    id: 1993d0b4ced5
+    last_write_checksum: sha1:600c3a02bfc3f5a7fe69e6178733e2f0f261f7be
+    pristine_git_object: 163658cf73d5e12c28620b3b3138a1a3466cbb51
+  src/novu_py/models/createdomaindto.py:
+    id: dd4fa8df31fe
+    last_write_checksum: sha1:1094d9258ade3d0af3b1effc4f75e2877e546463
+    pristine_git_object: 9eefdb87aefd6afd50432f9e315be238016bbbfd
   src/novu_py/models/createdsubscriberdto.py:
     id: 3c71ad81338f
     last_write_checksum: sha1:0c1fdcd09f6c8fde03f84c9dfe0fbc65d2e665cd
@@ -3809,8 +4157,8 @@ trackedFiles:
     pristine_git_object: bec058459407265b60291e2204aeaf6d3f609441
   src/novu_py/models/credentialsdto.py:
     id: c3c08bd9afea
-    last_write_checksum: sha1:ca5b55d7263b3556bd689286cc0d840d00fdc186
-    pristine_git_object: a812b0718332cf0194d9d143f44b3baf89154013
+    last_write_checksum: sha1:b13b7f2662f962e73ccff87f7d7d4fbcf53bf7f0
+    pristine_git_object: b35813a7d9f295f4aa9c8e174fc58a0f34710d55
   src/novu_py/models/customcontroldto.py:
     id: ef9e44bf6c23
     last_write_checksum: sha1:060dc484198ddfa08bc32c9e79f8ef438be71dae
@@ -3875,6 +4223,10 @@ trackedFiles:
     id: 9e7e3877f749
     last_write_checksum: sha1:dfeb25eb14bcbaf0b864f800cd965c8d43c9f80b
     pristine_git_object: e3c3ef7600046fa0fa7959de65acccfc1f18e9bb
+  src/novu_py/models/diagnosedomainresponsedto.py:
+    id: 18c7889b4a00
+    last_write_checksum: sha1:6f5e29f5b9efe991fd0e48600d28a2d06d3a77bb
+    pristine_git_object: 6e261a262810b43aaaa9e1d8cba3549a52b130f7
   src/novu_py/models/diffactionenum.py:
     id: f417d716980c
     last_write_checksum: sha1:3b0b948ecdfa2297c78b7a27680ea1b3d23cd5a2
@@ -3939,10 +4291,98 @@ trackedFiles:
     id: efc9271e1005
     last_write_checksum: sha1:f9c277ff82e6ca585cfa210948da2bd0dda92598
     pristine_git_object: f14f30aafc8d672fb6df2c651367d9358fb66094
+  src/novu_py/models/domainconnectapplyurlresponsedto.py:
+    id: e818aba6786e
+    last_write_checksum: sha1:c0f6f17727089209ee9b55991a2a0a38224fb978
+    pristine_git_object: 8806f2e8714c499512f53958c82cd748323abec9
+  src/novu_py/models/domainconnectstatusresponsedto.py:
+    id: 6d29ed60c04d
+    last_write_checksum: sha1:49f6c323a06ad3796a85eb2fba416fb5d8111f01
+    pristine_git_object: 283e99fa7b8f3fa4ecabd9ca4b7d571a9ff755d7
+  src/novu_py/models/domaindiagnosticcheckdto.py:
+    id: c25a9638ba2e
+    last_write_checksum: sha1:1ed8ac792894d23ca6ce61b90fb7560e3fa043b7
+    pristine_git_object: 6ebb1d04ea1ec2ab59bc82077ab1a25f64dbbabc
+  src/novu_py/models/domaindiagnosticissuedto.py:
+    id: 16a44129ab24
+    last_write_checksum: sha1:ad6b043855880f2100143b7e0da71c8559c4cb5c
+    pristine_git_object: 1251eb538ca67b1387f221df7885fbfac75c113a
+  src/novu_py/models/domainresponsedto.py:
+    id: 9ba3d98e1d3e
+    last_write_checksum: sha1:75222fe13426978aa30cbce96204032b7889b113
+    pristine_git_object: a04483a9f6fe27921c15541b18347192b639525e
+  src/novu_py/models/domainroutedto.py:
+    id: 7370cb2bdc82
+    last_write_checksum: sha1:0dab4376399b2d6b96aced126743a814c2f1b19f
+    pristine_git_object: c54dbd0ef5da779a21519da897d091552bbe5c26
+  src/novu_py/models/domainrouteresponsedto.py:
+    id: 7759b6b49514
+    last_write_checksum: sha1:c14dbe9ee15e73ceece319d312d3123d72d0a3ad
+    pristine_git_object: 00fa0bed2807ba46c9caee0abaad9651612bc448
+  src/novu_py/models/domainscontroller_createdomainop.py:
+    id: ace48f8ce277
+    last_write_checksum: sha1:7e48b6755a07cf2aee260ef0ff645287fbec7cde
+    pristine_git_object: b7720c77cc9cde9f20f4c3855fec15e6cbb0feea
+  src/novu_py/models/domainscontroller_createdomainrouteop.py:
+    id: 6c60a7063b42
+    last_write_checksum: sha1:524b0cc32cbf20bc75973d6cbe41399c93df5a42
+    pristine_git_object: 6129ff5dfc8525743023064ca4e254b0f0e55668
+  src/novu_py/models/domainscontroller_deletedomainop.py:
+    id: eb3b56915526
+    last_write_checksum: sha1:a5e8813555076fd67df25526b1f82bacab2a190f
+    pristine_git_object: 5b7a85204380cde14fafca021f15fb7bbbd021ed
+  src/novu_py/models/domainscontroller_deletedomainrouteop.py:
+    id: 32874f524fa4
+    last_write_checksum: sha1:87068f179d785e9225ab5ebd1423f3990a5bd173
+    pristine_git_object: 0821402d2d82b93800176da4642fd51d12eb3eb3
+  src/novu_py/models/domainscontroller_diagnosedomainop.py:
+    id: 8e84f51bb135
+    last_write_checksum: sha1:4effc1b6f787d9ba442d59fc4d19a50ab64c35bc
+    pristine_git_object: 9b46e4d86aa760154415d75fd8bd2c16d1d17812
+  src/novu_py/models/domainscontroller_getdomainautoconfigureop.py:
+    id: 52bdcd4a2073
+    last_write_checksum: sha1:3dfc8ac30c1711770e55cf2937ec58258bcbfa66
+    pristine_git_object: 62cbc5872e3420f491f8a990ac40b13c020a8154
+  src/novu_py/models/domainscontroller_getdomainop.py:
+    id: 4976b8cd97de
+    last_write_checksum: sha1:6c9c62e783da432cfbce28a3c7552d2c70e24f07
+    pristine_git_object: 54357522619b1eea6dfbe8693e75fcb1d9b7aea8
+  src/novu_py/models/domainscontroller_getdomainrouteop.py:
+    id: 1170f24ddb49
+    last_write_checksum: sha1:2db5f7a7aed8010e029f17556d8646e380b08335
+    pristine_git_object: fb210bfeb4ca70ad6dce05135b0304fdfc3e8c87
+  src/novu_py/models/domainscontroller_listdomainroutesop.py:
+    id: b9add7c6e7ca
+    last_write_checksum: sha1:2f6f2bd649ec7023e17f9a3aa4e0819134f1d923
+    pristine_git_object: 50b590bf66025f9695075aa76721d3ecee660327
+  src/novu_py/models/domainscontroller_listdomainsop.py:
+    id: 3ae00bf71920
+    last_write_checksum: sha1:5c1d727d5fde9647b4b071b0deeb9bc3abf8f4d0
+    pristine_git_object: ebd97a1082e3d162a53242ff39627296f7639d3e
+  src/novu_py/models/domainscontroller_startdomainautoconfigureop.py:
+    id: e2797cc5b87a
+    last_write_checksum: sha1:d2a9d7c558dba7376dd299605a7f8fc060fe7d09
+    pristine_git_object: cd4696ff410f04ac177cc69fabb71e3476b122b5
+  src/novu_py/models/domainscontroller_testdomainrouteop.py:
+    id: b5976dbabbe1
+    last_write_checksum: sha1:356b035db0f92c26d5d6a5621bf08cf7730d1bcf
+    pristine_git_object: bee6a2347a7a85a3ecca2e80a2584ed51c5ad984
+  src/novu_py/models/domainscontroller_updatedomainop.py:
+    id: b9d0996d48be
+    last_write_checksum: sha1:8e2b0a19348448b96211ad4abea98650eddef65e
+    pristine_git_object: 4297be83ec522ce16c0c6cf3f373967a7fa7806b
+  src/novu_py/models/domainscontroller_updatedomainrouteop.py:
+    id: 61aebdc8c841
+    last_write_checksum: sha1:70ab3c30e6e9670d012a80d4177abcfcad90d011
+    pristine_git_object: 9dd4447eaed1be5ba5c8003b4806bf79f3009a4e
+  src/novu_py/models/domainscontroller_verifydomainop.py:
+    id: 4bc44d71186a
+    last_write_checksum: sha1:77fc9a845314e9fc24b92b3246967bb8040bf569
+    pristine_git_object: 779b0ef19c09a608245cd3c9d412ed277035155a
   src/novu_py/models/duplicatelayoutdto.py:
     id: 9ec2da2dd76a
-    last_write_checksum: sha1:d14c82dab3fd4481b01ca16ad0ac80711cc7a9a3
-    pristine_git_object: 5648f587b9de796fcf6a4864936791580dde48c4
+    last_write_checksum: sha1:c69d4acddba42b687c9ce03d4e96982776eb3a7c
+    pristine_git_object: 690a69631c5256cdbd0d3259ac96f2118a62de5c
   src/novu_py/models/emailblock.py:
     id: 26325bfe4081
     last_write_checksum: sha1:b14d03ab8133d4d0508fea0e086f1360af9c6e61
@@ -4095,6 +4535,10 @@ trackedFiles:
     id: f5e172ee1939
     last_write_checksum: sha1:002f391d2cbd9f7a84f4e4ac898af8435bac5822
     pristine_git_object: cd0d9918546eac94137dd0486b7817f15f67dbaa
+  src/novu_py/models/expecteddnsrecorddto.py:
+    id: 461a74774dcf
+    last_write_checksum: sha1:dbe68c505abe7ba16f684637da348cb3e1dd63de
+    pristine_git_object: 59cdff32e60c9f393815e8dcbfe0f6b270c34cb6
   src/novu_py/models/failedoperationdto.py:
     id: b0f4d7f0d626
     last_write_checksum: sha1:f5e39eebb461c9eb32dc6bf016a36f356efc24ce
@@ -4113,16 +4557,24 @@ trackedFiles:
     pristine_git_object: 163619c4151a3b8e17166d9d1ed558fbbdc2126e
   src/novu_py/models/generatechatoauthurlrequestdto.py:
     id: ebcdb0a8b971
-    last_write_checksum: sha1:eb17adb8ce9e302e3344bbc8f843ece0477bcbb7
-    pristine_git_object: d8c4c0ff672f683aab28b8f1f9b96c9824e926aa
+    last_write_checksum: sha1:d7143f81669da70137dd73701eb1262d21760ace
+    pristine_git_object: e81c8af7e458f930fc2f65fac38fa863d9dcb9c9
   src/novu_py/models/generatechatoauthurlresponsedto.py:
     id: 91967b3550d9
     last_write_checksum: sha1:8bc2416b0c51cb5c843a464ebabdb57938dcc2d1
     pristine_git_object: ded69cc0d141479d3d5998b2a4999e7248e8cd45
+  src/novu_py/models/generateconnectoauthurlrequestdto.py:
+    id: a3c01620e100
+    last_write_checksum: sha1:14fa838aae00182d84b9676218ab9811e5ac50ec
+    pristine_git_object: 3feb758a5e8e1cc7e02dae6357b320d8068aea49
   src/novu_py/models/generatelayoutpreviewresponsedto.py:
     id: fb1d1cd95090
     last_write_checksum: sha1:cf4433b0a47ad5405ac232afe54fd8e0224e4bd4
     pristine_git_object: ac4bba127f0fff511c9e8e0dc382e0c81cbd3c28
+  src/novu_py/models/generatelinkuseroauthurlrequestdto.py:
+    id: 83cc18760c27
+    last_write_checksum: sha1:85d091b6f9a3728e8db7a9cab1aa9176b44ae09a
+    pristine_git_object: 587778e30f1a227781800ceee2d3c142154b87dd
   src/novu_py/models/generatepreviewrequestdto.py:
     id: 9ca026ee18de
     last_write_checksum: sha1:28de46dd1ee63f2ac9c1dca88564fd2d0be680b6
@@ -4133,12 +4585,12 @@ trackedFiles:
     pristine_git_object: 935e6ffb93fbe876043ba6a2d2a1c585bfec5901
   src/novu_py/models/getchannelconnectionresponsedto.py:
     id: 8fbf7ffa93f5
-    last_write_checksum: sha1:3dea48a77d833e75ac6be17836089311f422cf7f
-    pristine_git_object: 4c3759849c245239739bdfe9dc2b62dbcffed777
+    last_write_checksum: sha1:77cb1cd48860f18d53f0c3f90c178924712847e1
+    pristine_git_object: e7721980172da59d87ffe19cfb2431ab46f21959
   src/novu_py/models/getchannelendpointresponsedto.py:
     id: 7ecd48cbc543
-    last_write_checksum: sha1:0d3e38053ee56d6bbd4b0768af54981e396e84d0
-    pristine_git_object: af217d6e9376451f51fe6bfefa339c2086868687
+    last_write_checksum: sha1:6b3da0c922bc64a7c39394159cfc163c957052c2
+    pristine_git_object: 2a81217e5fc3a225d5275628e4a99606e539f313
   src/novu_py/models/getcontextresponsedto.py:
     id: 14a214a6e106
     last_write_checksum: sha1:f793e38d07a343c7915a9218c0cf974b8e2c87e4
@@ -4189,8 +4641,8 @@ trackedFiles:
     pristine_git_object: 5e918e9f13c854bc231f4f51c58b91e94f3d1f56
   src/novu_py/models/httprequestcontroldto.py:
     id: f011fb2c8731
-    last_write_checksum: sha1:9b70296adbc48649026ffd333bbd76ec15c935da
-    pristine_git_object: c8adc67b201f8a7122064b301dcb72b32e7d67dd
+    last_write_checksum: sha1:9539035f9ff7b288013b95673f95c81fed1b6520
+    pristine_git_object: 9ae11e3e5d10ce15648cebb0d70434d5ccdaab83
   src/novu_py/models/httprequestcontrolsmetadataresponsedto.py:
     id: ee3d74ddd9d2
     last_write_checksum: sha1:26d1f9714f12cee325df6b548e7dacaf7a78590c
@@ -4201,8 +4653,8 @@ trackedFiles:
     pristine_git_object: 6fd854f6df9d1a0772635890c813bdd0dcf4e432
   src/novu_py/models/httprequeststepresponsedto.py:
     id: d2640922a44a
-    last_write_checksum: sha1:55ea11b5eae30abd97aa12e27bbeaf724aeaa706
-    pristine_git_object: 78b85b12bf5adde40838ad7dd5d278c8ec91d2cf
+    last_write_checksum: sha1:1510bad72344215379315400329ae5887b914965
+    pristine_git_object: 26d2716b68a308ba3c15cf9a887db854c241ecb4
   src/novu_py/models/httprequeststepupsertdto.py:
     id: dcec7ae58958
     last_write_checksum: sha1:3afa9713fb5effff429972d5d9b32c44cb50380a
@@ -4271,6 +4723,14 @@ trackedFiles:
     id: 56c92ee9d143
     last_write_checksum: sha1:462c47ad16cf91081cc70f7f98d4f8f87038091d
     pristine_git_object: 4da70d38226e464eb5de205ae24e1c7e1d2ec151
+  src/novu_py/models/integrationscontroller_generateconnectoauthurlop.py:
+    id: 265848cb6640
+    last_write_checksum: sha1:aacc0eff76d2500a1feadd03231ae67648afb1ab
+    pristine_git_object: 9a61a3e83dced6c21a5140502031706c69927abc
+  src/novu_py/models/integrationscontroller_generatelinkuseroauthurlop.py:
+    id: acc9eb92b1ab
+    last_write_checksum: sha1:9d353e06a2abe0bbbb0c7057a96edc228050201f
+    pristine_git_object: 96e91555acaf91d7fc83e5ae849622aef3a4ca42
   src/novu_py/models/integrationscontroller_getactiveintegrationsop.py:
     id: bd51ab2ef213
     last_write_checksum: sha1:3a56aa6bfa4f733bbec608bb99040083f5ac18f2
@@ -4367,6 +4827,14 @@ trackedFiles:
     id: d736e5de99f1
     last_write_checksum: sha1:1506b7056810320f18891294d6e058d2675e70e5
     pristine_git_object: 32d5ada55a242bab5ca4eefb698b17b401c01897
+  src/novu_py/models/listdomainroutesresponsedto.py:
+    id: 433c5b4d4610
+    last_write_checksum: sha1:82466a92a78bec2f3baa838e93c47ec22331ee93
+    pristine_git_object: f8693f42c1c2bb50cd20c5a0787ea306f04a0603
+  src/novu_py/models/listdomainsresponsedto.py:
+    id: 56cf7763b8e8
+    last_write_checksum: sha1:0290638862aca53a1147544e8c526eaaf79588d3
+    pristine_git_object: ced04dd185b5bb48ec383992fed79d4bc3b1805f
   src/novu_py/models/listlayoutresponsedto.py:
     id: 7c96845facd5
     last_write_checksum: sha1:9327076f1883872c0cda3cae3400a3c0cc2a6cec
@@ -4585,8 +5053,8 @@ trackedFiles:
     pristine_git_object: 5a9cccbfee95b08b9890abaccbb29d4d5862623e
   src/novu_py/models/providersidenum.py:
     id: 7415ccdf52b5
-    last_write_checksum: sha1:79b53dedd18f1b906129e6ab5698bdb34dd4d9d5
-    pristine_git_object: 0296645a7ee92bfc847a8f258e210049641e9435
+    last_write_checksum: sha1:2495f1b155bda53fc368cd0a06a25fed1374d168
+    pristine_git_object: 94dbf33a6d6e5235442c8930f439ab3a671e1d7b
   src/novu_py/models/publishenvironmentrequestdto.py:
     id: d502aeeae822
     last_write_checksum: sha1:b10d11b264f21a5c576ec27562a5d6631e9ae671
@@ -4825,8 +5293,8 @@ trackedFiles:
     pristine_git_object: d1666cf4dad50abc8282780224a674082274a853
   src/novu_py/models/subscriberscontroller_getsubscribernotificationsop.py:
     id: 2512d21d935a
-    last_write_checksum: sha1:1d5d3efe25b97da190ef99912626e6b6e173bbc1
-    pristine_git_object: 21b27be3cfc1642c8b0a362f582807888bde29cd
+    last_write_checksum: sha1:6f936d4dc41e09e2af8d810712928947c15398b0
+    pristine_git_object: c07248253bc9bc495503187fb8a76827f23198be
   src/novu_py/models/subscriberscontroller_getsubscriberop.py:
     id: 331ae1500444
     last_write_checksum: sha1:709fd9e45b73b6e491c58d98aaf1f981f26f52e0
@@ -4975,6 +5443,26 @@ trackedFiles:
     id: e5454382ee7e
     last_write_checksum: sha1:bbab819298ffefb144abfc931fbb8c14b3ed9adf
     pristine_git_object: 512598ec4504568347cd6edac145b84503301770
+  src/novu_py/models/testdomainrouteagentresultdto.py:
+    id: "459334077362"
+    last_write_checksum: sha1:028edf35c515bc2dcad10b91b18a114a6da58cc7
+    pristine_git_object: 06b6c1e318c913bdb2eaf0f281cabe4789521531
+  src/novu_py/models/testdomainroutedto.py:
+    id: ad5f313c0ad1
+    last_write_checksum: sha1:e177b9207b8627cbfd1b1917d77201a791e3c279
+    pristine_git_object: 8a068c0092c910440dd26ba3583ce1530fc31bf3
+  src/novu_py/models/testdomainroutefromdto.py:
+    id: 710e3d85cec5
+    last_write_checksum: sha1:05123408b57e50bd7f35af36032c8475814e5f8a
+    pristine_git_object: 9fac7190b743018e227aedc88f0caa9fa299bc9e
+  src/novu_py/models/testdomainrouteresponsedto.py:
+    id: 6c54be61b744
+    last_write_checksum: sha1:2cdfea6ee9b66b9d8f24cc8d94b0211c5969447f
+    pristine_git_object: f669ba6246a3e5291c3ba87f01a503599dcc96c7
+  src/novu_py/models/testdomainroutewebhookresultdto.py:
+    id: d7b5d239e521
+    last_write_checksum: sha1:3269030e281a1a157adb16aec5b5e00e843b0459
+    pristine_git_object: 9527dc654724b2c7dd00d5aa87f6fff11c49169c
   src/novu_py/models/textalignenum.py:
     id: 0ef8586aaadf
     last_write_checksum: sha1:62445cc7e0bf26bbaaf337634d5df71f9e39e240
@@ -5175,6 +5663,14 @@ trackedFiles:
     id: af7fcd08cd86
     last_write_checksum: sha1:9a5e553e6ae698e20a7dd5739f4f3050adf7170a
     pristine_git_object: 7c4de530dd014a6bbf92c50a9cf5503782267005
+  src/novu_py/models/updatedomaindto.py:
+    id: 4bd4b429d8b4
+    last_write_checksum: sha1:55cc1ab288993677189c1290791fd736e54abbdb
+    pristine_git_object: ebc86375c50d8476f112bbaad2520508b0fe1bc4
+  src/novu_py/models/updatedomainroutedto.py:
+    id: cadb0b6a847f
+    last_write_checksum: sha1:91fe583cea5fa536f8a05c5dc9dfee75ade96c22
+    pristine_git_object: 6277b1f507fbef60c39dfbd7c52f48416909c773
   src/novu_py/models/updatedsubscriberdto.py:
     id: 28748fad6c1d
     last_write_checksum: sha1:f7c4ad1c772a39acc7d2aa9378340262e3d1bb47
@@ -5317,64 +5813,68 @@ trackedFiles:
     pristine_git_object: 8b8a4ae8eea1c7a906cc1f6719377fe98f4f310c
   src/novu_py/notifications.py:
     id: 07b8b9872108
-    last_write_checksum: sha1:5e3123c69b5197473095edd49983538bc3257830
-    pristine_git_object: 1af0ce8b0811129e8aaab1d49a1a8ac7c571ab59
+    last_write_checksum: sha1:179b397dfdfd79f34c6fe1ebcbd5e757a5f7ca7a
+    pristine_git_object: 2c105bd5a453c26f673a072190e0250d97b44ec4
   src/novu_py/novu_messages.py:
     id: 40b7c7fe6a50
-    last_write_checksum: sha1:e077f246358985801d89e84825bb08de07b9b68f
-    pristine_git_object: 966acdf057d75110995ded39699bd8f20a9afa66
+    last_write_checksum: sha1:990992553b4c0cb1413e6d2731b6192495cbc808
+    pristine_git_object: 95f6024cac7624acb4cff092e480056a1a516e98
   src/novu_py/novu_notifications.py:
     id: 625e06af47d0
-    last_write_checksum: sha1:2a6261efe6b51e448ca8d45aac44c24216293215
-    pristine_git_object: c09e9dc0167a8ea16066d1b6d17e53efa7e221dc
+    last_write_checksum: sha1:2080772121d93c9926479ea3b8af2c040ca3ab88
+    pristine_git_object: 8492934c7d94273243b9021cf6b0369c5729d324
   src/novu_py/novu_subscribers.py:
     id: 779029b19f30
-    last_write_checksum: sha1:434524128a314b90af0f4dd1d5e3374a3e6dcaf6
-    pristine_git_object: ad89f2ae5c489a319972d8944ef4e5278499bc14
+    last_write_checksum: sha1:e1ba0d59be5505d0ae319e29ed4a4273509e95fe
+    pristine_git_object: ba41afc9468f2926cad0bcf4ec88b8a7bcc7f5dc
   src/novu_py/novu_topics.py:
     id: 4b57996ac144
-    last_write_checksum: sha1:272cf6c1e3fd4535f2d85ca3c23546ee5121ca9d
-    pristine_git_object: 13e9554cbb834a4c5701b5ca085341689127a0d8
+    last_write_checksum: sha1:0a86e14fdfc6460461ed043e06047c2c22ed93e7
+    pristine_git_object: cdfb24fd82958d2545f8f019cf3489a0fb4f6216
   src/novu_py/preferences.py:
     id: ade969c13809
-    last_write_checksum: sha1:a97a36558ad1ae1feb5e439234df5b0b7e4db29c
-    pristine_git_object: 5067a9b2f2d6b9b4b36c88f368cdac652c5bd525
+    last_write_checksum: sha1:bf15dbc52d5cd1d0b90c2ce124526f74db907f15
+    pristine_git_object: fc6fcf37c7485ab615e06ac071860ae154ee3345
   src/novu_py/properties.py:
     id: 7f7dab82ac00
-    last_write_checksum: sha1:a129844caa1c3aa5217e71c7971953edb552cf20
-    pristine_git_object: 4cb34e933c5d1b0941c8af1b483a4149f925a0c6
+    last_write_checksum: sha1:05266fff3d4d44c0ab5c30dfcdf5f49929bce352
+    pristine_git_object: 0392a35c56dd5de0b734b516b231235b4586f2d0
   src/novu_py/py.typed:
     id: a5813560b70c
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
+  src/novu_py/routes.py:
+    id: b1e4e8c73a0f
+    last_write_checksum: sha1:8557d09961864f38ba41a497f65981c796149faa
+    pristine_git_object: 06d73aa7885e7b9e5fce693a61f2e7311727bb8e
   src/novu_py/sdk.py:
     id: 295c6e2a7b17
-    last_write_checksum: sha1:03847b741662716028943ba9549d364a05a73d69
-    pristine_git_object: cf19418dc666addbdb9619cb943418272baa37ad
+    last_write_checksum: sha1:5719baf28b85dc6c18bb40ded32d5f225da02c42
+    pristine_git_object: dad5b45ba3e23c72295597a24d0737fa85664af1
   src/novu_py/sdkconfiguration.py:
     id: 10dc4ec23819
     last_write_checksum: sha1:7fbaa91126f9d2c9c73239b97d9cd115973cf49d
     pristine_git_object: 9a6bce8a6670bbc8cb5a097f542cadd88a1673eb
   src/novu_py/steps.py:
     id: 643fdcfc303e
-    last_write_checksum: sha1:0799d553073c0baf7b2b67ad8d54ceae3fab953a
-    pristine_git_object: 4cf2ff58b0c120edb158ba0d3c02b71013343e3d
+    last_write_checksum: sha1:08c4f8d1d5c89fedbea16aff2e289a5512c756aa
+    pristine_git_object: da5531ed4877d8890bf4c553890a32702a248a2e
   src/novu_py/subscribers.py:
     id: 0fea353bdbd0
-    last_write_checksum: sha1:01583340d7524d1a7a04d0e78d45414afbada322
-    pristine_git_object: 65ba848dff028de74f4a3322da5682aa68a1ceab
+    last_write_checksum: sha1:f2413ab9e94385095e2acbdf6e59584a923a1bad
+    pristine_git_object: 4d4a942b10f7349f77eef39b23686c459bbe993b
   src/novu_py/subscriptions.py:
     id: 582a93baffa3
-    last_write_checksum: sha1:66bc0ad5fb6302f2cdd3409eb41b3a90a277e666
-    pristine_git_object: 105f795e4e7db6776738475dccdc97d52859d3e9
+    last_write_checksum: sha1:30caa28d4dd5f30a652a8f723c72b6aab5e301a3
+    pristine_git_object: 95fcdc031bcbae547a988ef8cf3ebade83b310b5
   src/novu_py/topics.py:
     id: 21805ff80609
-    last_write_checksum: sha1:09958fa87f4862f0cc4a4d5b17637a7ab20025e4
-    pristine_git_object: 794393cd7b37fccb89976c28b956d547db442928
+    last_write_checksum: sha1:6c64554615e82ae19e3b2b12f92ed682723d361b
+    pristine_git_object: bacabc64e3d3abbd260278ed90f193da43a89644
   src/novu_py/translations.py:
     id: 256781ff57a4
-    last_write_checksum: sha1:a6506f17244e6f8cbc6110275030ef0fda25af6b
-    pristine_git_object: 4af6fa4e861e6d2a208abbf947ae4aa5df39217f
+    last_write_checksum: sha1:951932d6e524381278a97cd2912301d0ec4b6182
+    pristine_git_object: bd1698bbeb72ef02af19b11f97f1a7f97f94cbcc
   src/novu_py/types/__init__.py:
     id: cf952daa42b9
     last_write_checksum: sha1:140ebdd01a46f92ffc710c52c958c4eba3cf68ed
@@ -5457,8 +5957,8 @@ trackedFiles:
     pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
   src/novu_py/workflows.py:
     id: 7cabc83c4dc8
-    last_write_checksum: sha1:d2ecfbd31d0b3647b5a396e9c323ab3d799609b5
-    pristine_git_object: aa2295b361376537802e4d8d0d2a13d339daaebf
+    last_write_checksum: sha1:edf91d395958ad22bb762d8e53a4aaf798f2b9da
+    pristine_git_object: 628e732b4ce24de38cdeb340767abd0b8c71f0ad
 examples:
   EventsController_trigger:
     speakeasy-default-events-controller-trigger:
@@ -6816,7 +7316,7 @@ examples:
   ChannelConnectionsController_createChannelConnection:
     speakeasy-default-channel-connections-controller-create-channel-connection:
       requestBody:
-        application/json: {"identifier": "slack-prod-user123-abc4", "subscriberId": "subscriber-123", "context": {"key": "org-acme"}, "integrationIdentifier": "slack-prod", "workspace": {"id": "T123456", "name": "Acme HQ"}, "auth": {"accessToken": "Workspace access token"}}
+        application/json: {"identifier": "slack-prod-user123-abc4", "subscriberId": "subscriber-123", "context": {"key": "org-acme"}, "connectionMode": "shared", "integrationIdentifier": "slack-prod", "workspace": {"id": "T123456", "name": "Acme HQ"}, "auth": {"accessToken": "Workspace access token"}}
       responses:
         "201":
           application/json: {"identifier": "<value>", "channel": "sms", "providerId": "slack", "integrationIdentifier": "slack-prod", "subscriberId": "subscriber-123", "contextKeys": ["tenant:org-123", "region:us-east-1"], "workspace": {"id": "T123456", "name": "Acme HQ"}, "auth": {"accessToken": "Workspace access token"}, "createdAt": "1719812430207", "updatedAt": "1735628544115"}
@@ -6963,7 +7463,7 @@ examples:
   IntegrationsController_getChatOAuthUrl:
     speakeasy-default-integrations-controller-get-chat-O-auth-url:
       requestBody:
-        application/json: {"subscriberId": "subscriber-123", "integrationIdentifier": "<value>", "connectionIdentifier": "slack-connection-abc123", "context": {"key": "org-acme"}, "scope": ["chat:write", "chat:write.public", "channels:read", "groups:read", "users:read", "users:read.email", "incoming-webhook"]}
+        application/json: {"subscriberId": "subscriber-123", "integrationIdentifier": "<value>", "connectionIdentifier": "slack-connection-abc123", "context": {"key": "org-acme"}, "scope": ["chat:write", "chat:write.public", "channels:read", "groups:read", "users:read", "users:read.email", "incoming-webhook"], "userScope": ["identity.basic"], "mode": "link_user", "connectionMode": "shared", "autoLinkUser": true}
       responses:
         "201":
           application/json: {"url": "https://slack.com/oauth/v2/authorize?state=..."}
@@ -7200,7 +7700,7 @@ examples:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": []}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_getSubscriberNotificationsCount:
@@ -7218,7 +7718,7 @@ examples:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": []}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_deleteAllNotifications:
@@ -7329,7 +7829,7 @@ examples:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": []}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   EnvironmentVariablesController_getEnvironmentVariable:
@@ -7396,9 +7896,290 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_listDomains:
+    speakeasy-default-domains-controller-list-domains:
+      parameters:
+        query:
+          limit: 10
+      responses:
+        "200":
+          application/json: {"data": [{"_id": "<id>", "name": "<value>", "status": "verified", "mxRecordConfigured": true, "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1709983742886", "updatedAt": "1735606707171", "expectedDnsRecords": [{"type": "MX", "name": "inbound", "content": "inbound-smtp.us-east-1.amazonaws.com", "ttl": "Auto", "priority": 10}]}], "next": "<value>", "previous": "<value>", "totalCount": 3816.97, "totalCountCapped": false}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_createDomain:
+    speakeasy-default-domains-controller-create-domain:
+      requestBody:
+        application/json: {"name": "<value>"}
+      responses:
+        "201":
+          application/json: {"_id": "<id>", "name": "<value>", "status": "verified", "mxRecordConfigured": false, "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1716949744625", "updatedAt": "1735624573515", "expectedDnsRecords": [{"type": "MX", "name": "inbound", "content": "inbound-smtp.us-east-1.amazonaws.com", "ttl": "Auto", "priority": 10}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": false}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_getDomain:
+    speakeasy-default-domains-controller-get-domain:
+      parameters:
+        path:
+          domain: "foolish-requirement.org"
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "name": "<value>", "status": "pending", "mxRecordConfigured": true, "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1712440954138", "updatedAt": "1735628784965", "expectedDnsRecords": [{"type": "MX", "name": "inbound", "content": "inbound-smtp.us-east-1.amazonaws.com", "ttl": "Auto", "priority": 10}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_updateDomain:
+    speakeasy-default-domains-controller-update-domain:
+      parameters:
+        path:
+          domain: "ordinary-eternity.org"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "name": "<value>", "status": "verified", "mxRecordConfigured": false, "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1711208292067", "updatedAt": "1735669961330", "expectedDnsRecords": [{"type": "MX", "name": "inbound", "content": "inbound-smtp.us-east-1.amazonaws.com", "ttl": "Auto", "priority": 10}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": 9284.53}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_deleteDomain:
+    speakeasy-default-domains-controller-delete-domain:
+      parameters:
+        path:
+          domain: "complicated-finer.org"
+      responses:
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": []}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_diagnoseDomain:
+    speakeasy-default-domains-controller-diagnose-domain:
+      parameters:
+        path:
+          domain: "alive-publication.biz"
+      responses:
+        "200":
+          application/json: {"ok": true, "runAt": "<value>", "checks": [{"code": "apex_cname_collision", "status": "skipped", "latencyMs": 2745.11}], "issues": []}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": [4727.34]}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_verifyDomain:
+    speakeasy-default-domains-controller-verify-domain:
+      parameters:
+        path:
+          domain: "formal-fork.com"
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "name": "<value>", "status": "verified", "mxRecordConfigured": true, "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1709440889064", "updatedAt": "1735651545144", "expectedDnsRecords": [{"type": "MX", "name": "inbound", "content": "inbound-smtp.us-east-1.amazonaws.com", "ttl": "Auto", "priority": 10}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_getDomainAutoConfigure:
+    speakeasy-default-domains-controller-get-domain-auto-configure:
+      parameters:
+        path:
+          domain: "hidden-subsidy.info"
+      responses:
+        "200":
+          application/json: {"available": false, "manualRecords": [{"type": "MX", "name": "inbound", "content": "inbound-smtp.us-east-1.amazonaws.com", "ttl": "Auto", "priority": 10}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": 7883.94}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_startDomainAutoConfigure:
+    speakeasy-default-domains-controller-start-domain-auto-configure:
+      parameters:
+        path:
+          domain: "criminal-other.name"
+      requestBody:
+        application/json: {}
+      responses:
+        "201":
+          application/json: {"applyUrl": "https://reckless-antelope.biz", "providerName": "<value>", "redirectUri": "https://shameless-roadway.info"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_listDomainRoutes:
+    speakeasy-default-domains-controller-list-domain-routes:
+      parameters:
+        path:
+          domain: "fearless-fishery.com"
+        query:
+          limit: 10
+      responses:
+        "200":
+          application/json: {"data": [{"_id": "<id>", "_domainId": "<id>", "address": "1647 N 8th Street", "type": "webhook", "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1720291119048", "updatedAt": "1735661570949"}], "next": "<value>", "previous": "<value>", "totalCount": 3751.99, "totalCountCapped": false}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_createDomainRoute:
+    speakeasy-default-domains-controller-create-domain-route:
+      parameters:
+        path:
+          domain: "radiant-solvency.net"
+      requestBody:
+        application/json: {"address": "6581 Birch Road", "type": "webhook"}
+      responses:
+        "201":
+          application/json: {"_id": "<id>", "_domainId": "<id>", "address": "9570 Ferry Parks", "type": "agent", "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1725211289760", "updatedAt": "1735636554635"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_getDomainRoute:
+    speakeasy-default-domains-controller-get-domain-route:
+      parameters:
+        path:
+          domain: "adolescent-petal.net"
+          address: "42531 Green Lane"
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "_domainId": "<id>", "address": "90726 E 10th Street", "type": "agent", "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1708129772047", "updatedAt": "1735652473494"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": 9757.52}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_updateDomainRoute:
+    speakeasy-default-domains-controller-update-domain-route:
+      parameters:
+        path:
+          domain: "cavernous-cycle.com"
+          address: "70213 Gerlach Rue"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "_domainId": "<id>", "address": "274 Kutch Fords", "type": "agent", "_environmentId": "<id>", "_organizationId": "<id>", "createdAt": "1720122687512", "updatedAt": "1735647797594"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_deleteDomainRoute:
+    speakeasy-default-domains-controller-delete-domain-route:
+      parameters:
+        path:
+          domain: "corrupt-avalanche.biz"
+          address: "753 W 4th Avenue"
+      responses:
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": 3301.74}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  DomainsController_testDomainRoute:
+    speakeasy-default-domains-controller-test-domain-route:
+      parameters:
+        path:
+          domain: "exalted-bonfire.com"
+          address: "90499 Rowan Close"
+      requestBody:
+        application/json: {"from": {"address": "58851 Konopelski Overpass"}, "subject": "<value>"}
+      responses:
+        "200":
+          application/json: {"matched": true, "dryRun": true}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": true}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  IntegrationsController_generateConnectOAuthUrl:
+    speakeasy-default-integrations-controller-generate-connect-O-auth-url:
+      requestBody:
+        application/json: {"subscriberId": "subscriber-123", "integrationIdentifier": "<value>", "connectionIdentifier": "slack-connection-abc123", "context": {"key": "org-acme"}, "scope": ["chat:write", "chat:write.public", "channels:read"], "connectionMode": "shared", "autoLinkUser": true}
+      responses:
+        "201":
+          application/json: {"url": "https://slack.com/oauth/v2/authorize?state=..."}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  IntegrationsController_generateLinkUserOAuthUrl:
+    speakeasy-default-integrations-controller-generate-link-user-O-auth-url:
+      requestBody:
+        application/json: {"subscriberId": "subscriber-123", "integrationIdentifier": "<value>", "connectionIdentifier": "slack-connection-abc123", "context": {"key": "org-acme"}, "userScope": ["identity.basic"]}
+      responses:
+        "201":
+          application/json: {"url": "https://slack.com/oauth/v2/authorize?state=..."}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": false}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `novu.layouts.create()`:  `response.controls.ui_schema` **Changed** (Breaking ⚠️)\n* `novu.notifications.retrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `novu.notifications.list()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `novu.channel_endpoints.update()`:  `response.provider_id.enum(cm_telecom)` **Added** (Breaking ⚠️)\n* `novu.channel_endpoints.retrieve()`:  `response.provider_id.enum(cm_telecom)` **Added** (Breaking ⚠️)\n* `novu.channel_endpoints.create()`:  `response.provider_id.enum(cm_telecom)` **Added** (Breaking ⚠️)\n* `novu.channel_endpoints.list()`: \n  *  `request.provider_id` **Changed**\n  *  `response.data[].provider_id.enum(cm_telecom)` **Added** (Breaking ⚠️)\n* `novu.channel_connections.update()`:  `response.provider_id.enum(cm_telecom)` **Added** (Breaking ⚠️)\n* `novu.channel_connections.retrieve()`:  `response.provider_id.enum(cm_telecom)` **Added** (Breaking ⚠️)\n* `novu.channel_connections.create()`:  `response.provider_id.enum(cm_telecom)` **Added** (Breaking ⚠️)\n* `novu.channel_connections.list()`: \n  *  `request.provider_id` **Changed**\n  *  `response.data[].provider_id.enum(cm_telecom)` **Added** (Breaking ⚠️)\n* `novu.workflows.steps.retrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `novu.workflows.sync()`:  `response` **Changed** (Breaking ⚠️)\n* `novu.workflows.patch()`:  `response` **Changed** (Breaking ⚠️)\n* `novu.workflows.get()`:  `response` **Changed** (Breaking ⚠️)\n* `novu.workflows.update()`: \n  *  `request.update_workflow_dto.steps[]` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `novu.workflows.list()`:  `response.workflows[]` **Changed** (Breaking ⚠️)\n* `novu.workflows.create()`: \n  *  `request.create_workflow_dto.steps[]` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `novu.layouts.duplicate()`:  `response.controls.ui_schema` **Changed** (Breaking ⚠️)\n* `novu.layouts.retrieve()`:  `response.controls.ui_schema` **Changed** (Breaking ⚠️)\n* `novu.layouts.update()`:  `response.controls.ui_schema` **Changed** (Breaking ⚠️)\n* `novu.layouts.list()`:  `response.layouts[].controls.ui_schema` **Changed** (Breaking ⚠️)\n* `novu.subscribers.notifications.delete_all()`: **Added**\n* `novu.subscribers.notifications.mark_all_as_read()`: **Added**\n* `novu.trigger_broadcast()`:  `response.activity_feed_link` **Added**\n* `novu.trigger_bulk()`:  `response.[].activity_feed_link` **Added**\n* `novu.environment_variables.usage()`: **Added**\n* `novu.environment_variables.delete()`: **Added**\n* `novu.environment_variables.update()`: **Added**\n* `novu.environment_variables.retrieve()`: **Added**\n* `novu.environment_variables.create()`: **Added**\n* `novu.environment_variables.list()`: **Added**\n* `novu.workflows.steps.generate_preview()`: **Added**\n* `novu.subscribers.notifications.mark_as_seen()`: **Added**\n* `novu.subscribers.notifications.archive_all_read()`: **Added**\n* `novu.trigger()`:  `response.activity_feed_link` **Added**\n* `novu.subscribers.notifications.list()`: **Added**\n* `novu.subscribers.notifications.count()`: **Added**\n* `novu.subscribers.notifications.archive_all()`: **Added**\n* `novu.subscribers.notifications.unsnooze()`: **Added**\n* `novu.subscribers.notifications.mark_as_unread()`: **Added**\n* `novu.subscribers.notifications.unarchive()`: **Added**\n* `novu.subscribers.notifications.snooze()`: **Added**\n* `novu.subscribers.notifications.mark_as_read()`: **Added**\n* `novu.subscribers.notifications.archive()`: **Added**\n* `novu.subscribers.notifications.revert_action()`: **Added**\n* `novu.subscribers.notifications.complete_action()`: **Added**\n* `novu.subscribers.notifications.delete()`: **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `novu.channel_endpoints.update()`:  `response.provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.workflows.create()`: \n  *  `request.create_workflow_dto.steps[].union(http_request).control_values.union(HttpRequestControlDto).body` **Changed** (Breaking ⚠️)\n  *  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.notifications.retrieve()`:  `response.jobs[].execution_details[].provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.notifications.list()`:  `response.data[].jobs[].execution_details[].provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.channel_endpoints.retrieve()`:  `response.provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.channel_endpoints.create()`:  `response.provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.channel_endpoints.list()`: \n  *  `request.provider_id` **Changed**\n  *  `response.data[].provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.channel_connections.update()`:  `response.provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.channel_connections.retrieve()`:  `response.provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.channel_connections.create()`: \n  *  `request.create_channel_connection_request_dto.connection_mode` **Added**\n  *  `response.provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.channel_connections.list()`: \n  *  `request.provider_id` **Changed**\n  *  `response.data[].provider_id.enum(novu_email_agent)` **Added** (Breaking ⚠️)\n* `novu.workflows.sync()`:  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.workflows.get()`:  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.workflows.patch()`:  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.workflows.update()`: \n  *  `request.update_workflow_dto.steps[].union(http_request).control_values.union(HttpRequestControlDto).body` **Changed** (Breaking ⚠️)\n  *  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.domains.routes.retrieve()`: **Added**\n* `novu.domains.diagnose()`: **Added**\n* `novu.layouts.duplicate()`: \n  *  `request.duplicate_layout_dto.layout_id` **Added**\n* `novu.integrations.generate_connect_o_auth_url()`: **Added**\n* `novu.domains.routes.test()`: **Added**\n* `novu.domains.create()`: **Added**\n* `novu.domains.routes.delete()`: **Added**\n* `novu.domains.routes.update()`: **Added**\n* `novu.domains.routes.create()`: **Added**\n* `novu.domains.routes.list()`: **Added**\n* `novu.domains.auto_configure.start()`: **Added**\n* `novu.domains.auto_configure.retrieve()`: **Added**\n* `novu.domains.verify()`: **Added**\n* `novu.integrations.generate_link_user_o_auth_url()`: **Added**\n* `novu.domains.delete()`: **Added**\n* `novu.domains.list()`: **Added**\n* `novu.integrations.list()`:  `response.[].credentials` **Changed**\n* `novu.integrations.create()`: \n  *  `request.create_integration_request_dto.credentials` **Changed**\n  *  `response.credentials` **Changed**\n* `novu.integrations.update()`: \n  *  `request.update_integration_request_dto.credentials` **Changed**\n  *  `response.credentials` **Changed**\n* `novu.integrations.delete()`:  `response.[].credentials` **Changed**\n* `novu.integrations.set_as_primary()`:  `response.credentials` **Changed**\n* `novu.integrations.list_active()`:  `response.[].credentials` **Changed**\n* `novu.integrations.generate_chat_o_auth_url()`: **Deprecated**\n* `novu.integrations.generate_chat_o_auth_url()`:  `request.generate_chat_oauth_url_request_dto` **Changed**\n* `novu.domains.update()`: **Added**\n* `novu.domains.retrieve()`: **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
