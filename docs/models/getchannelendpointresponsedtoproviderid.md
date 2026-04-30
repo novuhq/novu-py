@@ -36,6 +36,7 @@ value = GetChannelEndpointResponseDtoProviderID.EMAILJS
 | `SPARKPOST`         | sparkpost           |
 | `EMAIL_WEBHOOK`     | email-webhook       |
 | `BRAZE`             | braze               |
+| `NOVU_EMAIL_AGENT`  | novu-email-agent    |
 | `NEXMO`             | nexmo               |
 | `PLIVO`             | plivo               |
 | `SMS77`             | sms77               |
