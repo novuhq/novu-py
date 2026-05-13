@@ -63,6 +63,10 @@ class CredentialsDtoTypedDict(TypedDict):
     sender_id: NotRequired[str]
     tenant_id: NotRequired[str]
     app_io_base_url: NotRequired[str]
+    signing_secret: NotRequired[str]
+    outbound_integration_id: NotRequired[str]
+    use_from_address_override: NotRequired[bool]
+    from_address_override: NotRequired[str]
 
 
 class CredentialsDto(BaseModel):
@@ -178,6 +182,22 @@ class CredentialsDto(BaseModel):
         None
     )
 
+    signing_secret: Annotated[Optional[str], pydantic.Field(alias="signingSecret")] = (
+        None
+    )
+
+    outbound_integration_id: Annotated[
+        Optional[str], pydantic.Field(alias="outboundIntegrationId")
+    ] = None
+
+    use_from_address_override: Annotated[
+        Optional[bool], pydantic.Field(alias="useFromAddressOverride")
+    ] = None
+
+    from_address_override: Annotated[
+        Optional[str], pydantic.Field(alias="fromAddressOverride")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -228,6 +248,10 @@ class CredentialsDto(BaseModel):
                 "senderId",
                 "tenantId",
                 "AppIOBaseUrl",
+                "signingSecret",
+                "outboundIntegrationId",
+                "useFromAddressOverride",
+                "fromAddressOverride",
             ]
         )
         serialized = handler(self)

@@ -72,6 +72,7 @@ Create a new channel connection for a resource for given integration. Only one c
 
 <!-- UsageSnippet language="python" operationID="ChannelConnectionsController_createChannelConnection" method="post" path="/v1/channel-connections" -->
 ```python
+import novu_py
 from novu_py import Novu
 
 
@@ -85,6 +86,7 @@ with Novu(
         "context": {
             "key": "org-acme",
         },
+        "connection_mode": novu_py.ConnectionMode.SHARED,
         "integration_identifier": "slack-prod",
         "workspace": {
             "id": "T123456",

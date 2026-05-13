@@ -31,6 +31,7 @@ if TYPE_CHECKING:
     from novu_py.channel_connections import ChannelConnections
     from novu_py.channel_endpoints import ChannelEndpoints
     from novu_py.contexts import Contexts
+    from novu_py.domains import Domains
     from novu_py.environment_variables import EnvironmentVariables
     from novu_py.environments import Environments
     from novu_py.integrations import Integrations
@@ -76,6 +77,10 @@ class Novu(BaseSDK):
     """
     channel_connections: "ChannelConnections"
     channel_endpoints: "ChannelEndpoints"
+    domains: "Domains"
+    r"""Used to manage your inbound email domains.
+    https://docs.novu.co/platform/domains
+    """
     environment_variables: "EnvironmentVariables"
     integrations: "Integrations"
     r"""With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
@@ -97,6 +102,7 @@ class Novu(BaseSDK):
         "workflows": ("novu_py.workflows", "Workflows"),
         "channel_connections": ("novu_py.channel_connections", "ChannelConnections"),
         "channel_endpoints": ("novu_py.channel_endpoints", "ChannelEndpoints"),
+        "domains": ("novu_py.domains", "Domains"),
         "environment_variables": (
             "novu_py.environment_variables",
             "EnvironmentVariables",
@@ -348,23 +354,7 @@ class Novu(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -502,23 +492,7 @@ class Novu(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -647,23 +621,7 @@ class Novu(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -785,23 +743,7 @@ class Novu(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -934,23 +876,7 @@ class Novu(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1090,23 +1016,7 @@ class Novu(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1246,23 +1156,7 @@ class Novu(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1402,23 +1296,7 @@ class Novu(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

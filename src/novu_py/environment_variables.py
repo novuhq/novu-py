@@ -86,23 +86,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -225,23 +209,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -377,23 +345,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -529,23 +481,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -668,23 +604,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -805,23 +725,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -882,7 +786,7 @@ class EnvironmentVariables(BaseSDK):
     ) -> models.EnvironmentVariablesControllerUpdateEnvironmentVariableResponse:
         r"""Update a variable
 
-        Updates an existing environment variable. Providing values replaces all existing per-environment values.
+        Updates an existing environment variable. Providing `values` merges them into the existing per-environment values by `_environmentId`; envs not present in the request keep their stored value. Submitting the masked secret placeholder (the value returned by read endpoints for secret variables) as a real value is rejected.
 
         :param variable_key: The unique key of the environment variable (e.g. BASE_URL)
         :param update_environment_variable_request_dto:
@@ -958,23 +862,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1037,7 +925,7 @@ class EnvironmentVariables(BaseSDK):
     ) -> models.EnvironmentVariablesControllerUpdateEnvironmentVariableResponse:
         r"""Update a variable
 
-        Updates an existing environment variable. Providing values replaces all existing per-environment values.
+        Updates an existing environment variable. Providing `values` merges them into the existing per-environment values by `_environmentId`; envs not present in the request keep their stored value. Submitting the masked secret placeholder (the value returned by read endpoints for secret variables) as a real value is rejected.
 
         :param variable_key: The unique key of the environment variable (e.g. BASE_URL)
         :param update_environment_variable_request_dto:
@@ -1113,23 +1001,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1252,23 +1124,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1388,23 +1244,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1526,23 +1366,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1665,23 +1489,7 @@ class EnvironmentVariables(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "405",
-                "409",
-                "413",
-                "414",
-                "415",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "503",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

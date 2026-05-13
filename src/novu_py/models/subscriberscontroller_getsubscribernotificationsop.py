@@ -19,7 +19,7 @@ from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class Severity(str, Enum):
+class QueryParamSeverity(str, Enum):
     HIGH = "high"
     MEDIUM = "medium"
     LOW = "low"
@@ -42,7 +42,7 @@ class SubscribersControllerGetSubscriberNotificationsRequestTypedDict(TypedDict)
     r"""Filter by seen state"""
     data: NotRequired[str]
     r"""Filter by data attributes (JSON string)"""
-    severity: NotRequired[List[Severity]]
+    severity: NotRequired[List[QueryParamSeverity]]
     r"""Filter by severity levels"""
     created_gte: NotRequired[float]
     r"""Filter notifications created on or after this timestamp (Unix timestamp in milliseconds)"""
@@ -108,7 +108,7 @@ class SubscribersControllerGetSubscriberNotificationsRequest(BaseModel):
     r"""Filter by data attributes (JSON string)"""
 
     severity: Annotated[
-        Optional[List[Severity]],
+        Optional[List[QueryParamSeverity]],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter by severity levels"""

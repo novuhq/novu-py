@@ -12,13 +12,20 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CreateIntegrationRequestDtoChannel(str, Enum):
-    r"""The channel type for the integration"""
+    r"""The channel type for the integration. Not required for agent-kind integrations."""
 
     IN_APP = "in_app"
     EMAIL = "email"
     SMS = "sms"
     CHAT = "chat"
     PUSH = "push"
+
+
+class CreateIntegrationRequestDtoKind(str, Enum):
+    r"""Distinguishes delivery integrations from agent-runtime integrations. Defaults to \"delivery\". Agent integrations do not require a channel."""
+
+    DELIVERY = "delivery"
+    AGENT = "agent"
 
 
 class ConfigurationsTypedDict(TypedDict):
@@ -30,16 +37,18 @@ class Configurations(BaseModel):
 
 
 class CreateIntegrationRequestDtoTypedDict(TypedDict):
-    provider_id: str
-    r"""The provider ID for the integration"""
-    channel: CreateIntegrationRequestDtoChannel
-    r"""The channel type for the integration"""
     name: NotRequired[str]
     r"""The name of the integration"""
     identifier: NotRequired[str]
     r"""The unique identifier for the integration"""
     environment_id: NotRequired[str]
     r"""The ID of the associated environment"""
+    provider_id: NotRequired[str]
+    r"""The provider ID for the integration"""
+    channel: NotRequired[CreateIntegrationRequestDtoChannel]
+    r"""The channel type for the integration. Not required for agent-kind integrations."""
+    kind: NotRequired[CreateIntegrationRequestDtoKind]
+    r"""Distinguishes delivery integrations from agent-runtime integrations. Defaults to \"delivery\". Agent integrations do not require a channel."""
     credentials: NotRequired[CredentialsDtoTypedDict]
     r"""The credentials for the integration"""
     active: NotRequired[bool]
@@ -53,12 +62,6 @@ class CreateIntegrationRequestDtoTypedDict(TypedDict):
 
 
 class CreateIntegrationRequestDto(BaseModel):
-    provider_id: Annotated[str, pydantic.Field(alias="providerId")]
-    r"""The provider ID for the integration"""
-
-    channel: CreateIntegrationRequestDtoChannel
-    r"""The channel type for the integration"""
-
     name: Optional[str] = None
     r"""The name of the integration"""
 
@@ -69,6 +72,15 @@ class CreateIntegrationRequestDto(BaseModel):
         None
     )
     r"""The ID of the associated environment"""
+
+    provider_id: Annotated[Optional[str], pydantic.Field(alias="providerId")] = None
+    r"""The provider ID for the integration"""
+
+    channel: Optional[CreateIntegrationRequestDtoChannel] = None
+    r"""The channel type for the integration. Not required for agent-kind integrations."""
+
+    kind: Optional[CreateIntegrationRequestDtoKind] = None
+    r"""Distinguishes delivery integrations from agent-runtime integrations. Defaults to \"delivery\". Agent integrations do not require a channel."""
 
     credentials: Optional[CredentialsDto] = None
     r"""The credentials for the integration"""
@@ -92,6 +104,9 @@ class CreateIntegrationRequestDto(BaseModel):
                 "name",
                 "identifier",
                 "_environmentId",
+                "providerId",
+                "channel",
+                "kind",
                 "credentials",
                 "active",
                 "check",
