@@ -11,6 +11,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class DuplicateLayoutDtoTypedDict(TypedDict):
     name: str
     r"""Name of the layout"""
+    layout_id: NotRequired[str]
+    r"""Identifier for the duplicated layout. When omitted, it is derived from the name."""
     is_translation_enabled: NotRequired[bool]
     r"""Enable or disable translations for this layout"""
 
@@ -19,6 +21,9 @@ class DuplicateLayoutDto(BaseModel):
     name: str
     r"""Name of the layout"""
 
+    layout_id: Annotated[Optional[str], pydantic.Field(alias="layoutId")] = None
+    r"""Identifier for the duplicated layout. When omitted, it is derived from the name."""
+
     is_translation_enabled: Annotated[
         Optional[bool], pydantic.Field(alias="isTranslationEnabled")
     ] = False
@@ -26,7 +31,7 @@ class DuplicateLayoutDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["isTranslationEnabled"])
+        optional_fields = set(["layoutId", "isTranslationEnabled"])
         serialized = handler(self)
         m = {}
 

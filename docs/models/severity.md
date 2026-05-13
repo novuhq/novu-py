@@ -5,15 +5,13 @@
 ```python
 from novu_py.models import Severity
 
-value = Severity.HIGH
+value = Severity.WARN
 ```
 
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `HIGH`   | high     |
-| `MEDIUM` | medium   |
-| `LOW`    | low      |
-| `NONE`   | none     |
+| Name    | Value   |
+| ------- | ------- |
+| `WARN`  | warn    |
+| `ERROR` | error   |

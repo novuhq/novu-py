@@ -1,0 +1,11 @@
+# DomainDiagnosticIssueDto
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `code`                                                                           | [models.DomainDiagnosticIssueDtoCode](../models/domaindiagnosticissuedtocode.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `severity`                                                                       | [models.Severity](../models/severity.md)                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `message`                                                                        | *str*                                                                            | :heavy_check_mark:                                                               | N/A                                                                              |
+| `fix`                                                                            | *str*                                                                            | :heavy_check_mark:                                                               | Plain-language remediation guidance                                              |

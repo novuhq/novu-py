@@ -16,8 +16,21 @@ from .steptypeenum import StepTypeEnum
 from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import ConfigDict, model_serializer
-from typing import Any, Dict, List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Any, Dict, List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+HTTPRequestStepResponseDtoBodyTypedDict = TypeAliasType(
+    "HTTPRequestStepResponseDtoBodyTypedDict",
+    Union[str, List[HTTPRequestKeyValuePairDtoTypedDict]],
+)
+r"""Request body as a raw JSON string. Key-value arrays are supported for legacy workflows."""
+
+
+HTTPRequestStepResponseDtoBody = TypeAliasType(
+    "HTTPRequestStepResponseDtoBody", Union[str, List[HTTPRequestKeyValuePairDto]]
+)
+r"""Request body as a raw JSON string. Key-value arrays are supported for legacy workflows."""
 
 
 class HTTPRequestStepResponseDtoControlValuesTypedDict(TypedDict):
@@ -29,8 +42,8 @@ class HTTPRequestStepResponseDtoControlValuesTypedDict(TypedDict):
     r"""Target URL for the HTTP request"""
     headers: NotRequired[List[HTTPRequestKeyValuePairDtoTypedDict]]
     r"""Request headers as key-value pairs"""
-    body: NotRequired[List[HTTPRequestKeyValuePairDtoTypedDict]]
-    r"""Request body as key-value pairs"""
+    body: NotRequired[HTTPRequestStepResponseDtoBodyTypedDict]
+    r"""Request body as a raw JSON string. Key-value arrays are supported for legacy workflows."""
     response_body_schema: NotRequired[Dict[str, Any]]
     r"""JSON schema to validate response body against"""
     enforce_schema_validation: NotRequired[bool]
@@ -56,8 +69,8 @@ class HTTPRequestStepResponseDtoControlValues(BaseModel):
     headers: Optional[List[HTTPRequestKeyValuePairDto]] = None
     r"""Request headers as key-value pairs"""
 
-    body: Optional[List[HTTPRequestKeyValuePairDto]] = None
-    r"""Request body as key-value pairs"""
+    body: Optional[HTTPRequestStepResponseDtoBody] = None
+    r"""Request body as a raw JSON string. Key-value arrays are supported for legacy workflows."""
 
     response_body_schema: Annotated[
         Optional[Dict[str, Any]], pydantic.Field(alias="responseBodySchema")
