@@ -87,4 +87,7 @@ class ProvidersIDEnum(str, Enum):
     WHATSAPP_BUSINESS = "whatsapp-business"
     CHAT_WEBHOOK = "chat-webhook"
     NOVU_SLACK = "novu-slack"
+    TELEGRAM = "telegram"
     ANTHROPIC = "anthropic"
+    NOVU_ANTHROPIC = "novu-anthropic"
+    ANTHROPIC_AWS = "anthropic-aws"

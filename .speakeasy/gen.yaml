@@ -32,7 +32,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 3.16.0
+  version: 3.17.0
   additionalDependencies:
     dev:
       - pytest>=6.0.0
@@ -47,6 +47,7 @@ python:
   authors:
     - Speakeasy
   baseErrorName: NovuError
+  bodyVariantOverloads: false
   clientServerStatusCodesAsErrors: true
   constFieldCasing: upper
   defaultErrorName: APIError
@@ -76,8 +77,11 @@ python:
   license: ""
   maxMethodParams: 4
   methodArguments: infer-optional-args
+  methodTimeoutArgument: timeout-ms
+  methodTimeoutUnits: milliseconds
   moduleName: ""
   multipartArrayFormat: legacy
+  optionalDependencies: {}
   outputModelSuffix: output
   packageManager: poetry
   packageName: novu-py

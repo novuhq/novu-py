@@ -29,3 +29,21 @@ value: models.WebhookEndpointDto = /* values here */
 value: models.PhoneEndpointDto = /* values here */
 ```
 
+### `models.MsTeamsChannelEndpointDto`
+
+```python
+value: models.MsTeamsChannelEndpointDto = /* values here */
+```
+
+### `models.MsTeamsUserEndpointDto`
+
+```python
+value: models.MsTeamsUserEndpointDto = /* values here */
+```
+
+### `models.TelegramChatEndpointDto`
+
+```python
+value: models.TelegramChatEndpointDto = /* values here */
+```
+

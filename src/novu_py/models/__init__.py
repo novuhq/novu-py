@@ -319,6 +319,15 @@ if TYPE_CHECKING:
         CreateSubscriptionsResponseDto,
         CreateSubscriptionsResponseDtoTypedDict,
     )
+    from .createtelegramchatendpointdto import (
+        CreateTelegramChatEndpointDto,
+        CreateTelegramChatEndpointDtoContext,
+        CreateTelegramChatEndpointDtoContext2,
+        CreateTelegramChatEndpointDtoContext2TypedDict,
+        CreateTelegramChatEndpointDtoContextTypedDict,
+        CreateTelegramChatEndpointDtoType,
+        CreateTelegramChatEndpointDtoTypedDict,
+    )
     from .createtopicsubscriptionsrequestdto import (
         CreateTopicSubscriptionsRequestDto,
         CreateTopicSubscriptionsRequestDtoContext,
@@ -1836,6 +1845,10 @@ if TYPE_CHECKING:
     from .syncedworkflowdto import SyncedWorkflowDto, SyncedWorkflowDtoTypedDict
     from .syncresultdto import SyncResultDto, SyncResultDtoTypedDict
     from .syncworkflowdto import SyncWorkflowDto, SyncWorkflowDtoTypedDict
+    from .telegramchatendpointdto import (
+        TelegramChatEndpointDto,
+        TelegramChatEndpointDtoTypedDict,
+    )
     from .tenantpayloaddto import (
         Data,
         DataTypedDict,
@@ -2529,6 +2542,13 @@ __all__ = [
     "CreateSubscriberRequestDtoTypedDict",
     "CreateSubscriptionsResponseDto",
     "CreateSubscriptionsResponseDtoTypedDict",
+    "CreateTelegramChatEndpointDto",
+    "CreateTelegramChatEndpointDtoContext",
+    "CreateTelegramChatEndpointDtoContext2",
+    "CreateTelegramChatEndpointDtoContext2TypedDict",
+    "CreateTelegramChatEndpointDtoContextTypedDict",
+    "CreateTelegramChatEndpointDtoType",
+    "CreateTelegramChatEndpointDtoTypedDict",
     "CreateTopicSubscriptionsRequestDto",
     "CreateTopicSubscriptionsRequestDtoContext",
     "CreateTopicSubscriptionsRequestDtoContext2",
@@ -3600,6 +3620,8 @@ __all__ = [
     "Target",
     "TargetResource",
     "TargetResourceTypedDict",
+    "TelegramChatEndpointDto",
+    "TelegramChatEndpointDtoTypedDict",
     "Tenant",
     "TenantPayloadDto",
     "TenantPayloadDtoTypedDict",
@@ -4154,6 +4176,13 @@ _dynamic_imports: dict[str, str] = {
     "CreateSubscriberRequestDtoTypedDict": ".createsubscriberrequestdto",
     "CreateSubscriptionsResponseDto": ".createsubscriptionsresponsedto",
     "CreateSubscriptionsResponseDtoTypedDict": ".createsubscriptionsresponsedto",
+    "CreateTelegramChatEndpointDto": ".createtelegramchatendpointdto",
+    "CreateTelegramChatEndpointDtoContext": ".createtelegramchatendpointdto",
+    "CreateTelegramChatEndpointDtoContext2": ".createtelegramchatendpointdto",
+    "CreateTelegramChatEndpointDtoContext2TypedDict": ".createtelegramchatendpointdto",
+    "CreateTelegramChatEndpointDtoContextTypedDict": ".createtelegramchatendpointdto",
+    "CreateTelegramChatEndpointDtoType": ".createtelegramchatendpointdto",
+    "CreateTelegramChatEndpointDtoTypedDict": ".createtelegramchatendpointdto",
     "CreateTopicSubscriptionsRequestDto": ".createtopicsubscriptionsrequestdto",
     "CreateTopicSubscriptionsRequestDtoContext": ".createtopicsubscriptionsrequestdto",
     "CreateTopicSubscriptionsRequestDtoContext2": ".createtopicsubscriptionsrequestdto",
@@ -5224,6 +5253,8 @@ _dynamic_imports: dict[str, str] = {
     "SyncResultDtoTypedDict": ".syncresultdto",
     "SyncWorkflowDto": ".syncworkflowdto",
     "SyncWorkflowDtoTypedDict": ".syncworkflowdto",
+    "TelegramChatEndpointDto": ".telegramchatendpointdto",
+    "TelegramChatEndpointDtoTypedDict": ".telegramchatendpointdto",
     "Data": ".tenantpayloaddto",
     "DataTypedDict": ".tenantpayloaddto",
     "TenantPayloadDto": ".tenantpayloaddto",
