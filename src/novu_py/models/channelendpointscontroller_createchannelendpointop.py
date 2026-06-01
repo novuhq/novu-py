@@ -21,6 +21,10 @@ from .createslackuserendpointdto import (
     CreateSlackUserEndpointDto,
     CreateSlackUserEndpointDtoTypedDict,
 )
+from .createtelegramchatendpointdto import (
+    CreateTelegramChatEndpointDto,
+    CreateTelegramChatEndpointDtoTypedDict,
+)
 from .createwebhookendpointdto import (
     CreateWebhookEndpointDto,
     CreateWebhookEndpointDtoTypedDict,
@@ -51,6 +55,7 @@ ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypedDict = TypeAliasT
         CreatePhoneEndpointDtoTypedDict,
         CreateMsTeamsChannelEndpointDtoTypedDict,
         CreateMsTeamsUserEndpointDtoTypedDict,
+        CreateTelegramChatEndpointDtoTypedDict,
     ],
 )
 r"""Channel endpoint creation request. The structure varies based on the type field."""
@@ -64,6 +69,7 @@ ChannelEndpointsControllerCreateChannelEndpointRequestBody = Annotated[
         Annotated[CreatePhoneEndpointDto, Tag("phone")],
         Annotated[CreateMsTeamsChannelEndpointDto, Tag("ms_teams_channel")],
         Annotated[CreateMsTeamsUserEndpointDto, Tag("ms_teams_user")],
+        Annotated[CreateTelegramChatEndpointDto, Tag("telegram_chat")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

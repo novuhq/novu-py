@@ -157,7 +157,9 @@ class Novu(BaseSDK):
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
         security: Any = None
-        if callable(secret_key):
+        if secret_key is None:
+            security = None
+        elif callable(secret_key):
             # pylint: disable=unnecessary-lambda-assignment
             security = lambda: models.Security(secret_key=secret_key())
         else:

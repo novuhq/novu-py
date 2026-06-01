@@ -41,3 +41,9 @@ value: models.CreateMsTeamsChannelEndpointDto = /* values here */
 value: models.CreateMsTeamsUserEndpointDto = /* values here */
 ```
 
+### `models.CreateTelegramChatEndpointDto`
+
+```python
+value: models.CreateTelegramChatEndpointDto = /* values here */
+```
+

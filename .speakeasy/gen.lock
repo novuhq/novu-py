@@ -1,38 +1,38 @@
 lockVersion: 2.0.0
 id: f83d894c-c934-499f-8a8d-e128395ae8ff
 management:
-  docChecksum: 1ae2745d3d9b1151952944ab49df2a88
+  docChecksum: db8002579d820f70b2e3f0a3c22940f4
   docVersion: 3.15.0
-  speakeasyVersion: 1.763.0
-  generationVersion: 2.884.0
-  releaseVersion: 3.16.0
-  configChecksum: 3e260fecfc0a9d940cf3241d338b8150
+  speakeasyVersion: 1.769.1
+  generationVersion: 2.892.1
+  releaseVersion: 3.17.0
+  configChecksum: 5ff68620f07ae4cdf7222c8db26b1263
   repoURL: https://github.com/novuhq/novu-py.git
   installationURL: https://github.com/novuhq/novu-py.git
   published: true
 persistentEdits:
-  generation_id: 47d72c8f-4423-4743-908b-01c6f68683a0
-  pristine_commit_hash: bd17384c957c44237d3b70f102b9b9b0220cb01a
-  pristine_tree_hash: 42f07e9c4c5d72590245266d18ee16a4474f7623
+  generation_id: c7775bc8-3f2f-42cc-8f63-3128f405be24
+  pristine_commit_hash: a7d9116b755bd03497bd2f1ec41388cb7a6e576a
+  pristine_tree_hash: 737fcd8aee5d001b19e58966bf930fc083d99d12
 features:
   python:
-    additionalDependencies: 1.0.0
+    additionalDependencies: 1.1.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.7
-    core: 6.0.21
+    core: 6.0.24
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
     enumUnions: 0.1.1
-    envVarSecurityUsage: 0.3.2
-    examples: 3.0.3
+    envVarSecurityUsage: 0.3.3
+    examples: 3.0.4
     flattening: 3.1.1
     globalSecurity: 3.0.7
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.2.1
     groups: 3.0.1
-    methodArguments: 1.0.2
+    methodArguments: 1.1.0
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.3
     nullables: 1.0.2
@@ -41,7 +41,7 @@ features:
     retries: 3.0.5
     sdkHooks: 1.2.1
     unions: 3.1.5
-    uploadStreams: 1.0.0
+    uploadStreams: 1.0.2
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
@@ -125,8 +125,8 @@ trackedFiles:
     pristine_git_object: 51b558c0ce69e0084da461b244f455d296f373e5
   docs/models/actorfeeditemdto.md:
     id: "603054716781"
-    last_write_checksum: sha1:edf5c314eacbe7795b6b1f971922ccdf0d950b59
-    pristine_git_object: 17773d67ceb1403f2238da14cd81633188fec1f9
+    last_write_checksum: sha1:d87393afd670185948cdb373d3be27c6956ce87e
+    pristine_git_object: 6c73abca4bf381d71e9e34357722c7396ff08d63
   docs/models/actortypeenum.md:
     id: 5c07e8432fb2
     last_write_checksum: sha1:47ad68e1a440a0e6554637b570bba3af3906d280
@@ -261,8 +261,8 @@ trackedFiles:
     pristine_git_object: c474fb018b33290e231ba9a7d1d1b78493491ee1
   docs/models/channelendpointscontrollercreatechannelendpointrequestbody.md:
     id: e920d82b9185
-    last_write_checksum: sha1:4a5e7cfc398f57349a53048fa2667c661a3bcb46
-    pristine_git_object: 2607b75f22670db974d0f43a7b91d44c94ee1449
+    last_write_checksum: sha1:44175ff63399907438032116a3bdbe6a97091041
+    pristine_git_object: 076be709d924158b59200bfd4bb9fd060c80b73b
   docs/models/channelendpointscontrollercreatechannelendpointresponse.md:
     id: 4a301792654a
     last_write_checksum: sha1:428d05ddc67e3746ea5638d0f886441d4769d145
@@ -333,8 +333,8 @@ trackedFiles:
     pristine_git_object: 473d4bea64e45b51b458b1795a92c6f54af3a1f6
   docs/models/chatorpushproviderenum.md:
     id: 9b1a6601e3bd
-    last_write_checksum: sha1:0335d1d8304734adba25308d619a8f5b4278f3ff
-    pristine_git_object: 82b5ba03789d2c2806b9073be087c7d1d680ce8a
+    last_write_checksum: sha1:fdecd7cedd0e79ac823759b7e0acb4cbe04180c4
+    pristine_git_object: 9656938dacd1fc085b770ebae2a44b05bcc653f5
   docs/models/chatrenderoutput.md:
     id: 3cafb8e6105b
     last_write_checksum: sha1:6c7288d4b2b78f2cefeda89ad9cec88b753d4e47
@@ -591,6 +591,22 @@ trackedFiles:
     id: ebfdb4ce52e3
     last_write_checksum: sha1:7211d85b8207ed5918039ff1a4a76940f870b4f5
     pristine_git_object: d890d0c96ae767a63dffb7a46f97ffabc5ab5782
+  docs/models/createtelegramchatendpointdto.md:
+    id: 6c194bbf5773
+    last_write_checksum: sha1:d03b0ea8e2430e6fefd104318941dc8d45e56ad4
+    pristine_git_object: 8bfb4049a620b8c875877ea0f36397a8c9fdf83d
+  docs/models/createtelegramchatendpointdtocontext.md:
+    id: 344feb8a9365
+    last_write_checksum: sha1:66aacc32692d4d65a7c1bc5b7540f5fcaf12fb96
+    pristine_git_object: edd806eac9de5645530e6d8e7a4695e1f2d43376
+  docs/models/createtelegramchatendpointdtocontext2.md:
+    id: 6371dd05ee53
+    last_write_checksum: sha1:d8f35d57d5be9feb200d98f0ed824b7056fa2269
+    pristine_git_object: 64aede7e9fedd350434914b7cfa03958a3c20fb6
+  docs/models/createtelegramchatendpointdtotype.md:
+    id: 80e5c100bf1f
+    last_write_checksum: sha1:a57373f650eae3cfaad73a1af1e2d6c2838878a2
+    pristine_git_object: 179892fefd302c48cae9c46520411fde6f95d59c
   docs/models/createtopicsubscriptionsrequestdto.md:
     id: ebe4bfcaf57e
     last_write_checksum: sha1:b586b536b08178dddf2ba399630e4c22cd437391
@@ -633,8 +649,8 @@ trackedFiles:
     pristine_git_object: cd3f8f8acab21bbcc5d6ac2a3374dd551c9295cc
   docs/models/credentialsdto.md:
     id: 19f358ae6c7e
-    last_write_checksum: sha1:a96d753e31563a66e79ad6f6457825cbb9640027
-    pristine_git_object: 5a06def7d55726c6a38e494f7a262bdb4e7945c9
+    last_write_checksum: sha1:87a72a95b7c62bc1cab09d6622719ea63623fafd
+    pristine_git_object: 4a83193dd51bcf9fa7b34e2bfba000b8c0a263f0
   docs/models/criticality.md:
     id: d2650f6cbd02
     last_write_checksum: sha1:7f9978498aa0a42eb83c085ac8c35e2cb80194b2
@@ -1125,8 +1141,8 @@ trackedFiles:
     pristine_git_object: 2f30dc683d0cb249bacc43d719f159579e2068cf
   docs/models/endpoint.md:
     id: dc72b5fd04e3
-    last_write_checksum: sha1:5b69169987585bd6da5f89667d3866e055204b76
-    pristine_git_object: 577f46bed358476d334faf42982aeb772838b299
+    last_write_checksum: sha1:f1a5aafa2f664926f6107c62cbad74b3286fa264
+    pristine_git_object: b8dc532e1539b62aecd593eaedbc04828b48030d
   docs/models/environmentdiffsummarydto.md:
     id: 394f9851b8d7
     last_write_checksum: sha1:60a622534e25487767f4cddda6e6f1d2ea8a0b73
@@ -1469,12 +1485,12 @@ trackedFiles:
     pristine_git_object: 970c0a3440097dc5c73ff8b9124b203b0833d431
   docs/models/getchannelendpointresponsedtoproviderid.md:
     id: f52cc4d686fb
-    last_write_checksum: sha1:adfd635b0a63de444d57b3f7388060a37f5a2f54
-    pristine_git_object: 75083e9736df00ce3100bbc94032caffdef2c641
+    last_write_checksum: sha1:fc70a61bdefe7058302de936fae3308bc6db59d5
+    pristine_git_object: 5045a3f44cd627204f085fe48d54e44f9d9a4492
   docs/models/getchannelendpointresponsedtotype.md:
     id: 476d50607b13
-    last_write_checksum: sha1:51d2ada195b151f189a4296556f9a49073db78f8
-    pristine_git_object: 191722bc8577650ee1ff53d40d99c56b1917d651
+    last_write_checksum: sha1:a6ce17a9e9c80b0ad89405a37aa2976220c2f107
+    pristine_git_object: 0bdc2c9d1ec3d40401a00ed4419b5e64073f71c6
   docs/models/getcontextresponsedto.md:
     id: 92ae0bcead30
     last_write_checksum: sha1:866179e3b34a32bb7ab244f6b6cf85946f1a65df
@@ -2245,12 +2261,12 @@ trackedFiles:
     pristine_git_object: b99bc09cb2b6e9fc4509c1ecdc6e0e55361837bd
   docs/models/providerid.md:
     id: 00e92c4b11c9
-    last_write_checksum: sha1:d1734592db5732b8c71c70158f427f25c8940c55
-    pristine_git_object: 824e2b1f0f3aa328c0840948785a2943bcba9942
+    last_write_checksum: sha1:c18df21029498f7ce77fb62770f6a9ff9a11c56d
+    pristine_git_object: 2a8620e90be7beb49deec7d02f4310a52613ef03
   docs/models/providersidenum.md:
     id: a8365bac8637
-    last_write_checksum: sha1:2d6300f9b6bb0bf401fa9680bcff396eaadb9138
-    pristine_git_object: 5b0f0e31212e6703b04f7e13828a6eb938f428e9
+    last_write_checksum: sha1:4c8911058ea308d0501a9cf81849943ad8db174d
+    pristine_git_object: 1e54b84dfdf2f9203542fd8478b9c4b87367744b
   docs/models/publishenvironmentrequestdto.md:
     id: "061170546620"
     last_write_checksum: sha1:7a3f47e14595c11ca22b70bc70a5f71e091c9cb5
@@ -2529,8 +2545,8 @@ trackedFiles:
     pristine_git_object: a1da6b7d97135f2100d0261e2d57ed754a6ae873
   docs/models/subscriberchanneldtoproviderid.md:
     id: 1f1b386fd4c9
-    last_write_checksum: sha1:51bacffe3e63352460a4b84bfe15cbabe98b32a2
-    pristine_git_object: 1f03720ae8e426555e4077b556b206e67ce612da
+    last_write_checksum: sha1:32bc072748e2f455028560b953977ed9c040d199
+    pristine_git_object: 5cf17e20db379fd0b0a188ad1e6b1ddd97e1f8bd
   docs/models/subscriberdto.md:
     id: 5bfa10d798e1
     last_write_checksum: sha1:0738d15f00de12ea3011cb392f674eafe37dd87b
@@ -2931,6 +2947,10 @@ trackedFiles:
     id: 48ead33439a6
     last_write_checksum: sha1:c14e228cc057298d8ac5cca1aef50e98f4ae3b60
     pristine_git_object: 8bbb2a7ccb43209c17e2ae1dd81f5965366b694c
+  docs/models/telegramchatendpointdto.md:
+    id: 02608bab3685
+    last_write_checksum: sha1:c1722c42749ed1aa7ea38b7b763c73e40b7d1af9
+    pristine_git_object: 84643ebec6ff390bdd3f095c82b5645ea93dc42e
   docs/models/tenant.md:
     id: 5d923fdac371
     last_write_checksum: sha1:68e19c554ccee231a494f4fbf85947848ed6a4f4
@@ -3765,8 +3785,8 @@ trackedFiles:
     pristine_git_object: 28264e779f844f941839b08281af711b98f4c946
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:7f55e7443380c658f07864bb3921342cd2fc1579
-    pristine_git_object: a52a1054e935a387290c0df9597c471802f8c632
+    last_write_checksum: sha1:35328bad5eaac3afa18fb9d20e18ce404bcc479e
+    pristine_git_object: 5bf5df81046c10a4611722485ac47153684d8a40
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77610d735cce1bc0f71f13a746bf06e463e2ce47
@@ -3793,8 +3813,8 @@ trackedFiles:
     pristine_git_object: 955703fa58801c45f9cc8e62f4dfef8228cbf625
   src/novu_py/_version.py:
     id: 8e69485642eb
-    last_write_checksum: sha1:aa7b9ba4024c32b86094c5dead4bd2e49df37e7e
-    pristine_git_object: f19f83707fa55c0d4b68a9ddb8f0bfa25f5934ce
+    last_write_checksum: sha1:585fddb6e44d2321ab9043b59c9821bd621e60f1
+    pristine_git_object: d8652c12e10aaa4c1b2fc93ed6b26551059de6b7
   src/novu_py/activity.py:
     id: 7d001a1721a3
     last_write_checksum: sha1:f5e4cdae6b9313974e81819a0310996d64e5e476
@@ -3861,8 +3881,8 @@ trackedFiles:
     pristine_git_object: 5aad07ebd2a8a0b8c78dc9f2804289978a012337
   src/novu_py/models/__init__.py:
     id: 08e336e51536
-    last_write_checksum: sha1:a92a216c17cab2711841a0295f705b70b36ec557
-    pristine_git_object: 11896f47983f1bef69d1eab30cd2c4bfeed9c659
+    last_write_checksum: sha1:06e99ec32c0b18dcd37aef3aa82e2a91cf3e9b7c
+    pristine_git_object: 69d98ee2ced71353a2205ff2d5bf80671f84df10
   src/novu_py/models/actiondto.py:
     id: 1d3499193d8c
     last_write_checksum: sha1:787de11e6a1d379959aa69b9d1c5994837de3c50
@@ -3989,8 +4009,8 @@ trackedFiles:
     pristine_git_object: baaf9c4c6a351caf09e8f5abedd9e14b7cb92933
   src/novu_py/models/channelendpointscontroller_createchannelendpointop.py:
     id: 60f2a5074756
-    last_write_checksum: sha1:5e986800bc9c7346cf48ff5f665daf520520862f
-    pristine_git_object: eca4f6e98c8e5b1bbe0d2722041c45274b0e9a9d
+    last_write_checksum: sha1:49c45d3f6a45e2bd9803a2dc2308b31c511760b8
+    pristine_git_object: c49f50e0919be68fba199cef398e522798ec9101
   src/novu_py/models/channelendpointscontroller_deletechannelendpointop.py:
     id: df05754a50dd
     last_write_checksum: sha1:8844915f86245f110f87c374d87c0aad312084d5
@@ -4029,8 +4049,8 @@ trackedFiles:
     pristine_git_object: 0473beff2071d993740ba5fdfe445a7a6581f0f6
   src/novu_py/models/chatorpushproviderenum.py:
     id: 515e5ccf5624
-    last_write_checksum: sha1:ceb1f7d1f05e67e2df184593f41f6ca86701b65c
-    pristine_git_object: 38eb79bff8378557182c50febb51c4019252e4f0
+    last_write_checksum: sha1:ad30165764ec3e1f68a99648e43ec134bc32834f
+    pristine_git_object: 4b07fd17f776d48f214458caeeb59d732e99eabb
   src/novu_py/models/chatrenderoutput.py:
     id: f47a11a90c83
     last_write_checksum: sha1:9707cf6aaaf1db70f42b1ca2ec6f263079b2254d
@@ -4143,6 +4163,10 @@ trackedFiles:
     id: c44f33d6efeb
     last_write_checksum: sha1:257a66c2bdd0704c9eb05496ea23d716c089604d
     pristine_git_object: b1ef2ce73108ddab62494c5e3a6b98fb736017e2
+  src/novu_py/models/createtelegramchatendpointdto.py:
+    id: 2176b62b1e64
+    last_write_checksum: sha1:a331daa144d36f74514f4e51f2dfadc8c70b7427
+    pristine_git_object: 140674906f5f3b81a9cb89edeb4cba5fe5288f6e
   src/novu_py/models/createtopicsubscriptionsrequestdto.py:
     id: 6e28f02949f8
     last_write_checksum: sha1:73a228a3616f0272a97916557946f420d4334602
@@ -4165,8 +4189,8 @@ trackedFiles:
     pristine_git_object: bec058459407265b60291e2204aeaf6d3f609441
   src/novu_py/models/credentialsdto.py:
     id: c3c08bd9afea
-    last_write_checksum: sha1:50ce263220d0fd7a47c553e4f91b9296067941c7
-    pristine_git_object: dd97f95519b5e3d3d19ce95f0c20dbb8f9b74b8e
+    last_write_checksum: sha1:f982e0ab5549f2ef7bfa61ab1dd9e7d0e69f1d1f
+    pristine_git_object: 26c9671a08f7f6cdd327175696afd998966ccd31
   src/novu_py/models/customcontroldto.py:
     id: ef9e44bf6c23
     last_write_checksum: sha1:060dc484198ddfa08bc32c9e79f8ef438be71dae
@@ -4593,12 +4617,12 @@ trackedFiles:
     pristine_git_object: 935e6ffb93fbe876043ba6a2d2a1c585bfec5901
   src/novu_py/models/getchannelconnectionresponsedto.py:
     id: 8fbf7ffa93f5
-    last_write_checksum: sha1:43ea57e68d14d8ebc7e48962d49e7c03697cefac
-    pristine_git_object: d8bf51c80c027c1543631b6486837c3cce1bda69
+    last_write_checksum: sha1:c3c19f733fc7dd181ac35a48c8f6afee66e88c37
+    pristine_git_object: 3ca3808ae892515dfbdabaae51b8c0eab6015cd9
   src/novu_py/models/getchannelendpointresponsedto.py:
     id: 7ecd48cbc543
-    last_write_checksum: sha1:3ad37b09733203a1f5bcdf34bb6cfd6b5a2663cc
-    pristine_git_object: de116dee67a403d7cc6876983caea6c6a2ccc6f2
+    last_write_checksum: sha1:da534475ddb71acf88ec309ec7eea403772645dd
+    pristine_git_object: 4db9d3f7e91010a61e22afee298a3c12a38696de
   src/novu_py/models/getcontextresponsedto.py:
     id: 14a214a6e106
     last_write_checksum: sha1:f793e38d07a343c7915a9218c0cf974b8e2c87e4
@@ -5061,8 +5085,8 @@ trackedFiles:
     pristine_git_object: 5a9cccbfee95b08b9890abaccbb29d4d5862623e
   src/novu_py/models/providersidenum.py:
     id: 7415ccdf52b5
-    last_write_checksum: sha1:e2a713e521a5c7ae5557c74e1962325295bc9440
-    pristine_git_object: e63d6e70b57123e487b151e88075841c2859103d
+    last_write_checksum: sha1:a64de6545998ef426263c76cc95382e9f1db0476
+    pristine_git_object: d91c3d08727a22e412560b0bb84db4bfc171e383
   src/novu_py/models/publishenvironmentrequestdto.py:
     id: d502aeeae822
     last_write_checksum: sha1:b10d11b264f21a5c576ec27562a5d6631e9ae671
@@ -5221,8 +5245,8 @@ trackedFiles:
     pristine_git_object: e95d42b3a98a416396cc7381f9334045c9e22c93
   src/novu_py/models/subscriberchanneldto.py:
     id: bc0829ef7ca2
-    last_write_checksum: sha1:97b7c827065cb0f5cd26e374c3f5d18ce6ed9692
-    pristine_git_object: 8fa9b2c8147612c61acb15b97ef5459b7c0a492e
+    last_write_checksum: sha1:763a3800b154232400f4af6c87b901aeb686f72b
+    pristine_git_object: a559981f8b476f4c1bf2f967da5703108ad9ccde
   src/novu_py/models/subscriberdto.py:
     id: 9ccff7aa6747
     last_write_checksum: sha1:c36cab7a54ed096195445ceac08e02f157084111
@@ -5447,6 +5471,10 @@ trackedFiles:
     id: 6754488e0c67
     last_write_checksum: sha1:82bb975c36ebba05ec6878ea8b254d34c01c1d6e
     pristine_git_object: d2ce655d608e1cac492f8abe890a6888e8702f84
+  src/novu_py/models/telegramchatendpointdto.py:
+    id: 7a23fcbb8fa1
+    last_write_checksum: sha1:d6bebeca5f565f75ecbc95a710f2a4b2ed3a2d03
+    pristine_git_object: b296a492427e2eef41dafb8611816f070a39b64e
   src/novu_py/models/tenantpayloaddto.py:
     id: e5454382ee7e
     last_write_checksum: sha1:bbab819298ffefb144abfc931fbb8c14b3ed9adf
@@ -5857,8 +5885,8 @@ trackedFiles:
     pristine_git_object: 06d73aa7885e7b9e5fce693a61f2e7311727bb8e
   src/novu_py/sdk.py:
     id: 295c6e2a7b17
-    last_write_checksum: sha1:5719baf28b85dc6c18bb40ded32d5f225da02c42
-    pristine_git_object: dad5b45ba3e23c72295597a24d0737fa85664af1
+    last_write_checksum: sha1:8431fe8c5f031a7c8e783a2177501f8a65201158
+    pristine_git_object: c606b5ba9453fc548a6e726be86e14bbc088c75e
   src/novu_py/sdkconfiguration.py:
     id: 10dc4ec23819
     last_write_checksum: sha1:7fbaa91126f9d2c9c73239b97d9cd115973cf49d
@@ -5885,8 +5913,12 @@ trackedFiles:
     pristine_git_object: bd1698bbeb72ef02af19b11f97f1a7f97f94cbcc
   src/novu_py/types/__init__.py:
     id: cf952daa42b9
-    last_write_checksum: sha1:140ebdd01a46f92ffc710c52c958c4eba3cf68ed
-    pristine_git_object: fc76fe0c5505e29859b5d2bb707d48fd27661b8c
+    last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
+    pristine_git_object: faa268137bc01c9d08cfadc4797017db48747a96
+  src/novu_py/types/base64fileinput.py:
+    id: e9d409deba66
+    last_write_checksum: sha1:4780e893d3853b5a6e28d9a6ca3ee102ce0f502d
+    pristine_git_object: 25fc53989ed497649363f983219fc58705c8bf87
   src/novu_py/types/basemodel.py:
     id: 0d54e2bcada6
     last_write_checksum: sha1:10d84aedeb9d35edfdadf2c3020caa1d24d8b584
@@ -5937,8 +5969,8 @@ trackedFiles:
     pristine_git_object: c04e0db82b68eca041f2cb2614d748fbac80fd41
   src/novu_py/utils/requestbodies.py:
     id: 259e0fae8805
-    last_write_checksum: sha1:41e2d2d2d3ecc394c8122ca4d4b85e1c3e03f054
-    pristine_git_object: 1de32b6d26f46590232f398fdba6ce0072f1659c
+    last_write_checksum: sha1:e1fef575283b7fe7fe2ad392dbbb3fb105309124
+    pristine_git_object: 591415af8e64baa410627b507d2740afb5387d13
   src/novu_py/utils/retries.py:
     id: 2222096a9176
     last_write_checksum: sha1:471372f5c5d1dd5583239c9cf3c75f1b636e5d87
@@ -7980,7 +8012,7 @@ examples:
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": []}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   DomainsController_diagnoseDomain:
@@ -8187,7 +8219,7 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `novu.channel_endpoints.update()`:  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.workflows.create()`: \n  *  `request.create_workflow_dto.steps[].union(http_request).control_values.union(HttpRequestControlDto).body` **Changed** (Breaking ⚠️)\n  *  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.notifications.retrieve()`:  `response.jobs[].execution_details[].provider_id` **Changed** (Breaking ⚠️)\n* `novu.notifications.list()`:  `response.data[].jobs[].execution_details[].provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_endpoints.retrieve()`:  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_endpoints.create()`:  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_endpoints.list()`: \n  *  `request.provider_id` **Changed**\n  *  `response.data[].provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_connections.update()`:  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_connections.retrieve()`:  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_connections.create()`: \n  *  `request.create_channel_connection_request_dto.connection_mode` **Added**\n  *  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_connections.list()`: \n  *  `request.provider_id` **Changed**\n  *  `response.data[].provider_id` **Changed** (Breaking ⚠️)\n* `novu.workflows.sync()`:  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.workflows.get()`:  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.workflows.patch()`:  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.workflows.update()`: \n  *  `request.update_workflow_dto.steps[].union(http_request).control_values.union(HttpRequestControlDto).body` **Changed** (Breaking ⚠️)\n  *  `response.steps[].union(http_request)` **Changed** (Breaking ⚠️)\n* `novu.domains.routes.retrieve()`: **Added**\n* `novu.domains.diagnose()`: **Added**\n* `novu.layouts.duplicate()`: \n  *  `request.duplicate_layout_dto.layout_id` **Added**\n* `novu.integrations.generate_connect_o_auth_url()`: **Added**\n* `novu.domains.routes.test()`: **Added**\n* `novu.domains.create()`: **Added**\n* `novu.domains.routes.delete()`: **Added**\n* `novu.domains.routes.update()`: **Added**\n* `novu.domains.routes.create()`: **Added**\n* `novu.domains.routes.list()`: **Added**\n* `novu.domains.auto_configure.start()`: **Added**\n* `novu.domains.auto_configure.retrieve()`: **Added**\n* `novu.domains.verify()`: **Added**\n* `novu.integrations.generate_link_user_o_auth_url()`: **Added**\n* `novu.domains.delete()`: **Added**\n* `novu.domains.list()`: **Added**\n* `novu.integrations.list()`:  `response.[]` **Changed**\n* `novu.integrations.create()`: \n  *  `request.create_integration_request_dto` **Changed**\n  *  `response` **Changed**\n* `novu.integrations.update()`: \n  *  `request.update_integration_request_dto.credentials` **Changed**\n  *  `response` **Changed**\n* `novu.integrations.delete()`:  `response.[]` **Changed**\n* `novu.integrations.set_as_primary()`:  `response` **Changed**\n* `novu.integrations.list_active()`:  `response.[]` **Changed**\n* `novu.integrations.generate_chat_o_auth_url()`: **Deprecated**\n* `novu.integrations.generate_chat_o_auth_url()`:  `request.generate_chat_oauth_url_request_dto` **Changed**\n* `novu.domains.update()`: **Added**\n* `novu.domains.retrieve()`: **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `novu.channel_connections.list()`: \n  *  `request.provider_id` **Changed**\n  *  `response.data[].provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_connections.retrieve()`:  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.notifications.retrieve()`:  `response.jobs[].execution_details[].provider_id` **Changed** (Breaking ⚠️)\n* `novu.layouts.generate_preview()`: \n  *  `request.layout_preview_request_dto.preview_payload.subscriber.channels[].provider_id.enum(telegram)` **Added**\n  *  `response.preview_payload_example.subscriber.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.search()`:  `response.data[].channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.create()`: \n  *  `response.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n  *  `error.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.retrieve()`:  `response.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.patch()`:  `response.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.credentials.update()`: \n  *  `request.update_subscriber_channel_request_dto.provider_id.enum(telegram)` **Added**\n  *  `response.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.credentials.append()`: \n  *  `request.update_subscriber_channel_request_dto.provider_id.enum(telegram)` **Added**\n  *  `response.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.messages.update_as_seen()`:  `response.subscriber.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.messages.mark_all_as()`:  `response.[].subscriber.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.subscribers.properties.update_online_flag()`:  `response.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.workflows.steps.generate_preview()`: \n  *  `request.generate_preview_request_dto.preview_payload.subscriber.channels[].provider_id.enum(telegram)` **Added**\n  *  `response.preview_payload_example.subscriber.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.notifications.list()`:  `response.data[].jobs[].execution_details[].provider_id` **Changed** (Breaking ⚠️)\n* `novu.messages.retrieve()`:  `response.data[].subscriber.channels[].provider_id.enum(telegram)` **Added** (Breaking ⚠️)\n* `novu.channel_endpoints.list()`: \n  *  `request.provider_id` **Changed**\n  *  `response.data[]` **Changed** (Breaking ⚠️)\n* `novu.channel_connections.update()`:  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_connections.create()`:  `response.provider_id` **Changed** (Breaking ⚠️)\n* `novu.channel_endpoints.create()`: \n  *  `request_body.union(telegram_chat)` **Added**\n  *  `response` **Changed** (Breaking ⚠️)\n* `novu.channel_endpoints.retrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `novu.channel_endpoints.update()`:  `response` **Changed** (Breaking ⚠️)\n* `novu.integrations.list()`:  `response.[].credentials` **Changed**\n* `novu.integrations.create()`: \n  *  `request.create_integration_request_dto.credentials` **Changed**\n  *  `response.credentials` **Changed**\n* `novu.integrations.update()`: \n  *  `request.update_integration_request_dto.credentials` **Changed**\n  *  `response.credentials` **Changed**\n* `novu.integrations.delete()`:  `response.[].credentials` **Changed**\n* `novu.integrations.set_as_primary()`:  `response.credentials` **Changed**\n* `novu.integrations.list_active()`:  `response.[].credentials` **Changed**\n* `novu.trigger()`: \n  *  `request.trigger_event_request_dto.to.union(SubscriberPayloadDto).channels[].provider_id.enum(telegram)` **Added**\n* `novu.trigger_broadcast()`: \n  *  `request.trigger_event_to_all_request_dto.actor.union(SubscriberPayloadDto).channels[].provider_id.enum(telegram)` **Added**\n* `novu.trigger_bulk()`: \n  *  `request.bulk_trigger_event_dto.events[].to.union(Array<1>)[].union(SubscriberPayloadDto).channels[].provider_id.enum(telegram)` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

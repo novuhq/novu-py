@@ -67,6 +67,14 @@ class CredentialsDtoTypedDict(TypedDict):
     outbound_integration_id: NotRequired[str]
     use_from_address_override: NotRequired[bool]
     from_address_override: NotRequired[str]
+    email_slug_prefix: NotRequired[str]
+    r"""Agent default shared inbox slug prefix used in `{emailSlugPrefix}-{agentId}@<shared-domain>`. Only meaningful on the NovuAgent email integration."""
+    external_environment_id: NotRequired[str]
+    r"""Claude Managed Agents: ID of the Anthropic environment tied to this integration. Hydrated by the API at integration provisioning time."""
+    external_vault_id: NotRequired[str]
+    r"""Claude Managed Agents: ID of the Anthropic vault (`vlt_…`) tied to this integration. Hydrated by the API at integration provisioning time and used to push OAuth-completed MCP credentials to the per-vault credentials API."""
+    external_workspace_id: NotRequired[str]
+    r"""Claude Managed Agents: id of the Anthropic workspace used in console deep links. Defaults to `'default'` (the Default Workspace). Set this when the API key is scoped to a custom workspace (e.g. `wrkspc_…`)."""
 
 
 class CredentialsDto(BaseModel):
@@ -198,6 +206,26 @@ class CredentialsDto(BaseModel):
         Optional[str], pydantic.Field(alias="fromAddressOverride")
     ] = None
 
+    email_slug_prefix: Annotated[
+        Optional[str], pydantic.Field(alias="emailSlugPrefix")
+    ] = None
+    r"""Agent default shared inbox slug prefix used in `{emailSlugPrefix}-{agentId}@<shared-domain>`. Only meaningful on the NovuAgent email integration."""
+
+    external_environment_id: Annotated[
+        Optional[str], pydantic.Field(alias="externalEnvironmentId")
+    ] = None
+    r"""Claude Managed Agents: ID of the Anthropic environment tied to this integration. Hydrated by the API at integration provisioning time."""
+
+    external_vault_id: Annotated[
+        Optional[str], pydantic.Field(alias="externalVaultId")
+    ] = None
+    r"""Claude Managed Agents: ID of the Anthropic vault (`vlt_…`) tied to this integration. Hydrated by the API at integration provisioning time and used to push OAuth-completed MCP credentials to the per-vault credentials API."""
+
+    external_workspace_id: Annotated[
+        Optional[str], pydantic.Field(alias="externalWorkspaceId")
+    ] = None
+    r"""Claude Managed Agents: id of the Anthropic workspace used in console deep links. Defaults to `'default'` (the Default Workspace). Set this when the API key is scoped to a custom workspace (e.g. `wrkspc_…`)."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -252,6 +280,10 @@ class CredentialsDto(BaseModel):
                 "outboundIntegrationId",
                 "useFromAddressOverride",
                 "fromAddressOverride",
+                "emailSlugPrefix",
+                "externalEnvironmentId",
+                "externalVaultId",
+                "externalWorkspaceId",
             ]
         )
         serialized = handler(self)
