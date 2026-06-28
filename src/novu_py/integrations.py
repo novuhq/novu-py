@@ -26,7 +26,7 @@ class Integrations(BaseSDK):
     ) -> models.IntegrationsControllerListIntegrationsResponse:
         r"""List all integrations
 
-        List all the channels integrations created in the organization
+        List all the channels integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -86,6 +86,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -144,7 +146,7 @@ class Integrations(BaseSDK):
     ) -> models.IntegrationsControllerListIntegrationsResponse:
         r"""List all integrations
 
-        List all the channels integrations created in the organization
+        List all the channels integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -204,6 +206,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -267,7 +271,7 @@ class Integrations(BaseSDK):
         r"""Create an integration
 
         Create an integration for the current environment the user is based on the API key provided.
-        Each provider supports different credentials, check the provider documentation for more details.
+        Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param create_integration_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -338,6 +342,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -399,7 +405,7 @@ class Integrations(BaseSDK):
         r"""Create an integration
 
         Create an integration for the current environment the user is based on the API key provided.
-        Each provider supports different credentials, check the provider documentation for more details.
+        Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param create_integration_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -470,6 +476,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -532,7 +540,7 @@ class Integrations(BaseSDK):
         r"""Update an integration
 
         Update an integration by its unique key identifier **integrationId**.
-        Each provider supports different credentials, check the provider documentation for more details.
+        Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param update_integration_request_dto:
@@ -605,6 +613,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -667,7 +677,7 @@ class Integrations(BaseSDK):
         r"""Update an integration
 
         Update an integration by its unique key identifier **integrationId**.
-        Each provider supports different credentials, check the provider documentation for more details.
+        Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param update_integration_request_dto:
@@ -740,6 +750,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -798,7 +810,7 @@ class Integrations(BaseSDK):
         r"""Delete an integration
 
         Delete an integration by its unique key identifier **integrationId**.
-        This action is irreversible.
+        This action is irreversible. Only integration metadata is returned, credentials field is returned as empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -860,6 +872,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -920,7 +934,7 @@ class Integrations(BaseSDK):
         r"""Delete an integration
 
         Delete an integration by its unique key identifier **integrationId**.
-        This action is irreversible.
+        This action is irreversible. Only integration metadata is returned, credentials field is returned as empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -982,6 +996,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1042,7 +1058,7 @@ class Integrations(BaseSDK):
         r"""Auto-configure an integration for inbound webhooks
 
         Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support.
-        This will automatically generate required webhook signing keys and configure webhook endpoints.
+        This will automatically generate required webhook signing keys and configure webhook endpoints. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1104,6 +1120,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1164,7 +1182,7 @@ class Integrations(BaseSDK):
         r"""Auto-configure an integration for inbound webhooks
 
         Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support.
-        This will automatically generate required webhook signing keys and configure webhook endpoints.
+        This will automatically generate required webhook signing keys and configure webhook endpoints. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1226,6 +1244,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1288,6 +1308,7 @@ class Integrations(BaseSDK):
         Update an integration as **primary** by its unique key identifier **integrationId**.
         This API will set the integration as primary for that channel in the current environment.
         Primary integration is used to deliver notification for sms and email channels in the workflow.
+        Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1349,6 +1370,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1409,6 +1432,7 @@ class Integrations(BaseSDK):
         Update an integration as **primary** by its unique key identifier **integrationId**.
         This API will set the integration as primary for that channel in the current environment.
         Primary integration is used to deliver notification for sms and email channels in the workflow.
+        Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1470,6 +1494,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1526,7 +1552,7 @@ class Integrations(BaseSDK):
     ) -> models.IntegrationsControllerGetActiveIntegrationsResponse:
         r"""List active integrations
 
-        List all the active integrations created in the organization
+        List all the active integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -1586,6 +1612,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1644,7 +1672,7 @@ class Integrations(BaseSDK):
     ) -> models.IntegrationsControllerGetActiveIntegrationsResponse:
         r"""List active integrations
 
-        List all the active integrations created in the organization
+        List all the active integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -1704,6 +1732,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1839,6 +1869,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1974,6 +2006,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2109,6 +2143,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2244,6 +2280,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2384,6 +2422,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2524,6 +2564,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

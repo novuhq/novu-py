@@ -20,8 +20,8 @@
 * [mark_all_as_read](#mark_all_as_read) - Mark all notifications as read
 * [archive_all_read](#archive_all_read) - Archive all read notifications
 * [mark_as_seen](#mark_as_seen) - Mark notifications as seen
-* [feed](#feed) - Retrieve subscriber notifications
-* [unseen_count](#unseen_count) - Retrieve unseen notifications count
+* [~~feed~~](#feed) - Retrieve subscriber notifications :warning: **Deprecated**
+* [~~unseen_count~~](#unseen_count) - Retrieve unseen notifications count :warning: **Deprecated**
 
 ## list
 
@@ -765,9 +765,11 @@ with Novu(
 | models.ErrorDto                        | 500                                    | application/json                       |
 | models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
-## feed
+## ~~feed~~
 
-Retrieve subscriber in-app (inbox) notifications by its unique key identifier **subscriberId**.
+This API is deprecated, use v2 API instead. Retrieve subscriber in-app notifications by its unique key identifier **subscriberId**.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -812,9 +814,11 @@ with Novu(
 | models.ErrorDto                        | 500                                    | application/json                       |
 | models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
-## unseen_count
+## ~~unseen_count~~
 
-Retrieve unseen in-app (inbox) notifications count for a subscriber by its unique key identifier **subscriberId**.
+This API is deprecated, use v2 API instead. Retrieve unseen in-app notifications count for a subscriber by its unique key identifier **subscriberId**.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

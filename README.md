@@ -617,11 +617,11 @@ asyncio.run(main())
 * [append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
 * [delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
-#### [Subscribers.Messages](docs/sdks/novumessages/README.md)
+#### [~~Subscribers.Messages~~](docs/sdks/novumessages/README.md)
 
-* [update_as_seen](docs/sdks/novumessages/README.md#update_as_seen) - Update notification action status
-* [mark_all](docs/sdks/novumessages/README.md#mark_all) - Update all notifications state
-* [mark_all_as](docs/sdks/novumessages/README.md#mark_all_as) - Update notifications state
+* [~~update_as_seen~~](docs/sdks/novumessages/README.md#update_as_seen) - Update notification action status :warning: **Deprecated**
+* [~~mark_all~~](docs/sdks/novumessages/README.md#mark_all) - Update all notifications state :warning: **Deprecated**
+* [~~mark_all_as~~](docs/sdks/novumessages/README.md#mark_all_as) - Update notifications state :warning: **Deprecated**
 
 #### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
 
@@ -641,8 +641,8 @@ asyncio.run(main())
 * [mark_all_as_read](docs/sdks/novunotifications/README.md#mark_all_as_read) - Mark all notifications as read
 * [archive_all_read](docs/sdks/novunotifications/README.md#archive_all_read) - Archive all read notifications
 * [mark_as_seen](docs/sdks/novunotifications/README.md#mark_as_seen) - Mark notifications as seen
-* [feed](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications
-* [unseen_count](docs/sdks/novunotifications/README.md#unseen_count) - Retrieve unseen notifications count
+* [~~feed~~](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications :warning: **Deprecated**
+* [~~unseen_count~~](docs/sdks/novunotifications/README.md#unseen_count) - Retrieve unseen notifications count :warning: **Deprecated**
 
 #### [Subscribers.Preferences](docs/sdks/preferences/README.md)
 
