@@ -57,6 +57,8 @@ PreviewPayloadDtoContext = TypeAliasType(
 class PreviewPayloadDtoTypedDict(TypedDict):
     subscriber: NotRequired[SubscriberResponseDtoOptionalTypedDict]
     r"""Partial subscriber information"""
+    actor: NotRequired[SubscriberResponseDtoOptionalTypedDict]
+    r"""Partial actor information"""
     payload: NotRequired[Dict[str, Any]]
     r"""Payload data"""
     steps: NotRequired[Dict[str, Any]]
@@ -69,6 +71,9 @@ class PreviewPayloadDtoTypedDict(TypedDict):
 class PreviewPayloadDto(BaseModel):
     subscriber: Optional[SubscriberResponseDtoOptional] = None
     r"""Partial subscriber information"""
+
+    actor: Optional[SubscriberResponseDtoOptional] = None
+    r"""Partial actor information"""
 
     payload: Optional[Dict[str, Any]] = None
     r"""Payload data"""
@@ -83,7 +88,9 @@ class PreviewPayloadDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["subscriber", "payload", "steps", "context", "env"])
+        optional_fields = set(
+            ["subscriber", "actor", "payload", "steps", "context", "env"]
+        )
         serialized = handler(self)
         m = {}
 

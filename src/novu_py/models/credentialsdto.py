@@ -65,6 +65,7 @@ class CredentialsDtoTypedDict(TypedDict):
     app_io_base_url: NotRequired[str]
     signing_secret: NotRequired[str]
     outbound_integration_id: NotRequired[str]
+    outbound_connected_at: NotRequired[str]
     use_from_address_override: NotRequired[bool]
     from_address_override: NotRequired[str]
     email_slug_prefix: NotRequired[str]
@@ -198,6 +199,10 @@ class CredentialsDto(BaseModel):
         Optional[str], pydantic.Field(alias="outboundIntegrationId")
     ] = None
 
+    outbound_connected_at: Annotated[
+        Optional[str], pydantic.Field(alias="outboundConnectedAt")
+    ] = None
+
     use_from_address_override: Annotated[
         Optional[bool], pydantic.Field(alias="useFromAddressOverride")
     ] = None
@@ -278,6 +283,7 @@ class CredentialsDto(BaseModel):
                 "AppIOBaseUrl",
                 "signingSecret",
                 "outboundIntegrationId",
+                "outboundConnectedAt",
                 "useFromAddressOverride",
                 "fromAddressOverride",
                 "emailSlugPrefix",

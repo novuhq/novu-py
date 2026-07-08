@@ -16,6 +16,7 @@ from .pushstepupsertdto import PushStepUpsertDto, PushStepUpsertDtoTypedDict
 from .resourceoriginenum import ResourceOriginEnum
 from .severitylevelenum import SeverityLevelEnum
 from .smsstepupsertdto import SmsStepUpsertDto, SmsStepUpsertDtoTypedDict
+from .throttlestepupsertdto import ThrottleStepUpsertDto, ThrottleStepUpsertDtoTypedDict
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from novu_py.utils import get_discriminator
 import pydantic
@@ -34,6 +35,7 @@ UpdateWorkflowDtoStepsTypedDict = TypeAliasType(
         ChatStepUpsertDtoTypedDict,
         DelayStepUpsertDtoTypedDict,
         DigestStepUpsertDtoTypedDict,
+        ThrottleStepUpsertDtoTypedDict,
         CustomStepUpsertDtoTypedDict,
         HTTPRequestStepUpsertDtoTypedDict,
     ],
@@ -49,6 +51,7 @@ UpdateWorkflowDtoSteps = Annotated[
         Annotated[ChatStepUpsertDto, Tag("chat")],
         Annotated[DelayStepUpsertDto, Tag("delay")],
         Annotated[DigestStepUpsertDto, Tag("digest")],
+        Annotated[ThrottleStepUpsertDto, Tag("throttle")],
         Annotated[CustomStepUpsertDto, Tag("custom")],
         Annotated[HTTPRequestStepUpsertDto, Tag("http_request")],
     ],

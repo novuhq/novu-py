@@ -575,8 +575,11 @@ asyncio.run(main())
 * [delete](docs/sdks/integrations/README.md#delete) - Delete an integration
 * [integrations_controller_auto_configure_integration](docs/sdks/integrations/README.md#integrations_controller_auto_configure_integration) - Auto-configure an integration for inbound webhooks
 * [set_as_primary](docs/sdks/integrations/README.md#set_as_primary) - Update integration as primary
+* [create_mobile_link](docs/sdks/integrations/README.md#create_mobile_link) - Issue a short-lived mobile setup link for an existing integration
+* [integrations_controller_configure_integration_webhook](docs/sdks/integrations/README.md#integrations_controller_configure_integration_webhook) - Configure a chat integration webhook
 * [list_active](docs/sdks/integrations/README.md#list_active) - List active integrations
 * [generate_connect_o_auth_url](docs/sdks/integrations/README.md#generate_connect_o_auth_url) - Generate OAuth URL for a workspace/tenant connection
+* [link_channel_endpoint](docs/sdks/integrations/README.md#link_channel_endpoint) - Issue a URL to link a subscriber chat identity
 * [generate_link_user_o_auth_url](docs/sdks/integrations/README.md#generate_link_user_o_auth_url) - Generate OAuth URL to link a subscriber user identity
 * [~~generate_chat_o_auth_url~~](docs/sdks/integrations/README.md#generate_chat_o_auth_url) - Generate chat OAuth URL :warning: **Deprecated**
 
@@ -617,11 +620,11 @@ asyncio.run(main())
 * [append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
 * [delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
-#### [Subscribers.Messages](docs/sdks/novumessages/README.md)
+#### [~~Subscribers.Messages~~](docs/sdks/novumessages/README.md)
 
-* [update_as_seen](docs/sdks/novumessages/README.md#update_as_seen) - Update notification action status
-* [mark_all](docs/sdks/novumessages/README.md#mark_all) - Update all notifications state
-* [mark_all_as](docs/sdks/novumessages/README.md#mark_all_as) - Update notifications state
+* [~~update_as_seen~~](docs/sdks/novumessages/README.md#update_as_seen) - Update notification action status :warning: **Deprecated**
+* [~~mark_all~~](docs/sdks/novumessages/README.md#mark_all) - Update all notifications state :warning: **Deprecated**
+* [~~mark_all_as~~](docs/sdks/novumessages/README.md#mark_all_as) - Update notifications state :warning: **Deprecated**
 
 #### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
 
@@ -641,8 +644,8 @@ asyncio.run(main())
 * [mark_all_as_read](docs/sdks/novunotifications/README.md#mark_all_as_read) - Mark all notifications as read
 * [archive_all_read](docs/sdks/novunotifications/README.md#archive_all_read) - Archive all read notifications
 * [mark_as_seen](docs/sdks/novunotifications/README.md#mark_as_seen) - Mark notifications as seen
-* [feed](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications
-* [unseen_count](docs/sdks/novunotifications/README.md#unseen_count) - Retrieve unseen notifications count
+* [~~feed~~](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications :warning: **Deprecated**
+* [~~unseen_count~~](docs/sdks/novunotifications/README.md#unseen_count) - Retrieve unseen notifications count :warning: **Deprecated**
 
 #### [Subscribers.Preferences](docs/sdks/preferences/README.md)
 
@@ -897,9 +900,9 @@ with Novu(
 
 
 **Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
-* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 135 methods.*
-* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 135 methods.*
-* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 135 methods.*
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 138 methods.*
+* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 138 methods.*
+* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 138 methods.*
 * [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

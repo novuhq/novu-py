@@ -23,35 +23,57 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.workflows.steps.generate_preview(workflow_id="<id>", step_id="<id>", generate_preview_request_dto={
-        "preview_payload": {
-            "subscriber": {
-                "channels": [
-                    {
-                        "provider_id": novu_py.ChatOrPushProviderEnum.NOVU_SLACK,
-                        "credentials": {
-                            "webhook_url": "https://example.com/webhook",
-                            "channel": "general",
-                            "device_tokens": [
+    res = novu.workflows.steps.generate_preview(workflow_id="<id>", step_id="<id>", generate_preview_request_dto=novu_py.GeneratePreviewRequestDto(
+        preview_payload=novu_py.PreviewPayloadDto(
+            subscriber=novu_py.SubscriberResponseDtoOptional(
+                channels=[
+                    novu_py.ChannelSettingsDto(
+                        provider_id=novu_py.ChatOrPushProviderEnum.NOVU_SLACK,
+                        credentials=novu_py.ChannelCredentials(
+                            webhook_url="https://example.com/webhook",
+                            channel="general",
+                            device_tokens=[
                                 "token1",
                                 "token2",
                                 "token3",
                             ],
-                            "alert_uid": "12345-abcde",
-                            "title": "Critical Alert",
-                            "image_url": "https://example.com/image.png",
-                            "state": "resolved",
-                            "external_url": "https://example.com/details",
-                        },
-                        "integration_id": "<id>",
-                    },
+                            alert_uid="12345-abcde",
+                            title="Critical Alert",
+                            image_url="https://example.com/image.png",
+                            state="resolved",
+                            external_url="https://example.com/details",
+                        ),
+                        integration_id="<id>",
+                    ),
                 ],
-            },
-            "context": {
+            ),
+            actor=novu_py.SubscriberResponseDtoOptional(
+                channels=[
+                    novu_py.ChannelSettingsDto(
+                        provider_id=novu_py.ChatOrPushProviderEnum.TELEGRAM,
+                        credentials=novu_py.ChannelCredentials(
+                            webhook_url="https://example.com/webhook",
+                            channel="general",
+                            device_tokens=[
+                                "token1",
+                                "token2",
+                                "token3",
+                            ],
+                            alert_uid="12345-abcde",
+                            title="Critical Alert",
+                            image_url="https://example.com/image.png",
+                            state="resolved",
+                            external_url="https://example.com/details",
+                        ),
+                        integration_id="<id>",
+                    ),
+                ],
+            ),
+            context={
                 "key": "org-acme",
             },
-        },
-    })
+        ),
+    ))
 
     # Handle response
     print(res)
