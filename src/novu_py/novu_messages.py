@@ -7,9 +7,13 @@ from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from novu_py.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union, cast
+from typing_extensions import deprecated
 
 
 class NovuMessages(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update_as_seen(
         self,
         *,
@@ -24,7 +28,7 @@ class NovuMessages(BaseSDK):
     ) -> models.SubscribersV1ControllerMarkActionAsSeenResponse:
         r"""Update notification action status
 
-        Update in-app (inbox) notification's action status by its unique key identifier **messageId** and type field **type**.
+        This API is deprecated, use v2 API instead. Update in-app notification's action status by its unique key identifier **messageId** and type field **type**.
         **type** field can be **primary** or **secondary**
 
         :param request: The request object to send.
@@ -94,6 +98,8 @@ class NovuMessages(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -139,6 +145,9 @@ class NovuMessages(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_as_seen_async(
         self,
         *,
@@ -153,7 +162,7 @@ class NovuMessages(BaseSDK):
     ) -> models.SubscribersV1ControllerMarkActionAsSeenResponse:
         r"""Update notification action status
 
-        Update in-app (inbox) notification's action status by its unique key identifier **messageId** and type field **type**.
+        This API is deprecated, use v2 API instead. Update in-app notification's action status by its unique key identifier **messageId** and type field **type**.
         **type** field can be **primary** or **secondary**
 
         :param request: The request object to send.
@@ -223,6 +232,8 @@ class NovuMessages(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -268,6 +279,9 @@ class NovuMessages(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def mark_all(
         self,
         *,
@@ -284,7 +298,7 @@ class NovuMessages(BaseSDK):
     ) -> models.SubscribersV1ControllerMarkAllUnreadAsReadResponse:
         r"""Update all notifications state
 
-        Update all subscriber in-app (inbox) notifications state such as read, unread, seen or unseen by **subscriberId**.
+        This API is deprecated, use v2 API instead. Update all subscriber in-app notifications state such as read, unread, seen or unseen by **subscriberId**.
 
         :param subscriber_id:
         :param mark_all_message_as_request_dto:
@@ -357,6 +371,8 @@ class NovuMessages(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -402,6 +418,9 @@ class NovuMessages(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def mark_all_async(
         self,
         *,
@@ -418,7 +437,7 @@ class NovuMessages(BaseSDK):
     ) -> models.SubscribersV1ControllerMarkAllUnreadAsReadResponse:
         r"""Update all notifications state
 
-        Update all subscriber in-app (inbox) notifications state such as read, unread, seen or unseen by **subscriberId**.
+        This API is deprecated, use v2 API instead. Update all subscriber in-app notifications state such as read, unread, seen or unseen by **subscriberId**.
 
         :param subscriber_id:
         :param mark_all_message_as_request_dto:
@@ -491,6 +510,8 @@ class NovuMessages(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -536,6 +557,9 @@ class NovuMessages(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def mark_all_as(
         self,
         *,
@@ -551,8 +575,8 @@ class NovuMessages(BaseSDK):
     ) -> models.SubscribersV1ControllerMarkMessagesAsResponse:
         r"""Update notifications state
 
-        Update subscriber's multiple in-app (inbox) notifications state such as seen, read, unseen or unread by **subscriberId**.
-        **messageId** is of type mongodbId of notifications
+        This API is deprecated, use v2 API instead. Update subscriber's multiple in-app notifications state such as seen, read, unseen or unread by **subscriberId**.
+        **messageId** is of type mongodbId of notifications.
 
         :param subscriber_id:
         :param message_mark_as_request_dto:
@@ -625,6 +649,8 @@ class NovuMessages(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -672,6 +698,9 @@ class NovuMessages(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def mark_all_as_async(
         self,
         *,
@@ -687,8 +716,8 @@ class NovuMessages(BaseSDK):
     ) -> models.SubscribersV1ControllerMarkMessagesAsResponse:
         r"""Update notifications state
 
-        Update subscriber's multiple in-app (inbox) notifications state such as seen, read, unseen or unread by **subscriberId**.
-        **messageId** is of type mongodbId of notifications
+        This API is deprecated, use v2 API instead. Update subscriber's multiple in-app notifications state such as seen, read, unseen or unread by **subscriberId**.
+        **messageId** is of type mongodbId of notifications.
 
         :param subscriber_id:
         :param message_mark_as_request_dto:
@@ -761,6 +790,8 @@ class NovuMessages(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

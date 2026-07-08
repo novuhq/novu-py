@@ -15,7 +15,7 @@ class Activity(BaseSDK):
         *,
         environment_id: str,
         integration_id: str,
-        request_body: Dict[str, Any],
+        request_body: Mapping[str, Any],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -49,7 +49,7 @@ class Activity(BaseSDK):
             environment_id=environment_id,
             integration_id=integration_id,
             idempotency_key=idempotency_key,
-            request_body=request_body,
+            request_body=utils.unmarshal(request_body, Dict[str, Any]),
         )
 
         req = self._build_request(
@@ -93,6 +93,8 @@ class Activity(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Activity"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -115,7 +117,7 @@ class Activity(BaseSDK):
         *,
         environment_id: str,
         integration_id: str,
-        request_body: Dict[str, Any],
+        request_body: Mapping[str, Any],
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -149,7 +151,7 @@ class Activity(BaseSDK):
             environment_id=environment_id,
             integration_id=integration_id,
             idempotency_key=idempotency_key,
-            request_body=request_body,
+            request_body=utils.unmarshal(request_body, Dict[str, Any]),
         )
 
         req = self._build_request_async(
@@ -193,6 +195,8 @@ class Activity(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Activity"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

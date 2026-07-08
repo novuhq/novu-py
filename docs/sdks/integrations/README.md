@@ -13,14 +13,17 @@ With the help of the Integration Store, you can easily integrate your favorite d
 * [delete](#delete) - Delete an integration
 * [integrations_controller_auto_configure_integration](#integrations_controller_auto_configure_integration) - Auto-configure an integration for inbound webhooks
 * [set_as_primary](#set_as_primary) - Update integration as primary
+* [create_mobile_link](#create_mobile_link) - Issue a short-lived mobile setup link for an existing integration
+* [integrations_controller_configure_integration_webhook](#integrations_controller_configure_integration_webhook) - Configure a chat integration webhook
 * [list_active](#list_active) - List active integrations
 * [generate_connect_o_auth_url](#generate_connect_o_auth_url) - Generate OAuth URL for a workspace/tenant connection
+* [link_channel_endpoint](#link_channel_endpoint) - Issue a URL to link a subscriber chat identity
 * [generate_link_user_o_auth_url](#generate_link_user_o_auth_url) - Generate OAuth URL to link a subscriber user identity
 * [~~generate_chat_o_auth_url~~](#generate_chat_o_auth_url) - Generate chat OAuth URL :warning: **Deprecated**
 
 ## list
 
-List all the channels integrations created in the organization
+List all the channels integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -64,7 +67,7 @@ with Novu(
 ## create
 
 Create an integration for the current environment the user is based on the API key provided. 
-    Each provider supports different credentials, check the provider documentation for more details.
+    Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -109,7 +112,7 @@ with Novu(
 ## update
 
 Update an integration by its unique key identifier **integrationId**. 
-    Each provider supports different credentials, check the provider documentation for more details.
+    Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -155,7 +158,7 @@ with Novu(
 ## delete
 
 Delete an integration by its unique key identifier **integrationId**. 
-    This action is irreversible.
+    This action is irreversible. Only integration metadata is returned, credentials field is returned as empty object.
 
 ### Example Usage
 
@@ -200,7 +203,7 @@ with Novu(
 ## integrations_controller_auto_configure_integration
 
 Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support. 
-    This will automatically generate required webhook signing keys and configure webhook endpoints.
+    This will automatically generate required webhook signing keys and configure webhook endpoints. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -246,7 +249,8 @@ with Novu(
 
 Update an integration as **primary** by its unique key identifier **integrationId**. 
     This API will set the integration as primary for that channel in the current environment. 
-    Primary integration is used to deliver notification for sms and email channels in the workflow.
+    Primary integration is used to deliver notification for sms and email channels in the workflow. 
+    Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -288,9 +292,100 @@ with Novu(
 | models.ErrorDto                   | 500                               | application/json                  |
 | models.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
+## create_mobile_link
+
+Returns an opaque, single-use setup token plus a mobile URL for configuring an existing chat integration. Telegram is the only supported provider initially.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="IntegrationsController_createIntegrationMobileLink" method="post" path="/v1/integrations/{integrationIdentifier}/mobile-link" -->
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.integrations.create_mobile_link(integration_identifier="<value>", issue_integration_mobile_link_request_dto={
+        "subscriber_id": "subscriber-123",
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `integration_identifier`                                                                            | *str*                                                                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `issue_integration_mobile_link_request_dto`                                                         | [models.IssueIntegrationMobileLinkRequestDto](../../models/issueintegrationmobilelinkrequestdto.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `idempotency_key`                                                                                   | *Optional[str]*                                                                                     | :heavy_minus_sign:                                                                                  | A header for idempotency purposes                                                                   |
+| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
+
+### Response
+
+**[models.IntegrationsControllerCreateIntegrationMobileLinkResponse](../../models/integrationscontrollercreateintegrationmobilelinkresponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## integrations_controller_configure_integration_webhook
+
+Registers the Novu webhook URL with the chat provider for the specified integration. Telegram is the only supported provider initially.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="IntegrationsController_configureIntegrationWebhook" method="post" path="/v1/integrations/{integrationIdentifier}/webhook/configure" -->
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.integrations.integrations_controller_configure_integration_webhook(integration_identifier="<value>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `integration_identifier`                                            | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.IntegrationsControllerConfigureIntegrationWebhookResponse](../../models/integrationscontrollerconfigureintegrationwebhookresponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
 ## list_active
 
-List all the active integrations created in the organization
+List all the active integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -380,6 +475,53 @@ with Novu(
 ### Response
 
 **[models.IntegrationsControllerGenerateConnectOAuthURLResponse](../../models/integrationscontrollergenerateconnectoauthurlresponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models.ErrorDto                        | 414                                    | application/json                       |
+| models.ErrorDto                        | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| models.ValidationErrorDto              | 422                                    | application/json                       |
+| models.ErrorDto                        | 500                                    | application/json                       |
+| models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## link_channel_endpoint
+
+Returns a provider-specific URL the subscriber opens to link their chat identity. The integration provider is resolved from integrationIdentifier; Telegram returns a deep link.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="IntegrationsController_linkChannelEndpoint" method="post" path="/v1/integrations/channel-endpoints/link" -->
+```python
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.integrations.link_channel_endpoint(link_channel_endpoint_request_dto={
+        "integration_identifier": "telegram-bot",
+        "subscriber_id": "subscriber-123",
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `link_channel_endpoint_request_dto`                                                   | [models.LinkChannelEndpointRequestDto](../../models/linkchannelendpointrequestdto.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `idempotency_key`                                                                     | *Optional[str]*                                                                       | :heavy_minus_sign:                                                                    | A header for idempotency purposes                                                     |
+| `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
+
+### Response
+
+**[models.IntegrationsControllerLinkChannelEndpointResponse](../../models/integrationscontrollerlinkchannelendpointresponse.md)**
 
 ### Errors
 

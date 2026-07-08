@@ -1,0 +1,10 @@
+# IntegrationsControllerCreateIntegrationMobileLinkRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `integration_identifier`                                                                         | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `idempotency_key`                                                                                | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | A header for idempotency purposes                                                                |
+| `issue_integration_mobile_link_request_dto`                                                      | [models.IssueIntegrationMobileLinkRequestDto](../models/issueintegrationmobilelinkrequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

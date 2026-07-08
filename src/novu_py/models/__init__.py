@@ -183,6 +183,10 @@ if TYPE_CHECKING:
         ChatStepUpsertDtoTypedDict,
     )
     from .configurationsdto import ConfigurationsDto, ConfigurationsDtoTypedDict
+    from .configuretelegramwebhookresponsedto import (
+        ConfigureTelegramWebhookResponseDto,
+        ConfigureTelegramWebhookResponseDtoTypedDict,
+    )
     from .constraintvalidation import (
         ConstraintValidation,
         ConstraintValidationTypedDict,
@@ -1057,6 +1061,18 @@ if TYPE_CHECKING:
         IntegrationsControllerAutoConfigureIntegrationResponse,
         IntegrationsControllerAutoConfigureIntegrationResponseTypedDict,
     )
+    from .integrationscontroller_configureintegrationwebhookop import (
+        IntegrationsControllerConfigureIntegrationWebhookRequest,
+        IntegrationsControllerConfigureIntegrationWebhookRequestTypedDict,
+        IntegrationsControllerConfigureIntegrationWebhookResponse,
+        IntegrationsControllerConfigureIntegrationWebhookResponseTypedDict,
+    )
+    from .integrationscontroller_createintegrationmobilelinkop import (
+        IntegrationsControllerCreateIntegrationMobileLinkRequest,
+        IntegrationsControllerCreateIntegrationMobileLinkRequestTypedDict,
+        IntegrationsControllerCreateIntegrationMobileLinkResponse,
+        IntegrationsControllerCreateIntegrationMobileLinkResponseTypedDict,
+    )
     from .integrationscontroller_createintegrationop import (
         IntegrationsControllerCreateIntegrationRequest,
         IntegrationsControllerCreateIntegrationRequestTypedDict,
@@ -1087,6 +1103,12 @@ if TYPE_CHECKING:
         IntegrationsControllerGetChatOAuthURLResponse,
         IntegrationsControllerGetChatOAuthURLResponseTypedDict,
     )
+    from .integrationscontroller_linkchannelendpointop import (
+        IntegrationsControllerLinkChannelEndpointRequest,
+        IntegrationsControllerLinkChannelEndpointRequestTypedDict,
+        IntegrationsControllerLinkChannelEndpointResponse,
+        IntegrationsControllerLinkChannelEndpointResponseTypedDict,
+    )
     from .integrationscontroller_listintegrationsop import (
         IntegrationsControllerListIntegrationsRequest,
         IntegrationsControllerListIntegrationsRequestTypedDict,
@@ -1110,6 +1132,14 @@ if TYPE_CHECKING:
         IntegrationsControllerUpdateIntegrationByIDRequestTypedDict,
         IntegrationsControllerUpdateIntegrationByIDResponse,
         IntegrationsControllerUpdateIntegrationByIDResponseTypedDict,
+    )
+    from .issueintegrationmobilelinkrequestdto import (
+        IssueIntegrationMobileLinkRequestDto,
+        IssueIntegrationMobileLinkRequestDtoTypedDict,
+    )
+    from .issuetelegrammobilelinkresponsedto import (
+        IssueTelegramMobileLinkResponseDto,
+        IssueTelegramMobileLinkResponseDtoTypedDict,
     )
     from .layoutcontrolsdto import LayoutControlsDto, LayoutControlsDtoTypedDict
     from .layoutcontrolvaluesdto import (
@@ -1179,6 +1209,14 @@ if TYPE_CHECKING:
         LayoutsControllerUpdateRequestTypedDict,
         LayoutsControllerUpdateResponse,
         LayoutsControllerUpdateResponseTypedDict,
+    )
+    from .linkchannelendpointrequestdto import (
+        LinkChannelEndpointRequestDto,
+        LinkChannelEndpointRequestDtoTypedDict,
+    )
+    from .linkchannelendpointresponsedto import (
+        LinkChannelEndpointResponseDto,
+        LinkChannelEndpointResponseDtoTypedDict,
     )
     from .listchannelconnectionsresponsedto import (
         ListChannelConnectionsResponseDto,
@@ -2444,6 +2482,8 @@ __all__ = [
     "ConfigurationsDto",
     "ConfigurationsDtoTypedDict",
     "ConfigurationsTypedDict",
+    "ConfigureTelegramWebhookResponseDto",
+    "ConfigureTelegramWebhookResponseDtoTypedDict",
     "ConnectionMode",
     "ConstraintValidation",
     "ConstraintValidationTypedDict",
@@ -3020,6 +3060,14 @@ __all__ = [
     "IntegrationsControllerAutoConfigureIntegrationRequestTypedDict",
     "IntegrationsControllerAutoConfigureIntegrationResponse",
     "IntegrationsControllerAutoConfigureIntegrationResponseTypedDict",
+    "IntegrationsControllerConfigureIntegrationWebhookRequest",
+    "IntegrationsControllerConfigureIntegrationWebhookRequestTypedDict",
+    "IntegrationsControllerConfigureIntegrationWebhookResponse",
+    "IntegrationsControllerConfigureIntegrationWebhookResponseTypedDict",
+    "IntegrationsControllerCreateIntegrationMobileLinkRequest",
+    "IntegrationsControllerCreateIntegrationMobileLinkRequestTypedDict",
+    "IntegrationsControllerCreateIntegrationMobileLinkResponse",
+    "IntegrationsControllerCreateIntegrationMobileLinkResponseTypedDict",
     "IntegrationsControllerCreateIntegrationRequest",
     "IntegrationsControllerCreateIntegrationRequestTypedDict",
     "IntegrationsControllerCreateIntegrationResponse",
@@ -3040,6 +3088,10 @@ __all__ = [
     "IntegrationsControllerGetChatOAuthURLRequestTypedDict",
     "IntegrationsControllerGetChatOAuthURLResponse",
     "IntegrationsControllerGetChatOAuthURLResponseTypedDict",
+    "IntegrationsControllerLinkChannelEndpointRequest",
+    "IntegrationsControllerLinkChannelEndpointRequestTypedDict",
+    "IntegrationsControllerLinkChannelEndpointResponse",
+    "IntegrationsControllerLinkChannelEndpointResponseTypedDict",
     "IntegrationsControllerListIntegrationsRequest",
     "IntegrationsControllerListIntegrationsRequestTypedDict",
     "IntegrationsControllerListIntegrationsResponse",
@@ -3056,6 +3108,10 @@ __all__ = [
     "IntegrationsControllerUpdateIntegrationByIDRequestTypedDict",
     "IntegrationsControllerUpdateIntegrationByIDResponse",
     "IntegrationsControllerUpdateIntegrationByIDResponseTypedDict",
+    "IssueIntegrationMobileLinkRequestDto",
+    "IssueIntegrationMobileLinkRequestDtoTypedDict",
+    "IssueTelegramMobileLinkResponseDto",
+    "IssueTelegramMobileLinkResponseDtoTypedDict",
     "Issues",
     "IssuesTypedDict",
     "JobData",
@@ -3107,6 +3163,10 @@ __all__ = [
     "LayoutsControllerUpdateRequestTypedDict",
     "LayoutsControllerUpdateResponse",
     "LayoutsControllerUpdateResponseTypedDict",
+    "LinkChannelEndpointRequestDto",
+    "LinkChannelEndpointRequestDtoTypedDict",
+    "LinkChannelEndpointResponseDto",
+    "LinkChannelEndpointResponseDtoTypedDict",
     "ListChannelConnectionsResponseDto",
     "ListChannelConnectionsResponseDtoTypedDict",
     "ListChannelEndpointsResponseDto",
@@ -4077,6 +4137,8 @@ _dynamic_imports: dict[str, str] = {
     "ChatStepUpsertDtoTypedDict": ".chatstepupsertdto",
     "ConfigurationsDto": ".configurationsdto",
     "ConfigurationsDtoTypedDict": ".configurationsdto",
+    "ConfigureTelegramWebhookResponseDto": ".configuretelegramwebhookresponsedto",
+    "ConfigureTelegramWebhookResponseDtoTypedDict": ".configuretelegramwebhookresponsedto",
     "ConstraintValidation": ".constraintvalidation",
     "ConstraintValidationTypedDict": ".constraintvalidation",
     "Five": ".constraintvalidation",
@@ -4685,6 +4747,14 @@ _dynamic_imports: dict[str, str] = {
     "IntegrationsControllerAutoConfigureIntegrationRequestTypedDict": ".integrationscontroller_autoconfigureintegrationop",
     "IntegrationsControllerAutoConfigureIntegrationResponse": ".integrationscontroller_autoconfigureintegrationop",
     "IntegrationsControllerAutoConfigureIntegrationResponseTypedDict": ".integrationscontroller_autoconfigureintegrationop",
+    "IntegrationsControllerConfigureIntegrationWebhookRequest": ".integrationscontroller_configureintegrationwebhookop",
+    "IntegrationsControllerConfigureIntegrationWebhookRequestTypedDict": ".integrationscontroller_configureintegrationwebhookop",
+    "IntegrationsControllerConfigureIntegrationWebhookResponse": ".integrationscontroller_configureintegrationwebhookop",
+    "IntegrationsControllerConfigureIntegrationWebhookResponseTypedDict": ".integrationscontroller_configureintegrationwebhookop",
+    "IntegrationsControllerCreateIntegrationMobileLinkRequest": ".integrationscontroller_createintegrationmobilelinkop",
+    "IntegrationsControllerCreateIntegrationMobileLinkRequestTypedDict": ".integrationscontroller_createintegrationmobilelinkop",
+    "IntegrationsControllerCreateIntegrationMobileLinkResponse": ".integrationscontroller_createintegrationmobilelinkop",
+    "IntegrationsControllerCreateIntegrationMobileLinkResponseTypedDict": ".integrationscontroller_createintegrationmobilelinkop",
     "IntegrationsControllerCreateIntegrationRequest": ".integrationscontroller_createintegrationop",
     "IntegrationsControllerCreateIntegrationRequestTypedDict": ".integrationscontroller_createintegrationop",
     "IntegrationsControllerCreateIntegrationResponse": ".integrationscontroller_createintegrationop",
@@ -4705,6 +4775,10 @@ _dynamic_imports: dict[str, str] = {
     "IntegrationsControllerGetChatOAuthURLRequestTypedDict": ".integrationscontroller_getchatoauthurlop",
     "IntegrationsControllerGetChatOAuthURLResponse": ".integrationscontroller_getchatoauthurlop",
     "IntegrationsControllerGetChatOAuthURLResponseTypedDict": ".integrationscontroller_getchatoauthurlop",
+    "IntegrationsControllerLinkChannelEndpointRequest": ".integrationscontroller_linkchannelendpointop",
+    "IntegrationsControllerLinkChannelEndpointRequestTypedDict": ".integrationscontroller_linkchannelendpointop",
+    "IntegrationsControllerLinkChannelEndpointResponse": ".integrationscontroller_linkchannelendpointop",
+    "IntegrationsControllerLinkChannelEndpointResponseTypedDict": ".integrationscontroller_linkchannelendpointop",
     "IntegrationsControllerListIntegrationsRequest": ".integrationscontroller_listintegrationsop",
     "IntegrationsControllerListIntegrationsRequestTypedDict": ".integrationscontroller_listintegrationsop",
     "IntegrationsControllerListIntegrationsResponse": ".integrationscontroller_listintegrationsop",
@@ -4721,6 +4795,10 @@ _dynamic_imports: dict[str, str] = {
     "IntegrationsControllerUpdateIntegrationByIDRequestTypedDict": ".integrationscontroller_updateintegrationbyidop",
     "IntegrationsControllerUpdateIntegrationByIDResponse": ".integrationscontroller_updateintegrationbyidop",
     "IntegrationsControllerUpdateIntegrationByIDResponseTypedDict": ".integrationscontroller_updateintegrationbyidop",
+    "IssueIntegrationMobileLinkRequestDto": ".issueintegrationmobilelinkrequestdto",
+    "IssueIntegrationMobileLinkRequestDtoTypedDict": ".issueintegrationmobilelinkrequestdto",
+    "IssueTelegramMobileLinkResponseDto": ".issuetelegrammobilelinkresponsedto",
+    "IssueTelegramMobileLinkResponseDtoTypedDict": ".issuetelegrammobilelinkresponsedto",
     "LayoutControlsDto": ".layoutcontrolsdto",
     "LayoutControlsDtoTypedDict": ".layoutcontrolsdto",
     "LayoutControlValuesDto": ".layoutcontrolvaluesdto",
@@ -4767,6 +4845,10 @@ _dynamic_imports: dict[str, str] = {
     "LayoutsControllerUpdateRequestTypedDict": ".layoutscontroller_updateop",
     "LayoutsControllerUpdateResponse": ".layoutscontroller_updateop",
     "LayoutsControllerUpdateResponseTypedDict": ".layoutscontroller_updateop",
+    "LinkChannelEndpointRequestDto": ".linkchannelendpointrequestdto",
+    "LinkChannelEndpointRequestDtoTypedDict": ".linkchannelendpointrequestdto",
+    "LinkChannelEndpointResponseDto": ".linkchannelendpointresponsedto",
+    "LinkChannelEndpointResponseDtoTypedDict": ".linkchannelendpointresponsedto",
     "ListChannelConnectionsResponseDto": ".listchannelconnectionsresponsedto",
     "ListChannelConnectionsResponseDtoTypedDict": ".listchannelconnectionsresponsedto",
     "ListChannelEndpointsResponseDto": ".listchannelendpointsresponsedto",

@@ -6,7 +6,8 @@ from novu_py._hooks import HookContext
 from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from novu_py.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union, cast
+from typing import Any, Iterable, List, Mapping, Optional, Union, cast
+from typing_extensions import deprecated
 
 
 class NovuNotifications(BaseSDK):
@@ -89,6 +90,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -215,6 +218,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -267,7 +272,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -300,7 +305,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerDeleteNotificationRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -342,6 +347,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -389,7 +396,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -422,7 +429,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerDeleteNotificationRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -464,6 +471,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -584,6 +593,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -707,6 +718,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -830,6 +843,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -953,6 +968,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1003,7 +1020,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1036,7 +1053,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerArchiveNotificationRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -1078,6 +1095,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1128,7 +1147,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1161,7 +1180,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerArchiveNotificationRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -1203,6 +1222,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1253,7 +1274,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1286,7 +1307,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerMarkNotificationAsReadRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -1328,6 +1349,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1378,7 +1401,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1411,7 +1434,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerMarkNotificationAsReadRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -1453,6 +1476,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1581,6 +1606,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1709,6 +1736,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1759,7 +1788,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1792,7 +1821,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerUnarchiveNotificationRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -1834,6 +1863,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1884,7 +1915,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1917,7 +1948,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerUnarchiveNotificationRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -1959,6 +1990,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2009,7 +2042,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2042,7 +2075,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerMarkNotificationAsUnreadRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -2084,6 +2117,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2134,7 +2169,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2167,7 +2202,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerMarkNotificationAsUnreadRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -2209,6 +2244,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2259,7 +2296,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2292,7 +2329,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerUnsnoozeNotificationRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -2334,6 +2371,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2384,7 +2423,7 @@ class NovuNotifications(BaseSDK):
         *,
         subscriber_id: str,
         notification_id: str,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2417,7 +2456,7 @@ class NovuNotifications(BaseSDK):
         request = models.SubscribersControllerUnsnoozeNotificationRequest(
             subscriber_id=subscriber_id,
             notification_id=notification_id,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -2459,6 +2498,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2594,6 +2635,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2728,6 +2771,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2850,6 +2895,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2975,6 +3022,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3112,6 +3161,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3246,6 +3297,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3380,6 +3433,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3514,6 +3569,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3648,6 +3705,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3782,6 +3841,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3916,6 +3977,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4050,6 +4113,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4094,6 +4159,9 @@ class NovuNotifications(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def feed(
         self,
         *,
@@ -4108,7 +4176,7 @@ class NovuNotifications(BaseSDK):
     ) -> models.SubscribersV1ControllerGetNotificationsFeedResponse:
         r"""Retrieve subscriber notifications
 
-        Retrieve subscriber in-app (inbox) notifications by its unique key identifier **subscriberId**.
+        This API is deprecated, use v2 API instead. Retrieve subscriber in-app notifications by its unique key identifier **subscriberId**.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -4172,6 +4240,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4217,6 +4287,9 @@ class NovuNotifications(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def feed_async(
         self,
         *,
@@ -4231,7 +4304,7 @@ class NovuNotifications(BaseSDK):
     ) -> models.SubscribersV1ControllerGetNotificationsFeedResponse:
         r"""Retrieve subscriber notifications
 
-        Retrieve subscriber in-app (inbox) notifications by its unique key identifier **subscriberId**.
+        This API is deprecated, use v2 API instead. Retrieve subscriber in-app notifications by its unique key identifier **subscriberId**.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -4295,6 +4368,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4340,6 +4415,9 @@ class NovuNotifications(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def unseen_count(
         self,
         *,
@@ -4354,7 +4432,7 @@ class NovuNotifications(BaseSDK):
     ) -> models.SubscribersV1ControllerGetUnseenCountResponse:
         r"""Retrieve unseen notifications count
 
-        Retrieve unseen in-app (inbox) notifications count for a subscriber by its unique key identifier **subscriberId**.
+        This API is deprecated, use v2 API instead. Retrieve unseen in-app notifications count for a subscriber by its unique key identifier **subscriberId**.
 
         :param subscriber_id:
         :param seen: Indicates whether to count seen notifications.
@@ -4420,6 +4498,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -4465,6 +4545,9 @@ class NovuNotifications(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def unseen_count_async(
         self,
         *,
@@ -4479,7 +4562,7 @@ class NovuNotifications(BaseSDK):
     ) -> models.SubscribersV1ControllerGetUnseenCountResponse:
         r"""Retrieve unseen notifications count
 
-        Retrieve unseen in-app (inbox) notifications count for a subscriber by its unique key identifier **subscriberId**.
+        This API is deprecated, use v2 API instead. Retrieve unseen in-app notifications count for a subscriber by its unique key identifier **subscriberId**.
 
         :param subscriber_id:
         :param seen: Indicates whether to count seen notifications.
@@ -4545,6 +4628,8 @@ class NovuNotifications(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

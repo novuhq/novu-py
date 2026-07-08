@@ -1,17 +1,22 @@
-# Subscribers.Messages
+# ~~Subscribers.Messages~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [update_as_seen](#update_as_seen) - Update notification action status
-* [mark_all](#mark_all) - Update all notifications state
-* [mark_all_as](#mark_all_as) - Update notifications state
+* [~~update_as_seen~~](#update_as_seen) - Update notification action status :warning: **Deprecated**
+* [~~mark_all~~](#mark_all) - Update all notifications state :warning: **Deprecated**
+* [~~mark_all_as~~](#mark_all_as) - Update notifications state :warning: **Deprecated**
 
-## update_as_seen
+## ~~update_as_seen~~
 
-Update in-app (inbox) notification's action status by its unique key identifier **messageId** and type field **type**. 
+This API is deprecated, use v2 API instead. Update in-app notification's action status by its unique key identifier **messageId** and type field **type**. 
       **type** field can be **primary** or **secondary**
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -60,9 +65,11 @@ with Novu(
 | models.ErrorDto                        | 500                                    | application/json                       |
 | models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
-## mark_all
+## ~~mark_all~~
 
-Update all subscriber in-app (inbox) notifications state such as read, unread, seen or unseen by **subscriberId**.
+This API is deprecated, use v2 API instead. Update all subscriber in-app notifications state such as read, unread, seen or unseen by **subscriberId**.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -108,10 +115,12 @@ with Novu(
 | models.ErrorDto                        | 500                                    | application/json                       |
 | models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
-## mark_all_as
+## ~~mark_all_as~~
 
-Update subscriber's multiple in-app (inbox) notifications state such as seen, read, unseen or unread by **subscriberId**. 
-      **messageId** is of type mongodbId of notifications
+This API is deprecated, use v2 API instead. Update subscriber's multiple in-app notifications state such as seen, read, unseen or unread by **subscriberId**. 
+      **messageId** is of type mongodbId of notifications.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

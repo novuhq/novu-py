@@ -45,6 +45,12 @@ value: models.DelayStepUpsertDto = /* values here */
 value: models.DigestStepUpsertDto = /* values here */
 ```
 
+### `models.ThrottleStepUpsertDto`
+
+```python
+value: models.ThrottleStepUpsertDto = /* values here */
+```
+
 ### `models.CustomStepUpsertDto`
 
 ```python

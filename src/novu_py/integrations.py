@@ -26,7 +26,7 @@ class Integrations(BaseSDK):
     ) -> models.IntegrationsControllerListIntegrationsResponse:
         r"""List all integrations
 
-        List all the channels integrations created in the organization
+        List all the channels integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -86,6 +86,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -144,7 +146,7 @@ class Integrations(BaseSDK):
     ) -> models.IntegrationsControllerListIntegrationsResponse:
         r"""List all integrations
 
-        List all the channels integrations created in the organization
+        List all the channels integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -204,6 +206,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -267,7 +271,7 @@ class Integrations(BaseSDK):
         r"""Create an integration
 
         Create an integration for the current environment the user is based on the API key provided.
-        Each provider supports different credentials, check the provider documentation for more details.
+        Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param create_integration_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -338,6 +342,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -399,7 +405,7 @@ class Integrations(BaseSDK):
         r"""Create an integration
 
         Create an integration for the current environment the user is based on the API key provided.
-        Each provider supports different credentials, check the provider documentation for more details.
+        Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param create_integration_request_dto:
         :param idempotency_key: A header for idempotency purposes
@@ -470,6 +476,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -532,7 +540,7 @@ class Integrations(BaseSDK):
         r"""Update an integration
 
         Update an integration by its unique key identifier **integrationId**.
-        Each provider supports different credentials, check the provider documentation for more details.
+        Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param update_integration_request_dto:
@@ -605,6 +613,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -667,7 +677,7 @@ class Integrations(BaseSDK):
         r"""Update an integration
 
         Update an integration by its unique key identifier **integrationId**.
-        Each provider supports different credentials, check the provider documentation for more details.
+        Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param update_integration_request_dto:
@@ -740,6 +750,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -798,7 +810,7 @@ class Integrations(BaseSDK):
         r"""Delete an integration
 
         Delete an integration by its unique key identifier **integrationId**.
-        This action is irreversible.
+        This action is irreversible. Only integration metadata is returned, credentials field is returned as empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -860,6 +872,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -920,7 +934,7 @@ class Integrations(BaseSDK):
         r"""Delete an integration
 
         Delete an integration by its unique key identifier **integrationId**.
-        This action is irreversible.
+        This action is irreversible. Only integration metadata is returned, credentials field is returned as empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -982,6 +996,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1042,7 +1058,7 @@ class Integrations(BaseSDK):
         r"""Auto-configure an integration for inbound webhooks
 
         Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support.
-        This will automatically generate required webhook signing keys and configure webhook endpoints.
+        This will automatically generate required webhook signing keys and configure webhook endpoints. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1104,6 +1120,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1164,7 +1182,7 @@ class Integrations(BaseSDK):
         r"""Auto-configure an integration for inbound webhooks
 
         Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support.
-        This will automatically generate required webhook signing keys and configure webhook endpoints.
+        This will automatically generate required webhook signing keys and configure webhook endpoints. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1226,6 +1244,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1288,6 +1308,7 @@ class Integrations(BaseSDK):
         Update an integration as **primary** by its unique key identifier **integrationId**.
         This API will set the integration as primary for that channel in the current environment.
         Primary integration is used to deliver notification for sms and email channels in the workflow.
+        Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1349,6 +1370,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1409,6 +1432,7 @@ class Integrations(BaseSDK):
         Update an integration as **primary** by its unique key identifier **integrationId**.
         This API will set the integration as primary for that channel in the current environment.
         Primary integration is used to deliver notification for sms and email channels in the workflow.
+        Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param integration_id:
         :param idempotency_key: A header for idempotency purposes
@@ -1470,6 +1494,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1515,6 +1541,530 @@ class Integrations(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    def create_mobile_link(
+        self,
+        *,
+        integration_identifier: str,
+        issue_integration_mobile_link_request_dto: Union[
+            models.IssueIntegrationMobileLinkRequestDto,
+            models.IssueIntegrationMobileLinkRequestDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.IntegrationsControllerCreateIntegrationMobileLinkResponse:
+        r"""Issue a short-lived mobile setup link for an existing integration
+
+        Returns an opaque, single-use setup token plus a mobile URL for configuring an existing chat integration. Telegram is the only supported provider initially.
+
+        :param integration_identifier:
+        :param issue_integration_mobile_link_request_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.IntegrationsControllerCreateIntegrationMobileLinkRequest(
+            integration_identifier=integration_identifier,
+            idempotency_key=idempotency_key,
+            issue_integration_mobile_link_request_dto=utils.get_pydantic_model(
+                issue_integration_mobile_link_request_dto,
+                models.IssueIntegrationMobileLinkRequestDto,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v1/integrations/{integrationIdentifier}/mobile-link",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.issue_integration_mobile_link_request_dto,
+                False,
+                False,
+                "json",
+                models.IssueIntegrationMobileLinkRequestDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="IntegrationsController_createIntegrationMobileLink",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Integrations"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.IntegrationsControllerCreateIntegrationMobileLinkResponse(
+                result=unmarshal_json_response(
+                    models.IssueTelegramMobileLinkResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def create_mobile_link_async(
+        self,
+        *,
+        integration_identifier: str,
+        issue_integration_mobile_link_request_dto: Union[
+            models.IssueIntegrationMobileLinkRequestDto,
+            models.IssueIntegrationMobileLinkRequestDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.IntegrationsControllerCreateIntegrationMobileLinkResponse:
+        r"""Issue a short-lived mobile setup link for an existing integration
+
+        Returns an opaque, single-use setup token plus a mobile URL for configuring an existing chat integration. Telegram is the only supported provider initially.
+
+        :param integration_identifier:
+        :param issue_integration_mobile_link_request_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.IntegrationsControllerCreateIntegrationMobileLinkRequest(
+            integration_identifier=integration_identifier,
+            idempotency_key=idempotency_key,
+            issue_integration_mobile_link_request_dto=utils.get_pydantic_model(
+                issue_integration_mobile_link_request_dto,
+                models.IssueIntegrationMobileLinkRequestDto,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v1/integrations/{integrationIdentifier}/mobile-link",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.issue_integration_mobile_link_request_dto,
+                False,
+                False,
+                "json",
+                models.IssueIntegrationMobileLinkRequestDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="IntegrationsController_createIntegrationMobileLink",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Integrations"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.IntegrationsControllerCreateIntegrationMobileLinkResponse(
+                result=unmarshal_json_response(
+                    models.IssueTelegramMobileLinkResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def integrations_controller_configure_integration_webhook(
+        self,
+        *,
+        integration_identifier: str,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.IntegrationsControllerConfigureIntegrationWebhookResponse:
+        r"""Configure a chat integration webhook
+
+        Registers the Novu webhook URL with the chat provider for the specified integration. Telegram is the only supported provider initially.
+
+        :param integration_identifier:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.IntegrationsControllerConfigureIntegrationWebhookRequest(
+            integration_identifier=integration_identifier,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v1/integrations/{integrationIdentifier}/webhook/configure",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="IntegrationsController_configureIntegrationWebhook",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Integrations"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.IntegrationsControllerConfigureIntegrationWebhookResponse(
+                result=unmarshal_json_response(
+                    models.ConfigureTelegramWebhookResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def integrations_controller_configure_integration_webhook_async(
+        self,
+        *,
+        integration_identifier: str,
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.IntegrationsControllerConfigureIntegrationWebhookResponse:
+        r"""Configure a chat integration webhook
+
+        Registers the Novu webhook URL with the chat provider for the specified integration. Telegram is the only supported provider initially.
+
+        :param integration_identifier:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.IntegrationsControllerConfigureIntegrationWebhookRequest(
+            integration_identifier=integration_identifier,
+            idempotency_key=idempotency_key,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v1/integrations/{integrationIdentifier}/webhook/configure",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="IntegrationsController_configureIntegrationWebhook",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Integrations"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.IntegrationsControllerConfigureIntegrationWebhookResponse(
+                result=unmarshal_json_response(
+                    models.ConfigureTelegramWebhookResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
     def list_active(
         self,
         *,
@@ -1526,7 +2076,7 @@ class Integrations(BaseSDK):
     ) -> models.IntegrationsControllerGetActiveIntegrationsResponse:
         r"""List active integrations
 
-        List all the active integrations created in the organization
+        List all the active integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -1586,6 +2136,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1644,7 +2196,7 @@ class Integrations(BaseSDK):
     ) -> models.IntegrationsControllerGetActiveIntegrationsResponse:
         r"""List active integrations
 
-        List all the active integrations created in the organization
+        List all the active integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -1704,6 +2256,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1839,6 +2393,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1974,6 +2530,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1985,6 +2543,276 @@ class Integrations(BaseSDK):
             return models.IntegrationsControllerGenerateConnectOAuthURLResponse(
                 result=unmarshal_json_response(
                     models.GenerateChatOAuthURLResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def link_channel_endpoint(
+        self,
+        *,
+        link_channel_endpoint_request_dto: Union[
+            models.LinkChannelEndpointRequestDto,
+            models.LinkChannelEndpointRequestDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.IntegrationsControllerLinkChannelEndpointResponse:
+        r"""Issue a URL to link a subscriber chat identity
+
+        Returns a provider-specific URL the subscriber opens to link their chat identity. The integration provider is resolved from integrationIdentifier; Telegram returns a deep link.
+
+        :param link_channel_endpoint_request_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.IntegrationsControllerLinkChannelEndpointRequest(
+            idempotency_key=idempotency_key,
+            link_channel_endpoint_request_dto=utils.get_pydantic_model(
+                link_channel_endpoint_request_dto, models.LinkChannelEndpointRequestDto
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v1/integrations/channel-endpoints/link",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.link_channel_endpoint_request_dto,
+                False,
+                False,
+                "json",
+                models.LinkChannelEndpointRequestDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="IntegrationsController_linkChannelEndpoint",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Integrations"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.IntegrationsControllerLinkChannelEndpointResponse(
+                result=unmarshal_json_response(
+                    models.LinkChannelEndpointResponseDto, http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "414", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "405", "409", "413", "415"],
+            "application/json",
+        ):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                models.ValidationErrorDtoData, http_res
+            )
+            raise models.ValidationErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "429", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(models.ErrorDtoData, http_res)
+            raise models.ErrorDto(response_data, http_res)
+        if utils.match_response(http_res, "503", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def link_channel_endpoint_async(
+        self,
+        *,
+        link_channel_endpoint_request_dto: Union[
+            models.LinkChannelEndpointRequestDto,
+            models.LinkChannelEndpointRequestDtoTypedDict,
+        ],
+        idempotency_key: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.IntegrationsControllerLinkChannelEndpointResponse:
+        r"""Issue a URL to link a subscriber chat identity
+
+        Returns a provider-specific URL the subscriber opens to link their chat identity. The integration provider is resolved from integrationIdentifier; Telegram returns a deep link.
+
+        :param link_channel_endpoint_request_dto:
+        :param idempotency_key: A header for idempotency purposes
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.IntegrationsControllerLinkChannelEndpointRequest(
+            idempotency_key=idempotency_key,
+            link_channel_endpoint_request_dto=utils.get_pydantic_model(
+                link_channel_endpoint_request_dto, models.LinkChannelEndpointRequestDto
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v1/integrations/channel-endpoints/link",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.link_channel_endpoint_request_dto,
+                False,
+                False,
+                "json",
+                models.LinkChannelEndpointRequestDto,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(1000, 30000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["408", "409", "429", "5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="IntegrationsController_linkChannelEndpoint",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Integrations"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.IntegrationsControllerLinkChannelEndpointResponse(
+                result=unmarshal_json_response(
+                    models.LinkChannelEndpointResponseDto, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -2109,6 +2937,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2244,6 +3074,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2384,6 +3216,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2524,6 +3358,8 @@ class Integrations(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Integrations"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

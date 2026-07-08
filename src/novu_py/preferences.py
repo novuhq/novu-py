@@ -6,7 +6,7 @@ from novu_py._hooks import HookContext
 from novu_py.types import OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from novu_py.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Preferences(BaseSDK):
@@ -15,7 +15,7 @@ class Preferences(BaseSDK):
         *,
         subscriber_id: str,
         criticality: Optional[models.Criticality] = models.Criticality.NON_CRITICAL,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -49,7 +49,7 @@ class Preferences(BaseSDK):
         request = models.SubscribersControllerGetSubscriberPreferencesRequest(
             subscriber_id=subscriber_id,
             criticality=criticality,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -91,6 +91,8 @@ class Preferences(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -143,7 +145,7 @@ class Preferences(BaseSDK):
         *,
         subscriber_id: str,
         criticality: Optional[models.Criticality] = models.Criticality.NON_CRITICAL,
-        context_keys: Optional[List[str]] = None,
+        context_keys: Optional[Iterable[str]] = None,
         idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -177,7 +179,7 @@ class Preferences(BaseSDK):
         request = models.SubscribersControllerGetSubscriberPreferencesRequest(
             subscriber_id=subscriber_id,
             criticality=criticality,
-            context_keys=context_keys,
+            context_keys=utils.unmarshal(context_keys, Optional[List[str]]),
             idempotency_key=idempotency_key,
         )
 
@@ -219,6 +221,8 @@ class Preferences(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -357,6 +361,8 @@ class Preferences(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -495,6 +501,8 @@ class Preferences(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -633,6 +641,8 @@ class Preferences(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -771,6 +781,8 @@ class Preferences(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Subscribers"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
