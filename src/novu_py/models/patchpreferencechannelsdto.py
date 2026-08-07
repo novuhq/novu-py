@@ -18,6 +18,8 @@ class PatchPreferenceChannelsDtoTypedDict(TypedDict):
     r"""Push channel preference"""
     chat: NotRequired[bool]
     r"""Chat channel preference"""
+    tool: NotRequired[bool]
+    r"""Tool channel preference"""
 
 
 class PatchPreferenceChannelsDto(BaseModel):
@@ -36,9 +38,12 @@ class PatchPreferenceChannelsDto(BaseModel):
     chat: Optional[bool] = None
     r"""Chat channel preference"""
 
+    tool: Optional[bool] = None
+    r"""Tool channel preference"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["email", "sms", "in_app", "push", "chat"])
+        optional_fields = set(["email", "sms", "in_app", "push", "chat", "tool"])
         serialized = handler(self)
         m = {}
 

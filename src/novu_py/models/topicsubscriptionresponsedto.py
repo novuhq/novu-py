@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .subscriberdto import SubscriberDto, SubscriberDtoTypedDict
+from .subscriptionpreferencedto import (
+    SubscriptionPreferenceDto,
+    SubscriptionPreferenceDtoTypedDict,
+)
 from .topicresponsedto import TopicResponseDto, TopicResponseDtoTypedDict
 from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
@@ -23,6 +27,8 @@ class TopicSubscriptionResponseDtoTypedDict(TypedDict):
     r"""Subscriber information"""
     context_keys: NotRequired[List[str]]
     r"""Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)"""
+    preferences: NotRequired[List[SubscriptionPreferenceDtoTypedDict]]
+    r"""The preferences for workflows in this subscription"""
 
 
 class TopicSubscriptionResponseDto(BaseModel):
@@ -46,9 +52,12 @@ class TopicSubscriptionResponseDto(BaseModel):
     ] = None
     r"""Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)"""
 
+    preferences: Optional[List[SubscriptionPreferenceDto]] = None
+    r"""The preferences for workflows in this subscription"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["contextKeys"])
+        optional_fields = set(["contextKeys", "preferences"])
         serialized = handler(self)
         m = {}
 

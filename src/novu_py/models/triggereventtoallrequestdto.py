@@ -6,7 +6,7 @@ from .severitylevelenum import SeverityLevelEnum
 from .stepsoverrides import StepsOverrides, StepsOverridesTypedDict
 from .subscriberpayloaddto import SubscriberPayloadDto, SubscriberPayloadDtoTypedDict
 from .tenantpayloaddto import TenantPayloadDto, TenantPayloadDtoTypedDict
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import ConfigDict, model_serializer
 from typing import Any, Dict, Optional, Union
@@ -259,6 +259,8 @@ class TriggerEventToAllRequestDtoTypedDict(TypedDict):
     """
     overrides: NotRequired[TriggerEventToAllRequestDtoOverridesTypedDict]
     r"""This could be used to override provider specific configurations"""
+    agent_id: NotRequired[Nullable[str]]
+    r"""Override the workflow-assigned agent for this trigger using the public agent identifier. Omit to use the workflow default; pass null to disable agent routing for this execution."""
     transaction_id: NotRequired[str]
     r"""A unique identifier for this transaction, we will generated a UUID if not provided."""
     actor: NotRequired[TriggerEventToAllRequestDtoActorTypedDict]
@@ -287,6 +289,9 @@ class TriggerEventToAllRequestDto(BaseModel):
     overrides: Optional[TriggerEventToAllRequestDtoOverrides] = None
     r"""This could be used to override provider specific configurations"""
 
+    agent_id: Annotated[OptionalNullable[str], pydantic.Field(alias="agentId")] = UNSET
+    r"""Override the workflow-assigned agent for this trigger using the public agent identifier. Omit to use the workflow default; pass null to disable agent routing for this execution."""
+
     transaction_id: Annotated[Optional[str], pydantic.Field(alias="transactionId")] = (
         None
     )
@@ -309,17 +314,26 @@ class TriggerEventToAllRequestDto(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["overrides", "transactionId", "actor", "tenant", "context"]
+            ["overrides", "agentId", "transactionId", "actor", "tenant", "context"]
         )
+        nullable_fields = set(["agentId"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

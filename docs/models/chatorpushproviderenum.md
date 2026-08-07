@@ -18,6 +18,7 @@ value = ChatOrPushProviderEnum.SLACK
 | `SLACK`             | slack               |
 | `DISCORD`           | discord             |
 | `MSTEAMS`           | msteams             |
+| `WEBEX_MESSAGING`   | webex-messaging     |
 | `MATTERMOST`        | mattermost          |
 | `RYVER`             | ryver               |
 | `ZULIP`             | zulip               |
@@ -25,9 +26,12 @@ value = ChatOrPushProviderEnum.SLACK
 | `GETSTREAM`         | getstream           |
 | `ROCKET_CHAT`       | rocket-chat         |
 | `WHATSAPP_BUSINESS` | whatsapp-business   |
+| `LINE`              | line                |
 | `CHAT_WEBHOOK`      | chat-webhook        |
 | `NOVU_SLACK`        | novu-slack          |
 | `TELEGRAM`          | telegram            |
+| `SENDBLUE`          | sendblue            |
+| `NOVU_WEB_CHAT`     | novu-web-chat       |
 | `FCM`               | fcm                 |
 | `APNS`              | apns                |
 | `EXPO`              | expo                |

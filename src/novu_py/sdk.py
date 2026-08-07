@@ -28,6 +28,7 @@ import weakref
 
 if TYPE_CHECKING:
     from novu_py.activity import Activity
+    from novu_py.agents import Agents
     from novu_py.channel_connections import ChannelConnections
     from novu_py.channel_endpoints import ChannelEndpoints
     from novu_py.contexts import Contexts
@@ -75,6 +76,10 @@ class Novu(BaseSDK):
     r"""All notifications are sent via a workflow. Each workflow acts as a container for the logic and blueprint that are associated with a type of notification in your system.
     https://docs.novu.co/workflows
     """
+    agents: "Agents"
+    r"""Agents are conversational assistants that receive inbound messages from connected channels and respond through a custom code bridge or a managed runtime provider.
+    https://docs.novu.co/agents
+    """
     channel_connections: "ChannelConnections"
     channel_endpoints: "ChannelEndpoints"
     domains: "Domains"
@@ -100,6 +105,7 @@ class Novu(BaseSDK):
         "topics": ("novu_py.topics", "Topics"),
         "translations": ("novu_py.translations", "Translations"),
         "workflows": ("novu_py.workflows", "Workflows"),
+        "agents": ("novu_py.agents", "Agents"),
         "channel_connections": ("novu_py.channel_connections", "ChannelConnections"),
         "channel_endpoints": ("novu_py.channel_endpoints", "ChannelEndpoints"),
         "domains": ("novu_py.domains", "Domains"),

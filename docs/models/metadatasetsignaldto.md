@@ -1,0 +1,11 @@
+# MetadataSetSignalDto
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `type`                                                                     | [models.MetadataSetSignalDtoType](../models/metadatasetsignaldtotype.md)   | :heavy_check_mark:                                                         | N/A                                                                        |                                                                            |
+| `action`                                                                   | [Optional[models.Action]](../models/action.md)                             | :heavy_minus_sign:                                                         | Defaults to `set` when omitted.                                            |                                                                            |
+| `key`                                                                      | *str*                                                                      | :heavy_check_mark:                                                         | Metadata key (1–128 chars; letters, digits, and `-` `_` `:` separators).   | crm:ticketId                                                               |
+| `value`                                                                    | [models.MetadataSetSignalDtoValue](../models/metadatasetsignaldtovalue.md) | :heavy_check_mark:                                                         | JSON-serializable value to store.                                          | TCK-1001                                                                   |

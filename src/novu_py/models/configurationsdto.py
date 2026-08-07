@@ -11,6 +11,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class ConfigurationsDtoTypedDict(TypedDict):
     inbound_webhook_enabled: NotRequired[bool]
     inbound_webhook_signing_key: NotRequired[str]
+    payload_schema: NotRequired[str]
+    r"""JSON Schema describing the payload accepted by this integration."""
 
 
 class ConfigurationsDto(BaseModel):
@@ -22,9 +24,16 @@ class ConfigurationsDto(BaseModel):
         Optional[str], pydantic.Field(alias="inboundWebhookSigningKey")
     ] = None
 
+    payload_schema: Annotated[Optional[str], pydantic.Field(alias="payloadSchema")] = (
+        None
+    )
+    r"""JSON Schema describing the payload accepted by this integration."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["inboundWebhookEnabled", "inboundWebhookSigningKey"])
+        optional_fields = set(
+            ["inboundWebhookEnabled", "inboundWebhookSigningKey", "payloadSchema"]
+        )
         serialized = handler(self)
         m = {}
 

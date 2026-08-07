@@ -5,6 +5,7 @@ from .emailcontrolsmetadataresponsedto import (
     EmailControlsMetadataResponseDto,
     EmailControlsMetadataResponseDtoTypedDict,
 )
+from .emailfromcontroldto import EmailFromControlDto, EmailFromControlDtoTypedDict
 from .resourceoriginenum import ResourceOriginEnum
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
@@ -38,6 +39,14 @@ class EmailStepResponseDtoControlValuesTypedDict(TypedDict):
     r"""Disable sanitization of the output."""
     layout_id: NotRequired[Nullable[str]]
     r"""Layout ID to use for the email. Null means no layout, undefined means default layout."""
+    from_: NotRequired[EmailFromControlDtoTypedDict]
+    r"""Sender name and email overrides for this step."""
+    use_provider_defaults: NotRequired[bool]
+    r"""When true, sender name/email use the primary email integration defaults and skip workflow agent defaults."""
+    reply_to: NotRequired[str]
+    r"""Step-level Reply-To override. When unset, inherits the workflow agent reply-to."""
+    preheader: NotRequired[str]
+    r"""One-line inbox preview text shown next to the subject."""
 
 
 class EmailStepResponseDtoControlValues(BaseModel):
@@ -72,6 +81,20 @@ class EmailStepResponseDtoControlValues(BaseModel):
     )
     r"""Layout ID to use for the email. Null means no layout, undefined means default layout."""
 
+    from_: Annotated[Optional[EmailFromControlDto], pydantic.Field(alias="from")] = None
+    r"""Sender name and email overrides for this step."""
+
+    use_provider_defaults: Annotated[
+        Optional[bool], pydantic.Field(alias="useProviderDefaults")
+    ] = None
+    r"""When true, sender name/email use the primary email integration defaults and skip workflow agent defaults."""
+
+    reply_to: Annotated[Optional[str], pydantic.Field(alias="replyTo")] = None
+    r"""Step-level Reply-To override. When unset, inherits the workflow agent reply-to."""
+
+    preheader: Optional[str] = None
+    r"""One-line inbox preview text shown next to the subject."""
+
     @property
     def additional_properties(self):
         return self.__pydantic_extra__
@@ -83,7 +106,17 @@ class EmailStepResponseDtoControlValues(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["skip", "body", "editorType", "disableOutputSanitization", "layoutId"]
+            [
+                "skip",
+                "body",
+                "editorType",
+                "disableOutputSanitization",
+                "layoutId",
+                "from",
+                "useProviderDefaults",
+                "replyTo",
+                "preheader",
+            ]
         )
         nullable_fields = set(["layoutId"])
         serialized = handler(self)
@@ -134,6 +167,8 @@ class EmailStepResponseDtoTypedDict(TypedDict):
     r"""Workflow database identifier"""
     control_values: NotRequired[EmailStepResponseDtoControlValuesTypedDict]
     r"""Control values for the email step"""
+    provider_overrides: NotRequired[Nullable[Dict[str, Dict[str, Any]]]]
+    r"""Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`)."""
     issues: NotRequired[StepIssuesDtoTypedDict]
     r"""Issues associated with the step"""
     step_resolver_hash: NotRequired[str]
@@ -177,6 +212,12 @@ class EmailStepResponseDto(BaseModel):
     ] = None
     r"""Control values for the email step"""
 
+    provider_overrides: Annotated[
+        OptionalNullable[Dict[str, Dict[str, Any]]],
+        pydantic.Field(alias="providerOverrides"),
+    ] = UNSET
+    r"""Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`)."""
+
     issues: Optional[StepIssuesDto] = None
     r"""Issues associated with the step"""
 
@@ -187,16 +228,27 @@ class EmailStepResponseDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["controlValues", "issues", "stepResolverHash"])
+        optional_fields = set(
+            ["controlValues", "providerOverrides", "issues", "stepResolverHash"]
+        )
+        nullable_fields = set(["providerOverrides"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

@@ -20,6 +20,7 @@ class IntegrationResponseDtoChannel(str, Enum):
     SMS = "sms"
     CHAT = "chat"
     PUSH = "push"
+    TOOL = "tool"
 
 
 class Kind(str, Enum):

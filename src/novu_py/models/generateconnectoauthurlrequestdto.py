@@ -65,16 +65,18 @@ class GenerateConnectOauthURLRequestDtoTypedDict(TypedDict):
     integration_identifier: str
     r"""Integration identifier"""
     subscriber_id: NotRequired[str]
-    r"""The subscriber ID to associate with the channel connection. For Slack: optional for workspace connections (required only for incoming-webhook scope). For MS Teams: optional. Admin consent is tenant-wide."""
+    r"""The subscriber ID to associate with the channel connection. For Slack: optional for workspace connections (required only for incoming-webhook scope). For Webex: optional for workspace connections. For MS Teams: optional. Admin consent is tenant-wide."""
     connection_identifier: NotRequired[str]
     r"""Identifier of the channel connection that will be created. Generated automatically if not provided."""
     context: NotRequired[Dict[str, GenerateConnectOauthURLRequestDtoContextTypedDict]]
+    context_hash: NotRequired[str]
+    r"""HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same \"Inbox with context\" signing scheme). Required when the integration has HMAC validation enabled and the session did not already HMAC-verify the context. Establishes that the context/tenant binding was minted by an authenticated backend rather than forged in the browser."""
     scope: NotRequired[List[str]]
-    r"""**Slack only**: OAuth scopes to request during authorization. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions."""
+    r"""**Slack only**: OAuth scopes to request during authorization. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions."""
     connection_mode: NotRequired[GenerateConnectOauthURLRequestDtoConnectionMode]
     r"""Connection mode that determines how the channel connection is scoped. \"subscriber\" (default) associates the connection with a specific subscriber. \"shared\" associates the connection with a context instead of a subscriber."""
     auto_link_user: NotRequired[bool]
-    r"""When true (default when connectionMode is \"subscriber\"), after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint. For Slack, uses the authed_user.id returned by oauth.v2.access — no extra redirect. For MS Teams, triggers a second OAuth redirect for delegated user-identity consent. Set to false to only create the workspace connection without linking the individual user."""
+    r"""When true (default when connectionMode is \"subscriber\"), after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint. For Slack, uses the authed_user.id returned by oauth.v2.access — no extra redirect. For Webex, uses the authenticated Webex person returned by people/me — no extra redirect. For MS Teams, triggers a second OAuth redirect for delegated user-identity consent. Set to false to only create the workspace connection without linking the individual user."""
 
 
 class GenerateConnectOauthURLRequestDto(BaseModel):
@@ -84,7 +86,7 @@ class GenerateConnectOauthURLRequestDto(BaseModel):
     r"""Integration identifier"""
 
     subscriber_id: Annotated[Optional[str], pydantic.Field(alias="subscriberId")] = None
-    r"""The subscriber ID to associate with the channel connection. For Slack: optional for workspace connections (required only for incoming-webhook scope). For MS Teams: optional. Admin consent is tenant-wide."""
+    r"""The subscriber ID to associate with the channel connection. For Slack: optional for workspace connections (required only for incoming-webhook scope). For Webex: optional for workspace connections. For MS Teams: optional. Admin consent is tenant-wide."""
 
     connection_identifier: Annotated[
         Optional[str], pydantic.Field(alias="connectionIdentifier")
@@ -93,8 +95,11 @@ class GenerateConnectOauthURLRequestDto(BaseModel):
 
     context: Optional[Dict[str, GenerateConnectOauthURLRequestDtoContext]] = None
 
+    context_hash: Annotated[Optional[str], pydantic.Field(alias="contextHash")] = None
+    r"""HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same \"Inbox with context\" signing scheme). Required when the integration has HMAC validation enabled and the session did not already HMAC-verify the context. Establishes that the context/tenant binding was minted by an authenticated backend rather than forged in the browser."""
+
     scope: Optional[List[str]] = None
-    r"""**Slack only**: OAuth scopes to request during authorization. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions."""
+    r"""**Slack only**: OAuth scopes to request during authorization. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions."""
 
     connection_mode: Annotated[
         Optional[GenerateConnectOauthURLRequestDtoConnectionMode],
@@ -105,7 +110,7 @@ class GenerateConnectOauthURLRequestDto(BaseModel):
     auto_link_user: Annotated[Optional[bool], pydantic.Field(alias="autoLinkUser")] = (
         None
     )
-    r"""When true (default when connectionMode is \"subscriber\"), after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint. For Slack, uses the authed_user.id returned by oauth.v2.access — no extra redirect. For MS Teams, triggers a second OAuth redirect for delegated user-identity consent. Set to false to only create the workspace connection without linking the individual user."""
+    r"""When true (default when connectionMode is \"subscriber\"), after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint. For Slack, uses the authed_user.id returned by oauth.v2.access — no extra redirect. For Webex, uses the authenticated Webex person returned by people/me — no extra redirect. For MS Teams, triggers a second OAuth redirect for delegated user-identity consent. Set to false to only create the workspace connection without linking the individual user."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -114,6 +119,7 @@ class GenerateConnectOauthURLRequestDto(BaseModel):
                 "subscriberId",
                 "connectionIdentifier",
                 "context",
+                "contextHash",
                 "scope",
                 "connectionMode",
                 "autoLinkUser",

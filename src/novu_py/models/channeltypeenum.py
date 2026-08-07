@@ -12,3 +12,4 @@ class ChannelTypeEnum(str, Enum):
     SMS = "sms"
     CHAT = "chat"
     PUSH = "push"
+    TOOL = "tool"

@@ -5,12 +5,12 @@
 ```python
 from novu_py.models import GeneratePreviewResponseDtoResult9Type
 
-value = GeneratePreviewResponseDtoResult9Type.DIGEST
+value = GeneratePreviewResponseDtoResult9Type.DELAY
 ```
 
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `DIGEST` | digest   |
+| Name    | Value   |
+| ------- | ------- |
+| `DELAY` | delay   |

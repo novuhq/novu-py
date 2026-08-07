@@ -20,3 +20,4 @@ value = Channel.IN_APP
 | `SMS`    | sms      |
 | `CHAT`   | chat     |
 | `PUSH`   | push     |
+| `TOOL`   | tool     |

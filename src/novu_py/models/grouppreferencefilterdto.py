@@ -18,7 +18,7 @@ class GroupPreferenceFilterDtoTypedDict(TypedDict):
     enabled: NotRequired[bool]
     r"""Whether the preference is enabled. Used when condition is not provided."""
     condition: NotRequired[Dict[str, Any]]
-    r"""Optional condition using JSON Logic rules"""
+    r"""Optional JSON Logic condition evaluated at fan-out time against trigger payload, subscriber profile, actor, and context (for example, `{ \"var\": \"payload.tier\" }`, `{ \"var\": \"subscriber.data.plan\" }`, or `{ \"var\": \"actor.data.role\" }`)"""
 
 
 class GroupPreferenceFilterDto(BaseModel):
@@ -29,7 +29,7 @@ class GroupPreferenceFilterDto(BaseModel):
     r"""Whether the preference is enabled. Used when condition is not provided."""
 
     condition: Optional[Dict[str, Any]] = None
-    r"""Optional condition using JSON Logic rules"""
+    r"""Optional JSON Logic condition evaluated at fan-out time against trigger payload, subscriber profile, actor, and context (for example, `{ \"var\": \"payload.tier\" }`, `{ \"var\": \"subscriber.data.plan\" }`, or `{ \"var\": \"actor.data.role\" }`)"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

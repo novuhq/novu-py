@@ -23,6 +23,7 @@ class MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel(str, Enum
     SMS = "sms"
     CHAT = "chat"
     PUSH = "push"
+    TOOL = "tool"
 
 
 class MessagesControllerDeleteMessagesByTransactionIDRequestTypedDict(TypedDict):

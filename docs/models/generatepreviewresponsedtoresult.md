@@ -59,3 +59,9 @@ value: models.Eight = /* values here */
 value: models.Nine = /* values here */
 ```
 
+### `models.Ten`
+
+```python
+value: models.Ten = /* values here */
+```
+

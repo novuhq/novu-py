@@ -19,6 +19,7 @@ class CreateIntegrationRequestDtoChannel(str, Enum):
     SMS = "sms"
     CHAT = "chat"
     PUSH = "push"
+    TOOL = "tool"
 
 
 class CreateIntegrationRequestDtoKind(str, Enum):

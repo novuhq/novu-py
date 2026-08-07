@@ -20,3 +20,4 @@ value = ContentIssueEnum.ILLEGAL_VARIABLE_IN_CONTROL_VALUE
 | `INVALID_URL`                       | INVALID_URL                         |
 | `MISSING_VALUE`                     | MISSING_VALUE                       |
 | `TIER_LIMIT_EXCEEDED`               | TIER_LIMIT_EXCEEDED                 |
+| `UNSUPPORTED_PROPERTY`              | UNSUPPORTED_PROPERTY                |
