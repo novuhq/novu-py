@@ -19,11 +19,13 @@ class Channel(str, Enum):
     SMS = "sms"
     CHAT = "chat"
     PUSH = "push"
+    TOOL = "tool"
 
 
-class ProviderID(str, Enum):
+class GetChannelConnectionResponseDtoProviderID(str, Enum):
     r"""The provider identifier (e.g., sendgrid, twilio, slack, etc.)."""
 
+    ANYPOST = "anypost"
     EMAILJS = "emailjs"
     MAILGUN = "mailgun"
     MAILJET = "mailjet"
@@ -83,6 +85,7 @@ class ProviderID(str, Enum):
     SINCH = "sinch"
     ISENDPRO_SMS = "isendpro-sms"
     CM_TELECOM = "cm-telecom"
+    RUACH_SMS = "ruach-sms"
     FCM = "fcm"
     APNS = "apns"
     EXPO = "expo"
@@ -95,6 +98,7 @@ class ProviderID(str, Enum):
     SLACK = "slack"
     DISCORD = "discord"
     MSTEAMS = "msteams"
+    WEBEX_MESSAGING = "webex-messaging"
     MATTERMOST = "mattermost"
     RYVER = "ryver"
     ZULIP = "zulip"
@@ -102,12 +106,19 @@ class ProviderID(str, Enum):
     GETSTREAM = "getstream"
     ROCKET_CHAT = "rocket-chat"
     WHATSAPP_BUSINESS = "whatsapp-business"
+    LINE = "line"
     CHAT_WEBHOOK = "chat-webhook"
     NOVU_SLACK = "novu-slack"
     TELEGRAM = "telegram"
+    SENDBLUE = "sendblue"
+    NOVU_WEB_CHAT = "novu-web-chat"
     ANTHROPIC = "anthropic"
     NOVU_ANTHROPIC = "novu-anthropic"
     ANTHROPIC_AWS = "anthropic-aws"
+    PAGERDUTY = "pagerduty"
+    OPSGENIE = "opsgenie"
+    GRAFANA = "grafana"
+    TOOL_WEBHOOK = "tool-webhook"
 
 
 class GetChannelConnectionResponseDtoTypedDict(TypedDict):
@@ -115,7 +126,7 @@ class GetChannelConnectionResponseDtoTypedDict(TypedDict):
     r"""The unique identifier of the channel endpoint."""
     channel: Nullable[Channel]
     r"""The channel type (email, sms, push, chat, etc.)."""
-    provider_id: Nullable[ProviderID]
+    provider_id: Nullable[GetChannelConnectionResponseDtoProviderID]
     r"""The provider identifier (e.g., sendgrid, twilio, slack, etc.)."""
     integration_identifier: Nullable[str]
     r"""The identifier of the integration to use for this channel endpoint."""
@@ -138,7 +149,10 @@ class GetChannelConnectionResponseDto(BaseModel):
     channel: Nullable[Channel]
     r"""The channel type (email, sms, push, chat, etc.)."""
 
-    provider_id: Annotated[Nullable[ProviderID], pydantic.Field(alias="providerId")]
+    provider_id: Annotated[
+        Nullable[GetChannelConnectionResponseDtoProviderID],
+        pydantic.Field(alias="providerId"),
+    ]
     r"""The provider identifier (e.g., sendgrid, twilio, slack, etc.)."""
 
     integration_identifier: Annotated[

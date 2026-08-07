@@ -7,7 +7,7 @@ from .stepsoverrides import StepsOverrides, StepsOverridesTypedDict
 from .subscriberpayloaddto import SubscriberPayloadDto, SubscriberPayloadDtoTypedDict
 from .tenantpayloaddto import TenantPayloadDto, TenantPayloadDtoTypedDict
 from .topicpayloaddto import TopicPayloadDto, TopicPayloadDtoTypedDict
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, List, Optional, Union
@@ -160,8 +160,8 @@ To1TypedDict = TypeAliasType(
 To1 = TypeAliasType("To1", Union[TopicPayloadDto, SubscriberPayloadDto, str])
 
 
-ToTypedDict = TypeAliasType(
-    "ToTypedDict",
+TriggerEventRequestDtoToTypedDict = TypeAliasType(
+    "TriggerEventRequestDtoToTypedDict",
     Union[
         TopicPayloadDtoTypedDict, SubscriberPayloadDtoTypedDict, List[To1TypedDict], str
     ],
@@ -169,7 +169,10 @@ ToTypedDict = TypeAliasType(
 r"""The recipients list of people who will receive the notification. Maximum number of recipients can be 100."""
 
 
-To = TypeAliasType("To", Union[TopicPayloadDto, SubscriberPayloadDto, List[To1], str])
+TriggerEventRequestDtoTo = TypeAliasType(
+    "TriggerEventRequestDtoTo",
+    Union[TopicPayloadDto, SubscriberPayloadDto, List[To1], str],
+)
 r"""The recipients list of people who will receive the notification. Maximum number of recipients can be 100."""
 
 
@@ -250,15 +253,19 @@ TriggerEventRequestDtoContext = TypeAliasType(
 class TriggerEventRequestDtoTypedDict(TypedDict):
     workflow_id: str
     r"""The trigger identifier of the workflow you wish to send. This identifier can be found on the workflow page."""
-    to: ToTypedDict
+    to: TriggerEventRequestDtoToTypedDict
     r"""The recipients list of people who will receive the notification. Maximum number of recipients can be 100."""
     payload: NotRequired[Dict[str, Any]]
     r"""The payload object is used to pass additional custom information that could be
     used to render the workflow, or perform routing rules based on it.
     This data will also be available when fetching the notifications feed from the API to display certain parts of the UI.
     """
+    bridge_url: NotRequired[str]
+    r"""Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. Useful during local development when multiple engineers share an organization: set this to your personal tunnel URL from `npx novu@latest dev` (for example via NOVU_BRIDGE_URL) so app-fired triggers hit your machine instead of the environment's synced Bridge URL. Must be a publicly reachable https URL — private or localhost addresses are rejected."""
     overrides: NotRequired[OverridesTypedDict]
     r"""This could be used to override provider specific configurations"""
+    agent_id: NotRequired[Nullable[str]]
+    r"""Override the workflow-assigned agent for this trigger using the public agent identifier. Omit to use the workflow default; pass null to disable agent routing for this execution."""
     transaction_id: NotRequired[str]
     r"""A unique identifier for deduplication. If the same **transactionId** is sent again,
     the trigger is ignored. Useful to prevent duplicate notifications. The retention period depends on your billing tier.
@@ -279,7 +286,7 @@ class TriggerEventRequestDto(BaseModel):
     workflow_id: Annotated[str, pydantic.Field(alias="name")]
     r"""The trigger identifier of the workflow you wish to send. This identifier can be found on the workflow page."""
 
-    to: To
+    to: TriggerEventRequestDtoTo
     r"""The recipients list of people who will receive the notification. Maximum number of recipients can be 100."""
 
     payload: Optional[Dict[str, Any]] = None
@@ -288,8 +295,14 @@ class TriggerEventRequestDto(BaseModel):
     This data will also be available when fetching the notifications feed from the API to display certain parts of the UI.
     """
 
+    bridge_url: Annotated[Optional[str], pydantic.Field(alias="bridgeUrl")] = None
+    r"""Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. Useful during local development when multiple engineers share an organization: set this to your personal tunnel URL from `npx novu@latest dev` (for example via NOVU_BRIDGE_URL) so app-fired triggers hit your machine instead of the environment's synced Bridge URL. Must be a publicly reachable https URL — private or localhost addresses are rejected."""
+
     overrides: Optional[Overrides] = None
     r"""This could be used to override provider specific configurations"""
+
+    agent_id: Annotated[OptionalNullable[str], pydantic.Field(alias="agentId")] = UNSET
+    r"""Override the workflow-assigned agent for this trigger using the public agent identifier. Omit to use the workflow default; pass null to disable agent routing for this execution."""
 
     transaction_id: Annotated[Optional[str], pydantic.Field(alias="transactionId")] = (
         None
@@ -314,17 +327,35 @@ class TriggerEventRequestDto(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["payload", "overrides", "transactionId", "actor", "tenant", "context"]
+            [
+                "payload",
+                "bridgeUrl",
+                "overrides",
+                "agentId",
+                "transactionId",
+                "actor",
+                "tenant",
+                "context",
+            ]
         )
+        nullable_fields = set(["agentId"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

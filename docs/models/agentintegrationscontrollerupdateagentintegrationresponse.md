@@ -1,0 +1,9 @@
+# AgentIntegrationsControllerUpdateAgentIntegrationResponse
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `headers`                                                                      | Dict[str, List[*str*]]                                                         | :heavy_check_mark:                                                             | N/A                                                                            |
+| `result`                                                                       | [models.AgentIntegrationResponseDto](../models/agentintegrationresponsedto.md) | :heavy_check_mark:                                                             | N/A                                                                            |

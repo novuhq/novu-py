@@ -59,10 +59,12 @@ class GenerateLinkUserOauthURLRequestDtoTypedDict(TypedDict):
     integration_identifier: str
     r"""Integration identifier"""
     connection_identifier: NotRequired[str]
-    r"""Identifier of the existing channel connection to associate this user endpoint with. Generated automatically if not provided."""
+    r"""Identifier of the existing channel connection to associate this user endpoint with. Generated automatically if not provided for providers that support standalone user linking. Required for Webex."""
     context: NotRequired[Dict[str, GenerateLinkUserOauthURLRequestDtoContextTypedDict]]
+    context_hash: NotRequired[str]
+    r"""HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same \"Inbox with context\" signing scheme). Required when the integration has HMAC validation enabled and the session did not already HMAC-verify the context, so the per-user link carries a trustworthy subscriber/tenant binding."""
     user_scope: NotRequired[List[str]]
-    r"""**Slack only**: User-level OAuth scopes for \"Sign in with Slack\". Defaults to: identity.basic. **MS Teams**: ignored — uses delegated OpenID scopes (openid, profile, User.Read)."""
+    r"""**Slack only**: User-level OAuth scopes for \"Sign in with Slack\". Defaults to: identity.basic. **Webex**: Optional Webex scopes for people/me; defaults to spark:people_read. **MS Teams**: ignored — uses delegated OpenID scopes (openid, profile, User.Read)."""
 
 
 class GenerateLinkUserOauthURLRequestDto(BaseModel):
@@ -77,16 +79,21 @@ class GenerateLinkUserOauthURLRequestDto(BaseModel):
     connection_identifier: Annotated[
         Optional[str], pydantic.Field(alias="connectionIdentifier")
     ] = None
-    r"""Identifier of the existing channel connection to associate this user endpoint with. Generated automatically if not provided."""
+    r"""Identifier of the existing channel connection to associate this user endpoint with. Generated automatically if not provided for providers that support standalone user linking. Required for Webex."""
 
     context: Optional[Dict[str, GenerateLinkUserOauthURLRequestDtoContext]] = None
 
+    context_hash: Annotated[Optional[str], pydantic.Field(alias="contextHash")] = None
+    r"""HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same \"Inbox with context\" signing scheme). Required when the integration has HMAC validation enabled and the session did not already HMAC-verify the context, so the per-user link carries a trustworthy subscriber/tenant binding."""
+
     user_scope: Annotated[Optional[List[str]], pydantic.Field(alias="userScope")] = None
-    r"""**Slack only**: User-level OAuth scopes for \"Sign in with Slack\". Defaults to: identity.basic. **MS Teams**: ignored — uses delegated OpenID scopes (openid, profile, User.Read)."""
+    r"""**Slack only**: User-level OAuth scopes for \"Sign in with Slack\". Defaults to: identity.basic. **Webex**: Optional Webex scopes for people/me; defaults to spark:people_read. **MS Teams**: ignored — uses delegated OpenID scopes (openid, profile, User.Read)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["connectionIdentifier", "context", "userScope"])
+        optional_fields = set(
+            ["connectionIdentifier", "context", "contextHash", "userScope"]
+        )
         serialized = handler(self)
         m = {}
 

@@ -16,6 +16,7 @@ from .pushstepupsertdto import PushStepUpsertDto, PushStepUpsertDtoTypedDict
 from .severitylevelenum import SeverityLevelEnum
 from .smsstepupsertdto import SmsStepUpsertDto, SmsStepUpsertDtoTypedDict
 from .throttlestepupsertdto import ThrottleStepUpsertDto, ThrottleStepUpsertDtoTypedDict
+from .toolstepupsertdto import ToolStepUpsertDto, ToolStepUpsertDtoTypedDict
 from .workflowcreationsourceenum import WorkflowCreationSourceEnum
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from novu_py.utils import get_discriminator
@@ -25,6 +26,65 @@ from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
+class ProvidersTypedDict(TypedDict):
+    reply_to: NotRequired[str]
+
+
+class Providers(BaseModel):
+    reply_to: Annotated[Optional[str], pydantic.Field(alias="replyTo")] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["replyTo"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class AgentTypedDict(TypedDict):
+    r"""Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear."""
+
+    identifier: str
+    r"""Public agent identifier used to route this workflow through an agent's connected channels."""
+    providers: NotRequired[Dict[str, ProvidersTypedDict]]
+    r"""Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported."""
+
+
+class Agent(BaseModel):
+    r"""Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear."""
+
+    identifier: str
+    r"""Public agent identifier used to route this workflow through an agent's connected channels."""
+
+    providers: Optional[Dict[str, Providers]] = None
+    r"""Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["providers"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 StepsModelTypedDict = TypeAliasType(
     "StepsModelTypedDict",
     Union[
@@ -32,12 +92,13 @@ StepsModelTypedDict = TypeAliasType(
         EmailStepUpsertDtoTypedDict,
         SmsStepUpsertDtoTypedDict,
         PushStepUpsertDtoTypedDict,
-        ChatStepUpsertDtoTypedDict,
         DelayStepUpsertDtoTypedDict,
         DigestStepUpsertDtoTypedDict,
         ThrottleStepUpsertDtoTypedDict,
         CustomStepUpsertDtoTypedDict,
         HTTPRequestStepUpsertDtoTypedDict,
+        ChatStepUpsertDtoTypedDict,
+        ToolStepUpsertDtoTypedDict,
     ],
 )
 
@@ -52,6 +113,7 @@ StepsModel = Annotated[
         Annotated[DelayStepUpsertDto, Tag("delay")],
         Annotated[DigestStepUpsertDto, Tag("digest")],
         Annotated[ThrottleStepUpsertDto, Tag("throttle")],
+        Annotated[ToolStepUpsertDto, Tag("tool")],
         Annotated[CustomStepUpsertDto, Tag("custom")],
         Annotated[HTTPRequestStepUpsertDto, Tag("http_request")],
     ],
@@ -78,6 +140,8 @@ class CreateWorkflowDtoTypedDict(TypedDict):
     r"""The payload JSON Schema for the workflow"""
     is_translation_enabled: NotRequired[bool]
     r"""Enable or disable translations for this workflow"""
+    agent: NotRequired[Nullable[AgentTypedDict]]
+    r"""Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear."""
     source: NotRequired[WorkflowCreationSourceEnum]
     r"""Source of workflow creation"""
     preferences: NotRequired[PreferencesRequestDtoTypedDict]
@@ -120,6 +184,9 @@ class CreateWorkflowDto(BaseModel):
     ] = False
     r"""Enable or disable translations for this workflow"""
 
+    agent: OptionalNullable[Agent] = UNSET
+    r"""Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear."""
+
     source: Annotated[
         Optional[WorkflowCreationSourceEnum], pydantic.Field(alias="__source")
     ] = WorkflowCreationSourceEnum.EDITOR
@@ -141,12 +208,13 @@ class CreateWorkflowDto(BaseModel):
                 "validatePayload",
                 "payloadSchema",
                 "isTranslationEnabled",
+                "agent",
                 "__source",
                 "preferences",
                 "severity",
             ]
         )
-        nullable_fields = set(["payloadSchema"])
+        nullable_fields = set(["payloadSchema", "agent"])
         serialized = handler(self)
         m = {}
 
@@ -169,6 +237,10 @@ class CreateWorkflowDto(BaseModel):
         return m
 
 
+try:
+    Providers.model_rebuild()
+except NameError:
+    pass
 try:
     CreateWorkflowDto.model_rebuild()
 except NameError:

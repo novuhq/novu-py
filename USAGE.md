@@ -19,7 +19,9 @@ with Novu(
                 "text": "string",
             },
         },
+        bridge_url="https://your-tunnel.novu.co/api/novu",
         overrides=novu_py.Overrides(),
+        agent_id="support-agent",
         to="SUBSCRIBER_ID",
         actor="<value>",
         context={
@@ -55,7 +57,9 @@ async def main():
                     "text": "string",
                 },
             },
+            bridge_url="https://your-tunnel.novu.co/api/novu",
             overrides=novu_py.Overrides(),
+            agent_id="support-agent",
             to="SUBSCRIBER_ID",
             actor="<value>",
             context={
@@ -138,6 +142,7 @@ with Novu(
                 },
             },
         ),
+        agent_id="support-agent",
         actor=novu_py.SubscriberPayloadDto(
             first_name="John",
             last_name="Doe",
@@ -190,6 +195,7 @@ async def main():
                     },
                 },
             ),
+            agent_id="support-agent",
             actor=novu_py.SubscriberPayloadDto(
                 first_name="John",
                 last_name="Doe",
@@ -318,6 +324,60 @@ async def main():
                 ),
             ],
         })
+
+        # Handle response
+        print(res)
+
+asyncio.run(main())
+```
+
+### Send an agent reply
+
+```python
+# Synchronous Example
+import novu_py
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.agents.send_reply(agent_id="support-agent", agent_reply_payload_dto=novu_py.AgentReplyPayloadDto(
+        conversation_id="64f5a1c2e8b7a3d9f0c1b2a3",
+        integration_identifier="slack-support",
+        reply=novu_py.MarkdownReplyContentDto(
+            markdown="**Report ready.** Your weekly summary is attached.",
+        ),
+    ))
+
+    # Handle response
+    print(res)
+```
+
+</br>
+
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
+```python
+# Asynchronous Example
+import asyncio
+import novu_py
+from novu_py import Novu
+
+async def main():
+
+    async with Novu(
+        secret_key="YOUR_SECRET_KEY_HERE",
+    ) as novu:
+
+        res = await novu.agents.send_reply_async(agent_id="support-agent", agent_reply_payload_dto=novu_py.AgentReplyPayloadDto(
+            conversation_id="64f5a1c2e8b7a3d9f0c1b2a3",
+            integration_identifier="slack-support",
+            reply=novu_py.MarkdownReplyContentDto(
+                markdown="**Report ready.** Your weekly summary is attached.",
+            ),
+        ))
 
         # Handle response
         print(res)

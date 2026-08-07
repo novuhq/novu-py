@@ -77,7 +77,7 @@ class GenerateChatOauthURLRequestDtoTypedDict(TypedDict):
     r"""Identifier of the channel connection that will be created. It is generated automatically if not provided."""
     context: NotRequired[Dict[str, GenerateChatOauthURLRequestDtoContextTypedDict]]
     scope: NotRequired[List[str]]
-    r"""**Slack only**: OAuth scopes to request during authorization. These define the permissions your Slack integration will have. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **MS Teams**: This parameter is ignored. MS Teams uses admin consent with pre-configured permissions in Azure AD. Note: The generated OAuth URL expires after 5 minutes."""
+    r"""**Slack only**: OAuth scopes to request during authorization. These define the permissions your Slack integration will have. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: This parameter is ignored. MS Teams uses admin consent with pre-configured permissions in Azure AD. Note: The generated OAuth URL expires after 5 minutes."""
     user_scope: NotRequired[List[str]]
     r"""**Slack only, link_user mode**: User-level OAuth scopes to request during authorization. Used when mode is \"link_user\" to identify the Slack user via \"Sign in with Slack\". If not specified, defaults to: identity.basic."""
     mode: NotRequired[Mode]
@@ -85,7 +85,7 @@ class GenerateChatOauthURLRequestDtoTypedDict(TypedDict):
     connection_mode: NotRequired[GenerateChatOauthURLRequestDtoConnectionMode]
     r"""Connection mode that determines how the channel connection is scoped. Use \"subscriber\" (default) to associate the connection with a specific subscriber. Use \"shared\" to associate the connection with a context instead of a subscriber — subscriberId will not be stored on the connection."""
     auto_link_user: NotRequired[bool]
-    r"""When true, after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint. For Slack, this uses the authed_user.id already returned by oauth.v2.access — no extra redirect. For MS Teams, this triggers a second OAuth redirect for delegated user-identity consent. Defaults to false when omitted; the SlackConnectButton and MsTeamsConnectButton SDK components default this to true."""
+    r"""When true, after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint. For Slack, this uses the authed_user.id already returned by oauth.v2.access — no extra redirect. For Webex, this uses the authenticated Webex person returned by people/me — no extra redirect. For MS Teams, this triggers a second OAuth redirect for delegated user-identity consent. Defaults to false when omitted; the SlackConnectButton and MsTeamsConnectButton SDK components default this to true."""
 
 
 class GenerateChatOauthURLRequestDto(BaseModel):
@@ -105,7 +105,7 @@ class GenerateChatOauthURLRequestDto(BaseModel):
     context: Optional[Dict[str, GenerateChatOauthURLRequestDtoContext]] = None
 
     scope: Optional[List[str]] = None
-    r"""**Slack only**: OAuth scopes to request during authorization. These define the permissions your Slack integration will have. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **MS Teams**: This parameter is ignored. MS Teams uses admin consent with pre-configured permissions in Azure AD. Note: The generated OAuth URL expires after 5 minutes."""
+    r"""**Slack only**: OAuth scopes to request during authorization. These define the permissions your Slack integration will have. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: This parameter is ignored. MS Teams uses admin consent with pre-configured permissions in Azure AD. Note: The generated OAuth URL expires after 5 minutes."""
 
     user_scope: Annotated[Optional[List[str]], pydantic.Field(alias="userScope")] = None
     r"""**Slack only, link_user mode**: User-level OAuth scopes to request during authorization. Used when mode is \"link_user\" to identify the Slack user via \"Sign in with Slack\". If not specified, defaults to: identity.basic."""
@@ -122,7 +122,7 @@ class GenerateChatOauthURLRequestDto(BaseModel):
     auto_link_user: Annotated[Optional[bool], pydantic.Field(alias="autoLinkUser")] = (
         None
     )
-    r"""When true, after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint. For Slack, this uses the authed_user.id already returned by oauth.v2.access — no extra redirect. For MS Teams, this triggers a second OAuth redirect for delegated user-identity consent. Defaults to false when omitted; the SlackConnectButton and MsTeamsConnectButton SDK components default this to true."""
+    r"""When true, after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked \"Connect\" as a personal endpoint. For Slack, this uses the authed_user.id already returned by oauth.v2.access — no extra redirect. For Webex, this uses the authenticated Webex person returned by people/me — no extra redirect. For MS Teams, this triggers a second OAuth redirect for delegated user-identity consent. Defaults to false when omitted; the SlackConnectButton and MsTeamsConnectButton SDK components default this to true."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

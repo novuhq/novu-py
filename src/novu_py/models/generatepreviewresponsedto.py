@@ -17,8 +17,39 @@ from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class GeneratePreviewResponseDtoResult9Type(str, Enum):
+class GeneratePreviewResponseDtoResult10Type(str, Enum):
     DIGEST = "digest"
+
+
+class TenTypedDict(TypedDict):
+    type: NotRequired[GeneratePreviewResponseDtoResult10Type]
+    preview: NotRequired[DigestRegularOutputTypedDict]
+
+
+class Ten(BaseModel):
+    type: Optional[GeneratePreviewResponseDtoResult10Type] = None
+
+    preview: Optional[DigestRegularOutput] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type", "preview"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class GeneratePreviewResponseDtoResult9Type(str, Enum):
+    DELAY = "delay"
 
 
 class NineTypedDict(TypedDict):
@@ -49,22 +80,25 @@ class Nine(BaseModel):
 
 
 class GeneratePreviewResponseDtoResult8Type(str, Enum):
-    DELAY = "delay"
+    TOOL = "tool"
 
 
 class EightTypedDict(TypedDict):
     type: NotRequired[GeneratePreviewResponseDtoResult8Type]
-    preview: NotRequired[DigestRegularOutputTypedDict]
+    preview: NotRequired[Dict[str, Any]]
+    error: NotRequired[PreviewErrorDtoTypedDict]
 
 
 class Eight(BaseModel):
     type: Optional[GeneratePreviewResponseDtoResult8Type] = None
 
-    preview: Optional[DigestRegularOutput] = None
+    preview: Optional[Dict[str, Any]] = None
+
+    error: Optional[PreviewErrorDto] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["type", "preview"])
+        optional_fields = set(["type", "preview", "error"])
         serialized = handler(self)
         m = {}
 
@@ -286,14 +320,15 @@ class Result2(BaseModel):
 GeneratePreviewResponseDtoResultTypedDict = TypeAliasType(
     "GeneratePreviewResponseDtoResultTypedDict",
     Union[
-        EightTypedDict,
         NineTypedDict,
+        TenTypedDict,
         Result2TypedDict,
         ThreeTypedDict,
         Result4TypedDict,
         Result5TypedDict,
         SixTypedDict,
         SevenTypedDict,
+        EightTypedDict,
         Dict[str, Any],
     ],
 )
@@ -302,7 +337,9 @@ r"""Preview result"""
 
 GeneratePreviewResponseDtoResult = TypeAliasType(
     "GeneratePreviewResponseDtoResult",
-    Union[Eight, Nine, Result2, Three, Result4, Result5, Six, Seven, Dict[str, Any]],
+    Union[
+        Nine, Ten, Result2, Three, Result4, Result5, Six, Seven, Eight, Dict[str, Any]
+    ],
 )
 r"""Preview result"""
 

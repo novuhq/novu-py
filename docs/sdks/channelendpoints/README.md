@@ -82,6 +82,7 @@ with Novu(
 
     res = novu.channel_endpoints.create(request_body={
         "subscriber_id": "subscriber-123",
+        "create_subscriber_if_missing": False,
         "integration_identifier": "slack-prod",
         "type": novu_py.CreateSlackChannelEndpointDtoType.SLACK_CHANNEL,
         "endpoint": {

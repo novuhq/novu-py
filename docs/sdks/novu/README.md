@@ -39,7 +39,9 @@ with Novu(
                 "text": "string",
             },
         },
+        bridge_url="https://your-tunnel.novu.co/api/novu",
         overrides=novu_py.Overrides(),
+        agent_id="support-agent",
         to="SUBSCRIBER_ID",
         actor="<value>",
         context={
@@ -157,6 +159,7 @@ with Novu(
                 },
             },
         ),
+        agent_id="support-agent",
         actor=novu_py.SubscriberPayloadDto(
             first_name="John",
             last_name="Doe",

@@ -176,7 +176,9 @@ with Novu(
                 "text": "string",
             },
         },
+        bridge_url="https://your-tunnel.novu.co/api/novu",
         overrides=novu_py.Overrides(),
+        agent_id="support-agent",
         to="SUBSCRIBER_ID",
         actor="<value>",
         context={
@@ -212,7 +214,9 @@ async def main():
                     "text": "string",
                 },
             },
+            bridge_url="https://your-tunnel.novu.co/api/novu",
             overrides=novu_py.Overrides(),
+            agent_id="support-agent",
             to="SUBSCRIBER_ID",
             actor="<value>",
             context={
@@ -295,6 +299,7 @@ with Novu(
                 },
             },
         ),
+        agent_id="support-agent",
         actor=novu_py.SubscriberPayloadDto(
             first_name="John",
             last_name="Doe",
@@ -347,6 +352,7 @@ async def main():
                     },
                 },
             ),
+            agent_id="support-agent",
             actor=novu_py.SubscriberPayloadDto(
                 first_name="John",
                 last_name="Doe",
@@ -481,6 +487,60 @@ async def main():
 
 asyncio.run(main())
 ```
+
+### Send an agent reply
+
+```python
+# Synchronous Example
+import novu_py
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.agents.send_reply(agent_id="support-agent", agent_reply_payload_dto=novu_py.AgentReplyPayloadDto(
+        conversation_id="64f5a1c2e8b7a3d9f0c1b2a3",
+        integration_identifier="slack-support",
+        reply=novu_py.MarkdownReplyContentDto(
+            markdown="**Report ready.** Your weekly summary is attached.",
+        ),
+    ))
+
+    # Handle response
+    print(res)
+```
+
+</br>
+
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
+```python
+# Asynchronous Example
+import asyncio
+import novu_py
+from novu_py import Novu
+
+async def main():
+
+    async with Novu(
+        secret_key="YOUR_SECRET_KEY_HERE",
+    ) as novu:
+
+        res = await novu.agents.send_reply_async(agent_id="support-agent", agent_reply_payload_dto=novu_py.AgentReplyPayloadDto(
+            conversation_id="64f5a1c2e8b7a3d9f0c1b2a3",
+            integration_identifier="slack-support",
+            reply=novu_py.MarkdownReplyContentDto(
+                markdown="**Report ready.** Your weekly summary is attached.",
+            ),
+        ))
+
+        # Handle response
+        print(res)
+
+asyncio.run(main())
+```
 <!-- End SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
@@ -499,6 +559,23 @@ asyncio.run(main())
 ### [Activity](docs/sdks/activity/README.md)
 
 * [track](docs/sdks/activity/README.md#track) - Track provider activity and engagement events
+
+### [Agents](docs/sdks/agents/README.md)
+
+* [create](docs/sdks/agents/README.md#create) - Create an agent
+* [list](docs/sdks/agents/README.md#list) - List all agents
+* [send_reply](docs/sdks/agents/README.md#send_reply) - Send an agent reply
+* [retrieve](docs/sdks/agents/README.md#retrieve) - Retrieve an agent
+* [update](docs/sdks/agents/README.md#update) - Update an agent
+* [delete](docs/sdks/agents/README.md#delete) - Delete an agent
+* [update_bridge](docs/sdks/agents/README.md#update_bridge) - Update an agent bridge
+
+#### [Agents.Integrations](docs/sdks/novuintegrations/README.md)
+
+* [create](docs/sdks/novuintegrations/README.md#create) - Create an agent integration
+* [list](docs/sdks/novuintegrations/README.md#list) - List agent integrations
+* [update](docs/sdks/novuintegrations/README.md#update) - Update an agent integration
+* [delete](docs/sdks/novuintegrations/README.md#delete) - Delete an agent integration
 
 ### [ChannelConnections](docs/sdks/channelconnections/README.md)
 
@@ -772,7 +849,9 @@ with Novu(
                 "text": "string",
             },
         },
+        bridge_url="https://your-tunnel.novu.co/api/novu",
         overrides=novu_py.Overrides(),
+        agent_id="support-agent",
         to="SUBSCRIBER_ID",
         actor="<value>",
         context={
@@ -806,7 +885,9 @@ with Novu(
                 "text": "string",
             },
         },
+        bridge_url="https://your-tunnel.novu.co/api/novu",
         overrides=novu_py.Overrides(),
+        agent_id="support-agent",
         to="SUBSCRIBER_ID",
         actor="<value>",
         context={
@@ -854,7 +935,9 @@ with Novu(
                     "text": "string",
                 },
             },
+            bridge_url="https://your-tunnel.novu.co/api/novu",
             overrides=novu_py.Overrides(),
+            agent_id="support-agent",
             to="SUBSCRIBER_ID",
             actor="<value>",
             context={
@@ -900,9 +983,9 @@ with Novu(
 
 
 **Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
-* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 138 methods.*
-* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 138 methods.*
-* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 138 methods.*
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 149 methods.*
+* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 149 methods.*
+* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 149 methods.*
 * [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -942,7 +1025,9 @@ with Novu(
                 "text": "string",
             },
         },
+        bridge_url="https://your-tunnel.novu.co/api/novu",
         overrides=novu_py.Overrides(),
+        agent_id="support-agent",
         to="SUBSCRIBER_ID",
         actor="<value>",
         context={
@@ -976,7 +1061,9 @@ with Novu(
                 "text": "string",
             },
         },
+        bridge_url="https://your-tunnel.novu.co/api/novu",
         overrides=novu_py.Overrides(),
+        agent_id="support-agent",
         to="SUBSCRIBER_ID",
         actor="<value>",
         context={
@@ -1100,7 +1187,9 @@ with Novu(
                 "text": "string",
             },
         },
+        bridge_url="https://your-tunnel.novu.co/api/novu",
         overrides=novu_py.Overrides(),
+        agent_id="support-agent",
         to="SUBSCRIBER_ID",
         actor="<value>",
         context={

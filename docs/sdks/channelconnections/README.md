@@ -29,6 +29,7 @@ with Novu(
     res = novu.channel_connections.list(request={
         "limit": 10,
         "subscriber_id": "subscriber-123",
+        "connection_mode": novu_py.QueryParamConnectionMode.SHARED,
         "channel": novu_py.QueryParamChannel.CHAT,
         "provider_id": novu_py.ProvidersIDEnum.SLACK,
         "integration_identifier": "slack-prod",
@@ -91,9 +92,13 @@ with Novu(
         "workspace": {
             "id": "T123456",
             "name": "Acme HQ",
+            "bot_user_id": "U0123456789",
         },
         "auth": {
             "access_token": "Workspace access token",
+            "refresh_token": "Workspace refresh token",
+            "expires_at": "2026-06-15T12:00:00.000Z",
+            "refresh_token_expires_at": "2026-09-15T12:00:00.000Z",
         },
     })
 
@@ -187,9 +192,13 @@ with Novu(
         "workspace": {
             "id": "T123456",
             "name": "Acme HQ",
+            "bot_user_id": "U0123456789",
         },
         "auth": {
             "access_token": "Workspace access token",
+            "refresh_token": "Workspace refresh token",
+            "expires_at": "2026-06-15T12:00:00.000Z",
+            "refresh_token_expires_at": "2026-09-15T12:00:00.000Z",
         },
     })
 

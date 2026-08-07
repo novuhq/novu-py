@@ -1,15 +1,9 @@
 # To
 
-The recipients list of people who will receive the notification. Maximum number of recipients can be 100.
+Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber.
 
 
 ## Supported Types
-
-### `List[models.To1]`
-
-```python
-value: List[models.To1] = /* values here */
-```
 
 ### `str`
 
@@ -17,15 +11,15 @@ value: List[models.To1] = /* values here */
 value: str = /* values here */
 ```
 
-### `models.SubscriberPayloadDto`
+### `Dict[str, Any]`
 
 ```python
-value: models.SubscriberPayloadDto = /* values here */
+value: Dict[str, Any] = /* values here */
 ```
 
-### `models.TopicPayloadDto`
+### `List[models.To3]`
 
 ```python
-value: models.TopicPayloadDto = /* values here */
+value: List[models.To3] = /* values here */
 ```
 

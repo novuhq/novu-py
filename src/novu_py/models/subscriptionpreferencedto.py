@@ -85,7 +85,7 @@ class SubscriptionPreferenceDtoTypedDict(TypedDict):
     workflow: NotRequired[Nullable[SubscriptionPreferenceDtoWorkflowTypedDict]]
     r"""Workflow information if this is a template-level preference"""
     condition: NotRequired[Dict[str, Any]]
-    r"""Optional condition using JSON Logic rules"""
+    r"""Optional JSON Logic condition evaluated against the trigger payload at fan-out time (for example, `{ \"var\": \"payload.tier\" }`)"""
 
 
 class SubscriptionPreferenceDto(BaseModel):
@@ -99,7 +99,7 @@ class SubscriptionPreferenceDto(BaseModel):
     r"""Workflow information if this is a template-level preference"""
 
     condition: Optional[Dict[str, Any]] = None
-    r"""Optional condition using JSON Logic rules"""
+    r"""Optional JSON Logic condition evaluated against the trigger payload at fan-out time (for example, `{ \"var\": \"payload.tier\" }`)"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

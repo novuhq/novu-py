@@ -1,0 +1,11 @@
+# Agent
+
+Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear.
+
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `identifier`                                                                                                             | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Public agent identifier used to route this workflow through an agent's connected channels.                               |
+| `providers`                                                                                                              | Dict[str, [models.Providers](../models/providers.md)]                                                                    | :heavy_minus_sign:                                                                                                       | Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported. |

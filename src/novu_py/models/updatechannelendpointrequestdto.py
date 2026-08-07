@@ -7,6 +7,15 @@ from .slackchannelendpointdto import (
     SlackChannelEndpointDtoTypedDict,
 )
 from .slackuserendpointdto import SlackUserEndpointDto, SlackUserEndpointDtoTypedDict
+from .toolwebhookendpointdto import (
+    ToolWebhookEndpointDto,
+    ToolWebhookEndpointDtoTypedDict,
+)
+from .webexpersonendpointdto import (
+    WebexPersonEndpointDto,
+    WebexPersonEndpointDtoTypedDict,
+)
+from .webexroomendpointdto import WebexRoomEndpointDto, WebexRoomEndpointDtoTypedDict
 from .webhookendpointdto import WebhookEndpointDto, WebhookEndpointDtoTypedDict
 from novu_py.types import BaseModel
 from typing import Union
@@ -20,6 +29,9 @@ UpdateChannelEndpointRequestDtoEndpointTypedDict = TypeAliasType(
         SlackUserEndpointDtoTypedDict,
         PhoneEndpointDtoTypedDict,
         WebhookEndpointDtoTypedDict,
+        WebexRoomEndpointDtoTypedDict,
+        WebexPersonEndpointDtoTypedDict,
+        ToolWebhookEndpointDtoTypedDict,
     ],
 )
 r"""Updated endpoint data. The structure must match the existing channel endpoint type."""
@@ -32,6 +44,9 @@ UpdateChannelEndpointRequestDtoEndpoint = TypeAliasType(
         SlackUserEndpointDto,
         PhoneEndpointDto,
         WebhookEndpointDto,
+        WebexRoomEndpointDto,
+        WebexPersonEndpointDto,
+        ToolWebhookEndpointDto,
     ],
 )
 r"""Updated endpoint data. The structure must match the existing channel endpoint type."""

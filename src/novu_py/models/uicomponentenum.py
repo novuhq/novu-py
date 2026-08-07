@@ -41,6 +41,7 @@ class UIComponentEnum(str, Enum, metaclass=utils.OpenEnumMeta):
     SMS_BODY = "SMS_BODY"
     CHAT_BODY = "CHAT_BODY"
     PUSH_BODY = "PUSH_BODY"
+    TOOL_BODY = "TOOL_BODY"
     PUSH_SUBJECT = "PUSH_SUBJECT"
     QUERY_EDITOR = "QUERY_EDITOR"
     DATA = "DATA"

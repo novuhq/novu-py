@@ -71,6 +71,8 @@ class CreateSlackUserEndpointDtoTypedDict(TypedDict):
     r"""Slack user endpoint data"""
     identifier: NotRequired[str]
     r"""The unique identifier for the channel endpoint. If not provided, one will be generated automatically."""
+    create_subscriber_if_missing: NotRequired[bool]
+    r"""When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404."""
     context: NotRequired[Dict[str, CreateSlackUserEndpointDtoContextTypedDict]]
     connection_identifier: NotRequired[str]
     r"""The identifier of the channel connection to use for this channel endpoint."""
@@ -94,6 +96,11 @@ class CreateSlackUserEndpointDto(BaseModel):
     identifier: Optional[str] = None
     r"""The unique identifier for the channel endpoint. If not provided, one will be generated automatically."""
 
+    create_subscriber_if_missing: Annotated[
+        Optional[bool], pydantic.Field(alias="createSubscriberIfMissing")
+    ] = False
+    r"""When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404."""
+
     context: Optional[Dict[str, CreateSlackUserEndpointDtoContext]] = None
 
     connection_identifier: Annotated[
@@ -103,7 +110,14 @@ class CreateSlackUserEndpointDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["identifier", "context", "connectionIdentifier"])
+        optional_fields = set(
+            [
+                "identifier",
+                "createSubscriberIfMissing",
+                "context",
+                "connectionIdentifier",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

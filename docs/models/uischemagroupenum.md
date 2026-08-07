@@ -23,6 +23,7 @@ value = UISchemaGroupEnum.IN_APP
 | `SMS`          | SMS            |
 | `CHAT`         | CHAT           |
 | `PUSH`         | PUSH           |
+| `TOOL`         | TOOL           |
 | `SKIP`         | SKIP           |
 | `LAYOUT`       | LAYOUT         |
 | `HTTP_REQUEST` | HTTP_REQUEST   |

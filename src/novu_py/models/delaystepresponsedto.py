@@ -9,7 +9,7 @@ from .resourceoriginenum import ResourceOriginEnum
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import ConfigDict, model_serializer
 from typing import Any, Dict, Optional
@@ -123,6 +123,8 @@ class DelayStepResponseDtoTypedDict(TypedDict):
     r"""Workflow database identifier"""
     control_values: NotRequired[DelayStepResponseDtoControlValuesTypedDict]
     r"""Control values for the delay step"""
+    provider_overrides: NotRequired[Nullable[Dict[str, Dict[str, Any]]]]
+    r"""Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`)."""
     issues: NotRequired[StepIssuesDtoTypedDict]
     r"""Issues associated with the step"""
     step_resolver_hash: NotRequired[str]
@@ -166,6 +168,12 @@ class DelayStepResponseDto(BaseModel):
     ] = None
     r"""Control values for the delay step"""
 
+    provider_overrides: Annotated[
+        OptionalNullable[Dict[str, Dict[str, Any]]],
+        pydantic.Field(alias="providerOverrides"),
+    ] = UNSET
+    r"""Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`)."""
+
     issues: Optional[StepIssuesDto] = None
     r"""Issues associated with the step"""
 
@@ -176,16 +184,27 @@ class DelayStepResponseDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["controlValues", "issues", "stepResolverHash"])
+        optional_fields = set(
+            ["controlValues", "providerOverrides", "issues", "stepResolverHash"]
+        )
+        nullable_fields = set(["providerOverrides"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

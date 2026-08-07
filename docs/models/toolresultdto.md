@@ -1,0 +1,11 @@
+# ToolResultDto
+
+
+## Fields
+
+| Field                                                           | Type                                                            | Required                                                        | Description                                                     | Example                                                         |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `tool_call_id`                                                  | *str*                                                           | :heavy_check_mark:                                              | Id of the tool call this result resolves.                       | call_abc123                                                     |
+| `tool_name`                                                     | *Optional[str]*                                                 | :heavy_minus_sign:                                              | Name of the tool that produced this result.                     | lookup_order                                                    |
+| `output`                                                        | [Optional[models.Output]](../models/output.md)                  | :heavy_minus_sign:                                              | JSON-serializable tool output (or the execution-denied marker). |                                                                 |
+| `preview`                                                       | *Optional[str]*                                                 | :heavy_minus_sign:                                              | Human-readable preview for the display timeline.                | Order ORD-42 is shipped                                         |

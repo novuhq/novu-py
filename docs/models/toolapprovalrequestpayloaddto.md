@@ -1,0 +1,11 @@
+# ToolApprovalRequestPayloadDto
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `approval_id`                                                        | *str*                                                                | :heavy_check_mark:                                                   | Unique id for this approval request (matches the AI SDK approvalId). | apr_01HZX                                                            |
+| `tool_call_id`                                                       | *str*                                                                | :heavy_check_mark:                                                   | Id of the tool call awaiting approval.                               | call_refund_1                                                        |
+| `name`                                                               | *str*                                                                | :heavy_check_mark:                                                   | Name of the gated tool.                                              | issue_refund                                                         |
+| `input`                                                              | Dict[str, *Any*]                                                     | :heavy_minus_sign:                                                   | Tool input the model proposed.                                       | {<br/>"orderId": "ORD-42",<br/>"amountCents": 2500<br/>}             |

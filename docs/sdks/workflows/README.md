@@ -185,7 +185,6 @@ with Novu(
                 },
             ),
         ),
-        origin=novu_py.ResourceOriginEnum.EXTERNAL,
     ))
 
     # Handle response

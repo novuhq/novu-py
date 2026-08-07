@@ -2,14 +2,16 @@
 
 from __future__ import annotations
 from novu_py.types import BaseModel, UNSET_SENTINEL
+import pydantic
 from pydantic import model_serializer
 from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class WorkspaceDtoTypedDict(TypedDict):
     id: str
     name: NotRequired[str]
+    bot_user_id: NotRequired[str]
 
 
 class WorkspaceDto(BaseModel):
@@ -17,9 +19,11 @@ class WorkspaceDto(BaseModel):
 
     name: Optional[str] = None
 
+    bot_user_id: Annotated[Optional[str], pydantic.Field(alias="botUserId")] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name"])
+        optional_fields = set(["name", "botUserId"])
         serialized = handler(self)
         m = {}
 
@@ -32,3 +36,9 @@ class WorkspaceDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WorkspaceDto.model_rebuild()
+except NameError:
+    pass

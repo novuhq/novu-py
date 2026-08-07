@@ -24,6 +24,13 @@ class ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirection
     DESC = "DESC"
 
 
+class QueryParamConnectionMode(str, Enum):
+    r"""Scope results relative to the subscriber. `subscriber` returns only the subscriber-owned connections, `shared` returns only shared (workspace-level) connections. Omit to return both."""
+
+    SUBSCRIBER = "subscriber"
+    SHARED = "shared"
+
+
 class QueryParamChannel(str, Enum):
     r"""Filter by channel type (email, sms, push, chat, etc.)."""
 
@@ -32,6 +39,7 @@ class QueryParamChannel(str, Enum):
     SMS = "sms"
     CHAT = "chat"
     PUSH = "push"
+    TOOL = "tool"
 
 
 class ChannelConnectionsControllerListChannelConnectionsRequestTypedDict(TypedDict):
@@ -51,6 +59,8 @@ class ChannelConnectionsControllerListChannelConnectionsRequestTypedDict(TypedDi
     r"""Include cursor item in response"""
     subscriber_id: NotRequired[str]
     r"""The subscriber ID to filter results by"""
+    connection_mode: NotRequired[QueryParamConnectionMode]
+    r"""Scope results relative to the subscriber. `subscriber` returns only the subscriber-owned connections, `shared` returns only shared (workspace-level) connections. Omit to return both."""
     channel: NotRequired[QueryParamChannel]
     r"""Filter by channel type (email, sms, push, chat, etc.)."""
     provider_id: NotRequired[ProvidersIDEnum]
@@ -112,6 +122,13 @@ class ChannelConnectionsControllerListChannelConnectionsRequest(BaseModel):
     ] = None
     r"""The subscriber ID to filter results by"""
 
+    connection_mode: Annotated[
+        Optional[QueryParamConnectionMode],
+        pydantic.Field(alias="connectionMode"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Scope results relative to the subscriber. `subscriber` returns only the subscriber-owned connections, `shared` returns only shared (workspace-level) connections. Omit to return both."""
+
     channel: Annotated[
         Optional[QueryParamChannel],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -157,6 +174,7 @@ class ChannelConnectionsControllerListChannelConnectionsRequest(BaseModel):
                 "orderBy",
                 "includeCursor",
                 "subscriberId",
+                "connectionMode",
                 "channel",
                 "providerId",
                 "integrationIdentifier",

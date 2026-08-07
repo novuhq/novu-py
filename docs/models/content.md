@@ -1,19 +1,25 @@
 # Content
 
-Content of the message, can be an email block or a string
+Replacement content. Exactly one of markdown, card, or toolApprovalCard.
 
 
 ## Supported Types
 
-### `List[models.EmailBlock]`
+### `models.MarkdownReplyContentDto`
 
 ```python
-value: List[models.EmailBlock] = /* values here */
+value: models.MarkdownReplyContentDto = /* values here */
 ```
 
-### `str`
+### `models.CardReplyContentDto`
 
 ```python
-value: str = /* values here */
+value: models.CardReplyContentDto = /* values here */
+```
+
+### `models.ToolApprovalCardReplyContentDto`
+
+```python
+value: models.ToolApprovalCardReplyContentDto = /* values here */
 ```
 

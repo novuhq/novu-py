@@ -17,3 +17,5 @@ value = DependencyReasonEnum.LAYOUT_REQUIRED_FOR_WORKFLOW
 | ------------------------------ | ------------------------------ |
 | `LAYOUT_REQUIRED_FOR_WORKFLOW` | LAYOUT_REQUIRED_FOR_WORKFLOW   |
 | `LAYOUT_EXISTS_IN_TARGET`      | LAYOUT_EXISTS_IN_TARGET        |
+| `AGENT_REQUIRED_FOR_WORKFLOW`  | AGENT_REQUIRED_FOR_WORKFLOW    |
+| `AGENT_EXISTS_IN_TARGET`       | AGENT_EXISTS_IN_TARGET         |

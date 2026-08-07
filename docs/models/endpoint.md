@@ -47,3 +47,45 @@ value: models.MsTeamsUserEndpointDto = /* values here */
 value: models.TelegramChatEndpointDto = /* values here */
 ```
 
+### `models.WebexRoomEndpointDto`
+
+```python
+value: models.WebexRoomEndpointDto = /* values here */
+```
+
+### `models.WebexPersonEndpointDto`
+
+```python
+value: models.WebexPersonEndpointDto = /* values here */
+```
+
+### `models.LineUserEndpointDto`
+
+```python
+value: models.LineUserEndpointDto = /* values here */
+```
+
+### `models.PagerDutyServiceEndpointDto`
+
+```python
+value: models.PagerDutyServiceEndpointDto = /* values here */
+```
+
+### `models.OpsgenieIntegrationEndpointDto`
+
+```python
+value: models.OpsgenieIntegrationEndpointDto = /* values here */
+```
+
+### `models.GrafanaOnCallIntegrationEndpointDto`
+
+```python
+value: models.GrafanaOnCallIntegrationEndpointDto = /* values here */
+```
+
+### `models.ToolWebhookEndpointDto`
+
+```python
+value: models.ToolWebhookEndpointDto = /* values here */
+```
+

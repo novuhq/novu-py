@@ -20,6 +20,7 @@ from .throttlestepresponsedto import (
     ThrottleStepResponseDto,
     ThrottleStepResponseDtoTypedDict,
 )
+from .toolstepresponsedto import ToolStepResponseDto, ToolStepResponseDtoTypedDict
 from .workflowpreferencesresponsedto import (
     WorkflowPreferencesResponseDto,
     WorkflowPreferencesResponseDtoTypedDict,
@@ -31,6 +32,65 @@ import pydantic
 from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+class WorkflowResponseDtoProvidersTypedDict(TypedDict):
+    reply_to: NotRequired[str]
+
+
+class WorkflowResponseDtoProviders(BaseModel):
+    reply_to: Annotated[Optional[str], pydantic.Field(alias="replyTo")] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["replyTo"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class WorkflowResponseDtoAgentTypedDict(TypedDict):
+    r"""Optional agent assignment used to route this workflow through an agent's connected channels. Null when unassigned."""
+
+    identifier: str
+    r"""Public agent identifier used to route this workflow through an agent's connected channels."""
+    providers: NotRequired[Dict[str, WorkflowResponseDtoProvidersTypedDict]]
+    r"""Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported."""
+
+
+class WorkflowResponseDtoAgent(BaseModel):
+    r"""Optional agent assignment used to route this workflow through an agent's connected channels. Null when unassigned."""
+
+    identifier: str
+    r"""Public agent identifier used to route this workflow through an agent's connected channels."""
+
+    providers: Optional[Dict[str, WorkflowResponseDtoProviders]] = None
+    r"""Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["providers"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class WorkflowResponseDtoUpdatedByTypedDict(TypedDict):
@@ -166,6 +226,7 @@ WorkflowResponseDtoStepsTypedDict = TypeAliasType(
         CustomStepResponseDtoTypedDict,
         ThrottleStepResponseDtoTypedDict,
         HTTPRequestStepResponseDtoTypedDict,
+        ToolStepResponseDtoTypedDict,
     ],
 )
 
@@ -182,6 +243,7 @@ WorkflowResponseDtoSteps = Annotated[
         Annotated[CustomStepResponseDto, Tag("custom")],
         Annotated[ThrottleStepResponseDto, Tag("throttle")],
         Annotated[HTTPRequestStepResponseDto, Tag("http_request")],
+        Annotated[ToolStepResponseDto, Tag("tool")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
@@ -222,6 +284,8 @@ class WorkflowResponseDtoTypedDict(TypedDict):
     r"""The payload JSON Schema for the workflow"""
     is_translation_enabled: NotRequired[bool]
     r"""Enable or disable translations for this workflow"""
+    agent: NotRequired[Nullable[WorkflowResponseDtoAgentTypedDict]]
+    r"""Optional agent assignment used to route this workflow through an agent's connected channels. Null when unassigned."""
     updated_by: NotRequired[Nullable[WorkflowResponseDtoUpdatedByTypedDict]]
     r"""User who last updated the workflow"""
     last_published_at: NotRequired[Nullable[str]]
@@ -294,6 +358,9 @@ class WorkflowResponseDto(BaseModel):
     ] = False
     r"""Enable or disable translations for this workflow"""
 
+    agent: OptionalNullable[WorkflowResponseDtoAgent] = UNSET
+    r"""Optional agent assignment used to route this workflow through an agent's connected channels. Null when unassigned."""
+
     updated_by: Annotated[
         OptionalNullable[WorkflowResponseDtoUpdatedBy],
         pydantic.Field(alias="updatedBy"),
@@ -333,6 +400,7 @@ class WorkflowResponseDto(BaseModel):
                 "validatePayload",
                 "payloadSchema",
                 "isTranslationEnabled",
+                "agent",
                 "updatedBy",
                 "lastPublishedAt",
                 "lastPublishedBy",
@@ -344,6 +412,7 @@ class WorkflowResponseDto(BaseModel):
         nullable_fields = set(
             [
                 "payloadSchema",
+                "agent",
                 "updatedBy",
                 "lastPublishedAt",
                 "lastPublishedBy",
@@ -373,6 +442,10 @@ class WorkflowResponseDto(BaseModel):
         return m
 
 
+try:
+    WorkflowResponseDtoProviders.model_rebuild()
+except NameError:
+    pass
 try:
     WorkflowResponseDtoUpdatedBy.model_rebuild()
 except NameError:

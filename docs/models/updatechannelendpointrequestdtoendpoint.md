@@ -29,3 +29,21 @@ value: models.WebhookEndpointDto = /* values here */
 value: models.PhoneEndpointDto = /* values here */
 ```
 
+### `models.WebexRoomEndpointDto`
+
+```python
+value: models.WebexRoomEndpointDto = /* values here */
+```
+
+### `models.WebexPersonEndpointDto`
+
+```python
+value: models.WebexPersonEndpointDto = /* values here */
+```
+
+### `models.ToolWebhookEndpointDto`
+
+```python
+value: models.ToolWebhookEndpointDto = /* values here */
+```
+
