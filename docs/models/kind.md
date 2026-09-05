@@ -1,19 +1,21 @@
 # Kind
 
-Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not have a channel.
+Interaction verb queued by `ctx.ask` / `ctx.approve` / `ctx.choose` / `ctx.tell`.
 
 ## Example Usage
 
 ```python
 from novu_py.models import Kind
 
-value = Kind.DELIVERY
+value = Kind.ASK
 ```
 
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `DELIVERY` | delivery   |
-| `AGENT`    | agent      |
+| Name      | Value     |
+| --------- | --------- |
+| `ASK`     | ask       |
+| `APPROVE` | approve   |
+| `CHOOSE`  | choose    |
+| `TELL`    | tell      |

@@ -4,7 +4,7 @@ from __future__ import annotations
 from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -15,6 +15,8 @@ class TopicDtoTypedDict(TypedDict):
     r"""The key identifier of the topic used in your application. Should be unique on the environment level."""
     name: NotRequired[str]
     r"""The name of the topic"""
+    data: NotRequired[Dict[str, Any]]
+    r"""Additional custom data associated with the topic"""
 
 
 class TopicDto(BaseModel):
@@ -27,9 +29,12 @@ class TopicDto(BaseModel):
     name: Optional[str] = None
     r"""The name of the topic"""
 
+    data: Optional[Dict[str, Any]] = None
+    r"""Additional custom data associated with the topic"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name"])
+        optional_fields = set(["name", "data"])
         serialized = handler(self)
         m = {}
 
