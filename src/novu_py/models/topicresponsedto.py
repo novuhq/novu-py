@@ -4,7 +4,7 @@ from __future__ import annotations
 from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -15,6 +15,8 @@ class TopicResponseDtoTypedDict(TypedDict):
     r"""The unique key of the topic"""
     name: NotRequired[str]
     r"""The name of the topic"""
+    data: NotRequired[Dict[str, Any]]
+    r"""Additional custom data associated with the topic"""
     created_at: NotRequired[str]
     r"""The date the topic was created"""
     updated_at: NotRequired[str]
@@ -31,6 +33,9 @@ class TopicResponseDto(BaseModel):
     name: Optional[str] = None
     r"""The name of the topic"""
 
+    data: Optional[Dict[str, Any]] = None
+    r"""Additional custom data associated with the topic"""
+
     created_at: Annotated[Optional[str], pydantic.Field(alias="createdAt")] = None
     r"""The date the topic was created"""
 
@@ -39,7 +44,7 @@ class TopicResponseDto(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "createdAt", "updatedAt"])
+        optional_fields = set(["name", "data", "createdAt", "updatedAt"])
         serialized = handler(self)
         m = {}
 

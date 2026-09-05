@@ -37,6 +37,7 @@ with Novu(
                 "theme": "dark",
             },
         },
+        "bridge_url": "https://tenant-acme.example.com/api/novu",
     })
 
     # Handle response
@@ -142,6 +143,7 @@ with Novu(
                 "theme": "dark",
             },
         },
+        "bridge_url": "https://tenant-acme.example.com/api/novu",
     })
 
     # Handle response

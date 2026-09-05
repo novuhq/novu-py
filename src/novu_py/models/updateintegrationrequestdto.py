@@ -3,10 +3,10 @@
 from __future__ import annotations
 from .credentialsdto import CredentialsDto, CredentialsDtoTypedDict
 from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -27,6 +27,9 @@ class UpdateIntegrationRequestDtoTypedDict(TypedDict):
     credentials: NotRequired[CredentialsDtoTypedDict]
     check: NotRequired[bool]
     conditions: NotRequired[List[StepFilterDtoTypedDict]]
+    r"""Legacy StepFilter conditions. Ignored when `rules` is also set."""
+    rules: NotRequired[Nullable[Dict[str, Any]]]
+    r"""JSONLogic used at send time to select this integration. Takes precedence over `conditions`."""
     configurations: NotRequired[UpdateIntegrationRequestDtoConfigurationsTypedDict]
     r"""Configurations for the integration"""
 
@@ -47,7 +50,16 @@ class UpdateIntegrationRequestDto(BaseModel):
 
     check: Optional[bool] = None
 
-    conditions: Optional[List[StepFilterDto]] = None
+    conditions: Annotated[
+        Optional[List[StepFilterDto]],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = None
+    r"""Legacy StepFilter conditions. Ignored when `rules` is also set."""
+
+    rules: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""JSONLogic used at send time to select this integration. Takes precedence over `conditions`."""
 
     configurations: Optional[UpdateIntegrationRequestDtoConfigurations] = None
     r"""Configurations for the integration"""
@@ -63,18 +75,28 @@ class UpdateIntegrationRequestDto(BaseModel):
                 "credentials",
                 "check",
                 "conditions",
+                "rules",
                 "configurations",
             ]
         )
+        nullable_fields = set(["rules"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
