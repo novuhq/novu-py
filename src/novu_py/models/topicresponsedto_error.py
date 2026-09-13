@@ -6,7 +6,7 @@ import httpx
 from novu_py.models import NovuError
 from novu_py.types import BaseModel
 import pydantic
-from typing import Optional
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated
 
 
@@ -17,6 +17,8 @@ class TopicResponseDtoErrorData(BaseModel):
     r"""The unique key of the topic"""
     name: Optional[str] = None
     r"""The name of the topic"""
+    data: Optional[Dict[str, Any]] = None
+    r"""Additional custom data associated with the topic"""
     created_at: Annotated[Optional[str], pydantic.Field(alias="createdAt")] = None
     r"""The date the topic was created"""
     updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None

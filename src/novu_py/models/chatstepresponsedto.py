@@ -8,11 +8,19 @@ from .chatcontrolsmetadataresponsedto import (
 from .resourceoriginenum import ResourceOriginEnum
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
+from enum import Enum
 from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import ConfigDict, model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class ChatStepResponseDtoEditorType(str, Enum):
+    r"""Type of editor to use for the body. When omitted, inferred from the body: Maily JSON is \"block\", otherwise \"text\"."""
+
+    BLOCK = "block"
+    TEXT = "text"
 
 
 class ChatStepResponseDtoControlValuesTypedDict(TypedDict):
@@ -22,6 +30,8 @@ class ChatStepResponseDtoControlValuesTypedDict(TypedDict):
     r"""JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference."""
     body: NotRequired[str]
     r"""Content of the chat message."""
+    editor_type: NotRequired[ChatStepResponseDtoEditorType]
+    r"""Type of editor to use for the body. When omitted, inferred from the body: Maily JSON is \"block\", otherwise \"text\"."""
 
 
 class ChatStepResponseDtoControlValues(BaseModel):
@@ -38,6 +48,11 @@ class ChatStepResponseDtoControlValues(BaseModel):
     body: Optional[str] = None
     r"""Content of the chat message."""
 
+    editor_type: Annotated[
+        Optional[ChatStepResponseDtoEditorType], pydantic.Field(alias="editorType")
+    ] = None
+    r"""Type of editor to use for the body. When omitted, inferred from the body: Maily JSON is \"block\", otherwise \"text\"."""
+
     @property
     def additional_properties(self):
         return self.__pydantic_extra__
@@ -48,7 +63,7 @@ class ChatStepResponseDtoControlValues(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["skip", "body"])
+        optional_fields = set(["skip", "body", "editorType"])
         serialized = handler(self)
         m = {}
 
@@ -176,6 +191,10 @@ class ChatStepResponseDto(BaseModel):
         return m
 
 
+try:
+    ChatStepResponseDtoControlValues.model_rebuild()
+except NameError:
+    pass
 try:
     ChatStepResponseDto.model_rebuild()
 except NameError:

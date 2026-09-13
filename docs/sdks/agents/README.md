@@ -253,6 +253,35 @@ with Novu(
     print(res)
 
 ```
+### Example Usage: humanApprove
+
+<!-- UsageSnippet language="python" operationID="AgentReplyController_handleAgentReplyHandler" method="post" path="/v1/agents/{agentId}/reply" example="humanApprove" -->
+```python
+import novu_py
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.agents.send_reply(agent_id="support-agent", agent_reply_payload_dto=novu_py.AgentReplyPayloadDto(
+        conversation_id="64f5a1c2e8b7a3d9f0c1b2a3",
+        integration_identifier="slack-support",
+        signals=[
+            novu_py.HumanSignalDto(
+                type=novu_py.HumanSignalDtoType.HUMAN,
+                kind=novu_py.Kind.APPROVE,
+                prompt="Deploy v2.4.1 to production?",
+                request_id="hr_7c2e1a3b-4d5f-6789-abcd-ef0123456789",
+            ),
+        ],
+    ))
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: markdownReply
 
 <!-- UsageSnippet language="python" operationID="AgentReplyController_handleAgentReplyHandler" method="post" path="/v1/agents/{agentId}/reply" example="markdownReply" -->
