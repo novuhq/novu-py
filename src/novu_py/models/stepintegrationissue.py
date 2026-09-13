@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .integrationissueenum import IntegrationIssueEnum
+from .stepissueseverityenum import StepIssueSeverityEnum
 from novu_py.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -16,6 +17,8 @@ class StepIntegrationIssueTypedDict(TypedDict):
     r"""Detailed message describing the issue"""
     variable_name: NotRequired[str]
     r"""Name of the variable related to the issue"""
+    severity: NotRequired[StepIssueSeverityEnum]
+    r"""Blocking severity of the issue. `error` (default when omitted) blocks save; `warning` is a non-blocking notice."""
 
 
 class StepIntegrationIssue(BaseModel):
@@ -28,9 +31,12 @@ class StepIntegrationIssue(BaseModel):
     variable_name: Annotated[Optional[str], pydantic.Field(alias="variableName")] = None
     r"""Name of the variable related to the issue"""
 
+    severity: Optional[StepIssueSeverityEnum] = None
+    r"""Blocking severity of the issue. `error` (default when omitted) blocks save; `warning` is a non-blocking notice."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["variableName"])
+        optional_fields = set(["variableName", "severity"])
         serialized = handler(self)
         m = {}
 

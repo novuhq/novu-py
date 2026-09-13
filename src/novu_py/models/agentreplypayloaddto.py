@@ -8,6 +8,7 @@ from .deletemessagepayloaddto import (
     DeleteMessagePayloadDtoTypedDict,
 )
 from .editpayloaddto import EditPayloadDto, EditPayloadDtoTypedDict
+from .humansignaldto import HumanSignalDto, HumanSignalDtoTypedDict
 from .markdownreplycontentdto import (
     MarkdownReplyContentDto,
     MarkdownReplyContentDtoTypedDict,
@@ -68,6 +69,7 @@ SignalsTypedDict = TypeAliasType(
         MetadataDeleteSignalDtoTypedDict,
         MetadataSetSignalDtoTypedDict,
         TriggerSignalDtoTypedDict,
+        HumanSignalDtoTypedDict,
     ],
 )
 
@@ -79,6 +81,7 @@ Signals = TypeAliasType(
         MetadataDeleteSignalDto,
         MetadataSetSignalDto,
         TriggerSignalDto,
+        HumanSignalDto,
     ],
 )
 
@@ -113,7 +116,7 @@ class AgentReplyPayloadDtoTypedDict(TypedDict):
     resolve: NotRequired[ResolveDtoTypedDict]
     r"""Mark the conversation resolved. May be combined with a final `reply`."""
     signals: NotRequired[List[SignalsTypedDict]]
-    r"""Side-effect signals executed during this turn: conversation metadata mutations or Novu workflow triggers."""
+    r"""Side-effect signals executed during this turn: conversation metadata mutations, Novu workflow triggers, or human-in-the-loop interactions."""
     tool_results: NotRequired[List[ToolResultDtoTypedDict]]
     r"""Tool-call outcomes to persist in conversation history (typically before the assistant reply)."""
     add_reactions: NotRequired[List[AddReactionPayloadDtoTypedDict]]
@@ -151,7 +154,7 @@ class AgentReplyPayloadDto(BaseModel):
     r"""Mark the conversation resolved. May be combined with a final `reply`."""
 
     signals: Optional[List[Signals]] = None
-    r"""Side-effect signals executed during this turn: conversation metadata mutations or Novu workflow triggers."""
+    r"""Side-effect signals executed during this turn: conversation metadata mutations, Novu workflow triggers, or human-in-the-loop interactions."""
 
     tool_results: Annotated[
         Optional[List[ToolResultDto]], pydantic.Field(alias="toolResults")

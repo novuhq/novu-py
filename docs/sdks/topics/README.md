@@ -78,6 +78,10 @@ with Novu(
     res = novu.topics.create(create_update_topic_request_dto={
         "key": "task:12345",
         "name": "Task Title",
+        "data": {
+            "category": "product",
+            "priority": 1,
+        },
     })
 
     # Handle response
@@ -155,7 +159,7 @@ with Novu(
 
 ## update
 
-Update a topic name by its unique key identifier **topicKey**
+Update a topic name or data by its unique key identifier **topicKey**
 
 ### Example Usage
 
@@ -170,6 +174,10 @@ with Novu(
 
     res = novu.topics.update(topic_key="<value>", update_topic_request_dto={
         "name": "Updated Topic Name",
+        "data": {
+            "category": "product",
+            "priority": 1,
+        },
     })
 
     # Handle response
