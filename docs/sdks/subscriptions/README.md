@@ -28,7 +28,7 @@ with Novu(
 
     res = novu.topics.subscriptions.list(request={
         "topic_key": "<value>",
-        "limit": 10,
+        "limit": 10.0,
         "context_keys": [
             "tenant:org-123",
             "region:us-east-1",

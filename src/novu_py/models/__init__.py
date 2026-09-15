@@ -295,7 +295,11 @@ if TYPE_CHECKING:
     )
     from .channelsettingsdto import ChannelSettingsDto, ChannelSettingsDtoTypedDict
     from .channeltypeenum import ChannelTypeEnum
-    from .chatcontroldto import ChatControlDto, ChatControlDtoTypedDict
+    from .chatcontroldto import (
+        ChatControlDto,
+        ChatControlDtoEditorType,
+        ChatControlDtoTypedDict,
+    )
     from .chatcontrolsmetadataresponsedto import (
         ChatControlsMetadataResponseDto,
         ChatControlsMetadataResponseDtoTypedDict,
@@ -306,6 +310,7 @@ if TYPE_CHECKING:
         ChatStepResponseDto,
         ChatStepResponseDtoControlValues,
         ChatStepResponseDtoControlValuesTypedDict,
+        ChatStepResponseDtoEditorType,
         ChatStepResponseDtoTypedDict,
     )
     from .chatstepupsertdto import (
@@ -575,6 +580,7 @@ if TYPE_CHECKING:
     from .credentialsdto import (
         CredentialsDto,
         CredentialsDtoTypedDict,
+        HmacSecretKeyEncoding,
         TLSOptions,
         TLSOptionsTypedDict,
     )
@@ -1228,6 +1234,14 @@ if TYPE_CHECKING:
         HTTPRequestStepUpsertDtoControlValuesTypedDict,
         HTTPRequestStepUpsertDtoTypedDict,
     )
+    from .humansignaldto import (
+        HumanSignalDto,
+        HumanSignalDtoTo,
+        HumanSignalDtoToTypedDict,
+        HumanSignalDtoType,
+        HumanSignalDtoTypedDict,
+        Kind,
+    )
     from .importmasterjsonrequestdto import (
         ImportMasterJSONRequestDto,
         ImportMasterJSONRequestDtoTypedDict,
@@ -1275,8 +1289,8 @@ if TYPE_CHECKING:
     from .integrationresponsedto import (
         IntegrationResponseDto,
         IntegrationResponseDtoChannel,
+        IntegrationResponseDtoKind,
         IntegrationResponseDtoTypedDict,
-        Kind,
     )
     from .integrationscontroller_autoconfigureintegrationop import (
         IntegrationsControllerAutoConfigureIntegrationRequest,
@@ -1862,6 +1876,7 @@ if TYPE_CHECKING:
         StepIntegrationIssueTypedDict,
     )
     from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
+    from .stepissueseverityenum import StepIssueSeverityEnum
     from .steplistresponsedto import StepListResponseDto, StepListResponseDtoTypedDict
     from .stepresponsedto import StepResponseDto, StepResponseDtoTypedDict
     from .stepsoverrides import StepsOverrides, StepsOverridesTypedDict
@@ -2235,6 +2250,8 @@ if TYPE_CHECKING:
         ToolApprovalCardReplyContentDtoTypedDict,
     )
     from .toolapprovalrequestpayloaddto import (
+        To,
+        ToTypedDict,
         ToolApprovalRequestPayloadDto,
         ToolApprovalRequestPayloadDtoTypedDict,
     )
@@ -2453,11 +2470,11 @@ if TYPE_CHECKING:
     )
     from .triggerrecipientstypeenum import TriggerRecipientsTypeEnum
     from .triggersignaldto import (
-        To,
         To3,
         To3TypedDict,
-        ToTypedDict,
         TriggerSignalDto,
+        TriggerSignalDtoTo,
+        TriggerSignalDtoToTypedDict,
         TriggerSignalDtoType,
         TriggerSignalDtoTypedDict,
     )
@@ -2898,6 +2915,7 @@ __all__ = [
     "Channels",
     "ChannelsTypedDict",
     "ChatControlDto",
+    "ChatControlDtoEditorType",
     "ChatControlDtoTypedDict",
     "ChatControlsMetadataResponseDto",
     "ChatControlsMetadataResponseDtoTypedDict",
@@ -2907,6 +2925,7 @@ __all__ = [
     "ChatStepResponseDto",
     "ChatStepResponseDtoControlValues",
     "ChatStepResponseDtoControlValuesTypedDict",
+    "ChatStepResponseDtoEditorType",
     "ChatStepResponseDtoTypedDict",
     "ChatStepUpsertDto",
     "ChatStepUpsertDtoControlValues",
@@ -3526,6 +3545,12 @@ __all__ = [
     "HTTPRequestStepUpsertDtoTypedDict",
     "Headers",
     "HeadersTypedDict",
+    "HmacSecretKeyEncoding",
+    "HumanSignalDto",
+    "HumanSignalDtoTo",
+    "HumanSignalDtoToTypedDict",
+    "HumanSignalDtoType",
+    "HumanSignalDtoTypedDict",
     "ImportMasterJSONRequestDto",
     "ImportMasterJSONRequestDtoTypedDict",
     "ImportMasterJSONResponseDto",
@@ -3558,6 +3583,7 @@ __all__ = [
     "IntegrationIssueEnum",
     "IntegrationResponseDto",
     "IntegrationResponseDtoChannel",
+    "IntegrationResponseDtoKind",
     "IntegrationResponseDtoTypedDict",
     "IntegrationTypedDict",
     "IntegrationsControllerAutoConfigureIntegrationRequest",
@@ -4024,6 +4050,7 @@ __all__ = [
     "StepFilterDtoValue",
     "StepIntegrationIssue",
     "StepIntegrationIssueTypedDict",
+    "StepIssueSeverityEnum",
     "StepIssuesDto",
     "StepIssuesDtoTypedDict",
     "StepListResponseDto",
@@ -4430,6 +4457,8 @@ __all__ = [
     "TriggerEventToAllRequestDtoTypedDict",
     "TriggerRecipientsTypeEnum",
     "TriggerSignalDto",
+    "TriggerSignalDtoTo",
+    "TriggerSignalDtoToTypedDict",
     "TriggerSignalDtoType",
     "TriggerSignalDtoTypedDict",
     "Tuesday",
@@ -4830,6 +4859,7 @@ _dynamic_imports: dict[str, str] = {
     "ChannelSettingsDtoTypedDict": ".channelsettingsdto",
     "ChannelTypeEnum": ".channeltypeenum",
     "ChatControlDto": ".chatcontroldto",
+    "ChatControlDtoEditorType": ".chatcontroldto",
     "ChatControlDtoTypedDict": ".chatcontroldto",
     "ChatControlsMetadataResponseDto": ".chatcontrolsmetadataresponsedto",
     "ChatControlsMetadataResponseDtoTypedDict": ".chatcontrolsmetadataresponsedto",
@@ -4839,6 +4869,7 @@ _dynamic_imports: dict[str, str] = {
     "ChatStepResponseDto": ".chatstepresponsedto",
     "ChatStepResponseDtoControlValues": ".chatstepresponsedto",
     "ChatStepResponseDtoControlValuesTypedDict": ".chatstepresponsedto",
+    "ChatStepResponseDtoEditorType": ".chatstepresponsedto",
     "ChatStepResponseDtoTypedDict": ".chatstepresponsedto",
     "ChatStepUpsertDto": ".chatstepupsertdto",
     "ChatStepUpsertDtoControlValues": ".chatstepupsertdto",
@@ -5038,6 +5069,7 @@ _dynamic_imports: dict[str, str] = {
     "StepsModelTypedDict": ".createworkflowdto",
     "CredentialsDto": ".credentialsdto",
     "CredentialsDtoTypedDict": ".credentialsdto",
+    "HmacSecretKeyEncoding": ".credentialsdto",
     "TLSOptions": ".credentialsdto",
     "TLSOptionsTypedDict": ".credentialsdto",
     "CustomControlDto": ".customcontroldto",
@@ -5490,6 +5522,12 @@ _dynamic_imports: dict[str, str] = {
     "HTTPRequestStepUpsertDtoControlValues": ".httprequeststepupsertdto",
     "HTTPRequestStepUpsertDtoControlValuesTypedDict": ".httprequeststepupsertdto",
     "HTTPRequestStepUpsertDtoTypedDict": ".httprequeststepupsertdto",
+    "HumanSignalDto": ".humansignaldto",
+    "HumanSignalDtoTo": ".humansignaldto",
+    "HumanSignalDtoToTypedDict": ".humansignaldto",
+    "HumanSignalDtoType": ".humansignaldto",
+    "HumanSignalDtoTypedDict": ".humansignaldto",
+    "Kind": ".humansignaldto",
     "ImportMasterJSONRequestDto": ".importmasterjsonrequestdto",
     "ImportMasterJSONRequestDtoTypedDict": ".importmasterjsonrequestdto",
     "ImportMasterJSONResponseDto": ".importmasterjsonresponsedto",
@@ -5521,8 +5559,8 @@ _dynamic_imports: dict[str, str] = {
     "IntegrationIssueEnum": ".integrationissueenum",
     "IntegrationResponseDto": ".integrationresponsedto",
     "IntegrationResponseDtoChannel": ".integrationresponsedto",
+    "IntegrationResponseDtoKind": ".integrationresponsedto",
     "IntegrationResponseDtoTypedDict": ".integrationresponsedto",
-    "Kind": ".integrationresponsedto",
     "IntegrationsControllerAutoConfigureIntegrationRequest": ".integrationscontroller_autoconfigureintegrationop",
     "IntegrationsControllerAutoConfigureIntegrationRequestTypedDict": ".integrationscontroller_autoconfigureintegrationop",
     "IntegrationsControllerAutoConfigureIntegrationResponse": ".integrationscontroller_autoconfigureintegrationop",
@@ -5951,6 +5989,7 @@ _dynamic_imports: dict[str, str] = {
     "StepIntegrationIssueTypedDict": ".stepintegrationissue",
     "StepIssuesDto": ".stepissuesdto",
     "StepIssuesDtoTypedDict": ".stepissuesdto",
+    "StepIssueSeverityEnum": ".stepissueseverityenum",
     "StepListResponseDto": ".steplistresponsedto",
     "StepListResponseDtoTypedDict": ".steplistresponsedto",
     "StepResponseDto": ".stepresponsedto",
@@ -6204,6 +6243,8 @@ _dynamic_imports: dict[str, str] = {
     "TimeUnitEnum": ".timeunitenum",
     "ToolApprovalCardReplyContentDto": ".toolapprovalcardreplycontentdto",
     "ToolApprovalCardReplyContentDtoTypedDict": ".toolapprovalcardreplycontentdto",
+    "To": ".toolapprovalrequestpayloaddto",
+    "ToTypedDict": ".toolapprovalrequestpayloaddto",
     "ToolApprovalRequestPayloadDto": ".toolapprovalrequestpayloaddto",
     "ToolApprovalRequestPayloadDtoTypedDict": ".toolapprovalrequestpayloaddto",
     "ToolControlDto": ".toolcontroldto",
@@ -6362,11 +6403,11 @@ _dynamic_imports: dict[str, str] = {
     "TriggerEventToAllRequestDtoTenantTypedDict": ".triggereventtoallrequestdto",
     "TriggerEventToAllRequestDtoTypedDict": ".triggereventtoallrequestdto",
     "TriggerRecipientsTypeEnum": ".triggerrecipientstypeenum",
-    "To": ".triggersignaldto",
     "To3": ".triggersignaldto",
     "To3TypedDict": ".triggersignaldto",
-    "ToTypedDict": ".triggersignaldto",
     "TriggerSignalDto": ".triggersignaldto",
+    "TriggerSignalDtoTo": ".triggersignaldto",
+    "TriggerSignalDtoToTypedDict": ".triggersignaldto",
     "TriggerSignalDtoType": ".triggersignaldto",
     "TriggerSignalDtoTypedDict": ".triggersignaldto",
     "TypingStatusDto": ".typingstatusdto",

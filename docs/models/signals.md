@@ -27,3 +27,9 @@ value: models.MetadataClearSignalDto = /* values here */
 value: models.TriggerSignalDto = /* values here */
 ```
 
+### `models.HumanSignalDto`
+
+```python
+value: models.HumanSignalDto = /* values here */
+```
+
