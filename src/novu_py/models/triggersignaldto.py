@@ -19,13 +19,15 @@ To3TypedDict = TypeAliasType("To3TypedDict", Union[str, Dict[str, Any]])
 To3 = TypeAliasType("To3", Union[str, Dict[str, Any]])
 
 
-ToTypedDict = TypeAliasType(
-    "ToTypedDict", Union[str, Dict[str, Any], List[To3TypedDict]]
+TriggerSignalDtoToTypedDict = TypeAliasType(
+    "TriggerSignalDtoToTypedDict", Union[str, Dict[str, Any], List[To3TypedDict]]
 )
 r"""Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber."""
 
 
-To = TypeAliasType("To", Union[str, Dict[str, Any], List[To3]])
+TriggerSignalDtoTo = TypeAliasType(
+    "TriggerSignalDtoTo", Union[str, Dict[str, Any], List[To3]]
+)
 r"""Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber."""
 
 
@@ -33,7 +35,7 @@ class TriggerSignalDtoTypedDict(TypedDict):
     type: TriggerSignalDtoType
     workflow_id: str
     r"""Workflow identifier (same string used with `events.trigger`)."""
-    to: NotRequired[ToTypedDict]
+    to: NotRequired[TriggerSignalDtoToTypedDict]
     r"""Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber."""
     payload: NotRequired[Dict[str, Any]]
     r"""Arbitrary payload forwarded to the workflow."""
@@ -45,7 +47,7 @@ class TriggerSignalDto(BaseModel):
     workflow_id: Annotated[str, pydantic.Field(alias="workflowId")]
     r"""Workflow identifier (same string used with `events.trigger`)."""
 
-    to: Optional[To] = None
+    to: Optional[TriggerSignalDtoTo] = None
     r"""Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber."""
 
     payload: Optional[Dict[str, Any]] = None

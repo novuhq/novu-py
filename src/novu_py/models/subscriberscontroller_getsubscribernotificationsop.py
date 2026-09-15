@@ -65,7 +65,7 @@ class SubscribersControllerGetSubscriberNotificationsRequest(BaseModel):
     limit: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 10
+    ] = 10.0
 
     after: Annotated[
         Optional[str],
