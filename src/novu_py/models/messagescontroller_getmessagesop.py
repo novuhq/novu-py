@@ -53,12 +53,12 @@ class MessagesControllerGetMessagesRequest(BaseModel):
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 0
+    ] = 0.0
 
     limit: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 10
+    ] = 10.0
 
     idempotency_key: Annotated[
         Optional[str],
