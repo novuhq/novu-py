@@ -73,7 +73,7 @@ class ThrottleStepResponseDtoControlValues(BaseModel):
     dynamic_key: Annotated[Optional[str], pydantic.Field(alias="dynamicKey")] = None
     r"""Key path to retrieve dynamic window value (required for dynamic type)."""
 
-    threshold: Optional[float] = 1
+    threshold: Optional[float] = 1.0
     r"""The maximum number of executions allowed within the window. Defaults to 1."""
 
     throttle_key: Annotated[Optional[str], pydantic.Field(alias="throttleKey")] = None

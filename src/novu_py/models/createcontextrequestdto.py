@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from novu_py.types import BaseModel, UNSET_SENTINEL
+import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CreateContextRequestDtoTypedDict(TypedDict):
@@ -14,6 +15,8 @@ class CreateContextRequestDtoTypedDict(TypedDict):
     r"""Unique identifier for this context. Must be lowercase alphanumeric with optional separators."""
     data: NotRequired[Dict[str, Any]]
     r"""Optional custom data to associate with this context."""
+    bridge_url: NotRequired[str]
+    r"""Optional bridge URL override for agent connect. When an inbound agent turn resolves this context, its bridge call is routed here instead of the agent default bridge URL. Must be a publicly reachable URL."""
 
 
 class CreateContextRequestDto(BaseModel):
@@ -26,9 +29,12 @@ class CreateContextRequestDto(BaseModel):
     data: Optional[Dict[str, Any]] = None
     r"""Optional custom data to associate with this context."""
 
+    bridge_url: Annotated[Optional[str], pydantic.Field(alias="bridgeUrl")] = None
+    r"""Optional bridge URL override for agent connect. When an inbound agent turn resolves this context, its bridge call is routed here instead of the agent default bridge URL. Must be a publicly reachable URL."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "bridgeUrl"])
         serialized = handler(self)
         m = {}
 
@@ -41,3 +47,9 @@ class CreateContextRequestDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateContextRequestDto.model_rebuild()
+except NameError:
+    pass

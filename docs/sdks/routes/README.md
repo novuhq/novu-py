@@ -28,7 +28,7 @@ with Novu(
 
     res = novu.domains.routes.list(request={
         "domain": "fearless-fishery.com",
-        "limit": 10,
+        "limit": 10.0,
     })
 
     # Handle response
