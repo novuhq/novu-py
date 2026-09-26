@@ -9,6 +9,7 @@ from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from novu_py.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional, Union, cast
+from typing_extensions import deprecated
 
 
 class Agents(BaseSDK):
@@ -542,6 +543,9 @@ class Agents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def send_reply(
         self,
         *,
@@ -557,10 +561,9 @@ class Agents(BaseSDK):
     ) -> models.AgentReplyControllerHandleAgentReplyHandlerResponse:
         r"""Send an agent reply
 
-        Send a message or side-effect into an existing agent conversation from your backend.
-
-        Use this endpoint when you are not using `@novu/framework` (for example Python, Go, PHP, .NET, or Java SDKs),
-        or when a server process outside the bridge needs to post into a live conversation.
+        **Deprecated** — use `POST /v1/agents/events/ingest` (AgentEvent protocol).
+        This route stays live for old `@novu/framework` and existing OpenAPI `sendReply` clients.
+        Do not use it for new integrations.
 
         **Message actions**
         - `reply` — markdown, interactive card, or tool-approval card (optional `files`)
@@ -702,6 +705,9 @@ class Agents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def send_reply_async(
         self,
         *,
@@ -717,10 +723,9 @@ class Agents(BaseSDK):
     ) -> models.AgentReplyControllerHandleAgentReplyHandlerResponse:
         r"""Send an agent reply
 
-        Send a message or side-effect into an existing agent conversation from your backend.
-
-        Use this endpoint when you are not using `@novu/framework` (for example Python, Go, PHP, .NET, or Java SDKs),
-        or when a server process outside the bridge needs to post into a live conversation.
+        **Deprecated** — use `POST /v1/agents/events/ingest` (AgentEvent protocol).
+        This route stays live for old `@novu/framework` and existing OpenAPI `sendReply` clients.
+        Do not use it for new integrations.
 
         **Message actions**
         - `reply` — markdown, interactive card, or tool-approval card (optional `files`)

@@ -41,9 +41,9 @@ with Novu(
 
     res = novu.subscribers.notifications.list(request={
         "subscriber_id": "<id>",
-        "offset": 0,
-        "created_gte": 1704067200000,
-        "created_lte": 1735689599999,
+        "offset": 0.0,
+        "created_gte": 1704067200000.0,
+        "created_lte": 1735689599999.0,
     })
 
     # Handle response
@@ -784,7 +784,7 @@ with Novu(
 
     res = novu.subscribers.notifications.feed(request={
         "subscriber_id": "<id>",
-        "page": 0,
+        "page": 0.0,
         "payload": "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30=",
     })
 
@@ -831,7 +831,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>", seen=False, limit=100)
+    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>", seen=False, limit=100.0)
 
     # Handle response
     print(res)
