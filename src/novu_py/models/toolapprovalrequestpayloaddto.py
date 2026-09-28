@@ -8,6 +8,14 @@ from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class ToTypedDict(TypedDict):
+    r"""Novu subscriberId(s) allowed to settle this tool gate when HITL is enabled."""
+
+
+class To(BaseModel):
+    r"""Novu subscriberId(s) allowed to settle this tool gate when HITL is enabled."""
+
+
 class ToolApprovalRequestPayloadDtoTypedDict(TypedDict):
     approval_id: str
     r"""Unique id for this approval request (matches the AI SDK approvalId)."""
@@ -17,6 +25,18 @@ class ToolApprovalRequestPayloadDtoTypedDict(TypedDict):
     r"""Name of the gated tool."""
     input: NotRequired[Dict[str, Any]]
     r"""Tool input the model proposed."""
+    approve_action_id: NotRequired[str]
+    r"""Server-minted approve action id. When omitted, self-hosted tool-approval:* is minted at persist."""
+    deny_action_id: NotRequired[str]
+    r"""Server-minted deny action id. When omitted, self-hosted tool-approval:* is minted at persist."""
+    mcp_server_name: NotRequired[str]
+    r"""MCP server name when the gated tool is from an MCP server (for UI labels)."""
+    to: NotRequired[ToTypedDict]
+    r"""Novu subscriberId(s) allowed to settle this tool gate when HITL is enabled."""
+    from_: NotRequired[str]
+    r"""Attribution label shown on the HITL card."""
+    ttl_seconds: NotRequired[float]
+    r"""Seconds until the HITL tool-gate expires."""
 
 
 class ToolApprovalRequestPayloadDto(BaseModel):
@@ -32,9 +52,43 @@ class ToolApprovalRequestPayloadDto(BaseModel):
     input: Optional[Dict[str, Any]] = None
     r"""Tool input the model proposed."""
 
+    approve_action_id: Annotated[
+        Optional[str], pydantic.Field(alias="approveActionId")
+    ] = None
+    r"""Server-minted approve action id. When omitted, self-hosted tool-approval:* is minted at persist."""
+
+    deny_action_id: Annotated[Optional[str], pydantic.Field(alias="denyActionId")] = (
+        None
+    )
+    r"""Server-minted deny action id. When omitted, self-hosted tool-approval:* is minted at persist."""
+
+    mcp_server_name: Annotated[Optional[str], pydantic.Field(alias="mcpServerName")] = (
+        None
+    )
+    r"""MCP server name when the gated tool is from an MCP server (for UI labels)."""
+
+    to: Optional[To] = None
+    r"""Novu subscriberId(s) allowed to settle this tool gate when HITL is enabled."""
+
+    from_: Annotated[Optional[str], pydantic.Field(alias="from")] = None
+    r"""Attribution label shown on the HITL card."""
+
+    ttl_seconds: Annotated[Optional[float], pydantic.Field(alias="ttlSeconds")] = None
+    r"""Seconds until the HITL tool-gate expires."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["input"])
+        optional_fields = set(
+            [
+                "input",
+                "approveActionId",
+                "denyActionId",
+                "mcpServerName",
+                "to",
+                "from",
+                "ttlSeconds",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

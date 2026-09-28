@@ -37,6 +37,7 @@ with Novu(
                 "theme": "dark",
             },
         },
+        "bridge_url": "https://tenant-acme.example.com/api/novu",
     })
 
     # Handle response
@@ -86,7 +87,7 @@ with Novu(
 ) as novu:
 
     res = novu.contexts.list(request={
-        "limit": 10,
+        "limit": 10.0,
         "id": "tenant-prod-123",
         "search": "tenant",
     })
@@ -142,6 +143,7 @@ with Novu(
                 "theme": "dark",
             },
         },
+        "bridge_url": "https://tenant-acme.example.com/api/novu",
     })
 
     # Handle response

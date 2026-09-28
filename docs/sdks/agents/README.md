@@ -9,7 +9,7 @@ Agents are conversational assistants that receive inbound messages from connecte
 
 * [create](#create) - Create an agent
 * [list](#list) - List all agents
-* [send_reply](#send_reply) - Send an agent reply
+* [~~send_reply~~](#send_reply) - Send an agent reply :warning: **Deprecated**
 * [retrieve](#retrieve) - Retrieve an agent
 * [update](#update) - Update an agent
 * [delete](#delete) - Delete an agent
@@ -79,7 +79,7 @@ with Novu(
 ) as novu:
 
     res = novu.agents.list(request={
-        "limit": 10,
+        "limit": 10.0,
     })
 
     # Handle response
@@ -108,12 +108,11 @@ with Novu(
 | models.ErrorDto                        | 500                                    | application/json                       |
 | models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
-## send_reply
+## ~~send_reply~~
 
-Send a message or side-effect into an existing agent conversation from your backend.
-
-Use this endpoint when you are not using `@novu/framework` (for example Python, Go, PHP, .NET, or Java SDKs),
-or when a server process outside the bridge needs to post into a live conversation.
+**Deprecated** — use `POST /v1/agents/events/ingest` (AgentEvent protocol).
+This route stays live for old `@novu/framework` and existing OpenAPI `sendReply` clients.
+Do not use it for new integrations.
 
 **Message actions**
 - `reply` — markdown, interactive card, or tool-approval card (optional `files`)
@@ -133,6 +132,8 @@ or when a server process outside the bridge needs to post into a live conversati
 
 Returns `{ data: { messageId, platformThreadId } }` when a reply or edit is delivered;
 otherwise `{ data: null }`.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage: addReaction
 
@@ -247,6 +248,37 @@ with Novu(
                 markdown="Updated: the report is now final.",
             ),
         ),
+    ))
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: humanApprove
+
+<!-- UsageSnippet language="python" operationID="AgentReplyController_handleAgentReplyHandler" method="post" path="/v1/agents/{agentId}/reply" example="humanApprove" -->
+```python
+import novu_py
+from novu_py import Novu
+
+
+with Novu(
+    secret_key="YOUR_SECRET_KEY_HERE",
+) as novu:
+
+    res = novu.agents.send_reply(agent_id="support-agent", agent_reply_payload_dto=novu_py.AgentReplyPayloadDto(
+        conversation_id="64f5a1c2e8b7a3d9f0c1b2a3",
+        integration_identifier="slack-support",
+        signals=[
+            novu_py.HumanSignalDto(
+                type=novu_py.HumanSignalDtoType.HUMAN,
+                kind=novu_py.Kind.APPROVE,
+                card={
+                    "title": "Deploy v2.4.1 to production?",
+                },
+                request_id="hr_7c2e1a3b-4d5f-6789-abcd-ef0123456789",
+            ),
+        ],
     ))
 
     # Handle response

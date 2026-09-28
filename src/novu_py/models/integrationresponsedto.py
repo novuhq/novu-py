@@ -5,10 +5,10 @@ from .configurationsdto import ConfigurationsDto, ConfigurationsDtoTypedDict
 from .credentialsdto import CredentialsDto, CredentialsDtoTypedDict
 from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -23,7 +23,7 @@ class IntegrationResponseDtoChannel(str, Enum):
     TOOL = "tool"
 
 
-class Kind(str, Enum):
+class IntegrationResponseDtoKind(str, Enum):
     r"""Distinguishes delivery integrations from agent-runtime integrations. Defaults to \"delivery\". Agent integrations do not have a channel."""
 
     DELIVERY = "delivery"
@@ -51,7 +51,7 @@ class IntegrationResponseDtoTypedDict(TypedDict):
     r"""The unique identifier of the integration record in the database. This is automatically generated."""
     channel: NotRequired[IntegrationResponseDtoChannel]
     r"""The channel type for the integration, which defines how it communicates (e.g., email, SMS). Not set for agent-kind integrations."""
-    kind: NotRequired[Kind]
+    kind: NotRequired[IntegrationResponseDtoKind]
     r"""Distinguishes delivery integrations from agent-runtime integrations. Defaults to \"delivery\". Agent integrations do not have a channel."""
     credentials: NotRequired[CredentialsDtoTypedDict]
     r"""The decrypted credentials required for the integration to function (e.g. provider API keys, signing secrets). Only returned to dashboard/session-token callers; API-key authenticated callers receive the integration metadata without this field to avoid amplifying API-key leaks into provider-credential leaks."""
@@ -62,7 +62,9 @@ class IntegrationResponseDtoTypedDict(TypedDict):
     deleted_by: NotRequired[str]
     r"""The identifier of the user who performed the deletion of this integration. Useful for audit trails."""
     conditions: NotRequired[List[StepFilterDtoTypedDict]]
-    r"""An array of conditions associated with the integration that may influence its behavior or processing logic."""
+    r"""Legacy StepFilter conditions. Ignored when `rules` is also set."""
+    rules: NotRequired[Nullable[Dict[str, Any]]]
+    r"""JSONLogic used at send time to select this integration. Takes precedence over `conditions`."""
 
 
 class IntegrationResponseDto(BaseModel):
@@ -96,7 +98,7 @@ class IntegrationResponseDto(BaseModel):
     channel: Optional[IntegrationResponseDtoChannel] = None
     r"""The channel type for the integration, which defines how it communicates (e.g., email, SMS). Not set for agent-kind integrations."""
 
-    kind: Optional[Kind] = None
+    kind: Optional[IntegrationResponseDtoKind] = None
     r"""Distinguishes delivery integrations from agent-runtime integrations. Defaults to \"delivery\". Agent integrations do not have a channel."""
 
     credentials: Optional[CredentialsDto] = None
@@ -111,8 +113,16 @@ class IntegrationResponseDto(BaseModel):
     deleted_by: Annotated[Optional[str], pydantic.Field(alias="deletedBy")] = None
     r"""The identifier of the user who performed the deletion of this integration. Useful for audit trails."""
 
-    conditions: Optional[List[StepFilterDto]] = None
-    r"""An array of conditions associated with the integration that may influence its behavior or processing logic."""
+    conditions: Annotated[
+        Optional[List[StepFilterDto]],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = None
+    r"""Legacy StepFilter conditions. Ignored when `rules` is also set."""
+
+    rules: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""JSONLogic used at send time to select this integration. Takes precedence over `conditions`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -126,17 +136,27 @@ class IntegrationResponseDto(BaseModel):
                 "deletedAt",
                 "deletedBy",
                 "conditions",
+                "rules",
             ]
         )
+        nullable_fields = set(["rules"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

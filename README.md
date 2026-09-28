@@ -564,7 +564,7 @@ asyncio.run(main())
 
 * [create](docs/sdks/agents/README.md#create) - Create an agent
 * [list](docs/sdks/agents/README.md#list) - List all agents
-* [send_reply](docs/sdks/agents/README.md#send_reply) - Send an agent reply
+* [~~send_reply~~](docs/sdks/agents/README.md#send_reply) - Send an agent reply :warning: **Deprecated**
 * [retrieve](docs/sdks/agents/README.md#retrieve) - Retrieve an agent
 * [update](docs/sdks/agents/README.md#update) - Update an agent
 * [delete](docs/sdks/agents/README.md#delete) - Delete an agent
@@ -1156,6 +1156,20 @@ class CustomClient(AsyncHttpClient):
 
 s = Novu(async_client=CustomClient(httpx.AsyncClient()))
 ```
+### httpx2 (Pydantic's httpx fork)
+
+[httpx2](https://httpx2.pydantic.dev/) is Pydantic's maintained fork of `httpx`. To run this SDK on httpx2, call `alias_httpx()` at your program's entry point, before importing the SDK, so every `import httpx` — including the ones inside the SDK — resolves to `httpx2`:
+```python
+import httpx2
+
+httpx2.alias_httpx()
+
+from novu_py import Novu
+
+s = Novu()
+```
+
+An SDK can also be generated against httpx2 directly, so it depends on the fork instead of `httpx`, by setting `python.httpClientLibrary: httpx2` in `gen.yaml`.
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Authentication [security] -->

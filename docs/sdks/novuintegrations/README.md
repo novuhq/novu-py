@@ -71,7 +71,7 @@ with Novu(
 
     res = novu.agents.integrations.list(request={
         "identifier": "<value>",
-        "limit": 10,
+        "limit": 10.0,
     })
 
     # Handle response

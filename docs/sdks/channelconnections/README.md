@@ -27,7 +27,7 @@ with Novu(
 ) as novu:
 
     res = novu.channel_connections.list(request={
-        "limit": 10,
+        "limit": 10.0,
         "subscriber_id": "subscriber-123",
         "connection_mode": novu_py.QueryParamConnectionMode.SHARED,
         "channel": novu_py.QueryParamChannel.CHAT,

@@ -88,13 +88,13 @@ class NotificationsControllerListNotificationsRequest(BaseModel):
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 0
+    ] = 0.0
     r"""Page number for pagination"""
 
     limit: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 10
+    ] = 10.0
     r"""Limit for pagination"""
 
     transaction_id: Annotated[

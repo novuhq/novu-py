@@ -31,7 +31,7 @@ with Novu(
 ) as novu:
 
     res = novu.domains.list(request={
-        "limit": 10,
+        "limit": 10.0,
     })
 
     # Handle response

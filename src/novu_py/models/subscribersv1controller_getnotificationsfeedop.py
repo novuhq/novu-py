@@ -42,7 +42,7 @@ class SubscribersV1ControllerGetNotificationsFeedRequest(BaseModel):
     limit: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 10
+    ] = 10.0
 
     read: Annotated[
         Optional[bool],

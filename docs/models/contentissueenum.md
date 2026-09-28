@@ -21,3 +21,5 @@ value = ContentIssueEnum.ILLEGAL_VARIABLE_IN_CONTROL_VALUE
 | `MISSING_VALUE`                     | MISSING_VALUE                       |
 | `TIER_LIMIT_EXCEEDED`               | TIER_LIMIT_EXCEEDED                 |
 | `UNSUPPORTED_PROPERTY`              | UNSUPPORTED_PROPERTY                |
+| `CHAT_CARD_LIMIT_EXCEEDED`          | CHAT_CARD_LIMIT_EXCEEDED            |
+| `CHAT_CARD_INVALID_BUTTON`          | CHAT_CARD_INVALID_BUTTON            |

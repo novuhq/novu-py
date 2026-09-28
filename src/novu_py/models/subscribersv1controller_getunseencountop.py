@@ -41,7 +41,7 @@ class SubscribersV1ControllerGetUnseenCountRequest(BaseModel):
     limit: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 100
+    ] = 100.0
     r"""The maximum number of notifications to return."""
 
     idempotency_key: Annotated[

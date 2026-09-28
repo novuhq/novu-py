@@ -79,8 +79,8 @@ with Novu(
 ) as novu:
 
     res = novu.layouts.list(request={
-        "limit": 10,
-        "offset": 0,
+        "limit": 10.0,
+        "offset": 0.0,
     })
 
     # Handle response
