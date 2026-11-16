@@ -27,7 +27,7 @@ with Novu(
 ) as novu:
 
     res = novu.channel_endpoints.list(request={
-        "limit": 10,
+        "limit": 10.0,
         "subscriber_id": "subscriber-123",
         "context_keys": [
             "tenant:org-123",

@@ -79,8 +79,8 @@ with Novu(
 ) as novu:
 
     res = novu.layouts.list(request={
-        "limit": 10,
-        "offset": 0,
+        "limit": 10.0,
+        "offset": 0.0,
     })
 
     # Handle response
@@ -206,7 +206,7 @@ Removes a specific layout by its unique identifier **layoutId**
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="LayoutsController__delete" method="delete" path="/v2/layouts/{layoutId}" -->
+<!-- UsageSnippet language="python" operationID="LayoutsController_delete" method="delete" path="/v2/layouts/{layoutId}" -->
 ```python
 from novu_py import Novu
 

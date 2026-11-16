@@ -12,7 +12,13 @@ from .activitynotificationstepresponsedto import (
 from .digestmetadatadto import DigestMetadataDto, DigestMetadataDtoTypedDict
 from .providersidenum import ProvidersIDEnum
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
@@ -36,14 +42,6 @@ class ActivityNotificationJobResponseDtoType(str, Enum):
     HTTP_REQUEST = "http_request"
 
 
-class PayloadTypedDict(TypedDict):
-    r"""Optional payload for the job"""
-
-
-class Payload(BaseModel):
-    r"""Optional payload for the job"""
-
-
 class ActivityNotificationJobResponseDtoTypedDict(TypedDict):
     id: str
     r"""Unique identifier of the job"""
@@ -54,14 +52,14 @@ class ActivityNotificationJobResponseDtoTypedDict(TypedDict):
     step: ActivityNotificationStepResponseDtoTypedDict
     r"""Step details of the job"""
     provider_id: ProvidersIDEnum
-    r"""Provider ID of the job"""
+    r"""Provider ID of the execution"""
     status: str
     r"""Status of the job"""
     digest: NotRequired[DigestMetadataDtoTypedDict]
     r"""Optional digest for the job, including metadata and events"""
     overrides: NotRequired[Dict[str, Any]]
     r"""Optional context object for additional error details."""
-    payload: NotRequired[PayloadTypedDict]
+    payload: NotRequired[Dict[str, Any]]
     r"""Optional payload for the job"""
     updated_at: NotRequired[str]
     r"""Updated time of the notification"""
@@ -86,7 +84,7 @@ class ActivityNotificationJobResponseDto(BaseModel):
     r"""Step details of the job"""
 
     provider_id: Annotated[ProvidersIDEnum, pydantic.Field(alias="providerId")]
-    r"""Provider ID of the job"""
+    r"""Provider ID of the execution"""
 
     status: str
     r"""Status of the job"""
@@ -97,7 +95,7 @@ class ActivityNotificationJobResponseDto(BaseModel):
     overrides: Optional[Dict[str, Any]] = None
     r"""Optional context object for additional error details."""
 
-    payload: Optional[Payload] = None
+    payload: Optional[Dict[str, Any]] = None
     r"""Optional payload for the job"""
 
     updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None
@@ -109,15 +107,22 @@ class ActivityNotificationJobResponseDto(BaseModel):
     r"""The number of times the digest/delay job has been extended to align with the subscribers schedule"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             ["digest", "overrides", "payload", "updatedAt", "scheduleExtensionsCount"]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

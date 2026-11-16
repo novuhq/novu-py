@@ -26,7 +26,16 @@ from .workflowpreferencesresponsedto import (
     WorkflowPreferencesResponseDtoTypedDict,
 )
 from .workflowstatusenum import WorkflowStatusEnum
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from novu_py.utils import get_discriminator
 import pydantic
 from pydantic import Discriminator, Tag, model_serializer
@@ -42,13 +51,20 @@ class WorkflowResponseDtoProviders(BaseModel):
     reply_to: Annotated[Optional[str], pydantic.Field(alias="replyTo")] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["replyTo"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -77,13 +93,20 @@ class WorkflowResponseDtoAgent(BaseModel):
     r"""Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["providers"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -128,14 +151,21 @@ class WorkflowResponseDtoUpdatedBy(BaseModel):
     r"""User external ID"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["firstName", "lastName", "externalId"])
         nullable_fields = set(["firstName", "lastName", "externalId"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -188,14 +218,21 @@ class LastPublishedBy(BaseModel):
     r"""User external ID"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["firstName", "lastName", "externalId"])
         nullable_fields = set(["firstName", "lastName", "externalId"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -265,13 +302,13 @@ class WorkflowResponseDtoTypedDict(TypedDict):
     steps: List[WorkflowResponseDtoStepsTypedDict]
     r"""Steps of the workflow"""
     origin: ResourceOriginEnum
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
     preferences: WorkflowPreferencesResponseDtoTypedDict
     r"""Preferences for the workflow"""
     status: WorkflowStatusEnum
     r"""Status of the workflow"""
     severity: SeverityLevelEnum
-    r"""Severity of the workflow"""
+    r"""Override the severity of the workflow"""
     description: NotRequired[str]
     r"""Description of the workflow"""
     tags: NotRequired[List[str]]
@@ -292,7 +329,7 @@ class WorkflowResponseDtoTypedDict(TypedDict):
     r"""Timestamp of the last workflow publication"""
     last_published_by: NotRequired[Nullable[LastPublishedByTypedDict]]
     r"""User who last published the workflow"""
-    issues: NotRequired[Dict[str, RuntimeIssueDtoTypedDict]]
+    issues: NotRequired[Dict[str, List[RuntimeIssueDtoTypedDict]]]
     r"""Runtime issues for workflow creation and update"""
     last_triggered_at: NotRequired[Nullable[str]]
     r"""Timestamp of the last workflow trigger"""
@@ -323,7 +360,7 @@ class WorkflowResponseDto(BaseModel):
     r"""Steps of the workflow"""
 
     origin: ResourceOriginEnum
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
 
     preferences: WorkflowPreferencesResponseDto
     r"""Preferences for the workflow"""
@@ -332,7 +369,7 @@ class WorkflowResponseDto(BaseModel):
     r"""Status of the workflow"""
 
     severity: SeverityLevelEnum
-    r"""Severity of the workflow"""
+    r"""Override the severity of the workflow"""
 
     description: Optional[str] = None
     r"""Description of the workflow"""
@@ -377,7 +414,7 @@ class WorkflowResponseDto(BaseModel):
     ] = UNSET
     r"""User who last published the workflow"""
 
-    issues: Optional[Dict[str, RuntimeIssueDto]] = None
+    issues: Optional[Dict[str, List[RuntimeIssueDto]]] = None
     r"""Runtime issues for workflow creation and update"""
 
     last_triggered_at: Annotated[
@@ -391,6 +428,9 @@ class WorkflowResponseDto(BaseModel):
     r"""Generated payload example based on the payload schema"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -420,11 +460,15 @@ class WorkflowResponseDto(BaseModel):
                 "payloadExample",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

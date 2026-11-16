@@ -16,7 +16,13 @@ from .activitynotificationtemplateresponsedto import (
 from .activitytopicdto import ActivityTopicDto, ActivityTopicDtoTypedDict
 from .severitylevelenum import SeverityLevelEnum
 from .steptypeenum import StepTypeEnum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
@@ -43,6 +49,7 @@ class ActivityNotificationResponseDtoTypedDict(TypedDict):
     updated_at: NotRequired[str]
     r"""Last updated time of the notification"""
     channels: NotRequired[List[StepTypeEnum]]
+    r"""Channels of the notification"""
     subscriber: NotRequired[ActivityNotificationSubscriberResponseDtoTypedDict]
     r"""Subscriber of the notification"""
     template: NotRequired[ActivityNotificationTemplateResponseDtoTypedDict]
@@ -60,7 +67,7 @@ class ActivityNotificationResponseDtoTypedDict(TypedDict):
     topics: NotRequired[List[ActivityTopicDtoTypedDict]]
     r"""Topics of the notification"""
     severity: NotRequired[SeverityLevelEnum]
-    r"""Severity of the workflow"""
+    r"""Override the severity of the workflow"""
     critical: NotRequired[bool]
     r"""Criticality of the notification"""
     context_keys: NotRequired[List[str]]
@@ -98,6 +105,7 @@ class ActivityNotificationResponseDto(BaseModel):
     r"""Last updated time of the notification"""
 
     channels: Optional[List[StepTypeEnum]] = None
+    r"""Channels of the notification"""
 
     subscriber: Optional[ActivityNotificationSubscriberResponseDto] = None
     r"""Subscriber of the notification"""
@@ -124,7 +132,7 @@ class ActivityNotificationResponseDto(BaseModel):
     r"""Topics of the notification"""
 
     severity: Optional[SeverityLevelEnum] = None
-    r"""Severity of the workflow"""
+    r"""Override the severity of the workflow"""
 
     critical: Optional[bool] = None
     r"""Criticality of the notification"""
@@ -135,6 +143,9 @@ class ActivityNotificationResponseDto(BaseModel):
     r"""Context (single or multi) in which the notification was sent"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -157,11 +168,15 @@ class ActivityNotificationResponseDto(BaseModel):
                 "contextKeys",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

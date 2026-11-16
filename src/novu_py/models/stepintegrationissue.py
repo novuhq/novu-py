@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 from .integrationissueenum import IntegrationIssueEnum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from .stepissueseverityenum import StepIssueSeverityEnum
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -16,6 +23,8 @@ class StepIntegrationIssueTypedDict(TypedDict):
     r"""Detailed message describing the issue"""
     variable_name: NotRequired[str]
     r"""Name of the variable related to the issue"""
+    severity: NotRequired[StepIssueSeverityEnum]
+    r"""Blocking severity of the issue. `error` (default when omitted) blocks save; `warning` is a non-blocking notice."""
 
 
 class StepIntegrationIssue(BaseModel):
@@ -28,14 +37,24 @@ class StepIntegrationIssue(BaseModel):
     variable_name: Annotated[Optional[str], pydantic.Field(alias="variableName")] = None
     r"""Name of the variable related to the issue"""
 
+    severity: Optional[StepIssueSeverityEnum] = None
+    r"""Blocking severity of the issue. `error` (default when omitted) blocks save; `warning` is a non-blocking notice."""
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["variableName"])
+        optional_fields = set(["variableName", "severity"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

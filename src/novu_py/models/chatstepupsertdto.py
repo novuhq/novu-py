@@ -3,7 +3,16 @@
 from __future__ import annotations
 from .chatcontroldto import ChatControlDto, ChatControlDtoTypedDict
 from .steptypeenum import StepTypeEnum
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, Optional, Union
@@ -27,7 +36,7 @@ class ChatStepUpsertDtoTypedDict(TypedDict):
     name: str
     r"""Name of the step"""
     type: StepTypeEnum
-    r"""Type of the step"""
+    r"""Channels of the notification"""
     id: NotRequired[str]
     r"""Database identifier of the step. Used for updating the step."""
     step_id: NotRequired[str]
@@ -36,6 +45,8 @@ class ChatStepUpsertDtoTypedDict(TypedDict):
     r"""Control values for the Chat step."""
     provider_overrides: NotRequired[Nullable[Dict[str, Dict[str, Any]]]]
     r"""Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`). Omit to leave unchanged; pass null to delete all provider overrides; pass an object to replace the full set."""
+    integration_overrides: NotRequired[Nullable[Dict[str, Dict[str, Dict[str, Any]]]]]
+    r"""Per-integration content overrides keyed by providerId, then by integration identifier. Each entry is merged over the matching providerOverrides entry, only for sends through that integration. Trigger-time overrides still take precedence. Entries whose integration does not exist in the environment are kept but not applied. Omit to leave unchanged; pass null to delete all integration overrides; pass an object to replace the full set."""
 
 
 class ChatStepUpsertDto(BaseModel):
@@ -43,7 +54,7 @@ class ChatStepUpsertDto(BaseModel):
     r"""Name of the step"""
 
     type: StepTypeEnum
-    r"""Type of the step"""
+    r"""Channels of the notification"""
 
     id: Annotated[Optional[str], pydantic.Field(alias="_id")] = None
     r"""Database identifier of the step. Used for updating the step."""
@@ -62,15 +73,36 @@ class ChatStepUpsertDto(BaseModel):
     ] = UNSET
     r"""Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`). Omit to leave unchanged; pass null to delete all provider overrides; pass an object to replace the full set."""
 
+    integration_overrides: Annotated[
+        OptionalNullable[Dict[str, Dict[str, Dict[str, Any]]]],
+        pydantic.Field(alias="integrationOverrides"),
+    ] = UNSET
+    r"""Per-integration content overrides keyed by providerId, then by integration identifier. Each entry is merged over the matching providerOverrides entry, only for sends through that integration. Trigger-time overrides still take precedence. Entries whose integration does not exist in the environment are kept but not applied. Omit to leave unchanged; pass null to delete all integration overrides; pass an object to replace the full set."""
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["_id", "stepId", "controlValues", "providerOverrides"])
-        nullable_fields = set(["providerOverrides"])
+        optional_fields = set(
+            [
+                "_id",
+                "stepId",
+                "controlValues",
+                "providerOverrides",
+                "integrationOverrides",
+            ]
+        )
+        nullable_fields = set(["providerOverrides", "integrationOverrides"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

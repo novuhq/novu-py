@@ -5,7 +5,7 @@ from enum import Enum
 
 
 class ResourceOriginEnum(str, Enum):
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
 
     NOVU_CLOUD = "novu-cloud"
     NOVU_CLOUD_V1 = "novu-cloud-v1"

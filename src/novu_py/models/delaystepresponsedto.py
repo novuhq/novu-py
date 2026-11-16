@@ -9,7 +9,16 @@ from .resourceoriginenum import ResourceOriginEnum
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
 from enum import Enum
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import ConfigDict, model_serializer
 from typing import Any, Dict, Optional
@@ -81,13 +90,20 @@ class DelayStepResponseDtoControlValues(BaseModel):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["skip", "type", "amount", "unit", "cron"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             serialized.pop(k, serialized.pop(n, None))
 
@@ -114,9 +130,9 @@ class DelayStepResponseDtoTypedDict(TypedDict):
     slug: str
     r"""Slug of the step"""
     type: StepTypeEnum
-    r"""Type of the step"""
+    r"""Channels of the notification"""
     origin: ResourceOriginEnum
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
     workflow_id: str
     r"""Workflow identifier"""
     workflow_database_id: str
@@ -125,6 +141,8 @@ class DelayStepResponseDtoTypedDict(TypedDict):
     r"""Control values for the delay step"""
     provider_overrides: NotRequired[Nullable[Dict[str, Dict[str, Any]]]]
     r"""Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`)."""
+    integration_overrides: NotRequired[Nullable[Dict[str, Dict[str, Dict[str, Any]]]]]
+    r"""Per-integration content overrides keyed by providerId, then by integration identifier. Each entry is merged over the matching providerOverrides entry, only for sends through that integration. Trigger-time overrides still take precedence. Entries whose integration does not exist in the environment are kept but not applied."""
     issues: NotRequired[StepIssuesDtoTypedDict]
     r"""Issues associated with the step"""
     step_resolver_hash: NotRequired[str]
@@ -151,10 +169,10 @@ class DelayStepResponseDto(BaseModel):
     r"""Slug of the step"""
 
     type: StepTypeEnum
-    r"""Type of the step"""
+    r"""Channels of the notification"""
 
     origin: ResourceOriginEnum
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
 
     workflow_id: Annotated[str, pydantic.Field(alias="workflowId")]
     r"""Workflow identifier"""
@@ -174,6 +192,12 @@ class DelayStepResponseDto(BaseModel):
     ] = UNSET
     r"""Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`)."""
 
+    integration_overrides: Annotated[
+        OptionalNullable[Dict[str, Dict[str, Dict[str, Any]]]],
+        pydantic.Field(alias="integrationOverrides"),
+    ] = UNSET
+    r"""Per-integration content overrides keyed by providerId, then by integration identifier. Each entry is merged over the matching providerOverrides entry, only for sends through that integration. Trigger-time overrides still take precedence. Entries whose integration does not exist in the environment are kept but not applied."""
+
     issues: Optional[StepIssuesDto] = None
     r"""Issues associated with the step"""
 
@@ -183,16 +207,29 @@ class DelayStepResponseDto(BaseModel):
     r"""Hash identifying the deployed Cloudflare Worker for this step"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["controlValues", "providerOverrides", "issues", "stepResolverHash"]
+            [
+                "controlValues",
+                "providerOverrides",
+                "integrationOverrides",
+                "issues",
+                "stepResolverHash",
+            ]
         )
-        nullable_fields = set(["providerOverrides"])
+        nullable_fields = set(["providerOverrides", "integrationOverrides"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

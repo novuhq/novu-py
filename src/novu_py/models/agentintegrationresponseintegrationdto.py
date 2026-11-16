@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from .channeltypeenum import ChannelTypeEnum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -18,7 +24,6 @@ class AgentIntegrationResponseIntegrationDtoTypedDict(TypedDict):
     provider_id: str
     active: bool
     channel: NotRequired[ChannelTypeEnum]
-    r"""Channel type through which the message is sent"""
     shared_inbound_address: NotRequired[str]
     r"""The Novu shared inbox address for this agent. Set whenever the cloud shared-inbox feature is enabled. The dashboard uses this as the headline inbound address and to render the shared inbox row in the inbox list."""
     default_sender_name: NotRequired[str]
@@ -41,7 +46,6 @@ class AgentIntegrationResponseIntegrationDto(BaseModel):
     active: bool
 
     channel: Optional[ChannelTypeEnum] = None
-    r"""Channel type through which the message is sent"""
 
     shared_inbound_address: Annotated[
         Optional[str], pydantic.Field(alias="sharedInboundAddress")
@@ -59,6 +63,9 @@ class AgentIntegrationResponseIntegrationDto(BaseModel):
     r"""When true, the worker drops inbound mail addressed to this agent on the shared `agentconnect.sh` domain. Custom-domain routes still deliver. Meaningful on cloud-enabled NovuAgent integrations; on self-hosted it is set defensively at provisioning time and is effectively redundant."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -68,11 +75,15 @@ class AgentIntegrationResponseIntegrationDto(BaseModel):
                 "sharedInboxDisabled",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

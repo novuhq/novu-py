@@ -3,10 +3,19 @@
 from __future__ import annotations
 from .messagetemplatedto import MessageTemplateDto, MessageTemplateDtoTypedDict
 from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -16,14 +25,6 @@ class ActivityNotificationStepResponseDtoReplyCallbackTypedDict(TypedDict):
 
 class ActivityNotificationStepResponseDtoReplyCallback(BaseModel):
     r"""Reply callback settings"""
-
-
-class ControlVariablesTypedDict(TypedDict):
-    r"""Control variables"""
-
-
-class ControlVariables(BaseModel):
-    r"""Control variables"""
 
 
 class ActivityNotificationStepResponseDtoMetadataTypedDict(TypedDict):
@@ -55,7 +56,7 @@ class ActivityNotificationStepResponseDtoTypedDict(TypedDict):
         ActivityNotificationStepResponseDtoReplyCallbackTypedDict
     ]
     r"""Reply callback settings"""
-    control_variables: NotRequired[ControlVariablesTypedDict]
+    control_variables: NotRequired[Dict[str, Any]]
     r"""Control variables"""
     metadata: NotRequired[ActivityNotificationStepResponseDtoMetadataTypedDict]
     r"""Metadata for the workflow step"""
@@ -91,7 +92,7 @@ class ActivityNotificationStepResponseDto(BaseModel):
     r"""Reply callback settings"""
 
     control_variables: Annotated[
-        Optional[ControlVariables], pydantic.Field(alias="controlVariables")
+        Optional[Dict[str, Any]], pydantic.Field(alias="controlVariables")
     ] = None
     r"""Control variables"""
 
@@ -116,6 +117,9 @@ class ActivityNotificationStepResponseDto(BaseModel):
     r"""The unique identifier for the parent step"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -130,11 +134,15 @@ class ActivityNotificationStepResponseDto(BaseModel):
             ]
         )
         nullable_fields = set(["_parentId"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

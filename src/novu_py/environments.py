@@ -275,7 +275,7 @@ class Environments(BaseSDK):
     ) -> models.EnvironmentsControllerDiffEnvironmentResponse:
         r"""Compare resources between environments
 
-        Compares workflows and other resources between the source and target environments, returning detailed diff information including additions, modifications, and deletions.
+        Compares workflows and other resources between the development and target environments, returning detailed diff information including additions, modifications, and deletions.
 
         :param target_environment_id: Target environment ID (MongoDB ObjectId) to compare against
         :param diff_environment_request_dto: Diff request configuration
@@ -412,7 +412,7 @@ class Environments(BaseSDK):
     ) -> models.EnvironmentsControllerDiffEnvironmentResponse:
         r"""Compare resources between environments
 
-        Compares workflows and other resources between the source and target environments, returning detailed diff information including additions, modifications, and deletions.
+        Compares workflows and other resources between the development and target environments, returning detailed diff information including additions, modifications, and deletions.
 
         :param target_environment_id: Target environment ID (MongoDB ObjectId) to compare against
         :param diff_environment_request_dto: Diff request configuration
@@ -550,7 +550,7 @@ class Environments(BaseSDK):
     ) -> models.EnvironmentsControllerPublishEnvironmentResponse:
         r"""Publish resources to target environment
 
-        Publishes all workflows and resources from the source environment to the target environment. Optionally specify specific resources to publish or use dryRun mode to preview changes.
+        Publishes all workflows and resources from the development environment to the target environment. Optionally specify specific resources to publish or use dryRun mode to preview changes.
 
         :param target_environment_id: Target environment ID (MongoDB ObjectId) to publish resources to
         :param publish_environment_request_dto: Publish request configuration
@@ -688,7 +688,7 @@ class Environments(BaseSDK):
     ) -> models.EnvironmentsControllerPublishEnvironmentResponse:
         r"""Publish resources to target environment
 
-        Publishes all workflows and resources from the source environment to the target environment. Optionally specify specific resources to publish or use dryRun mode to preview changes.
+        Publishes all workflows and resources from the development environment to the target environment. Optionally specify specific resources to publish or use dryRun mode to preview changes.
 
         :param target_environment_id: Target environment ID (MongoDB ObjectId) to publish resources to
         :param publish_environment_request_dto: Publish request configuration

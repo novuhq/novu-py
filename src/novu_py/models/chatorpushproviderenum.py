@@ -9,6 +9,7 @@ class ChatOrPushProviderEnum(str, Enum):
 
     SLACK = "slack"
     DISCORD = "discord"
+    GOOGLE_CHAT = "google-chat"
     MSTEAMS = "msteams"
     WEBEX_MESSAGING = "webex-messaging"
     MATTERMOST = "mattermost"
@@ -23,6 +24,7 @@ class ChatOrPushProviderEnum(str, Enum):
     NOVU_SLACK = "novu-slack"
     TELEGRAM = "telegram"
     SENDBLUE = "sendblue"
+    PHOTON_IMESSAGE = "photon-imessage"
     NOVU_WEB_CHAT = "novu-web-chat"
     FCM = "fcm"
     APNS = "apns"

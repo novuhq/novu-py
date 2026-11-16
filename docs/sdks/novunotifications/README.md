@@ -41,9 +41,9 @@ with Novu(
 
     res = novu.subscribers.notifications.list(request={
         "subscriber_id": "<id>",
-        "offset": 0,
-        "created_gte": 1704067200000,
-        "created_lte": 1735689599999,
+        "offset": 0.0,
+        "created_gte": 1704067200000.0,
+        "created_lte": 1735689599999.0,
     })
 
     # Handle response
@@ -784,7 +784,7 @@ with Novu(
 
     res = novu.subscribers.notifications.feed(request={
         "subscriber_id": "<id>",
-        "page": 0,
+        "page": 0.0,
         "payload": "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30=",
     })
 
@@ -831,7 +831,9 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.subscribers.notifications.unseen_count(subscriber_id="<id>", seen=False, limit=100)
+    res = novu.subscribers.notifications.unseen_count(request={
+        "subscriber_id": "<id>",
+    })
 
     # Handle response
     print(res)
@@ -840,13 +842,10 @@ with Novu(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `subscriber_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `seen`                                                              | *Optional[bool]*                                                    | :heavy_minus_sign:                                                  | Indicates whether to count seen notifications.                      |
-| `limit`                                                             | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | The maximum number of notifications to return.                      |
-| `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                           | [models.SubscribersV1ControllerGetUnseenCountRequest](../../models/subscribersv1controllergetunseencountrequest.md) | :heavy_check_mark:                                                                                                  | The request object to use for the request.                                                                          |
+| `retries`                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                    | :heavy_minus_sign:                                                                                                  | Configuration to override the default retry behavior of the client.                                                 |
 
 ### Response
 

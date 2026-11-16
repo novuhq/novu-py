@@ -4,7 +4,16 @@ from __future__ import annotations
 from .layoutcontrolsdto import LayoutControlsDto, LayoutControlsDtoTypedDict
 from .resourceoriginenum import ResourceOriginEnum
 from .resourcetypeenum import ResourceTypeEnum
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict
@@ -46,14 +55,21 @@ class UpdatedBy(BaseModel):
     r"""User external ID"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["firstName", "lastName", "externalId"])
         nullable_fields = set(["firstName", "lastName", "externalId"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -89,7 +105,7 @@ class LayoutResponseDtoTypedDict(TypedDict):
     created_at: str
     r"""Creation timestamp"""
     origin: ResourceOriginEnum
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
     type: ResourceTypeEnum
     r"""Type of the layout"""
     controls: LayoutControlsDtoTypedDict
@@ -128,7 +144,7 @@ class LayoutResponseDto(BaseModel):
     r"""Creation timestamp"""
 
     origin: ResourceOriginEnum
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
 
     type: ResourceTypeEnum
     r"""Type of the layout"""
@@ -145,14 +161,21 @@ class LayoutResponseDto(BaseModel):
     r"""The variables JSON Schema for the layout"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["updatedBy", "variables"])
         nullable_fields = set(["updatedBy", "variables"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

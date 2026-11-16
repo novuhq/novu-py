@@ -6,7 +6,13 @@ from .listcontextsresponsedto import (
     ListContextsResponseDtoTypedDict,
 )
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from novu_py.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
@@ -34,6 +40,8 @@ class ContextsControllerListContextsRequestTypedDict(TypedDict):
     r"""Field to order by"""
     include_cursor: NotRequired[bool]
     r"""Include cursor item in response"""
+    type: NotRequired[str]
+    r"""Filter contexts by type"""
     id: NotRequired[str]
     r"""Filter contexts by id"""
     search: NotRequired[str]
@@ -82,6 +90,12 @@ class ContextsControllerListContextsRequest(BaseModel):
     ] = None
     r"""Include cursor item in response"""
 
+    type: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter contexts by type"""
+
     id: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -102,6 +116,9 @@ class ContextsControllerListContextsRequest(BaseModel):
     r"""A header for idempotency purposes"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -111,16 +128,21 @@ class ContextsControllerListContextsRequest(BaseModel):
                 "orderDirection",
                 "orderBy",
                 "includeCursor",
+                "type",
                 "id",
                 "search",
                 "idempotency-key",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

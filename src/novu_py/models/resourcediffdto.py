@@ -4,7 +4,16 @@ from __future__ import annotations
 from .diffactionenum import DiffActionEnum
 from .resourcetypeenum import ResourceTypeEnum
 from datetime import datetime
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, Optional
@@ -22,6 +31,8 @@ class ResourceDiffDtoUpdatedByTypedDict(TypedDict):
     r"""User last name"""
     external_id: NotRequired[str]
     r"""User external ID"""
+    email: NotRequired[Nullable[str]]
+    r"""User email, used when the user has no name"""
 
 
 class ResourceDiffDtoUpdatedBy(BaseModel):
@@ -41,15 +52,25 @@ class ResourceDiffDtoUpdatedBy(BaseModel):
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
     r"""User external ID"""
 
+    email: OptionalNullable[str] = UNSET
+    r"""User email, used when the user has no name"""
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["lastName", "externalId"])
-        nullable_fields = set(["lastName"])
+        optional_fields = set(["lastName", "externalId", "email"])
+        nullable_fields = set(["lastName", "email"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -100,14 +121,21 @@ class ResourceDiffDtoSourceResource(BaseModel):
     r"""When the resource was last updated"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["id", "name", "updatedBy", "updatedAt"])
         nullable_fields = set(["id", "name", "updatedBy", "updatedAt"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -136,6 +164,8 @@ class ResourceDiffDtoTargetResourceUpdatedByTypedDict(TypedDict):
     r"""User last name"""
     external_id: NotRequired[str]
     r"""User external ID"""
+    email: NotRequired[Nullable[str]]
+    r"""User email, used when the user has no name"""
 
 
 class ResourceDiffDtoTargetResourceUpdatedBy(BaseModel):
@@ -155,15 +185,25 @@ class ResourceDiffDtoTargetResourceUpdatedBy(BaseModel):
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
     r"""User external ID"""
 
+    email: OptionalNullable[str] = UNSET
+    r"""User email, used when the user has no name"""
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["lastName", "externalId"])
-        nullable_fields = set(["lastName"])
+        optional_fields = set(["lastName", "externalId", "email"])
+        nullable_fields = set(["lastName", "email"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -215,14 +255,21 @@ class ResourceDiffDtoTargetResource(BaseModel):
     r"""When the resource was last updated"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["id", "name", "updatedBy", "updatedAt"])
         nullable_fields = set(["id", "name", "updatedBy", "updatedAt"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -259,14 +306,21 @@ class Diffs(BaseModel):
     r"""New state of the resource (null for deleted resources)"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["previous", "new"])
         nullable_fields = set(["previous", "new"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -337,6 +391,9 @@ class ResourceDiffDto(BaseModel):
     r"""New index in steps array (for moved/added steps)"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -349,11 +406,15 @@ class ResourceDiffDto(BaseModel):
             ]
         )
         nullable_fields = set(["sourceResource", "targetResource"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

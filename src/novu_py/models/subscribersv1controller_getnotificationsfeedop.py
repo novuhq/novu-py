@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from .feedresponsedto import FeedResponseDto, FeedResponseDtoTypedDict
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from novu_py.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -19,6 +25,7 @@ class SubscribersV1ControllerGetNotificationsFeedRequestTypedDict(TypedDict):
     subscriber_id: str
     page: NotRequired[float]
     limit: NotRequired[float]
+    feed_identifier: NotRequired[List[str]]
     read: NotRequired[bool]
     seen: NotRequired[bool]
     payload: NotRequired[str]
@@ -42,7 +49,13 @@ class SubscribersV1ControllerGetNotificationsFeedRequest(BaseModel):
     limit: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 10
+    ] = 10.0
+
+    feed_identifier: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="feedIdentifier"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
 
     read: Annotated[
         Optional[bool],
@@ -68,15 +81,30 @@ class SubscribersV1ControllerGetNotificationsFeedRequest(BaseModel):
     r"""A header for idempotency purposes"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["page", "limit", "read", "seen", "payload", "idempotency-key"]
+            [
+                "page",
+                "limit",
+                "feedIdentifier",
+                "read",
+                "seen",
+                "payload",
+                "idempotency-key",
+            ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

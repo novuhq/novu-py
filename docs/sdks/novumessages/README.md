@@ -32,7 +32,7 @@ with Novu(
 
     res = novu.subscribers.messages.update_as_seen(request={
         "message_id": "<id>",
-        "type": "<value>",
+        "type": novu_py.PathParamType.PRIMARY,
         "subscriber_id": "<id>",
         "mark_message_action_as_seen_dto": {
             "status": novu_py.MarkMessageActionAsSeenDtoStatus.PENDING,

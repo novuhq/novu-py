@@ -6,7 +6,13 @@ from .listsubscribersresponsedto import (
     ListSubscribersResponseDtoTypedDict,
 )
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from novu_py.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
@@ -35,11 +41,11 @@ class SubscribersControllerSearchSubscribersRequestTypedDict(TypedDict):
     include_cursor: NotRequired[bool]
     r"""Include cursor item in response"""
     email: NotRequired[str]
-    r"""Email address of the subscriber to filter results."""
+    r"""Exact email address of the subscriber. The value must match the stored email field."""
     name: NotRequired[str]
     r"""Name of the subscriber to filter results."""
     phone: NotRequired[str]
-    r"""Phone number of the subscriber to filter results."""
+    r"""Exact phone number of the subscriber. The value must match the stored phone field."""
     subscriber_id: NotRequired[str]
     r"""Unique identifier of the subscriber to filter results."""
     idempotency_key: NotRequired[str]
@@ -90,7 +96,7 @@ class SubscribersControllerSearchSubscribersRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Email address of the subscriber to filter results."""
+    r"""Exact email address of the subscriber. The value must match the stored email field."""
 
     name: Annotated[
         Optional[str],
@@ -102,7 +108,7 @@ class SubscribersControllerSearchSubscribersRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Phone number of the subscriber to filter results."""
+    r"""Exact phone number of the subscriber. The value must match the stored phone field."""
 
     subscriber_id: Annotated[
         Optional[str],
@@ -119,6 +125,9 @@ class SubscribersControllerSearchSubscribersRequest(BaseModel):
     r"""A header for idempotency purposes"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -135,11 +144,15 @@ class SubscribersControllerSearchSubscribersRequest(BaseModel):
                 "idempotency-key",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

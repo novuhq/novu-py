@@ -80,7 +80,16 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.integrations.create(create_integration_request_dto={})
+    res = novu.integrations.create(create_integration_request_dto={
+        "rules": {
+            "==": [
+                {
+                    "var": "context.tenant.id",
+                },
+                "acme",
+            ],
+        },
+    })
 
     # Handle response
     print(res)
@@ -125,7 +134,16 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.integrations.update(integration_id="<id>", update_integration_request_dto={})
+    res = novu.integrations.update(integration_id="<id>", update_integration_request_dto={
+        "rules": {
+            "==": [
+                {
+                    "var": "context.tenant.id",
+                },
+                "acme",
+            ],
+        },
+    })
 
     # Handle response
     print(res)

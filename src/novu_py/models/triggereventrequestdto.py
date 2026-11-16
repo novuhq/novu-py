@@ -7,7 +7,16 @@ from .stepsoverrides import StepsOverrides, StepsOverridesTypedDict
 from .subscriberpayloaddto import SubscriberPayloadDto, SubscriberPayloadDtoTypedDict
 from .tenantpayloaddto import TenantPayloadDto, TenantPayloadDtoTypedDict
 from .topicpayloaddto import TopicPayloadDto, TopicPayloadDtoTypedDict
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, List, Optional, Union
@@ -28,13 +37,20 @@ class Channels(BaseModel):
     r"""Email channel specific overrides"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["email"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -64,7 +80,7 @@ class OverridesTypedDict(TypedDict):
     layout_identifier: NotRequired[str]
     r"""Override the layout identifier for the entire workflow"""
     severity: NotRequired[SeverityLevelEnum]
-    r"""Severity of the workflow"""
+    r"""Override the severity of the workflow"""
 
 
 class Overrides(BaseModel):
@@ -121,9 +137,12 @@ class Overrides(BaseModel):
     r"""Override the layout identifier for the entire workflow"""
 
     severity: Optional[SeverityLevelEnum] = None
-    r"""Severity of the workflow"""
+    r"""Override the severity of the workflow"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -138,11 +157,15 @@ class Overrides(BaseModel):
                 "severity",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -223,13 +246,20 @@ class TriggerEventRequestDtoContext2(BaseModel):
     r"""Optional additional context data"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["data"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -325,6 +355,9 @@ class TriggerEventRequestDto(BaseModel):
     context: Optional[Dict[str, TriggerEventRequestDtoContext]] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -339,11 +372,15 @@ class TriggerEventRequestDto(BaseModel):
             ]
         )
         nullable_fields = set(["agentId"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

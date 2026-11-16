@@ -37,6 +37,7 @@ with Novu(
                 "theme": "dark",
             },
         },
+        "bridge_url": "https://tenant-acme.example.com/api/novu",
     })
 
     # Handle response
@@ -86,7 +87,8 @@ with Novu(
 ) as novu:
 
     res = novu.contexts.list(request={
-        "limit": 10,
+        "limit": 10.0,
+        "type": "tenant",
         "id": "tenant-prod-123",
         "search": "tenant",
     })
@@ -142,6 +144,7 @@ with Novu(
                 "theme": "dark",
             },
         },
+        "bridge_url": "https://tenant-acme.example.com/api/novu",
     })
 
     # Handle response
@@ -154,7 +157,7 @@ with Novu(
 | Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | `id`                                                                      | *str*                                                                     | :heavy_check_mark:                                                        | Context ID                                                                |
-| `type`                                                                    | *str*                                                                     | :heavy_check_mark:                                                        | Context type                                                              |
+| `type_`                                                                   | *str*                                                                     | :heavy_check_mark:                                                        | Context type                                                              |
 | `update_context_request_dto`                                              | [models.UpdateContextRequestDto](../../models/updatecontextrequestdto.md) | :heavy_check_mark:                                                        | N/A                                                                       |
 | `idempotency_key`                                                         | *Optional[str]*                                                           | :heavy_minus_sign:                                                        | A header for idempotency purposes                                         |
 | `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |
@@ -201,7 +204,7 @@ with Novu(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Context ID                                                          |
-| `type`                                                              | *str*                                                               | :heavy_check_mark:                                                  | Context type                                                        |
+| `type_`                                                             | *str*                                                               | :heavy_check_mark:                                                  | Context type                                                        |
 | `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
@@ -247,7 +250,7 @@ with Novu(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Context ID                                                          |
-| `type`                                                              | *str*                                                               | :heavy_check_mark:                                                  | Context type                                                        |
+| `type_`                                                             | *str*                                                               | :heavy_check_mark:                                                  | Context type                                                        |
 | `idempotency_key`                                                   | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | A header for idempotency purposes                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 

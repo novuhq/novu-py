@@ -6,7 +6,13 @@ from .getsubscribernotificationsresponsedto import (
     GetSubscriberNotificationsResponseDtoTypedDict,
 )
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from novu_py.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -32,6 +38,8 @@ class SubscribersControllerGetSubscriberNotificationsRequestTypedDict(TypedDict)
     limit: NotRequired[float]
     after: NotRequired[str]
     offset: NotRequired[float]
+    tags: NotRequired[List[str]]
+    r"""Filter by workflow tags. Returns notifications that have any of the given tags."""
     read: NotRequired[bool]
     r"""Filter by read/unread state"""
     archived: NotRequired[bool]
@@ -65,7 +73,7 @@ class SubscribersControllerGetSubscriberNotificationsRequest(BaseModel):
     limit: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 10
+    ] = 10.0
 
     after: Annotated[
         Optional[str],
@@ -76,6 +84,12 @@ class SubscribersControllerGetSubscriberNotificationsRequest(BaseModel):
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+
+    tags: Annotated[
+        Optional[List[str]],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by workflow tags. Returns notifications that have any of the given tags."""
 
     read: Annotated[
         Optional[bool],
@@ -142,12 +156,16 @@ class SubscribersControllerGetSubscriberNotificationsRequest(BaseModel):
     r"""A header for idempotency purposes"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
                 "limit",
                 "after",
                 "offset",
+                "tags",
                 "read",
                 "archived",
                 "snoozed",
@@ -160,11 +178,15 @@ class SubscribersControllerGetSubscriberNotificationsRequest(BaseModel):
                 "idempotency-key",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

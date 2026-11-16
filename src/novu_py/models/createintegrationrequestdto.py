@@ -4,10 +4,19 @@ from __future__ import annotations
 from .credentialsdto import CredentialsDto, CredentialsDtoTypedDict
 from .stepfilterdto import StepFilterDto, StepFilterDtoTypedDict
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -27,14 +36,6 @@ class CreateIntegrationRequestDtoKind(str, Enum):
 
     DELIVERY = "delivery"
     AGENT = "agent"
-
-
-class ConfigurationsTypedDict(TypedDict):
-    r"""Configurations for the integration"""
-
-
-class Configurations(BaseModel):
-    r"""Configurations for the integration"""
 
 
 class CreateIntegrationRequestDtoTypedDict(TypedDict):
@@ -57,8 +58,10 @@ class CreateIntegrationRequestDtoTypedDict(TypedDict):
     check: NotRequired[bool]
     r"""Flag to check the integration status"""
     conditions: NotRequired[List[StepFilterDtoTypedDict]]
-    r"""Conditions for the integration"""
-    configurations: NotRequired[ConfigurationsTypedDict]
+    r"""Legacy StepFilter conditions. Ignored when `rules` is also set."""
+    rules: NotRequired[Nullable[Dict[str, Any]]]
+    r"""JSONLogic used at send time to select this integration. Takes precedence over `conditions`."""
+    configurations: NotRequired[Dict[str, str]]
     r"""Configurations for the integration"""
 
 
@@ -92,13 +95,24 @@ class CreateIntegrationRequestDto(BaseModel):
     check: Optional[bool] = None
     r"""Flag to check the integration status"""
 
-    conditions: Optional[List[StepFilterDto]] = None
-    r"""Conditions for the integration"""
+    conditions: Annotated[
+        Optional[List[StepFilterDto]],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = None
+    r"""Legacy StepFilter conditions. Ignored when `rules` is also set."""
 
-    configurations: Optional[Configurations] = None
+    rules: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""JSONLogic used at send time to select this integration. Takes precedence over `conditions`."""
+
+    configurations: Optional[Dict[str, str]] = None
     r"""Configurations for the integration"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -112,18 +126,32 @@ class CreateIntegrationRequestDto(BaseModel):
                 "active",
                 "check",
                 "conditions",
+                "rules",
                 "configurations",
             ]
         )
+        nullable_fields = set(["rules"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
