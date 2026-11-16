@@ -2,18 +2,16 @@
 
 from __future__ import annotations
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from pydantic import model_serializer
-from typing import Optional
+from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class HeadersTypedDict(TypedDict):
-    r"""Optional headers (e.g. auth tokens) sent with every request to this webhook. Header values are encrypted at rest on the channel endpoint (`endpoint` field)."""
-
-
-class Headers(BaseModel):
-    r"""Optional headers (e.g. auth tokens) sent with every request to this webhook. Header values are encrypted at rest on the channel endpoint (`endpoint` field)."""
 
 
 class Method(str, Enum):
@@ -27,7 +25,7 @@ class Method(str, Enum):
 class ToolWebhookEndpointDtoTypedDict(TypedDict):
     url: str
     r"""Destination webhook URL (often a per-subscriber capability URL). Encrypted at rest on the channel endpoint (`endpoint` field)."""
-    headers: NotRequired[HeadersTypedDict]
+    headers: NotRequired[Dict[str, str]]
     r"""Optional headers (e.g. auth tokens) sent with every request to this webhook. Header values are encrypted at rest on the channel endpoint (`endpoint` field)."""
     method: NotRequired[Method]
     r"""Optional HTTP method override for this webhook. Defaults to the integration-level method."""
@@ -37,20 +35,27 @@ class ToolWebhookEndpointDto(BaseModel):
     url: str
     r"""Destination webhook URL (often a per-subscriber capability URL). Encrypted at rest on the channel endpoint (`endpoint` field)."""
 
-    headers: Optional[Headers] = None
+    headers: Optional[Dict[str, str]] = None
     r"""Optional headers (e.g. auth tokens) sent with every request to this webhook. Header values are encrypted at rest on the channel endpoint (`endpoint` field)."""
 
     method: Optional[Method] = None
     r"""Optional HTTP method override for this webhook. Defaults to the integration-level method."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["headers", "method"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

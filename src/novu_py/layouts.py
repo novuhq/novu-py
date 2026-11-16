@@ -1085,7 +1085,7 @@ class Layouts(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="LayoutsController__delete",
+                operation_id="LayoutsController_delete",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1203,7 +1203,7 @@ class Layouts(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="LayoutsController__delete",
+                operation_id="LayoutsController_delete",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

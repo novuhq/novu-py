@@ -24,7 +24,7 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.agents.integrations.create(identifier="<value>", add_agent_integration_request_dto={})
+    res = novu.agents.integrations.create(identifier="<value>", novu_analytics_source="<value>", add_agent_integration_request_dto={})
 
     # Handle response
     print(res)
@@ -36,6 +36,7 @@ with Novu(
 | Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `identifier`                                                                          | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `novu_analytics_source`                                                               | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
 | `add_agent_integration_request_dto`                                                   | [models.AddAgentIntegrationRequestDto](../../models/addagentintegrationrequestdto.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
 | `idempotency_key`                                                                     | *Optional[str]*                                                                       | :heavy_minus_sign:                                                                    | A header for idempotency purposes                                                     |
 | `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
@@ -71,7 +72,7 @@ with Novu(
 
     res = novu.agents.integrations.list(request={
         "identifier": "<value>",
-        "limit": 10,
+        "limit": 10.0,
     })
 
     # Handle response

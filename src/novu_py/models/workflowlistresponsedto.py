@@ -5,7 +5,16 @@ from .resourceoriginenum import ResourceOriginEnum
 from .steplistresponsedto import StepListResponseDto, StepListResponseDtoTypedDict
 from .steptypeenum import StepTypeEnum
 from .workflowstatusenum import WorkflowStatusEnum
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
@@ -47,14 +56,21 @@ class WorkflowListResponseDtoUpdatedBy(BaseModel):
     r"""User external ID"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["firstName", "lastName", "externalId"])
         nullable_fields = set(["firstName", "lastName", "externalId"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -107,14 +123,21 @@ class WorkflowListResponseDtoLastPublishedBy(BaseModel):
     r"""User external ID"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["firstName", "lastName", "externalId"])
         nullable_fields = set(["firstName", "lastName", "externalId"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -148,7 +171,7 @@ class WorkflowListResponseDtoTypedDict(TypedDict):
     status: WorkflowStatusEnum
     r"""Status of the workflow"""
     origin: ResourceOriginEnum
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
     step_type_overviews: List[StepTypeEnum]
     r"""Overview of step types in the workflow"""
     steps: List[StepListResponseDtoTypedDict]
@@ -192,7 +215,7 @@ class WorkflowListResponseDto(BaseModel):
     r"""Status of the workflow"""
 
     origin: ResourceOriginEnum
-    r"""Origin of the layout"""
+    r"""Origin of the workflow"""
 
     step_type_overviews: Annotated[
         List[StepTypeEnum], pydantic.Field(alias="stepTypeOverviews")
@@ -233,6 +256,9 @@ class WorkflowListResponseDto(BaseModel):
     r"""Is translation enabled for the workflow"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -247,11 +273,15 @@ class WorkflowListResponseDto(BaseModel):
         nullable_fields = set(
             ["updatedBy", "lastPublishedAt", "lastPublishedBy", "lastTriggeredAt"]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

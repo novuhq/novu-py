@@ -5,7 +5,7 @@ from enum import Enum
 
 
 class SeverityLevelEnum(str, Enum):
-    r"""Severity of the workflow"""
+    r"""Override the severity of the workflow"""
 
     HIGH = "high"
     MEDIUM = "medium"

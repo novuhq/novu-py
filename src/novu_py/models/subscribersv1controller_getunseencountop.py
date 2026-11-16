@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from .unseencountresponse import UnseenCountResponse, UnseenCountResponseTypedDict
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from novu_py.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -17,6 +23,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class SubscribersV1ControllerGetUnseenCountRequestTypedDict(TypedDict):
     subscriber_id: str
+    feed_id: NotRequired[List[str]]
+    r"""Identifier for the feed. Can be a single string or an array of strings."""
     seen: NotRequired[bool]
     r"""Indicates whether to count seen notifications."""
     limit: NotRequired[float]
@@ -32,6 +40,13 @@ class SubscribersV1ControllerGetUnseenCountRequest(BaseModel):
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
 
+    feed_id: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="feedId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Identifier for the feed. Can be a single string or an array of strings."""
+
     seen: Annotated[
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -41,7 +56,7 @@ class SubscribersV1ControllerGetUnseenCountRequest(BaseModel):
     limit: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 100
+    ] = 100.0
     r"""The maximum number of notifications to return."""
 
     idempotency_key: Annotated[
@@ -52,13 +67,20 @@ class SubscribersV1ControllerGetUnseenCountRequest(BaseModel):
     r"""A header for idempotency purposes"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["seen", "limit", "idempotency-key"])
+        optional_fields = set(["feedId", "seen", "limit", "idempotency-key"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

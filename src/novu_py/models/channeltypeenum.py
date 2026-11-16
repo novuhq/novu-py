@@ -5,8 +5,6 @@ from enum import Enum
 
 
 class ChannelTypeEnum(str, Enum):
-    r"""Channel type through which the message is sent"""
-
     IN_APP = "in_app"
     EMAIL = "email"
     SMS = "sms"

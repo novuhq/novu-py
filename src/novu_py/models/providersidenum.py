@@ -5,7 +5,7 @@ from enum import Enum
 
 
 class ProvidersIDEnum(str, Enum):
-    r"""Provider ID of the job"""
+    r"""Provider ID of the execution"""
 
     ANYPOST = "anypost"
     EMAILJS = "emailjs"
@@ -30,6 +30,7 @@ class ProvidersIDEnum(str, Enum):
     EMAIL_WEBHOOK = "email-webhook"
     BRAZE = "braze"
     NOVU_EMAIL_AGENT = "novu-email-agent"
+    AGENT_EMAIL_INBOX = "agent-email-inbox"
     NEXMO = "nexmo"
     PLIVO = "plivo"
     SMS77 = "sms77"
@@ -79,6 +80,7 @@ class ProvidersIDEnum(str, Enum):
     NOVU = "novu"
     SLACK = "slack"
     DISCORD = "discord"
+    GOOGLE_CHAT = "google-chat"
     MSTEAMS = "msteams"
     WEBEX_MESSAGING = "webex-messaging"
     MATTERMOST = "mattermost"
@@ -93,6 +95,7 @@ class ProvidersIDEnum(str, Enum):
     NOVU_SLACK = "novu-slack"
     TELEGRAM = "telegram"
     SENDBLUE = "sendblue"
+    PHOTON_IMESSAGE = "photon-imessage"
     NOVU_WEB_CHAT = "novu-web-chat"
     ANTHROPIC = "anthropic"
     NOVU_ANTHROPIC = "novu-anthropic"

@@ -29,8 +29,8 @@ import weakref
 if TYPE_CHECKING:
     from novu_py.activity import Activity
     from novu_py.agents import Agents
-    from novu_py.channel_connections import ChannelConnections
-    from novu_py.channel_endpoints import ChannelEndpoints
+    from novu_py.channelconnections import ChannelConnections
+    from novu_py.channelendpoints import ChannelEndpoints
     from novu_py.contexts import Contexts
     from novu_py.domains import Domains
     from novu_py.environment_variables import EnvironmentVariables
@@ -106,8 +106,8 @@ class Novu(BaseSDK):
         "translations": ("novu_py.translations", "Translations"),
         "workflows": ("novu_py.workflows", "Workflows"),
         "agents": ("novu_py.agents", "Agents"),
-        "channel_connections": ("novu_py.channel_connections", "ChannelConnections"),
-        "channel_endpoints": ("novu_py.channel_endpoints", "ChannelEndpoints"),
+        "channel_connections": ("novu_py.channelconnections", "ChannelConnections"),
+        "channel_endpoints": ("novu_py.channelendpoints", "ChannelEndpoints"),
         "domains": ("novu_py.domains", "Domains"),
         "environment_variables": (
             "novu_py.environment_variables",

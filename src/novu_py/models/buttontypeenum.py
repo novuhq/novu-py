@@ -5,7 +5,7 @@ from enum import Enum
 
 
 class ButtonTypeEnum(str, Enum):
-    r"""Type of button for the action result"""
+    r"""Type of the button"""
 
     PRIMARY = "primary"
     SECONDARY = "secondary"

@@ -2,19 +2,19 @@
 
 from __future__ import annotations
 from enum import Enum
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-
-
-class ReactionOnResolvedTypedDict(TypedDict):
-    r"""Cross-platform emoji name for resolved conversations (e.g. \"check\", \"star\"). Set to null to disable. Default: \"check\" """
-
-
-class ReactionOnResolved(BaseModel):
-    r"""Cross-platform emoji name for resolved conversations (e.g. \"check\", \"star\"). Set to null to disable. Default: \"check\" """
 
 
 class SubscriberAccess(str, Enum):
@@ -24,13 +24,23 @@ class SubscriberAccess(str, Enum):
     RESTRICTED = "restricted"
 
 
+class ReplyPolicy(str, Enum):
+    r"""How the agent replies in shared rooms. \"mention_only\" requires an @mention in every shared room. \"auto_reply\" replies to unmentioned follow-ups in a nested Slack or Teams thread after the agent has joined. \"smart\" behaves like auto_reply while one person is talking to the agent in a thread, then requires an @mention there once someone else or another agent joins, or the incumbent @mentions another teammate. Create persists \"smart\". An omitted field on existing agents still means \"auto_reply\". DMs always reply without a mention. Optional on update (partial PATCH)."""
+
+    MENTION_ONLY = "mention_only"
+    AUTO_REPLY = "auto_reply"
+    SMART = "smart"
+
+
 class AgentBehaviorDtoTypedDict(TypedDict):
     acknowledge_on_received: NotRequired[bool]
     r"""Acknowledge incoming messages. On platforms that support a native typing indicator (e.g. Slack, WhatsApp, Microsoft Teams, Telegram), shows a \"Typing…\" indicator while the agent processes the message. On platforms that do not (e.g. Email), reacts with an \"eyes\" emoji to the first inbound message in a thread. Default: true"""
-    reaction_on_resolved: NotRequired[Nullable[ReactionOnResolvedTypedDict]]
+    reaction_on_resolved: NotRequired[Nullable[str]]
     r"""Cross-platform emoji name for resolved conversations (e.g. \"check\", \"star\"). Set to null to disable. Default: \"check\" """
     subscriber_access: NotRequired[SubscriberAccess]
     r"""Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. \"open\" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. \"restricted\" rejects unknown senders with a managed denial reply (any runtime). Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to \"open\"; self-hosted create defaults to \"restricted\"."""
+    reply_policy: NotRequired[ReplyPolicy]
+    r"""How the agent replies in shared rooms. \"mention_only\" requires an @mention in every shared room. \"auto_reply\" replies to unmentioned follow-ups in a nested Slack or Teams thread after the agent has joined. \"smart\" behaves like auto_reply while one person is talking to the agent in a thread, then requires an @mention there once someone else or another agent joins, or the incumbent @mentions another teammate. Create persists \"smart\". An omitted field on existing agents still means \"auto_reply\". DMs always reply without a mention. Optional on update (partial PATCH)."""
 
 
 class AgentBehaviorDto(BaseModel):
@@ -40,8 +50,8 @@ class AgentBehaviorDto(BaseModel):
     r"""Acknowledge incoming messages. On platforms that support a native typing indicator (e.g. Slack, WhatsApp, Microsoft Teams, Telegram), shows a \"Typing…\" indicator while the agent processes the message. On platforms that do not (e.g. Email), reacts with an \"eyes\" emoji to the first inbound message in a thread. Default: true"""
 
     reaction_on_resolved: Annotated[
-        OptionalNullable[ReactionOnResolved], pydantic.Field(alias="reactionOnResolved")
-    ] = UNSET
+        OptionalNullable[str], pydantic.Field(alias="reactionOnResolved")
+    ] = "check"
     r"""Cross-platform emoji name for resolved conversations (e.g. \"check\", \"star\"). Set to null to disable. Default: \"check\" """
 
     subscriber_access: Annotated[
@@ -49,17 +59,34 @@ class AgentBehaviorDto(BaseModel):
     ] = None
     r"""Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. \"open\" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. \"restricted\" rejects unknown senders with a managed denial reply (any runtime). Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to \"open\"; self-hosted create defaults to \"restricted\"."""
 
+    reply_policy: Annotated[
+        Optional[ReplyPolicy], pydantic.Field(alias="replyPolicy")
+    ] = ReplyPolicy.AUTO_REPLY
+    r"""How the agent replies in shared rooms. \"mention_only\" requires an @mention in every shared room. \"auto_reply\" replies to unmentioned follow-ups in a nested Slack or Teams thread after the agent has joined. \"smart\" behaves like auto_reply while one person is talking to the agent in a thread, then requires an @mention there once someone else or another agent joins, or the incumbent @mentions another teammate. Create persists \"smart\". An omitted field on existing agents still means \"auto_reply\". DMs always reply without a mention. Optional on update (partial PATCH)."""
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["acknowledgeOnReceived", "reactionOnResolved", "subscriberAccess"]
+            [
+                "acknowledgeOnReceived",
+                "reactionOnResolved",
+                "subscriberAccess",
+                "replyPolicy",
+            ]
         )
         nullable_fields = set(["reactionOnResolved"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

@@ -14,6 +14,7 @@ class NovuIntegrations(BaseSDK):
         self,
         *,
         identifier: str,
+        novu_analytics_source: str,
         add_agent_integration_request_dto: Union[
             models.AddAgentIntegrationRequestDto,
             models.AddAgentIntegrationRequestDtoTypedDict,
@@ -29,6 +30,7 @@ class NovuIntegrations(BaseSDK):
         Create a link between an agent (by identifier) and an integration (by integration **identifier**, not the internal _id).
 
         :param identifier:
+        :param novu_analytics_source:
         :param add_agent_integration_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -48,6 +50,7 @@ class NovuIntegrations(BaseSDK):
 
         request = models.AgentIntegrationsControllerAddAgentIntegrationRequest(
             identifier=identifier,
+            novu_analytics_source=novu_analytics_source,
             idempotency_key=idempotency_key,
             add_agent_integration_request_dto=utils.get_pydantic_model(
                 add_agent_integration_request_dto, models.AddAgentIntegrationRequestDto
@@ -152,6 +155,7 @@ class NovuIntegrations(BaseSDK):
         self,
         *,
         identifier: str,
+        novu_analytics_source: str,
         add_agent_integration_request_dto: Union[
             models.AddAgentIntegrationRequestDto,
             models.AddAgentIntegrationRequestDtoTypedDict,
@@ -167,6 +171,7 @@ class NovuIntegrations(BaseSDK):
         Create a link between an agent (by identifier) and an integration (by integration **identifier**, not the internal _id).
 
         :param identifier:
+        :param novu_analytics_source:
         :param add_agent_integration_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -186,6 +191,7 @@ class NovuIntegrations(BaseSDK):
 
         request = models.AgentIntegrationsControllerAddAgentIntegrationRequest(
             identifier=identifier,
+            novu_analytics_source=novu_analytics_source,
             idempotency_key=idempotency_key,
             add_agent_integration_request_dto=utils.get_pydantic_model(
                 add_agent_integration_request_dto, models.AddAgentIntegrationRequestDto

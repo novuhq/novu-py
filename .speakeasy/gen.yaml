@@ -18,6 +18,7 @@ generation:
     sharedErrorComponentsApr2025: false
     sharedNestedComponentsJan2026: false
     nameOverrideFeb2026: false
+    openSingleValueEnumsOct2026: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
@@ -32,7 +33,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 3.19.0
+  version: 3.20.0
   additionalDependencies:
     dev:
       - pytest>=6.0.0
@@ -69,6 +70,7 @@ python:
   flatteningOrder: parameters-first
   forwardCompatibleEnumsByDefault: false
   forwardCompatibleUnionsByDefault: "false"
+  httpClientLibrary: httpx
   imports:
     option: openapi
     paths:
@@ -85,6 +87,7 @@ python:
   methodArguments: infer-optional-args
   methodTimeoutArgument: timeout-ms
   methodTimeoutUnits: milliseconds
+  modelSerializationMethods: false
   moduleName: ""
   multipartArrayFormat: legacy
   optionalDependencies: {}
@@ -92,6 +95,7 @@ python:
   packageManager: poetry
   packageName: novu-py
   preApplyUnionDiscriminators: false
+  preserveUnknownFields: false
   pytestFilterWarnings: []
   pytestTimeout: 0
   rawResponseHelpers: false

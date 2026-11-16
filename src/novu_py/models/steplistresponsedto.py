@@ -3,7 +3,13 @@
 from __future__ import annotations
 from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
 from .steptypeenum import StepTypeEnum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -13,7 +19,7 @@ class StepListResponseDtoTypedDict(TypedDict):
     slug: str
     r"""Slug of the step"""
     type: StepTypeEnum
-    r"""Type of the step"""
+    r"""Channels of the notification"""
     issues: NotRequired[StepIssuesDtoTypedDict]
     r"""Issues associated with the step"""
 
@@ -23,19 +29,26 @@ class StepListResponseDto(BaseModel):
     r"""Slug of the step"""
 
     type: StepTypeEnum
-    r"""Type of the step"""
+    r"""Channels of the notification"""
 
     issues: Optional[StepIssuesDto] = None
     r"""Issues associated with the step"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["issues"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

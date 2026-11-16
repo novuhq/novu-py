@@ -6,7 +6,14 @@ from .markmessageactionasseendto import (
     MarkMessageActionAsSeenDtoTypedDict,
 )
 from .messageresponsedto import MessageResponseDto, MessageResponseDtoTypedDict
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from enum import Enum
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 from novu_py.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -15,13 +22,18 @@ from novu_py.utils import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class PathParamType(str, Enum):
+    PRIMARY = "primary"
+    SECONDARY = "secondary"
 
 
 class SubscribersV1ControllerMarkActionAsSeenRequestTypedDict(TypedDict):
     message_id: str
-    type: Any
+    type: PathParamType
     subscriber_id: str
     mark_message_action_as_seen_dto: MarkMessageActionAsSeenDtoTypedDict
     idempotency_key: NotRequired[str]
@@ -36,7 +48,8 @@ class SubscribersV1ControllerMarkActionAsSeenRequest(BaseModel):
     ]
 
     type: Annotated[
-        Any, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
+        PathParamType,
+        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
 
     subscriber_id: Annotated[
@@ -58,13 +71,20 @@ class SubscribersV1ControllerMarkActionAsSeenRequest(BaseModel):
     r"""A header for idempotency purposes"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["idempotency-key"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

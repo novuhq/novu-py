@@ -3,7 +3,13 @@
 from __future__ import annotations
 from .inappcontroldto import InAppControlDto, InAppControlDtoTypedDict
 from .steptypeenum import StepTypeEnum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, Optional, Union
@@ -27,7 +33,7 @@ class InAppStepUpsertDtoTypedDict(TypedDict):
     name: str
     r"""Name of the step"""
     type: StepTypeEnum
-    r"""Type of the step"""
+    r"""Channels of the notification"""
     id: NotRequired[str]
     r"""Database identifier of the step. Used for updating the step."""
     step_id: NotRequired[str]
@@ -41,7 +47,7 @@ class InAppStepUpsertDto(BaseModel):
     r"""Name of the step"""
 
     type: StepTypeEnum
-    r"""Type of the step"""
+    r"""Channels of the notification"""
 
     id: Annotated[Optional[str], pydantic.Field(alias="_id")] = None
     r"""Database identifier of the step. Used for updating the step."""
@@ -55,13 +61,20 @@ class InAppStepUpsertDto(BaseModel):
     r"""Control values for the In-App step."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["_id", "stepId", "controlValues"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

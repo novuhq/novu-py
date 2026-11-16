@@ -3,7 +3,35 @@
 JSON-serializable value to store.
 
 
-## Fields
+## Supported Types
 
-| Field       | Type        | Required    | Description |
-| ----------- | ----------- | ----------- | ----------- |
+### `str`
+
+```python
+value: str = /* values here */
+```
+
+### `float`
+
+```python
+value: float = /* values here */
+```
+
+### `bool`
+
+```python
+value: bool = /* values here */
+```
+
+### `Dict[str, Any]`
+
+```python
+value: Dict[str, Any] = /* values here */
+```
+
+### `List[Any]`
+
+```python
+value: List[Any] = /* values here */
+```
+

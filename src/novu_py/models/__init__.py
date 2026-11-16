@@ -19,8 +19,6 @@ if TYPE_CHECKING:
         ActivityNotificationJobResponseDto,
         ActivityNotificationJobResponseDtoType,
         ActivityNotificationJobResponseDtoTypedDict,
-        Payload,
-        PayloadTypedDict,
     )
     from .activitynotificationresponsedto import (
         ActivityNotificationResponseDto,
@@ -33,8 +31,6 @@ if TYPE_CHECKING:
         ActivityNotificationStepResponseDtoReplyCallback,
         ActivityNotificationStepResponseDtoReplyCallbackTypedDict,
         ActivityNotificationStepResponseDtoTypedDict,
-        ControlVariables,
-        ControlVariablesTypedDict,
         Issues,
         IssuesTypedDict,
     )
@@ -60,8 +56,7 @@ if TYPE_CHECKING:
     from .agentbehaviordto import (
         AgentBehaviorDto,
         AgentBehaviorDtoTypedDict,
-        ReactionOnResolved,
-        ReactionOnResolvedTypedDict,
+        ReplyPolicy,
         SubscriberAccess,
     )
     from .agentintegrationresponsedto import (
@@ -295,10 +290,17 @@ if TYPE_CHECKING:
     )
     from .channelsettingsdto import ChannelSettingsDto, ChannelSettingsDtoTypedDict
     from .channeltypeenum import ChannelTypeEnum
-    from .chatcontroldto import ChatControlDto, ChatControlDtoTypedDict
+    from .chatcontroldto import (
+        ChatControlDto,
+        ChatControlDtoEditorType,
+        ChatControlDtoTypedDict,
+    )
     from .chatcontrolsmetadataresponsedto import (
         ChatControlsMetadataResponseDto,
+        ChatControlsMetadataResponseDtoEditorType,
         ChatControlsMetadataResponseDtoTypedDict,
+        ChatControlsMetadataResponseDtoValues,
+        ChatControlsMetadataResponseDtoValuesTypedDict,
     )
     from .chatorpushproviderenum import ChatOrPushProviderEnum
     from .chatrenderoutput import ChatRenderOutput, ChatRenderOutputTypedDict
@@ -306,6 +308,7 @@ if TYPE_CHECKING:
         ChatStepResponseDto,
         ChatStepResponseDtoControlValues,
         ChatStepResponseDtoControlValuesTypedDict,
+        ChatStepResponseDtoEditorType,
         ChatStepResponseDtoTypedDict,
     )
     from .chatstepupsertdto import (
@@ -408,8 +411,6 @@ if TYPE_CHECKING:
         CreateGrafanaOnCallIntegrationEndpointDtoTypedDict,
     )
     from .createintegrationrequestdto import (
-        Configurations,
-        ConfigurationsTypedDict,
         CreateIntegrationRequestDto,
         CreateIntegrationRequestDtoChannel,
         CreateIntegrationRequestDtoKind,
@@ -573,8 +574,10 @@ if TYPE_CHECKING:
         StepsModelTypedDict,
     )
     from .credentialsdto import (
+        AuthMethod,
         CredentialsDto,
         CredentialsDtoTypedDict,
+        HmacSecretKeyEncoding,
         TLSOptions,
         TLSOptionsTypedDict,
     )
@@ -582,6 +585,8 @@ if TYPE_CHECKING:
     from .customcontrolsmetadataresponsedto import (
         CustomControlsMetadataResponseDto,
         CustomControlsMetadataResponseDtoTypedDict,
+        CustomControlsMetadataResponseDtoValues,
+        CustomControlsMetadataResponseDtoValuesTypedDict,
     )
     from .customstepresponsedto import (
         CustomStepResponseDto,
@@ -598,7 +603,11 @@ if TYPE_CHECKING:
     from .delaycontroldto import DelayControlDto, DelayControlDtoTypedDict, Type, Unit
     from .delaycontrolsmetadataresponsedto import (
         DelayControlsMetadataResponseDto,
+        DelayControlsMetadataResponseDtoType,
         DelayControlsMetadataResponseDtoTypedDict,
+        DelayControlsMetadataResponseDtoUnit,
+        DelayControlsMetadataResponseDtoValues,
+        DelayControlsMetadataResponseDtoValuesTypedDict,
     )
     from .delayregularmetadata import (
         DelayRegularMetadata,
@@ -675,7 +684,11 @@ if TYPE_CHECKING:
     )
     from .digestcontrolsmetadataresponsedto import (
         DigestControlsMetadataResponseDto,
+        DigestControlsMetadataResponseDtoType,
         DigestControlsMetadataResponseDtoTypedDict,
+        DigestControlsMetadataResponseDtoUnit,
+        DigestControlsMetadataResponseDtoValues,
+        DigestControlsMetadataResponseDtoValuesTypedDict,
     )
     from .digestmetadatadto import (
         DigestMetadataDto,
@@ -877,7 +890,10 @@ if TYPE_CHECKING:
     )
     from .emailcontrolsmetadataresponsedto import (
         EmailControlsMetadataResponseDto,
+        EmailControlsMetadataResponseDtoEditorType,
         EmailControlsMetadataResponseDtoTypedDict,
+        EmailControlsMetadataResponseDtoValues,
+        EmailControlsMetadataResponseDtoValuesTypedDict,
     )
     from .emailfromcontroldto import EmailFromControlDto, EmailFromControlDtoTypedDict
     from .emaillayoutrenderoutput import (
@@ -1167,8 +1183,6 @@ if TYPE_CHECKING:
         Condition,
         ConditionTypedDict,
         GetPreferencesResponseDto,
-        GetPreferencesResponseDtoData,
-        GetPreferencesResponseDtoDataTypedDict,
         GetPreferencesResponseDtoTypedDict,
         Workflow,
         WorkflowTypedDict,
@@ -1208,7 +1222,11 @@ if TYPE_CHECKING:
     )
     from .httprequestcontrolsmetadataresponsedto import (
         HTTPRequestControlsMetadataResponseDto,
+        HTTPRequestControlsMetadataResponseDtoBody,
+        HTTPRequestControlsMetadataResponseDtoBodyTypedDict,
         HTTPRequestControlsMetadataResponseDtoTypedDict,
+        HTTPRequestControlsMetadataResponseDtoValues,
+        HTTPRequestControlsMetadataResponseDtoValuesTypedDict,
     )
     from .httprequestkeyvaluepairdto import (
         HTTPRequestKeyValuePairDto,
@@ -1228,6 +1246,14 @@ if TYPE_CHECKING:
         HTTPRequestStepUpsertDtoControlValuesTypedDict,
         HTTPRequestStepUpsertDtoTypedDict,
     )
+    from .humansignaldto import (
+        HumanSignalDto,
+        HumanSignalDtoTo,
+        HumanSignalDtoToTypedDict,
+        HumanSignalDtoType,
+        HumanSignalDtoTypedDict,
+        Kind,
+    )
     from .importmasterjsonrequestdto import (
         ImportMasterJSONRequestDto,
         ImportMasterJSONRequestDtoTypedDict,
@@ -1240,6 +1266,8 @@ if TYPE_CHECKING:
     from .inappcontrolsmetadataresponsedto import (
         InAppControlsMetadataResponseDto,
         InAppControlsMetadataResponseDtoTypedDict,
+        Values,
+        ValuesTypedDict,
     )
     from .inapprenderoutput import InAppRenderOutput, InAppRenderOutputTypedDict
     from .inappstepresponsedto import (
@@ -1275,8 +1303,8 @@ if TYPE_CHECKING:
     from .integrationresponsedto import (
         IntegrationResponseDto,
         IntegrationResponseDtoChannel,
+        IntegrationResponseDtoKind,
         IntegrationResponseDtoTypedDict,
-        Kind,
     )
     from .integrationscontroller_autoconfigureintegrationop import (
         IntegrationsControllerAutoConfigureIntegrationRequest,
@@ -1365,10 +1393,6 @@ if TYPE_CHECKING:
         IssueTelegramMobileLinkResponseDtoTypedDict,
     )
     from .layoutcontrolsdto import LayoutControlsDto, LayoutControlsDtoTypedDict
-    from .layoutcontrolvaluesdto import (
-        LayoutControlValuesDto,
-        LayoutControlValuesDtoTypedDict,
-    )
     from .layoutcreationsourceenum import LayoutCreationSourceEnum
     from .layoutpreviewpayloaddto import (
         LayoutPreviewPayloadDto,
@@ -1521,8 +1545,6 @@ if TYPE_CHECKING:
     )
     from .markmessageactionasseendto import (
         MarkMessageActionAsSeenDto,
-        MarkMessageActionAsSeenDtoPayload,
-        MarkMessageActionAsSeenDtoPayloadTypedDict,
         MarkMessageActionAsSeenDtoStatus,
         MarkMessageActionAsSeenDtoTypedDict,
     )
@@ -1743,6 +1765,8 @@ if TYPE_CHECKING:
     from .pushcontrolsmetadataresponsedto import (
         PushControlsMetadataResponseDto,
         PushControlsMetadataResponseDtoTypedDict,
+        PushControlsMetadataResponseDtoValues,
+        PushControlsMetadataResponseDtoValuesTypedDict,
     )
     from .pushrenderoutput import PushRenderOutput, PushRenderOutputTypedDict
     from .pushstepresponsedto import (
@@ -1837,6 +1861,8 @@ if TYPE_CHECKING:
     from .smscontrolsmetadataresponsedto import (
         SmsControlsMetadataResponseDto,
         SmsControlsMetadataResponseDtoTypedDict,
+        SmsControlsMetadataResponseDtoValues,
+        SmsControlsMetadataResponseDtoValuesTypedDict,
     )
     from .smsrenderoutput import SmsRenderOutput, SmsRenderOutputTypedDict
     from .smsstepresponsedto import (
@@ -1862,6 +1888,7 @@ if TYPE_CHECKING:
         StepIntegrationIssueTypedDict,
     )
     from .stepissuesdto import StepIssuesDto, StepIssuesDtoTypedDict
+    from .stepissueseverityenum import StepIssueSeverityEnum
     from .steplistresponsedto import StepListResponseDto, StepListResponseDtoTypedDict
     from .stepresponsedto import StepResponseDto, StepResponseDtoTypedDict
     from .stepsoverrides import StepsOverrides, StepsOverridesTypedDict
@@ -2089,6 +2116,7 @@ if TYPE_CHECKING:
         SubscribersV1ControllerGetUnseenCountResponseTypedDict,
     )
     from .subscribersv1controller_markactionasseenop import (
+        PathParamType,
         SubscribersV1ControllerMarkActionAsSeenRequest,
         SubscribersV1ControllerMarkActionAsSeenRequestTypedDict,
         SubscribersV1ControllerMarkActionAsSeenResponse,
@@ -2144,8 +2172,6 @@ if TYPE_CHECKING:
     )
     from .subscriptionpreferencedto import (
         SubscriptionPreferenceDto,
-        SubscriptionPreferenceDtoData,
-        SubscriptionPreferenceDtoDataTypedDict,
         SubscriptionPreferenceDtoTypedDict,
         SubscriptionPreferenceDtoWorkflow,
         SubscriptionPreferenceDtoWorkflowTypedDict,
@@ -2168,12 +2194,7 @@ if TYPE_CHECKING:
         TelegramChatEndpointDto,
         TelegramChatEndpointDtoTypedDict,
     )
-    from .tenantpayloaddto import (
-        Data,
-        DataTypedDict,
-        TenantPayloadDto,
-        TenantPayloadDtoTypedDict,
-    )
+    from .tenantpayloaddto import TenantPayloadDto, TenantPayloadDtoTypedDict
     from .testdomainrouteagentresultdto import (
         AgentReply,
         AgentReplyTypedDict,
@@ -2204,7 +2225,11 @@ if TYPE_CHECKING:
     )
     from .throttlecontrolsmetadataresponsedto import (
         ThrottleControlsMetadataResponseDto,
+        ThrottleControlsMetadataResponseDtoType,
         ThrottleControlsMetadataResponseDtoTypedDict,
+        ThrottleControlsMetadataResponseDtoUnit,
+        ThrottleControlsMetadataResponseDtoValues,
+        ThrottleControlsMetadataResponseDtoValuesTypedDict,
     )
     from .throttlestepresponsedto import (
         ThrottleStepResponseDto,
@@ -2235,6 +2260,8 @@ if TYPE_CHECKING:
         ToolApprovalCardReplyContentDtoTypedDict,
     )
     from .toolapprovalrequestpayloaddto import (
+        To,
+        ToTypedDict,
         ToolApprovalRequestPayloadDto,
         ToolApprovalRequestPayloadDtoTypedDict,
     )
@@ -2242,6 +2269,8 @@ if TYPE_CHECKING:
     from .toolcontrolsmetadataresponsedto import (
         ToolControlsMetadataResponseDto,
         ToolControlsMetadataResponseDtoTypedDict,
+        ToolControlsMetadataResponseDtoValues,
+        ToolControlsMetadataResponseDtoValuesTypedDict,
     )
     from .toolresultdto import (
         Output,
@@ -2262,8 +2291,6 @@ if TYPE_CHECKING:
         ToolStepUpsertDtoTypedDict,
     )
     from .toolwebhookendpointdto import (
-        Headers,
-        HeadersTypedDict,
         Method,
         ToolWebhookEndpointDto,
         ToolWebhookEndpointDtoTypedDict,
@@ -2453,11 +2480,11 @@ if TYPE_CHECKING:
     )
     from .triggerrecipientstypeenum import TriggerRecipientsTypeEnum
     from .triggersignaldto import (
-        To,
         To3,
         To3TypedDict,
-        ToTypedDict,
         TriggerSignalDto,
+        TriggerSignalDtoTo,
+        TriggerSignalDtoToTypedDict,
         TriggerSignalDtoType,
         TriggerSignalDtoTypedDict,
     )
@@ -2527,8 +2554,6 @@ if TYPE_CHECKING:
     )
     from .updateintegrationrequestdto import (
         UpdateIntegrationRequestDto,
-        UpdateIntegrationRequestDtoConfigurations,
-        UpdateIntegrationRequestDtoConfigurationsTypedDict,
         UpdateIntegrationRequestDtoTypedDict,
     )
     from .updatelayoutdto import (
@@ -2643,6 +2668,7 @@ if TYPE_CHECKING:
     )
     from .workflowcreationsourceenum import WorkflowCreationSourceEnum
     from .workflowinfodto import WorkflowInfoDto, WorkflowInfoDtoTypedDict
+    from .workflowissuetypeenum import WorkflowIssueTypeEnum
     from .workflowlistresponsedto import (
         WorkflowListResponseDto,
         WorkflowListResponseDtoLastPublishedBy,
@@ -2677,8 +2703,6 @@ if TYPE_CHECKING:
         WorkflowIntegrationStatus,
         WorkflowIntegrationStatusTypedDict,
         WorkflowResponse,
-        WorkflowResponseData,
-        WorkflowResponseDataTypedDict,
         WorkflowResponseTypedDict,
     )
     from .workflowresponsedto import (
@@ -2816,6 +2840,7 @@ __all__ = [
     "AllTypedDict",
     "AuthDto",
     "AuthDtoTypedDict",
+    "AuthMethod",
     "AutoConfigureIntegrationResponseDto",
     "AutoConfigureIntegrationResponseDtoTypedDict",
     "BackoffUnit",
@@ -2898,15 +2923,20 @@ __all__ = [
     "Channels",
     "ChannelsTypedDict",
     "ChatControlDto",
+    "ChatControlDtoEditorType",
     "ChatControlDtoTypedDict",
     "ChatControlsMetadataResponseDto",
+    "ChatControlsMetadataResponseDtoEditorType",
     "ChatControlsMetadataResponseDtoTypedDict",
+    "ChatControlsMetadataResponseDtoValues",
+    "ChatControlsMetadataResponseDtoValuesTypedDict",
     "ChatOrPushProviderEnum",
     "ChatRenderOutput",
     "ChatRenderOutputTypedDict",
     "ChatStepResponseDto",
     "ChatStepResponseDtoControlValues",
     "ChatStepResponseDtoControlValuesTypedDict",
+    "ChatStepResponseDtoEditorType",
     "ChatStepResponseDtoTypedDict",
     "ChatStepUpsertDto",
     "ChatStepUpsertDtoControlValues",
@@ -2915,10 +2945,8 @@ __all__ = [
     "Code",
     "Condition",
     "ConditionTypedDict",
-    "Configurations",
     "ConfigurationsDto",
     "ConfigurationsDtoTypedDict",
-    "ConfigurationsTypedDict",
     "ConfigureTelegramWebhookResponseDto",
     "ConfigureTelegramWebhookResponseDtoTypedDict",
     "ConnectedAt",
@@ -2955,8 +2983,6 @@ __all__ = [
     "ContextsControllerUpdateContextResponseTypedDict",
     "ControlValues",
     "ControlValuesTypedDict",
-    "ControlVariables",
-    "ControlVariablesTypedDict",
     "ControlsMetadataDto",
     "ControlsMetadataDtoTypedDict",
     "CreateAgentRequestDto",
@@ -3107,6 +3133,8 @@ __all__ = [
     "CustomControlDtoTypedDict",
     "CustomControlsMetadataResponseDto",
     "CustomControlsMetadataResponseDtoTypedDict",
+    "CustomControlsMetadataResponseDtoValues",
+    "CustomControlsMetadataResponseDtoValuesTypedDict",
     "CustomStepResponseDto",
     "CustomStepResponseDtoControlValues",
     "CustomStepResponseDtoControlValuesTypedDict",
@@ -3115,12 +3143,14 @@ __all__ = [
     "CustomStepUpsertDtoControlValues",
     "CustomStepUpsertDtoControlValuesTypedDict",
     "CustomStepUpsertDtoTypedDict",
-    "Data",
-    "DataTypedDict",
     "DelayControlDto",
     "DelayControlDtoTypedDict",
     "DelayControlsMetadataResponseDto",
+    "DelayControlsMetadataResponseDtoType",
     "DelayControlsMetadataResponseDtoTypedDict",
+    "DelayControlsMetadataResponseDtoUnit",
+    "DelayControlsMetadataResponseDtoValues",
+    "DelayControlsMetadataResponseDtoValuesTypedDict",
     "DelayRegularMetadata",
     "DelayRegularMetadataType",
     "DelayRegularMetadataTypedDict",
@@ -3170,7 +3200,11 @@ __all__ = [
     "DigestControlDtoTypedDict",
     "DigestControlDtoUnit",
     "DigestControlsMetadataResponseDto",
+    "DigestControlsMetadataResponseDtoType",
     "DigestControlsMetadataResponseDtoTypedDict",
+    "DigestControlsMetadataResponseDtoUnit",
+    "DigestControlsMetadataResponseDtoValues",
+    "DigestControlsMetadataResponseDtoValuesTypedDict",
     "DigestMetadataDto",
     "DigestMetadataDtoTypedDict",
     "DigestMetadataDtoUnit",
@@ -3302,7 +3336,10 @@ __all__ = [
     "EmailControlsDto",
     "EmailControlsDtoTypedDict",
     "EmailControlsMetadataResponseDto",
+    "EmailControlsMetadataResponseDtoEditorType",
     "EmailControlsMetadataResponseDtoTypedDict",
+    "EmailControlsMetadataResponseDtoValues",
+    "EmailControlsMetadataResponseDtoValuesTypedDict",
     "EmailFromControlDto",
     "EmailFromControlDtoTypedDict",
     "EmailLayoutRenderOutput",
@@ -3492,8 +3529,6 @@ __all__ = [
     "GetMasterJSONResponseDto",
     "GetMasterJSONResponseDtoTypedDict",
     "GetPreferencesResponseDto",
-    "GetPreferencesResponseDtoData",
-    "GetPreferencesResponseDtoDataTypedDict",
     "GetPreferencesResponseDtoTypedDict",
     "GetSubscriberNotificationsCountResponseDto",
     "GetSubscriberNotificationsCountResponseDtoTypedDict",
@@ -3511,7 +3546,11 @@ __all__ = [
     "HTTPRequestControlDto",
     "HTTPRequestControlDtoTypedDict",
     "HTTPRequestControlsMetadataResponseDto",
+    "HTTPRequestControlsMetadataResponseDtoBody",
+    "HTTPRequestControlsMetadataResponseDtoBodyTypedDict",
     "HTTPRequestControlsMetadataResponseDtoTypedDict",
+    "HTTPRequestControlsMetadataResponseDtoValues",
+    "HTTPRequestControlsMetadataResponseDtoValuesTypedDict",
     "HTTPRequestKeyValuePairDto",
     "HTTPRequestKeyValuePairDtoTypedDict",
     "HTTPRequestStepResponseDto",
@@ -3524,8 +3563,12 @@ __all__ = [
     "HTTPRequestStepUpsertDtoControlValues",
     "HTTPRequestStepUpsertDtoControlValuesTypedDict",
     "HTTPRequestStepUpsertDtoTypedDict",
-    "Headers",
-    "HeadersTypedDict",
+    "HmacSecretKeyEncoding",
+    "HumanSignalDto",
+    "HumanSignalDtoTo",
+    "HumanSignalDtoToTypedDict",
+    "HumanSignalDtoType",
+    "HumanSignalDtoTypedDict",
     "ImportMasterJSONRequestDto",
     "ImportMasterJSONRequestDtoTypedDict",
     "ImportMasterJSONResponseDto",
@@ -3558,6 +3601,7 @@ __all__ = [
     "IntegrationIssueEnum",
     "IntegrationResponseDto",
     "IntegrationResponseDtoChannel",
+    "IntegrationResponseDtoKind",
     "IntegrationResponseDtoTypedDict",
     "IntegrationTypedDict",
     "IntegrationsControllerAutoConfigureIntegrationRequest",
@@ -3623,8 +3667,6 @@ __all__ = [
     "Kind",
     "LastPublishedBy",
     "LastPublishedByTypedDict",
-    "LayoutControlValuesDto",
-    "LayoutControlValuesDtoTypedDict",
     "LayoutControlsDto",
     "LayoutControlsDtoTypedDict",
     "LayoutCreationSourceEnum",
@@ -3715,8 +3757,6 @@ __all__ = [
     "MarkAllMessageAsRequestDtoTypedDict",
     "MarkAs",
     "MarkMessageActionAsSeenDto",
-    "MarkMessageActionAsSeenDtoPayload",
-    "MarkMessageActionAsSeenDtoPayloadTypedDict",
     "MarkMessageActionAsSeenDtoStatus",
     "MarkMessageActionAsSeenDtoTypedDict",
     "MarkSubscriberNotificationsAsSeenDto",
@@ -3863,8 +3903,7 @@ __all__ = [
     "PatchWorkflowDtoTypedDict",
     "PathParamActionType",
     "PathParamResourceType",
-    "Payload",
-    "PayloadTypedDict",
+    "PathParamType",
     "PayloadValidationErrorDto",
     "PayloadValidationErrorDtoTypedDict",
     "PayloadValidationErrorDtoValue",
@@ -3912,6 +3951,8 @@ __all__ = [
     "PushControlDtoTypedDict",
     "PushControlsMetadataResponseDto",
     "PushControlsMetadataResponseDtoTypedDict",
+    "PushControlsMetadataResponseDtoValues",
+    "PushControlsMetadataResponseDtoValuesTypedDict",
     "PushRenderOutput",
     "PushRenderOutputTypedDict",
     "PushStepResponseDto",
@@ -3926,8 +3967,6 @@ __all__ = [
     "QueryParamConnectionMode",
     "QueryParamOrderDirection",
     "QueryParamSeverity",
-    "ReactionOnResolved",
-    "ReactionOnResolvedTypedDict",
     "ReasonCode",
     "RedirectDto",
     "RedirectDtoTypedDict",
@@ -3937,6 +3976,7 @@ __all__ = [
     "Reply",
     "ReplyCallback",
     "ReplyCallbackTypedDict",
+    "ReplyPolicy",
     "ReplyTypedDict",
     "ResolveDto",
     "ResolveDtoTypedDict",
@@ -4002,6 +4042,8 @@ __all__ = [
     "SmsControlDtoTypedDict",
     "SmsControlsMetadataResponseDto",
     "SmsControlsMetadataResponseDtoTypedDict",
+    "SmsControlsMetadataResponseDtoValues",
+    "SmsControlsMetadataResponseDtoValuesTypedDict",
     "SmsRenderOutput",
     "SmsRenderOutputTypedDict",
     "SmsStepResponseDto",
@@ -4024,6 +4066,7 @@ __all__ = [
     "StepFilterDtoValue",
     "StepIntegrationIssue",
     "StepIntegrationIssueTypedDict",
+    "StepIssueSeverityEnum",
     "StepIssuesDto",
     "StepIssuesDtoTypedDict",
     "StepListResponseDto",
@@ -4213,8 +4256,6 @@ __all__ = [
     "SubscriptionErrorDto",
     "SubscriptionErrorDtoTypedDict",
     "SubscriptionPreferenceDto",
-    "SubscriptionPreferenceDtoData",
-    "SubscriptionPreferenceDtoDataTypedDict",
     "SubscriptionPreferenceDtoTypedDict",
     "SubscriptionPreferenceDtoWorkflow",
     "SubscriptionPreferenceDtoWorkflowTypedDict",
@@ -4267,7 +4308,11 @@ __all__ = [
     "ThrottleControlDtoTypedDict",
     "ThrottleControlDtoUnit",
     "ThrottleControlsMetadataResponseDto",
+    "ThrottleControlsMetadataResponseDtoType",
     "ThrottleControlsMetadataResponseDtoTypedDict",
+    "ThrottleControlsMetadataResponseDtoUnit",
+    "ThrottleControlsMetadataResponseDtoValues",
+    "ThrottleControlsMetadataResponseDtoValuesTypedDict",
     "ThrottleStepResponseDto",
     "ThrottleStepResponseDtoControlValues",
     "ThrottleStepResponseDtoControlValuesTypedDict",
@@ -4299,6 +4344,8 @@ __all__ = [
     "ToolControlDtoTypedDict",
     "ToolControlsMetadataResponseDto",
     "ToolControlsMetadataResponseDtoTypedDict",
+    "ToolControlsMetadataResponseDtoValues",
+    "ToolControlsMetadataResponseDtoValuesTypedDict",
     "ToolResultDto",
     "ToolResultDtoTypedDict",
     "ToolStepResponseDto",
@@ -4430,6 +4477,8 @@ __all__ = [
     "TriggerEventToAllRequestDtoTypedDict",
     "TriggerRecipientsTypeEnum",
     "TriggerSignalDto",
+    "TriggerSignalDtoTo",
+    "TriggerSignalDtoToTypedDict",
     "TriggerSignalDtoType",
     "TriggerSignalDtoTypedDict",
     "Tuesday",
@@ -4478,8 +4527,6 @@ __all__ = [
     "UpdateEnvironmentVariableRequestDtoType",
     "UpdateEnvironmentVariableRequestDtoTypedDict",
     "UpdateIntegrationRequestDto",
-    "UpdateIntegrationRequestDtoConfigurations",
-    "UpdateIntegrationRequestDtoConfigurationsTypedDict",
     "UpdateIntegrationRequestDtoTypedDict",
     "UpdateLayoutDto",
     "UpdateLayoutDtoTypedDict",
@@ -4522,6 +4569,8 @@ __all__ = [
     "Value5",
     "Value5TypedDict",
     "ValueTypedDict",
+    "Values",
+    "ValuesTypedDict",
     "Version",
     "VersionTypedDict",
     "Visibility",
@@ -4580,6 +4629,7 @@ __all__ = [
     "WorkflowInfoDtoTypedDict",
     "WorkflowIntegrationStatus",
     "WorkflowIntegrationStatusTypedDict",
+    "WorkflowIssueTypeEnum",
     "WorkflowListResponseDto",
     "WorkflowListResponseDtoLastPublishedBy",
     "WorkflowListResponseDtoLastPublishedByTypedDict",
@@ -4599,8 +4649,6 @@ __all__ = [
     "WorkflowPreferencesResponseDtoUser",
     "WorkflowPreferencesResponseDtoUserTypedDict",
     "WorkflowResponse",
-    "WorkflowResponseData",
-    "WorkflowResponseDataTypedDict",
     "WorkflowResponseDto",
     "WorkflowResponseDtoAgent",
     "WorkflowResponseDtoAgentTypedDict",
@@ -4629,8 +4677,6 @@ _dynamic_imports: dict[str, str] = {
     "ActivityNotificationJobResponseDto": ".activitynotificationjobresponsedto",
     "ActivityNotificationJobResponseDtoType": ".activitynotificationjobresponsedto",
     "ActivityNotificationJobResponseDtoTypedDict": ".activitynotificationjobresponsedto",
-    "Payload": ".activitynotificationjobresponsedto",
-    "PayloadTypedDict": ".activitynotificationjobresponsedto",
     "ActivityNotificationResponseDto": ".activitynotificationresponsedto",
     "ActivityNotificationResponseDtoTypedDict": ".activitynotificationresponsedto",
     "ActivityNotificationStepResponseDto": ".activitynotificationstepresponsedto",
@@ -4639,8 +4685,6 @@ _dynamic_imports: dict[str, str] = {
     "ActivityNotificationStepResponseDtoReplyCallback": ".activitynotificationstepresponsedto",
     "ActivityNotificationStepResponseDtoReplyCallbackTypedDict": ".activitynotificationstepresponsedto",
     "ActivityNotificationStepResponseDtoTypedDict": ".activitynotificationstepresponsedto",
-    "ControlVariables": ".activitynotificationstepresponsedto",
-    "ControlVariablesTypedDict": ".activitynotificationstepresponsedto",
     "Issues": ".activitynotificationstepresponsedto",
     "IssuesTypedDict": ".activitynotificationstepresponsedto",
     "ActivityNotificationSubscriberResponseDto": ".activitynotificationsubscriberresponsedto",
@@ -4658,8 +4702,7 @@ _dynamic_imports: dict[str, str] = {
     "AddReactionPayloadDtoTypedDict": ".addreactionpayloaddto",
     "AgentBehaviorDto": ".agentbehaviordto",
     "AgentBehaviorDtoTypedDict": ".agentbehaviordto",
-    "ReactionOnResolved": ".agentbehaviordto",
-    "ReactionOnResolvedTypedDict": ".agentbehaviordto",
+    "ReplyPolicy": ".agentbehaviordto",
     "SubscriberAccess": ".agentbehaviordto",
     "AgentIntegrationResponseDto": ".agentintegrationresponsedto",
     "AgentIntegrationResponseDtoTypedDict": ".agentintegrationresponsedto",
@@ -4830,15 +4873,20 @@ _dynamic_imports: dict[str, str] = {
     "ChannelSettingsDtoTypedDict": ".channelsettingsdto",
     "ChannelTypeEnum": ".channeltypeenum",
     "ChatControlDto": ".chatcontroldto",
+    "ChatControlDtoEditorType": ".chatcontroldto",
     "ChatControlDtoTypedDict": ".chatcontroldto",
     "ChatControlsMetadataResponseDto": ".chatcontrolsmetadataresponsedto",
+    "ChatControlsMetadataResponseDtoEditorType": ".chatcontrolsmetadataresponsedto",
     "ChatControlsMetadataResponseDtoTypedDict": ".chatcontrolsmetadataresponsedto",
+    "ChatControlsMetadataResponseDtoValues": ".chatcontrolsmetadataresponsedto",
+    "ChatControlsMetadataResponseDtoValuesTypedDict": ".chatcontrolsmetadataresponsedto",
     "ChatOrPushProviderEnum": ".chatorpushproviderenum",
     "ChatRenderOutput": ".chatrenderoutput",
     "ChatRenderOutputTypedDict": ".chatrenderoutput",
     "ChatStepResponseDto": ".chatstepresponsedto",
     "ChatStepResponseDtoControlValues": ".chatstepresponsedto",
     "ChatStepResponseDtoControlValuesTypedDict": ".chatstepresponsedto",
+    "ChatStepResponseDtoEditorType": ".chatstepresponsedto",
     "ChatStepResponseDtoTypedDict": ".chatstepresponsedto",
     "ChatStepUpsertDto": ".chatstepupsertdto",
     "ChatStepUpsertDtoControlValues": ".chatstepupsertdto",
@@ -4910,8 +4958,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateGrafanaOnCallIntegrationEndpointDtoContextTypedDict": ".creategrafanaoncallintegrationendpointdto",
     "CreateGrafanaOnCallIntegrationEndpointDtoType": ".creategrafanaoncallintegrationendpointdto",
     "CreateGrafanaOnCallIntegrationEndpointDtoTypedDict": ".creategrafanaoncallintegrationendpointdto",
-    "Configurations": ".createintegrationrequestdto",
-    "ConfigurationsTypedDict": ".createintegrationrequestdto",
     "CreateIntegrationRequestDto": ".createintegrationrequestdto",
     "CreateIntegrationRequestDtoChannel": ".createintegrationrequestdto",
     "CreateIntegrationRequestDtoKind": ".createintegrationrequestdto",
@@ -5036,14 +5082,18 @@ _dynamic_imports: dict[str, str] = {
     "ProvidersTypedDict": ".createworkflowdto",
     "StepsModel": ".createworkflowdto",
     "StepsModelTypedDict": ".createworkflowdto",
+    "AuthMethod": ".credentialsdto",
     "CredentialsDto": ".credentialsdto",
     "CredentialsDtoTypedDict": ".credentialsdto",
+    "HmacSecretKeyEncoding": ".credentialsdto",
     "TLSOptions": ".credentialsdto",
     "TLSOptionsTypedDict": ".credentialsdto",
     "CustomControlDto": ".customcontroldto",
     "CustomControlDtoTypedDict": ".customcontroldto",
     "CustomControlsMetadataResponseDto": ".customcontrolsmetadataresponsedto",
     "CustomControlsMetadataResponseDtoTypedDict": ".customcontrolsmetadataresponsedto",
+    "CustomControlsMetadataResponseDtoValues": ".customcontrolsmetadataresponsedto",
+    "CustomControlsMetadataResponseDtoValuesTypedDict": ".customcontrolsmetadataresponsedto",
     "CustomStepResponseDto": ".customstepresponsedto",
     "CustomStepResponseDtoControlValues": ".customstepresponsedto",
     "CustomStepResponseDtoControlValuesTypedDict": ".customstepresponsedto",
@@ -5057,7 +5107,11 @@ _dynamic_imports: dict[str, str] = {
     "Type": ".delaycontroldto",
     "Unit": ".delaycontroldto",
     "DelayControlsMetadataResponseDto": ".delaycontrolsmetadataresponsedto",
+    "DelayControlsMetadataResponseDtoType": ".delaycontrolsmetadataresponsedto",
     "DelayControlsMetadataResponseDtoTypedDict": ".delaycontrolsmetadataresponsedto",
+    "DelayControlsMetadataResponseDtoUnit": ".delaycontrolsmetadataresponsedto",
+    "DelayControlsMetadataResponseDtoValues": ".delaycontrolsmetadataresponsedto",
+    "DelayControlsMetadataResponseDtoValuesTypedDict": ".delaycontrolsmetadataresponsedto",
     "DelayRegularMetadata": ".delayregularmetadata",
     "DelayRegularMetadataType": ".delayregularmetadata",
     "DelayRegularMetadataTypedDict": ".delayregularmetadata",
@@ -5105,7 +5159,11 @@ _dynamic_imports: dict[str, str] = {
     "DigestControlDtoTypedDict": ".digestcontroldto",
     "DigestControlDtoUnit": ".digestcontroldto",
     "DigestControlsMetadataResponseDto": ".digestcontrolsmetadataresponsedto",
+    "DigestControlsMetadataResponseDtoType": ".digestcontrolsmetadataresponsedto",
     "DigestControlsMetadataResponseDtoTypedDict": ".digestcontrolsmetadataresponsedto",
+    "DigestControlsMetadataResponseDtoUnit": ".digestcontrolsmetadataresponsedto",
+    "DigestControlsMetadataResponseDtoValues": ".digestcontrolsmetadataresponsedto",
+    "DigestControlsMetadataResponseDtoValuesTypedDict": ".digestcontrolsmetadataresponsedto",
     "DigestMetadataDto": ".digestmetadatadto",
     "DigestMetadataDtoTypedDict": ".digestmetadatadto",
     "DigestMetadataDtoUnit": ".digestmetadatadto",
@@ -5242,7 +5300,10 @@ _dynamic_imports: dict[str, str] = {
     "EmailControlsDto": ".emailcontrolsdto",
     "EmailControlsDtoTypedDict": ".emailcontrolsdto",
     "EmailControlsMetadataResponseDto": ".emailcontrolsmetadataresponsedto",
+    "EmailControlsMetadataResponseDtoEditorType": ".emailcontrolsmetadataresponsedto",
     "EmailControlsMetadataResponseDtoTypedDict": ".emailcontrolsmetadataresponsedto",
+    "EmailControlsMetadataResponseDtoValues": ".emailcontrolsmetadataresponsedto",
+    "EmailControlsMetadataResponseDtoValuesTypedDict": ".emailcontrolsmetadataresponsedto",
     "EmailFromControlDto": ".emailfromcontroldto",
     "EmailFromControlDtoTypedDict": ".emailfromcontroldto",
     "EmailLayoutRenderOutput": ".emaillayoutrenderoutput",
@@ -5452,8 +5513,6 @@ _dynamic_imports: dict[str, str] = {
     "Condition": ".getpreferencesresponsedto",
     "ConditionTypedDict": ".getpreferencesresponsedto",
     "GetPreferencesResponseDto": ".getpreferencesresponsedto",
-    "GetPreferencesResponseDtoData": ".getpreferencesresponsedto",
-    "GetPreferencesResponseDtoDataTypedDict": ".getpreferencesresponsedto",
     "GetPreferencesResponseDtoTypedDict": ".getpreferencesresponsedto",
     "Workflow": ".getpreferencesresponsedto",
     "WorkflowTypedDict": ".getpreferencesresponsedto",
@@ -5477,7 +5536,11 @@ _dynamic_imports: dict[str, str] = {
     "HTTPRequestControlDto": ".httprequestcontroldto",
     "HTTPRequestControlDtoTypedDict": ".httprequestcontroldto",
     "HTTPRequestControlsMetadataResponseDto": ".httprequestcontrolsmetadataresponsedto",
+    "HTTPRequestControlsMetadataResponseDtoBody": ".httprequestcontrolsmetadataresponsedto",
+    "HTTPRequestControlsMetadataResponseDtoBodyTypedDict": ".httprequestcontrolsmetadataresponsedto",
     "HTTPRequestControlsMetadataResponseDtoTypedDict": ".httprequestcontrolsmetadataresponsedto",
+    "HTTPRequestControlsMetadataResponseDtoValues": ".httprequestcontrolsmetadataresponsedto",
+    "HTTPRequestControlsMetadataResponseDtoValuesTypedDict": ".httprequestcontrolsmetadataresponsedto",
     "HTTPRequestKeyValuePairDto": ".httprequestkeyvaluepairdto",
     "HTTPRequestKeyValuePairDtoTypedDict": ".httprequestkeyvaluepairdto",
     "HTTPRequestStepResponseDto": ".httprequeststepresponsedto",
@@ -5490,6 +5553,12 @@ _dynamic_imports: dict[str, str] = {
     "HTTPRequestStepUpsertDtoControlValues": ".httprequeststepupsertdto",
     "HTTPRequestStepUpsertDtoControlValuesTypedDict": ".httprequeststepupsertdto",
     "HTTPRequestStepUpsertDtoTypedDict": ".httprequeststepupsertdto",
+    "HumanSignalDto": ".humansignaldto",
+    "HumanSignalDtoTo": ".humansignaldto",
+    "HumanSignalDtoToTypedDict": ".humansignaldto",
+    "HumanSignalDtoType": ".humansignaldto",
+    "HumanSignalDtoTypedDict": ".humansignaldto",
+    "Kind": ".humansignaldto",
     "ImportMasterJSONRequestDto": ".importmasterjsonrequestdto",
     "ImportMasterJSONRequestDtoTypedDict": ".importmasterjsonrequestdto",
     "ImportMasterJSONResponseDto": ".importmasterjsonresponsedto",
@@ -5498,6 +5567,8 @@ _dynamic_imports: dict[str, str] = {
     "InAppControlDtoTypedDict": ".inappcontroldto",
     "InAppControlsMetadataResponseDto": ".inappcontrolsmetadataresponsedto",
     "InAppControlsMetadataResponseDtoTypedDict": ".inappcontrolsmetadataresponsedto",
+    "Values": ".inappcontrolsmetadataresponsedto",
+    "ValuesTypedDict": ".inappcontrolsmetadataresponsedto",
     "InAppRenderOutput": ".inapprenderoutput",
     "InAppRenderOutputTypedDict": ".inapprenderoutput",
     "InAppStepResponseDto": ".inappstepresponsedto",
@@ -5521,8 +5592,8 @@ _dynamic_imports: dict[str, str] = {
     "IntegrationIssueEnum": ".integrationissueenum",
     "IntegrationResponseDto": ".integrationresponsedto",
     "IntegrationResponseDtoChannel": ".integrationresponsedto",
+    "IntegrationResponseDtoKind": ".integrationresponsedto",
     "IntegrationResponseDtoTypedDict": ".integrationresponsedto",
-    "Kind": ".integrationresponsedto",
     "IntegrationsControllerAutoConfigureIntegrationRequest": ".integrationscontroller_autoconfigureintegrationop",
     "IntegrationsControllerAutoConfigureIntegrationRequestTypedDict": ".integrationscontroller_autoconfigureintegrationop",
     "IntegrationsControllerAutoConfigureIntegrationResponse": ".integrationscontroller_autoconfigureintegrationop",
@@ -5581,8 +5652,6 @@ _dynamic_imports: dict[str, str] = {
     "IssueTelegramMobileLinkResponseDtoTypedDict": ".issuetelegrammobilelinkresponsedto",
     "LayoutControlsDto": ".layoutcontrolsdto",
     "LayoutControlsDtoTypedDict": ".layoutcontrolsdto",
-    "LayoutControlValuesDto": ".layoutcontrolvaluesdto",
-    "LayoutControlValuesDtoTypedDict": ".layoutcontrolvaluesdto",
     "LayoutCreationSourceEnum": ".layoutcreationsourceenum",
     "LayoutPreviewPayloadDto": ".layoutpreviewpayloaddto",
     "LayoutPreviewPayloadDtoTypedDict": ".layoutpreviewpayloaddto",
@@ -5675,8 +5744,6 @@ _dynamic_imports: dict[str, str] = {
     "MarkdownReplyContentDto": ".markdownreplycontentdto",
     "MarkdownReplyContentDtoTypedDict": ".markdownreplycontentdto",
     "MarkMessageActionAsSeenDto": ".markmessageactionasseendto",
-    "MarkMessageActionAsSeenDtoPayload": ".markmessageactionasseendto",
-    "MarkMessageActionAsSeenDtoPayloadTypedDict": ".markmessageactionasseendto",
     "MarkMessageActionAsSeenDtoStatus": ".markmessageactionasseendto",
     "MarkMessageActionAsSeenDtoTypedDict": ".markmessageactionasseendto",
     "MarkSubscriberNotificationsAsSeenDto": ".marksubscribernotificationsasseendto",
@@ -5849,6 +5916,8 @@ _dynamic_imports: dict[str, str] = {
     "PushControlDtoTypedDict": ".pushcontroldto",
     "PushControlsMetadataResponseDto": ".pushcontrolsmetadataresponsedto",
     "PushControlsMetadataResponseDtoTypedDict": ".pushcontrolsmetadataresponsedto",
+    "PushControlsMetadataResponseDtoValues": ".pushcontrolsmetadataresponsedto",
+    "PushControlsMetadataResponseDtoValuesTypedDict": ".pushcontrolsmetadataresponsedto",
     "PushRenderOutput": ".pushrenderoutput",
     "PushRenderOutputTypedDict": ".pushrenderoutput",
     "PushStepResponseDto": ".pushstepresponsedto",
@@ -5930,6 +5999,8 @@ _dynamic_imports: dict[str, str] = {
     "SmsControlDtoTypedDict": ".smscontroldto",
     "SmsControlsMetadataResponseDto": ".smscontrolsmetadataresponsedto",
     "SmsControlsMetadataResponseDtoTypedDict": ".smscontrolsmetadataresponsedto",
+    "SmsControlsMetadataResponseDtoValues": ".smscontrolsmetadataresponsedto",
+    "SmsControlsMetadataResponseDtoValuesTypedDict": ".smscontrolsmetadataresponsedto",
     "SmsRenderOutput": ".smsrenderoutput",
     "SmsRenderOutputTypedDict": ".smsrenderoutput",
     "SmsStepResponseDto": ".smsstepresponsedto",
@@ -5951,6 +6022,7 @@ _dynamic_imports: dict[str, str] = {
     "StepIntegrationIssueTypedDict": ".stepintegrationissue",
     "StepIssuesDto": ".stepissuesdto",
     "StepIssuesDtoTypedDict": ".stepissuesdto",
+    "StepIssueSeverityEnum": ".stepissueseverityenum",
     "StepListResponseDto": ".steplistresponsedto",
     "StepListResponseDtoTypedDict": ".steplistresponsedto",
     "StepResponseDto": ".stepresponsedto",
@@ -6103,6 +6175,7 @@ _dynamic_imports: dict[str, str] = {
     "SubscribersV1ControllerGetUnseenCountRequestTypedDict": ".subscribersv1controller_getunseencountop",
     "SubscribersV1ControllerGetUnseenCountResponse": ".subscribersv1controller_getunseencountop",
     "SubscribersV1ControllerGetUnseenCountResponseTypedDict": ".subscribersv1controller_getunseencountop",
+    "PathParamType": ".subscribersv1controller_markactionasseenop",
     "SubscribersV1ControllerMarkActionAsSeenRequest": ".subscribersv1controller_markactionasseenop",
     "SubscribersV1ControllerMarkActionAsSeenRequestTypedDict": ".subscribersv1controller_markactionasseenop",
     "SubscribersV1ControllerMarkActionAsSeenResponse": ".subscribersv1controller_markactionasseenop",
@@ -6138,8 +6211,6 @@ _dynamic_imports: dict[str, str] = {
     "SubscriptionErrorDto": ".subscriptionerrordto",
     "SubscriptionErrorDtoTypedDict": ".subscriptionerrordto",
     "SubscriptionPreferenceDto": ".subscriptionpreferencedto",
-    "SubscriptionPreferenceDtoData": ".subscriptionpreferencedto",
-    "SubscriptionPreferenceDtoDataTypedDict": ".subscriptionpreferencedto",
     "SubscriptionPreferenceDtoTypedDict": ".subscriptionpreferencedto",
     "SubscriptionPreferenceDtoWorkflow": ".subscriptionpreferencedto",
     "SubscriptionPreferenceDtoWorkflowTypedDict": ".subscriptionpreferencedto",
@@ -6158,8 +6229,6 @@ _dynamic_imports: dict[str, str] = {
     "SyncWorkflowDtoTypedDict": ".syncworkflowdto",
     "TelegramChatEndpointDto": ".telegramchatendpointdto",
     "TelegramChatEndpointDtoTypedDict": ".telegramchatendpointdto",
-    "Data": ".tenantpayloaddto",
-    "DataTypedDict": ".tenantpayloaddto",
     "TenantPayloadDto": ".tenantpayloaddto",
     "TenantPayloadDtoTypedDict": ".tenantpayloaddto",
     "AgentReply": ".testdomainrouteagentresultdto",
@@ -6182,7 +6251,11 @@ _dynamic_imports: dict[str, str] = {
     "ThrottleControlDtoTypedDict": ".throttlecontroldto",
     "ThrottleControlDtoUnit": ".throttlecontroldto",
     "ThrottleControlsMetadataResponseDto": ".throttlecontrolsmetadataresponsedto",
+    "ThrottleControlsMetadataResponseDtoType": ".throttlecontrolsmetadataresponsedto",
     "ThrottleControlsMetadataResponseDtoTypedDict": ".throttlecontrolsmetadataresponsedto",
+    "ThrottleControlsMetadataResponseDtoUnit": ".throttlecontrolsmetadataresponsedto",
+    "ThrottleControlsMetadataResponseDtoValues": ".throttlecontrolsmetadataresponsedto",
+    "ThrottleControlsMetadataResponseDtoValuesTypedDict": ".throttlecontrolsmetadataresponsedto",
     "ThrottleStepResponseDto": ".throttlestepresponsedto",
     "ThrottleStepResponseDtoControlValues": ".throttlestepresponsedto",
     "ThrottleStepResponseDtoControlValuesTypedDict": ".throttlestepresponsedto",
@@ -6204,12 +6277,16 @@ _dynamic_imports: dict[str, str] = {
     "TimeUnitEnum": ".timeunitenum",
     "ToolApprovalCardReplyContentDto": ".toolapprovalcardreplycontentdto",
     "ToolApprovalCardReplyContentDtoTypedDict": ".toolapprovalcardreplycontentdto",
+    "To": ".toolapprovalrequestpayloaddto",
+    "ToTypedDict": ".toolapprovalrequestpayloaddto",
     "ToolApprovalRequestPayloadDto": ".toolapprovalrequestpayloaddto",
     "ToolApprovalRequestPayloadDtoTypedDict": ".toolapprovalrequestpayloaddto",
     "ToolControlDto": ".toolcontroldto",
     "ToolControlDtoTypedDict": ".toolcontroldto",
     "ToolControlsMetadataResponseDto": ".toolcontrolsmetadataresponsedto",
     "ToolControlsMetadataResponseDtoTypedDict": ".toolcontrolsmetadataresponsedto",
+    "ToolControlsMetadataResponseDtoValues": ".toolcontrolsmetadataresponsedto",
+    "ToolControlsMetadataResponseDtoValuesTypedDict": ".toolcontrolsmetadataresponsedto",
     "Output": ".toolresultdto",
     "OutputTypedDict": ".toolresultdto",
     "ToolResultDto": ".toolresultdto",
@@ -6222,8 +6299,6 @@ _dynamic_imports: dict[str, str] = {
     "ToolStepUpsertDtoControlValues": ".toolstepupsertdto",
     "ToolStepUpsertDtoControlValuesTypedDict": ".toolstepupsertdto",
     "ToolStepUpsertDtoTypedDict": ".toolstepupsertdto",
-    "Headers": ".toolwebhookendpointdto",
-    "HeadersTypedDict": ".toolwebhookendpointdto",
     "Method": ".toolwebhookendpointdto",
     "ToolWebhookEndpointDto": ".toolwebhookendpointdto",
     "ToolWebhookEndpointDtoTypedDict": ".toolwebhookendpointdto",
@@ -6362,11 +6437,11 @@ _dynamic_imports: dict[str, str] = {
     "TriggerEventToAllRequestDtoTenantTypedDict": ".triggereventtoallrequestdto",
     "TriggerEventToAllRequestDtoTypedDict": ".triggereventtoallrequestdto",
     "TriggerRecipientsTypeEnum": ".triggerrecipientstypeenum",
-    "To": ".triggersignaldto",
     "To3": ".triggersignaldto",
     "To3TypedDict": ".triggersignaldto",
-    "ToTypedDict": ".triggersignaldto",
     "TriggerSignalDto": ".triggersignaldto",
+    "TriggerSignalDtoTo": ".triggersignaldto",
+    "TriggerSignalDtoToTypedDict": ".triggersignaldto",
     "TriggerSignalDtoType": ".triggersignaldto",
     "TriggerSignalDtoTypedDict": ".triggersignaldto",
     "TypingStatusDto": ".typingstatusdto",
@@ -6414,8 +6489,6 @@ _dynamic_imports: dict[str, str] = {
     "UpdateEnvironmentVariableRequestDtoType": ".updateenvironmentvariablerequestdto",
     "UpdateEnvironmentVariableRequestDtoTypedDict": ".updateenvironmentvariablerequestdto",
     "UpdateIntegrationRequestDto": ".updateintegrationrequestdto",
-    "UpdateIntegrationRequestDtoConfigurations": ".updateintegrationrequestdto",
-    "UpdateIntegrationRequestDtoConfigurationsTypedDict": ".updateintegrationrequestdto",
     "UpdateIntegrationRequestDtoTypedDict": ".updateintegrationrequestdto",
     "ControlValues": ".updatelayoutdto",
     "ControlValuesTypedDict": ".updatelayoutdto",
@@ -6494,6 +6567,7 @@ _dynamic_imports: dict[str, str] = {
     "WorkflowCreationSourceEnum": ".workflowcreationsourceenum",
     "WorkflowInfoDto": ".workflowinfodto",
     "WorkflowInfoDtoTypedDict": ".workflowinfodto",
+    "WorkflowIssueTypeEnum": ".workflowissuetypeenum",
     "WorkflowListResponseDto": ".workflowlistresponsedto",
     "WorkflowListResponseDtoLastPublishedBy": ".workflowlistresponsedto",
     "WorkflowListResponseDtoLastPublishedByTypedDict": ".workflowlistresponsedto",
@@ -6517,8 +6591,6 @@ _dynamic_imports: dict[str, str] = {
     "WorkflowIntegrationStatus": ".workflowresponse",
     "WorkflowIntegrationStatusTypedDict": ".workflowresponse",
     "WorkflowResponse": ".workflowresponse",
-    "WorkflowResponseData": ".workflowresponse",
-    "WorkflowResponseDataTypedDict": ".workflowresponse",
     "WorkflowResponseTypedDict": ".workflowresponse",
     "LastPublishedBy": ".workflowresponsedto",
     "LastPublishedByTypedDict": ".workflowresponsedto",

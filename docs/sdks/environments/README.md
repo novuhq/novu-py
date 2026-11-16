@@ -61,7 +61,7 @@ with Novu(
 
 ## diff
 
-Compares workflows and other resources between the source and target environments, returning detailed diff information including additions, modifications, and deletions.
+Compares workflows and other resources between the development and target environments, returning detailed diff information including additions, modifications, and deletions.
 
 ### Example Usage
 
@@ -108,7 +108,7 @@ with Novu(
 
 ## publish
 
-Publishes all workflows and resources from the source environment to the target environment. Optionally specify specific resources to publish or use dryRun mode to preview changes.
+Publishes all workflows and resources from the development environment to the target environment. Optionally specify specific resources to publish or use dryRun mode to preview changes.
 
 ### Example Usage
 

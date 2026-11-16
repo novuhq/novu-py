@@ -9,14 +9,12 @@ from typing_extensions import TypedDict
 
 class SubscriberPreferenceOverrideDtoTypedDict(TypedDict):
     channel: ChannelTypeEnum
-    r"""Channel type through which the message is sent"""
     source: PreferenceOverrideSourceEnum
     r"""The source of overrides"""
 
 
 class SubscriberPreferenceOverrideDto(BaseModel):
     channel: ChannelTypeEnum
-    r"""Channel type through which the message is sent"""
 
     source: PreferenceOverrideSourceEnum
     r"""The source of overrides"""

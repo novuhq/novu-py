@@ -8,6 +8,7 @@ from .deletemessagepayloaddto import (
     DeleteMessagePayloadDtoTypedDict,
 )
 from .editpayloaddto import EditPayloadDto, EditPayloadDtoTypedDict
+from .humansignaldto import HumanSignalDto, HumanSignalDtoTypedDict
 from .markdownreplycontentdto import (
     MarkdownReplyContentDto,
     MarkdownReplyContentDtoTypedDict,
@@ -34,7 +35,13 @@ from .toolresultdto import ToolResultDto, ToolResultDtoTypedDict
 from .triggersignaldto import TriggerSignalDto, TriggerSignalDtoTypedDict
 from .typingstatusdto import TypingStatusDto, TypingStatusDtoTypedDict
 from enum import Enum
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, Union
@@ -68,6 +75,7 @@ SignalsTypedDict = TypeAliasType(
         MetadataDeleteSignalDtoTypedDict,
         MetadataSetSignalDtoTypedDict,
         TriggerSignalDtoTypedDict,
+        HumanSignalDtoTypedDict,
     ],
 )
 
@@ -79,6 +87,7 @@ Signals = TypeAliasType(
         MetadataDeleteSignalDto,
         MetadataSetSignalDto,
         TriggerSignalDto,
+        HumanSignalDto,
     ],
 )
 
@@ -113,7 +122,7 @@ class AgentReplyPayloadDtoTypedDict(TypedDict):
     resolve: NotRequired[ResolveDtoTypedDict]
     r"""Mark the conversation resolved. May be combined with a final `reply`."""
     signals: NotRequired[List[SignalsTypedDict]]
-    r"""Side-effect signals executed during this turn: conversation metadata mutations or Novu workflow triggers."""
+    r"""Side-effect signals executed during this turn: conversation metadata mutations, Novu workflow triggers, or human-in-the-loop interactions."""
     tool_results: NotRequired[List[ToolResultDtoTypedDict]]
     r"""Tool-call outcomes to persist in conversation history (typically before the assistant reply)."""
     add_reactions: NotRequired[List[AddReactionPayloadDtoTypedDict]]
@@ -151,7 +160,7 @@ class AgentReplyPayloadDto(BaseModel):
     r"""Mark the conversation resolved. May be combined with a final `reply`."""
 
     signals: Optional[List[Signals]] = None
-    r"""Side-effect signals executed during this turn: conversation metadata mutations or Novu workflow triggers."""
+    r"""Side-effect signals executed during this turn: conversation metadata mutations, Novu workflow triggers, or human-in-the-loop interactions."""
 
     tool_results: Annotated[
         Optional[List[ToolResultDto]], pydantic.Field(alias="toolResults")
@@ -175,6 +184,9 @@ class AgentReplyPayloadDto(BaseModel):
     r"""Bridge reports that the customer runtime failed this turn. Cannot be combined with other actions. Novu delivers generic user-facing error copy."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -190,11 +202,15 @@ class AgentReplyPayloadDto(BaseModel):
                 "error",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

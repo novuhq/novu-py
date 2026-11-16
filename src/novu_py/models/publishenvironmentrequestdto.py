@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from .resourcetopublishdto import ResourceToPublishDto, ResourceToPublishDtoTypedDict
-from novu_py.types import BaseModel, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
@@ -11,7 +17,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class PublishEnvironmentRequestDtoTypedDict(TypedDict):
     source_environment_id: NotRequired[str]
-    r"""Source environment ID to sync from. Defaults to the Development environment if not provided."""
+    r"""Source environment ID. Only the Development environment is currently supported; defaults to Development if omitted."""
     dry_run: NotRequired[bool]
     r"""Perform a dry run without making actual changes"""
     resources: NotRequired[List[ResourceToPublishDtoTypedDict]]
@@ -22,7 +28,7 @@ class PublishEnvironmentRequestDto(BaseModel):
     source_environment_id: Annotated[
         Optional[str], pydantic.Field(alias="sourceEnvironmentId")
     ] = None
-    r"""Source environment ID to sync from. Defaults to the Development environment if not provided."""
+    r"""Source environment ID. Only the Development environment is currently supported; defaults to Development if omitted."""
 
     dry_run: Annotated[Optional[bool], pydantic.Field(alias="dryRun")] = False
     r"""Perform a dry run without making actual changes"""
@@ -31,13 +37,20 @@ class PublishEnvironmentRequestDto(BaseModel):
     r"""Array of specific resources to publish. If not provided, all resources will be published."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["sourceEnvironmentId", "dryRun", "resources"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

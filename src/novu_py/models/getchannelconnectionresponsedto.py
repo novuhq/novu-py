@@ -4,7 +4,14 @@ from __future__ import annotations
 from .authdto import AuthDto, AuthDtoTypedDict
 from .workspacedto import WorkspaceDto, WorkspaceDtoTypedDict
 from enum import Enum
-from novu_py.types import BaseModel, Nullable, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import List
@@ -48,6 +55,7 @@ class GetChannelConnectionResponseDtoProviderID(str, Enum):
     EMAIL_WEBHOOK = "email-webhook"
     BRAZE = "braze"
     NOVU_EMAIL_AGENT = "novu-email-agent"
+    AGENT_EMAIL_INBOX = "agent-email-inbox"
     NEXMO = "nexmo"
     PLIVO = "plivo"
     SMS77 = "sms77"
@@ -97,6 +105,7 @@ class GetChannelConnectionResponseDtoProviderID(str, Enum):
     NOVU = "novu"
     SLACK = "slack"
     DISCORD = "discord"
+    GOOGLE_CHAT = "google-chat"
     MSTEAMS = "msteams"
     WEBEX_MESSAGING = "webex-messaging"
     MATTERMOST = "mattermost"
@@ -111,6 +120,7 @@ class GetChannelConnectionResponseDtoProviderID(str, Enum):
     NOVU_SLACK = "novu-slack"
     TELEGRAM = "telegram"
     SENDBLUE = "sendblue"
+    PHOTON_IMESSAGE = "photon-imessage"
     NOVU_WEB_CHAT = "novu-web-chat"
     ANTHROPIC = "anthropic"
     NOVU_ANTHROPIC = "novu-anthropic"
@@ -177,12 +187,19 @@ class GetChannelConnectionResponseDto(BaseModel):
     r"""The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

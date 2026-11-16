@@ -5,7 +5,16 @@ from .agentintegrationresponseintegrationdto import (
     AgentIntegrationResponseIntegrationDto,
     AgentIntegrationResponseIntegrationDtoTypedDict,
 )
-from novu_py.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from novu_py.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -33,6 +42,8 @@ class AgentIntegrationResponseDtoTypedDict(TypedDict):
     r"""Set when the agent–integration link received its first inbound webhook delivery."""
     exceeds_plan_limit: NotRequired[bool]
     r"""Cloud only. `true` when this channel type (provider) falls outside the organization plan active-channel limit (by connection order). Active channels are counted per channel type, so multiple integrations of the same provider (e.g. several Slack workspaces) count as a single active channel. Over-limit channels keep their configuration but the agent will not respond on them until the plan is upgraded or older channel types are disconnected."""
+    has_channel_endpoints: NotRequired[bool]
+    r"""`true` when at least one person has linked their chat on this integration (it has a channel endpoint), so the agent has someone to reach there. Only returned by the list, and only when true. Email has no channel endpoints, so it never carries the flag."""
 
 
 class AgentIntegrationResponseDto(BaseModel):
@@ -61,15 +72,29 @@ class AgentIntegrationResponseDto(BaseModel):
     ] = None
     r"""Cloud only. `true` when this channel type (provider) falls outside the organization plan active-channel limit (by connection order). Active channels are counted per channel type, so multiple integrations of the same provider (e.g. several Slack workspaces) count as a single active channel. Over-limit channels keep their configuration but the agent will not respond on them until the plan is upgraded or older channel types are disconnected."""
 
+    has_channel_endpoints: Annotated[
+        Optional[bool], pydantic.Field(alias="hasChannelEndpoints")
+    ] = None
+    r"""`true` when at least one person has linked their chat on this integration (it has a channel endpoint), so the agent has someone to reach there. Only returned by the list, and only when true. Email has no channel endpoints, so it never carries the flag."""
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["connectedAt", "exceedsPlanLimit"])
+        optional_fields = set(
+            ["connectedAt", "exceedsPlanLimit", "hasChannelEndpoints"]
+        )
         nullable_fields = set(["connectedAt"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

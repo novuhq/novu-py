@@ -557,7 +557,7 @@ class Contexts(BaseSDK):
         If the context does not exist, it returns the 404 response
 
         :param id: Context ID
-        :param type: Context type
+        :param type_: Context type
         :param update_context_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -697,7 +697,7 @@ class Contexts(BaseSDK):
         If the context does not exist, it returns the 404 response
 
         :param id: Context ID
-        :param type: Context type
+        :param type_: Context type
         :param update_context_request_dto:
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
@@ -833,7 +833,7 @@ class Contexts(BaseSDK):
         **type** and **id** are required fields, if the context does not exist, it returns the 404 response
 
         :param id: Context ID
-        :param type: Context type
+        :param type_: Context type
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -958,7 +958,7 @@ class Contexts(BaseSDK):
         **type** and **id** are required fields, if the context does not exist, it returns the 404 response
 
         :param id: Context ID
-        :param type: Context type
+        :param type_: Context type
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1083,7 +1083,7 @@ class Contexts(BaseSDK):
         **type** and **id** are required fields, if the context does not exist, it returns the 404 response
 
         :param id: Context ID
-        :param type: Context type
+        :param type_: Context type
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1205,7 +1205,7 @@ class Contexts(BaseSDK):
         **type** and **id** are required fields, if the context does not exist, it returns the 404 response
 
         :param id: Context ID
-        :param type: Context type
+        :param type_: Context type
         :param idempotency_key: A header for idempotency purposes
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

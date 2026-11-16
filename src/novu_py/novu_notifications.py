@@ -4421,10 +4421,10 @@ class NovuNotifications(BaseSDK):
     def unseen_count(
         self,
         *,
-        subscriber_id: str,
-        seen: Optional[bool] = False,
-        limit: Optional[float] = 100,
-        idempotency_key: Optional[str] = None,
+        request: Union[
+            models.SubscribersV1ControllerGetUnseenCountRequest,
+            models.SubscribersV1ControllerGetUnseenCountRequestTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4434,10 +4434,7 @@ class NovuNotifications(BaseSDK):
 
         This API is deprecated, use v2 API instead. Retrieve unseen in-app notifications count for a subscriber by its unique key identifier **subscriberId**.
 
-        :param subscriber_id:
-        :param seen: Indicates whether to count seen notifications.
-        :param limit: The maximum number of notifications to return.
-        :param idempotency_key: A header for idempotency purposes
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4453,12 +4450,11 @@ class NovuNotifications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SubscribersV1ControllerGetUnseenCountRequest(
-            subscriber_id=subscriber_id,
-            seen=seen,
-            limit=limit,
-            idempotency_key=idempotency_key,
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersV1ControllerGetUnseenCountRequest
+            )
+        request = cast(models.SubscribersV1ControllerGetUnseenCountRequest, request)
 
         req = self._build_request(
             method="GET",
@@ -4551,10 +4547,10 @@ class NovuNotifications(BaseSDK):
     async def unseen_count_async(
         self,
         *,
-        subscriber_id: str,
-        seen: Optional[bool] = False,
-        limit: Optional[float] = 100,
-        idempotency_key: Optional[str] = None,
+        request: Union[
+            models.SubscribersV1ControllerGetUnseenCountRequest,
+            models.SubscribersV1ControllerGetUnseenCountRequestTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4564,10 +4560,7 @@ class NovuNotifications(BaseSDK):
 
         This API is deprecated, use v2 API instead. Retrieve unseen in-app notifications count for a subscriber by its unique key identifier **subscriberId**.
 
-        :param subscriber_id:
-        :param seen: Indicates whether to count seen notifications.
-        :param limit: The maximum number of notifications to return.
-        :param idempotency_key: A header for idempotency purposes
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4583,12 +4576,11 @@ class NovuNotifications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SubscribersV1ControllerGetUnseenCountRequest(
-            subscriber_id=subscriber_id,
-            seen=seen,
-            limit=limit,
-            idempotency_key=idempotency_key,
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, models.SubscribersV1ControllerGetUnseenCountRequest
+            )
+        request = cast(models.SubscribersV1ControllerGetUnseenCountRequest, request)
 
         req = self._build_request_async(
             method="GET",
