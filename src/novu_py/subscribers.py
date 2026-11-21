@@ -10,6 +10,7 @@ from novu_py.novu_notifications import NovuNotifications
 from novu_py.novu_topics import NovuTopics
 from novu_py.preferences import Preferences
 from novu_py.properties import Properties
+from novu_py.tokens import Tokens
 from novu_py.types import BaseModel, OptionalNullable, UNSET
 from novu_py.utils import get_security_from_env
 from novu_py.utils.unmarshal_json_response import unmarshal_json_response
@@ -24,6 +25,7 @@ class Subscribers(BaseSDK):
     notifications: NovuNotifications
     preferences: Preferences
     topics: NovuTopics
+    tokens: Tokens
     credentials: Credentials
     messages: NovuMessages
     properties: Properties
@@ -43,6 +45,7 @@ class Subscribers(BaseSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.topics = NovuTopics(self.sdk_configuration, parent_ref=self.parent_ref)
+        self.tokens = Tokens(self.sdk_configuration, parent_ref=self.parent_ref)
         self.credentials = Credentials(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
