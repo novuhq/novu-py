@@ -58,6 +58,8 @@ class ActivityNotificationResponseDtoTypedDict(TypedDict):
     r"""Jobs of the notification"""
     payload: NotRequired[Dict[str, Any]]
     r"""Payload of the notification"""
+    overrides: NotRequired[Dict[str, Any]]
+    r"""Trigger overrides of the notification, as passed to the original workflow trigger"""
     tags: NotRequired[List[str]]
     r"""Tags associated with the notification"""
     controls: NotRequired[Dict[str, Any]]
@@ -119,6 +121,9 @@ class ActivityNotificationResponseDto(BaseModel):
     payload: Optional[Dict[str, Any]] = None
     r"""Payload of the notification"""
 
+    overrides: Optional[Dict[str, Any]] = None
+    r"""Trigger overrides of the notification, as passed to the original workflow trigger"""
+
     tags: Optional[List[str]] = None
     r"""Tags associated with the notification"""
 
@@ -159,6 +164,7 @@ class ActivityNotificationResponseDto(BaseModel):
                 "template",
                 "jobs",
                 "payload",
+                "overrides",
                 "tags",
                 "controls",
                 "to",
