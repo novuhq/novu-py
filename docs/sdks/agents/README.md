@@ -649,7 +649,21 @@ with Novu(
     secret_key="YOUR_SECRET_KEY_HERE",
 ) as novu:
 
-    res = novu.agents.update(identifier="<value>", update_agent_request_dto={})
+    res = novu.agents.update(identifier="<value>", update_agent_request_dto={
+        "behavior": {
+            "access_rule": {
+                "in": [
+                    {
+                        "var": "context.tenant.data.plan",
+                    },
+                    [
+                        "pro",
+                        "enterprise",
+                    ],
+                ],
+            },
+        },
+    })
 
     # Handle response
     print(res)

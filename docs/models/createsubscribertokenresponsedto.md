@@ -1,0 +1,9 @@
+# CreateSubscriberTokenResponseDto
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  | Example                                                                                      |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `token`                                                                                      | *str*                                                                                        | :heavy_check_mark:                                                                           | Novu-signed login token for the subscriber. Exchange it in the browser for an Inbox session. |                                                                                              |
+| `expires_at`                                                                                 | [date](https://docs.python.org/3/library/datetime.html#date-objects)                         | :heavy_check_mark:                                                                           | When the token expires, in ISO 8601.                                                         | 2025-01-01T00:10:00.000Z                                                                     |

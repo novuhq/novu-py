@@ -183,6 +183,10 @@ if TYPE_CHECKING:
         Integration,
         IntegrationTypedDict,
     )
+    from .basesubscriberfieldsdto import (
+        BaseSubscriberFieldsDto,
+        BaseSubscriberFieldsDtoTypedDict,
+    )
     from .bridgeconfigurationdto import (
         BridgeConfigurationDto,
         BridgeConfigurationDtoTypedDict,
@@ -492,6 +496,18 @@ if TYPE_CHECKING:
     from .createsubscriberrequestdto import (
         CreateSubscriberRequestDto,
         CreateSubscriberRequestDtoTypedDict,
+    )
+    from .createsubscribertokenrequestdto import (
+        CreateSubscriberTokenRequestDto,
+        CreateSubscriberTokenRequestDtoContext,
+        CreateSubscriberTokenRequestDtoContext2,
+        CreateSubscriberTokenRequestDtoContext2TypedDict,
+        CreateSubscriberTokenRequestDtoContextTypedDict,
+        CreateSubscriberTokenRequestDtoTypedDict,
+    )
+    from .createsubscribertokenresponsedto import (
+        CreateSubscriberTokenResponseDto,
+        CreateSubscriberTokenResponseDtoTypedDict,
     )
     from .createsubscriptionsresponsedto import (
         CreateSubscriptionsResponseDto,
@@ -1972,6 +1988,12 @@ if TYPE_CHECKING:
         SubscribersControllerCreateSubscriberResponse,
         SubscribersControllerCreateSubscriberResponseTypedDict,
     )
+    from .subscriberscontroller_createsubscribertokenop import (
+        SubscribersControllerCreateSubscriberTokenRequest,
+        SubscribersControllerCreateSubscriberTokenRequestTypedDict,
+        SubscribersControllerCreateSubscriberTokenResponse,
+        SubscribersControllerCreateSubscriberTokenResponseTypedDict,
+    )
     from .subscriberscontroller_deleteallnotificationsop import (
         SubscribersControllerDeleteAllNotificationsRequest,
         SubscribersControllerDeleteAllNotificationsRequestTypedDict,
@@ -2152,6 +2174,7 @@ if TYPE_CHECKING:
         SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse,
         SubscribersV1ControllerUpdateSubscriberOnlineFlagResponseTypedDict,
     )
+    from .subscribertokenscopeenum import SubscriberTokenScopeEnum
     from .subscriberworkflowpreferencedto import (
         SubscriberWorkflowPreferenceDto,
         SubscriberWorkflowPreferenceDtoTypedDict,
@@ -2844,6 +2867,8 @@ __all__ = [
     "AutoConfigureIntegrationResponseDto",
     "AutoConfigureIntegrationResponseDtoTypedDict",
     "BackoffUnit",
+    "BaseSubscriberFieldsDto",
+    "BaseSubscriberFieldsDtoTypedDict",
     "Body",
     "BodyTypedDict",
     "BridgeConfigurationDto",
@@ -3075,6 +3100,14 @@ __all__ = [
     "CreateSlackUserEndpointDtoTypedDict",
     "CreateSubscriberRequestDto",
     "CreateSubscriberRequestDtoTypedDict",
+    "CreateSubscriberTokenRequestDto",
+    "CreateSubscriberTokenRequestDtoContext",
+    "CreateSubscriberTokenRequestDtoContext2",
+    "CreateSubscriberTokenRequestDtoContext2TypedDict",
+    "CreateSubscriberTokenRequestDtoContextTypedDict",
+    "CreateSubscriberTokenRequestDtoTypedDict",
+    "CreateSubscriberTokenResponseDto",
+    "CreateSubscriberTokenResponseDtoTypedDict",
     "CreateSubscriptionsResponseDto",
     "CreateSubscriptionsResponseDtoTypedDict",
     "CreateTelegramChatEndpointDto",
@@ -4103,6 +4136,7 @@ __all__ = [
     "SubscriberResponseDtoOptional",
     "SubscriberResponseDtoOptionalTypedDict",
     "SubscriberResponseDtoTypedDict",
+    "SubscriberTokenScopeEnum",
     "SubscriberTypedDict",
     "SubscriberWorkflowPreferenceDto",
     "SubscriberWorkflowPreferenceDtoTypedDict",
@@ -4130,6 +4164,10 @@ __all__ = [
     "SubscribersControllerCreateSubscriberRequestTypedDict",
     "SubscribersControllerCreateSubscriberResponse",
     "SubscribersControllerCreateSubscriberResponseTypedDict",
+    "SubscribersControllerCreateSubscriberTokenRequest",
+    "SubscribersControllerCreateSubscriberTokenRequestTypedDict",
+    "SubscribersControllerCreateSubscriberTokenResponse",
+    "SubscribersControllerCreateSubscriberTokenResponseTypedDict",
     "SubscribersControllerDeleteAllNotificationsRequest",
     "SubscribersControllerDeleteAllNotificationsRequestTypedDict",
     "SubscribersControllerDeleteAllNotificationsResponse",
@@ -4795,6 +4833,8 @@ _dynamic_imports: dict[str, str] = {
     "AutoConfigureIntegrationResponseDtoTypedDict": ".autoconfigureintegrationresponsedto",
     "Integration": ".autoconfigureintegrationresponsedto",
     "IntegrationTypedDict": ".autoconfigureintegrationresponsedto",
+    "BaseSubscriberFieldsDto": ".basesubscriberfieldsdto",
+    "BaseSubscriberFieldsDtoTypedDict": ".basesubscriberfieldsdto",
     "BridgeConfigurationDto": ".bridgeconfigurationdto",
     "BridgeConfigurationDtoTypedDict": ".bridgeconfigurationdto",
     "BuilderFieldTypeEnum": ".builderfieldtypeenum",
@@ -5022,6 +5062,14 @@ _dynamic_imports: dict[str, str] = {
     "CreateSlackUserEndpointDtoTypedDict": ".createslackuserendpointdto",
     "CreateSubscriberRequestDto": ".createsubscriberrequestdto",
     "CreateSubscriberRequestDtoTypedDict": ".createsubscriberrequestdto",
+    "CreateSubscriberTokenRequestDto": ".createsubscribertokenrequestdto",
+    "CreateSubscriberTokenRequestDtoContext": ".createsubscribertokenrequestdto",
+    "CreateSubscriberTokenRequestDtoContext2": ".createsubscribertokenrequestdto",
+    "CreateSubscriberTokenRequestDtoContext2TypedDict": ".createsubscribertokenrequestdto",
+    "CreateSubscriberTokenRequestDtoContextTypedDict": ".createsubscribertokenrequestdto",
+    "CreateSubscriberTokenRequestDtoTypedDict": ".createsubscribertokenrequestdto",
+    "CreateSubscriberTokenResponseDto": ".createsubscribertokenresponsedto",
+    "CreateSubscriberTokenResponseDtoTypedDict": ".createsubscribertokenresponsedto",
     "CreateSubscriptionsResponseDto": ".createsubscriptionsresponsedto",
     "CreateSubscriptionsResponseDtoTypedDict": ".createsubscriptionsresponsedto",
     "CreateTelegramChatEndpointDto": ".createtelegramchatendpointdto",
@@ -6078,6 +6126,10 @@ _dynamic_imports: dict[str, str] = {
     "SubscribersControllerCreateSubscriberRequestTypedDict": ".subscriberscontroller_createsubscriberop",
     "SubscribersControllerCreateSubscriberResponse": ".subscriberscontroller_createsubscriberop",
     "SubscribersControllerCreateSubscriberResponseTypedDict": ".subscriberscontroller_createsubscriberop",
+    "SubscribersControllerCreateSubscriberTokenRequest": ".subscriberscontroller_createsubscribertokenop",
+    "SubscribersControllerCreateSubscriberTokenRequestTypedDict": ".subscriberscontroller_createsubscribertokenop",
+    "SubscribersControllerCreateSubscriberTokenResponse": ".subscriberscontroller_createsubscribertokenop",
+    "SubscribersControllerCreateSubscriberTokenResponseTypedDict": ".subscriberscontroller_createsubscribertokenop",
     "SubscribersControllerDeleteAllNotificationsRequest": ".subscriberscontroller_deleteallnotificationsop",
     "SubscribersControllerDeleteAllNotificationsRequestTypedDict": ".subscriberscontroller_deleteallnotificationsop",
     "SubscribersControllerDeleteAllNotificationsResponse": ".subscriberscontroller_deleteallnotificationsop",
@@ -6200,6 +6252,7 @@ _dynamic_imports: dict[str, str] = {
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagRequestTypedDict": ".subscribersv1controller_updatesubscriberonlineflagop",
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse": ".subscribersv1controller_updatesubscriberonlineflagop",
     "SubscribersV1ControllerUpdateSubscriberOnlineFlagResponseTypedDict": ".subscribersv1controller_updatesubscriberonlineflagop",
+    "SubscriberTokenScopeEnum": ".subscribertokenscopeenum",
     "SubscriberWorkflowPreferenceDto": ".subscriberworkflowpreferencedto",
     "SubscriberWorkflowPreferenceDtoTypedDict": ".subscriberworkflowpreferencedto",
     "SubscriptionDetailsResponseDto": ".subscriptiondetailsresponsedto",

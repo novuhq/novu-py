@@ -13,15 +13,16 @@ from novu_py.types import (
 from novu_py.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class SubscriberAccess(str, Enum):
-    r"""Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. \"open\" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. \"restricted\" rejects unknown senders with a managed denial reply (any runtime). Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to \"open\"; self-hosted create defaults to \"restricted\"."""
+    r"""Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. \"open\" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. \"restricted\" rejects unknown senders with a managed denial reply (any runtime). \"rule\" requires a known subscriber and accessRule must evaluate truthy for every message, edit, delete, click and reaction; unknown senders, an invalid rule and an evaluation error are refused; a missing field evaluates as JSON Logic says. Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to \"open\"; self-hosted create defaults to \"restricted\"."""
 
     OPEN = "open"
     RESTRICTED = "restricted"
+    RULE = "rule"
 
 
 class ReplyPolicy(str, Enum):
@@ -38,7 +39,9 @@ class AgentBehaviorDtoTypedDict(TypedDict):
     reaction_on_resolved: NotRequired[Nullable[str]]
     r"""Cross-platform emoji name for resolved conversations (e.g. \"check\", \"star\"). Set to null to disable. Default: \"check\" """
     subscriber_access: NotRequired[SubscriberAccess]
-    r"""Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. \"open\" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. \"restricted\" rejects unknown senders with a managed denial reply (any runtime). Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to \"open\"; self-hosted create defaults to \"restricted\"."""
+    r"""Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. \"open\" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. \"restricted\" rejects unknown senders with a managed denial reply (any runtime). \"rule\" requires a known subscriber and accessRule must evaluate truthy for every message, edit, delete, click and reaction; unknown senders, an invalid rule and an evaluation error are refused; a missing field evaluates as JSON Logic says. Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to \"open\"; self-hosted create defaults to \"restricted\"."""
+    access_rule: NotRequired[Dict[str, Any]]
+    r"""JSON Logic rule evaluated over subscriber.* and context.* when subscriberAccess is \"rule\". Present only when subscriberAccess is \"rule\". A missing field evaluates as JSON Logic says, so `null` is less than any positive number. \"==\" and \"!=\" compare strictly, without type coercion. At most 16 KB, with objects and arrays nested at most 32 levels deep."""
     reply_policy: NotRequired[ReplyPolicy]
     r"""How the agent replies in shared rooms. \"mention_only\" requires an @mention in every shared room. \"auto_reply\" replies to unmentioned follow-ups in a nested Slack or Teams thread after the agent has joined. \"smart\" behaves like auto_reply while one person is talking to the agent in a thread, then requires an @mention there once someone else or another agent joins, or the incumbent @mentions another teammate. Create persists \"smart\". An omitted field on existing agents still means \"auto_reply\". DMs always reply without a mention. Optional on update (partial PATCH)."""
 
@@ -57,7 +60,12 @@ class AgentBehaviorDto(BaseModel):
     subscriber_access: Annotated[
         Optional[SubscriberAccess], pydantic.Field(alias="subscriberAccess")
     ] = None
-    r"""Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. \"open\" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. \"restricted\" rejects unknown senders with a managed denial reply (any runtime). Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to \"open\"; self-hosted create defaults to \"restricted\"."""
+    r"""Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. \"open\" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. \"restricted\" rejects unknown senders with a managed denial reply (any runtime). \"rule\" requires a known subscriber and accessRule must evaluate truthy for every message, edit, delete, click and reaction; unknown senders, an invalid rule and an evaluation error are refused; a missing field evaluates as JSON Logic says. Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to \"open\"; self-hosted create defaults to \"restricted\"."""
+
+    access_rule: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="accessRule")
+    ] = None
+    r"""JSON Logic rule evaluated over subscriber.* and context.* when subscriberAccess is \"rule\". Present only when subscriberAccess is \"rule\". A missing field evaluates as JSON Logic says, so `null` is less than any positive number. \"==\" and \"!=\" compare strictly, without type coercion. At most 16 KB, with objects and arrays nested at most 32 levels deep."""
 
     reply_policy: Annotated[
         Optional[ReplyPolicy], pydantic.Field(alias="replyPolicy")
@@ -74,6 +82,7 @@ class AgentBehaviorDto(BaseModel):
                 "acknowledgeOnReceived",
                 "reactionOnResolved",
                 "subscriberAccess",
+                "accessRule",
                 "replyPolicy",
             ]
         )
