@@ -26,15 +26,15 @@ class Message4(BaseModel):
     pass
 
 
-MessageTypedDict = TypeAliasType(
-    "MessageTypedDict",
+ErrorDtoMessageTypedDict = TypeAliasType(
+    "ErrorDtoMessageTypedDict",
     Union[Message4TypedDict, str, float, bool, List[Nullable[Message5TypedDict]]],
 )
 r"""Value that failed validation"""
 
 
-Message = TypeAliasType(
-    "Message", Union[Message4, str, float, bool, List[Nullable[Message5]]]
+ErrorDtoMessage = TypeAliasType(
+    "ErrorDtoMessage", Union[Message4, str, float, bool, List[Nullable[Message5]]]
 )
 r"""Value that failed validation"""
 
@@ -46,7 +46,7 @@ class ErrorDtoData(BaseModel):
     r"""Timestamp of when the error occurred."""
     path: str
     r"""The path where the error occurred."""
-    message: OptionalNullable[Message] = UNSET
+    message: OptionalNullable[ErrorDtoMessage] = UNSET
     r"""Value that failed validation"""
     ctx: Optional[Dict[str, Any]] = None
     r"""Optional context object for additional error details."""

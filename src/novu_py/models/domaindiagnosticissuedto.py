@@ -14,14 +14,14 @@ class DomainDiagnosticIssueDtoCode(str, Enum):
     DNSBL_LISTED = "dnsbl_listed"
 
 
-class Severity(str, Enum):
+class DomainDiagnosticIssueDtoSeverity(str, Enum):
     WARN = "warn"
     ERROR = "error"
 
 
 class DomainDiagnosticIssueDtoTypedDict(TypedDict):
     code: DomainDiagnosticIssueDtoCode
-    severity: Severity
+    severity: DomainDiagnosticIssueDtoSeverity
     message: str
     fix: str
     r"""Plain-language remediation guidance"""
@@ -30,7 +30,7 @@ class DomainDiagnosticIssueDtoTypedDict(TypedDict):
 class DomainDiagnosticIssueDto(BaseModel):
     code: DomainDiagnosticIssueDtoCode
 
-    severity: Severity
+    severity: DomainDiagnosticIssueDtoSeverity
 
     message: str
 
