@@ -1,11 +1,11 @@
-# DigestTimedConfigDtoWeekDays
+# TimedConfigWeekDays
 
 ## Example Usage
 
 ```python
-from novu_py.models import DigestTimedConfigDtoWeekDays
+from novu_py.models import TimedConfigWeekDays
 
-value = DigestTimedConfigDtoWeekDays.MONDAY
+value = TimedConfigWeekDays.MONDAY
 ```
 
 

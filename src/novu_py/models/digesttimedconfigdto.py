@@ -18,7 +18,7 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class DigestTimedConfigDtoWeekDays(str, Enum):
+class WeekDays(str, Enum):
     MONDAY = "monday"
     TUESDAY = "tuesday"
     WEDNESDAY = "wednesday"
@@ -31,7 +31,7 @@ class DigestTimedConfigDtoWeekDays(str, Enum):
 class DigestTimedConfigDtoTypedDict(TypedDict):
     at_time: NotRequired[str]
     r"""Time at which the digest is triggered"""
-    week_days: NotRequired[List[DigestTimedConfigDtoWeekDays]]
+    week_days: NotRequired[List[WeekDays]]
     r"""Days of the week for the digest"""
     month_days: NotRequired[List[float]]
     r"""Specific days of the month for the digest"""
@@ -51,9 +51,9 @@ class DigestTimedConfigDto(BaseModel):
     at_time: Annotated[Optional[str], pydantic.Field(alias="atTime")] = None
     r"""Time at which the digest is triggered"""
 
-    week_days: Annotated[
-        Optional[List[DigestTimedConfigDtoWeekDays]], pydantic.Field(alias="weekDays")
-    ] = None
+    week_days: Annotated[Optional[List[WeekDays]], pydantic.Field(alias="weekDays")] = (
+        None
+    )
     r"""Days of the week for the digest"""
 
     month_days: Annotated[Optional[List[float]], pydantic.Field(alias="monthDays")] = (

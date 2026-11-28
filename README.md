@@ -560,6 +560,16 @@ asyncio.run(main())
 
 * [track](docs/sdks/activity/README.md#track) - Track provider activity and engagement events
 
+#### [Activity.Requests](docs/sdks/requests/README.md)
+
+* [list](docs/sdks/requests/README.md#list) - List activity requests
+* [retrieve](docs/sdks/requests/README.md#retrieve) - Retrieve activity request
+
+#### [Activity.WorkflowRuns](docs/sdks/workflowruns/README.md)
+
+* [list](docs/sdks/workflowruns/README.md#list) - List workflow runs
+* [retrieve](docs/sdks/workflowruns/README.md#retrieve) - Retrieve workflow run
+
 ### [Agents](docs/sdks/agents/README.md)
 
 * [create](docs/sdks/agents/README.md#create) - Create an agent
@@ -987,9 +997,9 @@ with Novu(
 
 
 **Inherit from [`NovuError`](./src/novu_py/models/novuerror.py)**:
-* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 150 methods.*
-* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 150 methods.*
-* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 150 methods.*
+* [`PayloadValidationExceptionDto`](./src/novu_py/models/payloadvalidationexceptiondto.py): Status code `400`. Applicable to 3 of 154 methods.*
+* [`SubscriberResponseDtoError`](./src/novu_py/models/subscriberresponsedtoerror.py): Created. Status code `409`. Applicable to 1 of 154 methods.*
+* [`TopicResponseDtoError`](./src/novu_py/models/topicresponsedtoerror.py): OK. Status code `409`. Applicable to 1 of 154 methods.*
 * [`ResponseValidationError`](./src/novu_py/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

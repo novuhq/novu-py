@@ -15,7 +15,7 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class WeekDays(str, Enum):
+class TimedConfigWeekDays(str, Enum):
     MONDAY = "monday"
     TUESDAY = "tuesday"
     WEDNESDAY = "wednesday"
@@ -54,7 +54,7 @@ class MonthlyType(str, Enum):
 
 class TimedConfigTypedDict(TypedDict):
     at_time: NotRequired[str]
-    week_days: NotRequired[List[WeekDays]]
+    week_days: NotRequired[List[TimedConfigWeekDays]]
     month_days: NotRequired[List[str]]
     ordinal: NotRequired[Ordinal]
     ordinal_value: NotRequired[OrdinalValue]
@@ -64,9 +64,9 @@ class TimedConfigTypedDict(TypedDict):
 class TimedConfig(BaseModel):
     at_time: Annotated[Optional[str], pydantic.Field(alias="atTime")] = None
 
-    week_days: Annotated[Optional[List[WeekDays]], pydantic.Field(alias="weekDays")] = (
-        None
-    )
+    week_days: Annotated[
+        Optional[List[TimedConfigWeekDays]], pydantic.Field(alias="weekDays")
+    ] = None
 
     month_days: Annotated[Optional[List[str]], pydantic.Field(alias="monthDays")] = None
 

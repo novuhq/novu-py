@@ -8,9 +8,10 @@ from novu_py.types import (
     serialize_with_info,
 )
 from novu_py.types.basemodel import current_filtered_dump
+import pydantic
 from pydantic import model_serializer
 from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class IntegrationTypedDict(TypedDict):
@@ -28,6 +29,8 @@ class AutoConfigureIntegrationResponseDtoTypedDict(TypedDict):
     r"""Optional message describing the result or any errors that occurred"""
     integration: NotRequired[IntegrationTypedDict]
     r"""The updated configurations after auto-configuration"""
+    webhook_url: NotRequired[str]
+    r"""The URL the provider sends delivery events to. Set it in the provider yourself when auto-configuration fails."""
 
 
 class AutoConfigureIntegrationResponseDto(BaseModel):
@@ -40,12 +43,15 @@ class AutoConfigureIntegrationResponseDto(BaseModel):
     integration: Optional[Integration] = None
     r"""The updated configurations after auto-configuration"""
 
+    webhook_url: Annotated[Optional[str], pydantic.Field(alias="webhookUrl")] = None
+    r"""The URL the provider sends delivery events to. Set it in the provider yourself when auto-configuration fails."""
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["message", "integration"])
+        optional_fields = set(["message", "integration", "webhookUrl"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -62,3 +68,9 @@ class AutoConfigureIntegrationResponseDto(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AutoConfigureIntegrationResponseDto.model_rebuild()
+except NameError:
+    pass
